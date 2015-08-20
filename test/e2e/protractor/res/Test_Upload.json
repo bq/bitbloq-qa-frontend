@@ -1,0 +1,37 @@
+{
+    "software": {
+        "vars": {
+            "name": "varsBloq",
+            "enable": true,
+            "childs": [],
+            "content": [
+                []
+            ]
+        },
+        "setup": {
+            "name": "setupBloq",
+            "enable": true,
+            "childs": [],
+            "content": [
+                []
+            ]
+        },
+        "loop": {
+            "name": "loopBloq",
+            "enable": true,
+            "childs": [],
+            "content": [
+                []
+            ]
+        }
+    },
+    "name": "Test_Save",
+    "description": "",
+    "userTags": [],
+    "hardwareTags": [],
+    "hardware": {
+        "components": [],
+        "connections": [],
+        "board": null
+    }
+}
