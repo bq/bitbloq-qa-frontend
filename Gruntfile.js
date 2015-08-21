@@ -152,7 +152,7 @@ module.exports = function(grunt) {
     //remember send --saucelabs=true --all or --all argument will be lost
     var saucelabs = grunt.option('saucelabs'),
       all = grunt.option('all'),
-      tasks = []; //'jshint'
+      tasks = ['jshint']; 
 
     env = env || 'local';
 

@@ -8,18 +8,12 @@
 var Variables = require('../../../commons/variables.js'),
     MakeActions = require('../makeActions.po.js'),
     Make = require('../../../make/make.po.js'),
-    Modals = require('../../../modals/modals.po.js'),
-    path = require('path'),
-    fs = require('fs'),
-    Login = require('../../../login/login.po.js'),
-    Infotab = require('../../infotab/infotab.po.js');
+    Modals = require('../../../modals/modals.po.js');
 
 var vars = new Variables(),
     makeActions = new MakeActions(),
     make = new Make(),
-    modals = new Modals(),
-    login = new Login(),
-    infotab = new Infotab();
+    modals = new Modals();
 
 describe('Menu file of MakeActions', function() {
 

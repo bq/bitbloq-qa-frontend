@@ -7,13 +7,11 @@
 
 var Variables = require('../../../commons/variables.js'),
     MakeActions = require('../makeActions.po.js'),
-    Login = require('../../../login/login.po.js'),
     Make = require('../../../make/make.po.js'),
     Explore = require('../../../explore/explore.po.js');
 
 var vars = new Variables(),
     makeActions = new MakeActions(),
-    login = new Login(),
     make = new Make(),
     explore = new Explore();
 

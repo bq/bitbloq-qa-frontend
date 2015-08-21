@@ -1,6 +1,7 @@
 /**
  * Page objects of myprojects.html
  */
+'use strict';
 
 var Myprojects = function() {
 
@@ -10,4 +11,3 @@ var Myprojects = function() {
 };
 
 module.exports = Myprojects;
-

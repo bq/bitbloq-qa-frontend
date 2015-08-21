@@ -45,7 +45,7 @@ describe('Language', function() {
         header.openHeaderMenu.click();
         header.changeLanguage.click();
         modals.languagesDropdownButton.click();
-        modals.languagesDropdownButton.all(by.css("li")).get(1).click();
+        modals.languagesDropdownButton.all(by.css('li')).get(1).click();
 
         modals.okDialog.click();
         expect(header.menuLearn.getText()).toBe('Learn');

@@ -3,14 +3,13 @@
  */
 
 'use strict';
+/* jshint loopfunc: true */
 
 var Variables = require('../commons/variables.js'),
-    Explore = require('../explore/explore.po.js'),
-    Login = require('../login/login.po.js');
+    Explore = require('../explore/explore.po.js');
 
 var vars = new Variables(),
-    explore = new Explore(),
-    login = new Login();
+    explore = new Explore();
 
 xdescribe('Explore tab', function() {
 

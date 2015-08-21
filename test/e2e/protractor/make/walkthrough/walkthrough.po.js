@@ -1,3 +1,5 @@
+'use strict';
+
 var Walkthrough = function() {
 	this.stepOne = $('.tour-step--first');
 	this.boards = $('[data-element="boards"]');
@@ -9,6 +11,6 @@ var Walkthrough = function() {
 	this.stepFive = $('.tour-step--fifth');
 	this.stepSix = $('.tour-step--sixth');
 	this.stepSeven = $('.tour-step--seventh');
-}
+};
 
 module.exports = Walkthrough;

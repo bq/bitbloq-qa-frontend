@@ -1,7 +1,7 @@
 /**
  * Page objects of alerts.html
  */
-
+'use strict';
 
 //TODO , check alert && add data-element
 var Alerts = function() {

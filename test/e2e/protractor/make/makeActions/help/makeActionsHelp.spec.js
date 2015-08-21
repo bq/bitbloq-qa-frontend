@@ -62,7 +62,7 @@ describe('Menu Help of MakeActions', function() {
                         //     _toMatchUrl(/#\/help\/forum/);
                         // });
 
-                    })
+                    });
                 });
 
             });
