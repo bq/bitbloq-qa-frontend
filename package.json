@@ -10,6 +10,10 @@
     "Sergio Morcuende <sergio.morcuende@bq.com> (http://smorcuend.es)",
     "Luis Antonio Gonzalez <luisantonio.gonzalez@bq.com>"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://stash.bq.com/projects/SWROB/repos/qa-web-bitbloq/"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "^0.5.1",
