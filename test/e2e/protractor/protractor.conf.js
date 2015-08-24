@@ -81,7 +81,7 @@ exports.config = {
 
     // If set, protractor will save the test output in json format at this path.
     // The path is relative to the location of this config.
-    resultJsonOutputFile: './target/e2e/protractor/tap_resultsGlobalConf.json',
+    resultJsonOutputFile: './target/e2e/protractor/resultTest.json',
 
 
 

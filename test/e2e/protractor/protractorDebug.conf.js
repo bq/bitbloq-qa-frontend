@@ -4,9 +4,8 @@
 
 var protractorConfig = require('./protractor.conf');
 
+//protractorConfig.config.resultJsonOutputFile = './target/e2e/protractor/tap_resultsDebugConf.json';
 
-
-protractorConfig.config.resultJsonOutputFile = './target/e2e/protractor/tap_resultsDebugConf.json';
 protractorConfig.config.baseUrl ='http://localhost:9000/';
 //protractorConfig.config.seleniumAddress = 'http://localhost:4444/wd/hub';
 /*

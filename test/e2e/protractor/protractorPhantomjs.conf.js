@@ -9,7 +9,7 @@
 
 var protractorConfig = require('./protractor.conf');
 
-protractorConfig.config.resultJsonOutputFile = './target/e2e/protractor/tap_result_Phantom.json';
+//protractorConfig.config.resultJsonOutputFile = './target/e2e/protractor/tap_result_Phantom.json';
 
 //protractorConfig.config.baseUrl =
 protractorConfig.config.capabilities.browserName  = 'phantomjs';

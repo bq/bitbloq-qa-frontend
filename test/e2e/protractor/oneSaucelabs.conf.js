@@ -8,7 +8,7 @@ var protractorConfig = require('./protractor.conf');
 // The tests will be run remotely using SauceLabs.
 protractorConfig.config.sauceUser = 'bitbloq';
 protractorConfig.config.sauceKey = '66222724-a846-4c20-a452-d7ab3b081320';
-protractorConfig.config.resultJsonOutputFile = './target/e2e/protractor/report_verifySauceLabs.json';
+//protractorConfig.config.resultJsonOutputFile = './target/e2e/protractor/report_verifySauceLabs.json';
 
 var saucelabTest = require('./saucelabsTestSuite');
 
