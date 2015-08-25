@@ -28,9 +28,9 @@ exports.config = {
         name: '[bitbloq-app] Linux-chrome-43',
         recordVideo: false,
         recordScreenshots: false,
-        specs: require('./commonTestSuite'),
+        specs: require('../testsuites/common.js'),
         shardTestFiles: true,
-        maxInstances: 4,
+        maxInstances: 5,
         chromeOptions: {
             prefs: {
                 download: {

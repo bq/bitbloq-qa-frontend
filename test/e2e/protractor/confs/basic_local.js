@@ -3,11 +3,9 @@
 /* A reference configuration file. */
 /* For more options: https://github.com/angular/protractor/blob/master/docs/referenceConf.js */
 
-var protractorConfig = require('./protractor.conf');
+var protractorConfig = require('./basic');
 
-//protractorConfig.config.resultJsonOutputFile = './target/e2e/protractor/report_localTest.json';
-
-var localTest = require('./localTestSuite');
+var localTest = require('../testsuites/local.js');
 
 for(var i=0; i<protractorConfig.config.multiCapabilities.length; i++) {
 

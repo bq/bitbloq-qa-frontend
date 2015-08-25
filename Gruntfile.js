@@ -25,14 +25,7 @@ module.exports = function(grunt) {
     },
 
     protractor_webdriver: {
-      /*
-      e2eUpdate: {
-          options: {
-          path: '~/.local/bin/'
-              command: 'webdriver-manager update --standalone'
-          },
-      }
-      */
+
       e2eStart: {
         options: {
           path: path.resolve() + '/node_modules/protractor/bin/',
@@ -44,13 +37,13 @@ module.exports = function(grunt) {
 
     protractor: {
       options: { // Default config file
-        configFile: path.resolve() + '/test/e2e/protractor/protractor.conf.js', // Default config file
+        configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js', // Default config file
         keepAlive: false, // If false, the grunt process stops when the test fails.
         noColor: true // If true, protractor will not use colors in its output.
       },
       local: {
         options: {
-          configFile: path.resolve() + '/test/e2e/protractor/protractorLocal.conf.js',
+          configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',
           args: {
             baseUrl: grunt.option('target') || 'http://localhost:9000/',
             seleniumAddress: 'http://localhost:4444/wd/hub'
@@ -59,7 +52,7 @@ module.exports = function(grunt) {
       },
       integration: {
         options: {
-          configFile: path.resolve() + '/test/e2e/protractor/protractorLocal.conf.js',
+          configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',
           args: {
             baseUrl: 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
             seleniumAddress: 'http://localhost:4444/wd/hub'
@@ -68,7 +61,7 @@ module.exports = function(grunt) {
       },
       qa: {
         options: {
-          configFile: path.resolve() + '/test/e2e/protractor/protractorLocal.conf.js',
+          configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',
           args: {
             baseUrl: 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
             seleniumAddress: 'http://localhost:4444/wd/hub'
@@ -77,7 +70,7 @@ module.exports = function(grunt) {
       },
       mvp: {
         options: {
-          configFile: path.resolve() + '/test/e2e/protractor/protractorLocal.conf.js',
+          configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',
           args: {
             baseUrl: 'http://mvp-bitbloq.bq.com/',
             seleniumAddress: 'http://localhost:4444/wd/hub'
@@ -86,7 +79,7 @@ module.exports = function(grunt) {
       },
       staging: {
         options: {
-          configFile: path.resolve() + '/test/e2e/protractor/protractorLocal.conf.js',
+          configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',
           args: {
             baseUrl: 'http://staging-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
             seleniumAddress: 'http://localhost:4444/wd/hub'
@@ -95,7 +88,7 @@ module.exports = function(grunt) {
       },
       saucelabs_integration: {
         options: {
-          configFile: path.resolve() + '/test/e2e/protractor/oneSaucelabs.conf.js',
+          configFile: path.resolve() + '/test/e2e/protractor/confsf/basic_saucelabs.js',
           args: {
             baseUrl: 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
           }
@@ -103,7 +96,7 @@ module.exports = function(grunt) {
       },
       saucelabs_qa: {
         options: {
-          configFile: path.resolve() + '/test/e2e/protractor/oneSaucelabs.conf.js',
+          configFile: path.resolve() + '/test/e2e/protractor/confsf/basic_saucelabs.js',
           args: {
             baseUrl: 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
           }
@@ -111,7 +104,7 @@ module.exports = function(grunt) {
       },
       saucelabs_mvp: {
         options: {
-          configFile: path.resolve() + '/test/e2e/protractor/oneSaucelabs.conf.js',
+          configFile: path.resolve() + '/test/e2e/protractor/confsf/basic_saucelabs.js',
           args: {
             baseUrl: 'http://mvp-bitbloq.bq.com/'
           }
@@ -119,7 +112,7 @@ module.exports = function(grunt) {
       },
       saucelabs_integration_all: {
         options: {
-          configFile: path.resolve() + '/test/e2e/protractor/allSaucelabs.conf.js',
+          configFile: path.resolve() + '/test/e2e/protractor/confsf/allOS_saucelabs.js',
           args: {
             baseUrl: 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
           }
@@ -127,7 +120,7 @@ module.exports = function(grunt) {
       },
       saucelabs_qa_all: {
         options: {
-          configFile: path.resolve() + '/test/e2e/protractor/allSaucelabs.conf.js',
+          configFile: path.resolve() + '/test/e2e/protractor/confsf/allOS_saucelabs.js',
           args: {
             baseUrl: 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
           }
@@ -135,7 +128,7 @@ module.exports = function(grunt) {
       },
       saucelabs_mvp_all: {
         options: {
-          configFile: path.resolve() + '/test/e2e/protractor/allSaucelabs.conf.js',
+          configFile: path.resolve() + '/test/e2e/protractor/confsf/allOS_saucelabs.js',
           args: {
             baseUrl: 'http://mvp-bitbloq.bq.com/'
           }
@@ -148,11 +141,11 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['jshint']);
 
-  grunt.registerTask('test:protractor', 'Protractor e2e funcional test (Selenium) task.', function(env) {
+  grunt.registerTask('test', 'Protractor e2e funcional test (Selenium) task.', function(env) {
     //remember send --saucelabs=true --all or --all argument will be lost
     var saucelabs = grunt.option('saucelabs'),
       all = grunt.option('all'),
-      tasks = ['jshint']; 
+      tasks = ['jshint'];
 
     env = env || 'local';
 
