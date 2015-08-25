@@ -84,7 +84,7 @@ describe('check makeActions actions', function() {
     /**
      * User not logged in
      */
-    fit('check enabled/disabled options by not logged in user', function() {
+    it('check enabled/disabled options by not logged in user', function() {
 
         make.get();
         modals.attentionContinueGuest.click();
