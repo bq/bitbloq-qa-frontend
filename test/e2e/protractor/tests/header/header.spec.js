@@ -25,7 +25,7 @@ describe('Language', function() {
     //beforeEach commons
     vars.beforeTest();
 
-    it('Test language change', function() {
+    it('bba-74:Test language change', function() {
 
         login.get();
         var randomUserCredentials = register.generateUser();
@@ -60,9 +60,9 @@ describe('Language', function() {
 
 });
 
-describe('Navbar :', function() {
+describe('Navbar --> ', function() {
 
-    it('Elements if no login --> Explora, aprende, ayuda, entrar', function() {
+    it('bba-75:Elements if no login --> Explora, aprende, ayuda, entrar', function() {
 
         //show always
         make.get();
@@ -89,7 +89,7 @@ describe('Navbar :', function() {
 
     });
 
-    it('Elements with login user --> Mis proyectos, Explora, aprende, ayuda', function() {
+    it('bba-76:Elements with login user --> Mis proyectos, Explora, aprende, ayuda', function() {
 
         login.loginWithRandomUser();
         make.get();
