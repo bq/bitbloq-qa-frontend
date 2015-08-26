@@ -6,12 +6,12 @@
 
 
 var Variables = require('../commons/variables.js'),
-    Make = require('../make/make.po.js'),
+    Make = require('../bloqsproject/make.po.js'),
     Login = require('../login/login.po.js'),
     Projects = require('./projects.po.js'),
     MyProjects = require('../myprojects/myprojects.po.js'),
     Modals = require('../modals/modals.po.js'),
-    Infotab = require('../make/infotab/infotab.po.js');
+    Infotab = require('../bloqsproject/infotab/infotab.po.js');
 
 var vars = new Variables(),
     login = new Login(),

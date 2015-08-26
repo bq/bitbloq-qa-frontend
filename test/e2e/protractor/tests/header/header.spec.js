@@ -8,7 +8,7 @@ var LoginBitbloq = require('../login/login.po.js'),
     Variables = require('../commons/variables.js'),
     Register = require('../register/register.po.js'),
     Header = require('./header.po.js'),
-    Make = require('../make/make.po.js'),
+    Make = require('../bloqsproject/make.po.js'),
     Modals = require('../modals/modals.po.js'),
     Projects = require('../projects/projects.po.js');
 

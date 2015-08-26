@@ -5,7 +5,7 @@
 'use strict';
 
 var Login = require('../../login/login.po.js'),
-    Make = require('../../make/make.po.js'),
+    Make = require('../../bloqsproject/make.po.js'),
     Vars = require('../../commons/variables.js'),
     Modals = require('./../modals.po.js'),
     Projects = require('../../projects/projects.po.js');

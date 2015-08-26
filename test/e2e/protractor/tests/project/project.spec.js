@@ -6,7 +6,7 @@
 
 var Login = require('../login/login.po.js'),
     Project = require('./project.po.js'),
-    Make = require('../make/make.po.js'),
+    Make = require('../bloqsproject/make.po.js'),
     Variables = require('../commons/variables.js'),
     Modals = require('../modals/modals.po.js');
 

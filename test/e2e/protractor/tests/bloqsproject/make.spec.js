@@ -6,7 +6,7 @@
 
 
 var Variables = require('../commons/variables.js'),
-    Make = require('../make/make.po.js'),
+    Make = require('./make.po.js'),
     Login = require('../login/login.po.js'),
     Projects = require('../projects/projects.po.js'),
     Infotab = require('./infotab/infotab.po.js'),

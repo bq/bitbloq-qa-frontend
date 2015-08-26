@@ -7,7 +7,7 @@
 
 var Variables = require('../../../commons/variables.js'),
     MakeActions = require('../makeActions.po.js'),
-    Make = require('../../../make/make.po.js'),
+    Make = require('../../make.po.js'),
     Modals = require('../../../modals/modals.po.js');
 
 var vars = new Variables(),

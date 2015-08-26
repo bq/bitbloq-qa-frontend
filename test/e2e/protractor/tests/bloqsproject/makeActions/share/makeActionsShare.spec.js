@@ -7,7 +7,7 @@
 
 var Variables = require('../../../commons/variables.js'),
     MakeActions = require('../makeActions.po.js'),
-    Make = require('../../../make/make.po.js'),
+    Make = require('../../make.po.js'),
     Explore = require('../../../explore/explore.po.js');
 
 var vars = new Variables(),
