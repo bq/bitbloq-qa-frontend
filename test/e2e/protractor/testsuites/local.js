@@ -5,8 +5,8 @@
 'use strict';
 
 var testSuite = [
-    'login/login.spec.local.js',
-    'make/makeActions/file/makeActionsFile.spec.local.js'
+    '../tests/login/login.spec.local.js',
+    '../tests/make/makeActions/file/makeActionsFile.spec.local.js'
 ];
 
 module.exports = testSuite;
