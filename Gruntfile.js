@@ -68,6 +68,15 @@ module.exports = function(grunt) {
           }
         }
       },
+      next: {
+        options: {
+          configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',
+          args: {
+            baseUrl: 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
+            seleniumAddress: 'http://localhost:4444/wd/hub'
+          }
+        }
+      },
       mvp: {
         options: {
           configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',

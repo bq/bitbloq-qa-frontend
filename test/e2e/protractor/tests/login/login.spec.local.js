@@ -17,6 +17,7 @@ describe('Login, specs only in local ', function() {
     //beforeEach commons
     vars.beforeTest();
 
+    // be careful, saucelabs no stopped !!
     xit('Login with a Google account', function() {
 
         landing.get();
@@ -32,7 +33,7 @@ describe('Login, specs only in local ', function() {
 
     });
 
-    xit('Login with a Facebook account', function() {
+    it('Login with a Facebook account', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
