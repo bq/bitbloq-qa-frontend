@@ -26,7 +26,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
     //beforeEach commons
     vars.beforeTest();
 
-    it('bba-89:Download project', function(done) {
+    it('Download project', function(done) {
 
         login.loginWithRandomUser();
         make.get();
@@ -86,7 +86,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
         login.logout();
     });
 
-    it('bba-90:Open from file, download and compare if is equal ', function(done) {
+    it('Open from file, download and compare if is equal ', function(done) {
 
         make.get();
         modals.attentionContinueGuest.click();
@@ -121,8 +121,8 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
     });
 
-    // OjO need fix bug --> not charge dropdowns
-    xit('bba-91:Check export in arduino project (only one project)', function(done) {
+    // OjO need fix bug --> not charge dropdowns 
+    xit('Check export in arduino project 1', function(done) {
 
         make.get();
         modals.attentionContinueGuest.click();
