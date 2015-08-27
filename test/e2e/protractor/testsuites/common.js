@@ -16,8 +16,8 @@ var testSuite = [
     '../tests/modals/changeProjectName/*.spec.js',
     '../tests/project/project.spec.js',
     '../tests/projects/projects.spec.js',
-    '../tests/register/register.spec.js'
-
+    '../tests/register/register.spec.js',
+    '../tests/help/help.spec.js'
 ];
 
 module.exports = testSuite;
