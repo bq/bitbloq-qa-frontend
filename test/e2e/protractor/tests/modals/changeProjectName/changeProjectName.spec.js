@@ -20,7 +20,7 @@ describe('Rename modal on make', function() {
 
     vars.beforeTest();
 
-    it('Rename project and save', function() {
+    it('bba-86:Rename project and save', function() {
 
         login.loginWithRandomUser();
         make.get();
@@ -39,7 +39,7 @@ describe('Rename modal on make', function() {
     });
 
 
-    it('Rename project and not save', function() {
+    it('bba-87:Rename project and not save', function() {
 
         //test no saved if click in cancel modal
         login.loginWithRandomUser();

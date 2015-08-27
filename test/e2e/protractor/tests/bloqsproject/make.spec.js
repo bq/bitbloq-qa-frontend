@@ -224,3 +224,23 @@ describe('make tab', function() {
      browser.pause();
      });*/
 });
+
+describe('Project ', function() {
+
+    //beforeEach commons
+    vars.beforeTest();
+
+    it('Project must to have a name', function() {
+
+        login.loginWithRandomUser();
+
+        make.get();
+        modals.rejectTour();
+        expect(make.projectName.isPresent()).toBe(true);
+        expect(make.projectName.getText()).toBe('Proyecto sin título');
+
+        login.logout();
+    });
+
+
+});

@@ -14,7 +14,6 @@ var testSuite = [
     '../tests/bloqsproject/makeActions/share/makeActionsShare.spec.js',
     '../tests/bloqsproject/makeActions/makeActions.spec.js',
     '../tests/modals/changeProjectName/*.spec.js',
-    '../tests/project/project.spec.js',
     '../tests/projects/projects.spec.js',
     '../tests/register/register.spec.js',
     '../tests/help/help.spec.js'

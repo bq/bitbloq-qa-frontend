@@ -20,13 +20,13 @@ var LoginSpec = function() {
         //beforeEach commons
         vars.beforeTest();
 
-        it('Login with a basic account', function() {
+        it('bba-78:Login with a basic account', function() {
             login.loginWithRandomUser();
             login.logout();
         });
 
 
-        it('Cant login with a non registered user', function() {
+        it('bba-79:Cant login with a non registered user', function() {
 
             landing.openLandingMenu.click();
             landing.enterButton.click();
@@ -36,13 +36,12 @@ var LoginSpec = function() {
             login.password.sendKeys('asdf');
             login.loginButton.click();
 
-            // if in #/login , --> Not in #/projects
             expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
 
         });
 
 
-        it('is show "Introduce un nombre de usuario o e-mail" ?', function() {
+        it('bba-81:is show "Introduce un nombre de usuario o e-mail" ?', function() {
 
             landing.openLandingMenu.click();
             landing.enterButton.click();
@@ -60,7 +59,7 @@ var LoginSpec = function() {
 
         });
 
-        it('is show "Introduce una contraseña" ?', function() {
+        it('bba-82:is show "Introduce una contraseña" ?', function() {
 
             landing.openLandingMenu.click();
             landing.enterButton.click();
@@ -79,7 +78,7 @@ var LoginSpec = function() {
 
         });
 
-        it('is show "La contraseña debe tener 6 caracteres como mínimo" ?', function() {
+        it('bba-83:is show "La contraseña debe tener 6 caracteres como mínimo" ?', function() {
 
             landing.openLandingMenu.click();
             landing.enterButton.click();
@@ -98,31 +97,30 @@ var LoginSpec = function() {
 
         });
 
-        it('is show "El usuario no está registrado" ?', function() {
+        it('bba-84:is show "El usuario no está registrado" ?', function() {
 
             landing.openLandingMenu.click();
             landing.enterButton.click();
-
-            //Login in bitbloq without password
+            //Login in bitbloq with false  password
             login.user.sendKeys('User'+ Number(new Date()));
             login.password.sendKeys('123456789');
             login.loginButton.click();
             //Wait show error
             expect(login.showIncorrectUser.isDisplayed()).toBeTruthy();
-
             // if in #/login , --> Not in #/projects
             expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
         });
 
-        it('is show "La contraseña es incorrecta" ?', function() {
+        it(' bba-85:is show "La contraseña es incorrecta" ?', function() {
 
+            //Register && login and save username
             landing.openLandingMenu.click();
             landing.enterButton.click();
             var username = 'User'+ Number(new Date());
             login.loginWithUserName(username);
             login.logout();
 
-            //Login in bitbloq without password
+            //Login in bitbloq with last username with incorrect password
             landing.openLandingMenu.click();
             landing.enterButton.click();
             login.user.sendKeys(username);
