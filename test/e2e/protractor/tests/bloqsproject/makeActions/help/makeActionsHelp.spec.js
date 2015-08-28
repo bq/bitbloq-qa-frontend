@@ -25,7 +25,7 @@ describe('Menu Help of MakeActions', function() {
     // afterEach commons
     vars.afterTest();
 
-    it('Login and there are all items visibles && redirect to faq, forum and help', function() {
+    it('bba-94:Login and test if there are all items visibles && redirect to faq, forum and help', function() {
 
         login.loginWithRandomUser();
         make.get();

@@ -23,7 +23,7 @@ describe('Menu file of MakeActions', function() {
     // afterEach commons
     vars.afterTest();
 
-    it('Open new project', function() {
+    it('bba-88:Open new project', function() {
 
         make.get();
         modals.attentionContinueGuest.click();
