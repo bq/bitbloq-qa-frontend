@@ -61,6 +61,36 @@ var HelpSpec = function() {
             help.tutorialTab.click();
             expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help/tutorial');
         });
+
+        it('bba-33:Verify that we can open a faq (registered user)', function() {
+            login.loginWithRandomUser();
+            header.navHelp.click();
+            help.tutorialTab.click();
+            help.faqTab.click();
+            var firstElement = help.elemsFaqTable.all(by.tagName('li')).first();
+            firstElement.click();
+            expect(firstElement.all(by.tagName('div')).count()).toEqual(2);
+            browser.sleep(1000);
+            firstElement.click();
+            expect(firstElement.all(by.tagName('div')).count()).toEqual(1);
+            login.logout();
+        });
+
+        it('bba-92:Verify that we can open a faq (unregistered user)', function() {
+            make.get();
+            modals.attentionContinueGuest.click();
+            modals.rejectTour();
+            browser.sleep(vars.timeToWaitFadeModals);
+            header.navHelp.click();
+            help.tutorialTab.click();
+            help.faqTab.click();
+            var firstElement = help.elemsFaqTable.all(by.tagName('li')).first();
+            firstElement.click();
+            expect(firstElement.all(by.tagName('div')).count()).toEqual(2);
+            browser.sleep(1000);
+            firstElement.click();
+            expect(firstElement.all(by.tagName('div')).count()).toEqual(1);
+        });
     });
 };
 
