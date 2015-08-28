@@ -17,8 +17,12 @@ var vars = new Variables(),
     login = new Login();
 
 fdescribe('Walkthrough', function() {
+    
     //beforeEach commons
     vars.beforeTest();
+
+    // afterEach commons
+    vars.afterTest();
 
 
     it('not logged in user', function() {

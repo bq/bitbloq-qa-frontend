@@ -7,6 +7,8 @@
 
 'use strict';
 
+var Commons = require('./commons.po.js');
+var commons = new Commons();
 var Variables = function() {
     //count for login
     this.user = 'luisangonzalez';
@@ -57,6 +59,19 @@ var Variables = function() {
             browser.get(browser.baseUrl);
             browser.waitForAngular();
 
+            // Tu y yo lo sabemos
+            commons.cookiesBar.click();
+            browser.sleep(1000);
+
+
+        });
+    };
+    
+    this.afterTest = function() {
+        afterEach(function() {
+            browser.executeScript('window.sessionStorage.clear();');
+            browser.executeScript('window.localStorage.clear();');
+            browser.manage().deleteAllCookies();
         });
     };
 

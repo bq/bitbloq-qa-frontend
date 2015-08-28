@@ -17,6 +17,9 @@ describe('Login, specs only in local ', function() {
     //beforeEach commons
     vars.beforeTest();
 
+    // afterEach commons
+    vars.afterTest();
+
     // be careful, saucelabs no stopped !!
     xit('Login with a Google account', function() {
 

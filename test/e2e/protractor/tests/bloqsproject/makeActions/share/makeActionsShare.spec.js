@@ -20,6 +20,9 @@ describe('Menu Help of MakeActions', function() {
     //beforeEach commons
     vars.beforeTest();
 
+    // afterEach commons
+    vars.afterTest();
+
     //TODO test TOAST
     it('Publish project', function() {
 

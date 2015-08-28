@@ -13,8 +13,11 @@ var vars = new Variables(),
 
 describe('Explore tab', function() {
 
-  //beforeEach commons
-  vars.beforeTest();
+    //beforeEach commons
+    vars.beforeTest();
+
+    // afterEach commons
+    vars.afterTest();
 
   it('bba-67:Show project using scroll', function() {
 

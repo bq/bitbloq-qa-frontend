@@ -22,9 +22,12 @@ var vars = new Variables(),
     modals = new Modals();
 
 describe('make tab', function() {
+    
     //beforeEach commons
     vars.beforeTest();
 
+    // afterEach commons
+    vars.afterTest();
 
     it('save project', function() {
         make.saveProject();
@@ -230,7 +233,10 @@ describe('Project ', function() {
     //beforeEach commons
     vars.beforeTest();
 
-    it('Project must to have a name', function() {
+    // afterEach commons
+    vars.afterTest();
+
+    it('Project must have a name', function() {
 
         login.loginWithRandomUser();
 

@@ -17,7 +17,12 @@ var HelpSpec = function() {
         vars = new Variables();
 
     describe('Help ', function() {
+
+        //beforeEach commons
         vars.beforeTest();
+
+        // afterEach commons
+        vars.afterTest();
 
         it('bba-32:Appears the FAQs with a registered user', function() {
             login.loginWithRandomUser();

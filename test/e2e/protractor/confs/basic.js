@@ -30,7 +30,7 @@ exports.config = {
         recordScreenshots: false,
         specs: require('../testsuites/common.js'),
         shardTestFiles: true,
-        maxInstances: 5,
+        maxInstances: 4,
         chromeOptions: {
             prefs: {
                 download: {
@@ -82,8 +82,6 @@ exports.config = {
     // If set, protractor will save the test output in json format at this path.
     // The path is relative to the location of this config.
     resultJsonOutputFile: './target/e2e/protractor/resultTest.json',
-
-
 
     // ---------------------------------------------------------------------------
     // ----- The test framework --------------------------------------------------

@@ -22,6 +22,9 @@ describe('check makeActions actions', function() {
     //beforeEach commons
     vars.beforeTest();
 
+    // afterEach commons
+    vars.afterTest();
+
     /**
      * User logged in
      */

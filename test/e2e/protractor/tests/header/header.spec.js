@@ -25,6 +25,9 @@ describe('Language', function() {
     //beforeEach commons
     vars.beforeTest();
 
+    // afterEach commons
+    vars.afterTest();
+
     it('bba-74:Test language change', function() {
 
         login.get();
@@ -62,6 +65,12 @@ describe('Language', function() {
 
 describe('Navbar --> ', function() {
 
+    //beforeEach commons
+    vars.beforeTest();
+
+    // afterEach commons
+    vars.afterTest();
+    
     it('bba-75:Elements if no login --> Explora, aprende, ayuda, entrar', function() {
 
         //show always

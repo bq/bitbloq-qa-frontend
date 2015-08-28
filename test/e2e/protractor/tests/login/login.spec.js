@@ -20,6 +20,9 @@ var LoginSpec = function() {
         //beforeEach commons
         vars.beforeTest();
 
+        // afterEach commons
+        vars.afterTest();
+
         it('bba-78:Login with a basic account', function() {
             login.loginWithRandomUser();
             login.logout();
@@ -102,7 +105,7 @@ var LoginSpec = function() {
             landing.openLandingMenu.click();
             landing.enterButton.click();
             //Login in bitbloq with false  password
-            login.user.sendKeys('User'+ Number(new Date()));
+            login.user.sendKeys('User' + Number(new Date()));
             login.password.sendKeys('123456789');
             login.loginButton.click();
             //Wait show error
@@ -116,7 +119,7 @@ var LoginSpec = function() {
             //Register && login and save username
             landing.openLandingMenu.click();
             landing.enterButton.click();
-            var username = 'User'+ Number(new Date());
+            var username = 'User' + Number(new Date());
             login.loginWithUserName(username);
             login.logout();
 

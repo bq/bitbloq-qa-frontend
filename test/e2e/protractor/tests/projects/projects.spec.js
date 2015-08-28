@@ -27,6 +27,9 @@ describe('Projects', function() {
     //beforeEach commons
     vars.beforeTest();
 
+    // afterEach commons
+    vars.afterTest();
+
     //TODO Check --> Alert (toast) && Create click into "Projecto sin titulo"
     it(' Correct elemination --> Create project and eliminate ', function() {
 

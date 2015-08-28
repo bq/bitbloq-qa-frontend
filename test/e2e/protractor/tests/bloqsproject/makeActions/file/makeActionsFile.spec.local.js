@@ -26,6 +26,9 @@ describe('Menu file of MakeActions, specs only in local ', function() {
     //beforeEach commons
     vars.beforeTest();
 
+    // afterEach commons
+    vars.afterTest();
+
     it('Download project', function(done) {
 
         login.loginWithRandomUser();

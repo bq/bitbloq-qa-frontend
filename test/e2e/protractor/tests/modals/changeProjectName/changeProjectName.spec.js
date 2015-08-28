@@ -18,7 +18,11 @@ var login = new Login(),
 
 describe('Rename modal on make', function() {
 
+    //beforeEach commons
     vars.beforeTest();
+
+    // afterEach commons
+    vars.afterTest();
 
     it('bba-86:Rename project and save', function() {
 

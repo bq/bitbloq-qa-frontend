@@ -19,6 +19,9 @@ describe('Register ', function() {
     //beforeEach commons
     vars.beforeTest();
 
+    // afterEach commons
+    vars.afterTest();
+
     it('Register with a user basic account', function() {
 
         landing.openLandingMenu.click();
