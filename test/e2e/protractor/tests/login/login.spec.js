@@ -114,7 +114,7 @@ var LoginSpec = function() {
             expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
         });
 
-        it(' bba-85:is show "La contraseña es incorrecta" ?', function() {
+        it('bba-85:is show "La contraseña es incorrecta" ?', function() {
 
             //Register && login and save username
             landing.openLandingMenu.click();
