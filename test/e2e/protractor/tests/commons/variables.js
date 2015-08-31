@@ -25,7 +25,7 @@ var Variables = function() {
 
     //timers
     this.timeToWaitFadeModals = 5000;
-    this.timeToWaitAutoSave = 5000;
+    this.timeToWaitAutoSave = 6000;
     this.timeToWaitTab = 3000;
 
     this.account = function(cuenta) {
@@ -66,7 +66,7 @@ var Variables = function() {
 
         });
     };
-    
+
     this.afterTest = function() {
         afterEach(function() {
             browser.executeScript('window.sessionStorage.clear();');
