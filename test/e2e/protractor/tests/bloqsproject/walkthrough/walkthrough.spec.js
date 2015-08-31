@@ -17,7 +17,7 @@ var vars = new Variables(),
     login = new Login();
 
 fdescribe('Walkthrough', function() {
-    
+
     //beforeEach commons
     vars.beforeTest();
 
@@ -25,7 +25,7 @@ fdescribe('Walkthrough', function() {
     vars.afterTest();
 
 
-    it('not logged in user', function() {
+    it('bba-118:not logged in user', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.acceptTour.click();
@@ -35,7 +35,7 @@ fdescribe('Walkthrough', function() {
         expect(walkthrough.stepTwo.isDisplayed()).toBeTruthy();
     });
 
-    it('logged in user did not finish walkthrough', function() {
+    it('bba-120:logged in user did not finish walkthrough', function() {
         var userLogin = login.loginWithRandomUser();
         make.get();
         modals.acceptTour.click();
@@ -49,7 +49,7 @@ fdescribe('Walkthrough', function() {
         login.logout();
     });
 
-    it('logged in user rejected walkthrough', function() {
+    it('bba-121:logged in user rejected walkthrough', function() {
             var userLogin = login.loginWithRandomUser();
             make.get();
             modals.rejectTour();

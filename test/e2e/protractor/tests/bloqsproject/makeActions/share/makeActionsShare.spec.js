@@ -24,7 +24,7 @@ describe('Menu Help of MakeActions', function() {
     vars.afterTest();
 
     //TODO test TOAST
-    it('Publish project', function() {
+    it('bba-109:Publish project', function() {
 
         var projectName = make.saveProject(true);
 
