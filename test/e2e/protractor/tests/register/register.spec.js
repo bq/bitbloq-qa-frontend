@@ -22,7 +22,7 @@ describe('Register ', function() {
     // afterEach commons
     vars.afterTest();
 
-    it('Register with a user basic account', function() {
+    it('bba-1:Register with a user basic account', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -42,7 +42,7 @@ describe('Register ', function() {
 
     });
 
-    it('Cant register without checking conditions', function() {
+    it('bba-96:Cant register without checking conditions', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -63,7 +63,7 @@ describe('Register ', function() {
 
     });
 
-    it('Cant register without an user name', function() {
+    it('bba-93:Cant register without an user name', function() {
         landing.openLandingMenu.click();
         landing.enterButton.click();
 
@@ -83,7 +83,7 @@ describe('Register ', function() {
 
     });
 
-    it('Cant register with the same user name', function() {
+    it('bba-25:Cant register with the same user name', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -109,9 +109,20 @@ describe('Register ', function() {
 
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
 
+        login.get();
+
+        register.createAccountButtn.click();
+
+        register.createAccount(user.username.toUpperCase(), user.userEmail, user.password, 31, 3, 1986, true, true);
+
+        // Only show if user is in use
+        expect(register.showInUse.isDisplayed()).toBeTruthy();
+
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+
     });
 
-    it('validate INCORRECT FORMAT USER ', function() {
+    it('bba-95:validate INCORRECT FORMAT USER ', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -137,7 +148,7 @@ describe('Register ', function() {
 
     });
 
-    it('validate NO EMAIL ', function() {
+    it('bba-97:validate NO EMAIL ', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -157,7 +168,7 @@ describe('Register ', function() {
 
     });
 
-    it('validate INCORRECT EMAIL ', function() {
+    it('bba-98:validate INCORRECT EMAIL ', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -184,7 +195,7 @@ describe('Register ', function() {
     });
 
 
-    it('in password is show "Introduce una contraseña" ?', function() {
+    it('bba-99:in password is show "Introduce una contraseña" ?', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -208,7 +219,7 @@ describe('Register ', function() {
 
     });
 
-    it('in password is show "La contraseña debe tener 6 caracteres como mínimo" ?', function() {
+    it('bba-100:in password is show "La contraseña debe tener 6 caracteres como mínimo" ?', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -231,7 +242,7 @@ describe('Register ', function() {
 
     });
 
-    it('validate NOT DATE OF BIRTH ', function() {
+    it('bba-101:validate NOT DATE OF BIRTH ', function() {
         landing.openLandingMenu.click();
         landing.enterButton.click();
 
@@ -279,7 +290,7 @@ describe('Register ', function() {
 
     });
 
-    it('validate DATE OF BIRTH BEFORE 14 YEARS (14 - DATENOW) ', function() {
+    it('bba-102:validate DATE OF BIRTH BEFORE 14 YEARS (14 - DATENOW) ', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();

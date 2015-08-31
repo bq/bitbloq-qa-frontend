@@ -31,7 +31,7 @@ describe('Projects', function() {
     vars.afterTest();
 
     //TODO Check --> Alert (toast) && Create click into "Projecto sin titulo"
-    it(' Correct elemination --> Create project and eliminate ', function() {
+    it('bba-105:Correct elemination --> Create project and eliminate ', function() {
 
         //Create and check saved project
         var newLoginRandom = login.loginWithRandomUser();
