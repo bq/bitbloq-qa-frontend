@@ -21,7 +21,7 @@ describe('Login, specs only in local ', function() {
     vars.afterTest();
 
     // be careful, saucelabs no stopped !!
-    xit('Login with a Google account', function() {
+    xit('bba-107:Login with a Google account', function() {
 
         landing.get();
         landing.openLandingMenu.click();
@@ -36,7 +36,7 @@ describe('Login, specs only in local ', function() {
 
     });
 
-    it('Login with a Facebook account', function() {
+    it('bba-108:Login with a Facebook account', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();

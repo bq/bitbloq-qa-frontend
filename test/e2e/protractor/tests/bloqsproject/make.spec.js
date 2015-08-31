@@ -33,7 +33,7 @@ describe('make tab', function() {
         make.saveProject();
     });
 
-    it('We can move between all tabs', function() {
+    it('bba-110:We can move between all tabs', function() {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -47,7 +47,7 @@ describe('make tab', function() {
     });
 
 
-    it('We can insert and save tag', function() {
+    it('bba-111:We can insert and save tag', function() {
 
         var userLogin = login.loginWithRandomUser();
         make.get();
@@ -96,7 +96,7 @@ describe('make tab', function() {
         });
     });
 
-    it('Delete tag', function() {
+    it('bba-115:Delete tag', function() {
         var userLogin = login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -149,7 +149,7 @@ describe('make tab', function() {
         });
     });
 
-    it('Rename project in make and test change in project', function() {
+    it('bba-119:Rename project in make and test change in project', function() {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -236,7 +236,7 @@ describe('Project ', function() {
     // afterEach commons
     vars.afterTest();
 
-    it('Project must have a name', function() {
+    it('bba-116:Project must have a name', function() {
 
         login.loginWithRandomUser();
 
