@@ -22,7 +22,7 @@ var vars = new Variables(),
     modals = new Modals();
 
 describe('make tab', function() {
-    
+
     //beforeEach commons
     vars.beforeTest();
 
@@ -171,7 +171,9 @@ describe('make tab', function() {
                     //Change name
                     make.projectName.click();
                     modals.inputModalChangeN.clear();
+                    browser.sleep(vars.timeToWaitAutoSave);
                     modals.inputModalChangeN.sendKeys('ChangeTestName');
+                    browser.sleep(vars.timeToWaitAutoSave);
                     modals.okDialog.click();
                     browser.sleep(vars.timeToWaitAutoSave);
                     expect(make.projectName.getText()).toEqual('ChangeTestName');
