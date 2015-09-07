@@ -3,7 +3,7 @@
 /* For more options: https://github.com/angular/protractor/blob/master/docs/referenceConf.js */
 
 var protractorConfig = require('./basic_saucelabs'),
-    _ = require('../../../bower_components/lodash/lodash.min');
+    _ = require('../../../../bower_components/lodash/lodash.min');
 
 
 var platform = ['Windows 7', 'OS X 10.10']; //, 'Windows 8', 'Windows 8.1']; OjO Linux is default include
