@@ -125,7 +125,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
     });
 
     // OjO need fix bug --> not charge dropdowns
-    xit('bba-91:Check export in arduino project (only one project)', function(done) {
+    it('bba-91:Check export in arduino project (only one project)', function(done) {
 
         make.get();
         modals.attentionContinueGuest.click();
