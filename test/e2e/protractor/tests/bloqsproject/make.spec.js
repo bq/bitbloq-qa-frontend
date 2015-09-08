@@ -29,7 +29,7 @@ describe('make tab', function() {
     // afterEach commons
     vars.afterTest();
 
-    it('bba-112:Save project', function() {
+    it('bba-122:Save project', function() {
         make.saveProject();
     });
 
