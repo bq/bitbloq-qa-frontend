@@ -238,8 +238,8 @@ module.exports = function(grunt) {
          file = './target/e2e/protractor/resultTest.json';
 
       //Configuration API
-      var testlinkTestPlanID = '26510',
-         testlinkBuildID = '1033',
+      var testlinkTestPlanID = '29389',
+         testlinkBuildID = '1097',
          testlinkUser = 'luisangonzalez';
 
       //Red json result test && reprotTCResult
