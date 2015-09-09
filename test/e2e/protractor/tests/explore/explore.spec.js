@@ -6,10 +6,16 @@
 /* jshint loopfunc: true */
 
 var Variables = require('../commons/variables.js'),
-  Explore = require('../explore/explore.po.js');
+  Explore = require('../explore/explore.po.js'),
+  Landing = require('../landing/landing.po.js'),
+  Login = require('../login/login.po.js'),
+  Header = require('../header/header.po.js');
 
 var vars = new Variables(),
-  explore = new Explore();
+  explore = new Explore(),
+  landing = new Landing(),
+  login = new Login(),
+  header = new Header();
 
 describe('Explore tab', function() {
 
@@ -78,5 +84,66 @@ describe('Explore tab', function() {
 
       });
 
+  });
+
+  it('bba-57:Verify that the Search bar work correctly', function() {
+    explore.get();
+    browser.sleep(5000);
+    // Fill the search bar with the following value
+    explore.exploreFind.clear().sendKeys('test_save_14411').then(function() {
+      explore.exploreCounts.getText().then(function(value) {
+        value = value.split('/');
+        // Verify that it has more than one result
+        expect(Number(value[1])>=1).toBeTruthy();
+      });
+    });
+    // Fill the search bar with the following value
+    explore.exploreFind.clear().sendKeys('no_hay_test').then(function() {
+      explore.exploreCounts.getText().then(function(value) {
+        value = value.split('/');
+        // Verify that it hasn't any result
+        expect(Number(value[1])).toEqual(0);
+      });
+    });
+    // Fill the search bar with the following value
+    explore.exploreFind.clear().sendKeys('tosadas').then(function() {
+      explore.exploreCounts.getText().then(function(value) {
+        value = value.split('/');
+        // Verify that it has a result
+        expect(Number(value[1])).toEqual(1);
+      });
+    });
+
+    landing.get();
+    login.loginWithRandomUser();
+
+    header.navExplore.click();
+    // Fill the search bar with the following value
+    explore.exploreFind.clear().sendKeys('test_save_14411').then(function() {
+      explore.exploreCounts.getText().then(function(value) {
+        value = value.split('/');
+        // Verify that it has more than one result
+        expect(Number(value[1])>=1).toBeTruthy();
+      });
+    });
+    // Fill the search bar with the following value
+    explore.exploreFind.clear().sendKeys('no_hay_test').then(function() {
+      explore.exploreCounts.getText().then(function(value) {
+        value = value.split('/');
+        // Verify that it hasn't any result
+        expect(Number(value[1])).toEqual(0);
+      });
+    });
+    // Fill the search bar with the following value
+    explore.exploreFind.clear().sendKeys('tosadas').then(function() {
+      explore.exploreCounts.getText().then(function(value) {
+        value = value.split('/');
+        // Verify that it has a result
+        expect(Number(value[1])).toEqual(1);
+      });
+    });
+
+    login.logout();
+    
   });
 });
