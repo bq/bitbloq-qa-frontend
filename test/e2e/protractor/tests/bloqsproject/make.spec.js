@@ -171,9 +171,7 @@ describe('make tab', function() {
                     //Change name
                     make.projectName.click();
                     modals.inputModalChangeN.clear();
-                    browser.sleep(vars.timeToWaitAutoSave);
                     modals.inputModalChangeN.sendKeys('ChangeTestName');
-                    browser.sleep(vars.timeToWaitAutoSave);
                     modals.okDialog.click();
                     browser.sleep(vars.timeToWaitAutoSave);
                     expect(make.projectName.getText()).toEqual('ChangeTestName');
@@ -181,6 +179,7 @@ describe('make tab', function() {
                     browser.close();
                     // Test if name is change in projects tab (the first tab opened)
                     browser.switchTo().window(handles[0]).then(function() {
+                        browser.sleep(vars.timeToWaitTab);
                         expect(projects.projectsName.getText()).toEqual('ChangeTestName');
                         login.logout();
                     });
