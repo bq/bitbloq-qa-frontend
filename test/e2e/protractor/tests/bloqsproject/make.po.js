@@ -4,13 +4,17 @@ var Login = require('../login/login.po.js'),
     Projects = require('../projects/projects.po.js'),
     Variables = require('../commons/variables.js'),
     Modals = require('../modals/modals.po.js'),
-    Infotab = require('./infotab/infotab.po.js');
+    Infotab = require('./infotab/infotab.po.js'),
+    Header = require('../header/header.po.js'),
+    MakeActions = require('./makeActions/makeActions.po.js');
 
 var login = new Login(),
     modals = new Modals(),
     projects = new Projects(),
     vars = new Variables(),
-    infotab = new Infotab();
+    infotab = new Infotab(),
+    header = new Header(),
+    makeActions = new MakeActions();
 
 var Make = function() {
 
@@ -55,6 +59,34 @@ var Make = function() {
             login.logout();
         }
 
+    };
+    //@first --> if true when the user doesn't have a project
+    //@publish --> if true when you want publish the project
+    this.saveProjectAndPublish = function(first,publish) {
+        var that = this;
+        var nameSavedProject = 'Test_Save__' + Number(new Date());
+        header.createNewProject();
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.sleep(vars.timeToWaitTab);
+            browser.switchTo().window(handles[1]).then(function(){
+                if (first) {
+                    modals.rejectTour();
+                    browser.sleep(vars.timeToWaitFadeModals); 
+                }
+                that.infoTab.click();
+                expect(infotab.infotabProjectName.isPresent()).toBe(true);
+                infotab.infotabProjectName.clear();
+                infotab.infotabProjectName.sendKeys(nameSavedProject);
+                browser.sleep(vars.timeToWaitAutoSave);
+                if (publish) {
+                    makeActions.publishProject();
+                }
+                browser.close().then(function() {
+                    browser.switchTo().window(handles[0]);
+                });
+            });
+        });
+        return nameSavedProject;   
     };
 };
 

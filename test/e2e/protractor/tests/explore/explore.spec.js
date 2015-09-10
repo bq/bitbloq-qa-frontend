@@ -9,13 +9,15 @@ var Variables = require('../commons/variables.js'),
   Explore = require('../explore/explore.po.js'),
   Landing = require('../landing/landing.po.js'),
   Login = require('../login/login.po.js'),
-  Header = require('../header/header.po.js');
+  Header = require('../header/header.po.js'),
+  Make = require('../bloqsproject/make.po.js');
 
 var vars = new Variables(),
   explore = new Explore(),
   landing = new Landing(),
   login = new Login(),
-  header = new Header();
+  header = new Header(),
+  make = new Make();
 
 describe('Explore tab', function() {
 
@@ -25,11 +27,9 @@ describe('Explore tab', function() {
     // afterEach commons
     vars.afterTest();
 
-  it('bba-67:Show project using scroll', function() {
+  fit('bba-67:Show project using scroll', function() {
 
     explore.get();
-    browser.sleep(2000);
-
 
     //First test if there are projects and saved value for nest test
     var firstvalue, lastvalue;
@@ -86,11 +86,15 @@ describe('Explore tab', function() {
 
   });
 
-  it('bba-57:Verify that the Search bar work correctly', function() {
+  xit('bba-57:Verify that the Search bar work correctly', function() {
+    
+    login.loginWithRandomUser(); 
+    var nameProject = make.saveProjectAndPublish(true,true);
+    make.saveProjectAndPublish(false,true);
+    login.logout();
     explore.get();
-    browser.sleep(5000);
     // Fill the search bar with the following value
-    explore.exploreFind.clear().sendKeys('test_save_14411').then(function() {
+    explore.exploreFind.clear().sendKeys('test_save__').then(function() {
       explore.exploreCounts.getText().then(function(value) {
         value = value.split('/');
         // Verify that it has more than one result
@@ -106,7 +110,7 @@ describe('Explore tab', function() {
       });
     });
     // Fill the search bar with the following value
-    explore.exploreFind.clear().sendKeys('tosadas').then(function() {
+    explore.exploreFind.clear().sendKeys(nameProject).then(function() {
       explore.exploreCounts.getText().then(function(value) {
         value = value.split('/');
         // Verify that it has a result
@@ -119,7 +123,7 @@ describe('Explore tab', function() {
 
     header.navExplore.click();
     // Fill the search bar with the following value
-    explore.exploreFind.clear().sendKeys('test_save_14411').then(function() {
+    explore.exploreFind.clear().sendKeys('test_save__').then(function() {
       explore.exploreCounts.getText().then(function(value) {
         value = value.split('/');
         // Verify that it has more than one result
@@ -135,7 +139,7 @@ describe('Explore tab', function() {
       });
     });
     // Fill the search bar with the following value
-    explore.exploreFind.clear().sendKeys('tosadas').then(function() {
+    explore.exploreFind.clear().sendKeys(nameProject).then(function() {
       explore.exploreCounts.getText().then(function(value) {
         value = value.split('/');
         // Verify that it has a result
