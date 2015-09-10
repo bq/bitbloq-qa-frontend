@@ -102,7 +102,7 @@ describe('Register ', function() {
 
         register.createAccountButtn.click();
 
-        register.createAccount(user.username, user.userEmail, user.password, 31, 3, 1986, true, true);
+        register.createAccount(user.username, 'a'+user.userEmail, user.password, 31, 3, 1986, true, true);
 
         // Only show if user is in use
         expect(register.showInUse.isDisplayed()).toBeTruthy();
@@ -113,7 +113,7 @@ describe('Register ', function() {
 
         register.createAccountButtn.click();
 
-        register.createAccount(user.username.toUpperCase(), user.userEmail, user.password, 31, 3, 1986, true, true);
+        register.createAccount(user.username.toUpperCase(), 'a'+user.userEmail, user.password, 31, 3, 1986, true, true);
 
         // Only show if user is in use
         expect(register.showInUse.isDisplayed()).toBeTruthy();
@@ -312,5 +312,28 @@ describe('Register ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
     });
 
+    it('bba-21:The email is duplicated', function() {
+        landing.openLandingMenu.click();
+        landing.enterButton.click();
+
+        //Go to create account form
+        register.createAccountButtn.click();
+
+        var user = register.generateUser();
+        //Register with user in use
+        register.createAccount(user.username, user.userEmail, user.password, 31, 3, 1986, true, true);
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        login.logout();
+        login.get();
+        register.createAccountButtn.click();
+        register.createAccount(user.username+'a', user.userEmail, user.password, 31, 3, 1986, true, true);
+
+        // Only show if user is in use
+        expect(register.showEmailDuplicate.isDisplayed()).toBeTruthy();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+
+    });
+    
+    
 
 });

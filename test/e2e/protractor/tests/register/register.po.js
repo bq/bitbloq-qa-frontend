@@ -28,6 +28,7 @@ var Register = function() {
     this.showInvalidUser = $('[data-element="show-invalid-user"]');
     this.showNoBirthdate = $('[data-element="show-no-birthdate"]');
     this.showNoFourteen = $('[data-element="show-no-fourteen"]');
+    this.showEmailDuplicate = $('[data-element="login-duplicated-email"');
     //Show validate elements in password input
     this.showNoPass = $('[data-element="show-no-pass"]');
     this.showMoreSixPass = $('[data-element="show-more-six-pass"]');
