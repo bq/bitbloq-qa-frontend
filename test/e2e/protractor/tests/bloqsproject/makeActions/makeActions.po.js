@@ -47,7 +47,10 @@ var MakeActions = function() {
     this.inputUploadFile = $('[data-element="makeactions-input-upload-file"]');
 
 
-
+    this.publishProject = function() {
+       this.menuShare.click();
+       this.menuSharePublish.click(); 
+    };
 
 };
 
