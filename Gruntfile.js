@@ -225,8 +225,12 @@ module.exports = function(grunt) {
 
    grunt.registerTask('testlink', 'Testlink report dump', function() {
 
+      var planID = grunt.option('plan') || '29389', // by default ALLTEST Plan Management
+         buildID = grunt.option('build') || '1097', // by default 2.0.7 en Next - Corbel 1.22.0
+         user = grunt.option('user') || 'luisangonzalez',
+         platform = grunt.option('platform') || 'Ubuntu 14.04 LTS';
 
-      // console xml connect --> /node_modules/testlink-connect/lib/testlinkapi.js:
+      // console for debug xml--> /node_modules/testlink-connect/lib/testlinkapi.js:
 
       // Force task into async mode and grab a handle to the "done" function.
       var done = this.async();
@@ -237,24 +241,19 @@ module.exports = function(grunt) {
          testlinkConnect = new TestlinkConnect('8b4c278f1df8e4059f894acadf9932bb', 'http://testlink.mundoreader.local/lib/api/xmlrpc/v1/xmlrpc.php'),
          file = './target/e2e/protractor/resultTest.json';
 
-      //Configuration API
-      var testlinkTestPlanID = '29389',
-         testlinkBuildID = '1097',
-         testlinkUser = 'luisangonzalez';
-
       //Red json result test && reprotTCResult
       var obj, passedArray = [];
 
       //Obj result
       var Passed = function() {
          return {
-            user: testlinkUser,
-            testplanid: testlinkTestPlanID,
-            buildid: testlinkBuildID,
+            user: user,
+            testplanid: planID,
+            buildid: buildID,
             testcaseexternalid: '',
             notes: '',
             status: 'p',
-            platformname: 'Ubuntu 14.04 LTS', // To check name and id --> getTestCasesForTestPlan
+            platformname: platform, // To check name and id --> getTestCasesForTestPlan
             platform_id: 4,
             overwrite: true
          };
