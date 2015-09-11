@@ -180,6 +180,7 @@ describe('make tab', function() {
                     // Test if name is change in projects tab (the first tab opened)
                     browser.switchTo().window(handles[0]).then(function() {
                         browser.sleep(vars.timeToWaitTab);
+                        projects.get();
                         expect(projects.projectsName.getText()).toEqual('ChangeTestName');
                         login.logout();
                     });
