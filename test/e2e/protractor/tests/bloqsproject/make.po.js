@@ -62,16 +62,17 @@ var Make = function() {
     };
     //@first --> if true when the user doesn't have a project
     //@publish --> if true when you want publish the project
-    this.saveProjectAndPublish = function(first,publish) {
+    this.saveProjectAndPublish = function(first, publish) {
         var that = this;
         var nameSavedProject = 'Test_Save__' + Number(new Date());
         header.createNewProject();
+        browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.sleep(vars.timeToWaitTab);
             browser.switchTo().window(handles[1]).then(function(){
                 if (first) {
                     modals.rejectTour();
-                    browser.sleep(vars.timeToWaitFadeModals); 
+                    browser.sleep(vars.timeToWaitFadeModals);
                 }
                 that.infoTab.click();
                 expect(infotab.infotabProjectName.isPresent()).toBe(true);
@@ -84,9 +85,10 @@ var Make = function() {
                 browser.close().then(function() {
                     browser.switchTo().window(handles[0]);
                 });
+                browser.sleep(vars.timeToWaitTab);
             });
         });
-        return nameSavedProject;   
+        return nameSavedProject;
     };
 };
 

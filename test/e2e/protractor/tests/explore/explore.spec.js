@@ -87,11 +87,11 @@ describe('Explore tab', function() {
 
    });
    // sometimes name = null error
-   xit('bba-57:Verify that the Search bar work correctly', function() {
+   it('bba-57:Verify that the Search bar work correctly', function() {
 
       login.loginWithRandomUser();
       var nameProject = make.saveProjectAndPublish(true, true);
-      make.saveProjectAndPublish(false, true);
+      make.saveProjectAndPublish(false,true);
       login.logout();
       explore.get();
       // Fill the search bar with the following value
