@@ -7,22 +7,26 @@
 var Login = require('../../login/login.po.js'),
     Make = require('../../bloqsproject/make.po.js'),
     Vars = require('../../commons/variables.js'),
+    GlobalFunctions = require('../../commons/globalFunctions.js'),
     Modals = require('./../modals.po.js'),
     Projects = require('../../projects/projects.po.js');
 
 var login = new Login(),
     make = new Make(),
     vars = new Vars(),
+    globalFunctions = new GlobalFunctions(),
     modals = new Modals(),
     projects = new Projects();
 
+globalFunctions.xmlReport('changeProjectName');
+
 describe('Rename modal on make', function() {
 
-    //beforeEach commons
-    vars.beforeTest();
+  //beforeEach commons
+  globalFunctions.beforeTest();
 
-    // afterEach commons
-    vars.afterTest();
+  // afterEach commons
+  globalFunctions.afterTest();
 
     it('bba-86:Rename project and save', function() {
 

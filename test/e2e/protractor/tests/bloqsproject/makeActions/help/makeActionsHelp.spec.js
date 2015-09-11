@@ -6,24 +6,28 @@
 'use strict';
 
 var Variables = require('../../../commons/variables.js'),
+   GlobalFunctions = require('../../../commons/globalFunctions.js'),
    MakeActions = require('../makeActions.po.js'),
    Login = require('../../../login/login.po.js'),
    Make = require('../..//make.po.js'),
    Modals = require('../../../modals/modals.po.js');
 
 var vars = new Variables(),
+   globalFunctions = new GlobalFunctions(),
    makeActions = new MakeActions(),
    login = new Login(),
    make = new Make(),
    modals = new Modals();
 
+globalFunctions.xmlReport('makeActionsHelp');
+
 describe('Menu Help of MakeActions', function() {
 
    //beforeEach commons
-   vars.beforeTest();
+   globalFunctions.beforeTest();
 
    // afterEach commons
-   vars.afterTest();
+   globalFunctions.afterTest();
 
    it('bba-94:Login and test if there are all items visibles && redirect to faq, forum and help', function() {
 

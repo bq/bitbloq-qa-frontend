@@ -6,19 +6,22 @@
 
 var Login = require('./login.po.js'),
     Landing = require('../landing/landing.po.js'),
-    Variables = require('../commons/variables.js');
+    Variables = require('../commons/variables.js'),
+    GlobalFunctions = require('../commons/globalFunctions.js');
 
 var login = new Login(),
     landing = new Landing(),
-    vars = new Variables();
+    vars = new Variables(),
+    globalFunctions = new GlobalFunctions();
 
+globalFunctions.xmlReport('loginLocal');
 describe('Login, specs only in local ', function() {
 
-    //beforeEach commons
-    vars.beforeTest();
+  //beforeEach commons
+  globalFunctions.beforeTest();
 
-    // afterEach commons
-    vars.afterTest();
+  // afterEach commons
+  globalFunctions.afterTest();
 
     // be careful, saucelabs no stopped !!
     xit('bba-107:Login with a Google account', function() {

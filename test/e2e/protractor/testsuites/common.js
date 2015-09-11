@@ -7,7 +7,7 @@ var testSuite = [
     '../tests/explore/explore.spec.js',
     '../tests/header/header.spec.js',
     '../tests/login/login.spec.js',
-    '../tests/bloqsproject/make.spec.js',
+     '../tests/bloqsproject/make.spec.js',
     '../tests/bloqsproject/walkthrough/walkthrough.spec.js',
     '../tests/bloqsproject/makeActions/file/makeActionsFile.spec.js',
     '../tests/bloqsproject/makeActions/help/makeActionsHelp.spec.js',

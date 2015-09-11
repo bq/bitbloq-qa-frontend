@@ -23,6 +23,7 @@
     "grunt-newer": "^1.1.1",
     "grunt-protractor-runner": "^2.1.0",
     "grunt-protractor-webdriver": "^0.2.0",
+    "grunt-contrib-clean": "^0.6.0",
     "jasmine-core": "^2.3.4",
     "jasmine-reporters": "^2.0.7",
     "jasmine-spec-reporter": "^2.4.0",

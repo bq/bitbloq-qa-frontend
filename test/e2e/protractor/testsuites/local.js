@@ -5,7 +5,7 @@
 'use strict';
 
 var testSuite = [
-    '../tests/login/login.spec.local.js',
+   '../tests/login/login.spec.local.js',
     '../tests/bloqsproject/makeActions/file/makeActionsFile.spec.local.js'
 ];
 

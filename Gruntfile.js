@@ -25,6 +25,10 @@ module.exports = function(grunt) {
             ]
          }
       },
+      // Empties folders to start fresh
+      clean: {
+          target:'target/*'
+      },
 
       protractor_webdriver: {
 
@@ -192,6 +196,9 @@ module.exports = function(grunt) {
 
    grunt.registerTask('default', ['jshint']);
 
+   grunt.registerTask('deletetarget', 'Delete target folder by reports and downloads tmp', ['clean:target']);
+
+
    grunt.registerTask('test', 'Protractor e2e funcional test (Selenium) task.', function(env) {
       //remember send --saucelabs=true --all or --all argument will be lost
       var saucelabs = grunt.option('saucelabs'),
@@ -215,6 +222,7 @@ module.exports = function(grunt) {
 
          }
       } else {
+         tasks.push('clean:target');
          tasks.push('protractor_webdriver:e2eStart');
          tasks.push('protractor:' + env);
       }

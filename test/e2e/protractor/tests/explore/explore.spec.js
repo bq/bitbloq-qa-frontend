@@ -5,27 +5,29 @@
 'use strict';
 /* jshint loopfunc: true */
 
-var Variables = require('../commons/variables.js'),
+var GlobalFunctions = require('../commons/globalFunctions.js'),
    Explore = require('../explore/explore.po.js'),
    Landing = require('../landing/landing.po.js'),
    Login = require('../login/login.po.js'),
    Header = require('../header/header.po.js'),
    Make = require('../bloqsproject/make.po.js');
 
-var vars = new Variables(),
+var globalFunctions = new GlobalFunctions(),
    explore = new Explore(),
    landing = new Landing(),
    login = new Login(),
    header = new Header(),
    make = new Make();
 
+globalFunctions.xmlReport('explore');
+
 describe('Explore tab', function() {
 
    //beforeEach commons
-   vars.beforeTest();
+   globalFunctions.beforeTest();
 
    // afterEach commons
-   vars.afterTest();
+   globalFunctions.afterTest();
 
    it('bba-67:Show project using scroll', function() {
 
