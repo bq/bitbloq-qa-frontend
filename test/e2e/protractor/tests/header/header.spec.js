@@ -108,11 +108,9 @@ describe('Navbar --> ', function() {
    it('bba-76:Elements with login user --> Mis proyectos, Explora, aprende, ayuda', function() {
 
       login.loginWithRandomUser();
-      make.get();
-      modals.rejectTour();
-      //Show all, inclusive myProjects
-      expect(header.navProjects.isPresent()).toBe(true);
+
       projects.get();
+      expect(header.navProjects.isPresent()).toBe(true);
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
 
       header.navExplore.click();
