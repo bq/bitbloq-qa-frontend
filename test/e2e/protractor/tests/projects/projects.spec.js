@@ -74,5 +74,39 @@ describe('Projects', function() {
 
    });
 
+    it('bba-57:Verify that the Search bar work correctly', function() {
+        login.loginWithRandomUser();
+        var nameProject = make.saveProjectAndPublish(true, false);
+        make.saveProjectAndPublish(false, false);
+        make.saveProjectAndPublish(false, false);
+        projects.get();
+
+        projects.findBar.clear().sendKeys(nameProject).then(function() {
+            browser.sleep(2000);
+            projects.listProject.all(by.tagName('li')).count().then(function(result) {
+                console.log(result);
+                expect(Number(result)).toEqual(1);
+            });
+        });
+
+        projects.findBar.clear().sendKeys('test_save__').then(function() {
+            browser.sleep(2000);
+            projects.listProject.all(by.tagName('li')).count().then(function(result) {
+                console.log(result);
+                expect(Number(result) >= 1).toBeTruthy();
+            });
+        });
+
+        projects.findBar.clear().sendKeys('no_hay_test').then(function() {
+            browser.sleep(2000);
+            projects.listProject.all(by.tagName('li')).count().then(function(result) {
+                console.log(result);
+                expect(Number(result)).toEqual(0);
+            });
+        });
+
+        login.logout();
+
+    });
 
 });
