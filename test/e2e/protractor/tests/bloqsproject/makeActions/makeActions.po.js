@@ -4,7 +4,6 @@
 
 'use strict';
 
-
 var MakeActions = function() {
 
     this.hideBar = $('[data-element="hide-bar"]');
@@ -35,6 +34,8 @@ var MakeActions = function() {
     this.menuSharePrivate = $('[data-element="makeactions-menushare-private"]');
     this.menuShareWithUsers = $('[data-element="makeactions-menushare-share-with-users"]');
     this.menuShareSocial = $('[data-element="makeactions-menushare-share-social"]');
+    this.publishButton = $('[data-element="publish-button"]');
+    this.privateButton = $('[data-element="publish-button"]');
     //HELP
     this.menuHelp = $('[data-element="makeactions-menuhelp"]');
     this.menuHelpFaq = $('[data-element="makeactions-menuhelp-faq"]');
@@ -46,13 +47,12 @@ var MakeActions = function() {
     //Hidden input to upload file
     this.inputUploadFile = $('[data-element="makeactions-input-upload-file"]');
 
-
     this.publishProject = function() {
-       this.menuShare.click();
-       this.menuSharePublish.click(); 
+        this.menuShare.click();
+        this.menuSharePublish.click();
+        this.publishButton.click();
     };
 
 };
 
 module.exports = MakeActions;
-
