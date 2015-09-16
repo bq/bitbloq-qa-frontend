@@ -20,6 +20,7 @@ var Modals = function() {
     this.notifyErrorTextArea = $('[data-element="modal-notify-error-textarea"]');
     this.notifyErrorSO = $('[data-element="modal-notify-error-so"]');
     this.notifyErrorBrowser = $('[data-element="modal-notify-error-browser"]');
+    this.rejectTourPO = $('[data-element="reject-tour"]');
     this.rejectTour = function() {
         $('[data-element="reject-tour"]').click();
     };

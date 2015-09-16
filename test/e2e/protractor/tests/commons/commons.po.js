@@ -4,7 +4,7 @@
 'use strict';
 
 var Commons = function() {
-	this.cookiesBar = $('[data-element="cookies"]');
+	//Empty in this moment, fill when is necessary 
 };
 
 module.exports = Commons;

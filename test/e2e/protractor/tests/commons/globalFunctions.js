@@ -4,8 +4,8 @@
 
 'use strict';
 
-var Commons = require('./commons.po.js');
-var commons = new Commons();
+var CookiesBar = require('../cookiesBar/cookiesBar.po.js');
+var cookiesBar = new CookiesBar();
 
 var Global = function() {
 
@@ -14,9 +14,7 @@ var Global = function() {
          browser.manage().window().setSize(1024, 768);
          browser.get(browser.baseUrl);
          browser.waitForAngular();
-         // Close cookies bar
-         commons.cookiesBar.click();
-         browser.sleep(1000);
+         cookiesBar.closeCookiesBar();
       });
    };
 
@@ -36,6 +34,7 @@ var Global = function() {
             filePrefix: fileName,
             savePath: 'target/report/'
          }));
+
       });
    };
 

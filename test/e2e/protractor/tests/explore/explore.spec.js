@@ -21,7 +21,7 @@ var globalFunctions = new GlobalFunctions(),
 
 globalFunctions.xmlReport('explore');
 
-fdescribe('Explore tab', function() {
+describe('Explore tab', function() {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -88,69 +88,76 @@ fdescribe('Explore tab', function() {
             });
 
     });
-    // sometimes name = null error
+
+    //TODO test show toast
     it('bba-57:Verify that the Search bar work correctly', function() {
 
-        login.loginWithRandomUser();
-        var nameProject = make.saveProjectAndPublish(true, true);
-        make.saveProjectAndPublish(false, true);
-        login.logout();
-        explore.get();
-        // Fill the search bar with the following value
-        explore.exploreFind.clear().sendKeys('test_save__').then(function() {
-            explore.exploreCounts.getText().then(function(value) {
-                value = value.split('/');
-                // Verify that it has more than one result
-                expect(Number(value[1]) >= 1).toBeTruthy();
+        //Save and publish 2 project begining in test_save__ , and use name of one
+        make.saveProjectAndPublish();
+        // promise because expect return promise
+        make.saveProjectAndPublish().then(function(project) {
+
+            /*** No login search in explore check ***/
+            explore.get();
+
+            // Verify that it has more than one result
+            explore.exploreFind.clear().sendKeys('test_save__').then(function() {
+                explore.exploreCounts.getText().then(function(value) {
+                    value = value.split('/');
+                    expect(Number(value[1]) >= 1).toBeTruthy();
+                });
             });
-        });
-        // Fill the search bar with the following value
-        explore.exploreFind.clear().sendKeys('no_hay_test').then(function() {
-            explore.exploreCounts.getText().then(function(value) {
-                value = value.split('/');
-                // Verify that it hasn't any result
-                expect(Number(value[1])).toEqual(0);
+
+            // Verify that it hasn't any result
+            explore.exploreFind.clear().sendKeys('no_test' + Number(new Date())).then(function() {
+                explore.exploreCounts.getText().then(function(value) {
+                    value = value.split('/');
+                    expect(Number(value[1])).toEqual(0);
+                });
             });
-        });
-        // Fill the search bar with the following value
-        explore.exploreFind.clear().sendKeys(nameProject).then(function() {
-            explore.exploreCounts.getText().then(function(value) {
-                value = value.split('/');
-                // Verify that it has a result
-                expect(Number(value[1])).toEqual(1);
+
+            // Verify that it has a result
+            explore.exploreFind.clear().sendKeys(project.projectName).then(function() {
+                explore.exploreCounts.getText().then(function(value) {
+                    value = value.split('/');
+                    expect(Number(value[1])).toEqual(1);
+                });
             });
+
+            /*** Login search in explore check ***/
+            landing.get();
+            login.loginWithRandomUser();
+            header.navExplore.click();
+
+            // Verify that it has more than one result
+            explore.exploreFind.clear().sendKeys('test_save__').then(function() {
+                explore.exploreCounts.getText().then(function(value) {
+                    value = value.split('/');
+                    expect(Number(value[1]) >= 1).toBeTruthy();
+                });
+            });
+
+            // Verify that it hasn't any result
+            explore.exploreFind.clear().sendKeys('no_test' + Number(new Date())).then(function() {
+                explore.exploreCounts.getText().then(function(value) {
+                    value = value.split('/');
+
+                    expect(Number(value[1])).toEqual(0);
+                });
+            });
+
+            // Verify that it has a result
+            explore.exploreFind.clear().sendKeys(project.projectName).then(function() {
+                explore.exploreCounts.getText().then(function(value) {
+                    value = value.split('/');
+                    expect(Number(value[1])).toEqual(1);
+                });
+            });
+
+            login.logout();
+            return true;
         });
 
-        landing.get();
-        login.loginWithRandomUser();
-
-        header.navExplore.click();
-        // Fill the search bar with the following value
-        explore.exploreFind.clear().sendKeys('test_save__').then(function() {
-            explore.exploreCounts.getText().then(function(value) {
-                value = value.split('/');
-                // Verify that it has more than one result
-                expect(Number(value[1]) >= 1).toBeTruthy();
-            });
-        });
-        // Fill the search bar with the following value
-        explore.exploreFind.clear().sendKeys('no_hay_test').then(function() {
-            explore.exploreCounts.getText().then(function(value) {
-                value = value.split('/');
-                // Verify that it hasn't any result
-                expect(Number(value[1])).toEqual(0);
-            });
-        });
-        // Fill the search bar with the following value
-        explore.exploreFind.clear().sendKeys(nameProject).then(function() {
-            explore.exploreCounts.getText().then(function(value) {
-                value = value.split('/');
-                // Verify that it has a result
-                expect(Number(value[1])).toEqual(1);
-            });
-        });
-
-        login.logout();
     });
 
 });

@@ -5,7 +5,6 @@ var Login = require('../login/login.po.js'),
     Variables = require('../commons/variables.js'),
     Modals = require('../modals/modals.po.js'),
     Infotab = require('./infotab/infotab.po.js'),
-    Header = require('../header/header.po.js'),
     MakeActions = require('./makeActions/makeActions.po.js');
 
 var login = new Login(),
@@ -13,7 +12,6 @@ var login = new Login(),
     projects = new Projects(),
     vars = new Variables(),
     infotab = new Infotab(),
-    header = new Header(),
     makeActions = new MakeActions();
 
 var Make = function() {
@@ -34,62 +32,121 @@ var Make = function() {
         browser.get('#/bloqsproject');
     };
 
-    //@noLogout --> If true no logout && no check prjects && return name project and user
-    this.saveProject = function(noLogout) {
-        //Create and check saved project
+
+    /*
+     * @noLogout {boolean} --> If true no logout && no check prjects && return name project and user
+     * @isLogin {boolean} True if it is login before
+     *  If user and password is undefined login with random user, unless login and save with user
+     * @user {string} user login
+     * @password {string} password login
+    */
+    this.saveProject = function(noLogout, isLogin, user, password) {
+
         var nameSavedProject = 'Test_Save_' + Number(new Date());
-        var userName = login.loginWithRandomUser();
-        this.get();
-        modals.rejectTour();
-        browser.sleep(vars.timeToWaitFadeModals);
-        this.infoTab.click();
-        expect(infotab.infotabProjectName.isPresent()).toBe(true);
-        infotab.infotabProjectName.clear();
-        infotab.infotabProjectName.sendKeys(nameSavedProject);
-        browser.sleep(vars.timeToWaitAutoSave);
-        if (noLogout) {
+
+        if (typeof user === 'undefined' || typeof password === 'undefined') {
+
+            //Create and check saved project
+            var userName = login.loginWithRandomUser();
+            this.get();
+            modals.rejectTour();
+            browser.sleep(vars.timeToWaitFadeModals);
+            this.infoTab.click();
+            expect(infotab.infotabProjectName.isPresent()).toBe(true);
+            infotab.infotabProjectName.clear();
+            infotab.infotabProjectName.sendKeys(nameSavedProject);
+            browser.sleep(vars.timeToWaitAutoSave);
+            if (!noLogout) {
+                projects.get();
+                expect(projects.projectsName.isPresent()).toBe(true);
+                expect(projects.projectsName.getText()).toEqual(nameSavedProject);
+                login.logout();
+            }
             return {
                 projectName: nameSavedProject,
                 user: userName
             };
         } else {
-            projects.get();
-            expect(projects.projectsName.isPresent()).toBe(true);
-            expect(projects.projectsName.getText()).toEqual(nameSavedProject);
-            login.logout();
+            if (!isLogin) {
+                login.login(user, password);
+            }
+            this.get();
+
+            if (!isLogin) {
+                modals.rejectTour();
+            }
+            browser.sleep(vars.timeToWaitFadeModals);
+            this.infoTab.click();
+            expect(infotab.infotabProjectName.isPresent()).toBe(true);
+            infotab.infotabProjectName.clear();
+            infotab.infotabProjectName.sendKeys(nameSavedProject);
+            browser.sleep(vars.timeToWaitAutoSave);
+            if (!noLogout) {
+                projects.get();
+                expect(projects.projectsName.isPresent()).toBe(true);
+                expect(projects.projectsName.getText()).toEqual(nameSavedProject);
+                login.logout();
+            }
+            return {
+                projectName: nameSavedProject,
+                user: user
+            };
+
         }
 
     };
-    //@first --> if true when the user doesn't have a project
-    //@publish --> if true when you want publish the project
-    this.saveProjectAndPublish = function(first, publish) {
-        var that = this;
-        var nameSavedProject = 'Test_Save__' + Number(new Date());
-        header.createNewProject();
-        browser.sleep(vars.timeToWaitTab);
-        browser.getAllWindowHandles().then(function(handles) {
-            browser.sleep(vars.timeToWaitTab);
-            browser.switchTo().window(handles[1]).then(function(){
-                if (first) {
-                    modals.rejectTour();
-                    browser.sleep(vars.timeToWaitFadeModals);
-                }
-                that.infoTab.click();
-                expect(infotab.infotabProjectName.isPresent()).toBe(true);
-                infotab.infotabProjectName.clear();
-                infotab.infotabProjectName.sendKeys(nameSavedProject);
-                browser.sleep(vars.timeToWaitAutoSave);
-                if (publish) {
-                    makeActions.publishProject();
-                }
-                browser.close().then(function() {
-                    browser.switchTo().window(handles[0]);
+
+
+    /*
+     * @noLogout {boolean} --> If true no logout && no check prjects && return name project and user
+     * @isLogin {boolean} True if it is login before
+     *  If user and password is undefined login with random user, unless login and save with user
+     * @user {string} user login
+     * @password {string} password login
+    */
+    this.saveProjectAndPublish = function(noLogout, isLogin, user, password) {
+        var that = this,
+            project;
+
+        if (typeof user === 'undefined' || typeof password === 'undefined') {
+            project = that.saveProject(true);
+            makeActions.publishProject();
+            browser.sleep(vars.timeToWaitAutoSave);
+
+            return browser.wait(function() {
+                return browser.getCurrentUrl().then(function(url) {
+                    if (!noLogout) {
+                        login.logout();
+                    }
+                    return {
+                        projectName: project.projectName,
+                        user: project.user,
+                        urlid: url
+                    };
                 });
-                browser.sleep(vars.timeToWaitTab);
-            });
-        });
-        return nameSavedProject;
+            }, 1000, ' browser.getCurrentUrl TimeOut');
+        } else {
+            project = that.saveProject(true, isLogin, user, password);
+            makeActions.publishProject();
+            browser.sleep(vars.timeToWaitAutoSave);
+
+            return browser.wait(function() {
+                return browser.getCurrentUrl().then(function(url) {
+                    if (!noLogout) {
+                        login.logout();
+                    }
+                    return {
+                        projectName: project.projectName,
+                        user: user,
+                        urlid: url
+                    };
+                });
+            }, 1000, ' browser.getCurrentUrl TimeOut');
+
+        }
+
     };
+
 };
 
 module.exports = Make;
