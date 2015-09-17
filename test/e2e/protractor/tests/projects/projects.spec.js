@@ -11,7 +11,10 @@ var Variables = require('../commons/variables.js'),
     Projects = require('./projects.po.js'),
     MyProjects = require('../myprojects/myprojects.po.js'),
     Modals = require('../modals/modals.po.js'),
-    Infotab = require('../bloqsproject/infotab/infotab.po.js');
+    Infotab = require('../bloqsproject/infotab/infotab.po.js'),
+    MakeActions = require('../bloqsproject/makeActions/makeActions.po.js'),
+    Header = require('../header/header.po.js'),
+    Explore = require('../explore/explore.po.js');
 
 var vars = new Variables(),
     globalFunctions = new GlobalFunctions(),
@@ -20,7 +23,10 @@ var vars = new Variables(),
     projects = new Projects(),
     myprojects = new MyProjects(),
     modals = new Modals(),
-    infotab = new Infotab();
+    infotab = new Infotab(),
+    makeActions = new MakeActions(),
+    header = new Header(),
+    explore = new Explore();
 
 globalFunctions.xmlReport('projects');
 
@@ -111,5 +117,48 @@ describe('Projects', function() {
         });
 
     });
+
+    it('bba-44:Verify that the project can be published', function() {
+
+       var nameProject = make.saveProject(true).projectName;
+       projects.get();
+       var projectElem = projects.listProject.all(by.tagName('li')).first();
+       browser.actions().mouseMove(projectElem).perform();
+       browser.sleep(6000);
+       //Publish the project. Click on publish icon
+       var icon = projectElem.$('[data-element="myprojects-footer-publish"]');
+       icon.click();
+       //confirm that we want publish our project.
+       makeActions.publishButton.click();
+       header.navExplore.click();
+       //Check that the project is displayed in explora page.
+       explore.exploreFind.clear().sendKeys(nameProject).then(function() {
+           explore.exploreCounts.getText().then(function(value) {
+               value = value.split('/');
+               // Verify that it has a result
+               expect(Number(value[1])).toEqual(1);
+               header.navProjects.click();
+               browser.actions().mouseMove(projectElem).perform();
+               browser.sleep(6000);
+               //Publish the project. Click on publish icon
+               icon = projectElem.$('[data-element="myprojects-footer-private"]');
+               icon.click();
+               //confirm that we want publish our project.
+               makeActions.privateButton.click();
+               header.navExplore.click();
+               //Check that the project isn't displayed in explora page.
+               explore.exploreFind.clear().sendKeys(nameProject).then(function() {
+                   explore.exploreCounts.getText().then(function(value) {
+                       value = value.split('/');
+                       // Verify that it hasn't any result
+                       expect(Number(value[1])).toEqual(0);
+                       login.logout();
+                   });
+               });
+
+           });
+       });
+
+   });
 
 });

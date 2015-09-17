@@ -35,7 +35,7 @@ var MakeActions = function() {
     this.menuShareWithUsers = $('[data-element="makeactions-menushare-share-with-users"]');
     this.menuShareSocial = $('[data-element="makeactions-menushare-share-social"]');
     this.publishButton = $('[data-element="publish-button"]');
-    this.privateButton = $('[data-element="publish-button"]');
+    this.privateButton = $('[data-element="private-button"]');
     //HELP
     this.menuHelp = $('[data-element="makeactions-menuhelp"]');
     this.menuHelpFaq = $('[data-element="makeactions-menuhelp-faq"]');
