@@ -61,7 +61,7 @@ describe('Projects', function() {
         //Eliminar el projecto
         myprojects.overMyProjects.click();
         myprojects.eliminateMyProjects.click();
-
+        browser.sleep(1000);
         //Comprobar que aparece la alerta de se ha eliminado
         //expect(projects.alert.isDisplayed()).toBeTruthy();
 
