@@ -101,7 +101,7 @@ describe('Explore tab', function() {
             explore.get();
 
             // Verify that it has more than one result
-            explore.exploreFind.clear().sendKeys('test_save__').then(function() {
+            explore.exploreFind.clear().sendKeys('Test_Save_').then(function() {
                 explore.exploreCounts.getText().then(function(value) {
                     value = value.split('/');
                     expect(Number(value[1]) >= 1).toBeTruthy();
@@ -130,7 +130,7 @@ describe('Explore tab', function() {
             header.navExplore.click();
 
             // Verify that it has more than one result
-            explore.exploreFind.clear().sendKeys('test_save__').then(function() {
+            explore.exploreFind.clear().sendKeys('Test_Save_').then(function() {
                 explore.exploreCounts.getText().then(function(value) {
                     value = value.split('/');
                     expect(Number(value[1]) >= 1).toBeTruthy();
