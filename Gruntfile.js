@@ -234,7 +234,7 @@ module.exports = function(grunt) {
    grunt.registerTask('testlink', 'Testlink report dump', function() {
 
       var planID = grunt.option('plan') || '29389', // by default ALLTEST Plan Management
-         buildID = grunt.option('build') || '1097', // by default 2.0.7 en Next - Corbel 1.22.0
+         buildID = grunt.option('build') || '1104', // by default 2.0.7 en Next - Corbel 1.22.0
          user = grunt.option('user') || 'luisangonzalez',
          platform = grunt.option('platform') || 'Ubuntu 14.04 LTS';
 
@@ -246,8 +246,8 @@ module.exports = function(grunt) {
       //Connecto testlink
       var TestlinkConnect = require('testlink-connect'),
          fs = require('fs'),
-         testlinkConnect = new TestlinkConnect('8b4c278f1df8e4059f894acadf9932bb', 'http://testlink.mundoreader.local/lib/api/xmlrpc/v1/xmlrpc.php'),
-         file = './target/e2e/protractor/resultTest.json';
+         testlinkConnect = new TestlinkConnect('8b4c278f1df8e4059f894acadf9932bb', 'http://testlink.bq.local/lib/api/xmlrpc/v1/xmlrpc.php'),
+         file = './target/report/resultTest.json';
 
       //Red json result test && reprotTCResult
       var obj, passedArray = [];
