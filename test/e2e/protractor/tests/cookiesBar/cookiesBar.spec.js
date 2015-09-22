@@ -52,7 +52,7 @@ describe('Test CookiesBar', function() {
         //check bloqsproject
         var browserBloqsPrjectUrl = browser.forkNewDriverInstance(),
             $2 = browserBloqsPrjectUrl.$;
-        browserBloqsPrjectUrl.get(browser.baseUrl + '#/bloqsproject');
+        browserBloqsPrjectUrl.get(browser.baseUrl + make.url);
         browserBloqsPrjectUrl.manage().window().setSize(1024, 768);
         browserBloqsPrjectUrl.waitForAngular();
         $2(modals.attentionContinueGuest.elementArrayFinder_.locator_.value).click();
@@ -64,7 +64,7 @@ describe('Test CookiesBar', function() {
         //check explora
         var browserExplore = browser.forkNewDriverInstance();
         $2 = browserExplore.$;
-        browserExplore.get(browser.baseUrl + '#/explore');
+        browserExplore.get(browser.baseUrl + explore.url);
         browserExplore.manage().window().setSize(1024, 768);
         browserExplore.waitForAngular();
         $2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).click();
@@ -73,11 +73,20 @@ describe('Test CookiesBar', function() {
         //check codeproject
         var browserCodeproject = browser.forkNewDriverInstance();
         $2 = browserCodeproject.$;
-        browserCodeproject.get(browser.baseUrl + '#/codeproject');
+        browserCodeproject.get(browser.baseUrl + codeproject.url);
         browserCodeproject.manage().window().setSize(1024, 768);
         browserCodeproject.waitForAngular();
         $2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).click();
         browserCodeproject.close();
+
+        //check help
+        var browserHelp = browser.forkNewDriverInstance();
+        $2 = browserHelp.$;
+        browserHelp.get(browser.baseUrl + help.url);
+        browserHelp.manage().window().setSize(1024, 768);
+        browserHelp.waitForAngular();
+        $2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).click();
+        browserHelp.close();
 
         //check bloqsproject/<id> && codeproject/<id>
 
@@ -104,44 +113,52 @@ describe('Test CookiesBar', function() {
             return true;
         });
 
-        browser.close();
+        browser.quit();
 
     });
-    //TODO Verifiy more
-    xit('bba-126:Check, If you close cookies bar it not appear again in other pages (in same session && no login user )', function() {
+
+    it('bba-126:Check, If you close cookies bar it not appear again in other pages (in same session && no login user )', function() {
 
         //check landing
-        browser.manage().window().setSize(1024, 768);
-        browser.get(browser.baseUrl);
-        browser.waitForAngular();
+        var browserCheckCookiesNoLogin = browser.forkNewDriverInstance(),
+            $2 = browserCheckCookiesNoLogin.$;
+        browserCheckCookiesNoLogin.manage().window().setSize(1024, 768);
+        browserCheckCookiesNoLogin.get(browser.baseUrl);
+        browserCheckCookiesNoLogin.waitForAngular();
 
-        expect(cookiesBar.cookiesBar.isDisplayed()).toBe(true);
-        cookiesBar.closeCookiesBar();
-        expect(cookiesBar.cookiesBar.isDisplayed()).toBe(false);
+        expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(true);
+        $2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).click();
+        expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
-        landing.feauturesButton.click();
-        expect(cookiesBar.cookiesBar.isDisplayed()).toBe(false);
+        $2(landing.openLandingMenu.elementArrayFinder_.locator_.value).click();
+        $2(landing.feauturesButton.elementArrayFinder_.locator_.value).click();
+        expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
-        landing.downloadsButton.click();
-        expect(cookiesBar.cookiesBar.isDisplayed()).toBe(false);
+        $2(landing.openLandingMenu.elementArrayFinder_.locator_.value).click();
+        $2(landing.downloadsButton.elementArrayFinder_.locator_.value).click();
+        expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
-        landing.aboutusButton.click();
-        expect(cookiesBar.cookiesBar.isDisplayed()).toBe(false);
+        $2(landing.openLandingMenu.elementArrayFinder_.locator_.value).click();
+        $2(landing.aboutusButton.elementArrayFinder_.locator_.value).click();
+        expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
         //bloqsproject
-        make.get();
-        expect(cookiesBar.cookiesBar.isDisplayed()).toBe(false);
+        browserCheckCookiesNoLogin.get(browser.baseUrl + make.url);
+        expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
-        codeproject.get();
-        expect(cookiesBar.cookiesBar.isDisplayed()).toBe(false);
+        //codeproject
+        browserCheckCookiesNoLogin.get(browser.baseUrl + codeproject.url);
+        expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
-        explore.get();
-        expect(cookiesBar.cookiesBar.isDisplayed()).toBe(false);
+        //explore
+        browserCheckCookiesNoLogin.get(browser.baseUrl + explore.url);
+        expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
-        help.get();
-        expect(cookiesBar.cookiesBar.isDisplayed()).toBe(false);
+        //help
+        browserCheckCookiesNoLogin.get(browser.baseUrl + help.url);
+        expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
-        browser.close();
+        browserCheckCookiesNoLogin.close();
 
     });
 

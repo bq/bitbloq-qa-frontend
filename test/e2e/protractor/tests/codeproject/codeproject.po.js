@@ -2,8 +2,10 @@
 
 var Codeproject = function() {
 
+    this.url = '#/codeproject';
+
     this.get = function() {
-        browser.get('#/codeproject');
+        browser.get(this.url);
     };
 
 };

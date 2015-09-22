@@ -27,9 +27,10 @@ var Make = function() {
     this.swToolboxFunctions = $('[data-element="sw-toolbox-functions"]');
     this.projectName = $('[data-element="project-name"]');
     this.hideBar = $('[data-element="hide-bar"]');
+    this.url=  '#/bloqsproject';
 
     this.get = function() {
-        browser.get('#/bloqsproject');
+        browser.get(this.url);
     };
 
 
