@@ -1,0 +1,56 @@
+[
+  {
+    "description": "bba-122:Save project",
+    "assertions": [
+      {
+        "passed": true
+      }
+    ],
+    "duration": 0
+  },
+  {
+    "description": "bba-110:We can move between all tabs",
+    "assertions": [
+      {
+        "passed": true
+      }
+    ],
+    "duration": 1
+  },
+  {
+    "description": "bba-111:We can insert and save tag",
+    "assertions": [
+      {
+        "passed": true
+      }
+    ],
+    "duration": 50932
+  },
+  {
+    "description": "bba-115:Delete tag",
+    "assertions": [
+      {
+        "passed": true
+      }
+    ],
+    "duration": 57805
+  },
+  {
+    "description": "bba-119:Rename project in make and test change in project",
+    "assertions": [
+      {
+        "passed": true
+      }
+    ],
+    "duration": 47095
+  },
+  {
+    "description": "bba-116:Project must have a name",
+    "assertions": [
+      {
+        "passed": true
+      }
+    ],
+    "duration": 9148
+  }
+]

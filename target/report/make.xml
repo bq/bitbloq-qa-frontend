@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+ <testsuite name="make tab" timestamp="2015-09-23T14:31:00" hostname="localhost" time="155.837" errors="0" tests="5" skipped="2" disabled="0" failures="0">
+  <testcase classname="make tab" name="bba-122:Save project" time="0.001">
+   <skipped />
+  </testcase>
+  <testcase classname="make tab" name="bba-110:We can move between all tabs" time="0.001">
+   <skipped />
+  </testcase>
+  <testcase classname="make tab" name="bba-111:We can insert and save tag" time="50.932" />
+  <testcase classname="make tab" name="bba-115:Delete tag" time="57.805" />
+  <testcase classname="make tab" name="bba-119:Rename project in make and test change in project" time="47.096" />
+ </testsuite>
+ <testsuite name="Project " timestamp="2015-09-23T14:33:36" hostname="localhost" time="9.15" errors="0" tests="1" skipped="0" disabled="0" failures="0">
+  <testcase classname="Project " name="bba-116:Project must have a name" time="9.148" />
+ </testsuite>
+</testsuites>

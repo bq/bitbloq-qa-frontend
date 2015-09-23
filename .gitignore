@@ -6,7 +6,6 @@ bower_components/
 *.log
 *~
 nbproject
-target/
 
 # Editor File Ignore
 *.sublime-project
