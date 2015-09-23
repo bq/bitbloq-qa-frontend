@@ -230,6 +230,60 @@ module.exports = function(grunt) {
 
     });
 
+    grunt.registerTask('jsonbitbloq1', 'Generate json of id testCase on bitbloq1', function() {
+        // Force task into async mode and grab a handle to the "done" function.
+        var done = this.async();
+
+        //Connecto testlink
+        var TestlinkConnect = require('testlink-connect'),
+            fs = require('fs'),
+            testlinkConnect = new TestlinkConnect('8b4c278f1df8e4059f894acadf9932bb', 'http://testlink.bq.local/lib/api/xmlrpc/v1/xmlrpc.php');
+
+        //Obj result
+        var PlanID = {
+            testplanid: 29714,
+        };
+
+        testlinkConnect.getTestCasesForTestPlan(PlanID, function(obj) {
+
+            var testCaseObjArray = {
+                test: []
+            };
+
+            for (var i in obj.struct) {
+
+                for (var j in obj.struct[i]) {
+                    //console.log(obj.struct[i][j].platform_name);
+                    if (obj.struct[i][j].platform_name === 'Windows 7' && obj.struct[i][j].execution_type === '2') {
+                        //console.log(obj.struct[i][j].full_external_id);
+                        var testCaseObj = {
+                            'description': '',
+                            'assertions': [{
+                                'passed': 'true'
+                            }]
+                        };
+                        testCaseObj.description = obj.struct[i][j].full_external_id + ':';
+
+                        testCaseObjArray.test.push(testCaseObj);
+                    }
+                }
+            }
+
+            fs.writeFile('./target/bitbloq.json', JSON.stringify(testCaseObjArray.test), function(err) {
+                if (err) {
+                    throw err;
+                }
+                console.log('It\'s saved!');
+                done();
+            });
+
+        });
+
+    });
+
+    // Save resulttest bitbloq 1 on testlink:
+    // 1) grunt jsonbitbloq1
+    // 2) grunt testlink --build=$idBuild --old=true  (only necessary indicate --build and old=true )
     grunt.registerTask('testlink', 'Testlink report dump', function() {
 
         var planID = grunt.option('plan') || '29389', // by default ALLTEST Plan Management
@@ -237,7 +291,8 @@ module.exports = function(grunt) {
             user = grunt.option('user') || 'luisangonzalez',
             platform = grunt.option('platform') || 'Ubuntu 14.04 LTS',
             proxy = grunt.option('proxy'),
-            proxyValues;
+            proxyValues,
+            old = grunt.option('old'); // old opions is report dump BITBLOQ 1
 
         if (proxy) {
             proxyValues = {
@@ -256,6 +311,13 @@ module.exports = function(grunt) {
             fs = require('fs'),
             testlinkConnect = new TestlinkConnect('8b4c278f1df8e4059f894acadf9932bb', 'http://testlink.bq.local/lib/api/xmlrpc/v1/xmlrpc.php'),
             file = './target/report/resultTest.json';
+
+        if (old) {
+            file = './target/bitbloq.json';
+            platform = 'Windows 7';
+            planID = '29714';
+            //grunt.task.run('oldbitbloqtest');
+        }
 
         //Red json result test && reprotTCResult
         var obj, passedArray = [];
