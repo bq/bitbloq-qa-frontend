@@ -52,7 +52,7 @@ describe('Projects', function() {
         //Nombre del projecto
         var name = 'Test_Save_' + Number(new Date());
         infotab.infotabProjectName.sendKeys(name);
-        browser.sleep(7000);
+        browser.sleep(vars.timeToWaitAutoSave);
 
         //Comprobar que se ha guardado el projecto por el nombre
         projects.get();
@@ -60,8 +60,9 @@ describe('Projects', function() {
 
         //Eliminar el projecto
         myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         myprojects.eliminateMyProjects.click();
-        browser.sleep(15000);
+        browser.sleep(1000);
         //Comprobar que aparece la alerta de se ha eliminado
         //expect(projects.alert.isDisplayed()).toBeTruthy();
 
@@ -120,45 +121,45 @@ describe('Projects', function() {
 
     it('bba-44:Verify that the project can be published', function() {
 
-       var nameProject = make.saveProject(true).projectName;
-       projects.get();
-       var projectElem = projects.listProject.all(by.tagName('li')).first();
-       browser.actions().mouseMove(projectElem).perform();
-       browser.sleep(6000);
-       //Publish the project. Click on publish icon
-       var icon = projectElem.$('[data-element="myprojects-footer-publish"]');
-       icon.click();
-       //confirm that we want publish our project.
-       makeActions.publishButton.click();
-       header.navExplore.click();
-       //Check that the project is displayed in explora page.
-       explore.exploreFind.clear().sendKeys(nameProject).then(function() {
-           explore.exploreCounts.getText().then(function(value) {
-               value = value.split('/');
-               // Verify that it has a result
-               expect(Number(value[1])).toEqual(1);
-               header.navProjects.click();
-               browser.actions().mouseMove(projectElem).perform();
-               browser.sleep(6000);
-               //Publish the project. Click on publish icon
-               icon = projectElem.$('[data-element="myprojects-footer-private"]');
-               icon.click();
-               //confirm that we want publish our project.
-               makeActions.privateButton.click();
-               header.navExplore.click();
-               //Check that the project isn't displayed in explora page.
-               explore.exploreFind.clear().sendKeys(nameProject).then(function() {
-                   explore.exploreCounts.getText().then(function(value) {
-                       value = value.split('/');
-                       // Verify that it hasn't any result
-                       expect(Number(value[1])).toEqual(0);
-                       login.logout();
-                   });
-               });
+        var nameProject = make.saveProject(true).projectName;
+        projects.get();
+        var projectElem = projects.listProject.all(by.tagName('li')).first();
+        browser.actions().mouseMove(projectElem).perform();
+        browser.sleep(6000);
+        //Publish the project. Click on publish icon
+        var icon = projectElem.$('[data-element="myprojects-footer-publish"]');
+        icon.click();
+        //confirm that we want publish our project.
+        makeActions.publishButton.click();
+        header.navExplore.click();
+        //Check that the project is displayed in explora page.
+        explore.exploreFind.clear().sendKeys(nameProject).then(function() {
+            explore.exploreCounts.getText().then(function(value) {
+                value = value.split('/');
+                // Verify that it has a result
+                expect(Number(value[1])).toEqual(1);
+                header.navProjects.click();
+                browser.actions().mouseMove(projectElem).perform();
+                browser.sleep(6000);
+                //Publish the project. Click on publish icon
+                icon = projectElem.$('[data-element="myprojects-footer-private"]');
+                icon.click();
+                //confirm that we want publish our project.
+                makeActions.privateButton.click();
+                header.navExplore.click();
+                //Check that the project isn't displayed in explora page.
+                explore.exploreFind.clear().sendKeys(nameProject).then(function() {
+                    explore.exploreCounts.getText().then(function(value) {
+                        value = value.split('/');
+                        // Verify that it hasn't any result
+                        expect(Number(value[1])).toEqual(0);
+                        login.logout();
+                    });
+                });
 
-           });
-       });
+            });
+        });
 
-   });
+    });
 
 });

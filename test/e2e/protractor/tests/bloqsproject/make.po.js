@@ -27,12 +27,11 @@ var Make = function() {
     this.swToolboxFunctions = $('[data-element="sw-toolbox-functions"]');
     this.projectName = $('[data-element="project-name"]');
     this.hideBar = $('[data-element="hide-bar"]');
-    this.url=  '#/bloqsproject';
+    this.url = '#/bloqsproject';
 
     this.get = function() {
         browser.get(this.url);
     };
-
 
     /*
      * @noLogout {boolean} --> If true no logout && no check prjects && return name project and user
@@ -40,7 +39,7 @@ var Make = function() {
      *  If user and password is undefined login with random user, unless login and save with user
      * @user {string} user login
      * @password {string} password login
-    */
+     */
     this.saveProject = function(noLogout, isLogin, user, password) {
 
         var nameSavedProject = 'Test_Save_' + Number(new Date());
@@ -97,14 +96,13 @@ var Make = function() {
 
     };
 
-
     /*
      * @noLogout {boolean} --> If true no logout && no check prjects && return name project and user
      * @isLogin {boolean} True if it is login before
      *  If user and password is undefined login with random user, unless login and save with user
      * @user {string} user login
      * @password {string} password login
-    */
+     */
     this.saveProjectAndPublish = function(noLogout, isLogin, user, password) {
         var that = this,
             project;
