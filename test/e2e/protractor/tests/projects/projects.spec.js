@@ -62,7 +62,7 @@ describe('Projects', function() {
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitFadeModals);
         myprojects.eliminateMyProjects.click();
-        browser.sleep(1000);
+        browser.sleep(15000);
         //Comprobar que aparece la alerta de se ha eliminado
         //expect(projects.alert.isDisplayed()).toBeTruthy();
 
