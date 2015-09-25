@@ -12,7 +12,8 @@ var CookiesBar = require('./cookiesBar.po.js'),
     Landing = require('../landing/landing.po.js'),
     Explore = require('../explore/explore.po.js'),
     Codeproject = require('../codeproject/codeproject.po.js'),
-    Help = require('../help/help.po.js');
+    Help = require('../help/help.po.js'),
+    Login = require('../login/login.po.js');
 
 var cookiesBar = new CookiesBar(),
     globalFunctions = new GlobalFunctions(),
@@ -22,7 +23,8 @@ var cookiesBar = new CookiesBar(),
     landing = new Landing(),
     explore = new Explore(),
     codeproject = new Codeproject(),
-    help = new Help();
+    help = new Help(),
+    login = new Login();
 
 globalFunctions.xmlReport('cookiesBar');
 
@@ -113,7 +115,7 @@ describe('Test CookiesBar', function() {
             return true;
         });
 
-        browser.quit();
+        //browser.quit();
 
     });
 
@@ -162,8 +164,38 @@ describe('Test CookiesBar', function() {
 
     });
 
+    // ISSUE,
     xit('bba-127:Check, Login user accept cookies and never appear in other session', function() {
-        //TODO
+
+        /* Open browser with random user and close cookiesBar */
+
+        //check landing
+        browser.manage().window().setSize(1024, 768);
+        browser.get(browser.baseUrl);
+        browser.waitForAngular();
+        cookiesBar.closeCookiesBar();
+        var user = login.loginWithRandomUser();
+        console.log(user);
+        login.logout();
+
+        /* Open new browser and login last user to check no show cookies bar*/
+
+        var browserCheckCookiesLogin = browser.forkNewDriverInstance(),
+            $2 = browserCheckCookiesLogin.$;
+        browserCheckCookiesLogin.manage().window().setSize(1024, 768);
+        browserCheckCookiesLogin.get(browser.baseUrl);
+        browserCheckCookiesLogin.waitForAngular();
+
+        //Login last user
+        browserCheckCookiesLogin.get(login.url);
+        $2(login.user.elementArrayFinder_.locator_.value).sendKeys(user.user);
+        $2(login.password.elementArrayFinder_.locator_.value).sendKeys(user.password);
+        $2(login.loginButton.elementArrayFinder_.locator_.value).click();
+        expect(browserCheckCookiesLogin.getCurrentUrl()).toMatch(browser.baseUrl + '#/projects');
+        //Check no show cookies bar
+        expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
+
+        browser.quit();
     });
 
 });

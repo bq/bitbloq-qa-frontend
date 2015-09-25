@@ -15,8 +15,9 @@ var Login = function() {
     //This elements are public (this) by reuse
     //Login basic
     this.loginButton = $('[data-element="login-button"]');
-    this.user = element(by.model('emailUserName'));
-    this.password = element(by.model('user.password'));
+    this.user = $('[data-element="login-emailusername-intput"]');
+    this.password = $('[data-element="login-password-input"]');
+
     this.userLoginHeader = $('[data-element="user-login"]');
     //Login FB
     this.facebookButton = element(by.buttonText('Facebook'));
@@ -36,6 +37,11 @@ var Login = function() {
     this.showMoreSixPass = $('[data-element="show-more-six-pass"]');
     this.showIncorrectPass = $('[data-element="show-incorrect-password"]');
     this.showIncorrectUser = $('[data-element="show-no-user-or-email-register"]');
+    this.url = '#/login';
+
+    this.get = function() {
+        browser.get(this.url);
+    };
 
     /**
      * login in bitbloq
@@ -129,7 +135,6 @@ var Login = function() {
 
     };
 
-
     this.loginWithRandomUser = function() {
         this.get();
         var randomUserCredentials = register.generateUser();
@@ -158,7 +163,7 @@ var Login = function() {
         };
     };
 
-    this.loginWithUserName = function (name) {
+    this.loginWithUserName = function(name) {
         this.get();
         var randomUserCredentials = register.generateUser();
         register.createAccountButtn.click();
@@ -186,7 +191,6 @@ var Login = function() {
         };
     };
 
-
     /**
      * Are localStorage ?
      *  @return {boolean} boolean true or false cookies
@@ -212,9 +216,6 @@ var Login = function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/');
     };
 
-    this.get = function() {
-        browser.get('#/login');
-    };
 };
 
 module.exports = Login;
