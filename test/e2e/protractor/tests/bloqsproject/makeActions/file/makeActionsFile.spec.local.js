@@ -45,6 +45,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
         //Download file
         makeActions.menuFile.click();
+        browser.sleep(vars.timeToWaitMenu);
         makeActions.menuDownload.click();
 
         //Wait to download file and compare upload file to download file
@@ -81,6 +82,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
         //Download file
         makeActions.menuFile.click();
+        browser.sleep(vars.timeToWaitMenu);
         makeActions.menuExportArduino.click();
 
         //Wait to download file and compare upload file to download file

@@ -24,6 +24,7 @@ var Variables = function() {
    this.timeToWaitFadeModals = 5000;
    this.timeToWaitAutoSave = 6000;
    this.timeToWaitTab = 3000;
+   this.timeToWaitMenu = 500;
 
    this.account = function(cuenta) {
       if (cuenta === 'google') {

@@ -180,7 +180,7 @@ describe('Test CookiesBar', function() {
 
         /* Open new browser and login last user to check no show cookies bar*/
 
-        var browserCheckCookiesLogin = browser.forkNewDriverInstance(),
+        var browserCheckCookiesLogin = browser.loginforkNewDriverInstance(),
             $2 = browserCheckCookiesLogin.$;
         browserCheckCookiesLogin.manage().window().setSize(1024, 768);
         browserCheckCookiesLogin.get(browser.baseUrl);
@@ -194,8 +194,23 @@ describe('Test CookiesBar', function() {
         expect(browserCheckCookiesLogin.getCurrentUrl()).toMatch(browser.baseUrl + '#/projects');
         //Check no show cookies bar
         expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
+        browserCheckCookiesLogin.close();
 
-        browser.quit();
+    });
+
+    it('bba-132:Verify link to "Politica de cookies" is ok', function(){
+
+      //check landing
+      var browserCheckCookiesURL = browser.forkNewDriverInstance(),
+          $2 = browserCheckCookiesURL.$;
+      browserCheckCookiesURL.manage().window().setSize(1024, 768);
+      browserCheckCookiesURL.get(browser.baseUrl);
+      browserCheckCookiesURL.waitForAngular();
+      console.log(cookiesBar.cookiesBarLink.elementArrayFinder_.locator_.value);
+      expect($2(cookiesBar.cookiesBarLink.elementArrayFinder_.locator_.value).getAttribute('href')).toEqual(browser.baseUrl + '#/cookies');
+
+      browserCheckCookiesURL.close();
+      //browser.quit();
     });
 
 });
