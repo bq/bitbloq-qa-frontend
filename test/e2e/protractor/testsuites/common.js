@@ -3,6 +3,7 @@
 /*Test suite*/
 var testSuite = [
     '../tests/explore/explore.spec.js',
+    '../tests/explore/project.spec.js',
     '../tests/header/header.spec.js',
     '../tests/login/login.spec.js',
     '../tests/bloqsproject/make.spec.js',
