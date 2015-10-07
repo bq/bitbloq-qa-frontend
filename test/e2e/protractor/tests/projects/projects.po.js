@@ -12,9 +12,15 @@ var Projects = function() {
     this.projectsName = $('[data-element="projects-project-name"]');
     this.findBar = $('[data-element="projects-find"]');
     this.listProject = $('[data-element="projects-list-project"]');
-    
+    this.project = $('[data-element="projects-project"]');
+
     this.get = function() {
         browser.get('#/projects');
+    };
+
+    this.getProjectCount = function() {
+        return this.listProject.all(by.xpath('//*[@data-element="projects-project"]')).count();
+
     };
 };
 

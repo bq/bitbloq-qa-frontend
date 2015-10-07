@@ -91,24 +91,21 @@ describe('Projects', function() {
 
                 projects.findBar.clear().sendKeys(project.projectName).then(function() {
                     browser.sleep(2000);
-                    projects.listProject.all(by.tagName('li')).count().then(function(result) {
-                        console.log(result);
+                    projects.getProjectCount().then(function(result) {
                         expect(Number(result)).toEqual(1);
                     });
                 });
 
                 projects.findBar.clear().sendKeys('test_save_').then(function() {
                     browser.sleep(2000);
-                    projects.listProject.all(by.tagName('li')).count().then(function(result) {
-                        console.log(result);
+                    projects.getProjectCount().then(function(result) {
                         expect(Number(result) >= 1).toBeTruthy();
                     });
                 });
 
                 projects.findBar.clear().sendKeys('no_test' + Number(new Date())).then(function() {
                     browser.sleep(2000);
-                    projects.listProject.all(by.tagName('li')).count().then(function(result) {
-                        console.log(result);
+                    projects.getProjectCount().then(function(result) {
                         expect(Number(result)).toEqual(0);
                     });
                 });
@@ -123,7 +120,7 @@ describe('Projects', function() {
 
         var nameProject = make.saveProject(true).projectName;
         projects.get();
-        var projectElem = projects.listProject.all(by.tagName('li')).first();
+        var projectElem = projects.project;
         browser.actions().mouseMove(projectElem).perform();
         browser.sleep(6000);
         //Publish the project. Click on publish icon

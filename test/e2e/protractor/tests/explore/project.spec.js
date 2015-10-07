@@ -57,7 +57,7 @@ describe('Publish project', function() {
                 //Se comprueba que se ha añadido el proyecto
                 header.navProjects.click();
                 projects.findBar.clear().sendKeys('Copia de ' + project1.projectName).then(function() {
-                    projects.listProject.all(by.tagName('li')).count().then(function(result) {
+                    projects.getProjectCount().then(function(result) {
                         expect(Number(result) >= 1).toBeTruthy();
                         login.logout();
                     });
