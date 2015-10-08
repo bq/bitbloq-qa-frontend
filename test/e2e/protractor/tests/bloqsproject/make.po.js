@@ -29,6 +29,8 @@ var Make = function() {
     this.hideBar = $('[data-element="hide-bar"]');
     this.url = '#/bloqsproject';
 
+    this.softwareEditCode = $('[data-element="software-edit-code"]');
+
     this.get = function() {
         browser.get(this.url);
     };

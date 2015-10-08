@@ -198,19 +198,18 @@ describe('Test CookiesBar', function() {
 
     });
 
-    it('bba-132:Verify link to "Politica de cookies" is ok', function(){
+    it('bba-132:Verify link to "Politica de cookies" is ok', function() {
 
-      //check landing
-      var browserCheckCookiesURL = browser.forkNewDriverInstance(),
-          $2 = browserCheckCookiesURL.$;
-      browserCheckCookiesURL.manage().window().setSize(1024, 768);
-      browserCheckCookiesURL.get(browser.baseUrl);
-      browserCheckCookiesURL.waitForAngular();
-      console.log(cookiesBar.cookiesBarLink.elementArrayFinder_.locator_.value);
-      expect($2(cookiesBar.cookiesBarLink.elementArrayFinder_.locator_.value).getAttribute('href')).toEqual(browser.baseUrl + '#/cookies');
+        //check landing
+        var browserCheckCookiesURL = browser.forkNewDriverInstance(),
+            $2 = browserCheckCookiesURL.$;
+        browserCheckCookiesURL.manage().window().setSize(1024, 768);
+        browserCheckCookiesURL.get(browser.baseUrl);
+        browserCheckCookiesURL.waitForAngular();
+        expect($2(cookiesBar.cookiesBarLink.elementArrayFinder_.locator_.value).getAttribute('href')).toEqual(browser.baseUrl + '#/cookies');
 
-      browserCheckCookiesURL.close();
-      //browser.quit();
+        browserCheckCookiesURL.close();
+        //browser.quit();
     });
 
 });

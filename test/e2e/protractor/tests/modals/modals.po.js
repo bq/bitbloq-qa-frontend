@@ -19,6 +19,9 @@ var Modals = function() {
     this.notifyErrorSO = $('[data-element="modal-notify-error-so"]');
     this.notifyErrorBrowser = $('[data-element="modal-notify-error-browser"]');
     this.rejectTourPO = $('[data-element="reject-tour"]');
+    //PO alert.html
+    this.modalAlertOk = $(['data-element="modal-alert-ok"']);
+
     this.rejectTour = function() {
         $('[data-element="reject-tour"]').click();
     };

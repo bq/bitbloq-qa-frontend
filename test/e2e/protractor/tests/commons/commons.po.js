@@ -4,7 +4,11 @@
 'use strict';
 
 var Commons = function() {
-	//Empty in this moment, fill when is necessary 
+    //TOAST
+    this.editToast = $('[data-id="edit-project"]');
+    this.alertTextToast = $('[data-element="alert-text-toast"]');
+    this.alertCloseToast = $('[data-element="alert-close-toast"]');
+    this.alertSvgIcon = $('[data-element="alert-svg-icon"]');
 };
 
 module.exports = Commons;
