@@ -13,12 +13,16 @@ var Variables = function() {
 
     //count google for login
     this.userGoogle = 'test2bitbloq@gmail.com';
+    this.userNameGoogle = 'tsetsretsa';
+    this.firstNameGoogle = 'Test';
+    this.lastNameGoogle = 'Test';
     this.passwordGoogle = 'test2015bitbloq';
 
     //count facebook for login
     this.emailFb = 'webpruebas.2@gmail.com';
     this.passwordFb = 'webpruebas.2webpruebas.2';
     this.userFb = 'Paco';
+    this.lastnameFb = 'Gómez';
 
     //timers
     this.timeToWaitFadeModals = 5000;
@@ -30,6 +34,9 @@ var Variables = function() {
         if (cuenta === 'google') {
             return {
                 user: this.userGoogle,
+                username: this.userNameGoogle,
+                firstname: this.firstNameGoogle,
+                lastname: this.lastNameGoogle,
                 password: this.passwordGoogle
             };
 
@@ -37,7 +44,8 @@ var Variables = function() {
             return {
                 email: this.emailFb,
                 password: this.passwordFb,
-                user: this.userFb
+                user: this.userFb,
+                lastname: this.lastnameFb
             };
         } else if (cuenta === 'bitbloq') {
             return {
