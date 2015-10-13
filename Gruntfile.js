@@ -67,7 +67,7 @@ module.exports = function(grunt) {
             },
             integration: {
                 options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
                     args: {
                         baseUrl: 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
                         seleniumAddress: 'http://localhost:4444/wd/hub'
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
             },
             qa: {
                 options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
                     args: {
                         baseUrl: 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
                         seleniumAddress: 'http://localhost:4444/wd/hub'
@@ -85,7 +85,7 @@ module.exports = function(grunt) {
             },
             next: {
                 options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
                     args: {
                         baseUrl: 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
                         seleniumAddress: 'http://localhost:4444/wd/hub'
@@ -94,7 +94,7 @@ module.exports = function(grunt) {
             },
             mvp: {
                 options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
                     args: {
                         baseUrl: 'http://mvp-bitbloq.bq.com/',
                         seleniumAddress: 'http://localhost:4444/wd/hub'
@@ -103,7 +103,7 @@ module.exports = function(grunt) {
             },
             staging: {
                 options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
                     args: {
                         baseUrl: 'http://staging-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
                         seleniumAddress: 'http://localhost:4444/wd/hub'

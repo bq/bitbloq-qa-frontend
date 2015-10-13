@@ -20,7 +20,12 @@ var Modals = function() {
     this.notifyErrorBrowser = $('[data-element="modal-notify-error-browser"]');
     this.rejectTourPO = $('[data-element="reject-tour"]');
     //PO alert.html
-    this.modalAlertOk = $(['data-element="modal-alert-ok"']);
+    this.modalAlertOk = $('[data-element="modal-alert-ok"]');
+    //PO modal-share-social-networks.html
+    this.fbButton = $('[data-element="modals-fb-button"]');
+    this.twButton = $('[data-element="modals-tw-button"]');
+    this.gButton = $('[data-element="modals-g-button"]');
+    this.shortButton = $('[data-element="modals-shortURL"]');
 
     this.rejectTour = function() {
         $('[data-element="reject-tour"]').click();
