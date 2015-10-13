@@ -91,6 +91,7 @@ describe('Menu file of MakeActions', function() {
             expect(browser.getCurrentUrl()).toMatch(/#\/bloqsproject/);
             expect(make.projectName.getText()).toEqual(nameSavedProject);
             browser.close().then(browser.switchTo().window(handles[0]));
+            projects.get();
             projects.getProjectCount().then(function(result) {
                 expect(Number(result)).toEqual(2);
                 login.logout();
