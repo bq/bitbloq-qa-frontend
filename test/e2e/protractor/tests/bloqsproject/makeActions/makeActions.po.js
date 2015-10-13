@@ -4,6 +4,15 @@
 
 'use strict';
 
+var Variables = require('../../commons/variables.js'),
+    Modals = require('../../modals/modals.po.js'),
+    Login = require('../../login/login.po.js');
+
+var vars = new Variables(),
+    modals = new Modals(),
+    os = require('os').type,
+    login = new Login();
+
 var MakeActions = function() {
 
     this.hideBar = $('[data-element="hide-bar"]');
@@ -49,8 +58,80 @@ var MakeActions = function() {
 
     this.publishProject = function() {
         this.menuShare.click();
+        browser.sleep(vars.timeToWaitMenu);
         this.menuSharePublish.click();
+        browser.sleep(vars.timeToWaitMenu);
         this.publishButton.click();
+    };
+
+    this.publishProjectWithName = function(name) {
+
+        this.menuFile.click();
+        browser.sleep(vars.timeToWaitMenu);
+        this.menuChangeName.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        modals.inputModalChangeN.clear();
+        modals.inputModalChangeN.sendKeys(name);
+        modals.okDialog.click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        this.menuShare.click();
+        browser.sleep(vars.timeToWaitMenu);
+        this.menuSharePublish.click();
+        browser.sleep(vars.timeToWaitMenu);
+        this.publishButton.click();
+    };
+
+    this.importFile = function(file) {
+        browser.get('#/bloqsproject');
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        if (os() === 'Windows_NT') {
+            file = file.replace('/', '\\');
+        }
+        this.inputUploadFile.sendKeys(file);
+        browser.sleep(vars.timeToWaitFadeModals);
+
+    };
+
+    this.importFileGuestUser = function(file) {
+        browser.get('#/bloqsproject');
+        modals.attentionContinueGuest.click();
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        if (os() === 'Windows_NT') {
+            file = file.replace('/', '\\');
+        }
+        this.inputUploadFile.sendKeys(file);
+        browser.sleep(vars.timeToWaitFadeModals);
+
+    };
+
+    this.importFileNewUser = function(file) {
+        var user = login.loginWithRandomUser();
+        this.importFile(file);
+        browser.sleep(5000);
+        return {
+            user: user
+        };
+    };
+
+    this.importFileUserLogin = function(file, user) {
+        login.login(user.user, user.password);
+        browser.get('#/bloqsproject');
+        if (os() === 'Windows_NT') {
+            file = file.replace('/', '\\');
+        }
+        this.inputUploadFile.sendKeys(file);
+        browser.sleep(vars.timeToWaitFadeModals);
+    };
+
+    this.importFileUser = function(file) {
+        browser.get('#/bloqsproject');
+        if (os() === 'Windows_NT') {
+            file = file.replace('/', '\\');
+        }
+        this.inputUploadFile.sendKeys(file);
+        browser.sleep(vars.timeToWaitFadeModals);
     };
 
 };

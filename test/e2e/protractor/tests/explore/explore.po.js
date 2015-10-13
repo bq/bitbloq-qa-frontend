@@ -12,6 +12,7 @@ var Explore = function() {
     this.indexMain = '$(\'[data-element="explore-scroll"]\')'; // This data-element is different (\'data-element\') because is use in executeScript
     this.projectElem = $('[data-element="explora-project-elem"]');
     this.projectMoreInfoButton = $('[data-element="explora-project-moreinfo"]');
+    this.exploreFilterDrowdown = $('[data-element="explore-filter-dropdown"]');
     this.url = '#/explore';
 
     this.get = function() {
