@@ -17,7 +17,7 @@ var globalFunctions = new GlobalFunctions(),
     landing = new Landing(),
     login = new Login();
 
-globalFunctions.xmlReport('makeActionsEdit');
+globalFunctions.xmlReport('account');
 
 describe('User account view', function() {
 
@@ -36,23 +36,6 @@ describe('User account view', function() {
         expect(account.email.getAttribute('value')).toBe(randomUserInfo.userEmail.toLowerCase());
         expect(account.firstname.getAttribute('value')).toBe('');
         expect(account.lastname.getAttribute('value')).toBe('');
-
-        login.logout();
-
-    });
-
-    it('bba-158:Verify fields from new google user', function() {
-
-        landing.openLandingMenu.click();
-        landing.enterButton.click();
-        var googleAccount = vars.account('google');
-        login.loginGoogle(googleAccount.user, googleAccount.password);
-        account.get();
-
-        expect(account.firstname.getAttribute('value')).toBe(googleAccount.firstname);
-        expect(account.lastname.getAttribute('value')).toBe(googleAccount.lastname);
-        expect(account.username.getAttribute('value')).toBe(googleAccount.username);
-        expect(account.email.getAttribute('value')).toBe(googleAccount.user);
 
         login.logout();
 
