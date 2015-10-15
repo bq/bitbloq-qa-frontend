@@ -12,7 +12,8 @@ var login = new Login(),
     projects = new Projects(),
     vars = new Variables(),
     infotab = new Infotab(),
-    makeActions = new MakeActions();
+    makeActions = new MakeActions(),
+    os = require('os').type;
 
 var Make = function() {
 
@@ -111,7 +112,7 @@ var Make = function() {
 
         if (typeof user === 'undefined' || typeof password === 'undefined') {
             project = that.saveProject(true);
-            makeActions.publishProject();
+            this.publishProject();
             browser.sleep(vars.timeToWaitAutoSave);
 
             return browser.wait(function() {
@@ -128,7 +129,7 @@ var Make = function() {
             }, 1000, ' browser.getCurrentUrl TimeOut');
         } else {
             project = that.saveProject(true, isLogin, user, password);
-            makeActions.publishProject();
+            this.publishProject();
             browser.sleep(vars.timeToWaitAutoSave);
 
             return browser.wait(function() {
@@ -148,6 +149,83 @@ var Make = function() {
 
     };
 
+    this.publishProject = function() {
+        makeActions.menuShare.click();
+        browser.sleep(vars.timeToWaitMenu);
+        makeActions.menuSharePublish.click();
+        browser.sleep(vars.timeToWaitMenu);
+        makeActions.publishButton.click();
+    };
+
+    this.publishProjectWithName = function(name) {
+
+        makeActions.menuFile.click();
+        browser.sleep(vars.timeToWaitMenu);
+        makeActions.menuChangeName.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        modals.inputModalChangeN.clear();
+        modals.inputModalChangeN.sendKeys(name);
+        modals.okDialog.click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        makeActions.menuShare.click();
+        browser.sleep(vars.timeToWaitMenu);
+        makeActions.menuSharePublish.click();
+        browser.sleep(vars.timeToWaitMenu);
+        makeActions.publishButton.click();
+    };
+
+    this.importFile = function(file) {
+        browser.get('#/bloqsproject');
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        if (os() === 'Windows_NT') {
+            file = file.replace('/', '\\');
+        }
+        makeActions.inputUploadFile.sendKeys(file);
+        browser.sleep(vars.timeToWaitFadeModals);
+
+    };
+
+    this.importFileGuestUser = function(file) {
+        browser.get('#/bloqsproject');
+        modals.attentionContinueGuest.click();
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        if (os() === 'Windows_NT') {
+            file = file.replace('/', '\\');
+        }
+        makeActions.inputUploadFile.sendKeys(file);
+        browser.sleep(vars.timeToWaitFadeModals);
+
+    };
+
+    this.importFileNewUser = function(file) {
+        var user = login.loginWithRandomUser();
+        this.importFile(file);
+        browser.sleep(5000);
+        return {
+            user: user
+        };
+    };
+
+    this.importFileUserLogin = function(file, user) {
+        login.login(user.user, user.password);
+        browser.get('#/bloqsproject');
+        if (os() === 'Windows_NT') {
+            file = file.replace('/', '\\');
+        }
+        makeActions.inputUploadFile.sendKeys(file);
+        browser.sleep(vars.timeToWaitFadeModals);
+    };
+
+    this.importFileUser = function(file) {
+        browser.get('#/bloqsproject');
+        if (os() === 'Windows_NT') {
+            file = file.replace('/', '\\');
+        }
+        makeActions.inputUploadFile.sendKeys(file);
+        browser.sleep(vars.timeToWaitFadeModals);
+    };
 };
 
 module.exports = Make;

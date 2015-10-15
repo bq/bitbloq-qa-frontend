@@ -8,13 +8,15 @@
 var Variables = require('../../../commons/variables.js'),
     GlobalFunctions = require('../../../commons/globalFunctions.js'),
     MakeActions = require('../makeActions.po.js'),
+    Make = require('../../make.po.js'),
     path = require('path'),
     fs = require('fs'),
     os = require('os').type;
 
 var vars = new Variables(),
     globalFunctions = new GlobalFunctions(),
-    makeActions = new MakeActions();
+    makeActions = new MakeActions(),
+    make = new Make();
 
 globalFunctions.xmlReport('makeActionsFileLocal');
 
@@ -29,7 +31,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
     it('bba-90:Open from file, download and compare if is equal ', function() {
 
         var fileToUpload = path.resolve() + '/test/e2e/protractor/res/onlyBoardZum.json';
-        makeActions.importFileGuestUser(fileToUpload);
+        make.importFileGuestUser(fileToUpload);
 
         //If file download exist, delete it
         var fileDownload = path.resolve() + '/target/onlyBoardZum.json';
@@ -54,7 +56,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
     it('bba-91:Check export in arduino project (only one project)', function() {
 
         var fileToUpload = path.resolve() + '/test/e2e/protractor/res/Creando_un_voltimetro_con_bitbloq.json';
-        makeActions.importFileGuestUser(fileToUpload);
+        make.importFileGuestUser(fileToUpload);
 
         var fileToCompare = path.resolve() + '/test/e2e/protractor/res/Creando_un_voltimetro_con_bitbloq.ino';
         if (os() === 'Windows_NT') {

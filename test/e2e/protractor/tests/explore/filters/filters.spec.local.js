@@ -2,7 +2,7 @@
 
 var Variables = require('../../commons/variables.js'),
     GlobalFunctions = require('../../commons/globalFunctions.js'),
-    MakeActions = require('../../bloqsproject/makeActions/makeActions.po.js'),
+    Make = require('../../bloqsproject/make.po.js'),
     Login = require('../../login/login.po.js'),
     Explore = require('../explore.po.js'),
     path = require('path');
@@ -11,7 +11,7 @@ var vars = new Variables(),
     globalFunctions = new GlobalFunctions(),
     login = new Login(),
     explore = new Explore(),
-    makeActions = new MakeActions();
+    make = new Make();
 
 globalFunctions.xmlReport('makeActionsFileLocal');
 
@@ -43,74 +43,74 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
         /********  PUBLISH PROJECT WITH DIFFERENTS COMPONENTES ***********/
 
-        makeActions.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Ultrasonidos_Bloqs.json');
+        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Ultrasonidos_Bloqs.json');
         nameUltrasonidosProject = 'Ultrasonidos_Bloqs' + Number(new Date());
-        makeActions.publishProjectWithName(nameUltrasonidosProject);
+        make.publishProjectWithName(nameUltrasonidosProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/Bluetooth_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Bluetooth_Bloqs.json');
         nameBluetoothProject = 'Bluetooth_Bloqs' + Number(new Date());
-        makeActions.publishProjectWithName(nameBluetoothProject);
+        make.publishProjectWithName(nameBluetoothProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/Boton_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Boton_Bloqs.json');
         nameBotonProject = 'Boton_Bloqs' + Number(new Date());
-        makeActions.publishProjectWithName(nameBotonProject);
+        make.publishProjectWithName(nameBotonProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/Botonera_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Botonera_Bloqs.json');
         nameBotoneraProject = 'Botonera_Bloqs' + Number(new Date());
-        makeActions.publishProjectWithName(nameBotoneraProject);
+        make.publishProjectWithName(nameBotoneraProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/SensorInfrarojos_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/SensorInfrarojos_Bloqs.json');
         nameSensorInfrarojosProject = 'SensorInfrarojos_Bloqs' + Number(new Date());
-        makeActions.publishProjectWithName(nameSensorInfrarojosProject);
+        make.publishProjectWithName(nameSensorInfrarojosProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/Joystick_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Joystick_Bloqs.json');
         nameJoystickProject = 'Joystick_Bloqs' + Number(new Date());
-        makeActions.publishProjectWithName(nameJoystickProject);
+        make.publishProjectWithName(nameJoystickProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/LCD_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/LCD_Bloqs.json');
         nameLCDProject = 'LCD_Bloqs' + Number(new Date());
-        makeActions.publishProjectWithName(nameLCDProject);
+        make.publishProjectWithName(nameLCDProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/Led_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Led_Bloqs.json');
         nameLedProject = 'Led_Bloqs' + Number(new Date());
-        makeActions.publishProjectWithName(nameLedProject);
+        make.publishProjectWithName(nameLedProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/SensorLuz_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/SensorLuz_Bloqs.json');
         nameSensorLuzProject = 'SensorLuz_Bloqs' + Number(new Date());
-        makeActions.publishProjectWithName(nameSensorLuzProject);
+        make.publishProjectWithName(nameSensorLuzProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/Potenciometro_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Potenciometro_Bloqs.json');
         namePotenciometroProject = 'Potenciometro_Bloqs' + Number(new Date());
-        makeActions.publishProjectWithName(namePotenciometroProject);
+        make.publishProjectWithName(namePotenciometroProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/PuertoSerie_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/PuertoSerie_Bloqs.json');
         namePuertoSerieProject = 'PuertoSerie_Bloqs' + Number(new Date());
-        makeActions.publishProjectWithName(namePuertoSerieProject);
+        make.publishProjectWithName(namePuertoSerieProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/Servo_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Servo_Bloqs.json');
         nameServoProject = 'Servo_Bloqs' + Number(new Date());
-        makeActions.publishProjectWithName(nameServoProject);
+        make.publishProjectWithName(nameServoProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/ServoContinuo_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/ServoContinuo_Bloqs.json');
         nameServoContinuoProject = 'ServoContinuo_Bloqs.json' + Number(new Date());
-        makeActions.publishProjectWithName(nameServoContinuoProject);
+        make.publishProjectWithName(nameServoContinuoProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        makeActions.importFileUser(path.resolve() + '/test/e2e/protractor/res/Zumbador_Bloqs.json');
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Zumbador_Bloqs.json');
         nameZumbadorProject = 'Zumbador_Bloqs.json' + Number(new Date());
-        makeActions.publishProjectWithName(nameZumbadorProject);
+        make.publishProjectWithName(nameZumbadorProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
         /********  EXPLORE WHIT FILTER **************************

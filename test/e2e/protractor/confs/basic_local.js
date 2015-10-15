@@ -7,9 +7,9 @@ var protractorConfig = require('./basic');
 
 var localTest = require('../testsuites/local.js');
 
-for(var i=0; i<protractorConfig.config.multiCapabilities.length; i++) {
+for (var i = 0; i < protractorConfig.config.multiCapabilities.length; i++) {
 
-    protractorConfig.config.multiCapabilities[i].specs = protractorConfig.config.multiCapabilities[i].specs.concat(localTest) ;
+    protractorConfig.config.multiCapabilities[i].specs = protractorConfig.config.multiCapabilities[i].specs.concat(localTest);
 }
 
 exports.config = protractorConfig.config;

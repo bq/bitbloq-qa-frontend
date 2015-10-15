@@ -209,7 +209,7 @@ describe('Test CookiesBar', function() {
         expect($2(cookiesBar.cookiesBarLink.elementArrayFinder_.locator_.value).getAttribute('href')).toEqual(browser.baseUrl + '#/cookies');
 
         browserCheckCookiesURL.close();
-        //browser.quit();
+        browser.quit();
     });
 
 });

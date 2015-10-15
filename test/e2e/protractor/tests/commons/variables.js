@@ -13,7 +13,7 @@ var Variables = function() {
 
     //count google for login
     this.userGoogle = 'test2bitbloq@gmail.com';
-    this.userNameGoogle = 'tsetsretsa';
+    this.userNameGoogle = 'testgoogle';
     this.firstNameGoogle = 'Test';
     this.lastNameGoogle = 'Test';
     this.passwordGoogle = 'test2015bitbloq';
