@@ -90,20 +90,36 @@ describe('Publish project', function() {
                 browser.driver.wait(function() {
                     return fs.existsSync(filename);
                 }, 4000);
-                login.loginWithRandomUser();
-                header.navExplore.click();
-                //Se busca el primer proyecto (no es propietario)
-                explore.exploreFind.clear().sendKeys(project1.projectName).then(function() {
-                    projectElem = explore.projectElem;
-                    projectElem.click();
-                    browser.sleep(vars.timeToWaitFadeModals);
-                    explore.projectMoreInfoButton.click();
-                    //Se comprueba que el boton "descargar" descarga el proyecto
-                    filename = path.resolve() + '/target/' + project1.projectName + '.json';
-                    project.downloadProjectButton.click();
-                    browser.driver.wait(function() {
-                        return fs.existsSync(filename);
-                    }, 4000);
+                make.saveProjectAndPublish(true).then(function(project2) {
+                    projects.get();
+                    header.navExplore.click();
+                    //Se busca el primer proyecto (no es propietario)
+                    explore.exploreFind.clear().sendKeys(project1.projectName).then(function() {
+                        projectElem = explore.projectElem;
+                        projectElem.click();
+                        browser.sleep(vars.timeToWaitFadeModals);
+                        explore.projectMoreInfoButton.click();
+                        //Se comprueba que el boton "descargar" descarga el proyecto
+                        filename = path.resolve() + '/target/' + project1.projectName + '.json';
+                        project.downloadProjectButton.click();
+                        browser.driver.wait(function() {
+                            return fs.existsSync(filename);
+                        }, 4000);
+                        header.navExplore.click();
+                        explore.exploreFind.clear().sendKeys(project2.projectName).then(function() {
+                            projectElem = explore.projectElem;
+                            projectElem.click();
+                            browser.sleep(vars.timeToWaitFadeModals);
+                            explore.projectMoreInfoButton.click();
+                            //Se comprueba que el boton "descargar" descarga el proyecto
+                            filename = path.resolve() + '/target/' + project2.projectName + '.json';
+                            project.downloadProjectButton.click();
+                            browser.driver.wait(function() {
+                                return fs.existsSync(filename);
+                            }, 4000);
+                            login.logout();
+                        });
+                    });
                 });
             });
         });
@@ -162,6 +178,170 @@ describe('Publish project', function() {
                                     // en la URL en la que se encuentra el navegador
                                     expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/bloqsproject/' + url2[url2.length - 1]);
                                     browser.close().then(browser.switchTo().window(handles[0]));
+                                    login.logout();
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+    it('bba-152:Verify the viewered counter', function() {
+        //Unregistered user
+        var projectElem;
+        //Se salva un proyecto para que al menos explora tenga un proyecto
+        make.saveProjectAndPublish(false).then(function(project1) {
+            //Entramos como invitado para comprobar la vista de explora
+            make.get();
+            modals.attentionContinueGuest.click();
+            modals.rejectTour();
+            browser.sleep(vars.timeToWaitFadeModals);
+            header.navExplore.click();
+            //Se busca el proyecto creado con anterioridad
+            explore.exploreFind.clear().sendKeys(project1.projectName).then(function() {
+                projectElem = explore.projectElem;
+                projectElem.click();
+                browser.sleep(vars.timeToWaitFadeModals);
+                explore.projectMoreInfoButton.click();
+
+                //Se comprueba la funcionalidad del boton "ver proyecto"
+                project.timesViewed.getText().then(function(timesViewedBefore) {
+                    project.seeProjectButton.click();
+                    browser.sleep(vars.timeToWaitTab);
+                    browser.getAllWindowHandles().then(function(handles) {
+                        browser.switchTo().window(handles[1]);
+                        browser.sleep(vars.timeToWaitTab);
+                        //el id que se obtuvo anteriormente debe ser el mismo que
+                        // en la URL en la que se encuentra el navegador
+                        browser.close().then(browser.switchTo().window(handles[0]));
+                        project.timesViewed.getText().then(function(timesViewedAfter) {
+                            expect(Number(timesViewedBefore)).toEqual(Number(timesViewedAfter));
+                        });
+                        //Registered user
+                        //Entramos como usuario registrado
+                        make.get();
+                        make.saveProjectAndPublish(true).then(function(project2) {
+                            projects.get();
+                            header.navExplore.click();
+                            //Se busca el primer proyecto (no es propietario)
+                            explore.exploreFind.clear().sendKeys(project1.projectName).then(function() {
+                            projectElem = explore.projectElem;
+                            projectElem.click();
+                            browser.sleep(vars.timeToWaitFadeModals);
+                            explore.projectMoreInfoButton.click();
+                                //Se comprueba la funcionalidad del boton "ver proyecto"
+                                project.timesViewed.getText().then(function(timesViewedBefore2) {
+                                    project.seeProjectButton.click();
+                                    browser.sleep(vars.timeToWaitTab);
+                                    browser.getAllWindowHandles().then(function(handles) {
+                                        browser.switchTo().window(handles[1]);
+                                        browser.sleep(vars.timeToWaitTab);
+                                        //el id que se obtuvo anteriormente debe ser el mismo que
+                                        // en la URL en la que se encuentra el navegador
+                                        browser.close().then(browser.switchTo().window(handles[0]));
+                                        project.timesViewed.getText().then(function(timesViewedAfter2) {
+                                            expect(Number(timesViewedBefore2)<Number(timesViewedAfter2)).toBe(true);
+                                        });
+                                        header.navExplore.click();
+                                        explore.exploreFind.clear().sendKeys(project2.projectName).then(function() {
+                                            projectElem = explore.projectElem;
+                                            projectElem.click();
+                                            browser.sleep(vars.timeToWaitFadeModals);
+                                            explore.projectMoreInfoButton.click();
+                                            //Se comprueba la funcionalidad del boton "ver proyecto"
+                                            project.timesViewed.getText().then(function(timesViewedBefore3) {
+                                                project.seeProjectButton.click();
+                                                browser.sleep(vars.timeToWaitTab);
+                                                browser.getAllWindowHandles().then(function(handles) {
+                                                    browser.switchTo().window(handles[1]);
+                                                    browser.sleep(vars.timeToWaitTab);
+                                                    //el id que se obtuvo anteriormente debe ser el mismo que
+                                                    // en la URL en la que se encuentra el navegador
+                                                    browser.close().then(browser.switchTo().window(handles[0]));
+                                                    project.timesViewed.getText().then(function(timesViewedAfter3) {
+                                                        expect(Number(timesViewedBefore3)).toEqual(Number(timesViewedAfter3));
+                                                        login.logout();
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+    it('bba-153:Verify the downloaded counter', function() {
+        //Unregistered user
+        var projectElem, filename;
+        //Se salva un proyecto para que al menos explora tenga un proyecto
+        make.saveProjectAndPublish(false).then(function(project1) {
+            //Entramos como invitado para comprobar la vista de explora
+            make.get();
+            modals.attentionContinueGuest.click();
+            modals.rejectTour();
+            browser.sleep(vars.timeToWaitFadeModals);
+            header.navExplore.click();
+            //Se busca el proyecto creado con anterioridad
+            explore.exploreFind.clear().sendKeys(project1.projectName).then(function() {
+                projectElem = explore.projectElem;
+                projectElem.click();
+                browser.sleep(vars.timeToWaitFadeModals);
+                explore.projectMoreInfoButton.click();
+                filename = path.resolve() + '/target/' + project1.projectName + '.json';
+                project.timesDownloaded.getText().then(function(timesDownBefore) {
+                    //Se comprueba que el boton "descargar" descarga el proyecto
+                    project.downloadProjectButton.click();
+                    browser.driver.wait(function() {
+                        return fs.existsSync(filename);
+                    }, 4000);
+                    project.timesDownloaded.getText().then(function(timesDownAfter) {
+                      expect(Number(timesDownBefore)).toEqual(Number(timesDownAfter));
+                    });
+                    make.get();
+                    make.saveProjectAndPublish(true).then(function(project2) {
+                        projects.get();
+                        header.navExplore.click();
+                        //Se busca el primer proyecto (no es propietario)
+                        explore.exploreFind.clear().sendKeys(project1.projectName).then(function() {
+                            projectElem = explore.projectElem;
+                            projectElem.click();
+                            browser.sleep(vars.timeToWaitFadeModals);
+                            explore.projectMoreInfoButton.click();
+                            //Se comprueba que el boton "descargar" descarga el proyecto
+                            filename = path.resolve() + '/target/' + project1.projectName + '.json';
+                            project.timesDownloaded.getText().then(function(timesDownBefore1) {
+                                project.downloadProjectButton.click();
+                                browser.driver.wait(function() {
+                                    return fs.existsSync(filename);
+                                }, 4000);
+                                project.timesDownloaded.getText().then(function(timesDownAfter2) {
+                                    expect(Number(timesDownBefore1)<Number(timesDownAfter2)).toBe(true);
+                                });
+                                header.navExplore.click();
+                                explore.exploreFind.clear().sendKeys(project2.projectName).then(function() {
+                                    projectElem = explore.projectElem;
+                                    projectElem.click();
+                                    browser.sleep(vars.timeToWaitFadeModals);
+                                    explore.projectMoreInfoButton.click();
+                                    //Se comprueba que el boton "descargar" descarga el proyecto
+                                    filename = path.resolve() + '/target/' + project2.projectName + '.json';
+                                    project.timesDownloaded.getText().then(function(timesDownBefore2) {
+                                        project.downloadProjectButton.click();
+                                        browser.driver.wait(function() {
+                                            return fs.existsSync(filename);
+                                        }, 4000);
+                                        project.timesDownloaded.getText().then(function(timesDownAfter2) {
+                                            expect(Number(timesDownBefore2)).toEqual(Number(timesDownAfter2));
+                                            login.logout();
+                                        });
+                                    });
                                 });
                             });
                         });
