@@ -37,6 +37,8 @@ describe('Test Codeproject verify', function() {
         make.softwareEditCode.click();
         modals.modalAlertOk.click();
 
+        browser.sleep(vars.timeToWaitFadeModals);
+
         expect(commons.editToast.isDisplayed()).toBe(true);
 
         expect(commons.alertTextToast.getText()).toMatch('Si editas el código no podrás volver a utilizar los bloques en este proyecto.');
@@ -76,6 +78,8 @@ describe('Test Codeproject verify', function() {
         make.softwareTab.click();
         make.codeTab.click();
         make.softwareEditCode.click();
+
+        browser.sleep(vars.timeToWaitFadeModals);
 
         expect(modals.modalAlertOk.isPresent()).toBe(false);
 
