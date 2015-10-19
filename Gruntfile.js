@@ -65,6 +65,24 @@ module.exports = function(grunt) {
                     }
                 }
             },
+            mac: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
+                    args: {
+                        baseUrl: grunt.option('target'),
+                        seleniumAddress: 'http://172.16.30.102:4444/wd/hub'
+                    }
+                }
+            },
+            max: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
+                    args: {
+                        baseUrl: grunt.option('target'),
+                        seleniumAddress: 'http://172.16.30.189:4444/wd/hub'
+                    }
+                }
+            },
             integration: {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
