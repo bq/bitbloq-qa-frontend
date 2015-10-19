@@ -33,7 +33,7 @@ describe('make tab', function() {
     globalFunctions.afterTest();
 
     it('bba-122:Save project', function() {
-        make.saveProject();
+        make.saveProjectNewUserAndLogout();
     });
 
     it('bba-110:We can move between all tabs', function() {

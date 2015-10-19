@@ -84,9 +84,9 @@ describe('Projects', function() {
         //Save and publish 2 project begining in test_save__ , and use name of one
         // make.saveProjectAndPublish(true);
 
-        make.saveProjectAndPublish(true).then(function(savedProject) {
+        make.saveProjectAndPublishNewUserAndLogout().then(function(savedProject) {
             // promise because expect return promise
-            make.saveProjectAndPublish(true, true, savedProject.user.user, savedProject.user.password).then(function(project) {
+            make.saveProjectAndPublishUser(savedProject.user.user, savedProject.user.password).then(function(project) {
                 projects.get();
 
                 projects.findBar.clear().sendKeys(project.projectName).then(function() {
@@ -118,7 +118,7 @@ describe('Projects', function() {
 
     it('bba-44:Verify that the project can be published', function() {
 
-        var nameProject = make.saveProject(true).projectName;
+        var nameProject = make.saveProjectNewUser().projectName;
         projects.get();
         var projectElem = projects.project;
         browser.actions().mouseMove(projectElem).perform();

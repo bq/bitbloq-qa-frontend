@@ -5,127 +5,124 @@
 'use strict';
 
 var LoginBitbloq = require('../login/login.po.js'),
-   Variables = require('../commons/variables.js'),
-   GlobalFunctions = require('../commons/globalFunctions.js'),
-   Register = require('../register/register.po.js'),
-   Header = require('./header.po.js'),
-   Make = require('../bloqsproject/make.po.js'),
-   Modals = require('../modals/modals.po.js'),
-   Projects = require('../projects/projects.po.js');
+    Variables = require('../commons/variables.js'),
+    GlobalFunctions = require('../commons/globalFunctions.js'),
+    Register = require('../register/register.po.js'),
+    Header = require('./header.po.js'),
+    Make = require('../bloqsproject/make.po.js'),
+    Modals = require('../modals/modals.po.js'),
+    Projects = require('../projects/projects.po.js');
 
 var login = new LoginBitbloq(),
-   vars = new Variables(),
-   globalFunctions = new GlobalFunctions(),
-   register = new Register(),
-   header = new Header(),
-   make = new Make(),
-   modals = new Modals(),
-   projects = new Projects();
-
+    vars = new Variables(),
+    globalFunctions = new GlobalFunctions(),
+    register = new Register(),
+    header = new Header(),
+    make = new Make(),
+    modals = new Modals(),
+    projects = new Projects();
 
 globalFunctions.xmlReport('header');
 
 describe('Language', function() {
 
-   //beforeEach commons
-   globalFunctions.beforeTest();
+    //beforeEach commons
+    globalFunctions.beforeTest();
 
-   // afterEach commons
-   globalFunctions.afterTest();
+    // afterEach commons
+    globalFunctions.afterTest();
 
-   //globalFunctions.xmlReport('header');
+    //globalFunctions.xmlReport('header');
 
-   it('bba-74:Test language change', function() {
+    it('bba-74:Test language change', function() {
 
-      login.get();
-      var randomUserCredentials = register.generateUser();
-      register.createAccountButtn.click();
-      register.createAccount(
-         randomUserCredentials.username,
-         randomUserCredentials.userEmail,
-         randomUserCredentials.password,
-         randomUserCredentials.day,
-         randomUserCredentials.month,
-         randomUserCredentials.year,
-         true,
-         true);
-      //wait succesfull login page
-      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        login.get();
+        var randomUserCredentials = register.generateUser();
+        register.createAccountButtn.click();
+        register.createAccount(
+            randomUserCredentials.username,
+            randomUserCredentials.userEmail,
+            randomUserCredentials.password,
+            randomUserCredentials.day,
+            randomUserCredentials.month,
+            randomUserCredentials.year,
+            true,
+            true);
+        //wait succesfull login page
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
 
-      header.openHeaderMenu.click();
-      header.changeLanguage.click();
-      modals.languagesDropdownButton.click();
-      modals.languagesDropdownButton.all(by.css('li')).get(1).click();
+        header.openHeaderMenu.click();
+        header.changeLanguage.click();
+        modals.languagesDropdownButton.click();
+        modals.languagesDropdownButton.all(by.css('li')).get(1).click();
 
-      modals.okDialog.click();
-      expect(header.menuLearn.getText()).toBe('Learn');
-      login.logout();
+        modals.okDialog.click();
+        expect(header.menuLearn.getText()).toBe('Learn');
+        login.logout();
 
-      login.get();
-      login.login(randomUserCredentials.username, randomUserCredentials.password);
-      expect(header.menuLearn.getText()).toBe('Learn');
-      // browser.pause();
-      login.logout();
-   });
+        login.get();
+        login.login(randomUserCredentials.username, randomUserCredentials.password);
+        expect(header.menuLearn.getText()).toBe('Learn');
+        // browser.pause();
+        login.logout();
+    });
 
 });
 
 describe('Navbar --> ', function() {
 
-   //beforeEach commons
-   globalFunctions.beforeTest();
+    //beforeEach commons
+    globalFunctions.beforeTest();
 
-   // afterEach commons
-   globalFunctions.afterTest();
+    // afterEach commons
+    globalFunctions.afterTest();
 
-   it('bba-75:Elements if no login --> Explora, aprende, ayuda, entrar', function() {
+    it('bba-75:Elements if no login --> Explora, aprende, ayuda, entrar', function() {
 
-      //show always
-      make.get();
-      modals.attentionContinueGuest.click();
-      modals.rejectTour();
-      browser.sleep(vars.timeToWaitFadeModals);
+        //show always
+        make.get();
+        modals.attentionContinueGuest.click();
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
 
-      header.navExplore.click();
-      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/explore');
+        header.navExplore.click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/explore');
 
-      expect(header.navLearn.getAttribute('href')).toEqual('http://diwo.bq.com/course/aprende-robotica-y-programacion-con-bitbloq-2/');
+        expect(header.navLearn.getAttribute('href')).toEqual('http://diwo.bq.com/course/aprende-robotica-y-programacion-con-bitbloq-2/');
 
-      header.navHelp.click();
-      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help');
+        header.navHelp.click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help');
 
-      header.navLogo.click();
-      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/');
+        header.navLogo.click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/');
 
-      //no show is no login
-      expect(header.navProjects.isPresent()).toBe(false);
-      projects.get();
-      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+        //no show is no login
+        expect(header.navProjects.isPresent()).toBe(false);
+        projects.get();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
 
+    });
 
-   });
+    it('bba-76:Elements with login user --> Mis proyectos, Explora, aprende, ayuda', function() {
 
-   it('bba-76:Elements with login user --> Mis proyectos, Explora, aprende, ayuda', function() {
+        login.loginWithRandomUser();
 
-      login.loginWithRandomUser();
+        projects.get();
+        expect(header.navProjects.isPresent()).toBe(true);
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
 
-      projects.get();
-      expect(header.navProjects.isPresent()).toBe(true);
-      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        header.navExplore.click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/explore');
 
-      header.navExplore.click();
-      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/explore');
+        expect(header.navLearn.getAttribute('href')).toEqual('http://diwo.bq.com/course/aprende-robotica-y-programacion-con-bitbloq-2/');
 
-      expect(header.navLearn.getAttribute('href')).toEqual('http://diwo.bq.com/course/aprende-robotica-y-programacion-con-bitbloq-2/');
+        header.navHelp.click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help');
 
-      header.navHelp.click();
-      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help');
+        header.navLogo.click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
 
-      header.navLogo.click();
-      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        login.logout();
 
-      login.logout();
-
-
-   });
+    });
 });

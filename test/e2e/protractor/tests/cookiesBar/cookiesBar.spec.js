@@ -49,7 +49,7 @@ describe('Test CookiesBar', function() {
         browser.get(browser.baseUrl);
         browser.waitForAngular();
         cookiesBar.closeCookiesBar();
-        //browser.close(); NO CLOSE SESSION, use this instance to create id project (make.saveProjectAndPublish())
+        //browser.close(); NO CLOSE SESSION, use this instance to create id project (make.saveProjectAndPublishNewUser())
 
         //check bloqsproject
         var browserBloqsPrjectUrl = browser.forkNewDriverInstance(),
@@ -92,8 +92,7 @@ describe('Test CookiesBar', function() {
 
         //check bloqsproject/<id> && codeproject/<id>
 
-        make.saveProjectAndPublish().then(function(project) {
-
+        make.saveProjectAndPublishNewUser().then(function(project) {
             var browserBloqsProjectID = browser.forkNewDriverInstance();
             $2 = browserBloqsProjectID.$;
             browserBloqsProjectID.get(project.urlid);

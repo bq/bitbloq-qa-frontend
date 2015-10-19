@@ -8,12 +8,14 @@
 var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     MakeActions = require('../makeActions.po.js'),
     Make = require('../../make.po.js'),
-    Explore = require('../../../explore/explore.po.js');
+    Explore = require('../../../explore/explore.po.js'),
+    Login = require('../../../login/login.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     makeActions = new MakeActions(),
     make = new Make(),
-    explore = new Explore();
+    explore = new Explore(),
+    login = new Login();
 
 globalFunctions.xmlReport('makeActionsShare');
 describe('Menu Help of MakeActions', function() {
@@ -27,7 +29,7 @@ describe('Menu Help of MakeActions', function() {
     //TODO test TOAST
     it('bba-109:Publish project', function() {
 
-        var projectName = make.saveProject(true);
+        var projectName = make.saveProjectNewUser();
 
         makeActions.menuShare.click();
         makeActions.menuSharePublish.click();
@@ -36,6 +38,7 @@ describe('Menu Help of MakeActions', function() {
         explore.exploreFind.sendKeys(projectName.projectName);
         browser.sleep(2000);
         expect(explore.projectName.getText()).toContain(projectName.projectName);
+        login.logout();
 
     });
 

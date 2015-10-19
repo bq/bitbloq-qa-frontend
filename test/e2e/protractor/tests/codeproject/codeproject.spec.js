@@ -89,9 +89,15 @@ describe('Test Codeproject verify', function() {
 
     xit('bba-131:Verify wit LOGIN user, undo change in TOAST (before create bloqsproject)', function() {
 
-        // login.loginWithRandomUser();
-        // codeproject.get();
-        // browser.pause();
+        //Check modal show first time
+        make.saveProjectNewUser();
+        make.softwareTab.click();
+        make.codeTab.click();
+        make.softwareEditCode.click();
+
+        modals.modalAlertOk.click();
+
+        //login.logout
 
     });
 

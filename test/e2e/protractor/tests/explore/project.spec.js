@@ -40,7 +40,7 @@ describe('Publish project', function() {
     it('bba-41:Verify that the "Add to my project" option is displayed', function() {
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
-        make.saveProjectAndPublish(false).then(function(project1) {
+        make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             //Registered user
             //Entramos como usuario registrado y creamos un proyecto propio
             login.loginWithRandomUser();
@@ -71,7 +71,7 @@ describe('Publish project', function() {
         //Unregistered user
         var projectElem, filename;
         //Se salva un proyecto para que al menos explora tenga un proyecto
-        make.saveProjectAndPublish(false).then(function(project1) {
+        make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             //Entramos como invitado para comprobar la vista de explora
             make.get();
             modals.attentionContinueGuest.click();
@@ -90,7 +90,7 @@ describe('Publish project', function() {
                 browser.driver.wait(function() {
                     return fs.existsSync(filename);
                 }, 4000);
-                make.saveProjectAndPublish(true).then(function(project2) {
+                make.saveProjectAndPublishNewUser().then(function(project2) {
                     projects.get();
                     header.navExplore.click();
                     //Se busca el primer proyecto (no es propietario)
@@ -129,7 +129,7 @@ describe('Publish project', function() {
         //Unregistered user
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
-        make.saveProjectAndPublish(false).then(function(project1) {
+        make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             //Entramos como invitado para comprobar la vista de explora
             make.get();
             modals.attentionContinueGuest.click();
@@ -192,7 +192,7 @@ describe('Publish project', function() {
         //Unregistered user
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
-        make.saveProjectAndPublish(false).then(function(project1) {
+        make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             //Entramos como invitado para comprobar la vista de explora
             make.get();
             modals.attentionContinueGuest.click();
@@ -222,7 +222,7 @@ describe('Publish project', function() {
                         //Registered user
                         //Entramos como usuario registrado
                         make.get();
-                        make.saveProjectAndPublish(true).then(function(project2) {
+                        make.saveProjectAndPublishNewUser().then(function(project2) {
                             projects.get();
                             header.navExplore.click();
                             //Se busca el primer proyecto (no es propietario)
@@ -281,7 +281,7 @@ describe('Publish project', function() {
         //Unregistered user
         var projectElem, filename;
         //Se salva un proyecto para que al menos explora tenga un proyecto
-        make.saveProjectAndPublish(false).then(function(project1) {
+        make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             //Entramos como invitado para comprobar la vista de explora
             make.get();
             modals.attentionContinueGuest.click();
@@ -305,7 +305,7 @@ describe('Publish project', function() {
                       expect(Number(timesDownBefore)).toEqual(Number(timesDownAfter));
                     });
                     make.get();
-                    make.saveProjectAndPublish(true).then(function(project2) {
+                    make.saveProjectAndPublishNewUser().then(function(project2) {
                         projects.get();
                         header.navExplore.click();
                         //Se busca el primer proyecto (no es propietario)

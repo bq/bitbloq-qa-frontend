@@ -101,9 +101,9 @@ describe('Explore tab', function() {
     it('bba-57:Verify that the Search bar work correctly', function() {
 
         //Save and publish 2 project begining in test_save__ , and use name of one
-        make.saveProjectAndPublish();
+        make.saveProjectAndPublishNewUserAndLogout();
         // promise because expect return promise
-        make.saveProjectAndPublish().then(function(project) {
+        make.saveProjectAndPublishNewUser().then(function(project) {
 
             /*** No login search in explore check ***/
             explore.get();
@@ -132,6 +132,7 @@ describe('Explore tab', function() {
                 });
             });
 
+            login.logout();
             /*** Login search in explore check ***/
             landing.get();
             login.loginWithRandomUser();
@@ -172,7 +173,7 @@ describe('Explore tab', function() {
         //Unregistered user
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
-        make.saveProjectAndPublish(false).then(function(project1) {
+        make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             //Entramos como invitado para comprobar la vista de explora
             make.get();
             modals.attentionContinueGuest.click();
@@ -193,7 +194,7 @@ describe('Explore tab', function() {
 
                 //Registered user
                 //Entramos como usuario registrado y creamos un proyecto propio
-                make.saveProjectAndPublish(true).then(function(project2) {
+                make.saveProjectAndPublishNewUser().then(function(project2) {
                     projects.get();
                     header.navExplore.click();
                     //Se busca el primer proyecto (no es propietario)
@@ -220,6 +221,8 @@ describe('Explore tab', function() {
                             expect(project.seeProjectButton.isDisplayed()).toBe(true);
                             expect(project.downloadProjectButton.isDisplayed()).toBe(true);
                             expect(project.addProjectButton.isDisplayed()).toBe(false);
+
+                            login.logout();
                         });
                     });
                 });
