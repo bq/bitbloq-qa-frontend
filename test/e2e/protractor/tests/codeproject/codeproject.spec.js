@@ -64,13 +64,11 @@ describe('Test Codeproject verify', function() {
         make.softwareEditCode.click();
 
         modals.modalAlertOk.click();
+        browser.sleep(vars.timeToWaitAutoSave);
 
-        browser.ignoreSynchronization = true;
-        browser.sleep(3000);
-        expect(commons.editToast.isDisplayed()).toBe(true);
-        browser.ignoreSynchronization = false;
-
+        commons.expectToastTimeOut(commons.editToast);
         login.logout();
+
         //Check modal NO show second time
         login.get();
         login.login(user.user, user.password);
@@ -87,17 +85,22 @@ describe('Test Codeproject verify', function() {
 
     });
 
-    xit('bba-131:Verify wit LOGIN user, undo change in TOAST (before create bloqsproject)', function() {
+    it('bba-131:Verify wit LOGIN user, undo change in TOAST (before create bloqsproject)', function() {
 
-        //Check modal show first time
         make.saveProjectNewUser();
-        make.softwareTab.click();
-        make.codeTab.click();
-        make.softwareEditCode.click();
 
-        modals.modalAlertOk.click();
+        browser.getCurrentUrl().then(function(urlBloqsproject) {
 
-        //login.logout
+            make.softwareTab.click();
+            make.codeTab.click();
+            make.softwareEditCode.click();
+            modals.modalAlertOk.click();
+
+            commons.clickAlertUndoToast();
+
+            expect(browser.getCurrentUrl()).toEqual(urlBloqsproject);
+            login.logout();
+        });
 
     });
 
