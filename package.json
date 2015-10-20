@@ -30,7 +30,7 @@
         "jshint-stylish": "^2.0.1",
         "load-grunt-tasks": "^3.2.0",
         "lodash": "^3.10.1",
-        "protractor": "^2.1.0",
+        "protractor": "^2.5.0",
         "testlink-connect-proxy": "^0.5.3",
         "time-grunt": "^1.0.0"
     },

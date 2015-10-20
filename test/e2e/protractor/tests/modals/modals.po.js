@@ -2,6 +2,7 @@
 
 var Modals = function() {
     //P.O modal.html
+    this.modalTitle = $('[data-element="modal-title"]');
     this.okDialog = $('[data-element="modal-ok-dialog"]');
     this.cancelDialog = $('[data-element="modal-cancel-dialog"]');
     this.bladeClose = $('[data-element="modal-blade-close"]');
