@@ -3,6 +3,7 @@
 var Help = function() {
     this.faqTab = $('[data-element="help-faqnav"]');
     this.tutorialTab = $('[data-element="help-tutorialnav"]');
+    this.changelogTab = $('[data-element="help-changelognav"]');
     this.elemsFaqTable = $('[data-element="help-faqTable"]');
 
     this.contactUsTutorials = $('[data-element="help-contact-us-tutorial"]');
@@ -11,6 +12,8 @@ var Help = function() {
     this.feedbackIdeas = $('[data-element="help-feedback-ideas-or-comments"]');
 
     this.helpView = '$(\'[data-element="help-view"]\')';
+
+    this.changelogList = element.all(by.repeater('item in changeLogsApi'));
 
     this.url = '#/help';
 

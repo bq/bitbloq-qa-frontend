@@ -18,6 +18,7 @@ var testSuite = [
     '../tests/projects/projects.spec.js',
     '../tests/register/register.spec.js',
     '../tests/help/help.spec.js',
+    '../tests/help/changelog/changelog.spec.js',
     '../tests/account/account.spec.js',
 ];
 
