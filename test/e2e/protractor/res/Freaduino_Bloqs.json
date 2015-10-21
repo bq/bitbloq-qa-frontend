@@ -1,0 +1,1 @@
+{"software":{"vars":{"name":"varsBloq","enable":true,"childs":[],"content":[[]]},"setup":{"name":"setupBloq","enable":true,"childs":[],"content":[[]]},"loop":{"name":"loopBloq","enable":true,"childs":[],"content":[[]]}},"name":"Freaduino_Bloqs","description":"","userTags":[],"hardwareTags":["Freaduino UNO"],"hardware":{"board":"Freaduino UNO","components":[],"connections":[]}}
