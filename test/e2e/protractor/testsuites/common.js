@@ -22,6 +22,7 @@ var testSuite = [
     '../tests/help/faq/faq.spec.js',
     '../tests/help/tutorial/tutorial.spec.js',
     '../tests/account/account.spec.js',
+    '../tests/bloqsproject/infotab/infotab.spec.local.js'
 ];
 
 module.exports = testSuite;
