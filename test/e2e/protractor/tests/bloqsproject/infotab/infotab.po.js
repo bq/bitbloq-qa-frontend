@@ -1,5 +1,5 @@
 /**
- * P.O infotab.html
+ * P.O infotab
  */
 
 'use strict';
@@ -11,8 +11,9 @@ var Infotab = function() {
     this.infotabUploadImageButton = $('[data-element="infotab-uploadimage"]');
     this.infotabFileUpload = $('[data-element="infotab-fileinput"]');
     this.infotabProjectImage = $('[data-element="infotab-projectimage"]');
-    this.infotabDescription = $('[data-element="infotab-description"]');
-    this.infotabYoutubeVideo = $('[data-element="infotab-youtubevideo"]');
+    this.infotabChooseThemeButton = $('[data-element="infotab-choosetheme"]');
+    this.infotabOptionGrayTheme = $('[data-element="infotab_option_grayTheme"]');
+    this.infotabOptionColorTheme = $('[data-element="infotab_option_colorTheme"]');
 };
 
 module.exports = Infotab;
