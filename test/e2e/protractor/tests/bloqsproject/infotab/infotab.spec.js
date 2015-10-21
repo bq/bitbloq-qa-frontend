@@ -9,12 +9,14 @@ var Variables = require('../../commons/variables.js'),
     Make = require('../make.po.js'),
     Modals = require('../../modals/modals.po.js'),
     Login = require('../../login/login.po.js'),
+    Commons = require('../../commons/commons.po.js'),
     BloqsTab = require('../bloqstab/bloqstab.po.js');
 
 var vars = new Variables(),
     globalFunctions = new GlobalFunctions(),
     infoTab = new InfoTab(),
     make = new Make(),
+    commons = new Commons(),
     bloqsTab = new BloqsTab(),
     login = new Login(),
     modals = new Modals();
@@ -69,5 +71,29 @@ describe('Info tab', function() {
         expect(element(by.css('.bloq-void-function')).getCssValue('color')).toBe('rgba(221, 90, 10, 1)');
         setThemeColor('color');
         expect(element(by.css('.bloq-void-function')).getCssValue('color')).toBe('rgba(255, 255, 255, 1)');
+    });
+
+    it('bba-164: Verify the Youtube URL', function() {
+        var validYoutubeUrl = 'https://youtu.be/f2WME8N8qXc?list=PL3AshJDPy8GQhVWkzsjc5IvrzD5ctpQXN';
+        login.loginWithRandomUser();
+        make.get();
+        modals.rejectTour();
+        make.infoTab.click();
+        infoTab.infotabYoutubeVideoInput.sendKeys('https://www.youtube.com/user/TheRedsMusic');
+        browser.sleep(vars.timeToWaitAutoSave);
+        expect(commons.alertTextToast.getText()).toMatch('Introduce una url de Youtube válida');
+        infoTab.infotabYoutubeVideoInput.clear();
+        infoTab.infotabYoutubeVideoInput.sendKeys(validYoutubeUrl);
+        browser.sleep(vars.timeToWaitAutoSave);
+        browser.refresh();
+        make.infoTab.click();
+        expect(infoTab.infotabYoutubeVideoInput.getAttribute('value')).toBe(validYoutubeUrl);
+        infoTab.infotabYoutubeVideoInput.clear();
+        infoTab.infotabYoutubeVideoInput.sendKeys('');
+        browser.sleep(vars.timeToWaitAutoSave);
+        browser.refresh();
+        make.infoTab.click();
+        expect(infoTab.infotabYoutubeVideoInput.getAttribute('value')).toBe('');
+
     });
 });
