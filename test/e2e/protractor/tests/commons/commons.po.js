@@ -25,6 +25,13 @@ var Commons = function() {
         browser.ignoreSynchronization = false;
     };
 
+    this.clickAlertCloseToast = function() {
+        browser.ignoreSynchronization = true;
+        browser.sleep(1500);
+        this.alertCloseToast.click();
+        browser.ignoreSynchronization = false;
+    };
+
 };
 
 module.exports = Commons;

@@ -6,7 +6,8 @@ var Codeproject = require('./codeproject.po.js'),
     Login = require('../login/login.po.js'),
     Make = require('../bloqsproject/make.po.js'),
     Modals = require('../modals/modals.po.js'),
-    Variables = require('../commons/variables.js');
+    Variables = require('../commons/variables.js'),
+    MyProjects = require('../myprojects/myprojects.po.js');
 
 var codeproject = new Codeproject(),
     globalFunctions = new GlobalFunctions(),
@@ -14,7 +15,8 @@ var codeproject = new Codeproject(),
     login = new Login(),
     make = new Make(),
     modals = new Modals(),
-    vars = new Variables();
+    vars = new Variables(),
+    myprojects = new MyProjects();
 
 globalFunctions.xmlReport('codeproject');
 
@@ -104,7 +106,97 @@ describe('Test Codeproject verify', function() {
 
     });
 
-    xit('bba-150:We can change the board in the info tab', function() {
+    it('bba-150:We can change the board in the info tab and saved it', function() {
+
+        var projectUser = make.saveProjectNewUser();
+        make.softwareTab.click();
+        make.codeTab.click();
+        make.softwareEditCode.click();
+        modals.modalAlertOk.click();
+        commons.clickAlertCloseToast();
+        make.infoTab.click();
+
+        codeproject.codeInfotabChooseBoard.click();
+        element.all(by.repeater('item in options').row(2)).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+
+        expect(codeproject.codeInfotabHeading.getText()).toMatch('Arduino UNO');
+
+        //Logout, login and check if saved
+        login.logout();
+        login.get();
+        login.login(projectUser.user.user, projectUser.user.password);
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+
+        myprojects.openProject.click().then(function() {
+            browser.sleep(vars.timeToWaitTab);
+            browser.getAllWindowHandles().then(function(handles) {
+                console.log(handles);
+                browser.switchTo().window(handles[1]).then(function() {
+                    make.infoTab.click();
+
+                    expect(codeproject.codeInfotabHeading.getText()).toMatch('Arduino UNO');
+
+                    //Change other board
+                    codeproject.codeInfotabChooseBoard.click();
+                    element.all(by.repeater('item in options').row(1)).click();
+                    browser.sleep(vars.timeToWaitAutoSave);
+
+                    login.logout();
+                    browser.close().then(browser.switchTo().window(handles[0]));
+
+                });
+            });
+        });
+
+        login.get();
+        login.login(projectUser.user.user, projectUser.user.password);
+
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        myprojects.openProject.click().then(function() {
+            browser.sleep(vars.timeToWaitTab);
+            browser.getAllWindowHandles().then(function(handles) {
+                console.log(handles);
+                browser.switchTo().window(handles[1]).then(function() {
+                    make.infoTab.click();
+
+                    expect(codeproject.codeInfotabHeading.getText()).toMatch('Freaduino UNO');
+
+                    //Change other board
+                    codeproject.codeInfotabChooseBoard.click();
+                    element.all(by.repeater('item in options').row(0)).click();
+                    browser.sleep(vars.timeToWaitAutoSave);
+
+                    login.logout();
+                    browser.close().then(browser.switchTo().window(handles[0]));
+
+                });
+            });
+        });
+
+        //Logout, login and check if saved
+        login.get();
+        login.login(projectUser.user.user, projectUser.user.password);
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        myprojects.openProject.click().then(function() {
+            browser.sleep(vars.timeToWaitTab);
+            browser.getAllWindowHandles().then(function(handles) {
+                console.log(handles);
+                browser.switchTo().window(handles[1]).then(function() {
+                    make.infoTab.click();
+                    expect(codeproject.codeInfotabHeading.getText()).toMatch('bq ZUM');
+                    login.logout();
+                    browser.close().then(browser.switchTo().window(handles[0]));
+
+                });
+            });
+        });
 
     });
 
