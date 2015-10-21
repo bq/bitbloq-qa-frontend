@@ -11,6 +11,8 @@ var Infotab = function() {
     this.infotabUploadImageButton = $('[data-element="infotab-uploadimage"]');
     this.infotabFileUpload = $('[data-element="infotab-fileinput"]');
     this.infotabProjectImage = $('[data-element="infotab-projectimage"]');
+    this.infotabDescription = $('[data-element="infotab-description"]');
+    this.infotabYoutubeVideo = $('[data-element="infotab-youtubevideo"]');
 };
 
 module.exports = Infotab;
