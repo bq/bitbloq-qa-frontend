@@ -236,4 +236,99 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
     });
 
+    it('bba-163:Check board filters on explora', function() {
+        //Name project published
+        var nameZumProject,
+            nameFreaduinoProject,
+            nameArduinoProject;
+
+        /********  PUBLISH PROJECT WITH DIFFERENTS BOARD ***********/
+
+        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Zum_Bloqs.json');
+        nameZumProject = 'Zum_Bloqs' + Number(new Date());
+        make.publishProjectWithName(nameZumProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Freaduino_Bloqs.json');
+        nameFreaduinoProject = 'Freaduino_Bloqs' + Number(new Date());
+        make.publishProjectWithName(nameFreaduinoProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Arduino_Bloqs.json');
+        nameArduinoProject = 'Arduino_Bloqs' + Number(new Date());
+        make.publishProjectWithName(nameArduinoProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+
+        /********  EXPLORE WHIT FILTER **************************
+         *  Check checkbox board and find project                 *
+         * *******************************************************/
+
+        explore.get();
+        explore.exploreFilterDrowdown.click();
+
+
+        // bq ZUM check
+        element.all(by.repeater('board in boardsFilterOptions').row(0).column('board.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameZumProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.getText()).toMatch(nameZumProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameFreaduinoProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameArduinoProject);
+        });
+
+        // check no show other board
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameFreaduinoProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameArduinoProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+
+        // Freduino check
+        element.all(by.repeater('board in boardsFilterOptions').row(1).column('board.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameFreaduinoProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.getText()).toMatch(nameFreaduinoProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameZumProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameArduinoProject);
+        });
+
+        // check no show other board
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameZumProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameArduinoProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+
+        // Arduino check
+        element.all(by.repeater('board in boardsFilterOptions').row(2).column('board.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameArduinoProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.getText()).toMatch(nameArduinoProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameFreaduinoProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameZumProject);
+        });
+        // check no show other board
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameFreaduinoProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameZumProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+
+        login.logout();
+    });
 });

@@ -1,0 +1,1 @@
+{"software":{"vars":{"name":"varsBloq","enable":true,"childs":[],"content":[[]]},"setup":{"name":"setupBloq","enable":true,"childs":[],"content":[[]]},"loop":{"name":"loopBloq","enable":true,"childs":[],"content":[[]]}},"name":"Arduino_Bloqs","description":"","userTags":[],"hardwareTags":["Arduino UNO"],"hardware":{"board":"Arduino UNO","components":[],"connections":[]}}
