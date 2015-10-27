@@ -4,8 +4,15 @@
 
 module.exports = function(grunt) {
 
-    var path = require('path');
-    var async = require('async');
+    var path = require('path'),
+        async = require('async'),
+        os = require('os').type,
+        seleniumPath = path.resolve() + '/node_modules/protractor/bin/';
+
+    // Path selenium-wedriver
+    if (os() === 'Windows_NT') {
+        seleniumPath = seleniumPath.replace('/', '\\');
+    }
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
 
@@ -31,21 +38,18 @@ module.exports = function(grunt) {
         },
 
         protractor_webdriver: {
-
-            /* if is need update, better upgrade manual
+            options: {
+                path: seleniumPath
+            },
+            //if is need update, better upgrade manual, no stop grunt task
             e2eUpdate: {
                 options: {
-                path: '~/.local/bin/'
                     command: 'webdriver-manager update --standalone'
-                },
-            }
-            */
-
+                }
+            },
             e2eStart: {
                 options: {
-                    path: path.resolve() + '/node_modules/protractor/bin/',
                     command: 'webdriver-manager start --standalone'
-
                 }
             }
         },
