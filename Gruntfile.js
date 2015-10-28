@@ -5,14 +5,8 @@
 module.exports = function(grunt) {
 
     var path = require('path'),
-        async = require('async'),
-        os = require('os').type,
-        seleniumPath = path.resolve() + '/node_modules/protractor/bin/';
+        async = require('async');
 
-    // Path selenium-wedriver
-    if (os() === 'Windows_NT') {
-        seleniumPath = seleniumPath.replace('/', '\\');
-    }
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
 
@@ -38,9 +32,6 @@ module.exports = function(grunt) {
         },
 
         protractor_webdriver: {
-            options: {
-                path: seleniumPath
-            },
             //if is need update, better upgrade manual, no stop grunt task
             e2eUpdate: {
                 options: {
@@ -58,7 +49,9 @@ module.exports = function(grunt) {
             options: { // Default config file
                 configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js', // Default config file
                 keepAlive: false, // If false, the grunt process stops when the test fails.
-                noColor: true // If true, protractor will not use colors in its output.
+                noColor: true, // If true, protractor will not use colors in its output.
+                webdriverManagerUpdate: true,
+                includeStackTrace: true
             },
             local: {
                 options: {
