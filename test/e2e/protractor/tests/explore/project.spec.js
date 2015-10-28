@@ -217,4 +217,40 @@ describe('Publish project', function() {
         });
     });
 
+    it('bba-153:Verify the "Add to my project" counter', function() {
+        var projectElem;
+        //Se salva un proyecto para que al menos explora tenga un proyecto
+        make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
+            //Registered user
+            //Entramos como usuario registrado y creamos un proyecto propio
+            login.loginWithRandomUser();
+            header.navExplore.click();
+            //Se busca el primer proyecto (no es propietario)
+            explore.exploreFind.clear().sendKeys(project1.projectName).then(function() {
+                projectElem = explore.projectElem;
+                projectElem.click();
+                browser.sleep(vars.timeToWaitFadeModals);
+                explore.projectMoreInfoButton.click();
+                project.timesAdded.getText().then(function(timesAdded) {
+                    //Se comprueba la funcionalidad del boton anadir
+                    project.addProjectButton.click();
+                    modals.okDialog.click();
+                    project.timesAdded.getText().then(function(timesAdded2) {
+                        expect(Number(timesAdded)<Number(timesAdded2)).toBeTruthy();
+                        //Se comprueba que se ha añadido el proyecto
+                        header.navProjects.click();
+                        projects.findBar.clear().sendKeys('Copia de ' + project1.projectName).then(function() {
+                            projects.getProjectCount().then(function(result) {
+                                expect(Number(result) >= 1).toBeTruthy();
+                                login.logout();
+                            });
+                        });
+                    });
+
+                });
+
+
+            });
+        });
+    });
 });

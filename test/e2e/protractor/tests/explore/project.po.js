@@ -10,7 +10,7 @@ var Project = function() {
     this.downloadProjectButton = $('[data-element="explora-project-download"]');
     this.addProjectButton = $('[data-element="explore-project-addbutton"]');
     this.timesViewed = $('[data-element="project-times-viewed"]');
-    this.timesDownloaded = $('[data-element="project-times-downloaded"]');
+    this.timesAdded = $('[data-element="project-times-added"]');
 };
 
 module.exports = Project;
