@@ -7,7 +7,7 @@ var Login = require('../../login/login.po.js'),
     Modals = require('../../modals/modals.po.js'),
     Variables = require('../../commons/variables.js'),
     GlobalFunctions = require('../../commons/globalFunctions.js');
-    
+
 var login = new Login(),
     header = new Header(),
     help = new Help(),
@@ -46,7 +46,7 @@ describe('Tutorial ', function() {
         expect(help.basicTutorialTable.isPresent());
     });
 
-    xit('bba-173:Verify that you can click on tutorial (registered user)', function() {
+    it('bba-173:Verify that you can click on tutorial (registered user)', function() {
         login.loginWithRandomUser();
         header.navHelp.click();
         help.tutorialTab.click();
@@ -66,7 +66,7 @@ describe('Tutorial ', function() {
 
     });
 
-    xit('bba-174:Verify that you can click on tutorial (unregistered user)', function() {
+    it('bba-174:Verify that you can click on tutorial (unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();

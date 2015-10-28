@@ -46,6 +46,12 @@ var Help = function() {
         var elem = this.basicTutorialTable.all(by.className('tutorial--item')).first();
         return elem;
     };
+
+    this.getTitleChangelog = function(title) {
+        return $('[data-element="changelog__title-' + title + '"]').getText().then(function(titletext){
+            return titletext;
+        });
+    };
 };
 
 module.exports = Help;

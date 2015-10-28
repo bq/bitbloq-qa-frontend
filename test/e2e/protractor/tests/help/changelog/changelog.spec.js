@@ -47,7 +47,8 @@ describe('Changelog ', function() {
         help.changelogList.each(function(changelog) {
             changelog.click();
             changelog.getText().then(function(title) {
-                expect(title).toEqual($('[data-element="changelog__title-' + title + '"]').getText());
+                var text = help.getTitleChangelog(title);
+                expect(title).toEqual(text);
             });
         });
         login.logout();
@@ -59,7 +60,8 @@ describe('Changelog ', function() {
         help.changelogList.each(function(changelog) {
             changelog.click();
             changelog.getText().then(function(title) {
-                expect(title).toEqual($('[data-element="changelog__title-' + title + '"]').getText());
+                var text = help.getTitleChangelog(title);
+                expect(title).toEqual(text);
             });
         });
     });

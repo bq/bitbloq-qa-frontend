@@ -36,9 +36,10 @@ describe('Info tab', function() {
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         make.infoTab.click();
+        browser.sleep(vars.timeToWaitTab);
         expect(infoTab.infotabProjectName.getAttribute('disabled')).toBe('true');
         expect(infoTab.infotabDescription.getAttribute('disabled')).toBe('true');
-        expect(infoTab.infotabYoutubeVideo.getAttribute('disabled')).toBe('true');
+        expect(infoTab.infotabYoutubeVideoInput.getAttribute('disabled')).toBe('true');
         expect(infoTab.infotabTaginputButton.getAttribute('disabled')).toBe('true');
     });
 

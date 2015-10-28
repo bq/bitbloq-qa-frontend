@@ -91,7 +91,7 @@ describe('Menu Help of MakeActions', function() {
         makeActions.menuHelpComments.click();
 
         modals.sendCommentsName.sendKeys('TestName');
-        modals.sendCommentsTextarea.sendKeys('Hell text area');
+        modals.sendCommentsTextarea.sendKeys('Hell text area hello its a test 20 characters');
         modals.okDialog.click();
 
         // TOAST
