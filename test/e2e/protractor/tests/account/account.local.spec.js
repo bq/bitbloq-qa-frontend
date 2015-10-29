@@ -44,4 +44,21 @@ describe('User account view', function() {
 
     });
 
+    it('bba-159:Verify fields from new facebook user', function() {
+
+        landing.openLandingMenu.click();
+        landing.enterButton.click();
+        var facebookAccount = vars.account('facebook');
+        login.loginFb(facebookAccount.email, facebookAccount.password);
+        account.get();
+
+        expect(account.firstname.getAttribute('value')).toBe(facebookAccount.user);
+        expect(account.lastname.getAttribute('value')).toBe(facebookAccount.lastname);
+        expect(account.username.getAttribute('value')).toBe(facebookAccount.user.toLowerCase());
+        expect(account.email.getAttribute('value')).toBe(facebookAccount.email);
+
+        login.logout();
+
+    });
+
 });

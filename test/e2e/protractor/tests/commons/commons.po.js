@@ -13,21 +13,21 @@ var Commons = function() {
 
     this.expectToastTimeOut = function(alertElement) {
         browser.ignoreSynchronization = true;
-        browser.sleep(1500);
+        browser.sleep(1000);
         expect(alertElement.isDisplayed()).toBe(true);
         browser.ignoreSynchronization = false;
     };
 
     this.clickAlertUndoToast = function() {
         browser.ignoreSynchronization = true;
-        browser.sleep(1500);
+        browser.sleep(2000);
         this.alertUndoButton.click();
         browser.ignoreSynchronization = false;
     };
 
     this.clickAlertCloseToast = function() {
         browser.ignoreSynchronization = true;
-        browser.sleep(1500);
+        browser.sleep(2000);
         this.alertCloseToast.click();
         browser.ignoreSynchronization = false;
     };

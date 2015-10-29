@@ -25,8 +25,8 @@ var Variables = function() {
     this.lastnameFb = 'Gómez';
 
     //timers
-    this.timeToWaitFadeModals = 500;
-    this.timeToWaitAutoSave = 6000;
+    this.timeToWaitFadeModals = 1500;
+    this.timeToWaitAutoSave = 5000;
     this.timeToWaitTab = 3000;
     this.timeToWaitMenu = 500;
 

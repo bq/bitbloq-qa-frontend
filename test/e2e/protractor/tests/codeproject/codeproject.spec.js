@@ -97,9 +97,10 @@ describe('Test Codeproject verify', function() {
             make.codeTab.click();
             make.softwareEditCode.click();
             modals.modalAlertOk.click();
+            browser.sleep(vars.timeToWaitFadeModals);
 
             commons.clickAlertUndoToast();
-
+            browser.sleep(vars.timeToWaitFadeModals);
             expect(browser.getCurrentUrl()).toEqual(urlBloqsproject);
             login.logout();
         });
@@ -113,7 +114,9 @@ describe('Test Codeproject verify', function() {
         make.codeTab.click();
         make.softwareEditCode.click();
         modals.modalAlertOk.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         commons.clickAlertCloseToast();
+        browser.sleep(vars.timeToWaitFadeModals);
         make.infoTab.click();
 
         codeproject.codeInfotabChooseBoard.click();
