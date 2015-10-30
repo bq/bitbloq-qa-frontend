@@ -10,7 +10,7 @@ var Variables = require('../commons/variables.js'),
     Login = require('../login/login.po.js'),
     Projects = require('../projects/projects.po.js'),
     Infotab = require('../bloqsproject/infotab/infotab.po.js'),
-    MyProjects = require('../myprojects/myprojects.po.js'),
+    MyProjects = require('../projects/myprojects/myprojects.po.js'), 
     Modals = require('../modals/modals.po.js');
 
 var vars = new Variables(),

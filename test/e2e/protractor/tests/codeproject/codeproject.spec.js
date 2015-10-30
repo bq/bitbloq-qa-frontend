@@ -7,7 +7,7 @@ var Codeproject = require('./codeproject.po.js'),
     Make = require('../bloqsproject/make.po.js'),
     Modals = require('../modals/modals.po.js'),
     Variables = require('../commons/variables.js'),
-    MyProjects = require('../myprojects/myprojects.po.js');
+    MyProjects = require('../projects/myprojects/myprojects.po.js');
 
 var codeproject = new Codeproject(),
     globalFunctions = new GlobalFunctions(),

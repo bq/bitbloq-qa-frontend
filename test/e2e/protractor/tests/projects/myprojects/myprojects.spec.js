@@ -4,17 +4,17 @@
 
 'use strict';
 
-var Variables = require('../commons/variables.js'),
-    GlobalFunctions = require('../commons/globalFunctions.js'),
-    Make = require('../bloqsproject/make.po.js'),
-    Login = require('../login/login.po.js'),
-    Projects = require('./projects.po.js'),
-    MyProjects = require('../myprojects/myprojects.po.js'),
-    Modals = require('../modals/modals.po.js'),
-    Infotab = require('../bloqsproject/infotab/infotab.po.js'),
-    MakeActions = require('../bloqsproject/makeActions/makeActions.po.js'),
-    Header = require('../header/header.po.js'),
-    Explore = require('../explore/explore.po.js');
+var Variables = require('../../commons/variables.js'),
+    GlobalFunctions = require('../../commons/globalFunctions.js'),
+    Make = require('../../bloqsproject/make.po.js'),
+    Login = require('../../login/login.po.js'),
+    Projects = require('../projects.po.js'),
+    MyProjects = require('./myprojects.po.js'),
+    Modals = require('../../modals/modals.po.js'),
+    Infotab = require('../../bloqsproject/infotab/infotab.po.js'),
+    MakeActions = require('../../bloqsproject/makeActions/makeActions.po.js'),
+    Header = require('../../header/header.po.js'),
+    Explore = require('../../explore/explore.po.js');
 
 var vars = new Variables(),
     globalFunctions = new GlobalFunctions(),
@@ -30,7 +30,7 @@ var vars = new Variables(),
 
 globalFunctions.xmlReport('projects');
 
-describe('Projects', function() {
+describe('My Projects', function() {
 
     //beforeEach commons
     globalFunctions.beforeTest();

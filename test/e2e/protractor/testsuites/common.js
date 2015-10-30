@@ -15,7 +15,7 @@ var testSuite = [
     '../tests/codeproject/codeproject.spec.js',
     '../tests/cookiesBar/cookiesBar.spec.js',
     '../tests/modals/changeProjectName/*.spec.js',
-    '../tests/projects/projects.spec.js',
+    '../tests/projects/myprojects/myprojects.spec.js',
     '../tests/register/register.spec.js',
     '../tests/help/help.spec.js',
     '../tests/help/changelog/changelog.spec.js',

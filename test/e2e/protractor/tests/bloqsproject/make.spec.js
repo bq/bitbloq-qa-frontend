@@ -10,7 +10,7 @@ var Variables = require('../commons/variables.js'),
     Login = require('../login/login.po.js'),
     Projects = require('../projects/projects.po.js'),
     Infotab = require('./infotab/infotab.po.js'),
-    MyProjects = require('../myprojects/myprojects.po.js'),
+    MyProjects = require('../projects/myprojects/myprojects.po.js'),
     Modals = require('../modals/modals.po.js');
 
 var vars = new Variables(),
@@ -191,16 +191,6 @@ describe('make tab', function() {
         });
     });
 
-});
-
-describe('Project ', function() {
-
-    //beforeEach commons
-    globalFunctions.beforeTest();
-
-    // afterEach commons
-    globalFunctions.afterTest();
-
     it('bba-116:Project must have a name', function() {
 
         login.loginWithRandomUser();
@@ -212,5 +202,4 @@ describe('Project ', function() {
 
         login.logout();
     });
-
 });
