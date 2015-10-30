@@ -16,7 +16,7 @@ var Register = function() {
     this.inputMonth = $('[data-element="login-month-input"]');
     this.inputYear = $('[data-element="login-year-input"]');
     this.enterRegister = $('[data-element="enter-register"]');
-    this.checkBoxNewsletter = element(by.model('user.properties.newsletter'));
+    this.checkBoxNewsletterAndTeacher = $('[data-element="register-newsletter-teacher-input"]');
     this.checkBoxPropertiesTerm = element(by.model('user.properties.term'));
     this.userLoginHeader = $('[data-element="user-login"]');
     //Show validate elements
@@ -69,7 +69,7 @@ var Register = function() {
         this.inputYear.sendKeys(year);
 
         if (isCheckNew) {
-            this.checkBoxNewsletter.click();
+            this.checkBoxNewsletterAndTeacher.click();
         }
         if (isCheckProp) {
             this.checkBoxPropertiesTerm.click();

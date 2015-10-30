@@ -309,12 +309,12 @@ describe('Register ', function() {
 
         var user = register.generateUser();
         //Register with user in use
-        register.createAccount(user.username, user.userEmail, user.password, 31, 3, 1986, true, true);
+        register.createAccount(user.username, user.userEmail, user.password, 31, 3, 1986, false, true);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
         login.logout();
         login.get();
         register.createAccountButtn.click();
-        register.createAccount(user.username + 'a', user.userEmail, user.password, 31, 3, 1986, true, true);
+        register.createAccount(user.username + 'a', user.userEmail, user.password, 31, 3, 1986, false, true);
 
         // Only show if user is in use
         expect(register.showEmailDuplicate.isDisplayed()).toBeTruthy();
@@ -353,7 +353,7 @@ describe('Register ', function() {
             expect(landing.contactButton.getAttribute('href')).toMatch(emailto);
         });
     });
-    //This test fail in MAC 
+    //This test fail in MAC
     it('bba-182:check if is login show modal feedback in landing (link "contacto")', function() {
 
         //landing.openLandingMenu.click();
@@ -378,6 +378,18 @@ describe('Register ', function() {
 
         });
 
+    });
+
+    it('bba-184:Check that a checkbox appears to indicate that you are a teacher', function() {
+        landing.openLandingMenu.click();
+        landing.enterButton.click();
+        register.createAccountButtn.click();
+
+        var user = register.generateUser();
+        //Register with user in use and check newsleettter
+        register.createAccount(user.username, user.userEmail, user.password, 31, 3, 1986, true, true);
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        login.logout();
     });
 
 });
