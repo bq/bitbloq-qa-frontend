@@ -34,7 +34,6 @@ describe('User account view', function() {
         var googleAccount = vars.account('google');
         login.loginGoogle(googleAccount.user, googleAccount.password);
         account.get();
-
         expect(account.firstname.getAttribute('value')).toBe(googleAccount.firstname);
         expect(account.lastname.getAttribute('value')).toBe(googleAccount.lastname);
         expect(account.username.getAttribute('value')).toBe(googleAccount.username);

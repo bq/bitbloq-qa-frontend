@@ -13,7 +13,7 @@ var Variables = function() {
 
     //count google for login
     this.userGoogle = 'test2bitbloq@gmail.com';
-    this.userNameGoogle = 'testgoogle';
+    this.userNameGoogle = 'qa2015';
     this.firstNameGoogle = 'Test';
     this.lastNameGoogle = 'Test';
     this.passwordGoogle = 'test2015bitbloq';
@@ -26,7 +26,7 @@ var Variables = function() {
 
     //timers
     this.timeToWaitFadeModals = 1500;
-    this.timeToWaitAutoSave = 5000;
+    this.timeToWaitAutoSave = 5600;
     this.timeToWaitTab = 3000;
     this.timeToWaitMenu = 500;
 

@@ -55,16 +55,16 @@ describe('Menu file of MakeActions, specs only in local ', function() {
     // OjO need fix bug --> not charge dropdowns
     it('bba-91:Check export in arduino project (only one project)', function() {
 
-        var fileToUpload = path.resolve() + '/test/e2e/protractor/res/Creando_un_voltimetro_con_bitbloq.json';
+        var fileToUpload = path.resolve() + '/test/e2e/protractor/res/CreandoUnVoltimetroBitbloq.json';
         make.importFileGuestUser(fileToUpload);
 
-        var fileToCompare = path.resolve() + '/test/e2e/protractor/res/Creando_un_voltimetro_con_bitbloq.ino';
+        var fileToCompare = path.resolve() + '/test/e2e/protractor/res/CreandoUnVoltimetroBitbloq.ino';
         if (os() === 'Windows_NT') {
             fileToCompare.replace('/', '\\');
         }
 
         //If file download exist, delete it (a export file, no a upload file )
-        var fileDownload = path.resolve() + '/target/Creando_un_voltimetro_con_bitbloq.ino';
+        var fileDownload = path.resolve() + '/target/CreandoUnVoltimetroBitbloq.ino';
         if (os() === 'Windows_NT') {
             fileDownload.replace('/', '\\');
         }

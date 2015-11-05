@@ -122,7 +122,10 @@ var Login = function() {
             browser.sleep(1000);
             that.googleEnter.click();
             browser.sleep(5000);
-            that.googleAprove.click();
+
+            if (browser.baseUrl === 'http://localhost:9000/') {
+                that.googleAprove.click();
+            }
 
             browser.sleep(vars.timeToWaitTab);
 
