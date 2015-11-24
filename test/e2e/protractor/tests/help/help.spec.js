@@ -24,7 +24,7 @@ describe('Help ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-38:Comprobar botones Informar de un error en usuario invitado', function() {
+    xit('bba-38:Comprobar botones Informar de un error en usuario invitado', function() {
         help.get();
         var emailto = 'mailto:support-bitbloq@bq.com';
 

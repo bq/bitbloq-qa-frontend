@@ -40,7 +40,7 @@ describe('Changelog ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help/updates');
     });
 
-    it('bba-137:Verify that the change and bugs appears in the changelog tab (Registered user)', function() {
+    xit('bba-137:Verify that the change and bugs appears in the changelog tab (Registered user)', function() {
         login.loginWithRandomUser();
         header.navHelp.click();
         help.changelogTab.click();

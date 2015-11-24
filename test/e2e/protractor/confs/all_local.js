@@ -1,10 +1,11 @@
-/**
- * Local to spec
- */
-
 'use strict';
 
-var testSuite = [
+/* A reference configuration file. */
+/* For more options: https://github.com/angular/protractor/blob/master/docs/referenceConf.js */
+
+var protractorConfig = require('./basic');
+
+protractorConfig.config.suites.allLocal = [
     '../tests/login/login.spec.local.js',
     '../tests/bloqsproject/makeActions/file/makeActionsFile.spec.local.js',
     '../tests/explore/filters/filters.spec.local.js',
@@ -13,4 +14,6 @@ var testSuite = [
     '../tests/explore/project.spec.local.js'
 ];
 
-module.exports = testSuite;
+console.log(protractorConfig.config.suites);
+
+exports.config = protractorConfig.config;
