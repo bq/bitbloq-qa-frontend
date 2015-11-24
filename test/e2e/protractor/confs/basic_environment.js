@@ -5,17 +5,6 @@
 
 var protractorConfig = require('./basic');
 
-var environment = require('../testsuites/environment.js');
-var local = require('../testsuites/local.js');
-
-for(var i=0; i<protractorConfig.config.multiCapabilities.length; i++) {
-
-    protractorConfig.config.multiCapabilities[i].specs = protractorConfig.config.multiCapabilities[i].specs.concat(environment) ;
-}
-
-for(var i=0; i<protractorConfig.config.multiCapabilities.length; i++) {
-
-    protractorConfig.config.multiCapabilities[i].specs = protractorConfig.config.multiCapabilities[i].specs.concat(local) ;
-}
+protractorConfig.config.suites.enviroment = '../tests/bloqsproject/makeActions/share/makeActionsShare.spec.env.js';
 
 exports.config = protractorConfig.config;

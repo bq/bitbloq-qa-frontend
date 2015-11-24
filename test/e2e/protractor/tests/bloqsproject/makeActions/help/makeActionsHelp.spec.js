@@ -120,7 +120,7 @@ describe('Menu Help of MakeActions', function() {
         login.logout();
     });
 
-    it('bba-106:NO login, send comment and feedback modal are not displayed but it posible send mailto', function() {
+    xit('bba-106:NO login, send comment and feedback modal are not displayed but it posible send mailto', function() {
 
         make.get();
         modals.attentionContinueGuest.click();

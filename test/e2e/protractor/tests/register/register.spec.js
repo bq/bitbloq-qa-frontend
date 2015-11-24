@@ -343,7 +343,7 @@ describe('Register ', function() {
         });
     });
 
-    it('bba-183:check if NO login go to mailto in landing (link "contacto")', function() {
+    xit('bba-183:check if NO login go to mailto in landing (link "contacto")', function() {
 
         //landing.openLandingMenu.click();
         var emailto = 'mailto:support-bitbloq@bq.com',
@@ -354,7 +354,7 @@ describe('Register ', function() {
         });
     });
     //This test fail in MAC
-    it('bba-182:check if is login show modal feedback in landing (link "contacto")', function() {
+    xit('bba-182:check if is login show modal feedback in landing (link "contacto")', function() {
 
         //landing.openLandingMenu.click();
         var emailto = 'mailto:support-bitbloq@bq.com',

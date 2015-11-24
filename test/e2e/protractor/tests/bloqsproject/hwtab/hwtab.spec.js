@@ -5,7 +5,7 @@
 
 'use strict';
 
-var GlobalFunctions = require('../../../commons/globalFunctions.js');
+var GlobalFunctions = require('../../commons/globalFunctions.js');
 
 var globalFunctions = new GlobalFunctions();
 

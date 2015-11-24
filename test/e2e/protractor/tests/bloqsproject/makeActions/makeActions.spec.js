@@ -31,7 +31,7 @@ describe('check makeActions actions', function() {
     /**
      * User logged in
      */
-    it('bba-112:check enabled/disabled options by logged in user', function() {
+    xit('bba-112:check enabled/disabled options by logged in user', function() {
 
         login.loginWithRandomUser();
 
@@ -85,7 +85,7 @@ describe('check makeActions actions', function() {
     /**
      * User not logged in
      */
-    it('bba-113:check enabled/disabled options by not logged in user', function() {
+    xit('bba-113:check enabled/disabled options by not logged in user', function() {
 
         make.get();
         modals.attentionContinueGuest.click();

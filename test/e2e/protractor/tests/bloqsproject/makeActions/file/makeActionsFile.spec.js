@@ -62,7 +62,7 @@ describe('Menu file of MakeActions', function() {
 
     });
 
-    it('bba-155: Copy a project', function() {
+    xit('bba-155: Copy a project', function() {
         var nameSavedProject = 'Test_Save_' + Number(new Date());
         login.loginWithRandomUser();
         header.createNewProject();

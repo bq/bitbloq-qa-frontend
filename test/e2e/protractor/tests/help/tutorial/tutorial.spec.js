@@ -87,7 +87,7 @@ describe('Tutorial ', function() {
         });
     });
 
-    it('bba-63:Verificar la acción de sugerir un tutorial', function() {
+    xit('bba-63:Verificar la acción de sugerir un tutorial', function() {
 
         var emailto = 'mailto:support-bitbloq@bq.com',
             script = help.helpView + '.scrollTo(0,5000);';

@@ -5,11 +5,13 @@
 
 var protractorConfig = require('./basic');
 
-var localTest = require('../testsuites/local.js');
+protractorConfig.config.suites.loginLocal = '../tests/login/login.spec.local.js';
+protractorConfig.config.suites.makeactionsFileLocal = '../tests/login/login.spec.local.js';
+protractorConfig.config.suites.filtersLocal = '../tests/explore/filters/filters.spec.local.js';
+protractorConfig.config.suites.accountLocal = '../tests/account/account.local.spec.js';
+protractorConfig.config.suites.infotabLocal = '../tests/bloqsproject/infotab/infotab.spec.local.js';
+protractorConfig.config.suites.projectLocal = '../tests/explore/project.spec.local.js';
 
-for (var i = 0; i < protractorConfig.config.multiCapabilities.length; i++) {
-
-    protractorConfig.config.multiCapabilities[i].specs = protractorConfig.config.multiCapabilities[i].specs.concat(localTest);
-}
+console.log(protractorConfig.config.suites);
 
 exports.config = protractorConfig.config;

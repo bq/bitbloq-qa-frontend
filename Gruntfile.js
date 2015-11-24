@@ -62,6 +62,15 @@ module.exports = function(grunt) {
                     }
                 }
             },
+            alllocal: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/all_local.js',
+                    args: {
+                        baseUrl: grunt.option('target') || 'http://localhost:9000/',
+                        seleniumAddress: 'http://localhost:4444/wd/hub'
+                    }
+                }
+            },
             mac: {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
