@@ -24,13 +24,11 @@ describe('Help ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bba-38:Comprobar botones Informar de un error en usuario invitado', function() {
+    it('bba-38:Comprobar botones Informar de un error en usuario invitado', function() {
         help.get();
-        var emailto = 'mailto:support-bitbloq@bq.com';
-
-        expect(help.contactUsLink.getAttribute('href')).toEqual(emailto);
-        expect(help.feedbackAboutAnError.getAttribute('href')).toEqual(emailto);
-        expect(help.feedbackIdeas.getAttribute('href')).toEqual(emailto);
+        expect(help.contactUsLink.getAttribute('href')).toEqual(vars.supportEmail);
+        expect(help.feedbackAboutAnError.getAttribute('href')).toEqual(vars.supportEmail);
+        expect(help.feedbackIdeas.getAttribute('href')).toEqual(vars.supportEmail);
     });
 
     it('bba-175:Comprobar botones Informar de un error en usuario registrado', function() {

@@ -87,17 +87,16 @@ describe('Tutorial ', function() {
         });
     });
 
-    xit('bba-63:Verificar la acción de sugerir un tutorial', function() {
+    it('bba-63:Verificar la acción de sugerir un tutorial', function() {
 
-        var emailto = 'mailto:support-bitbloq@bq.com',
-            script = help.helpView + '.scrollTo(0,5000);';
+        var script = help.helpView + '.scrollTo(0,5000);';
 
         help.get();
 
         help.tutorialTab.click();
 
         browser.executeScript(script).then(function() {
-            expect(help.contactUsTutorials.getAttribute('href')).toEqual(emailto);
+            expect(help.contactUsTutorials.getAttribute('href')).toEqual(vars.supportEmail);
         });
 
         login.loginWithRandomUser();

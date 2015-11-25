@@ -343,29 +343,27 @@ describe('Register ', function() {
         });
     });
 
-    xit('bba-183:check if NO login go to mailto in landing (link "contacto")', function() {
+    it('bba-183:check if NO login go to mailto in landing (link "contacto")', function() {
 
         //landing.openLandingMenu.click();
-        var emailto = 'mailto:support-bitbloq@bq.com',
-            script = landing.landingPage + '.scrollTo(0,6000);';
+        var script = landing.landingPage + '.scrollTo(0,6000);';
 
         browser.executeScript(script).then(function() {
-            expect(landing.contactButton.getAttribute('href')).toMatch(emailto);
+            expect(landing.contactButton.getAttribute('href')).toMatch(vars.supportEmail);
         });
     });
     //This test fail in MAC
     xit('bba-182:check if is login show modal feedback in landing (link "contacto")', function() {
 
         //landing.openLandingMenu.click();
-        var emailto = 'mailto:support-bitbloq@bq.com',
-            script = landing.landingPage + '.scrollTo(0,2000);';
+        var script = landing.landingPage + '.scrollTo(0,2000);';
 
         login.loginWithRandomUser();
         landing.get();
         //console.log(script);
 
         browser.executeScript(script).then(function() {
-            expect(landing.contactButton.getAttribute('href')).not.toMatch(emailto);
+            expect(landing.contactButton.getAttribute('href')).not.toMatch(vars.supportEmail);
 
             landing.contactButton.click();
             browser.sleep(vars.timeToWaitFadeModals);

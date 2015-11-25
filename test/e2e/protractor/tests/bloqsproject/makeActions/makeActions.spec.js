@@ -85,7 +85,7 @@ describe('check makeActions actions', function() {
     /**
      * User not logged in
      */
-    xit('bba-113:check enabled/disabled options by not logged in user', function() {
+    it('bba-113:check enabled/disabled options by not logged in user', function() {
 
         make.get();
         modals.attentionContinueGuest.click();
@@ -128,7 +128,7 @@ describe('check makeActions actions', function() {
         makeActions.menuHelp.click();
         expect(makeActions.menuHelpFaq.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuHelpTutorial.getAttribute('disabled')).not.toBeTruthy();
-        expect(makeActions.menuHelpComments.getAttribute('href')).toMatch('mailto:support-bitbloq@bq.com');
+        expect(makeActions.menuHelpComments.getAttribute('href')).toMatch(vars.supportEmail);
         //expect(makeActions.menuHelpForum.getAttribute('disabled')).not.toBeTruthy(); Remove, forum not created yet
     });
 

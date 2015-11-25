@@ -30,6 +30,8 @@ var Variables = function() {
     this.timeToWaitTab = 3000;
     this.timeToWaitMenu = 500;
 
+    this.supportEmail = 'mailto:soporte.bitbloq@bq.com';
+
     this.account = function(cuenta) {
         if (cuenta === 'google') {
             return {

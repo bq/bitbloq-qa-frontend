@@ -120,7 +120,7 @@ describe('Menu Help of MakeActions', function() {
         login.logout();
     });
 
-    xit('bba-106:NO login, send comment and feedback modal are not displayed but it posible send mailto', function() {
+    it('bba-106:NO login, send comment and feedback modal are not displayed but it posible send mailto', function() {
 
         make.get();
         modals.attentionContinueGuest.click();
@@ -129,8 +129,8 @@ describe('Menu Help of MakeActions', function() {
 
         makeActions.menuHelp.click();
         ///test item "Enviar comentarios" && "Informar de un error"  are enable
-        expect(makeActions.menuHelpComments.getAttribute('href')).toMatch('mailto:support-bitbloq@bq.com');
-        expect(makeActions.menuHelpErrorFeedback.getAttribute('href')).toMatch('mailto:support-bitbloq@bq.com');
+        expect(makeActions.menuHelpComments.getAttribute('href')).toMatch(vars.supportEmail);
+        expect(makeActions.menuHelpErrorFeedback.getAttribute('href')).toMatch(vars.supportEmail);
 
     });
 
