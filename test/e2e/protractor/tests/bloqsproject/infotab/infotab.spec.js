@@ -43,7 +43,7 @@ describe('Info tab', function() {
         expect(infoTab.infotabTaginputButton.getAttribute('disabled')).toBe('true');
     });
 
-    xit('bba-124: Verificar el cambio de tema del proyecto', function() {
+    it('bba-124: Verificar el cambio de tema del proyecto', function() {
         function setThemeColor(color) {
             var themeColor;
             if (color === 'gray') {

@@ -110,7 +110,7 @@ describe('Test CookiesBar', function() {
             $2(make.codeTab.elementArrayFinder_.locator_.value).click();
             $2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).click();
             browserCodeProjectID.close();
-
+            login.logout();
             return true;
         });
 
@@ -163,8 +163,7 @@ describe('Test CookiesBar', function() {
 
     });
 
-    // ISSUE,
-    xit('bba-127:Check, Login user accept cookies and never appear in other session', function() {
+    it('bba-127:Check, Login user accept cookies and never appear in other session', function() {
 
         /* Open browser with random user and close cookiesBar */
 
@@ -172,14 +171,33 @@ describe('Test CookiesBar', function() {
         browser.manage().window().setSize(1024, 768);
         browser.get(browser.baseUrl);
         browser.waitForAngular();
-        cookiesBar.closeCookiesBar();
+        //cookiesBar.closeCookiesBar(); //close before because is over register button
         var user = login.loginWithRandomUser();
-        console.log(user);
         login.logout();
+
+        /* Open new browser to close cookes after login  */
+        var browserCloseCookiesLogin = browser.forkNewDriverInstance(),
+            $3 = browserCloseCookiesLogin.$;
+        browserCloseCookiesLogin.manage().window().setSize(1024, 768);
+        browserCloseCookiesLogin.get(browser.baseUrl);
+        browserCloseCookiesLogin.waitForAngular();
+        //Login last user and close cookies bar
+        browserCloseCookiesLogin.get(login.url);
+        $3(login.user.elementArrayFinder_.locator_.value).sendKeys(user.user);
+        $3(login.password.elementArrayFinder_.locator_.value).sendKeys(user.password);
+        $3(login.loginButton.elementArrayFinder_.locator_.value).click();
+        expect(browserCloseCookiesLogin.getCurrentUrl()).toMatch(browser.baseUrl + '#/projects');
+        //Cookies are open
+        expect($3(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(true);
+        //Close cookies
+        $3(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).click();
+        //Cookies are closed
+        expect($3(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
+        browserCloseCookiesLogin.close();
 
         /* Open new browser and login last user to check no show cookies bar*/
 
-        var browserCheckCookiesLogin = browser.loginforkNewDriverInstance(),
+        var browserCheckCookiesLogin = browser.forkNewDriverInstance(),
             $2 = browserCheckCookiesLogin.$;
         browserCheckCookiesLogin.manage().window().setSize(1024, 768);
         browserCheckCookiesLogin.get(browser.baseUrl);
