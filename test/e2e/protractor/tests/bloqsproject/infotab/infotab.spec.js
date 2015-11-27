@@ -33,6 +33,7 @@ describe('Info tab', function() {
     it('bba-7: Verificar en el tab de información que no aparecen las opciones que requieren registro', function() {
         make.get();
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         make.infoTab.click();

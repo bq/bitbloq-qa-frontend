@@ -20,7 +20,7 @@ describe('bloqs', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('detect if vars was stored on rename', function() {
+    xit('detect if vars was stored on rename', function() {
         //login.loginWithRandomUser();
         make.get();
 

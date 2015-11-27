@@ -29,14 +29,14 @@ describe('Menu Help of MakeActions', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-94:Login and test if there are all items visibles && redirect to faq, forum and help', function() {
+    xit('bba-94:Login and test if there are all items visibles && redirect to faq, forum and help', function() {
 
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         makeActions.menuHelp.click();
-
+        browser.sleep(vars.timeToWaitFadeModals);
         //test item "Enviar comentarios" && "Informar de un error"  are enable
         expect(makeActions.menuHelpComments.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuHelpErrorFeedback.getAttribute('disabled')).not.toBeTruthy();
@@ -47,6 +47,7 @@ describe('Menu Help of MakeActions', function() {
             browser.sleep(vars.timeToWaitTab);
             return browser.getAllWindowHandles().then(function(handles) {
                 return browser.switchTo().window(handles[1]).then(function() {
+                   browser.sleep(vars.timeToWaitTab);
                     expect(browser.getCurrentUrl()).toMatch(url);
                     return browser.close().then(function() {
                         return browser.switchTo().window(handles[0]);

@@ -9,13 +9,15 @@ var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     MakeActions = require('../makeActions.po.js'),
     Make = require('../../make.po.js'),
     Explore = require('../../../explore/explore.po.js'),
-    Login = require('../../../login/login.po.js');
+    Login = require('../../../login/login.po.js'),
+    Variables = require('../../../commons/variables.js');
 
 var globalFunctions = new GlobalFunctions(),
     makeActions = new MakeActions(),
     make = new Make(),
     explore = new Explore(),
-    login = new Login();
+    login = new Login(),
+    vars = new Variables();
 
 globalFunctions.xmlReport('makeActionsShare');
 describe('Menu Help of MakeActions', function() {
@@ -32,7 +34,9 @@ describe('Menu Help of MakeActions', function() {
         var projectName = make.saveProjectNewUser();
 
         makeActions.menuShare.click();
+        browser.sleep(vars.timeToWaitTab);
         makeActions.menuSharePublish.click();
+        browser.sleep(vars.timeToWaitTab);
         makeActions.publishButton.click();
         explore.get();
         explore.exploreFind.sendKeys(projectName.projectName);

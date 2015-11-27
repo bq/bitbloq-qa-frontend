@@ -25,12 +25,14 @@ var Variables = function() {
     this.lastnameFb = 'Gómez';
 
     //timers
-    this.timeToWaitFadeModals = 1500;
+    this.timeToWaitFadeModals = 2000;
     this.timeToWaitAutoSave = 5600;
     this.timeToWaitTab = 3000;
     this.timeToWaitMenu = 500;
 
     this.supportEmail = 'mailto:soporte.bitbloq@bq.com';
+    this.sendCommentsLiteral = 'Enviar comentarios a Bitbloq';
+    this.infoErrorLiteral = 'Informar de un error';
 
     this.account = function(cuenta) {
         if (cuenta === 'google') {

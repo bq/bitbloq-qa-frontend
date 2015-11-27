@@ -94,6 +94,7 @@ describe('Tutorial ', function() {
         help.get();
 
         help.tutorialTab.click();
+        browser.sleep(vars.timeToWaitFadeModals);
 
         browser.executeScript(script).then(function() {
             expect(help.contactUsTutorials.getAttribute('href')).toEqual(vars.supportEmail);
@@ -107,7 +108,7 @@ describe('Tutorial ', function() {
         browser.executeScript(script).then(function() {
             help.contactUsTutorials.click();
             browser.sleep(vars.feedbackIdeas);
-            expect(modals.modalTitle.getText()).toEqual('Enviar comentarios a bitbloq');
+            expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
             modals.bladeClose.click();
             browser.sleep(vars.timeToWaitFadeModals);
         });

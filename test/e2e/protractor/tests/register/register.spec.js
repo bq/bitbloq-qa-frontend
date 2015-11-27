@@ -347,7 +347,7 @@ describe('Register ', function() {
 
         //landing.openLandingMenu.click();
         var script = landing.landingPage + '.scrollTo(0,6000);';
-
+        browser.sleep(5000); //Time to wait load explora project on landing (not wait angular)
         browser.executeScript(script).then(function() {
             expect(landing.contactButton.getAttribute('href')).toMatch(vars.supportEmail);
         });
@@ -360,14 +360,14 @@ describe('Register ', function() {
 
         login.loginWithRandomUser();
         landing.get();
-        browser.sleep(1000); //Time to wait load explora project on landing (not wait angular)
+        browser.sleep(5000); //Time to wait load explora project on landing (not wait angular)
 
         browser.executeScript(script).then(function() {
             expect(landing.contactButton.getAttribute('href')).not.toMatch(vars.supportEmail);
 
             landing.contactButton.click();
             browser.sleep(vars.timeToWaitFadeModals);
-            expect(modals.modalTitle.getText()).toEqual('Enviar comentarios a bitbloq');
+            expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
 
             modals.bladeClose.click();
             browser.sleep(vars.timeToWaitFadeModals);

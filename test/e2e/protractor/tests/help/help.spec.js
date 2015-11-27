@@ -39,7 +39,7 @@ describe('Help ', function() {
         help.contactUsLink.click();
         browser.sleep(vars.timeToWaitFadeModals);
 
-        expect(modals.modalTitle.getText()).toEqual('Enviar comentarios a bitbloq');
+        expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
 
         modals.bladeClose.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -47,7 +47,7 @@ describe('Help ', function() {
         help.feedbackAboutAnError.click();
         browser.sleep(vars.timeToWaitFadeModals);
 
-        expect(modals.modalTitle.getText()).toEqual('Informar de un error');
+        expect(modals.modalTitle.getText()).toEqual(vars.infoErrorLiteral);
 
         modals.bladeClose.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -55,7 +55,7 @@ describe('Help ', function() {
         help.feedbackIdeas.click();
         browser.sleep(vars.feedbackIdeas);
 
-        expect(modals.modalTitle.getText()).toEqual('Enviar comentarios a bitbloq');
+        expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
 
     });
 
