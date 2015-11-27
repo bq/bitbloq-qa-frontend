@@ -2,16 +2,17 @@
 
 var Login = require('../login/login.po.js'),
     Variables = require('../commons/variables.js'),
+    GlobalFunctions = require('../commons/globalFunctions.js'),
     Modals = require('../modals/modals.po.js'),
     Infotab = require('./infotab/infotab.po.js'),
     MakeActions = require('./makeActions/makeActions.po.js');
 
 var login = new Login(),
+    globalFunctions = new GlobalFunctions(),
     modals = new Modals(),
     vars = new Variables(),
     infotab = new Infotab(),
-    makeActions = new MakeActions(),
-    os = require('os').type;
+    makeActions = new MakeActions();
 
 var Make = function() {
 
@@ -188,9 +189,7 @@ var Make = function() {
         browser.get('#/bloqsproject');
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
-        if (os() === 'Windows_NT') {
-            file = file.replace('/', '\\');
-        }
+        file = globalFunctions.filePath(file);
         makeActions.inputUploadFile.sendKeys(file);
         browser.sleep(vars.timeToWaitFadeModals);
 
@@ -201,9 +200,7 @@ var Make = function() {
         modals.attentionContinueGuest.click();
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
-        if (os() === 'Windows_NT') {
-            file = file.replace('/', '\\');
-        }
+        file = globalFunctions.filePath(file);
         makeActions.inputUploadFile.sendKeys(file);
         browser.sleep(vars.timeToWaitFadeModals);
 
@@ -221,18 +218,14 @@ var Make = function() {
     this.importFileUserLogin = function(file, user) {
         login.login(user.user, user.password);
         browser.get('#/bloqsproject');
-        if (os() === 'Windows_NT') {
-            file = file.replace('/', '\\');
-        }
+        file = globalFunctions.filePath(file);
         makeActions.inputUploadFile.sendKeys(file);
         browser.sleep(vars.timeToWaitFadeModals);
     };
 
     this.importFileUser = function(file) {
         browser.get('#/bloqsproject');
-        if (os() === 'Windows_NT') {
-            file = file.replace('/', '\\');
-        }
+        file = globalFunctions.filePath(file);
         makeActions.inputUploadFile.sendKeys(file);
         browser.sleep(vars.timeToWaitFadeModals);
     };

@@ -32,7 +32,7 @@ describe('Publish project', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bba-42:Verify that the project can be downloaded', function() {
+    it('bba-42:Verify that the project can be downloaded', function() {
         //Unregistered user
         var projectElem, filename;
         //Se salva un proyecto para que al menos explora tenga un proyecto
@@ -49,7 +49,7 @@ describe('Publish project', function() {
                 projectElem.click();
                 browser.sleep(vars.timeToWaitFadeModals);
                 explore.projectMoreInfoButton.click();
-                filename = path.resolve() + '/target/' + project1.projectName + '.json';
+                filename = globalFunctions.filePath(path.resolve() + '/target/' + project1.projectName + '.json');
                 //Se comprueba que el boton "descargar" descarga el proyecto
                 project.downloadProjectButton.click();
                 browser.driver.wait(function() {
@@ -65,7 +65,7 @@ describe('Publish project', function() {
                         browser.sleep(vars.timeToWaitFadeModals);
                         explore.projectMoreInfoButton.click();
                         //Se comprueba que el boton "descargar" descarga el proyecto
-                        filename = path.resolve() + '/target/' + project1.projectName + '.json';
+                        filename = globalFunctions.filePath(path.resolve() + '/target/' + project1.projectName + '.json');
                         project.downloadProjectButton.click();
                         browser.driver.wait(function() {
                             return fs.existsSync(filename);
@@ -77,7 +77,7 @@ describe('Publish project', function() {
                             browser.sleep(vars.timeToWaitFadeModals);
                             explore.projectMoreInfoButton.click();
                             //Se comprueba que el boton "descargar" descarga el proyecto
-                            filename = path.resolve() + '/target/' + project2.projectName + '.json';
+                            filename = globalFunctions.filePath(path.resolve() + '/target/' + project2.projectName + '.json');
                             project.downloadProjectButton.click();
                             browser.driver.wait(function() {
                                 return fs.existsSync(filename);

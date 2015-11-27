@@ -5,7 +5,9 @@
 'use strict';
 
 var CookiesBar = require('../cookiesBar/cookiesBar.po.js');
-var cookiesBar = new CookiesBar();
+
+var cookiesBar = new CookiesBar(),
+os = require('os').type;
 
 var Global = function() {
 
@@ -36,6 +38,13 @@ var Global = function() {
          }));
 
       });
+   };
+
+   this.filePath = function(nameFile) {
+     if (os() === 'Windows_NT') {
+         nameFile = nameFile.replace('/', '\\');
+     }
+     return nameFile;
    };
 
 };
