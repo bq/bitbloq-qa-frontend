@@ -1,9 +1,7 @@
 
 /***   Included libraries  ***/
 #include <Wire.h>
-#include <bqLiquidCrystal.h>
-#include <Servo.h>
-#include <SoftwareSerial.h>
+#include <BitbloqLiquidCrystal.h>
 
 
 /***   Global variables and function definition  ***/

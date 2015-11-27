@@ -6,7 +6,8 @@
 var protractorConfig = require('./basic');
 
 protractorConfig.config.suites.loginLocal = '../tests/login/login.spec.local.js';
-protractorConfig.config.suites.makeactionsFileLocal = '../tests/login/login.spec.local.js';
+protractorConfig.config.suites.makeactionsEditLocal = '../tests/bloqsproject/makeActions/edit/makeActionsEdit.spec.local.js';
+protractorConfig.config.suites.makeactionsFileLocal = '../tests/bloqsproject/makeActions/file/makeActionsFile.spec.local.js';
 protractorConfig.config.suites.filtersLocal = '../tests/explore/filters/filters.spec.local.js';
 protractorConfig.config.suites.accountLocal = '../tests/account/account.local.spec.js';
 protractorConfig.config.suites.infotabLocal = '../tests/bloqsproject/infotab/infotab.spec.local.js';
