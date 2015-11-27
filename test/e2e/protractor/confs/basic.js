@@ -56,7 +56,6 @@ exports.config = {
         cookiesBar: '../tests/cookiesBar/cookiesBar.spec.js',
         dragAndDrop: '../tests/dragAndDrop/dragAndDrop.spec.js',
         explore: '../tests/explore/explore.spec.js',
-        exploreFilters: '../tests/explore/filters/filters.spec.local.js',
         exploreProject: '../tests/explore/project.spec.js',
         header: '../tests/header/header.spec.js',
         help: '../tests/help/*.spec.js',
