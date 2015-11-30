@@ -4,48 +4,63 @@
 
 'use strict';
 
-var CookiesBar = require('../cookiesBar/cookiesBar.po.js');
+var CookiesBar = require('../cookiesBar/cookiesBar.po.js'),
+    Variables = require('../commons/variables.js');
 
 var cookiesBar = new CookiesBar(),
-os = require('os').type;
+    os = require('os').type,
+    vars = new Variables();
 
 var Global = function() {
 
-   this.beforeTest = function() {
-      beforeEach(function() {
-         browser.manage().window().setSize(1024, 768);
-         browser.get(browser.baseUrl);
-         browser.waitForAngular();
-         cookiesBar.closeCookiesBar();
-      });
-   };
+    this.beforeTest = function() {
+        beforeEach(function() {
+            browser.manage().window().setSize(1024, 768);
+            browser.get(browser.baseUrl);
+            browser.waitForAngular();
+            cookiesBar.closeCookiesBar();
+        });
+    };
 
-   this.afterTest = function() {
-      afterEach(function() {
-         browser.executeScript('window.sessionStorage.clear();');
-         browser.executeScript('window.localStorage.clear();');
-         browser.manage().deleteAllCookies();
-      });
-   };
+    this.afterTest = function() {
+        afterEach(function() {
+            browser.executeScript('window.sessionStorage.clear();');
+            browser.executeScript('window.localStorage.clear();');
+            browser.manage().deleteAllCookies();
+        });
+    };
 
-   this.xmlReport = function(fileName) {
-      beforeAll(function() {
-         var jasmineReporters = require('jasmine-reporters');
-         jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
-            consolidateAll: true,
-            filePrefix: fileName,
-            savePath: 'target/report/'
-         }));
+    this.xmlReport = function(fileName) {
+        beforeAll(function() {
+            var jasmineReporters = require('jasmine-reporters');
+            jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
+                consolidateAll: true,
+                filePrefix: fileName,
+                savePath: 'target/report/'
+            }));
 
-      });
-   };
+        });
+    };
 
-   this.filePath = function(nameFile) {
-     if (os() === 'Windows_NT') {
-         nameFile = nameFile.replace('/', '\\');
-     }
-     return nameFile;
-   };
+    this.filePath = function(nameFile) {
+        if (os() === 'Windows_NT') {
+            nameFile = nameFile.replace('/', '\\');
+        }
+        return nameFile;
+    };
+
+    this.toMatchUrlInNewTab = function(url) {
+        browser.sleep(vars.timeToWaitTab);
+        return browser.getAllWindowHandles().then(function(handles) {
+            return browser.switchTo().window(handles[1]).then(function() {
+                browser.sleep(vars.timeToWaitTab);
+                expect(browser.getCurrentUrl()).toMatch(url);
+                return browser.close().then(function() {
+                    return browser.switchTo().window(handles[0]);
+                });
+            });
+        });
+    };
 
 };
 

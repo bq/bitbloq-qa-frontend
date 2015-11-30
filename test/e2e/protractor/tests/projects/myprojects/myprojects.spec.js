@@ -159,4 +159,12 @@ describe('My Projects', function() {
 
     });
 
+    it('bba-146:Verify if not have project, show create new project', function() {
+        login.loginWithRandomUser();
+        myprojects.newProject.click();
+        globalFunctions.toMatchUrlInNewTab(/#\/bloqsproject/);
+        login.logout();
+
+    });
+
 });
