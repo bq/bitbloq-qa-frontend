@@ -6,13 +6,15 @@
 
 var Variables = require('../../commons/variables.js'),
     GlobalFunctions = require('../../commons/globalFunctions.js'),
+    Commons = require('../../commons/commons.po.js'),
     Make = require('../../bloqsproject/make.po.js'),
     Login = require('../../login/login.po.js'),
     Modals = require('../../modals/modals.po.js'),
-    MakeActions = require('./makeActions.po.js');
+    MakeActions = require('../../bloqsproject/makeActions/makeActions.po.js');
 
 var vars = new Variables(),
     globalFunctions = new GlobalFunctions(),
+    commons = new Commons(),
     login = new Login(),
     modals = new Modals(),
     make = new Make(),
@@ -20,7 +22,7 @@ var vars = new Variables(),
 
 globalFunctions.xmlReport('makeActions');
 
-describe('Check makeActions actions in bloqsproject', function() {
+describe('Check makeActions actions in codeProjects', function() {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -28,12 +30,19 @@ describe('Check makeActions actions in bloqsproject', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-112:check enabled/disabled options by logged in user', function() {
+    it('bba-240:check enabled/disabled options by logged in user', function() {
 
         login.loginWithRandomUser();
 
         make.get();
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        make.softwareTab.click();
+        make.codeTab.click();
+        make.softwareEditCode.click();
+        modals.modalAlertOk.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        commons.clickAlertCloseToast();
         browser.sleep(vars.timeToWaitFadeModals);
         //FILE
         makeActions.menuFile.click();
@@ -73,11 +82,18 @@ describe('Check makeActions actions in bloqsproject', function() {
     /**
      * User not logged in
      */
-    it('bba-113:check enabled/disabled options by not logged in user', function() {
+    it('bba-241:check enabled/disabled options by not logged in user', function() {
 
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        make.softwareTab.click();
+        make.codeTab.click();
+        make.softwareEditCode.click();
+        modals.modalAlertOk.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        commons.clickAlertCloseToast();
         browser.sleep(vars.timeToWaitFadeModals);
 
         //FILE

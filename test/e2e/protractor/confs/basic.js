@@ -53,6 +53,7 @@ exports.config = {
         bloqsprojectMakeActionsShare: '../tests/bloqsproject/makeActions/share/makeActionsShare.spec.js',
         bloqsprojectWalkthrough: '../tests/bloqsproject/walkthrough/walkthrough.spec.js',
         codeProject: '../tests/codeproject/codeproject.spec.js',
+        codeProjectMakeActions: '../tests/codeproject/makeActions/makeActions.spec.js',
         cookiesBar: '../tests/cookiesBar/cookiesBar.spec.js',
         dragAndDrop: '../tests/dragAndDrop/dragAndDrop.spec.js',
         explore: '../tests/explore/explore.spec.js',
