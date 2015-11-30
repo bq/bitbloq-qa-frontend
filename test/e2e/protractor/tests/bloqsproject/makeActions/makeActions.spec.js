@@ -31,7 +31,7 @@ describe('check makeActions actions', function() {
     /**
      * User logged in
      */
-    xit('bba-112:check enabled/disabled options by logged in user', function() {
+    it('bba-112:check enabled/disabled options by logged in user', function() {
 
         login.loginWithRandomUser();
 

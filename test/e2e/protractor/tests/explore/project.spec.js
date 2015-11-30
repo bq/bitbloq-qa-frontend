@@ -35,7 +35,7 @@ describe('Publish project', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bba-41:Verify that the "Add to my project" option is displayed', function() {
+    it('bba-41:Verify that the "Add to my project" option is displayed', function() {
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
@@ -217,7 +217,7 @@ describe('Publish project', function() {
         });
     });
 
-    xit('bba-153:Verify the "Add to my project" counter', function() {
+    it('bba-153:Verify the "Add to my project" counter', function() {
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {

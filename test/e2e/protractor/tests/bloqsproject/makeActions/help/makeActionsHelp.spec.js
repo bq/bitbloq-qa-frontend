@@ -29,8 +29,7 @@ describe('Menu Help of MakeActions', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bba-94:Login and test if there are all items visibles && redirect to faq, forum and help', function() {
-
+    it('bba-94:Login and test if there are all items visibles && redirect to faq, forum and help', function() {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -42,12 +41,11 @@ describe('Menu Help of MakeActions', function() {
         expect(makeActions.menuHelpErrorFeedback.getAttribute('disabled')).not.toBeTruthy();
 
         // Test redirect to faq, forum and help
-
         function _toMatchUrl(url) {
             browser.sleep(vars.timeToWaitTab);
             return browser.getAllWindowHandles().then(function(handles) {
                 return browser.switchTo().window(handles[1]).then(function() {
-                   browser.sleep(vars.timeToWaitTab);
+                    browser.sleep(vars.timeToWaitTab);
                     expect(browser.getCurrentUrl()).toMatch(url);
                     return browser.close().then(function() {
                         return browser.switchTo().window(handles[0]);
@@ -59,9 +57,9 @@ describe('Menu Help of MakeActions', function() {
         makeActions.menuHelpFaq.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
             _toMatchUrl(/#\/help/).then(function() {
-
+                makeActions.menuHelp.click();
+                browser.sleep(vars.timeToWaitTab);
                 makeActions.menuHelpTutorial.click().then(function() {
-                    browser.sleep(vars.timeToWaitTab);
                     _toMatchUrl(/#\/help\/tutorial/).then(function() {
 
                         // FOrum not ready yet to test
@@ -70,13 +68,11 @@ describe('Menu Help of MakeActions', function() {
                         //     _toMatchUrl(/#\/help\/forum/);
                         // });
 
+                        login.logout();
                     });
                 });
-
             });
         });
-
-        login.logout();
     });
 
     //TODO CHECK TOAST

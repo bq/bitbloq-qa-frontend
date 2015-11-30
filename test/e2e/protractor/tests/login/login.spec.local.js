@@ -23,8 +23,7 @@ describe('Login, specs only in local ', function() {
   // afterEach commons
   globalFunctions.afterTest();
 
-    // be careful, saucelabs no stopped !!
-    xit('bba-107:Login with a Google account', function() {
+    it('bba-107:Login with a Google account', function() {
 
         landing.get();
         landing.openLandingMenu.click();
