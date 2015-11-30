@@ -27,7 +27,7 @@ describe('User account view', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bba-158:Verify fields from new google user', function() {
+    it('bba-158:Verify fields from new google user', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();

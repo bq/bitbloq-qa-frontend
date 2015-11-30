@@ -10,7 +10,7 @@ protractorConfig.config.suites.allLocal = [
     '../tests/bloqsproject/makeActions/file/makeActionsFile.spec.local.js',
     '../tests/bloqsproject/makeActions/edit/makeActionsEdit.spec.local.js',
     '../tests/explore/filters/filters.spec.local.js',
-    '../tests/account/account.local.spec.js',
+    '../tests/account/account.spec.local.js',
     '../tests/bloqsproject/infotab/infotab.spec.local.js',
     '../tests/explore/project.spec.local.js'
 ];
