@@ -29,6 +29,8 @@ var Variables = function() {
     this.timeToWaitAutoSave = 5600;
     this.timeToWaitTab = 3000;
     this.timeToWaitMenu = 500;
+    this.timeToWaitSendKeys = 1000;
+    this.timeToWaitLoadExporeProjects = 3000;
 
     this.supportEmail = 'mailto:soporte.bitbloq@bq.com';
     this.sendCommentsLiteral = 'Enviar comentarios a Bitbloq';
