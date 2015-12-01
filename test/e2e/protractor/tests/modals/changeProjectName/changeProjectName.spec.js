@@ -43,6 +43,7 @@ describe('Rename modal on make', function() {
         // Comprobar cuando le da a aceptar, que abres de nuevo el proyecto y tiene el nombre nuevo
         projects.get();
         expect(projects.projectsName.getText()).toEqual('ChangeTestName');
+
         login.logout();
     });
 
@@ -68,5 +69,45 @@ describe('Rename modal on make', function() {
         modals.inputModalChangeN.sendKeys('ChangeTestName');
         modals.bladeClose.click();
         expect(make.projectName.getText()).not.toEqual('ChangeTestName');
+
+        login.logout();
     });
+
+    it('bba-147:Verify save name when sendKeys enter in modal', function() {
+
+        //test no saved if click in cancel modal
+        login.loginWithRandomUser();
+        make.get();
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        make.projectName.click();
+        modals.inputModalChangeN.clear();
+        modals.inputModalChangeN.sendKeys('ChangeTestName');
+        browser.actions().sendKeys(protractor.Key.ENTER).perform();
+        expect(make.projectName.getText()).toEqual('ChangeTestName');
+
+        browser.sleep(vars.timeToWaitFadeModals);
+
+        login.logout();
+    });
+
+    it('bba-246:Verify save name when sendKeys ESCAPE in modal no save name', function() {
+
+        //test no saved if click in cancel modal
+        login.loginWithRandomUser();
+        make.get();
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        make.projectName.click();
+        modals.inputModalChangeN.clear();
+        modals.inputModalChangeN.sendKeys('ChangeTestName');
+        browser.actions().sendKeys(protractor.Key.ESCAPE).perform();
+        expect(make.projectName.getText()).not.toEqual('ChangeTestName');
+
+        browser.sleep(vars.timeToWaitFadeModals);
+
+        login.logout();
+    });
+
+
 });
