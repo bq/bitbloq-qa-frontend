@@ -39,8 +39,8 @@ var Register = function() {
      */
     this.generateUser = function() {
         return {
-            username: 'userTest_' + Number(new Date()),
-            userEmail: 'userTest_' + Number(new Date()) + '@devfakebq.es',
+            username: 'userTest' + Number(new Date()),
+            userEmail: 'userTest' + Number(new Date()) + '@devfakebq.es',
             password: 'prueba',
             day: '08',
             month: '07',
