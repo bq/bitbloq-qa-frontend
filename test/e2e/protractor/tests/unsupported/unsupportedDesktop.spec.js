@@ -3,12 +3,22 @@
 var
     GlobalFunctions = require('../commons/globalFunctions.js'),
     Unsupported = require('./unsupported.po.js'),
-    Variables = require('../commons/variables.js');
+    Variables = require('../commons/variables.js'),
+    Bloqsproject = require('../bloqsproject/make.po.js'),
+    Register = require('../register/register.po.js'),
+    Explore = require('../explore/explore.po.js'),
+    Codeproject = require('../codeproject/codeproject.po.js'),
+    Help = require('../help/help.po.js');
 
 var
     globalFunctions = new GlobalFunctions(),
     unsupported = new Unsupported(),
-    vars = new Variables();
+    vars = new Variables(),
+    bloqsproject = new Bloqsproject(),
+    register = new Register(),
+    explore = new Explore(),
+    codeproject = new Codeproject(),
+    help = new Help();
 
 globalFunctions.xmlReport('unsupportedDesktop');
 
@@ -45,7 +55,21 @@ describe('Check unsupported in desktop', function() {
                 });
             });
         });
+    });
 
+    it('bba-70:Check if open bitbloq on firefox redirect to unsupported/desktop only first time', function() {
+        unsupported.continueButton.click();
+        expect(browser.getCurrentUrl()).toMatch(browser.baseUrl);
+        bloqsproject.get();
+        expect(browser.getCurrentUrl()).toMatch(browser.baseUrl + bloqsproject.url);
+        register.get();
+        expect(browser.getCurrentUrl()).toMatch(browser.baseUrl + register.url);
+        explore.get();
+        expect(browser.getCurrentUrl()).toMatch(browser.baseUrl + explore.url);
+        codeproject.get();
+        expect(browser.getCurrentUrl()).toMatch(browser.baseUrl + codeproject.url);
+        help.get();
+        expect(browser.getCurrentUrl()).toMatch(browser.baseUrl + help.url);
     });
 
 });

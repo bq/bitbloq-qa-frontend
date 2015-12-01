@@ -34,6 +34,11 @@ var Register = function() {
     this.showMoreSixPass = $('[data-element="show-more-six-pass"]');
     this.showIncorrectPass = $('[data-element="show-incorrect-pass"]');
 
+    this.url = ('#/register');
+    this.get = function() {
+        browser.get(this.url);
+    };
+
     /**
      * generate Random user
      */
