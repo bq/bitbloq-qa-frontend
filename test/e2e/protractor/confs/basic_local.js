@@ -13,6 +13,4 @@ protractorConfig.config.suites.accountLocal = '../tests/account/account.spec.loc
 protractorConfig.config.suites.infotabLocal = '../tests/bloqsproject/infotab/infotab.spec.local.js';
 protractorConfig.config.suites.projectLocal = '../tests/explore/project.spec.local.js';
 
-console.log(protractorConfig.config.suites);
-
 exports.config = protractorConfig.config;

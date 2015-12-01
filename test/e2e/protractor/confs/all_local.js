@@ -15,6 +15,4 @@ protractorConfig.config.suites.allLocal = [
     '../tests/explore/project.spec.local.js'
 ];
 
-console.log(protractorConfig.config.suites);
-
 exports.config = protractorConfig.config;

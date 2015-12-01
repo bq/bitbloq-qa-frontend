@@ -71,6 +71,16 @@ module.exports = function(grunt) {
                     }
                 }
             },
+            firefox: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_firefox.js',
+                    args: {
+                        baseUrl: grunt.option('target') || 'http://localhost:9000/',
+                        seleniumAddress: 'http://localhost:4444/wd/hub',
+                        suite: 'unsupportedDesktop'
+                    }
+                }
+            },
             mac: {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',

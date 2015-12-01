@@ -67,7 +67,6 @@ exports.config = {
         modalsChangeProjectName: '../tests/modals/changeProjectName/changeProjectName.spec.js',
         MyProjects: '../tests/projects/myprojects/myprojects.spec.js',
         register: '../tests/register/register.spec.js'
-
     },
 
     // /*
