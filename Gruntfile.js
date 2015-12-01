@@ -83,19 +83,33 @@ module.exports = function(grunt) {
             },
             mac: {
                 options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
                     args: {
                         baseUrl: grunt.option('target'),
                         seleniumAddress: 'http://172.16.30.18:4444/wd/hub'
                     }
                 }
             },
-            max: {
+            win32: {
                 options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
                     args: {
                         baseUrl: grunt.option('target'),
-                        seleniumAddress: 'http://172.16.30.189:4444/wd/hub'
+                        seleniumAddress: 'http://172.16.30.26:4444/wd/hub'
+                    }
+                }
+            },
+            win64: {
+                options: {
+                    args: {
+                        baseUrl: grunt.option('target'),
+                        seleniumAddress: 'http://172.16.30.23:4444/wd/hub'
+                    }
+                }
+            },
+            linux32: {
+                options: {
+                    args: {
+                        baseUrl: grunt.option('target'),
+                        seleniumAddress: 'http://172.16.30.25:4444/wd/hub'
                     }
                 }
             },
