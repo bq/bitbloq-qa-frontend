@@ -6,12 +6,16 @@
 'use strict';
 
 var GlobalFunctions = require('../commons/globalFunctions.js'),
+    Variables = require('../commons/variables.js'),
     Account = require('./account.po.js'),
-    Login = require('../login/login.po.js');
+    Login = require('../login/login.po.js'),
+    Modals = require('../modals/modals.po.js');
 
 var globalFunctions = new GlobalFunctions(),
+    vars =  new Variables(),
     account = new Account(),
-    login = new Login();
+    login = new Login(),
+    modals = new Modals();
 
 globalFunctions.xmlReport('account');
 
@@ -34,7 +38,25 @@ describe('User account view', function() {
         expect(account.lastname.getAttribute('value')).toBe('');
 
         login.logout();
-
     });
+
+    it('bba-24:Verify reset password (no social login)', function() {
+
+        var randomUserInfo = login.loginWithRandomUser();
+        account.get();
+        account.resetPasswordButton.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        modals.accountResetPasswordInput.sendKeys('123456');
+        modals.accountResetPasswordRepitInput.sendKeys('123456');
+        modals.accountResetPasswordOKButton.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        login.logout();
+
+        login.get();
+        login.login(randomUserInfo.user,'123456');
+
+        login.logout();
+    });
+
 
 });

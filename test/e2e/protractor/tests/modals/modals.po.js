@@ -28,6 +28,10 @@ var Modals = function() {
     this.gButton = $('[data-element="modals-g-button"]');
     this.shortText = $('[data-element="modals-shortURL"]');
     this.shortButton = $('[data-element="modals-shortURL-button"]');
+    //PO modal-password-reset
+    this.accountResetPasswordInput = $('[data-element="modal-password-reset-main-input"]');
+    this.accountResetPasswordRepitInput = $('[data-element="modal-password-reset-repeat-input"]');
+    this.accountResetPasswordOKButton = $('[data-element="modal-password-reset-ok-button"]');
 
     this.rejectTour = function() {
         $('[data-element="reject-tour"]').click();

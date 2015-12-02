@@ -11,6 +11,7 @@ var Account = function() {
     this.lastname = $('[data-element="lastname"]');
     this.username = $('[data-element="username"]');
     this.email = $('[data-element="email"]');
+    this.resetPasswordButton = $('[data-element="account-reset-password-button"]');
 
     this.get = function() {
         browser.get(this.url);
