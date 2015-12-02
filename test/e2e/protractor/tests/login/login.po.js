@@ -39,6 +39,13 @@ var Login = function() {
     this.showMoreSixPass = $('[data-element="show-more-six-pass"]');
     this.showIncorrectPass = $('[data-element="show-incorrect-password"]');
     this.showIncorrectUser = $('[data-element="show-no-user-or-email-register"]');
+    //No remember password in login
+    this.showEmailNotExist = $('[data-element="login-email-not-exist"]');
+    //Forgot password
+    this.forgotPasswordButton = $('[data-element="login-forgot-password-button"]');
+    this.emailToSendInput = $('[data-element="login-email-to-send-input"]');
+    this.emailToSendButton = $('[data-element="login-email-to-send-button"]');
+
     this.url = '#/login';
 
     this.get = function() {

@@ -136,4 +136,14 @@ describe('Login ', function() {
       // if in #/login , --> Not in #/projects
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
    });
+
+   it('bba-162:Check show user not register if email is not register', function() {
+
+       login.get();
+       login.forgotPasswordButton.click();
+       login.emailToSendInput.sendKeys('userTest' + Number(new Date()) + '@devfakebq.es');
+       login.emailToSendButton.click();
+       expect(login.showEmailNotExist.isDisplayed()).toBeTruthy();
+
+   });
 });
