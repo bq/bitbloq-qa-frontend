@@ -26,7 +26,8 @@ var Modals = function() {
     this.fbButton = $('[data-element="modals-fb-button"]');
     this.twButton = $('[data-element="modals-tw-button"]');
     this.gButton = $('[data-element="modals-g-button"]');
-    this.shortButton = $('[data-element="modals-shortURL"]');
+    this.shortText = $('[data-element="modals-shortURL"]');
+    this.shortButton = $('[data-element="modals-shortURL-button"]');
 
     this.rejectTour = function() {
         $('[data-element="reject-tour"]').click();

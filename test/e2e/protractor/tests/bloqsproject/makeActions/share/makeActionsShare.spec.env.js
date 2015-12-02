@@ -13,7 +13,6 @@ var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     Variables = require('../../../commons/variables.js'),
     Login = require('../../../login/login.po.js');
 
-
 var globalFunctions = new GlobalFunctions(),
     makeActions = new MakeActions(),
     make = new Make(),
@@ -33,87 +32,159 @@ describe('Menu Share of MakeActions', function() {
 
     //TODO test TOAST
     //Solo se puede jugar en un entorno
-    xit('bba-151:Publish project in social media (the project has already been published in Explora)', function() {
+    it('bba-151:Publish project in social media (the project has already been published in Explora)', function() {
 
         //make.saveProjectAndPublishNewUser();
-        make.saveProjectAndPublishNewUser().then(function () {
-              browser.sleep(vars.timeToWaitMenu);
-              var url = browser.getCurrentUrl();
-              makeActions.menuShare.click();
-              browser.sleep(vars.timeToWaitMenu);
-              makeActions.menuShareSocial.click();
-              browser.sleep(vars.timeToWaitMenu);
-              browser.ignoreSynchronization = true;
-              modals.fbButton.click();
-              browser.sleep(vars.timeToWaitTab);
-              //Facebook
-              browser.getAllWindowHandles().then(function(handles) {
-                  browser.switchTo().window(handles[1]);
-                  browser.sleep(vars.timeToWaitTab);
-                  login.facebookUser.sendKeys(vars.emailFb);
-                  login.facebookPassword.sendKeys(vars.passwordFb);
-                  login.facebookEnter.click().then(function() {
-                      browser.sleep(vars.timeToWaitTab);
-                      browser.getCurrentUrl().then(function(urlFacebook) {
-                          urlFacebook = urlFacebook.split('=');
-                          urlFacebook = urlFacebook[urlFacebook.length-2].split('&');
-                          urlFacebook = decodeURIComponent(urlFacebook[0]);
-                          expect(urlFacebook).toEqual(url);
-                      });
-                  });
-                  // expect(urlFacebook[urlFacebook.length-1]).toEqual(url);
-                  browser.close().then(browser.switchTo().window(handles[0]));
-              });
-              makeActions.menuShare.click();
-              browser.sleep(vars.timeToWaitMenu);
-              makeActions.menuShareSocial.click();
-              browser.sleep(vars.timeToWaitMenu);
-              modals.gButton.click();
-              browser.sleep(vars.timeToWaitTab);
-              //Google+
-              browser.getAllWindowHandles().then(function(handles) {
-                  browser.switchTo().window(handles[1]);
-                  browser.sleep(vars.timeToWaitTab);
-                  login.googleUser.sendKeys(vars.userGoogle);
-                  browser.sleep(1000);
-                  login.googleNext.click();
-                  browser.sleep(1000);
-                  login.googlePassword.sendKeys(vars.passwordGoogle);
-                  browser.sleep(1000);
-                  login.googleEnter.click();
-                  browser.sleep(5000);
-                  // login.googleAprove.click();
-                  // browser.sleep(vars.timeToWaitTab);
-                  expect(socialNetwork.googleLink.getAttribute('href')).toEqual(url);
-                  browser.close().then(browser.switchTo().window(handles[0]));
-              });
-              makeActions.menuShare.click();
-              browser.sleep(vars.timeToWaitMenu);
-              makeActions.menuShareSocial.click();
-              browser.sleep(vars.timeToWaitMenu);
-              modals.twButton.click();
-              browser.sleep(vars.timeToWaitTab);
-              //Twitter
-              browser.getAllWindowHandles().then(function(handles) {
-                  browser.switchTo().window(handles[1]);
-                  browser.sleep(vars.timeToWaitTab);
-                  expect(socialNetwork.twitterLink.getText()).toMatch(url);
-                  browser.close().then(browser.switchTo().window(handles[0]));
-
-              });
-              makeActions.menuShare.click();
-              browser.sleep(vars.timeToWaitMenu);
-              makeActions.menuShareSocial.click().then(function() {
-                  browser.sleep(vars.timeToWaitMenu);
-                  modals.shortButton.getAttribute('value').then(function(text){
-                    console.log(text);
-                    login.logout();
-                    browser.get(text);
+        make.saveProjectAndPublishNewUser().then(function() {
+            browser.sleep(vars.timeToWaitMenu);
+            browser.getCurrentUrl().then(function(url) {
+                url = url.split('/');
+                makeActions.menuShare.click();
+                browser.sleep(vars.timeToWaitMenu);
+                makeActions.menuShareSocial.click();
+                browser.sleep(vars.timeToWaitMenu);
+                browser.ignoreSynchronization = true;
+                modals.gButton.click();
+                browser.sleep(vars.timeToWaitTab);
+                //Google+
+                browser.getAllWindowHandles().then(function(handles) {
+                    browser.switchTo().window(handles[1]);
                     browser.sleep(vars.timeToWaitTab);
-                    expect(browser.getCurrentUrl()).toEqual(url);
-                  });
-                  browser.ignoreSynchronization =false;
-              });
+                    login.googleUser.sendKeys(vars.userGoogle);
+                    browser.sleep(1000);
+                    login.googleNext.click();
+                    browser.sleep(1000);
+                    login.googlePassword.sendKeys(vars.passwordGoogle);
+                    browser.sleep(1000);
+                    login.googleEnter.click();
+                    browser.sleep(5000);
+                    // login.googleAprove.click();
+                    // browser.sleep(vars.timeToWaitTab);
+                    expect(socialNetwork.googleLink.getAttribute('href')).toMatch(url[url.length - 1]);
+                    browser.close().then(browser.switchTo().window(handles[0]));
+                });
+                makeActions.menuShare.click();
+                browser.sleep(vars.timeToWaitMenu);
+                makeActions.menuShareSocial.click();
+                browser.sleep(vars.timeToWaitMenu);
+                modals.twButton.click();
+                browser.sleep(vars.timeToWaitTab);
+                //Twitter
+                browser.getAllWindowHandles().then(function(handles) {
+                    browser.switchTo().window(handles[1]);
+                    browser.sleep(vars.timeToWaitTab);
+                    expect(socialNetwork.twitterLink.getText()).toMatch(url[url.length - 1]);
+                    browser.close().then(browser.switchTo().window(handles[0]));
+
+                });
+                //short button
+                makeActions.menuShare.click();
+                browser.sleep(vars.timeToWaitMenu);
+                makeActions.menuShareSocial.click().then(function() {
+                    browser.sleep(vars.timeToWaitMenu);
+                    modals.shortText.getAttribute('value').then(function(text) {
+                        modals.shortButton.click().then(function() {
+                            login.logout();
+                            browser.get(text);
+                            browser.sleep(vars.timeToWaitTab);
+                            browser.getCurrentUrl().then(function(urlNow) {
+                                expect(urlNow).toMatch(url[url.length - 1]);
+                            });
+                        });
+                    });
+                    browser.ignoreSynchronization = false;
+                });
+            });
+
+        });
+
+    });
+    //TODO test TOAST
+    //Solo se puede jugar en un entorno
+
+    it('bba-156:Publish project in social media (the project hasnt been published in Explora)', function() {
+
+        //make.saveProjectAndPublishNewUser();
+        make.saveProjectNewUser();
+        browser.sleep(vars.timeToWaitMenu);
+        browser.getCurrentUrl().then(function(url) {
+            url = url.split('/');
+            makeActions.menuShare.click();
+            browser.sleep(vars.timeToWaitMenu);
+            makeActions.menuShareSocial.click();
+            browser.sleep(vars.timeToWaitMenu);
+            browser.ignoreSynchronization = true;
+            modals.gButton.click();
+            browser.sleep(vars.timeToWaitTab);
+            //Google+
+            browser.getAllWindowHandles().then(function(handles) {
+                browser.switchTo().window(handles[1]);
+                browser.sleep(vars.timeToWaitTab);
+                login.googleUser.isPresent().then(function(displayed) {
+                    if (displayed) {
+                      login.googleUser.sendKeys(vars.userGoogle);
+                      browser.sleep(1000);
+                      login.googleNext.click();
+                      browser.sleep(1000);
+                      login.googlePassword.sendKeys(vars.passwordGoogle);
+                      browser.sleep(1000);
+                      login.googleEnter.click();
+                      browser.sleep(5000);
+                    }
+
+                });
+
+                // login.googleAprove.click();
+                // browser.sleep(vars.timeToWaitTab);
+                expect(socialNetwork.googleLink.getAttribute('href')).toMatch(url[url.length - 1]);
+                browser.close().then(browser.switchTo().window(handles[0]));
+            });
+            makeActions.menuShare.click();
+            browser.sleep(vars.timeToWaitMenu);
+            makeActions.menuSharePrivate.click();
+            browser.sleep(vars.timeToWaitMenu);
+            makeActions.privateButton.click();
+            browser.sleep(vars.timeToWaitMenu);
+            makeActions.menuShare.click();
+            browser.sleep(vars.timeToWaitMenu);
+            makeActions.menuShareSocial.click();
+            browser.sleep(vars.timeToWaitMenu);
+            modals.twButton.click();
+            browser.sleep(vars.timeToWaitTab);
+            //Twitter
+            browser.getAllWindowHandles().then(function(handles) {
+                browser.switchTo().window(handles[1]);
+                browser.sleep(vars.timeToWaitTab);
+                expect(socialNetwork.twitterLink.getText()).toMatch(url[url.length - 1]);
+                browser.close().then(browser.switchTo().window(handles[0]));
+
+            });
+            makeActions.menuShare.click();
+            browser.sleep(vars.timeToWaitMenu);
+            makeActions.menuSharePrivate.click();
+            browser.sleep(vars.timeToWaitMenu);
+            makeActions.privateButton.click();
+            browser.sleep(vars.timeToWaitMenu);
+            //short button
+            makeActions.menuShare.click();
+            browser.sleep(vars.timeToWaitMenu);
+            makeActions.menuShareSocial.click().then(function() {
+                browser.sleep(vars.timeToWaitMenu);
+                modals.shortText.getAttribute('value').then(function(text) {
+                    modals.shortButton.click().then(function() {
+                        browser.sleep(vars.timeToWaitMenu);
+                        modals.bladeClose.click();
+                        login.logout();
+                        browser.ignoreSynchronization = false;
+                        browser.get(text);
+                        browser.sleep(vars.timeToWaitTab);
+                        expect(browser.getCurrentUrl()).toMatch(url[url.length - 1]);
+                    });
+
+                });
+
+            });
+
         });
 
     });
