@@ -12,5 +12,6 @@ protractorConfig.config.suites.filtersLocal = '../tests/explore/filters/filters.
 protractorConfig.config.suites.accountLocal = '../tests/account/account.spec.local.js';
 protractorConfig.config.suites.infotabLocal = '../tests/bloqsproject/infotab/infotab.spec.local.js';
 protractorConfig.config.suites.projectLocal = '../tests/explore/project.spec.local.js';
+protractorConfig.config.suites.stateLocal = '../tests/state/state.spec.local.js';
 
 exports.config = protractorConfig.config;

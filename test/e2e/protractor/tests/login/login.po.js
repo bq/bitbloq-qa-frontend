@@ -9,7 +9,9 @@ var Register = require('../register/register.po.js'),
     Projects = require('../projects/projects.po.js'),
     projects = new Projects(),
     Variables = require('../commons/variables.js'),
-    vars = new Variables();
+    vars = new Variables(),
+    Header = require('../header/header.po.js'),
+    header = new Header();
 
 var Login = function() {
     //This elements are public (this) by reuse
@@ -217,6 +219,34 @@ var Login = function() {
         $('[data-element="open-header-menu"]').click();
         $('[data-element="header-menu-logout"]').click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/');
+    };
+
+    this.loginFromHeader = function() {
+        header.enterButton.click();
+        var randomUserCredentials = register.generateUser();
+        register.createAccountButtn.click();
+        register.createAccount(
+            randomUserCredentials.username,
+            randomUserCredentials.userEmail,
+            randomUserCredentials.password,
+            randomUserCredentials.day,
+            randomUserCredentials.month,
+            randomUserCredentials.year,
+            true,
+            true);
+        //wait succesfull login page
+        expect(browser.getCurrentUrl()).toMatch(browser.baseUrl + '#/bloqsproject');
+
+        //Add return for reuse user if is necessary
+        return {
+            user: randomUserCredentials.username,
+            userEmail: randomUserCredentials.userEmail,
+            password: randomUserCredentials.password,
+            day: randomUserCredentials.day,
+            month: randomUserCredentials.month,
+            year: randomUserCredentials.year
+
+        };
     };
 
 };

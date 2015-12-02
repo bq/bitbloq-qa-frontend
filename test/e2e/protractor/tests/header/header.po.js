@@ -9,6 +9,7 @@ var Header = function() {
     this.changeLanguage = $('[data-element="header-change-language"]');
     this.menuLearn = $('[data-element="header-menu-learn"]');
     this.newProject = $('[data-element="header-new-project"]');
+    this.enterButton = $('[data-element="header-enterbutton"]');
     //navbar
     this.navLogo = $('[data-element="nav-logo"]');
     this.navMake = $('[data-element="nav-make"]');
@@ -23,4 +24,3 @@ var Header = function() {
 };
 
 module.exports = Header;
-
