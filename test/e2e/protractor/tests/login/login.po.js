@@ -235,7 +235,9 @@ var Login = function() {
             true,
             true);
         //wait succesfull login page
-        expect(browser.getCurrentUrl()).toMatch(browser.baseUrl + '#/bloqsproject');
+        browser.getCurrentUrl().then(function(url) {
+            expect(url.indexOf(browser.baseUrl + '#/bloqsproject')>-1 || url.indexOf(browser.baseUrl + '#/codeproject')>-1).toBeTruthy();
+        });
 
         //Add return for reuse user if is necessary
         return {
