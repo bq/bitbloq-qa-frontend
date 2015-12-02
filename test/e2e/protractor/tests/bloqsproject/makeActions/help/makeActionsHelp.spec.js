@@ -112,8 +112,8 @@ describe('Menu Help of MakeActions', function() {
 
         makeActions.menuHelp.click();
         ///test item "Enviar comentarios" && "Informar de un error"  are enable
-        expect(makeActions.menuHelpComments.getAttribute('href')).toMatch(vars.supportEmail);
-        expect(makeActions.menuHelpErrorFeedback.getAttribute('href')).toMatch(vars.supportEmail);
+        expect(makeActions.menuHelpComments.getAttribute('href')).toMatch(vars.supportEmailES);
+        expect(makeActions.menuHelpErrorFeedback.getAttribute('href')).toMatch(vars.supportEmailES);
 
     });
 

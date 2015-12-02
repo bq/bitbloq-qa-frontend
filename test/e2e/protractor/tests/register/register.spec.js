@@ -349,7 +349,7 @@ describe('Register ', function() {
         var script = landing.landingPage + '.scrollTo(0,6000);';
         browser.sleep(5000); //Time to wait load explora project on landing (not wait angular)
         browser.executeScript(script).then(function() {
-            expect(landing.contactButton.getAttribute('href')).toMatch(vars.supportEmail);
+            expect(landing.contactButton.getAttribute('href')).toMatch(vars.supportEmailES);
         });
     });
 
@@ -363,7 +363,7 @@ describe('Register ', function() {
         browser.sleep(5000); //Time to wait load explora project on landing (not wait angular)
 
         browser.executeScript(script).then(function() {
-            expect(landing.contactButton.getAttribute('href')).not.toMatch(vars.supportEmail);
+            expect(landing.contactButton.getAttribute('href')).not.toMatch(vars.supportEmailES);
 
             landing.contactButton.click();
             browser.sleep(vars.timeToWaitFadeModals);

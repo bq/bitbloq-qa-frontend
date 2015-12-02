@@ -32,7 +32,16 @@ var Variables = function() {
     this.timeToWaitSendKeys = 1000;
     this.timeToWaitLoadExporeProjects = 3000;
 
-    this.supportEmail = 'mailto:soporte.bitbloq@bq.com';
+    //Languages support email, default is EN
+    this.supportEmailES = 'mailto:soporte.bitbloq@bq.com';
+    this.supportEmailEN = 'mailto:support.bitbloq.en@bq.com';
+    this.supportEmailFR = 'mailto:support.bitbloq.fr@bq.com';
+    this.supportEmailDE = 'mailto:support.bitbloq.de@bq.com';
+    this.supportEmailPT = 'mailto:support.bitbloq.pt@bq.com';
+    this.supportEmailSV = 'mailto:support.bitbloq.sv@bq.com';
+    this.supportEmailRU = 'mailto:support.bitbloq.ru@bq.com';
+    this.supportEmailIT = 'mailto:support.bitbloq.it@bq.com';
+
     this.sendCommentsLiteral = 'Enviar comentarios a Bitbloq';
     this.infoErrorLiteral = 'Informar de un error';
 

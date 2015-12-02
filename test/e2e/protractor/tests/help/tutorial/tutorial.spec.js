@@ -97,7 +97,7 @@ describe('Tutorial ', function() {
         browser.sleep(vars.timeToWaitFadeModals);
 
         browser.executeScript(script).then(function() {
-            expect(help.contactUsTutorials.getAttribute('href')).toEqual(vars.supportEmail);
+            expect(help.contactUsTutorials.getAttribute('href')).toEqual(vars.supportEmailES);
         });
 
         login.loginWithRandomUser();
