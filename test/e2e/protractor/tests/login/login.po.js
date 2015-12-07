@@ -228,7 +228,7 @@ var Login = function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/');
     };
 
-    this.loginFromHeader = function() {
+    this.loginFromHeader = function(urlDest) {
         header.enterButton.click();
         var randomUserCredentials = register.generateUser();
         register.createAccountButtn.click();
@@ -243,7 +243,7 @@ var Login = function() {
             true);
         //wait succesfull login page
         browser.getCurrentUrl().then(function(url) {
-            expect(url.indexOf(browser.baseUrl + '#/bloqsproject')>-1 || url.indexOf(browser.baseUrl + '#/codeproject')>-1).toBeTruthy();
+            expect(url.indexOf(browser.baseUrl + '#/'+urlDest)>-1).toBeTruthy();
         });
 
         //Add return for reuse user if is necessary

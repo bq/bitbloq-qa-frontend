@@ -31,7 +31,7 @@ describe('State, specs only in local', function() {
     it('bba-256:Save a bloqs project', function() {
         var name = 'Ultrasonidos_Bloqs';
         make.importFileGuestUser(path.resolve() + '/test/e2e/protractor/res/' + name +'.json');
-        login.loginFromHeader();
+        login.loginFromHeader('bloqsproject');
         modals.rejectTour();
         expect(make.projectName.getText()).toEqual(name);
         projects.get();

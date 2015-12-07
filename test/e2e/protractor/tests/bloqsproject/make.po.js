@@ -5,6 +5,7 @@ var Login = require('../login/login.po.js'),
     GlobalFunctions = require('../commons/globalFunctions.js'),
     Modals = require('../modals/modals.po.js'),
     Infotab = require('./infotab/infotab.po.js'),
+    Commons = require('../commons/commons.po.js'),
     MakeActions = require('./makeActions/makeActions.po.js');
 
 var login = new Login(),
@@ -12,6 +13,7 @@ var login = new Login(),
     modals = new Modals(),
     vars = new Variables(),
     infotab = new Infotab(),
+    commons = new Commons(),
     makeActions = new MakeActions();
 
 var Make = function() {
@@ -157,6 +159,34 @@ var Make = function() {
                 };
             });
         }, 1000, ' browser.getCurrentUrl TimeOut');
+
+    };
+
+    this.saveCodeProjectAndPublishNewUserAndLogout = function() {
+        var user = login.loginWithRandomUser();
+        var nameSavedProject = 'Test_Save_' + Number(new Date());
+        this.get();
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        this.softwareTab.click();
+        this.codeTab.click();
+        this.softwareEditCode.click();
+        modals.modalAlertOk.click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        commons.expectToastTimeOut(commons.editToast);
+        this.infoTab.click();
+        expect(infotab.infotabProjectName.isPresent()).toBe(true);
+        infotab.infotabProjectName.clear();
+        infotab.infotabProjectName.sendKeys(nameSavedProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+        this.publishProject();
+        browser.sleep(vars.timeToWaitAutoSave);
+        login.logout();
+        //Create and check saved project
+        return {
+            projectName: nameSavedProject,
+            user: user
+        };
 
     };
 
