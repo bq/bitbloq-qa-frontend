@@ -68,10 +68,24 @@ describe('make tab', function() {
         infotab.infotabTaginputText.sendKeys('TestTag_TWO_2');
         infotab.infotabTaginputButton.click();
         browser.sleep(vars.timeToWaitAutoSave);
+        infotab.infotabTaginputText.sendKeys('TestTag__3,TestTag__4');
+        browser.sleep(vars.timeToWaitSendKeys);
+        infotab.infotabTaginputButton.click();
+        infotab.infotabTaginputText.sendKeys('TestTag,Test,t,t,t,e,e,s,t');
+        browser.sleep(vars.timeToWaitSendKeys);
+        infotab.infotabTaginputButton.click();
 
         //Show saved tag
         expect(element.all(by.repeater('tag in project.userTags').row(0)).getText()).toContain('TestTag_ONE_1');
         expect(element.all(by.repeater('tag in project.userTags').row(1)).getText()).toContain('TestTag_TWO_2');
+        expect(element.all(by.repeater('tag in project.userTags').row(2)).getText()).toContain('TestTag__3');
+        expect(element.all(by.repeater('tag in project.userTags').row(3)).getText()).toContain('TestTag__4');
+        expect(element.all(by.repeater('tag in project.userTags').row(4)).getText()).toContain('TestTag');
+        expect(element.all(by.repeater('tag in project.userTags').row(5)).getText()).toContain('Test');
+        expect(element.all(by.repeater('tag in project.userTags').row(6)).getText()).toContain('t');
+        expect(element.all(by.repeater('tag in project.userTags').row(7)).getText()).toContain('e');
+        expect(element.all(by.repeater('tag in project.userTags').row(8)).getText()).toContain('s');
+        expect(element.all(by.repeater('tag in project.userTags')).count()).toBe(9);
 
         //Logout and Login last user and test project exist with yours tags
         login.logout();
@@ -90,6 +104,14 @@ describe('make tab', function() {
                     //Show saved tag
                     expect(element.all(by.repeater('tag in project.userTags').row(0)).getText()).toContain('TestTag_ONE_1');
                     expect(element.all(by.repeater('tag in project.userTags').row(1)).getText()).toContain('TestTag_TWO_2');
+                    expect(element.all(by.repeater('tag in project.userTags').row(2)).getText()).toContain('TestTag__3');
+                    expect(element.all(by.repeater('tag in project.userTags').row(3)).getText()).toContain('TestTag__4');
+                    expect(element.all(by.repeater('tag in project.userTags').row(4)).getText()).toContain('TestTag');
+                    expect(element.all(by.repeater('tag in project.userTags').row(5)).getText()).toContain('Test');
+                    expect(element.all(by.repeater('tag in project.userTags').row(6)).getText()).toContain('t');
+                    expect(element.all(by.repeater('tag in project.userTags').row(7)).getText()).toContain('e');
+                    expect(element.all(by.repeater('tag in project.userTags').row(8)).getText()).toContain('s');
+                    expect(element.all(by.repeater('tag in project.userTags')).count()).toBe(9);
                     login.logout();
                     browser.close().then(browser.switchTo().window(handles[0]));
 
@@ -184,7 +206,26 @@ describe('make tab', function() {
                         browser.sleep(vars.timeToWaitTab);
                         projects.get();
                         expect(projects.projectsName.getText()).toEqual('ChangeTestName');
-                        login.logout();
+                        myprojects.overMyProjects.click();
+                        browser.sleep(vars.timeToWaitFadeModals);
+                        myprojects.openProject.click().then(function() {
+                            browser.sleep(vars.timeToWaitTab);
+                            browser.getAllWindowHandles().then(function(handles2) {
+                                browser.switchTo().window(handles2[1]).then(function() {
+                                    make.infoTab.click();
+                                    infotab.infotabProjectName.clear();
+                                    browser.sleep(vars.timeToWaitAutoSave);
+                                    projects.get();
+                                    expect(projects.projectsName.getText()).toEqual('ChangeTestName');
+
+                                    login.logout();
+
+                                });
+
+                            });
+
+                        });
+
                     });
                 });
             });
