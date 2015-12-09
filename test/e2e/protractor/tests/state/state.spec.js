@@ -13,6 +13,7 @@ var Login = require('../login/login.po.js'),
     Header = require('../header/header.po.js'),
     Explore = require('../explore/explore.po.js'),
     Project = require('../explore/project.po.js'),
+    Help = require('../help/help.po.js'),
     Modals = require('../modals/modals.po.js');
 
 var login = new Login(),
@@ -24,6 +25,7 @@ var login = new Login(),
     header = new Header(),
     explore = new Explore(),
     project = new Project(),
+    help = new Help(),
     globalFunctions = new GlobalFunctions();
 
 globalFunctions.xmlReport('state');
@@ -141,4 +143,61 @@ describe('State ', function() {
             });
         });
     });
+
+    it('bba-263:See a faq page', function() {
+        make.get();
+        modals.attentionContinueGuest.click();
+        modals.rejectTour();
+        header.navHelp.click();
+        help.tutorialTab.click();
+        help.faqTab.click();
+        login.loginFromHeader('help/faq');
+    });
+
+    it('bba-264:See a tutorial page', function() {
+        make.get();
+        modals.attentionContinueGuest.click();
+        modals.rejectTour();
+        header.navHelp.click();
+        help.tutorialTab.click();
+        login.loginFromHeader('help/tutorial');
+    });
+
+    it('bba-265:See a faq page', function() {
+        make.get();
+        modals.attentionContinueGuest.click();
+        modals.rejectTour();
+        header.navHelp.click();
+        help.changelogTab.click();
+        login.loginFromHeader('help/update');
+    });
+
+    it('bba-266:A search in the explora tab', function() {
+        make.get();
+        modals.attentionContinueGuest.click();
+        modals.rejectTour();
+        header.navExplore.click();
+        explore.exploreFind.clear().sendKeys('Test_Save_');
+        browser.getCurrentUrl().then(function(url) {
+            login.loginFromHeader('explore');
+            expect(browser.getCurrentUrl()).toEqual(url);
+        });
+
+    });
+
+    it('bba-267:A filter in the explora tab', function() {
+        make.get();
+        modals.attentionContinueGuest.click();
+        modals.rejectTour();
+        header.navExplore.click();
+        explore.exploreFilterDrowdown.click();
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(1).column('compFilter.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        browser.getCurrentUrl().then(function(url) {
+            login.loginFromHeader('explore');
+            expect(browser.getCurrentUrl()).toEqual(url);
+        });
+
+    });
+
 });
