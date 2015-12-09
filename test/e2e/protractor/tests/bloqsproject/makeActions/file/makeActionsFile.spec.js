@@ -13,6 +13,7 @@ var Variables = require('../../../commons/variables.js'),
     Login = require('../../../login/login.po.js'),
     Header = require('../../../header/header.po.js'),
     Infotab = require('../../infotab/infotab.po.js'),
+    path = require('path'),
     Projects = require('../../../projects/projects.po.js');
 
 var vars = new Variables(),
@@ -85,7 +86,7 @@ describe('Menu file of MakeActions', function() {
                 browser.switchTo().window(handles[2]);
                 browser.sleep(vars.timeToWaitTab);
                 expect(browser.getCurrentUrl()).toMatch(/#\/bloqsproject/);
-                expect(make.projectName.getText()).toEqual('Copia de '+nameSavedProject);
+                expect(make.projectName.getText()).toEqual('Copia de ' + nameSavedProject);
                 browser.close().then(browser.switchTo().window(handles[1]));
             });
             expect(browser.getCurrentUrl()).toMatch(/#\/bloqsproject/);
@@ -98,6 +99,52 @@ describe('Menu file of MakeActions', function() {
             });
         });
 
+    });
+    it('bba-64: delete a project', function() {
+        var projecImportPath = '../../../../res/Boton_Bloqs.json',
+            projectImportAbsolutePath = path.resolve(__dirname, projecImportPath);
+        login.loginWithRandomUser();
+        header.newProject.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]);
+            browser.sleep(vars.timeToWaitTab);
+            modals.rejectTour();
+            browser.sleep(vars.timeToWaitFadeModals);
+            makeActions.menuFile.click();
+            browser.sleep(vars.timeToWaitMenu);
+
+            makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled) {
+                expect(disabled).toBeTruthy();
+                make.saveProject();
+                makeActions.menuFile.click();
+                browser.sleep(vars.timeToWaitMenu);
+                makeActions.removeProject.click();
+                browser.sleep(vars.timeToWaitTab);
+                browser.sleep(vars.timeForDelete);
+                projects.get();
+                expect(projects.projectsName.isPresent()).toBe(false);
+                login.logout();
+                make.get();
+                browser.sleep(vars.timeToWaitTab);
+                modals.attentionContinueGuest.click();
+                browser.sleep(vars.timeToWaitFadeModals);
+                modals.rejectTour();
+                browser.sleep(vars.timeToWaitFadeModals);
+                makeActions.menuFile.click();
+                browser.sleep(vars.timeToWaitMenu);
+                makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled2) {
+                    expect(disabled2).toBeTruthy();
+                    makeActions.inputUploadFile.sendKeys(projectImportAbsolutePath);
+                    browser.sleep(vars.timeToWaitSendKeys);
+                    makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled3) {
+                        expect(disabled3).toBeTruthy();
+                    });
+                });
+
+            });
+
+        });
 
     });
 

@@ -31,6 +31,7 @@ var Variables = function() {
     this.timeToWaitMenu = 500;
     this.timeToWaitSendKeys = 1000;
     this.timeToWaitLoadExporeProjects = 3000;
+    this.timeForDelete = 15000;
 
     //Languages support email, default is EN
     this.supportEmailES = 'mailto:soporte.bitbloq@bq.com';
