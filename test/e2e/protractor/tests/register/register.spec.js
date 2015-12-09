@@ -390,4 +390,71 @@ describe('Register ', function() {
         login.logout();
     });
 
+    it('bba-23:Verify remember password email', function() {
+
+        //check bloqsproject
+        var browserEmail = browser.forkNewDriverInstance();
+        browserEmail.ignoreSynchronization = true;
+
+        var getExternalProviderEmail = function(driver) {
+            var mailProvider = 'http://www.my10minutemail.com/',
+                $2 = driver.$,
+                email = $2('body > div.container-narrow > div.jumbotron > p');
+
+            driver.get(mailProvider);
+            driver.manage().window().setSize(1024, 768);
+
+            return email.getText().then(function(value) {
+                return value;
+            });
+
+        };
+
+        getExternalProviderEmail(browserEmail).then(function(value) {
+            var email = value,
+                newUser = register.generateUser();
+            browserEmail.ignoreSynchronization = false;
+
+            register.get();
+            register.createAccount(newUser.username, email, newUser.password, newUser.day, newUser.month, newUser.year, true, true);
+            browser.sleep('3000');
+            login.logout();
+            login.get();
+            login.user.sendKeys(email);
+            login.forgotPasswordButton.click();
+            login.emailToSendInput.sendKeys(email);
+            login.emailToSendButton.click();
+
+            browser.sleep('9000');
+
+            browserEmail.ignoreSynchronization = true;
+
+            var $2 = browserEmail.$;
+            globalFunctions.scrollBottomPage(browserEmail).then(function() {
+                $2('#msg_1 > td:nth-child(2)').click();
+                //Open popup email send
+                browserEmail.sleep(5000);
+                $2('#modalMessage > div.modal-body > a').click();
+                //#modalMessage > div.modal-body > a
+
+                //Other tab
+                browserEmail.getAllWindowHandles().then(
+                    function(handles) {
+                        //Switch to popup
+                        browserEmail.switchTo().window(handles[1]);
+                        browserEmail.ignoreSynchronization = false;
+                        //News passwords
+                        $2(register.resetPasswordMainInput.elementArrayFinder_.locator_.value).sendKeys('123456');
+                        $2(register.resetPasswordRepeatInput.elementArrayFinder_.locator_.value).sendKeys('123456');
+                        $2(register.resetPasswordOkButton.elementArrayFinder_.locator_.value).click();
+                        browser.sleep(vars.timeToWaitAutoSave);
+                        //go back to the main window && login wiht new passwords
+                        login.get();
+                        login.login(newUser.username, '123456');
+                    });
+            });
+        });
+
+    });
+
 });

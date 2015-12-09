@@ -62,6 +62,16 @@ var Global = function() {
         });
     };
 
+    /**
+     * Scroll to the bottom of the page
+     * @param  {webdriver.Builder} driver
+     * @return {webdriver.promise}
+     */
+    this.scrollBottomPage = function(driver) {
+        driver = driver || browser;
+        return driver.executeScript('var windowHeight = $(document).height(); $(window).scrollTop(windowHeight); ');
+    };
+
 };
 
 module.exports = Global;

@@ -34,6 +34,13 @@ var Register = function() {
     this.showMoreSixPass = $('[data-element="show-more-six-pass"]');
     this.showIncorrectPass = $('[data-element="show-incorrect-pass"]');
 
+    /* P.O resetPassword.html */
+    this.resetPasswordMainInput = $('[data-element="reset-password-main-input"]');
+    this.resetPasswordRepeatInput = $('[data-element="reset-password-repeat-input"]');
+    this.resetPasswordOkButton = $('[data-element="reset-password-button-ok"]');
+    /***************************/
+
+
     this.url = ('#/register');
     this.get = function() {
         browser.get(this.url);
