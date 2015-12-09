@@ -66,6 +66,14 @@ var Login = function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
     };
 
+    this.loginFail = function(user, password) {
+        this.user.sendKeys(user);
+        this.password.sendKeys(password);
+        this.loginButton.click();
+        //wait succesfull login page
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+    };
+
     /**
      * login with facebook in bitbloq
      * @user {String}  bitlbloq user

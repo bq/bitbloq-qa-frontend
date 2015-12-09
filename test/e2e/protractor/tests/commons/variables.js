@@ -43,8 +43,12 @@ var Variables = function() {
     this.supportEmailRU = 'mailto:support.bitbloq.ru@bq.com';
     this.supportEmailIT = 'mailto:support.bitbloq.it@bq.com';
 
+    //Literals
     this.sendCommentsLiteral = 'Enviar comentarios a Bitbloq';
     this.infoErrorLiteral = 'Informar de un error';
+    //Toast Literals
+    this.toastResetPasswordNewLink = 'No se ha podido cambiar la contraseña. Por favor, solicita un nuevo link';
+
 
     this.account = function(cuenta) {
         if (cuenta === 'google') {
