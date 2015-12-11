@@ -39,7 +39,14 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             namePuertoSerieProject,
             nameServoProject,
             nameServoContinuoProject,
+            nameLedRGBProject,
+            nameSensorSonidosProject,
+            nameRelojDeTiempoRealProject,
+            nameSensorDeHumedadProject,
+            nameEncoderProject,
+            nameFinDeCarreraProject,
             nameZumbadorProject;
+
 
         /********  PUBLISH PROJECT WITH DIFFERENTS COMPONENTES ***********/
 
@@ -111,6 +118,37 @@ describe('Menu file of MakeActions, specs only in local ', function() {
         make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Zumbador_Bloqs.json');
         nameZumbadorProject = 'Zumbador_Bloqs.json' + Number(new Date());
         make.publishProjectWithName(nameZumbadorProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+
+        //led RGB
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/LedRGB_Bloqs.json');
+        nameLedRGBProject = 'LedRGB_Bloqs.json' + Number(new Date());
+        make.publishProjectWithName(nameLedRGBProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+        //sensor sonidos
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/SensorSonidos_Bloqs.json');
+        nameSensorSonidosProject = 'SensorSonidos_Bloqs.json' + Number(new Date());
+        make.publishProjectWithName(nameSensorSonidosProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+        //reloj de tiempo real
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/RelojDeTiempoReal_Bloqs.json');
+        nameRelojDeTiempoRealProject = 'RelojDeTiempoReal_Bloqs.json' + Number(new Date());
+        make.publishProjectWithName(nameRelojDeTiempoRealProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+        //sensor de humedad
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/SensorDeHumedad_Bloqs.json');
+        nameSensorDeHumedadProject = 'SensorDeHumedad_Bloqs.json' + Number(new Date());
+        make.publishProjectWithName(nameSensorDeHumedadProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+        //encoder
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Encoder_Bloqs.json');
+        nameEncoderProject = 'Encoder_Bloqs.json' + Number(new Date());
+        make.publishProjectWithName(nameEncoderProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+        //fin de carrera
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/FinDeCarrera_Bloqs.json');
+        nameFinDeCarreraProject = 'FinDeCarrera_Bloqs.json' + Number(new Date());
+        make.publishProjectWithName(nameFinDeCarreraProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
         /********  EXPLORE WHIT FILTER **************************
@@ -231,6 +269,50 @@ describe('Menu file of MakeActions, specs only in local ', function() {
         explore.exploreFind.clear().sendKeys(nameZumbadorProject).then(function() {
             expect(explore.projectElem.getText()).toMatch(nameZumbadorProject);
         });
+
+        //ledRGB
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(0).column('compFilter.option')).click();
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(15).column('compFilter.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameLedRGBProject).then(function() {
+            expect(explore.projectElem.getText()).toMatch(nameLedRGBProject);
+        });
+        //Sensor de sonido
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(0).column('compFilter.option')).click();
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(16).column('compFilter.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameSensorSonidosProject).then(function() {
+            expect(explore.projectElem.getText()).toMatch(nameSensorSonidosProject);
+        });
+        //reloj de tiempo real
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(0).column('compFilter.option')).click();
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(17).column('compFilter.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameRelojDeTiempoRealProject).then(function() {
+            expect(explore.projectElem.getText()).toMatch(nameRelojDeTiempoRealProject);
+        });
+        //sensor de humedad
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(0).column('compFilter.option')).click();
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(18).column('compFilter.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameSensorDeHumedadProject).then(function() {
+            expect(explore.projectElem.getText()).toMatch(nameSensorDeHumedadProject);
+        });
+        //encoder
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(0).column('compFilter.option')).click();
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(19).column('compFilter.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameEncoderProject).then(function() {
+            expect(explore.projectElem.getText()).toMatch(nameEncoderProject);
+        });
+        //final de carrera
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(0).column('compFilter.option')).click();
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(20).column('compFilter.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameFinDeCarreraProject).then(function() {
+            expect(explore.projectElem.getText()).toMatch(nameFinDeCarreraProject);
+        });
+
 
         login.logout();
 
