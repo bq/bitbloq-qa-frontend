@@ -50,9 +50,9 @@ var Make = function() {
         };
     };
 
-    this.saveProjectNewUser = function() {
+    this.saveProjectNewUser = function(nameProject) {
         var user = login.loginWithRandomUser();
-        var nameSavedProject = 'Test_Save_' + Number(new Date());
+        var nameSavedProject = nameProject || 'Test_Save_' + Number(new Date());
         this.get();
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -68,6 +68,7 @@ var Make = function() {
         };
 
     };
+    
 
     this.saveProjectNewUserAndLogout = function() {
         var project = this.saveProjectNewUser();
