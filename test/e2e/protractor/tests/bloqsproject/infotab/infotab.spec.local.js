@@ -20,7 +20,7 @@ var vars = new Variables(),
     modals = new Modals(),
     login = new Login();
 
-globalFunctions.xmlReport('infotab');
+globalFunctions.xmlReport('infotabLocal');
 
 describe('Info tab', function() {
 

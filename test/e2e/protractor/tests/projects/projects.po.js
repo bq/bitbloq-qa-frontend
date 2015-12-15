@@ -13,6 +13,7 @@ var Projects = function() {
     this.findBar = $('[data-element="projects-find"]');
     this.listProject = $('[data-element="projects-list-project"]');
     this.project = $('[data-element="projects-project"]');
+    this.newProject = $('[data-element="projects-new-project"]');
 
     this.get = function() {
         browser.get('#/projects');
@@ -21,6 +22,10 @@ var Projects = function() {
     this.getProjectCount = function() {
         return this.listProject.all(by.xpath('//*[@data-element="projects-project"]')).count();
 
+    };
+
+    this.createNewProject = function() {
+        this.newProject.click();
     };
 };
 

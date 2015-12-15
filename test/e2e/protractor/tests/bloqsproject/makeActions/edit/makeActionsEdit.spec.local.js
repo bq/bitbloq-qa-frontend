@@ -9,7 +9,7 @@ var Variables = require('../../../commons/variables.js'),
     GlobalFunctions = require('../../../commons/globalFunctions.js'),
     Make = require('../../../bloqsproject/make.po.js'),
     Modals = require('../../../modals/modals.po.js'),
-    HwTab = require('../../../hwtab/hwtab.po.js'),
+    HwTab = require('../../hwtab/hwtab.po.js'),
     MakeActions = require('../makeActions.po.js'),
     path = require('path');
 
@@ -30,7 +30,7 @@ describe('Menu file of MakeActions', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-133: Verify undo&redo action on hwTab', function() {
+    xit('bba-133: Verify undo&redo action on hwTab', function() {
 
         make.get();
         modals.attentionContinueGuest.click();

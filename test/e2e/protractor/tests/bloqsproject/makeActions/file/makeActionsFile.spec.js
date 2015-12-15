@@ -11,7 +11,6 @@ var Variables = require('../../../commons/variables.js'),
     Make = require('../../make.po.js'),
     Modals = require('../../../modals/modals.po.js'),
     Login = require('../../../login/login.po.js'),
-    Header = require('../../../header/header.po.js'),
     Infotab = require('../../infotab/infotab.po.js'),
     path = require('path'),
     Projects = require('../../../projects/projects.po.js');
@@ -22,7 +21,6 @@ var vars = new Variables(),
     make = new Make(),
     modals = new Modals(),
     login = new Login(),
-    header = new Header(),
     infotab = new Infotab(),
     projects = new Projects();
 
@@ -66,7 +64,7 @@ describe('Menu file of MakeActions', function() {
     it('bba-155: Copy a project', function() {
         var nameSavedProject = 'Test_Save_' + Number(new Date());
         login.loginWithRandomUser();
-        header.createNewProject();
+        projects.createNewProject();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.switchTo().window(handles[1]);
@@ -104,7 +102,7 @@ describe('Menu file of MakeActions', function() {
         var projecImportPath = '../../../../res/Boton_Bloqs.json',
             projectImportAbsolutePath = path.resolve(__dirname, projecImportPath);
         login.loginWithRandomUser();
-        header.newProject.click();
+        projects.createNewProject();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.switchTo().window(handles[1]);
