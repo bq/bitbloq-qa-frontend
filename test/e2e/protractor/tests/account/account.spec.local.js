@@ -46,7 +46,7 @@ describe('User account view', function() {
 
     });
 
-    it('bba-159:Verify fields from new facebook user', function() {
+    xit('bba-159:Verify fields from new facebook user', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();

@@ -38,7 +38,7 @@ describe('Login, specs only in local ', function() {
 
     });
 
-    it('bba-108:Login with a Facebook account', function() {
+    xit('bba-108:Login with a Facebook account', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
