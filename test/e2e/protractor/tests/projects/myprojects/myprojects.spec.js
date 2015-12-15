@@ -14,7 +14,8 @@ var Variables = require('../../commons/variables.js'),
     Infotab = require('../../bloqsproject/infotab/infotab.po.js'),
     MakeActions = require('../../bloqsproject/makeActions/makeActions.po.js'),
     Header = require('../../header/header.po.js'),
-    Explore = require('../../explore/explore.po.js');
+    Explore = require('../../explore/explore.po.js'),
+    CodeProject = require('../../codeproject/codeproject.po.js');
 
 var vars = new Variables(),
     globalFunctions = new GlobalFunctions(),
@@ -26,7 +27,8 @@ var vars = new Variables(),
     infotab = new Infotab(),
     makeActions = new MakeActions(),
     header = new Header(),
-    explore = new Explore();
+    explore = new Explore(),
+    codeProject = new CodeProject();
 
 globalFunctions.xmlReport('projects');
 
@@ -165,6 +167,96 @@ describe('My Projects', function() {
         globalFunctions.toMatchUrlInNewTab(/#\/bloqsproject/);
         login.logout();
 
+    });
+
+    it('bba-16:Check if projects are show correctly in my projects', function() {
+
+        var checkNameProjects = function(row, contain) {
+            expect(element.all(by.repeater('project in projectSearched').row(row).column('project.name')).getText()).toContain(contain);
+        };
+
+        make.saveProjectNewUser('a');
+        make.saveProject('aa');
+        make.saveProject('aab');
+        make.saveProject('za');
+        make.saveProject('b');
+        make.saveProject('c');
+        make.saveProject('d');
+        make.saveProject('e');
+        make.saveProject('5');
+        codeProject.saveCodeProject('g');
+        myprojects.get();
+
+        //Most recent
+        checkNameProjects(0, 'g');
+        checkNameProjects(1, '5');
+        checkNameProjects(2, 'e');
+        checkNameProjects(3, 'd');
+        checkNameProjects(4, 'c');
+        checkNameProjects(5, 'b');
+        checkNameProjects(6, 'za');
+        checkNameProjects(7, 'aab');
+        checkNameProjects(8, 'aa');
+        checkNameProjects(9, 'a');
+
+        // Most old
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrderSortOld.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrder.click();
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        checkNameProjects(0, 'a');
+        checkNameProjects(1, 'aa');
+        checkNameProjects(2, 'aab');
+        checkNameProjects(3, 'za');
+        checkNameProjects(4, 'b');
+        checkNameProjects(5, 'c');
+        checkNameProjects(6, 'd');
+        checkNameProjects(7, 'e');
+        checkNameProjects(8, '5');
+        checkNameProjects(9, 'g');
+
+        // Order AZ
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrderSortNameAZ.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrder.click();
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        checkNameProjects(0, '5');
+        checkNameProjects(1, 'a');
+        checkNameProjects(2, 'aa');
+        checkNameProjects(3, 'aab');
+        checkNameProjects(4, 'b');
+        checkNameProjects(5, 'c');
+        checkNameProjects(6, 'd');
+        checkNameProjects(7, 'e');
+        checkNameProjects(8, 'g');
+        checkNameProjects(9, 'za');
+
+        // Order ZA
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrderSortNameZA.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrder.click();
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        checkNameProjects(0, 'za');
+        checkNameProjects(1, 'g');
+        checkNameProjects(2, 'e');
+        checkNameProjects(3, 'd');
+        checkNameProjects(4, 'c');
+        checkNameProjects(5, 'b');
+        checkNameProjects(6, 'aab');
+        checkNameProjects(7, 'aa');
+        checkNameProjects(8, 'a');
+        checkNameProjects(9, '5');
+
+        login.logout();
     });
 
 });

@@ -37,8 +37,8 @@ var Make = function() {
         browser.get(this.url);
     };
 
-    this.saveProject = function() {
-        var nameSavedProject = 'Test_Save_' + Number(new Date());
+    this.saveProject = function(nameProject) {
+        var nameSavedProject = nameProject || 'Test_Save_' + Number(new Date());
         this.get();
         this.infoTab.click();
         expect(infotab.infotabProjectName.isPresent()).toBe(true);
@@ -68,7 +68,6 @@ var Make = function() {
         };
 
     };
-    
 
     this.saveProjectNewUserAndLogout = function() {
         var project = this.saveProjectNewUser();

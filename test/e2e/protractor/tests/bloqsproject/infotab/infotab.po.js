@@ -5,6 +5,9 @@
 'use strict';
 
 var Infotab = function() {
+    this.infoTab = $('[data-element="info-tab"]');
+    this.hardwareTab = $('[data-element="hardware-tab"]');
+    this.softwareTab = $('[data-element="software-tab"]');
     this.infotabProjectName = $('[data-element="info-project-name"]');
     this.infotabTaginputText = $('[data-element="infotab-taginput-text"]');
     this.infotabTaginputButton = $('[data-element="infotab-taginput-button"]');

@@ -14,7 +14,8 @@ var Login = require('../login/login.po.js'),
     Explore = require('../explore/explore.po.js'),
     Project = require('../explore/project.po.js'),
     Help = require('../help/help.po.js'),
-    Modals = require('../modals/modals.po.js');
+    Modals = require('../modals/modals.po.js'),
+    CodeProject = require('../codeproject/codeproject.po.js');
 
 var login = new Login(),
     make = new Make(),
@@ -26,7 +27,8 @@ var login = new Login(),
     explore = new Explore(),
     project = new Project(),
     help = new Help(),
-    globalFunctions = new GlobalFunctions();
+    globalFunctions = new GlobalFunctions(),
+    codeProject = new CodeProject();
 
 globalFunctions.xmlReport('state');
 
@@ -117,7 +119,7 @@ describe('State ', function() {
 
     it('bba-262:See a code project detail from explore tab', function() {
         var projectElem;
-        var projectSaved = make.saveCodeProjectAndPublishNewUserAndLogout();
+        var projectSaved = codeProject.saveCodeProjectAndPublishNewUserAndLogout();
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
