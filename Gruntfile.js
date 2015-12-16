@@ -238,6 +238,16 @@ module.exports = function(grunt) {
                     }
                 }
             }
+        }, //Protractor config task
+
+        release: {
+            /* For more options: https://github.com/geddski/grunt-release#options */
+            options: {
+                indentation: '\t', //default: '  ' (two spaces)
+                commitMessage: 'Release v<%= version %>', //default: 'release <%= version %>'
+                tagMessage: 'v<%= version %>', //default: 'Version <%= version %>',
+                tagName: 'v<%= version %>'
+            }
         }
 
     });
