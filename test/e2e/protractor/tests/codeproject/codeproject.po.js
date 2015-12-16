@@ -33,6 +33,30 @@ var Codeproject = function() {
         browser.sleep(vars.timeToWaitAutoSave);
     };
 
+    this.saveCodeProjectNewUser = function() {
+        var user = login.loginWithRandomUser();
+        var nameSavedProject = 'Test_Save_' + Number(new Date());
+        bloqsproject.get();
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        bloqsproject.softwareTab.click();
+        bloqsproject.codeTab.click();
+        bloqsproject.softwareEditCode.click();
+        modals.modalAlertOk.click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        commons.expectToastTimeOut(commons.editToast);
+        bloqsproject.infoTab.click();
+        expect(infotab.infotabProjectName.isPresent()).toBe(true);
+        infotab.infotabProjectName.clear();
+        infotab.infotabProjectName.sendKeys(nameSavedProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+        //Create and check saved project
+        return {
+            projectName: nameSavedProject,
+            user: user
+        };
+    };
+
     this.saveCodeProjectAndPublishNewUserAndLogout = function() {
         var user = login.loginWithRandomUser();
         var nameSavedProject = 'Test_Save_' + Number(new Date());

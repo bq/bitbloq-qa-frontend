@@ -240,7 +240,15 @@ describe('make tab', function() {
         modals.rejectTour();
         expect(make.projectName.isPresent()).toBe(true);
         expect(make.projectName.getText()).toBe('Proyecto sin título');
-
+        make.infoTab.click();
+        infotab.infotabProjectName.clear();
+        browser.ignoreSynchronization = true;
+        infotab.infotabProjectName.sendKeys('Prueba blanco');
+        infotab.infotabProjectName.clear();
+        browser.ignoreSynchronization = false;
+        browser.sleep(vars.timeToWaitAutoSave);
+        projects.get();
+        expect(projects.projectsName.getText()).toEqual('Proyecto sin título');
         login.logout();
     });
 });
