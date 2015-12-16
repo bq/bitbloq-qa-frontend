@@ -257,6 +257,29 @@ describe('My Projects', function() {
         checkNameProjects(9, '5');
 
         login.logout();
+});
+
+    it('bba-271:Verify you can change the name of a project', function() {
+        var originalName=make.saveProjectNewUser().projectName;
+        projects.get();
+        browser.sleep(vars.timeToWaitTab);
+
+        myprojects.timeTag.getText().then(function(timeCreation) {
+            myprojects.overMyProjects.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+            myprojects.renameProject.click();
+            modals.inputModalChangeN.clear();
+            modals.inputModalChangeN.sendKeys('new name');
+            browser.sleep(vars.timeToWaitSendKeys);
+            browser.sleep(54000);
+            modals.okDialog.click();
+            browser.sleep(vars.timeToWaitAutoSave);
+
+            expect(myprojects.timeTag.getText()).not.toMatch(timeCreation);
+            expect(myprojects.projectName.getText()).not.toMatch(originalName);
+            login.logout();
+        });
+
     });
 
 });

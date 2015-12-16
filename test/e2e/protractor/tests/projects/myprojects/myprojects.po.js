@@ -18,11 +18,13 @@ var Myprojects = function() {
     this.dropDownOrderSortOld = $('[data-element="explore-sortby-old"]');
     this.dropDownOrderSortNameAZ = $('[data-element="explore-sortby-name-az"]');
     this.dropDownOrderSortNameZA = $('[data-element="explore-sortby-name-za"]');
-
+    this.timeTag = $('[data-element="myprojects-time-tag"]');
+    this.renameProject = $('[data-element="myprojects-rename-project"]');
     this.url = '#/projects';
     this.get = function() {
         browser.get(this.url);
     };
+
 
 };
 
