@@ -8,11 +8,13 @@ var Login = require('../login/login.po.js'),
     Make = require('../bloqsproject/make.po.js'),
     GlobalFunctions = require('../commons/globalFunctions.js'),
     Modals = require('../modals/modals.po.js'),
+    Variables = require('../commons/variables.js'),
     Projects = require('../projects/projects.po.js'),
     Modals = require('../modals/modals.po.js'),
     path = require('path');
 
 var login = new Login(),
+    vars = new Variables(),
     make = new Make(),
     modals = new Modals(),
     projects = new Projects(),
@@ -39,4 +41,19 @@ describe('State, specs only in local', function() {
         login.logout();
     });
 
+    xit('bba-257:Save a code project', function() {
+        var name = 'Ultrasonidos_Bloqs';
+        make.importFileGuestUser(path.resolve() + '/test/e2e/protractor/res/' + name +'.json');
+        browser.sleep(vars.timeToWaitFadeModals);
+        make.softwareTab.click();
+        browser.sleep(vars.timeToWaitTab);
+        make.codeTab.click();
+        make.softwareEditCode.click();
+        modals.modalAlertOk.click();
+        login.loginFromHeader('codeproject');
+        expect(make.projectName.getText()).toEqual(name);
+        projects.get();
+        expect(projects.getProjectCount()).toBe(1);
+        login.logout();
+    });
 });
