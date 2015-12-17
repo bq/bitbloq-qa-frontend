@@ -83,6 +83,7 @@ describe('Menu Share of MakeActions', function() {
                 makeActions.menuShareSocial.click().then(function() {
                     browser.sleep(vars.timeToWaitMenu);
                     modals.shortText.getAttribute('value').then(function(text) {
+                        expect(text).toMatch('http://goo.gl');
                         modals.shortButton.click().then(function() {
                             login.logout();
                             browser.get(text);
@@ -171,6 +172,7 @@ describe('Menu Share of MakeActions', function() {
             makeActions.menuShareSocial.click().then(function() {
                 browser.sleep(vars.timeToWaitMenu);
                 modals.shortText.getAttribute('value').then(function(text) {
+                    expect(text).toMatch('http://goo.gl');
                     modals.shortButton.click().then(function() {
                         browser.sleep(vars.timeToWaitMenu);
                         modals.bladeClose.click();
