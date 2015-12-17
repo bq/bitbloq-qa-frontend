@@ -186,7 +186,6 @@ describe('My Projects', function() {
         make.saveProject('5');
         codeProject.saveCodeProject('g');
         myprojects.get();
-
         //Most recent
         checkNameProjects(0, 'g');
         checkNameProjects(1, '5');
@@ -198,7 +197,6 @@ describe('My Projects', function() {
         checkNameProjects(7, 'aab');
         checkNameProjects(8, 'aa');
         checkNameProjects(9, 'a');
-
         // Most old
         myprojects.dropDownOrder.click();
         browser.sleep(vars.timeToWaitTab);
@@ -206,7 +204,7 @@ describe('My Projects', function() {
         browser.sleep(vars.timeToWaitTab);
         myprojects.dropDownOrder.click();
         myprojects.dropDownOrder.click();
-        browser.sleep(vars.timeToWaitAutoSave);
+        browser.sleep(vars.timeToWaitTab);
         checkNameProjects(0, 'a');
         checkNameProjects(1, 'aa');
         checkNameProjects(2, 'aab');
@@ -217,7 +215,6 @@ describe('My Projects', function() {
         checkNameProjects(7, 'e');
         checkNameProjects(8, '5');
         checkNameProjects(9, 'g');
-
         // Order AZ
         myprojects.dropDownOrder.click();
         browser.sleep(vars.timeToWaitTab);
@@ -225,7 +222,7 @@ describe('My Projects', function() {
         browser.sleep(vars.timeToWaitTab);
         myprojects.dropDownOrder.click();
         myprojects.dropDownOrder.click();
-        browser.sleep(vars.timeToWaitAutoSave);
+        browser.sleep(vars.timeToWaitTab);
         checkNameProjects(0, '5');
         checkNameProjects(1, 'a');
         checkNameProjects(2, 'aa');
@@ -236,7 +233,6 @@ describe('My Projects', function() {
         checkNameProjects(7, 'e');
         checkNameProjects(8, 'g');
         checkNameProjects(9, 'za');
-
         // Order ZA
         myprojects.dropDownOrder.click();
         browser.sleep(vars.timeToWaitTab);
@@ -244,7 +240,7 @@ describe('My Projects', function() {
         browser.sleep(vars.timeToWaitTab);
         myprojects.dropDownOrder.click();
         myprojects.dropDownOrder.click();
-        browser.sleep(vars.timeToWaitAutoSave);
+        browser.sleep(vars.timeToWaitTab);
         checkNameProjects(0, 'za');
         checkNameProjects(1, 'g');
         checkNameProjects(2, 'e');
@@ -256,11 +252,125 @@ describe('My Projects', function() {
         checkNameProjects(8, 'a');
         checkNameProjects(9, '5');
 
+        //IN List
+        myprojects.itemLayoutListButton.click();
+
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrderSortRecent.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrder.click();
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitTab);
+        checkNameProjects(0, 'g');
+        checkNameProjects(1, '5');
+        checkNameProjects(2, 'e');
+        checkNameProjects(3, 'd');
+        checkNameProjects(4, 'c');
+        checkNameProjects(5, 'b');
+        checkNameProjects(6, 'za');
+        checkNameProjects(7, 'aab');
+        checkNameProjects(8, 'aa');
+        checkNameProjects(9, 'a');
+        // Most old
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrderSortOld.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrder.click();
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitTab);
+        checkNameProjects(0, 'a');
+        checkNameProjects(1, 'aa');
+        checkNameProjects(2, 'aab');
+        checkNameProjects(3, 'za');
+        checkNameProjects(4, 'b');
+        checkNameProjects(5, 'c');
+        checkNameProjects(6, 'd');
+        checkNameProjects(7, 'e');
+        checkNameProjects(8, '5');
+        checkNameProjects(9, 'g');
+        // Order AZ
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrderSortNameAZ.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrder.click();
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitTab);
+        checkNameProjects(0, '5');
+        checkNameProjects(1, 'a');
+        checkNameProjects(2, 'aa');
+        checkNameProjects(3, 'aab');
+        checkNameProjects(4, 'b');
+        checkNameProjects(5, 'c');
+        checkNameProjects(6, 'd');
+        checkNameProjects(7, 'e');
+        checkNameProjects(8, 'g');
+        checkNameProjects(9, 'za');
+        // Order ZA
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrderSortNameZA.click();
+        browser.sleep(vars.timeToWaitTab);
+        myprojects.dropDownOrder.click();
+        myprojects.dropDownOrder.click();
+        browser.sleep(vars.timeToWaitTab);
+        checkNameProjects(0, 'za');
+        checkNameProjects(1, 'g');
+        checkNameProjects(2, 'e');
+        checkNameProjects(3, 'd');
+        checkNameProjects(4, 'c');
+        checkNameProjects(5, 'b');
+        checkNameProjects(6, 'aab');
+        checkNameProjects(7, 'aa');
+        checkNameProjects(8, 'a');
+        checkNameProjects(9, '5');
+
+
+        /*   DRAFT TODO check tooltips
+
+        WebElement elem = driver.findElement(By.tagName("div"));
+        action.moveToElement(elem);
+        action.perform();
+
+
+        // browser.actions().mouseMove(projects.project).perform();
+        // browser.sleep(6000);
+        //
+        // browser.actions().
+        //     mouseMove(myprojects.copyProject).
+        //     perform();
+        //
+        // expect(myprojects.copyProject.isPresent()).toBeTruthy(true);
+        //
+        // // var script = "return window.getComputedStyle(document.querySelector(' '),':before').getPropertyValue('content')";
+        //
+        //  browser.executeScript('return window.getComputedStyle(document.querySelector(data-element="myprojects-rename-project"),:before).getPropertyValue("content")');
+        //
+        //
+        //  this.getBloq = function(section, bloqClass) {
+        //      var that = this,
+        //          bloqsuniquetag = Date.now();
+        //
+        //      return browser.executeScript('document.querySelectorAll(\'[data-element="toolbox-' + section + '"] .' + bloqClass + '\')[0].setAttribute("bloqsuniquetag", "' + bloqsuniquetag + '")').then(function() {
+        //          var toolbox = that.getToolboxPO(section);
+        //          toolbox.click();
+        //          browser.sleep(1000);
+        //          return $('[bloqsuniquetag="' + bloqsuniquetag + '"]');
+        //      });
+        //  };
+        //
+        //
+        // browser.pause();
+          */
+
+          
         login.logout();
-});
+    });
 
     it('bba-271:Verify you can change the name of a project', function() {
-        var originalName=make.saveProjectNewUser().projectName;
+        var originalName = make.saveProjectNewUser().projectName;
         projects.get();
         browser.sleep(vars.timeToWaitTab);
 
