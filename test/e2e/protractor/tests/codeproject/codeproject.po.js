@@ -28,8 +28,9 @@ var Codeproject = function() {
         var nameSavedProject = nameProject || 'Test_Save_' + Number(new Date());
         this.get();
         infotab.infoTab.click();
-        infotab.infotabProjectName.clear();
-        infotab.infotabProjectName.sendKeys(nameSavedProject);
+        browser.ignoreSynchronization = true;
+        infotab.infotabProjectName.clear().sendKeys(nameSavedProject);
+        browser.ignoreSynchronization = false;
         browser.sleep(vars.timeToWaitAutoSave);
     };
 
@@ -47,8 +48,9 @@ var Codeproject = function() {
         commons.expectToastTimeOut(commons.editToast);
         bloqsproject.infoTab.click();
         expect(infotab.infotabProjectName.isPresent()).toBe(true);
-        infotab.infotabProjectName.clear();
-        infotab.infotabProjectName.sendKeys(nameSavedProject);
+        browser.ignoreSynchronization = true;
+        infotab.infotabProjectName.clear().sendKeys(nameSavedProject);
+        browser.ignoreSynchronization = false;
         browser.sleep(vars.timeToWaitAutoSave);
         //Create and check saved project
         return {
@@ -71,8 +73,9 @@ var Codeproject = function() {
         commons.expectToastTimeOut(commons.editToast);
         bloqsproject.infoTab.click();
         expect(infotab.infotabProjectName.isPresent()).toBe(true);
-        infotab.infotabProjectName.clear();
-        infotab.infotabProjectName.sendKeys(nameSavedProject);
+        browser.ignoreSynchronization = true;
+        infotab.infotabProjectName.clear().sendKeys(nameSavedProject);
+        browser.ignoreSynchronization = false;
         browser.sleep(vars.timeToWaitAutoSave);
         bloqsproject.publishProject();
         browser.sleep(vars.timeToWaitAutoSave);

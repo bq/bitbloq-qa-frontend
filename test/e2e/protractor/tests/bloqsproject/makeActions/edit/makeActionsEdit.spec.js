@@ -19,7 +19,7 @@ describe('Menu file of MakeActions', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-133: Verify undo&redo action on hwTab', function() {
+    xit('bba-133: Verify undo&redo action on hwTab', function() {
 
         expect(true).toBe(true);
 

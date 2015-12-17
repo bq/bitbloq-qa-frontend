@@ -7,7 +7,9 @@ var Codeproject = require('./codeproject.po.js'),
     Make = require('../bloqsproject/make.po.js'),
     Modals = require('../modals/modals.po.js'),
     Variables = require('../commons/variables.js'),
-    MyProjects = require('../projects/myprojects/myprojects.po.js');
+    Projects = require('../projects/projects.po.js'),
+    MyProjects = require('../projects/myprojects/myprojects.po.js'),
+    Infotab = require('../bloqsproject/infotab/infotab.po.js');
 
 var codeproject = new Codeproject(),
     globalFunctions = new GlobalFunctions(),
@@ -16,7 +18,9 @@ var codeproject = new Codeproject(),
     make = new Make(),
     modals = new Modals(),
     vars = new Variables(),
-    myprojects = new MyProjects();
+    projects = new Projects(),
+    myprojects = new MyProjects(),
+    infotab = new Infotab();
 
 globalFunctions.xmlReport('codeproject');
 
@@ -210,4 +214,27 @@ describe('Test Codeproject verify', function() {
 
     });
 
+    it('bba-275:Project must have a name',function() {
+        codeproject.saveCodeProjectNewUser();
+        projects.get();
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        myprojects.openProject.click().then(function() {
+            browser.sleep(vars.timeToWaitTab);
+            browser.getAllWindowHandles().then(function(handles) {
+                browser.switchTo().window(handles[1]).then(function() {
+                    infotab.infoTab.click();
+                    browser.ignoreSynchronization = true;
+                    infotab.infotabProjectName.clear().sendKeys('Prueba blanco');
+                    browser.ignoreSynchronization = false;
+                    infotab.infotabProjectName.clear();
+                    browser.sleep(vars.timeToWaitAutoSave);
+                    projects.get();
+                    expect(projects.projectsName.getText()).toEqual('Proyecto sin título');
+                    browser.close().then(browser.switchTo().window(handles[0]));
+                    login.logout();
+                });
+            });
+        });
+    });
 });
