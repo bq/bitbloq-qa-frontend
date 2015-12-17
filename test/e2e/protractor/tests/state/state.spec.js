@@ -39,7 +39,19 @@ describe('State ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-257:Save a code project', function() {
+    it ('bba-273:Verify that the empty bloqsproject isnt saved', function() {
+      make.get();
+      modals.attentionContinueGuest.click();
+      modals.rejectTour();
+      login.loginFromHeader('bloqsproject');
+      modals.rejectTour();
+      expect(make.projectName.getText()).toEqual('Proyecto sin título');
+      projects.get();
+      expect(projects.getProjectCount()).toBe(0);
+      login.logout();
+    });
+
+    it('bba-274:Verify that the empty codeproject isnt saved', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -51,7 +63,7 @@ describe('State ', function() {
         modals.modalAlertOk.click();
         login.loginFromHeader('codeproject');
         projects.get();
-        expect(projects.getProjectCount()).toBe(1);
+        expect(projects.getProjectCount()).toBe(0);
         login.logout();
     });
 
