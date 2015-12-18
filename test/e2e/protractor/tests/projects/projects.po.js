@@ -14,6 +14,7 @@ var Projects = function() {
     this.listProject = $('[data-element="projects-list-project"]');
     this.project = $('[data-element="projects-project"]');
     this.newProject = $('[data-element="projects-new-project"]');
+    this.sharedProjects = $('[data-element="projects-shared-projects"]');
 
     this.get = function() {
         browser.get('#/projects');

@@ -32,6 +32,8 @@ var Modals = function() {
     this.accountResetPasswordInput = $('[data-element="modal-password-reset-main-input"]');
     this.accountResetPasswordRepitInput = $('[data-element="modal-password-reset-repeat-input"]');
     this.accountResetPasswordOKButton = $('[data-element="modal-password-reset-ok-button"]');
+    //PO modal-share-with-users
+    this.inputEmailsUsers= $('[data-element="modals-share-with-users-input"]');
 
     this.rejectTour = function() {
         $('[data-element="reject-tour"]').click();

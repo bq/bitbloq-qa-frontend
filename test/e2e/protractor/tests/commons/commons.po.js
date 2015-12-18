@@ -18,6 +18,14 @@ var Commons = function() {
         browser.ignoreSynchronization = false;
     };
 
+    this.expectToastTimeOutandText = function(alertElement,text) {
+        browser.ignoreSynchronization = true;
+        browser.sleep(1000);
+        expect(alertElement.isDisplayed()).toBe(true);
+        expect(alertElement.getText()).toMatch(text);
+        browser.ignoreSynchronization = false;
+    };
+
     this.clickAlertUndoToast = function() {
         browser.ignoreSynchronization = true;
         browser.sleep(2000);
