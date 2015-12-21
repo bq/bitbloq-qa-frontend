@@ -35,20 +35,37 @@ var Variables = function() {
 
     //Languages support email, default is EN
     this.supportEmailES = 'mailto:soporte.bitbloq@bq.com';
-    this.supportEmailEN = 'mailto:support.bitbloq.en@bq.com';
     this.supportEmailFR = 'mailto:support.bitbloq.fr@bq.com';
     this.supportEmailDE = 'mailto:support.bitbloq.de@bq.com';
     this.supportEmailPT = 'mailto:support.bitbloq.pt@bq.com';
-    this.supportEmailSV = 'mailto:support.bitbloq.sv@bq.com';
     this.supportEmailRU = 'mailto:support.bitbloq.ru@bq.com';
     this.supportEmailIT = 'mailto:support.bitbloq.it@bq.com';
+    this.supportEmailSV = 'mailto:support.bitbloq.sv@bq.com';
+    this.supportEmailEN = 'mailto:support.bitbloq.en@bq.com';
+    this.supportEmail = function(language) {
+        switch (language) {
+            case 'es':
+                return this.supportEmailES;
+            case 'fr':
+                return this.supportEmailFR;
+            case 'de':
+                return this.supportEmailDE;
+            case 'pt':
+                return this.supportEmailPT;
+            case 'ru':
+                return this.supportEmailRU;
+            case 'it':
+                return this.supportEmailIT;
+            default:
+                return this.supportEmailEN;
+        }
+    };
 
     //Literals
     this.sendCommentsLiteral = 'Enviar comentarios a Bitbloq';
     this.infoErrorLiteral = 'Informar de un error';
     //Toast Literals
     this.toastResetPasswordNewLink = 'No se ha podido cambiar la contraseña. Por favor, solicita un nuevo link';
-
 
     this.account = function(cuenta) {
         if (cuenta === 'google') {

@@ -72,6 +72,13 @@ var Global = function() {
         return driver.executeScript('var windowHeight = $(document).height(); $(window).scrollTop(windowHeight); ');
     };
 
+    this.navigatorLanguage = function() {
+        return browser.executeScript('return navigator.language;').then(function(language) {
+            console.log(language.split('-')[0]);
+            return language;
+        });
+    };
+
 };
 
 module.exports = Global;

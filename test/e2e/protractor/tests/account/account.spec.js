@@ -9,13 +9,15 @@ var GlobalFunctions = require('../commons/globalFunctions.js'),
     Variables = require('../commons/variables.js'),
     Account = require('./account.po.js'),
     Login = require('../login/login.po.js'),
-    Modals = require('../modals/modals.po.js');
+    Modals = require('../modals/modals.po.js'),
+    Commons = require('../commons/commons.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     vars =  new Variables(),
     account = new Account(),
     login = new Login(),
-    modals = new Modals();
+    modals = new Modals(),
+    commons = new Commons();
 
 globalFunctions.xmlReport('account');
 
@@ -56,6 +58,29 @@ describe('User account view', function() {
         login.login(randomUserInfo.user,'123456');
 
         login.logout();
+    });
+
+
+    it('bba-59:Check name and surmane are edits (input text)', function() {
+
+        var randomUserInfo = login.loginWithRandomUser();
+        account.get();
+        account.firstname.clear().sendKeys('Manolo');
+        browser.sleep(1500);
+        commons.expectToastTimeOut(commons.alertTextToast);
+        account.lastname.clear().sendKeys('Garcia');
+        browser.sleep(1500);
+        commons.expectToastTimeOut(commons.alertTextToast);
+        browser.sleep(vars.timeToWaitAutoSave);
+
+        login.logout();
+
+        login.get();
+        login.login(randomUserInfo.user,randomUserInfo.password);
+        account.get();
+
+        expect(account.firstname.getAttribute('value')).toMatch('Manolo');
+        expect(account.lastname.getAttribute('value')).toMatch('Garcia');
     });
 
 

@@ -23,12 +23,10 @@ describe('Verify landing ', function() {
     globalFunctions.afterTest();
 
     it('bba-35:Check that links to legal documents work', function() {
-
         //landing.openLandingMenu.click();
         var cookies = '#/cookies',
             terms = '#/terms',
             script = landing.landingPage + '.scrollTo(0,5000);';
-
         browser.executeScript(script).then(function() {
 
             landing.cookiesButton.click();
@@ -45,12 +43,16 @@ describe('Verify landing ', function() {
 
     it('bba-183:check if NO login go to mailto in landing (link "contacto")', function() {
 
-        //landing.openLandingMenu.click();
         var script = landing.landingPage + '.scrollTo(0,6000);';
+
         browser.sleep(5000); //Time to wait load explora project on landing (not wait angular)
-        browser.executeScript(script).then(function() {
-            expect(landing.contactButton.getAttribute('href')).toMatch(vars.supportEmailES);
-        });
+
+        browser.executeScript(script)
+            .then(globalFunctions.navigatorLanguage)
+            .then(function(language) {
+                expect(landing.contactButton.getAttribute('href')).toMatch(vars.supportEmail(language));
+            });
+
     });
 
     it('bba-182:check if is login show modal feedback in landing (link "contacto")', function() {
