@@ -15,5 +15,6 @@ protractorConfig.config.suites.projectLocal = '../tests/explore/project.spec.loc
 protractorConfig.config.suites.myProjectsLocal = '../tests/projects/myprojects/myprojects.spec.local.js';
 protractorConfig.config.suites.stateLocal = '../tests/state/state.spec.local.js';
 protractorConfig.config.suites.myProjectsLocal = '../tests/projects/myprojects/myprojects.spec.local.js';
+protractorConfig.config.suites.makeactionsShareLocal = '../tests/bloqsproject/makeActions/share/makeActionsShare.spec.local.js';
 
 exports.config = protractorConfig.config;
