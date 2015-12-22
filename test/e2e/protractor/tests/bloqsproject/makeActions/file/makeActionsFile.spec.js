@@ -113,7 +113,7 @@ describe('Menu file of MakeActions', function() {
             browser.sleep(vars.timeToWaitMenu);
 
             makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled) {
-                expect(disabled).toBeTruthy();
+                expect(disabled).toBe('true');
                 make.saveProject();
                 makeActions.menuFile.click();
                 browser.sleep(vars.timeToWaitMenu);
@@ -132,11 +132,11 @@ describe('Menu file of MakeActions', function() {
                 makeActions.menuFile.click();
                 browser.sleep(vars.timeToWaitMenu);
                 makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled2) {
-                    expect(disabled2).toBeTruthy();
+                    expect(disabled2).toBe('true');
                     makeActions.inputUploadFile.sendKeys(projectImportAbsolutePath);
                     browser.sleep(vars.timeToWaitSendKeys);
                     makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled3) {
-                        expect(disabled3).toBeTruthy();
+                        expect(disabled3).toBe('true');
                     });
                 });
 

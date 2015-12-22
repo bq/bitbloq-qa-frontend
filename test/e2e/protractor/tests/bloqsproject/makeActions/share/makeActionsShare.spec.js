@@ -281,5 +281,61 @@ describe('Menu Help of MakeActions', function() {
         });
 
     });
+    it('bba-141:Access the project from URL only if you have been shared the project', function() {
+        var user1 = login.loginWithRandomUser();
+        login.logout();
+        var projectName1 = make.saveProjectNewUser().projectName;
+        //share the project with user 1
+        makeActions.menuShare.click();
+        makeActions.menuShareWithUsers.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        modals.inputEmailsUsers.all(by.css('input')).get(0).sendKeys(user1.userEmail);
+        browser.actions().sendKeys(protractor.Key.ENTER).perform();
+        modals.okDialog.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        //download the project to comapre
+        var file1 = path.resolve() + '/target/' + projectName1 + '.json';
+        makeActions.menuFile.click();
+        browser.sleep(vars.timeToWaitMenu);
+        makeActions.menuDownload.click();
+        browser.driver.wait(function() {
+            return fs.existsSync(file1);
+        }, 4000).then(function() {
+            browser.getCurrentUrl().then(function(url) {
+                console.log(url);
+
+                login.logout();
+                login.get();
+                browser.sleep(vars.timeToWaitTab);
+                login.login(user1.user, user1.password);
+                browser.get(url);
+
+                browser.sleep(vars.timeToWaitTab);
+
+                var file2 = path.resolve() + '/target/' + projectName1 + '.json';
+                makeActions.menuFile.click();
+                browser.sleep(vars.timeToWaitMenu);
+                makeActions.menuDownload.click();
+                browser.driver.wait(function() {
+                    return fs.existsSync(file2);
+                }, 4000).then(function() {
+                    console.log('antes de comparar');
+                    expect(JSON.parse(fs.readFileSync(file1, 'utf8'))).toEqual(JSON.parse(fs.readFileSync(file2, 'utf8')));
+                    console.log('despues de comparar');
+                    login.logout();
+                    login.loginWithRandomUser();
+                    browser.get(url);
+                    browser.sleep(vars.timeToWaitTab);
+                    modals.rejectTour();
+                    commons.expectToastTimeOutandText(commons.alertTextToast, 'Este es un proyecto privado y no tienes permisos para verlo.');
+                    expect(browser.getCurrentUrl()).toMatch('#/bloqsproject');
+
+                });
+
+            });
+
+        });
+
+    });
 
 });
