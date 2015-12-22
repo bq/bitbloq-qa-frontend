@@ -30,34 +30,19 @@ describe('bloqs', function() {
         make.softwareTab.click();
 
         bloqs.getBloq('functions', 'bloq-void-function').then(function(voidFunctionBloq) {
-            bloqs.moveBloq(voidFunctionBloq, {
-                x: -100,
-                y: 0
-            });
-
-            bloqs.moveBloq(voidFunctionBloq, {
-                x: -100,
-                y: 0
-            });
+              bloqs.moveBloq(voidFunctionBloq, {
+                  x: 0,
+                  y: 100
+              });
 
             bloqs.getBloq('functions', 'bloq-void-function').then(function(voidFunctionBloq2) {
                 bloqs.moveBloq(voidFunctionBloq2, {
-                    x: 0,
+                    x: -100,
                     y: 0
                 });
 
-                bloqs.moveBloq(voidFunctionBloq2, {
-                    x: 0,
-                    y: 100
-                });
-
-                bloqs.moveBloq(voidFunctionBloq2, {
-                    x: 0,
-                    y: 100
-                });
-
-                bloqs.connectBloqs('up', voidFunctionBloq, voidFunctionBloq2);
-
+                //bloqs.connectBloqs('down', voidFunctionBloq, voidFunctionBloq2);
+                browser.sleep(5000);
                 browser.pause();
             });
         });

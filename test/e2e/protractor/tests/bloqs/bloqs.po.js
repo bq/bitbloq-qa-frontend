@@ -43,43 +43,62 @@ var Bloqs = function() {
                 x: 10,
                 y: 10
             })
+            .mouseMove({ //first move to get distance and leave preMove status
+                x: 0,
+                y: 0
+            })
             .mouseMove(positionDiff)
             .mouseUp()
             .perform();
     };
 
-    this.connectBloqs = function(connector, movingBloq, destinationBloq) {
+    this.connectBloqs = function(connector, destinationBloq, movingBloq) {
 
-        return Q.all([destinationBloq.getLocation(), movingBloq.getLocation()]).then(function(res) {
-            console.log('destinationBloq');
-            console.log(res[0]);
-            console.log(res[1]);
-            destinationBloq.getSize().then(function(size) {
-                console.log('size');
-                console.log(size);
-                browser.actions()
-                    .mouseMove(movingBloq.getWebElement(), {
-                        x: 10,
-                        y: 10
-                    })
-                    .mouseDown()
-                    .mouseMove(movingBloq.getWebElement()) //premove start
-                    .mouseMove({ //first move to get distance and leave preMove status
-                        x: 10,
-                        y: 10
-                    })
-                    .mouseMove({
-                        x: res[0].x - res[1].x - 10,
-                        y: res[0].y - res[1].y - size.height - 10
-                    })
-                    .mouseMove({
-                        x: res[0].x - res[1].x,
-                        y: res[0].y - res[1].y - size.height - 10
-                    })
-                    .mouseUp()
-                    .perform();
+        return Q.all([destinationBloq.getLocation(), movingBloq.getLocation()]).then(function() {
 
-            });
+            browser.actions()
+                .mouseMove(destinationBloq.getWebElement(), {
+                    x: 10,
+                    y: 10
+                })
+                .mouseDown()
+                .mouseMove(destinationBloq.getWebElement()) //premove start
+                .mouseMove({ //first move to get distance and leave preMove status
+                    x: 10,
+                    y: 10
+                })
+                .mouseMove({ //first move to get distance and leave preMove status
+                    x: 0,
+                    y: 0
+                })
+                .mouseMove({
+                    x: 0,
+                    y: 100
+                })
+                .mouseUp()
+                .perform();
+
+            browser.actions()
+                .mouseMove(movingBloq.getWebElement(), {
+                    x: 10,
+                    y: 10
+                })
+                .mouseDown()
+                .mouseMove(movingBloq.getWebElement()) //premove start
+                .mouseMove({ //first move to get distance and leave preMove status
+                    x: 10,
+                    y: 10
+                })
+                .mouseMove({ //first move to get distance and leave preMove status
+                    x: 0,
+                    y: 0
+                })
+                .mouseMove({
+                    x: 0,
+                    y: 100
+                })
+                .mouseUp()
+                .perform();
         });
     };
 };
