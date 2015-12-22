@@ -69,6 +69,11 @@ var Variables = function() {
     this.enterValidYoutubeUrlEN = 'Enter a valid Youtube URL';
 
     this.infoErrorLiteral = 'Informar de un error';
+
+    this.nameNewProject = 'Proyecto sin título';
+    this.nameNewProjectEN = 'Untitled project';
+
+
     //Toast Literals
     this.toastResetPasswordNewLink = 'No se ha podido cambiar la contraseña. Por favor, solicita un nuevo link';
 

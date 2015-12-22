@@ -9,7 +9,8 @@ var Codeproject = require('./codeproject.po.js'),
     Variables = require('../commons/variables.js'),
     Projects = require('../projects/projects.po.js'),
     MyProjects = require('../projects/myprojects/myprojects.po.js'),
-    Infotab = require('../bloqsproject/infotab/infotab.po.js');
+    Infotab = require('../bloqsproject/infotab/infotab.po.js'),
+    Alert = require('../alerts/alerts.po.js');
 
 var codeproject = new Codeproject(),
     globalFunctions = new GlobalFunctions(),
@@ -20,7 +21,8 @@ var codeproject = new Codeproject(),
     vars = new Variables(),
     projects = new Projects(),
     myprojects = new MyProjects(),
-    infotab = new Infotab();
+    infotab = new Infotab(),
+    alert = new Alert();
 
 globalFunctions.xmlReport('codeproject');
 
@@ -47,7 +49,14 @@ describe('Test Codeproject verify', function() {
 
         expect(commons.editToast.isDisplayed()).toBe(true);
 
-        expect(commons.alertTextToast.getText()).toMatch('Si editas el código no podrás volver a utilizar los bloques en este proyecto.');
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(commons.alertTextToast.getText()).toMatch(alert.alertTextEditCode);
+                } else {
+                    expect(commons.alertTextToast.getText()).toMatch(alert.alertTextEditCodeEN);
+                }
+            });
 
         expect(commons.alertSvgIcon.getAttribute('data-type')).toEqual('warning');
 
@@ -214,7 +223,7 @@ describe('Test Codeproject verify', function() {
 
     });
 
-    it('bba-275:Project must have a name',function() {
+    it('bba-275:Project must have a name', function() {
         codeproject.saveCodeProjectNewUser();
         projects.get();
         myprojects.overMyProjects.click();
@@ -230,7 +239,15 @@ describe('Test Codeproject verify', function() {
                     infotab.infotabProjectName.clear();
                     browser.sleep(vars.timeToWaitAutoSave);
                     projects.get();
-                    expect(projects.projectsName.getText()).toEqual('Proyecto sin título');
+                    globalFunctions.navigatorLanguage()
+                        .then(function(language) {
+                            if (language === 'es') {
+                                expect(projects.projectsName.getText()).toEqual(vars.nameNewProject);
+                            } else {
+                                expect(projects.projectsName.getText()).toEqual(vars.nameNewProjectEN);
+                            }
+                        });
+
                     browser.close().then(browser.switchTo().window(handles[0]));
                     login.logout();
                 });

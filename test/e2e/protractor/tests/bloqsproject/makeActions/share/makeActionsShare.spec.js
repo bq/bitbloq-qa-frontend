@@ -152,7 +152,14 @@ describe('Menu Help of MakeActions', function() {
         modals.okDialog.click();
         browser.sleep(vars.timeToWaitFadeModals);
         //browser.sleep(1000);
-        commons.expectToastTimeOutandText(commons.alertTextToast, 'Tu proyecto se ha compartido con 1 personas');
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    commons.expectToastTimeOutandText(commons.alertTextToast, 'Tu proyecto se ha compartido con 1 personas');
+                } else {
+                    commons.expectToastTimeOutandText(commons.alertTextToast, 'Your project has been shared with 1 people');
+                }
+            });
         //download project 1 to comapre
         var file1 = path.resolve() + '/target/' + projectName1 + '.json';
         makeActions.menuFile.click();
@@ -174,7 +181,14 @@ describe('Menu Help of MakeActions', function() {
             browser.sleep(vars.timeToWaitFadeModals);
             modals.okDialog.click();
             browser.sleep(vars.timeToWaitFadeModals);
-            commons.expectToastTimeOutandText(commons.alertTextToast, 'Tu proyecto se ha compartido con 0 personas');
+            globalFunctions.navigatorLanguage()
+                .then(function(language) {
+                    if (language === 'es') {
+                        commons.expectToastTimeOutandText(commons.alertTextToast, 'Tu proyecto se ha compartido con 0 personas');
+                    } else {
+                        commons.expectToastTimeOutandText(commons.alertTextToast, 'Your project has been shared with 0 people');
+                    }
+                });
             //share project multiple user+incorrect
             makeActions.menuShare.click();
             makeActions.menuShareWithUsers.click();
@@ -191,7 +205,14 @@ describe('Menu Help of MakeActions', function() {
             browser.sleep(vars.timeToWaitFadeModals);
             modals.okDialog.click();
             browser.sleep(vars.timeToWaitFadeModals);
-            commons.expectToastTimeOutandText(commons.alertTextToast, 'Tu proyecto se ha compartido con 2 personas');
+            globalFunctions.navigatorLanguage()
+                .then(function(language) {
+                    if (language === 'es') {
+                        commons.expectToastTimeOutandText(commons.alertTextToast, 'Tu proyecto se ha compartido con 2 personas');
+                    } else {
+                        commons.expectToastTimeOutandText(commons.alertTextToast, 'Your project has been shared with 2 people');
+                    }
+                });
             //download second project
             var file2 = path.resolve() + '/target/' + projectName2 + '.json';
             makeActions.menuFile.click();

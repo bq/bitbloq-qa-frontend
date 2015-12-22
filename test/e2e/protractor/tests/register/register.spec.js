@@ -9,14 +9,16 @@ var Register = require('./register.po.js'),
     GlobalFunctions = require('../commons/globalFunctions.js'),
     Landing = require('../landing/landing.po.js'),
     Login = require('../login/login.po.js'),
-    Commons = require('../commons/commons.po.js');
+    Commons = require('../commons/commons.po.js'),
+    Alerts = require('../alerts/alerts.po.js');
 
 var register = new Register(),
     vars = new Variables(),
     globalFunctions = new GlobalFunctions(),
     landing = new Landing(),
     login = new Login(),
-    commons = new Commons();
+    commons = new Commons(),
+    alerts = new Alerts();
 
 globalFunctions.xmlReport('Register');
 
@@ -483,7 +485,15 @@ describe('Register ', function() {
                                 browser.sleep(vars.timeToWaitAutoSave);
 
                                 //Check toast no reset password
-                                expect($2(commons.alertTextToast.elementArrayFinder_.locator_.value).getText()).toMatch(vars.toastResetPasswordNewLink);
+                                globalFunctions.navigatorLanguage()
+                                    .then(function(language) {
+                                        if (language === 'es') {
+                                            expect($2(commons.alertTextToast.elementArrayFinder_.locator_.value).getText()).toMatch(alerts.textResetPasswordNewLink);
+                                        } else {
+                                            expect($2(commons.alertTextToast.elementArrayFinder_.locator_.value).getText()).toMatch(alerts.textResetPasswordNewLinkEN);
+                                        }
+                                    });
+
                                 commons.clickAlertCloseToast($2(commons.alertCloseToast.elementArrayFinder_.locator_.value));
 
                                 //Check that not login (no change password)
