@@ -84,7 +84,15 @@ describe('Menu file of MakeActions', function() {
                 browser.switchTo().window(handles[2]);
                 browser.sleep(vars.timeToWaitTab);
                 expect(browser.getCurrentUrl()).toMatch(/#\/bloqsproject/);
-                expect(make.projectName.getText()).toEqual('Copia de ' + nameSavedProject);
+                globalFunctions.navigatorLanguage()
+                    .then(function(language) {
+                        if (language === 'es') {
+                            expect(make.projectName.getText()).toEqual('Copia de ' + nameSavedProject);
+                        } else {
+                            expect(make.projectName.getText()).toEqual('Copy of ' + nameSavedProject);
+                        }
+                    });
+
                 browser.close().then(browser.switchTo().window(handles[1]));
             });
             expect(browser.getCurrentUrl()).toMatch(/#\/bloqsproject/);
