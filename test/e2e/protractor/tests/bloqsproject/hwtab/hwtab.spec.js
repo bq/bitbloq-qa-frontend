@@ -19,7 +19,7 @@ describe('hardwareTab testing', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('hwTab spec', function() {
+    xit('hwTab spec', function() {
 
         expect(true).toBe(true);
 

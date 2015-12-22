@@ -108,7 +108,7 @@ describe('Check makeActions actions in codeProjects', function() {
     });
 
     it('bba-280:Verify that the autosave is launched when you delete a component', function() {
-        
+
         var name = 'VariosComponentes';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
         projects.get();
@@ -121,6 +121,33 @@ describe('Check makeActions actions in codeProjects', function() {
                 browser.actions().mouseMove(hwtab.sampleBoton).perform();
                 browser.actions().click(protractor.Button.RIGHT).perform();
                 hwtab.hwContextMenuDeleteComponent.click();
+                browser.sleep(vars.timeToWaitAutoSave);
+                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                browser.close().then(browser.switchTo().window(handles[0]));
+                login.logout();
+            });
+        });
+    });
+
+    it('bba-281:Verify that the autosave is launched when you disconnect a component', function() {
+
+        var name = 'VariosComponentes';
+        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
+        projects.get();
+        myprojects.overMyProjects.click();
+        myprojects.openProject.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]).then(function() {
+                expect(make.projectSave.getAttribute('aria-hidden')).toBe('true');
+                browser.actions().mouseMove(hwtab.sampleBoton).perform();
+                browser.actions().click(protractor.Button.RIGHT).perform();
+                hwtab.hwContextMenuDisconnectComponent.click();
+                browser.sleep(vars.timeToWaitAutoSave);
+                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                browser.actions().mouseMove(element(by.id('boardSchema'))).perform();
+                browser.actions().click(protractor.Button.RIGHT).perform();
+                hwtab.hwContextMenuDisconnectBoard.click();
                 browser.sleep(vars.timeToWaitAutoSave);
                 expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
                 browser.close().then(browser.switchTo().window(handles[0]));
