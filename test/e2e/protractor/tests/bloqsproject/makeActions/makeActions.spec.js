@@ -107,7 +107,11 @@ describe('Check makeActions actions in bloqsproject', function() {
         makeActions.menuHelp.click();
         expect(makeActions.menuHelpFaq.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuHelpTutorial.getAttribute('disabled')).not.toBeTruthy();
-        expect(makeActions.menuHelpComments.getAttribute('href')).toMatch(vars.supportEmailES);
+
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                expect(makeActions.menuHelpComments.getAttribute('href')).toMatch(vars.supportEmail(language));
+            });
         //expect(makeActions.menuHelpForum.getAttribute('disabled')).not.toBeTruthy(); Remove, forum not created yet
 
     });
