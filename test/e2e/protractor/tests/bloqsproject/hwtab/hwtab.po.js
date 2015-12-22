@@ -7,11 +7,16 @@
 var HwTab = function() {
 
     this.hwContextMenuDuplicate = $('[data-element="hw-contextmenu-duplicate"]');
-    this.hwContextMenuDelete = $('[data-element="hw-contextmenu-delete"]');
+    this.hwContextMenuDeleteBoard = $('[data-element="hw-contextmenu-board-delete"]');
     this.hwContextMenuDisconnect = $('[data-element="hw-contextmenu-disconnect"]');
 
-    this.sampleLed = $('[data-name="Led_1"]');
-    this.sampleServo = $('[data-name="Servo_1"]');
+    //ROBOTS
+    this.hwContextMenuDeleteRobot = $('[data-element="hw-contextmenu-robot-delete"]');
+
+    //COMPONENT
+    this.hwContextMenuDeleteComponent = $('[data-element="hw-contextmenu-component-delete"]');
+
+    this.sampleBoton = $('[data-name="boton_0"]');
 
 };
 
