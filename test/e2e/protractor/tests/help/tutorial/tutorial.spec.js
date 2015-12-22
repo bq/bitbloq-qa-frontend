@@ -96,23 +96,30 @@ describe('Tutorial ', function() {
         help.tutorialTab.click();
         browser.sleep(vars.timeToWaitFadeModals);
 
-        browser.executeScript(script).then(function() {
-            expect(help.contactUsTutorials.getAttribute('href')).toEqual(vars.supportEmailES);
-        });
+        browser.executeScript(script)
+            .then(globalFunctions.navigatorLanguage)
+            .then(function(language) {
+                expect(help.contactUsTutorials.getAttribute('href')).toEqual(vars.supportEmail(language));
+            });
 
         login.loginWithRandomUser();
         header.navHelp.click();
-
         help.tutorialTab.click();
-
         browser.executeScript(script).then(function() {
             help.contactUsTutorials.click();
             browser.sleep(vars.feedbackIdeas);
-            expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
+            globalFunctions.navigatorLanguage().then(function(language) {
+                if (language === 'es') {
+                    expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
+                } else {
+                    expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
+                }
+            });
+
             modals.bladeClose.click();
             browser.sleep(vars.timeToWaitFadeModals);
         });
 
     });
 
-  });
+});

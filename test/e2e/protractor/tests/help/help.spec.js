@@ -26,9 +26,12 @@ describe('Help ', function() {
 
     it('bba-38:Comprobar botones Informar de un error en usuario invitado', function() {
         help.get();
-        expect(help.contactUsLink.getAttribute('href')).toEqual(vars.supportEmailES);
-        expect(help.feedbackAboutAnError.getAttribute('href')).toEqual(vars.supportEmailES);
-        expect(help.feedbackIdeas.getAttribute('href')).toEqual(vars.supportEmailES);
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                expect(help.contactUsLink.getAttribute('href')).toEqual(vars.supportEmail(language));
+                expect(help.feedbackAboutAnError.getAttribute('href')).toEqual(vars.supportEmail(language));
+                expect(help.feedbackIdeas.getAttribute('href')).toEqual(vars.supportEmail(language));
+            });
     });
 
     it('bba-175:Comprobar botones Informar de un error en usuario registrado', function() {

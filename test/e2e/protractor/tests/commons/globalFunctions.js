@@ -74,8 +74,7 @@ var Global = function() {
 
     this.navigatorLanguage = function() {
         return browser.executeScript('return navigator.language;').then(function(language) {
-            console.log(language.split('-')[0]);
-            return language;
+            return language.split('-')[0];
         });
     };
 

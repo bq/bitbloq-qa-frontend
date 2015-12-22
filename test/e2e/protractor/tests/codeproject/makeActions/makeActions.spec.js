@@ -121,9 +121,12 @@ describe('Check makeActions actions in codeProjects', function() {
         makeActions.menuHelp.click();
         expect(makeActions.menuHelpFaq.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuHelpTutorial.getAttribute('disabled')).not.toBeTruthy();
-        expect(makeActions.menuHelpComments.getAttribute('href')).toMatch(vars.supportEmailES);
-        expect(makeActions.menuHelpErrorFeedback.getAttribute('href')).toMatch(vars.supportEmailES);
-        //expect(makeActions.menuHelpForum.getAttribute('disabled')).not.toBeTruthy(); Remove, forum not created yet
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                expect(makeActions.menuHelpComments.getAttribute('href')).toMatch(vars.supportEmail(language));
+                expect(makeActions.menuHelpErrorFeedback.getAttribute('href')).toMatch(vars.supportEmail(language));
+
+            });
 
     });
 
