@@ -21,7 +21,7 @@ var globalFunctions = new GlobalFunctions(),
     vars = new Variables(),
     login = new Login();
 
-globalFunctions.xmlReport('makeActionsShareLocal');
+globalFunctions.xmlReport('makeActionsShareEnv');
 describe('Menu Share of MakeActions', function() {
 
     //beforeEach commons

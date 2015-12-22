@@ -25,6 +25,7 @@ var Make = function() {
     this.bloqsTab = $('[data-element="bloqs-tab"]');
     this.codeTab = $('[data-element="code-tab"]');
     this.projectSave = $('[data-element="project-saved"]');
+    this.projectNotAllowSave = $('[data-element="project-not-allow-save"]');
 
     this.swToolboxFunctions = $('[data-element="sw-toolbox-functions"]');
     this.projectName = $('[data-element="project-name"]');
