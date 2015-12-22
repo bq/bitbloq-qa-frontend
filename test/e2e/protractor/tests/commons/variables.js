@@ -65,6 +65,9 @@ var Variables = function() {
     this.sendCommentsLiteral = 'Enviar comentarios a Bitbloq';
     this.sendCommentsLiteralEN = 'Send comments to Bitbloq';
 
+    this.enterValidYoutubeUrl = 'Introduce una url de Youtube válida';
+    this.enterValidYoutubeUrlEN = 'Enter a valid Youtube URL';
+
     this.infoErrorLiteral = 'Informar de un error';
     //Toast Literals
     this.toastResetPasswordNewLink = 'No se ha podido cambiar la contraseña. Por favor, solicita un nuevo link';

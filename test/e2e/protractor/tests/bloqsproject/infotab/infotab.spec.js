@@ -83,7 +83,14 @@ describe('Info tab', function() {
         make.infoTab.click();
         infoTab.infotabYoutubeVideoInput.sendKeys('https://www.youtube.com/user/TheRedsMusic');
         browser.sleep(vars.timeToWaitAutoSave);
-        expect(commons.alertTextToast.getText()).toMatch('Introduce una url de Youtube válida');
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.enterValidYoutubeUrl);
+                } else {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.enterValidYoutubeUrlEN);
+                }
+            });
         infoTab.infotabYoutubeVideoInput.clear();
         infoTab.infotabYoutubeVideoInput.sendKeys(validYoutubeUrl);
         browser.sleep(vars.timeToWaitAutoSave);
