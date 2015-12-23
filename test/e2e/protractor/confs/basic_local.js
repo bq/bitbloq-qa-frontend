@@ -16,5 +16,6 @@ protractorConfig.config.suites.myProjectsLocal = '../tests/projects/myprojects/m
 protractorConfig.config.suites.stateLocal = '../tests/state/state.spec.local.js';
 protractorConfig.config.suites.myProjectsLocal = '../tests/projects/myprojects/myprojects.spec.local.js';
 protractorConfig.config.suites.makeactionsShareLocal = '../tests/bloqsproject/makeActions/share/makeActionsShare.spec.local.js';
+protractorConfig.config.suites.autosaveLocal = '../tests/autosave/autosave.spec.local.js';
 
 exports.config = protractorConfig.config;

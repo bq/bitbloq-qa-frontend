@@ -10,6 +10,8 @@ var Variables = require('../../../commons/variables.js'),
     MakeActions = require('../makeActions.po.js'),
     Make = require('../../make.po.js'),
     Modals = require('../../../modals/modals.po.js'),
+    Login = require('../../../login/login.po.js'),
+    Projects = require('../../../projects/projects.po.js'),
     path = require('path'),
     fs = require('fs');
 
@@ -17,7 +19,9 @@ var vars = new Variables(),
     globalFunctions = new GlobalFunctions(),
     makeActions = new MakeActions(),
     modals = new Modals(),
-    make = new Make();
+    make = new Make(),
+    login = new Login(),
+    projects = new Projects();
 
 globalFunctions.xmlReport('makeActionsFileLocal');
 
@@ -134,6 +138,52 @@ describe('Menu file of MakeActions, specs only in local ', function() {
         //
         //    fs.unlink(fileDownload, done);
         //});
+
+    });
+
+    it('bba-64: delete a project', function() {
+        login.loginWithRandomUser();
+        projects.createNewProject();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]);
+            browser.sleep(vars.timeToWaitTab);
+            modals.rejectTour();
+            browser.sleep(vars.timeToWaitFadeModals);
+            makeActions.menuFile.click();
+            browser.sleep(vars.timeToWaitMenu);
+
+            makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled) {
+                expect(disabled).toBe('true');
+                make.saveProject();
+                makeActions.menuFile.click();
+                browser.sleep(vars.timeToWaitMenu);
+                makeActions.removeProject.click();
+                browser.sleep(vars.timeToWaitTab);
+                browser.sleep(vars.timeForDelete);
+                projects.get();
+                expect(projects.projectsName.isPresent()).toBe(false);
+                login.logout();
+                make.get();
+                browser.sleep(vars.timeToWaitTab);
+                modals.attentionContinueGuest.click();
+                browser.sleep(vars.timeToWaitFadeModals);
+                modals.rejectTour();
+                browser.sleep(vars.timeToWaitFadeModals);
+                makeActions.menuFile.click();
+                browser.sleep(vars.timeToWaitMenu);
+                makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled2) {
+                    expect(disabled2).toBe('true');
+                    makeActions.inputUploadFile.sendKeys(globalFunctions.filePath(path.resolve() + '/res/Boton_Bloqs.json'));
+                    browser.sleep(vars.timeToWaitSendKeys);
+                    makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled3) {
+                        expect(disabled3).toBe('true');
+                    });
+                });
+
+            });
+
+        });
 
     });
 
