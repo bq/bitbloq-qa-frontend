@@ -77,7 +77,8 @@ exports.config = {
         landing: '../tests/landing/landing.spec.js',
         language: '../tests/language/language.spec.js',
         state: '../tests/state/state.spec.js',
-        autosave: '../tests/autosave/autosave.spec.js'
+        autosave: '../tests/autosave/autosave.spec.js',
+        projects: '../tests/projects/projects.spec.js'
     },
 
     // /*

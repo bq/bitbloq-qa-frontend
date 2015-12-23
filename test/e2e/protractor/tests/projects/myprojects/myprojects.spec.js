@@ -30,7 +30,7 @@ var vars = new Variables(),
     explore = new Explore(),
     codeProject = new CodeProject();
 
-globalFunctions.xmlReport('projects');
+globalFunctions.xmlReport('myprojects');
 
 describe('My Projects', function() {
 
@@ -365,7 +365,7 @@ describe('My Projects', function() {
         // browser.pause();
           */
 
-          
+
         login.logout();
     });
 
