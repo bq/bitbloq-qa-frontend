@@ -2,7 +2,7 @@
 
 var Bloqs = function() {
 
-    var Q = require('q');
+    //var Q = require('q');
 
     this.getToolboxPO = function(section) {
         return $('[data-element="toolbox-' + section + '"]');
@@ -52,53 +52,83 @@ var Bloqs = function() {
             .perform();
     };
 
-    this.connectBloqs = function(connector, destinationBloq, movingBloq) {
+    this.connectBloqsDown = function() {
+        var that = this;
 
-        return Q.all([destinationBloq.getLocation(), movingBloq.getLocation()]).then(function() {
+        that.getBloq('functions', 'bloq-void-function').then(function(voidFunctionBloq) {
 
-            browser.actions()
-                .mouseMove(destinationBloq.getWebElement(), {
-                    x: 10,
-                    y: 10
-                })
-                .mouseDown()
-                .mouseMove(destinationBloq.getWebElement()) //premove start
-                .mouseMove({ //first move to get distance and leave preMove status
-                    x: 10,
-                    y: 10
-                })
-                .mouseMove({ //first move to get distance and leave preMove status
-                    x: 0,
-                    y: 0
-                })
-                .mouseMove({
+            that.moveBloq(voidFunctionBloq, {
+                x: -100,
+                y: 0
+            });
+
+            that.getBloq('functions', 'bloq-void-function').then(function(voidFunctionBloq2) {
+
+                that.moveBloq(voidFunctionBloq2, {
                     x: 0,
                     y: 100
-                })
-                .mouseUp()
-                .perform();
+                });
+            });
+        });
+    };
 
-            browser.actions()
-                .mouseMove(movingBloq.getWebElement(), {
-                    x: 10,
-                    y: 10
-                })
-                .mouseDown()
-                .mouseMove(movingBloq.getWebElement()) //premove start
-                .mouseMove({ //first move to get distance and leave preMove status
-                    x: 10,
-                    y: 10
-                })
-                .mouseMove({ //first move to get distance and leave preMove status
-                    x: 0,
+    this.connectBloqsUp = function() {
+        var that = this;
+
+        that.getBloq('functions', 'bloq-void-function').then(function(voidFunctionBloq) {
+
+            that.moveBloq(voidFunctionBloq, {
+                x: 0,
+                y: 100
+            });
+
+            that.getBloq('functions', 'bloq-void-function').then(function(voidFunctionBloq2) {
+
+                that.moveBloq(voidFunctionBloq2, {
+                    x: -100,
                     y: 0
-                })
-                .mouseMove({
+                });
+            });
+        });
+    };
+
+    this.connectBloqsRoot = function() {
+        var that = this;
+
+        that.getBloq('functions', 'bloq-void-function').then(function(voidFunctionBloq) {
+
+            that.moveBloq(voidFunctionBloq, {
+                x: 0,
+                y: 0
+            });
+
+            that.getBloq('functions', 'bloq-void-function').then(function(voidFunctionBloq2) {
+
+                that.moveBloq(voidFunctionBloq2, {
                     x: 0,
-                    y: 100
-                })
-                .mouseUp()
-                .perform();
+                    y: 50
+                });
+            });
+        });
+    };
+
+    this.connectElement = function() {
+        var that = this;
+
+        that.getBloq('vars', 'bloq-declare-variable').then(function(voidFunctionBloq) {
+
+            that.moveBloq(voidFunctionBloq, {
+                x: -200,
+                y: 0
+            });
+
+            that.getBloq('maths', 'bloq-number').then(function(voidFunctionBloq2) {
+
+                that.moveBloq(voidFunctionBloq2, {
+                    x: 100,
+                    y: 0
+                });
+            });
         });
     };
 };
