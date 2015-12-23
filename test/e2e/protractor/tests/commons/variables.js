@@ -69,6 +69,7 @@ var Variables = function() {
     this.enterValidYoutubeUrlEN = 'Enter a valid Youtube URL';
 
     this.infoErrorLiteral = 'Informar de un error';
+    this.infoErrorLiteralEN = 'Report an error';
 
     this.nameNewProject = 'Proyecto sin título';
     this.nameNewProjectEN = 'Untitled project';

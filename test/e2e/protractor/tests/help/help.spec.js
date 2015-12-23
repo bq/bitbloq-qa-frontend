@@ -41,25 +41,40 @@ describe('Help ', function() {
 
         help.contactUsLink.click();
         browser.sleep(vars.timeToWaitFadeModals);
-
-        expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
-
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
+                } else {
+                    expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
+                }
+            });
         modals.bladeClose.click();
         browser.sleep(vars.timeToWaitFadeModals);
 
         help.feedbackAboutAnError.click();
         browser.sleep(vars.timeToWaitFadeModals);
-
-        expect(modals.modalTitle.getText()).toEqual(vars.infoErrorLiteral);
-
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(modals.modalTitle.getText()).toEqual(vars.infoErrorLiteral);
+                } else {
+                    expect(modals.modalTitle.getText()).toEqual(vars.infoErrorLiteralEN);
+                }
+            });
         modals.bladeClose.click();
         browser.sleep(vars.timeToWaitFadeModals);
 
         help.feedbackIdeas.click();
         browser.sleep(vars.feedbackIdeas);
-
-        expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
-
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
+                } else {
+                    expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
+                }
+            });
     });
 
 });

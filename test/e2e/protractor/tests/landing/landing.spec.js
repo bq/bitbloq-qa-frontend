@@ -57,27 +57,34 @@ describe('Verify landing ', function() {
 
     it('bba-182:check if is login show modal feedback in landing (link "contacto")', function() {
 
-        //landing.openLandingMenu.click();
         var script = landing.landingPage + '.scrollTo(0,2000);';
-
         login.loginWithRandomUser();
         landing.get();
         browser.sleep(5000); //Time to wait load explora project on landing (not wait angular)
 
         browser.executeScript(script).then(function() {
-            expect(landing.contactButton.getAttribute('href')).not.toMatch(vars.supportEmailES);
-
+            globalFunctions.navigatorLanguage()
+                .then(function(language) {
+                    if (language === 'es') {
+                        expect(landing.contactButton.getAttribute('href')).not.toMatch(vars.supportEmailES);
+                    } else {
+                        expect(landing.contactButton.getAttribute('href')).not.toMatch(vars.supportEmailEN);
+                    }
+                });
             landing.contactButton.click();
             browser.sleep(vars.timeToWaitFadeModals);
-            expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
-
+            globalFunctions.navigatorLanguage()
+                .then(function(language) {
+                    if (language === 'es') {
+                        expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
+                    } else {
+                        expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
+                    }
+                });
             modals.bladeClose.click();
             browser.sleep(vars.timeToWaitFadeModals);
-
             login.logout();
-
         });
-
     });
 
 });

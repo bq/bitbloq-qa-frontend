@@ -239,7 +239,14 @@ describe('make tab', function() {
         make.get();
         modals.rejectTour();
         expect(make.projectName.isPresent()).toBe(true);
-        expect(make.projectName.getText()).toBe('Proyecto sin título');
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(make.projectName.getText()).toBe(vars.nameNewProject);
+                } else {
+                    expect(make.projectName.getText()).toBe(vars.nameNewProjectEN);
+                }
+            });
         make.infoTab.click();
         infotab.infotabProjectName.clear();
         browser.ignoreSynchronization = true;
@@ -248,7 +255,14 @@ describe('make tab', function() {
         browser.ignoreSynchronization = false;
         browser.sleep(vars.timeToWaitAutoSave);
         projects.get();
-        expect(projects.projectsName.getText()).toEqual('Proyecto sin título');
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(myprojects.projectName.getText()).toBe(vars.nameNewProject);
+                } else {
+                    expect(myprojects.projectName.getText()).toBe(vars.nameNewProjectEN);
+                }
+            });
         login.logout();
     });
 });

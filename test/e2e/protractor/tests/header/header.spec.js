@@ -113,8 +113,14 @@ describe('Navbar --> ', function() {
 
         header.navExplore.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/explore');
-
-        expect(header.navLearn.getAttribute('href')).toEqual('http://diwo.bq.com//course/aprende-robotica-y-programacion-con-bitbloq-2/');
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(header.navLearn.getAttribute('href')).toEqual('http://diwo.bq.com//course/aprende-robotica-y-programacion-con-bitbloq-2/');
+                } else {
+                    expect(header.navLearn.getAttribute('href')).toEqual('http://diwo.bq.com/en/course/aprende-robotica-y-programacion-con-bitbloq-2/');
+                }
+            });
 
         header.navHelp.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help');
