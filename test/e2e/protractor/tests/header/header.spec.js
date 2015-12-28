@@ -88,7 +88,7 @@ describe('Navbar --> ', function() {
         header.navExplore.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/explore');
 
-        expect(header.navLearn.getAttribute('href')).toEqual('http://diwo.bq.com//course/aprende-robotica-y-programacion-con-bitbloq-2/');
+        expect(header.navLearn.getAttribute('href')).toEqual('http://diwo.bq.com/course/aprende-robotica-y-programacion-con-bitbloq-2/');
 
         header.navHelp.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help');
@@ -114,7 +114,7 @@ describe('Navbar --> ', function() {
         header.navExplore.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/explore');
 
-        expect(header.navLearn.getAttribute('href')).toEqual('http://diwo.bq.com//course/aprende-robotica-y-programacion-con-bitbloq-2/');
+        expect(header.navLearn.getAttribute('href')).toEqual('http://diwo.bq.com/course/aprende-robotica-y-programacion-con-bitbloq-2/');
 
         header.navHelp.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help');

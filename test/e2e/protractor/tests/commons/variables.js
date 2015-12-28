@@ -34,7 +34,7 @@ var Variables = function() {
     this.timeForDelete = 15000;
 
     //Languages support email, default is EN
-    this.supportEmailES = 'mailto:soporte.bitbloq@bq.com';
+    this.supportEmailES = 'mailto:support-bitbloq@bq.com';
     this.supportEmailEN = 'mailto:support.bitbloq.en@bq.com';
     this.supportEmailFR = 'mailto:support.bitbloq.fr@bq.com';
     this.supportEmailDE = 'mailto:support.bitbloq.de@bq.com';
