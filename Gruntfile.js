@@ -71,6 +71,36 @@ module.exports = function(grunt) {
                     }
                 }
             },
+            alllocal_mvp: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/all_local.js',
+                    args: {
+                        baseUrl: grunt.option('target') || 'http://mvp-bitbloq.bq.com/',
+                        seleniumAddress: 'http://localhost:4444/wd/hub',
+                        suite: 'allLocal'
+                    }
+                }
+            },
+            alllocal_qa: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/all_local.js',
+                    args: {
+                        baseUrl: grunt.option('target') || 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
+                        seleniumAddress: 'http://localhost:4444/wd/hub',
+                        suite: 'allLocal'
+                    }
+                }
+            },
+            alllocal_next: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/all_local.js',
+                    args: {
+                        baseUrl: grunt.option('target') || 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
+                        seleniumAddress: 'http://localhost:4444/wd/hub',
+                        suite: 'allLocal'
+                    }
+                }
+            },
             firefox: {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic_firefox.js',
