@@ -11,7 +11,7 @@ var Register = function() {
     this.createAccountButtn = $('[data-element="create-account"]');
     this.userName = element(by.id('username'));
     this.email = element(by.model('user.email'));
-    this.password = element(by.model('user.password'));
+    this.password = $('[data-element="register-password-input"]');
     this.inputDay = $('[data-element="login-day-input"]');
     this.inputMonth = $('[data-element="login-month-input"]');
     this.inputYear = $('[data-element="login-year-input"]');
@@ -23,15 +23,15 @@ var Register = function() {
     this.showNoCheck = $('[data-element="show-no-check"]');
     this.showNoUser = $('[data-element="show-nouser"]');
     this.showInUse = $('[data-element="show-inuse"]');
-    this.showNoEmail = $('[data-element="show-noemail"]');
-    this.showInvalidEmial = $('[data-element="invalid-email"]');
+    this.showNoEmail = $('[data-element="register-show-noemail"]');
+    this.showInvalidEmial = $('[data-element="register-invalid-email"]');
     this.showInvalidUser = $('[data-element="show-invalid-user"]');
     this.showNoBirthdate = $('[data-element="show-no-birthdate"]');
     this.showNoFourteen = $('[data-element="show-no-fourteen"]');
     this.showEmailDuplicate = $('[data-element="login-duplicated-email"');
     //Show validate elements in password input
-    this.showNoPass = $('[data-element="show-no-pass"]');
-    this.showMoreSixPass = $('[data-element="show-more-six-pass"]');
+    this.showNoPass = $('[data-element="register-show-no-pass"]');
+    this.showMoreSixPass = $('[data-element="register-show-more-six-pass"]');
     this.showIncorrectPass = $('[data-element="show-incorrect-pass"]');
 
     /* P.O resetPassword.html */
