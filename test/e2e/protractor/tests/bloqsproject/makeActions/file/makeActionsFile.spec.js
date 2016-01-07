@@ -61,7 +61,7 @@ describe('Menu file of MakeActions', function() {
 
     });
 
-    it('bba-155: Copy a project', function() {
+    xit('bba-155: Copy a project', function() {
         var nameSavedProject = 'Test_Save_' + Number(new Date());
         login.loginWithRandomUser();
         projects.createNewProject();
@@ -98,7 +98,7 @@ describe('Menu file of MakeActions', function() {
         });
 
     });
-    it('bba-64: delete a project', function() {
+    xit('bba-64: delete a project', function() {
         var projecImportPath = '../../../../res/Boton_Bloqs.json',
             projectImportAbsolutePath = path.resolve(__dirname, projecImportPath);
         login.loginWithRandomUser();

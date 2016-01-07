@@ -40,7 +40,7 @@ describe('User account view', function() {
         login.logout();
     });
 
-    it('bba-24:Verify reset password (no social login)', function() {
+    xit('bba-24:Verify reset password (no social login)', function() {
 
         var randomUserInfo = login.loginWithRandomUser();
         account.get();

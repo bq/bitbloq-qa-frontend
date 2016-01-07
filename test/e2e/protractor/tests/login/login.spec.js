@@ -137,7 +137,7 @@ describe('Login ', function() {
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
    });
 
-   it('bba-162:Check show user not register if email is not register', function() {
+   xit('bba-162:Check show user not register if email is not register', function() {
 
        login.get();
        login.forgotPasswordButton.click();

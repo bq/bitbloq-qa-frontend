@@ -30,7 +30,7 @@ var vars = new Variables(),
     explore = new Explore(),
     codeProject = new CodeProject();
 
-globalFunctions.xmlReport('projects');
+globalFunctions.xmlReport('myProjects');
 
 describe('My Projects', function() {
 
@@ -161,7 +161,7 @@ describe('My Projects', function() {
 
     });
 
-    it('bba-146:Verify if not have project, show create new project', function() {
+    xit('bba-146:Verify if not have project, show create new project', function() {
         login.loginWithRandomUser();
         myprojects.newProject.click();
         globalFunctions.toMatchUrlInNewTab(/#\/bloqsproject/);
@@ -169,7 +169,7 @@ describe('My Projects', function() {
 
     });
 
-    it('bba-16:Check if projects are show correctly in my projects', function() {
+    xit('bba-16:Check if projects are show correctly in my projects', function() {
 
         var checkNameProjects = function(row, contain) {
             expect(element.all(by.repeater('project in projectSearched').row(row).column('project.name')).getText()).toContain(contain);

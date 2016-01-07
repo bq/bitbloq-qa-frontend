@@ -392,7 +392,7 @@ describe('Register ', function() {
         login.logout();
     });
 
-    it('bba-23:Verify remember password email', function() {
+    xit('bba-23:Verify remember password email', function() {
 
         //check bloqsproject
         var browserEmail = browser.forkNewDriverInstance();
@@ -460,7 +460,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-228:Check that link recovery password only use one time', function() {
+    xit('bba-228:Check that link recovery password only use one time', function() {
 
         //check bloqsproject
         var browserEmail = browser.forkNewDriverInstance();

@@ -68,8 +68,8 @@ exports.config = {
         myProjects: '../tests/projects/myprojects/myprojects.spec.js',
         register: '../tests/register/register.spec.js',
         landing: '../tests/landing/landing.spec.js',
-        language: '../tests/language/language.spec.js',
-        state: '../tests/state/state.spec.js'
+        language: '../tests/language/language.spec.js'//,
+        //state: '../tests/state/state.spec.js'
     },
 
     // /*

@@ -163,7 +163,7 @@ describe('Test CookiesBar', function() {
 
     });
 
-    it('bba-127:Check, Login user accept cookies and never appear in other session', function() {
+    xit('bba-127:Check, Login user accept cookies and never appear in other session', function() {
 
         /* Open browser with random user and close cookiesBar */
 

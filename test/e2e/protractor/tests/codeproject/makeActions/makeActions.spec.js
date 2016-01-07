@@ -30,7 +30,7 @@ describe('Check makeActions actions in codeProjects', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-240:check enabled/disabled options by logged in user', function() {
+    xit('bba-240:check enabled/disabled options by logged in user', function() {
 
         login.loginWithRandomUser();
 
