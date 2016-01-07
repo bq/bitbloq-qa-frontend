@@ -28,7 +28,7 @@ describe('State, specs only in local', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-256:Save a bloqs project', function() {
+    xit('bba-256:Save a bloqs project', function() {
         var name = 'Ultrasonidos_Bloqs';
         make.importFileGuestUser(path.resolve() + '/test/e2e/protractor/res/' + name +'.json');
         login.loginFromHeader('bloqsproject');

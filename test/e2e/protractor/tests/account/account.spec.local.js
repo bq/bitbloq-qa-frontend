@@ -62,7 +62,7 @@ describe('User account view', function() {
         login.logout();
 
     });
-    it('bba-60: verify user image upload', function() {
+    xit('bba-60: verify user image upload', function() {
         var smallImagePath = '../../res/imagenPequeña.jpg',
             bigImagePath = '../../res/morethanonemb.jpg',
             perfectImagePath = '../../res/perfectimage.jpg',
