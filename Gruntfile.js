@@ -407,11 +407,15 @@ module.exports = function(grunt) {
                     var passedItem = new Passed();
                     var test = obj[i].description.split(':');
                     passedItem.testcaseexternalid = test[0];
-                    if (obj[i].assertions[0].passed) {
+                    if (obj[i].assertions[0].passed && obj[i].duration > 100) {
                         passedItem.status = 'p';
-                    } else {
+                    } else if (!obj[i].assertions[0].passed && obj[i].duration > 100) {
                         passedItem.status = 'f';
                     }
+                    /* if is necessary bloqed test xit
+                                         else if (obj[i].duration < 100) {
+                                           passedItem.status = 'b';
+                                       }*/
                     passedArray.push(passedItem);
                 }
                 callback();
