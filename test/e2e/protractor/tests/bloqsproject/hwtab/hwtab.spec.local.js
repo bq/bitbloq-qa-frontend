@@ -18,7 +18,7 @@ var globalFunctions = new GlobalFunctions(),
 
 globalFunctions.xmlReport('hardwareTabLocal');
 
-describe('hardware tab testing for local', function() {
+describe('Hardware tab testing from local for contextual menu to ', function() {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -26,15 +26,7 @@ describe('hardware tab testing for local', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-169:Duplicate a component', function() {
-        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Bluetooth_Bloqs.json');
-        browser.actions().mouseMove(hwtab.bluetoothComp0).perform();
-        browser.actions().click(protractor.Button.RIGHT).perform();
-        hwtab.hwContextMenuDuplicateComponent.click();
-        expect(hwtab.bluetoothComp0.getAttribute('src')).toMatch(hwtab.bluetoothComp1.getAttribute('src'));
-        login.logout();
-    });
-    it('bba-22:Check hardware contextual menu', function() {
+    it('bba-22:Check menu options', function() {
         //component contextual menu
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Bluetooth_Bloqs.json');
         expect(hwtab.hwContextMenuComponent.getAttribute('style')).toMatch('display: none;');
@@ -83,6 +75,46 @@ describe('hardware tab testing for local', function() {
 
         login.logout();
 
+    });
+
+    //Testing menu contextual for board
+    it('bba-313:Remove board', function() {
+        var name = 'Arduino_Bloqs';
+        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
+        browser.actions().mouseMove(element(by.id('boardSchema'))).perform();
+        browser.actions().click(protractor.Button.RIGHT).perform();
+        hwtab.hwContextMenuDeleteBoard.click();
+        expect(element(by.css('.ArduinoUNO')).isPresent()).toBe(false);
+        login.logout();
+    });
+
+    //Testing menu contextual for component
+    it('bba-169:Duplicate a component', function() {
+        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Bluetooth_Bloqs.json');
+        browser.actions().mouseMove(hwtab.bluetoothComp0).perform();
+        browser.actions().click(protractor.Button.RIGHT).perform();
+        hwtab.hwContextMenuDuplicateComponent.click();
+        expect(hwtab.bluetoothComp0.getAttribute('src')).toMatch(hwtab.bluetoothComp1.getAttribute('src'));
+        login.logout();
+    });
+
+    it('bba-314:Disconnect a component', function() {
+        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Bluetooth_Bloqs.json');
+        browser.actions().mouseMove(hwtab.bluetoothComp0).perform();
+        browser.actions().click(protractor.Button.RIGHT).perform();
+        expect(globalFunctions.hasClass(hwtab.bluetoothComp0, 'jsplumb-connected')).toBe(true);
+        hwtab.hwContextMenuDisconnectComponent.click();
+        expect(globalFunctions.hasClass(hwtab.bluetoothComp0, 'jsplumb-connected')).toBe(false);
+        login.logout();
+    });
+
+    it('bba-315:Remove a component', function() {
+        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Bluetooth_Bloqs.json');
+        browser.actions().mouseMove(hwtab.bluetoothComp0).perform();
+        browser.actions().click(protractor.Button.RIGHT).perform();
+        hwtab.hwContextMenuDeleteComponent.click();
+        expect(hwtab.bluetoothComp0.isPresent()).toBe(false);
+        login.logout();
     });
 
 });
