@@ -13,7 +13,7 @@ var vars = new Variables(),
     explore = new Explore(),
     make = new Make();
 
-globalFunctions.xmlReport('makeActionsFileLocal');
+globalFunctions.xmlReport('explorefiltersLocal');
 
 describe('Menu file of MakeActions, specs only in local ', function() {
 

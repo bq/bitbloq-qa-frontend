@@ -409,13 +409,13 @@ module.exports = function(grunt) {
                     passedItem.testcaseexternalid = test[0];
                     if (obj[i].assertions[0].passed && obj[i].duration > 100) {
                         passedItem.status = 'p';
-                    } else if (!obj[i].assertions[0].passed && obj[i].duration > 100) {
+                    } else if (!obj[i].assertions[0].passed) {
                         passedItem.status = 'f';
                     }
-                    /* if is necessary bloqed test xit
-                                         else if (obj[i].duration < 100) {
-                                           passedItem.status = 'b';
-                                       }*/
+                    // if test is xit, time is < 100 and test is savedReport to bloqed
+                    else if (obj[i].duration < 100) {
+                        passedItem.status = 'b';
+                    }
                     passedArray.push(passedItem);
                 }
                 callback();
