@@ -6,6 +6,7 @@
 
 var HwTab = function() {
 
+	//BOARDS
     this.hwContextMenuBoard = $('[id="board-context-menu"]');
     this.hwContextMenuDeleteBoard = $('[data-element="hw-contextmenu-board-delete"]');
     this.hwContextMenuDisconnectBoard = $('[data-element="hw-contextmenu-board-disconnect"]');

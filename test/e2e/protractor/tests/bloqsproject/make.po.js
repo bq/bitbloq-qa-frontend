@@ -192,7 +192,7 @@ var Make = function() {
         browser.sleep(vars.timeToWaitFadeModals);
         file = globalFunctions.filePath(file);
         makeActions.inputUploadFile.sendKeys(file);
-        browser.sleep(vars.timeToWaitFadeModals);
+        return browser.sleep(vars.timeToWaitAutoSave);
 
     };
 
@@ -209,11 +209,11 @@ var Make = function() {
 
     this.importFileNewUser = function(file) {
         var user = login.loginWithRandomUser();
-        this.importFile(file);
-        browser.sleep(5000);
-        return {
-            user: user
-        };
+        return this.importFile(file).then(function() {
+            return {
+                user: user
+            };
+        });
     };
 
     this.importFileUserLogin = function(file, user) {
