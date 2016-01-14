@@ -37,6 +37,7 @@ describe('Menu file of MakeActions', function() {
 
         make.get();
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
 

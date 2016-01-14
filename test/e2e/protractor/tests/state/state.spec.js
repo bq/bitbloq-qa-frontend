@@ -42,6 +42,7 @@ describe('State ', function() {
     it('bba-273:Verify that the empty bloqsproject isnt saved', function() {
         make.get();
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         login.loginFromHeader('bloqsproject');
@@ -63,6 +64,7 @@ describe('State ', function() {
     it('bba-274:Verify that the empty codeproject isnt saved', function() {
         make.get();
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         make.softwareTab.click();
@@ -79,6 +81,7 @@ describe('State ', function() {
     it('bba-258:See a explore tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         header.navExplore.click();
@@ -91,6 +94,7 @@ describe('State ', function() {
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             make.get();
             modals.attentionContinueGuest.click();
+            browser.sleep(vars.timeToWaitFadeModals);
             modals.rejectTour();
             browser.sleep(vars.timeToWaitFadeModals);
             header.navExplore.click();
@@ -113,6 +117,7 @@ describe('State ', function() {
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             make.get();
             modals.attentionContinueGuest.click();
+            browser.sleep(vars.timeToWaitFadeModals);
             modals.rejectTour();
             browser.sleep(vars.timeToWaitFadeModals);
             header.navExplore.click();
@@ -143,6 +148,7 @@ describe('State ', function() {
         var projectSaved = codeProject.saveCodeProjectAndPublishNewUserAndLogout();
         make.get();
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         header.navExplore.click();
@@ -170,6 +176,7 @@ describe('State ', function() {
     it('bba-263:See a faq page', function() {
         make.get();
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         header.navHelp.click();
@@ -181,6 +188,7 @@ describe('State ', function() {
     it('bba-264:See a tutorial page', function() {
         make.get();
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         header.navHelp.click();
@@ -191,6 +199,7 @@ describe('State ', function() {
     it('bba-265:See a faq page', function() {
         make.get();
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         header.navHelp.click();
@@ -201,6 +210,7 @@ describe('State ', function() {
     it('bba-266:A search in the explora tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         header.navExplore.click();
@@ -215,6 +225,7 @@ describe('State ', function() {
     it('bba-267:A filter in the explora tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         header.navExplore.click();

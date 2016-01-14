@@ -16,7 +16,7 @@ var login = new Login(),
     // vars = new Variables(),
     globalFunctions = new GlobalFunctions();
 
-globalFunctions.xmlReport('help');
+globalFunctions.xmlReport('helpChangelog');
 
 describe('Changelog ', function() {
 

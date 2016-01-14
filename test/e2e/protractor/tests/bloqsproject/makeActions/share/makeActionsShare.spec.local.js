@@ -129,6 +129,7 @@ describe('Menu share of makeactions local', function() {
                     //turn the bloqsproject into codeproject
                     //this does not cause autosave
                     make.softwareTab.click();
+                    browser.sleep(vars.timeToWaitTab);
                     make.codeTab.click();
                     make.softwareEditCode.click();
                     modals.modalAlertOk.click();

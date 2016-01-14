@@ -69,6 +69,7 @@ describe('Info tab', function() {
         login.logout();
         make.get();
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         setThemeColor('gray');
