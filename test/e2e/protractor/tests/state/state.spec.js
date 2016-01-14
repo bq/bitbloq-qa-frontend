@@ -43,8 +43,10 @@ describe('State ', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
         login.loginFromHeader('bloqsproject');
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
         globalFunctions.navigatorLanguage()
             .then(function(language) {
                 if (language === 'es') {
@@ -169,6 +171,7 @@ describe('State ', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
         header.navHelp.click();
         help.tutorialTab.click();
         help.faqTab.click();
@@ -179,6 +182,7 @@ describe('State ', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
         header.navHelp.click();
         help.tutorialTab.click();
         login.loginFromHeader('help/tutorial');
@@ -188,6 +192,7 @@ describe('State ', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
         header.navHelp.click();
         help.changelogTab.click();
         login.loginFromHeader('help/update');
@@ -197,6 +202,7 @@ describe('State ', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
         header.navExplore.click();
         explore.exploreFind.clear().sendKeys('Test_Save_');
         browser.getCurrentUrl().then(function(url) {
@@ -210,6 +216,7 @@ describe('State ', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
         header.navExplore.click();
         explore.exploreFilterDrowdown.click();
         element.all(by.repeater('compFilter in componentsFilterOptions').row(1).column('compFilter.option')).click();

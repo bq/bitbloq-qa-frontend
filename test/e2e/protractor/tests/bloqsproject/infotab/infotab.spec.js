@@ -61,6 +61,7 @@ describe('Info tab', function() {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
         setThemeColor('gray');
         expect(element(by.css('.bloq-void-function')).getCssValue('color')).toBe('rgba(221, 90, 10, 1)');
         setThemeColor('color');
@@ -69,6 +70,7 @@ describe('Info tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
         setThemeColor('gray');
         expect(element(by.css('.bloq-void-function')).getCssValue('color')).toBe('rgba(221, 90, 10, 1)');
         setThemeColor('color');
@@ -80,6 +82,7 @@ describe('Info tab', function() {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
         make.infoTab.click();
         infoTab.infotabYoutubeVideoInput.sendKeys('https://www.youtube.com/user/TheRedsMusic');
         browser.sleep(vars.timeToWaitAutoSave);

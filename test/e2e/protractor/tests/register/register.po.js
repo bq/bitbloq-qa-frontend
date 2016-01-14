@@ -17,7 +17,7 @@ var Register = function() {
     this.inputYear = $('[data-element="login-year-input"]');
     this.enterRegister = $('[data-element="enter-register"]');
     this.checkBoxNewsletterAndTeacher = $('[data-element="register-newsletter-teacher-input"]');
-    this.checkBoxPropertiesTerm = element(by.model('user.properties.term'));
+    this.checkBoxPropertiesTerm=$('[data-element="register-terms-input"]');
     this.userLoginHeader = $('[data-element="user-login"]');
     //Show validate elements
     this.showNoCheck = $('[data-element="show-no-check"]');

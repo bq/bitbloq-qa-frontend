@@ -78,7 +78,8 @@ exports.config = {
         language: '../tests/language/language.spec.js',
         state: '../tests/state/state.spec.js',
         autosave: '../tests/autosave/autosave.spec.js',
-        projects: '../tests/projects/projects.spec.js'
+        projects: '../tests/projects/projects.spec.js',
+        forum: '../tests/help/forum/forum.spec.js'
     },
 
     // /*

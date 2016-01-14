@@ -5,6 +5,7 @@ var Help = function() {
     this.faqTab = $('[data-element="help-faqnav"]');
     this.tutorialTab = $('[data-element="help-tutorialnav"]');
     this.changelogTab = $('[data-element="help-changelognav"]');
+    this.foroNav=$('[data-element="help-foronav"]');
 
     this.contactUsTutorials = $('[data-element="help-contact-us-tutorial"]');
     this.contactUsLink = $('[data-element="help-contact-us-link"]');

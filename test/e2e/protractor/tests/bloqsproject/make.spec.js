@@ -238,6 +238,7 @@ describe('make tab', function() {
 
         make.get();
         modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
         expect(make.projectName.isPresent()).toBe(true);
         globalFunctions.navigatorLanguage()
             .then(function(language) {

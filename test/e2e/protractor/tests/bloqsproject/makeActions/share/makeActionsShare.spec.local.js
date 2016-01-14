@@ -132,6 +132,7 @@ describe('Menu share of makeactions local', function() {
                     make.codeTab.click();
                     make.softwareEditCode.click();
                     modals.modalAlertOk.click();
+                    browser.sleep(vars.timeToWaitFadeModals);
                     ////////////////////////////////////
                     make.infoTab.click();
                     browser.sleep(vars.timeToWaitTab);

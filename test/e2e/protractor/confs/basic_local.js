@@ -14,7 +14,6 @@ protractorConfig.config.suites.infotabLocal = '../tests/bloqsproject/infotab/inf
 protractorConfig.config.suites.projectLocal = '../tests/explore/project.spec.local.js';
 protractorConfig.config.suites.myProjectsLocal = '../tests/projects/myprojects/myprojects.spec.local.js';
 protractorConfig.config.suites.stateLocal = '../tests/state/state.spec.local.js';
-protractorConfig.config.suites.myProjectsLocal = '../tests/projects/myprojects/myprojects.spec.local.js';
 protractorConfig.config.suites.makeactionsShareLocal = '../tests/bloqsproject/makeActions/share/makeActionsShare.spec.local.js';
 protractorConfig.config.suites.autosaveLocal = '../tests/autosave/autosave.spec.local.js';
 protractorConfig.config.suites.bloqsprojectHardwareLocal = '../tests/bloqsproject/hwtab/hwtab.spec.local.js';

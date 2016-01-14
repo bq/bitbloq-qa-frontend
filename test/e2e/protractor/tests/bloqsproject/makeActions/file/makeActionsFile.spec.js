@@ -69,6 +69,7 @@ describe('Menu file of MakeActions', function() {
             browser.switchTo().window(handles[1]);
             browser.sleep(vars.timeToWaitTab);
             modals.rejectTour();
+            browser.sleep(vars.timeToWaitFadeModals);
             make.infoTab.click();
             infotab.infotabProjectName.clear();
             infotab.infotabProjectName.sendKeys(nameSavedProject);
