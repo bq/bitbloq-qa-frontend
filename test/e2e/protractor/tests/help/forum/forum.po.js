@@ -6,10 +6,17 @@ var Forum = function() {
 
     //new topic
     this.categoryList = $('[data-element="forum_category_dropdown"]');
-    this.newTopicTitle=$('[data-element="forum-new-theme-title"]');
-    this.newTopicDescription=$('[data-element="forum-new-theme-description"]');
-    this.forumScroll='$(\'[data-element="forum-scroll"]\')';
-    this.publishTopic=$('[data-element="forum-publish-theme"]');
+    this.newTopicTitle = $('[data-element="forum-new-theme-title"]');
+    this.newTopicDescription = $('[data-element="forum-new-theme-description"]');
+    this.forumScroll = '$(\'[data-element="forum-scroll"]\')';
+    this.publishTopic = $('[data-element="forum-publish-theme"]');
+
+    //category topic lists
+    this.categoryTopicTitle = $('[data-element="forum-category-theme-title"]');
+
+    //inside a topic
+    this.topicTopicTitle=$('[data-element="forum-theme-theme-title"]');
+    this.topicTopicContent=$('[data-element="forum-theme-theme-content"]');
 
     this.url = '#/help/forum';
 
