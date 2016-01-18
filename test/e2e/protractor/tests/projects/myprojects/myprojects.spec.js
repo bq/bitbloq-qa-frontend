@@ -61,7 +61,7 @@ describe('My Projects', function() {
         expect(projects.projectsName.getText()).toEqual(name);
 
         //Eliminar el projecto
-        myprojects.overMyProjects.click();
+        browser.actions().mouseMove(myprojects.overMyProjects).perform();
         browser.sleep(vars.timeToWaitFadeModals);
         myprojects.eliminateMyProjects.click();
         browser.sleep(18000);
@@ -375,7 +375,7 @@ describe('My Projects', function() {
         browser.sleep(vars.timeToWaitTab);
 
         myprojects.timeTag.getText().then(function(timeCreation) {
-            myprojects.overMyProjects.click();
+            browser.actions().mouseMove(myprojects.overMyProjects).perform();
             browser.sleep(vars.timeToWaitFadeModals);
             myprojects.renameProject.click();
             modals.inputModalChangeN.clear();

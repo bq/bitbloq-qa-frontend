@@ -37,13 +37,13 @@ describe('My projects, only local', function() {
         projects.get();
         browser.sleep(vars.timeToWaitTab);
         var file1 = path.resolve() + '/target/' + nameProject + '.ino';
-        myprojects.overMyProjects.click();
+        browser.actions().mouseMove(myprojects.overMyProjects).perform();
         browser.sleep(vars.timeToWaitFadeModals);
         myprojects.downloadIno.click();
         browser.driver.wait(function() {
             return fs.existsSync(file1);
         }, 4000).then(function() {
-            myprojects.overMyProjects.click();
+            browser.actions().mouseMove(myprojects.overMyProjects).perform();
             browser.sleep(vars.timeToWaitFadeModals);
             myprojects.copyProject.click();
             browser.sleep(vars.timeToWaitFadeModals);
@@ -51,7 +51,7 @@ describe('My projects, only local', function() {
             browser.sleep(vars.timeToWaitAutoSave).then(function() {
                 expect(myprojects.projectName.getText()).toEqual('Copia de ' + nameProject);
                 var file2 = path.resolve() + '/target/' + 'Copia_de_' + nameProject + '.ino';
-                myprojects.overMyProjects.click();
+                browser.actions().mouseMove(myprojects.overMyProjects).perform();
                 browser.sleep(vars.timeToWaitFadeModals);
                 myprojects.downloadIno.click();
                 browser.driver.wait(function() {
@@ -81,7 +81,7 @@ describe('My projects, only local', function() {
         browser.sleep(vars.timeToWaitAutoSave);
         projects.get();
         browser.sleep(vars.timeToWaitTab);
-        myprojects.overMyProjects.click();
+        browser.actions().mouseMove(myprojects.overMyProjects).perform();
         browser.sleep(vars.timeToWaitFadeModals);
         myprojects.downloadIno.click();
         browser.wait(function() {

@@ -93,12 +93,9 @@ describe('make tab', function() {
         login.login(userLogin.user, userLogin.password);
         projects.get();
         //Open saved project
-        myprojects.overMyProjects.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        myprojects.openProject.click().then(function() {
+        myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
             browser.getAllWindowHandles().then(function(handles) {
-                console.log(handles);
                 browser.switchTo().window(handles[1]).then(function() {
                     make.infoTab.click();
                     //Show saved tag
@@ -156,9 +153,7 @@ describe('make tab', function() {
         login.login(userLogin.user, userLogin.password);
         projects.get();
         //Open saved project
-        myprojects.overMyProjects.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        myprojects.openProject.click().then(function() {
+        myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
             browser.getAllWindowHandles().then(function(handles) {
                 console.log(handles);
@@ -186,9 +181,7 @@ describe('make tab', function() {
         browser.sleep(vars.timeToWaitAutoSave);
         //Open saved project
         projects.get();
-        myprojects.overMyProjects.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        myprojects.openProject.click().then(function() {
+        myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
             browser.getAllWindowHandles().then(function(handles) {
                 browser.switchTo().window(handles[1]).then(function() {
@@ -206,9 +199,7 @@ describe('make tab', function() {
                         browser.sleep(vars.timeToWaitTab);
                         projects.get();
                         expect(projects.projectsName.getText()).toEqual('ChangeTestName');
-                        myprojects.overMyProjects.click();
-                        browser.sleep(vars.timeToWaitFadeModals);
-                        myprojects.openProject.click().then(function() {
+                        myprojects.overMyProjects.click().then(function() {
                             browser.sleep(vars.timeToWaitTab);
                             browser.getAllWindowHandles().then(function(handles2) {
                                 browser.switchTo().window(handles2[1]).then(function() {

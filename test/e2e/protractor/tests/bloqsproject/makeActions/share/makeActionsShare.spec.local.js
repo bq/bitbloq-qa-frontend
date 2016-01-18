@@ -80,8 +80,6 @@ describe('Menu share of makeactions local', function() {
             login.login(user1.user, user1.password);
             projects.sharedProjects.click();
             myprojects.overMyProjects.click();
-            browser.sleep(vars.timeToWaitFadeModals);
-            myprojects.openProject.click();
             browser.getAllWindowHandles().then(function(handles) {
                 browser.switchTo().window(handles[1]).then(function() {
                     //try to change values at infotab
@@ -178,8 +176,6 @@ describe('Menu share of makeactions local', function() {
                     browser.sleep(vars.timeToWaitTab);
                     projects.sharedProjects.click();
                     myprojects.overMyProjects.click();
-                    browser.sleep(vars.timeToWaitFadeModals);
-                    myprojects.openProject.click();
                     browser.sleep(vars.timeToWaitTab);
                     browser.getAllWindowHandles().then(function(handles2) {
                         browser.switchTo().window(handles2[2]).then(function() {
@@ -329,8 +325,6 @@ describe('Menu share of makeactions local', function() {
                 login.login(user1.user, user1.password);
                 projects.sharedProjects.click();
                 myprojects.overMyProjects.click();
-                browser.sleep(vars.timeToWaitFadeModals);
-                myprojects.openProject.click();
                 browser.getAllWindowHandles().then(function(handles) {
                     browser.sleep(vars.timeToWaitTab);
                     browser.switchTo().window(handles[1]).then(function() {
@@ -349,8 +343,6 @@ describe('Menu share of makeactions local', function() {
                             login.login(user2.user, user2.password);
                             projects.sharedProjects.click();
                             myprojects.overMyProjects.click();
-                            browser.sleep(vars.timeToWaitFadeModals);
-                            myprojects.openProject.click();
                             browser.getAllWindowHandles().then(function(handles2) {
                                 browser.sleep(vars.timeToWaitTab);
                                 browser.switchTo().window(handles2[2]).then(function() {
@@ -368,8 +360,6 @@ describe('Menu share of makeactions local', function() {
                                         login.login(user3.user, user3.password);
                                         projects.sharedProjects.click();
                                         myprojects.overMyProjects.click();
-                                        browser.sleep(vars.timeToWaitFadeModals);
-                                        myprojects.openProject.click();
                                         browser.getAllWindowHandles().then(function(handles3) {
                                             browser.sleep(vars.timeToWaitTab);
                                             browser.switchTo().window(handles3[3]).then(function() {
