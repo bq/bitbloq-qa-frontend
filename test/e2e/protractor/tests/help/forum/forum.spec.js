@@ -62,7 +62,9 @@ describe('Forum', function() {
         });
 
     });
+
     it('bba-292:create a new topic', function() {
+
         login.loginWithRandomUser();
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -75,6 +77,7 @@ describe('Forum', function() {
         browser.sleep(vars.timeToWaitSendKeys);
         var script = forum.forumScroll + '.scrollTo(0,1000);';
         browser.executeScript(script).then(function() {
+
             forum.newTopicDescription.all(by.css('div')).get(15).click();
             var contenido = 'comentario automatico ' + Number(new Date());
             forum.newTopicDescription.all(by.css('div')).get(15).sendKeys(contenido);
@@ -82,6 +85,7 @@ describe('Forum', function() {
             browser.sleep(vars.timeToWaitFadeModals);
             forum.publishTopic.click();
             browser.sleep(vars.timeToWaitTab);
+
             //en el momento de creacion de este test, no existia traduccion para este toast
             //una vez exista, se añadira el control del idioma para saucelabs
             commons.expectToastTimeOutandText(commons.alertTextToast, 'Tema creado');
@@ -94,12 +98,12 @@ describe('Forum', function() {
                 expect(topicTitle).toBe(titulo);
                 forum.topicTopicContent.getText().then(function(topicContent) {
                     expect(topicContent).toMatch(contenido);
+                    login.logout();
                 });
             });
 
         });
 
-        //browser.sleep(100000);
     });
     it('bba-293:create a new topic (not registered)', function() {
 
@@ -167,8 +171,79 @@ describe('Forum', function() {
                 forum.newTopicTitle.sendKeys(titulo);
                 browser.sleep(vars.timeToWaitSendKeys);
                 expect(forum.publishTopic.getAttribute('aria-disabled')).toBe('true');
-              });
+                login.logout();
+            });
         });
+
+    });
+    it('bba-295:create topics with the same title', function() {
+        var title = 'same title ' + Number(new Date());
+        var description = 'same description' + Number(new Date());
+        forum.createTopicNewUser(title, description);
+        forum.createNewTopic(title, description);
+        forum.get();
+        browser.sleep(vars.timeToWaitTab);
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitTab);
+        element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.title')).click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getCurrentUrl().then(function(url) {
+            expect(forum.topicTopicTitle.getText()).toBe(title);
+            expect(forum.topicTopicContent.getText()).toMatch(description);
+            forum.get();
+            browser.sleep(vars.timeToWaitTab);
+            forum.categoryButton.click();
+            browser.sleep(vars.timeToWaitTab);
+            element.all(by.repeater('theme in forum.categoryThemes').row(1).column('theme.title')).click();
+            browser.sleep(vars.timeToWaitTab);
+            expect(browser.getCurrentUrl()).not.toMatch(url);
+            expect(forum.topicTopicTitle.getText()).toBe(title);
+            expect(forum.topicTopicContent.getText()).toMatch(description);
+            login.logout();
+        });
+
+    });
+
+    it('bba-296:Answer a topic', function() {
+        var user = forum.createTopicNewUser().user;
+        forum.get();
+        browser.sleep(vars.timeToWaitTab);
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitTab);
+        element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.title')).click();
+        browser.sleep(vars.timeToWaitTab);
+        var answer = 'answer_' + Number(new Date());
+        forum.answerTopic.all(by.css('div')).get(15).click();
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys(answer);
+        browser.sleep(vars.timeToWaitSendKeys);
+        forum.publishAnswerButton.click();
+        browser.sleep(vars.timeToWaitTab);
+        element.all(by.repeater('answer in forum.themeAnswers').row(0).column('answer.owner.username')).getText().then(function(userAnswer) {
+            expect(userAnswer).toMatch(user.user.toLowerCase());
+            expect(forum.answerContent.getText()).toMatch(answer);
+            login.logout();
+        });
+
+    });
+    it('bba-297:Answer a topic (empty answer)', function() {
+        forum.createTopicNewUser();
+        forum.get();
+        browser.sleep(vars.timeToWaitTab);
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitTab);
+        element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.title')).click();
+        browser.sleep(vars.timeToWaitTab);
+        expect(forum.publishAnswerButton.getAttribute('aria-disabled')).toBe('true');
+        forum.answerTopic.all(by.css('div')).get(15).click();
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys('random keystrokes');
+        browser.sleep(vars.timeToWaitSendKeys);
+        browser.sleep(vars.timeToWaitFadeModals);
+        expect(forum.publishAnswerButton.getAttribute('aria-disabled')).toBe('false');
+        forum.answerTopic.all(by.css('div')).get(15).click();
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys(protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE);
+        browser.sleep(vars.timeToWaitFadeModals);
+        expect(forum.publishAnswerButton.getAttribute('aria-disabled')).toBe('true');
+        login.logout();
     });
 
 });

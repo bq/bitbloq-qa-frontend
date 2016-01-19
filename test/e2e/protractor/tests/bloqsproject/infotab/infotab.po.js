@@ -19,6 +19,7 @@ var Infotab = function() {
     this.infotabOptionColorTheme = $('[data-element="infotab_option_colorTheme"]');
     this.infotabYoutubeVideoInput = $('[data-element="infotab-youtubevideo"]');
     this.infotabDescription = $('[data-element="infotab-description"]');
+    this.infotabRemoveTag=$('[data-element="infotab-remove-tag"]');
 };
 
 module.exports = Infotab;

@@ -24,6 +24,10 @@ var Variables = function() {
     this.userFb = 'Paco';
     this.lastnameFb = 'Gómez';
 
+    //forum user admin
+    this.forumAdminEmail='oscar.alhambra@bq.com';
+    this.forumAdminPass='adminkey';
+
     //timers
     this.timeToWaitFadeModals = 2000;
     this.timeToWaitAutoSave = 5600;

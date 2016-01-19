@@ -117,7 +117,7 @@ describe('make tab', function() {
         });
     });
 
-    it('bba-115:Delete tag', function() {
+    fit('bba-115:Delete tag', function() {
         var userLogin = login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -142,7 +142,10 @@ describe('make tab', function() {
 
         //Eliminate tag
         element.all(by.repeater('tag in project.userTags').row(0)).click();
-        element.all(by.repeater('tag in project.userTags').row(0)).click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        infotab.infotabRemoveTag.click();
+        infotab.infotabRemoveTag.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         browser.sleep(vars.timeToWaitAutoSave);
 
         expect(element(by.repeater('tag in project.userTags')).isPresent()).toBe(false);
