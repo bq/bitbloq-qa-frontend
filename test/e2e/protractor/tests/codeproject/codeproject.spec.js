@@ -142,10 +142,7 @@ describe('Test Codeproject verify', function() {
         login.logout();
         login.get();
         login.login(projectUser.user.user, projectUser.user.password);
-        myprojects.overMyProjects.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-
-        myprojects.openProject.click().then(function() {
+        myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
             browser.getAllWindowHandles().then(function(handles) {
                 console.log(handles);
@@ -169,9 +166,7 @@ describe('Test Codeproject verify', function() {
         login.get();
         login.login(projectUser.user.user, projectUser.user.password);
 
-        myprojects.overMyProjects.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        myprojects.openProject.click().then(function() {
+        myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
             browser.getAllWindowHandles().then(function(handles) {
                 console.log(handles);
@@ -195,12 +190,7 @@ describe('Test Codeproject verify', function() {
         //Logout, login and check if saved
         login.get();
         login.login(projectUser.user.user, projectUser.user.password);
-        myprojects.overMyProjects.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-
-        myprojects.overMyProjects.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        myprojects.openProject.click().then(function() {
+        myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
             browser.getAllWindowHandles().then(function(handles) {
                 console.log(handles);
@@ -226,9 +216,7 @@ describe('Test Codeproject verify', function() {
     it('bba-275:Project must have a name', function() {
         codeproject.saveCodeProjectNewUser();
         projects.get();
-        myprojects.overMyProjects.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        myprojects.openProject.click().then(function() {
+        myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
             browser.getAllWindowHandles().then(function(handles) {
                 browser.switchTo().window(handles[1]).then(function() {

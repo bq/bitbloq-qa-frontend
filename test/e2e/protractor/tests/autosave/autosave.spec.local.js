@@ -37,7 +37,6 @@ describe('Check makeActions actions in codeProjects', function() {
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
         projects.get();
         myprojects.overMyProjects.click();
-        myprojects.openProject.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.switchTo().window(handles[1]).then(function() {
@@ -56,7 +55,6 @@ describe('Check makeActions actions in codeProjects', function() {
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
         projects.get();
         myprojects.overMyProjects.click();
-        myprojects.openProject.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.switchTo().window(handles[1]).then(function() {
@@ -78,7 +76,6 @@ describe('Check makeActions actions in codeProjects', function() {
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
         projects.get();
         myprojects.overMyProjects.click();
-        myprojects.openProject.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.switchTo().window(handles[1]).then(function() {
@@ -100,7 +97,6 @@ describe('Check makeActions actions in codeProjects', function() {
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
         projects.get();
         myprojects.overMyProjects.click();
-        myprojects.openProject.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.switchTo().window(handles[1]).then(function() {
