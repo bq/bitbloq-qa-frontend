@@ -117,7 +117,7 @@ describe('make tab', function() {
         });
     });
 
-    fit('bba-115:Delete tag', function() {
+    it('bba-115:Delete tag', function() {
         var userLogin = login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
