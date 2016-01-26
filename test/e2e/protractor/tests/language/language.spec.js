@@ -61,7 +61,7 @@ describe('Language', function() {
                     break;
                 case 'EU':
                     buttonLanguage = landing.basqueLanguage;
-                    supportEmail = vars.supportEmailEN;
+                    supportEmail = vars.supportEmailES;
                     break;
                 case 'CA':
                     buttonLanguage = landing.catalanLanguage;
@@ -69,7 +69,7 @@ describe('Language', function() {
                     break;
                 case 'GL':
                     buttonLanguage = landing.galicianLanguage;
-                    supportEmail = vars.supportEmailEN;
+                    supportEmail = vars.supportEmailES;
                     break;
                 case 'CN':
                     buttonLanguage = landing.chineseLanguage;
