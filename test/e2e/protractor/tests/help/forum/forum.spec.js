@@ -63,7 +63,7 @@ describe('Forum', function() {
 
     });
 
-    it('bba-292:create a new topic', function() {
+    xit('bba-292:create a new topic', function() {
 
         login.loginWithRandomUser();
         forum.get();
@@ -204,7 +204,7 @@ describe('Forum', function() {
 
     });
 
-    it('bba-296:Answer a topic', function() {
+    xit('bba-296:Answer a topic', function() {
         var user = forum.createTopicNewUser().user;
         forum.get();
         browser.sleep(vars.timeToWaitTab);
