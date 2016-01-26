@@ -32,41 +32,42 @@ describe('Menu Share of MakeActions', function() {
 
     //TODO test TOAST
     //Solo se puede jugar en un entorno
-    xit('bba-151:Publish project in social media (the project has already been published in Explora)', function() {
+    it('bba-151:Publish project in social media (the project has already been published in Explora)', function() {
 
         //make.saveProjectAndPublishNewUser();
         make.saveProjectAndPublishNewUser().then(function() {
             browser.sleep(vars.timeToWaitMenu);
             browser.getCurrentUrl().then(function(url) {
                 url = url.split('/');
+                // makeActions.menuShare.click();
+                // browser.sleep(vars.timeToWaitMenu);
+                // makeActions.menuShareSocial.click();
+                // browser.sleep(vars.timeToWaitMenu);
+                // browser.ignoreSynchronization = true;
+                // modals.gButton.click();
+                // browser.sleep(vars.timeToWaitTab);
+                // //Google+
+                // browser.getAllWindowHandles().then(function(handles) {
+                //     browser.switchTo().window(handles[1]);
+                //     browser.sleep(vars.timeToWaitTab);
+                //     login.googleUser.sendKeys(vars.userGoogle);
+                //     browser.sleep(1000);
+                //     login.googleNext.click();
+                //     browser.sleep(1000);
+                //     login.googlePassword.sendKeys(vars.passwordGoogle);
+                //     browser.sleep(1000);
+                //     login.googleEnter.click();
+                //     browser.sleep(5000);
+                //     // login.googleAprove.click();
+                //     // browser.sleep(vars.timeToWaitTab);
+                //     expect(socialNetwork.googleLink.getAttribute('href')).toMatch(url[url.length - 1]);
+                //     browser.close().then(browser.switchTo().window(handles[0]));
+                // });
                 makeActions.menuShare.click();
                 browser.sleep(vars.timeToWaitMenu);
                 makeActions.menuShareSocial.click();
                 browser.sleep(vars.timeToWaitMenu);
                 browser.ignoreSynchronization = true;
-                modals.gButton.click();
-                browser.sleep(vars.timeToWaitTab);
-                //Google+
-                browser.getAllWindowHandles().then(function(handles) {
-                    browser.switchTo().window(handles[1]);
-                    browser.sleep(vars.timeToWaitTab);
-                    login.googleUser.sendKeys(vars.userGoogle);
-                    browser.sleep(1000);
-                    login.googleNext.click();
-                    browser.sleep(1000);
-                    login.googlePassword.sendKeys(vars.passwordGoogle);
-                    browser.sleep(1000);
-                    login.googleEnter.click();
-                    browser.sleep(5000);
-                    // login.googleAprove.click();
-                    // browser.sleep(vars.timeToWaitTab);
-                    expect(socialNetwork.googleLink.getAttribute('href')).toMatch(url[url.length - 1]);
-                    browser.close().then(browser.switchTo().window(handles[0]));
-                });
-                makeActions.menuShare.click();
-                browser.sleep(vars.timeToWaitMenu);
-                makeActions.menuShareSocial.click();
-                browser.sleep(vars.timeToWaitMenu);
                 modals.twButton.click();
                 browser.sleep(vars.timeToWaitTab);
                 //Twitter
@@ -75,7 +76,7 @@ describe('Menu Share of MakeActions', function() {
                     browser.sleep(vars.timeToWaitTab);
                     expect(socialNetwork.twitterLink.getText()).toMatch(url[url.length - 1]);
                     browser.close().then(browser.switchTo().window(handles[0]));
-
+                    browser.sleep(vars.timeToWaitTab);
                 });
                 //short button
                 makeActions.menuShare.click();
@@ -103,53 +104,54 @@ describe('Menu Share of MakeActions', function() {
     //TODO test TOAST
     //Solo se puede jugar en un entorno
 
-    xit('bba-156:Publish project in social media (the project hasnt been published in Explora)', function() {
+    it('bba-156:Publish project in social media (the project hasnt been published in Explora)', function() {
 
         //make.saveProjectAndPublishNewUser();
         make.saveProjectNewUser();
         browser.sleep(vars.timeToWaitMenu);
         browser.getCurrentUrl().then(function(url) {
             url = url.split('/');
+            // makeActions.menuShare.click();
+            // browser.sleep(vars.timeToWaitMenu);
+            // makeActions.menuShareSocial.click();
+            // browser.sleep(vars.timeToWaitMenu);
+            // browser.ignoreSynchronization = true;
+            // modals.gButton.click();
+            // browser.sleep(vars.timeToWaitTab);
+            // //Google+
+            // browser.getAllWindowHandles().then(function(handles) {
+            //     browser.switchTo().window(handles[1]);
+            //     browser.sleep(vars.timeToWaitTab);
+            //     login.googleUser.isPresent().then(function(displayed) {
+            //         if (displayed) {
+            //           login.googleUser.sendKeys(vars.userGoogle);
+            //           browser.sleep(1000);
+            //           login.googleNext.click();
+            //           browser.sleep(1000);
+            //           login.googlePassword.sendKeys(vars.passwordGoogle);
+            //           browser.sleep(1000);
+            //           login.googleEnter.click();
+            //           browser.sleep(5000);
+            //         }
+            //
+            //     });
+            //
+            //     // login.googleAprove.click();
+            //     // browser.sleep(vars.timeToWaitTab);
+            //     expect(socialNetwork.googleLink.getAttribute('href')).toMatch(url[url.length - 1]);
+            //     browser.close().then(browser.switchTo().window(handles[0]));
+            // });
+            // makeActions.menuShare.click();
+            // browser.sleep(vars.timeToWaitMenu);
+            // makeActions.menuSharePrivate.click();
+            // browser.sleep(vars.timeToWaitMenu);
+            // makeActions.privateButton.click();
+            // browser.sleep(vars.timeToWaitMenu);
             makeActions.menuShare.click();
             browser.sleep(vars.timeToWaitMenu);
             makeActions.menuShareSocial.click();
             browser.sleep(vars.timeToWaitMenu);
             browser.ignoreSynchronization = true;
-            modals.gButton.click();
-            browser.sleep(vars.timeToWaitTab);
-            //Google+
-            browser.getAllWindowHandles().then(function(handles) {
-                browser.switchTo().window(handles[1]);
-                browser.sleep(vars.timeToWaitTab);
-                login.googleUser.isPresent().then(function(displayed) {
-                    if (displayed) {
-                      login.googleUser.sendKeys(vars.userGoogle);
-                      browser.sleep(1000);
-                      login.googleNext.click();
-                      browser.sleep(1000);
-                      login.googlePassword.sendKeys(vars.passwordGoogle);
-                      browser.sleep(1000);
-                      login.googleEnter.click();
-                      browser.sleep(5000);
-                    }
-
-                });
-
-                // login.googleAprove.click();
-                // browser.sleep(vars.timeToWaitTab);
-                expect(socialNetwork.googleLink.getAttribute('href')).toMatch(url[url.length - 1]);
-                browser.close().then(browser.switchTo().window(handles[0]));
-            });
-            makeActions.menuShare.click();
-            browser.sleep(vars.timeToWaitMenu);
-            makeActions.menuSharePrivate.click();
-            browser.sleep(vars.timeToWaitMenu);
-            makeActions.privateButton.click();
-            browser.sleep(vars.timeToWaitMenu);
-            makeActions.menuShare.click();
-            browser.sleep(vars.timeToWaitMenu);
-            makeActions.menuShareSocial.click();
-            browser.sleep(vars.timeToWaitMenu);
             modals.twButton.click();
             browser.sleep(vars.timeToWaitTab);
             //Twitter
@@ -158,7 +160,7 @@ describe('Menu Share of MakeActions', function() {
                 browser.sleep(vars.timeToWaitTab);
                 expect(socialNetwork.twitterLink.getText()).toMatch(url[url.length - 1]);
                 browser.close().then(browser.switchTo().window(handles[0]));
-
+                browser.sleep(vars.timeToWaitTab);
             });
             makeActions.menuShare.click();
             browser.sleep(vars.timeToWaitMenu);

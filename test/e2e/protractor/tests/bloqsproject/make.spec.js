@@ -247,6 +247,7 @@ describe('make tab', function() {
         browser.ignoreSynchronization = true;
         infotab.infotabProjectName.sendKeys('Prueba blanco');
         infotab.infotabProjectName.clear();
+        browser.sleep(vars.timeToWaitAutoSave);
         browser.ignoreSynchronization = false;
         browser.sleep(vars.timeToWaitAutoSave);
         projects.get();
