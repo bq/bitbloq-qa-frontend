@@ -63,7 +63,7 @@ describe('Forum', function() {
 
     });
 
-    xit('bba-292:create a new topic', function() {
+    it('bba-292:create a new topic', function() {
 
         login.loginWithRandomUser();
         forum.get();
@@ -71,7 +71,7 @@ describe('Forum', function() {
         forum.newTopicButton.click();
         browser.sleep(vars.timeToWaitTab);
         forum.categoryList.click();
-        forum.categoryList.all(by.css('li')).get(4).click();
+        forum.categoryListNoticias.click();
         var titulo = 'tema automatico ' + Number(new Date());
         forum.newTopicTitle.sendKeys(titulo);
         browser.sleep(vars.timeToWaitSendKeys);
@@ -204,7 +204,7 @@ describe('Forum', function() {
 
     });
 
-    xit('bba-296:Answer a topic', function() {
+    it('bba-296:Answer a topic', function() {
         var user = forum.createTopicNewUser().user;
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -245,5 +245,5 @@ describe('Forum', function() {
         expect(forum.publishAnswerButton.getAttribute('aria-disabled')).toBe('true');
         login.logout();
     });
-
+    
 });

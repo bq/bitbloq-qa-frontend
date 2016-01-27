@@ -274,7 +274,7 @@ describe('Menu share of makeactions local', function() {
             browser.sleep(vars.timeToWaitSendKeys);
             browser.actions().sendKeys(protractor.Key.ENTER).perform();
             modals.okDialog.click();
-            browser.sleep(vars.timeToWaitFadeModals);
+            browser.sleep(vars.timeToWaitFadeModals+1000);
             modals.okDialog.click();
             browser.sleep(vars.timeToWaitFadeModals);
             globalFunctions.navigatorLanguage()
@@ -290,6 +290,7 @@ describe('Menu share of makeactions local', function() {
             makeActions.menuShareWithUsers.click();
             browser.sleep(vars.timeToWaitFadeModals);
             modals.inputEmailsUsers.all(by.css('input')).get(0).sendKeys(user2.userEmail);
+            browser.sleep(vars.timeToWaitSendKeys);
             browser.actions().sendKeys(protractor.Key.ENTER).perform();
             modals.inputEmailsUsers.all(by.css('input')).get(0).sendKeys('absolutelyfakeemail@fake.no');
             browser.sleep(vars.timeToWaitSendKeys);
@@ -298,7 +299,7 @@ describe('Menu share of makeactions local', function() {
             browser.sleep(vars.timeToWaitSendKeys);
             browser.actions().sendKeys(protractor.Key.ENTER).perform();
             modals.okDialog.click();
-            browser.sleep(vars.timeToWaitFadeModals);
+            browser.sleep(vars.timeToWaitFadeModals+1000);
             modals.okDialog.click();
             browser.sleep(vars.timeToWaitFadeModals);
             globalFunctions.navigatorLanguage()
