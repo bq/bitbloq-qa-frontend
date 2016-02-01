@@ -178,6 +178,7 @@ describe('Menu Share of MakeActions', function() {
                     modals.shortButton.click().then(function() {
                         browser.sleep(vars.timeToWaitMenu);
                         modals.bladeClose.click();
+                        browser.sleep(vars.timeToWaitFadeModals);
                         login.logout();
                         browser.ignoreSynchronization = false;
                         browser.get(text);
