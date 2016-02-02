@@ -2,6 +2,10 @@
 
 var Bloqs = function() {
 
+    //P.O
+    this.bloqsTab = $('[data-element="bloqs-tab"]');
+    this.sectionVars = $('[data-element="toolbox-functions"]');
+
     // This function returns the element associated
     // to the toolbox section passed in param
     this.getToolboxPO = function(section) {
@@ -22,7 +26,7 @@ var Bloqs = function() {
 
     // This function close the bloqs tab
     this.closeTab = function() {
-        element(by.css('[id="bloqs--field"]')).click();
+        this.bloqsTab.click();
     };
 
     // This function return the conector passed in params from the bloq header
@@ -112,7 +116,7 @@ var Bloqs = function() {
     this.setDropdownNested = function(bloque, tipo, operacion) {
         var that = this,
             elem = that.getConectorNested(bloque, tipo);
-            
+
         elem.click();
         elem.$('[value="' + operacion + '"]').click();
     };
@@ -134,9 +138,9 @@ var Bloqs = function() {
     };
 
     // This function connect a bloq into the bloq return
-    this.connectElementReturn = function(arg, bloqueDest, bloqueMover) {
+    this.connectElementReturn = function(bloqueDest, bloqueMover) {
         var that = this;
-        var conector = that.getConectorReturn(bloqueDest, arg);
+        var conector = that.getConectorReturn(bloqueDest, 'RETURN');
 
         conector.getLocation().then(function(location) {
             bloqueMover.getLocation().then(function(location2) {
@@ -199,6 +203,22 @@ var Bloqs = function() {
         });
     };
 
+    this.getBloqFunctions = function(bloqClass) {
+        return this.getBloq('functions', bloqClass, false);
+    };
+
+    this.getBloqMaths = function(bloqClass) {
+        return this.getBloq('maths', bloqClass, false);
+    };
+
+    this.getBloqVars = function(bloqClass) {
+        return this.getBloq('vars', bloqClass, false);
+    };
+
+    this.getBloqControl = function(bloqClass) {
+        return this.getBloq('control', bloqClass, false);
+    };
+
     // This function return the distance between two position
     // objects.
     this.getDistance = function(position1, position2) {
@@ -249,50 +269,60 @@ var Bloqs = function() {
         });
     };
 
+    this.addToGroupVars = function(bloque) {
+        return this.addToGroup('vars', bloque);
+    };
+
+    this.addToGroupSetup = function(bloque) {
+        return this.addToGroup('setup', bloque);
+    };
+
     // This function connect two boqs through the conector passed in params
     // it can be up, down or root
-    this.connectBloqs = function(conector, bloqueDest, bloqueMover) {
-        var that = this;
 
-        if (conector === 'up') {
-            bloqueDest.getSize().then(function(size) {
-                bloqueDest.getLocation().then(function(location) {
-                    bloqueMover.getLocation().then(function(location2) {
-                        var distance = that.getDistance(location, location2);
-                        that.moveBloq(bloqueMover, {
-                            x: distance.x,
-                            y: distance.y + size.height
-                        });
+    this.connectBloqsUp = function(bloqueDest, bloqueMover) {
+        var that = this;
+        bloqueDest.getSize().then(function(size) {
+            bloqueDest.getLocation().then(function(location) {
+                bloqueMover.getLocation().then(function(location2) {
+                    var distance = that.getDistance(location, location2);
+                    that.moveBloq(bloqueMover, {
+                        x: distance.x,
+                        y: distance.y + size.height
                     });
                 });
             });
-        } else if (conector === 'down') {
-            bloqueDest.getSize().then(function() {
-                bloqueDest.getLocation().then(function(location) {
-                    bloqueMover.getLocation().then(function(location2) {
-                        var distance = that.getDistance(location, location2);
-                        that.moveBloq(bloqueMover, {
-                            x: distance.x,
-                            y: distance.y - 10
-                        });
+        });
+    };
+
+    this.connectBloqsDown = function(bloqueDest, bloqueMover) {
+        var that = this;
+        bloqueDest.getSize().then(function() {
+            bloqueDest.getLocation().then(function(location) {
+                bloqueMover.getLocation().then(function(location2) {
+                    var distance = that.getDistance(location, location2);
+                    that.moveBloq(bloqueMover, {
+                        x: distance.x,
+                        y: distance.y - 10
                     });
                 });
             });
-        } else if (conector === 'root') {
-            bloqueDest.getSize().then(function(size) {
-                bloqueDest.getLocation().then(function(location) {
-                    bloqueMover.getLocation().then(function(location2) {
-                        var distance = that.getDistance(location, location2);
-                        that.moveBloq(bloqueMover, {
-                            x: distance.x,
-                            y: distance.y + size.height / 2
-                        });
+        });
+    };
+
+    this.connectBloqsRoot = function(bloqueDest, bloqueMover) {
+        var that = this;
+        bloqueDest.getSize().then(function(size) {
+            bloqueDest.getLocation().then(function(location) {
+                bloqueMover.getLocation().then(function(location2) {
+                    var distance = that.getDistance(location, location2);
+                    that.moveBloq(bloqueMover, {
+                        x: distance.x,
+                        y: distance.y + size.height / 2
                     });
                 });
             });
-        } else {
-            console.log('no way');
-        }
+        });
     };
 
 };

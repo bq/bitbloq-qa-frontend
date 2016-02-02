@@ -33,30 +33,28 @@ describe('bloqs', function() {
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
 
-        var advanced = true;
-
-        bloqs.getBloq('functions', 'bloq-return-function', !advanced).then(function(bloque1) {
-            bloqs.addToGroup('vars', bloque1);
+        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+            bloqs.addToGroupVars(bloque1);
             bloqs.closeTab();
-            bloqs.getBloq('maths', 'bloq-random', !advanced).then(function(bloque2) {
-                bloqs.connectElementReturn('RETURN', bloque1, bloque2);
+            bloqs.getBloqMaths('bloq-random').then(function(bloque2) {
+                bloqs.connectElementReturn(bloque1, bloque2);
                 bloqs.closeTab();
-                bloqs.getBloq('maths', 'bloq-random', !advanced).then(function(bloque3) {
+                bloqs.getBloqMaths('bloq-random').then(function(bloque3) {
                     bloqs.connectElementNested('ARG1', bloque2, bloque3);
                     bloqs.closeTab();
-                    bloqs.getBloq('maths', 'bloq-number', !advanced).then(function(bloque5) {
+                    bloqs.getBloqMaths('bloq-number').then(function(bloque5) {
                         bloqs.connectElementNested('ARG1', bloque3, bloque5);
                         bloqs.closeTab();
                     });
-                    bloqs.getBloq('maths', 'bloq-random', !advanced).then(function(bloque4) {
+                    bloqs.getBloqMaths('bloq-random').then(function(bloque4) {
                         bloqs.connectElementNested('ARG2', bloque2, bloque4);
                         bloqs.closeTab();
-                        bloqs.getBloq('maths', 'bloq-number', !advanced).then(function(bloque6) {
+                        bloqs.getBloqMaths('bloq-number').then(function(bloque6) {
                             bloqs.connectElementNested('ARG2', bloque4, bloque6);
                             bloqs.closeTab();
                         });
                     });
-                    bloqs.getBloq('maths', 'bloq-number', !advanced).then(function(bloque9) {
+                    bloqs.getBloqMaths('bloq-number').then(function(bloque9) {
                         bloqs.connectElementNested('ARG2', bloque3, bloque9);
                         bloqs.closeTab();
                     });
@@ -64,38 +62,38 @@ describe('bloqs', function() {
             });
         });
 
-        bloqs.getBloq('vars', 'bloq-declare-variable', !advanced).then(function(bloque1) {
-            bloqs.addToGroup('setup', bloque1);
+        bloqs.getBloqVars('bloq-declare-variable').then(function(bloque1) {
+            bloqs.addToGroupSetup(bloque1);
             bloqs.closeTab();
-            bloqs.getBloq('maths', 'bloq-random', !advanced).then(function(bloque2) {
+            bloqs.getBloqMaths('bloq-random').then(function(bloque2) {
                 bloqs.connectElementFixed('VALUE', bloque1, bloque2);
                 bloqs.closeTab();
-                bloqs.getBloq('maths', 'bloq-random', !advanced).then(function(bloque3) {
+                bloqs.getBloqMaths('bloq-random').then(function(bloque3) {
                     bloqs.connectElementNested('ARG1', bloque2, bloque3);
                     bloqs.closeTab();
-                    bloqs.getBloq('maths', 'bloq-number', !advanced).then(function(bloque6) {
+                    bloqs.getBloqMaths('bloq-number').then(function(bloque6) {
                         bloqs.connectElementNested('ARG2', bloque2, bloque6);
                         bloqs.closeTab();
                     });
-                    bloqs.getBloq('control', 'bloq-if', !advanced).then(function(bloque8) {
-                        bloqs.connectBloqs('down', bloque1, bloque8);
+                    bloqs.getBloqControl('bloq-if').then(function(bloque8) {
+                        bloqs.connectBloqsDown(bloque1, bloque8);
                         bloqs.closeTab();
-                        bloqs.getBloq('control', 'bloq-millis', !advanced).then(function(bloque6) {
+                        bloqs.getBloqControl('bloq-millis').then(function(bloque6) {
                             bloqs.connectElementHeader('ARG1', bloque8, bloque6);
                             bloqs.closeTab();
                         });
-                        bloqs.getBloq('maths', 'bloq-number', !advanced).then(function(bloque9) {
+                        bloqs.getBloqMaths('bloq-number').then(function(bloque9) {
                             bloqs.connectElementHeader('ARG2', bloque8, bloque9);
                             bloqs.closeTab();
                         });
                     });
-                    bloqs.getBloq('maths', 'bloq-number', !advanced).then(function(bloque9) {
+                    bloqs.getBloqMaths('bloq-number').then(function(bloque9) {
                         bloqs.connectElementNested('ARG2', bloque3, bloque9);
                         bloqs.closeTab();
                     });
                 });
             });
         });
-        browser.pause();
+        //browser.pause();
     });
 });
