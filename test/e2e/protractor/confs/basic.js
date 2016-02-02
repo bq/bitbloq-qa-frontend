@@ -49,7 +49,7 @@ exports.config = {
 
     suites: {
         account: '../tests/account/account.spec.js',
-        bloqs: '../tests/bloqs/bloqs.spec.js',
+        // bloqs: '../tests/bloqs/bloqs.spec.js',
         bloqsproject: '../tests/bloqsproject/make.spec.js',
         bloqsprojectHardware: '../tests/bloqsproject/hwtab/hwtab.spec.js',
         bloqsprojectInfo: '../tests/bloqsproject/infotab/infotab.spec.js',
