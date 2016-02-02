@@ -106,7 +106,7 @@ describe('Language', function() {
         checkSupportEmail('PT');
         checkSupportEmail('RU');
         checkSupportEmail('IT');
-        checkSupportEmail('NL');
+        //checkSupportEmail('NL');
         checkSupportEmail('EU');
         checkSupportEmail('CA');
         checkSupportEmail('GL');
