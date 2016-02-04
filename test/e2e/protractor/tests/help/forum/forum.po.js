@@ -19,6 +19,10 @@ var Forum = function() {
     this.forumScroll = '$(\'[data-element="forum-scroll"]\')';
     this.publishTopic = $('[data-element="forum-publish-theme"]');
 
+    //new topic category dropdown
+    this.categoryListNoticias = $('[data-element="Noticias"]');
+    this.categoryListExposicion = $('[data-element="Exposición"]');
+
     //category topic lists
     this.categoryTopicTitle = $('[data-element="forum-category-theme-title"]');
 
@@ -34,9 +38,9 @@ var Forum = function() {
     this.get = function() {
         browser.get(this.url);
     };
-    this.createTopicNewUser = function(title, description) {
+    this.createTopicNewUser = function(title, description, category) {
         var user = login.loginWithRandomUser();
-        var results = this.createNewTopic(title, description);
+        var results = this.createNewTopic(title, description, category);
         return {
             topicTitle: results.topicTitle,
             topicDescription: results.topicDescription,
@@ -45,16 +49,16 @@ var Forum = function() {
         };
 
     };
-    this.createNewTopic = function(title, description) {
+    this.createNewTopic = function(title, description, category) {
         var nameTitle = title || 'titulo_' + Number(new Date());
         var nameDescription = description || 'descripcion_' + Number(new Date());
+        var topicCategory = category || this.categoryListNoticias;
         this.get();
         browser.sleep(vars.timeToWaitTab);
         this.newTopicButton.click();
         browser.sleep(vars.timeToWaitTab);
         this.categoryList.click();
-        this.categoryList.all(by.css('li')).get(4).click();
-
+        topicCategory.click();
         this.newTopicTitle.sendKeys(nameTitle);
         browser.sleep(vars.timeToWaitSendKeys);
 
