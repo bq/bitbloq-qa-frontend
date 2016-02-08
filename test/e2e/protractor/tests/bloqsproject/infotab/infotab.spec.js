@@ -97,7 +97,7 @@ describe('Info tab', function() {
             });
         infoTab.infotabYoutubeVideoInput.clear();
         infoTab.infotabYoutubeVideoInput.sendKeys(validYoutubeUrl);
-        browser.sleep(vars.timeToWaitAutoSave);
+        browser.sleep(vars.timeToWaitAutoSave+1000);
         browser.refresh();
         make.infoTab.click();
         expect(infoTab.infotabYoutubeVideoInput.getAttribute('value')).toBe(validYoutubeUrl);

@@ -44,9 +44,9 @@ describe('Help ', function() {
         globalFunctions.navigatorLanguage()
             .then(function(language) {
                 if (language === 'es') {
-                    expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
+                    expect(modals.modalTitle.getText()).toEqual(vars.contact);
                 } else {
-                    expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
+                    expect(modals.modalTitle.getText()).toEqual(vars.contactEN);
                 }
             });
         modals.bladeClose.click();

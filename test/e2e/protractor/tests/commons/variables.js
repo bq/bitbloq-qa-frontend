@@ -75,6 +75,9 @@ var Variables = function() {
     this.nameNewProject = 'Proyecto sin título';
     this.nameNewProjectEN = 'Untitled project';
 
+    this.contact = 'Contacto';
+    this.contactEN = 'Contact';
+
 
     //Toast Literals
     this.toastResetPasswordNewLink = 'No se ha podido cambiar la contraseña. Por favor, solicita un nuevo link';
