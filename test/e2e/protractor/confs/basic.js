@@ -32,6 +32,7 @@ exports.config = {
         chromeOptions: {
             // How to set browser language (menus & so on)
             //args: ['lang=fr-FR'],
+            args: ['--no-sandbox'],
             prefs: {
                 // Set other language in navigator
                 // intl: {

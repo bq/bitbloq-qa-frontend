@@ -237,6 +237,14 @@ module.exports = function(grunt) {
                         baseUrl: 'http://mvp-bitbloq.bq.com/'
                     }
                 }
+            },
+            yenkins_next: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
+                    args: {
+                        baseUrl: 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
+                    }
+                }
             }
         }, //Protractor config task
 
