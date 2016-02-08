@@ -34,7 +34,6 @@ describe('State, specs only in local', function() {
         var name = 'Ultrasonidos_Bloqs';
         make.importFileGuestUser(path.resolve() + '/test/e2e/protractor/res/' + name +'.json');
         login.loginFromHeader('bloqsproject');
-        modals.rejectTour();
         expect(make.projectName.getText()).toEqual(name);
         projects.get();
         expect(projects.getProjectCount()).toBe(1);
