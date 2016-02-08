@@ -89,6 +89,8 @@ describe('Forum', function() {
             //en el momento de creacion de este test, no existia traduccion para este toast
             //una vez exista, se añadira el control del idioma para saucelabs
             commons.expectToastTimeOutandText(commons.alertTextToast, 'Tema creado');
+            forum.get();
+            browser.sleep(vars.timeToWaitTab);
 
             forum.categoryButton.click();
             forum.categoryTopicTitle.click();
@@ -245,5 +247,45 @@ describe('Forum', function() {
         expect(forum.publishAnswerButton.getAttribute('aria-disabled')).toBe('true');
         login.logout();
     });
-    
+
+    it('bba-298:topic title size limit', function() {
+        var longTitle = 'long title ' + Number(new Date());
+        for (var i = 0; i < 200; i++) {
+            longTitle = longTitle + ' even longer title ' + Number(new Date());
+        }
+        forum.createTopicNewUser(longTitle);
+        browser.sleep(vars.timeToWaitTab);
+        forum.get();
+        browser.sleep(vars.timeToWaitTab);
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitTab);
+        element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.title')).click();
+        expect(forum.topicTopicTitle.getText()).toBe(longTitle);
+        login.logout();
+
+    });
+    it('bba-299:topic answer size limit', function() {
+        forum.createTopicNewUser();
+        var longanswer = 'long answer ' + Number(new Date());
+        for (var i = 0; i < 200; i++) {
+            longanswer = longanswer + ' even longer answer ' + Number(new Date());
+        }
+        forum.get();
+        browser.sleep(vars.timeToWaitTab);
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitTab);
+        element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.title')).click();
+        browser.sleep(vars.timeToWaitTab);
+        forum.answerTopic.all(by.css('div')).get(15).click();
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys(longanswer);
+        browser.sleep(vars.timeToWaitSendKeys);
+        browser.sleep(vars.timeToWaitFadeModals);
+        forum.publishAnswerButton.click();
+        element.all(by.repeater('answer in forum.themeAnswers').row(0).column('answer.owner.username')).getText().then(function() {
+            expect(forum.answerContent.getText()).toMatch(longanswer);
+            login.logout();
+        });
+
+    });
+
 });

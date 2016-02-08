@@ -11,7 +11,7 @@ var Variables = function() {
     this.user = 'luisangonzalez5';
     this.password = '123456';
 
-    //count google for login
+    //count google for login and forum admin
     this.userGoogle = 'test2bitbloq@gmail.com';
     this.userNameGoogle = 'qa2015';
     this.firstNameGoogle = 'Test';
@@ -24,9 +24,6 @@ var Variables = function() {
     this.userFb = 'Paco';
     this.lastnameFb = 'Gómez';
 
-    //forum user admin
-    this.forumAdminEmail='oscar.alhambra@bq.com';
-    this.forumAdminPass='adminkey';
 
     //timers
     this.timeToWaitFadeModals = 2000;
