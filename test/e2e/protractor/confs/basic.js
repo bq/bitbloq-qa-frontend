@@ -9,7 +9,7 @@ exports.config = {
     // ---------------------------------------------------------------------------
 
     //seleniumArgs: ['--ignore-certificate-errors --standalone'],
-    seleniumArgs: ['--standalone --ignore-certificate-errors'],
+    //seleniumArgs: ['--standalone --ignore-certificate-errors'],
 
     // ---------------------------------------------------------------------------
     // ----- How to set up browsers ----------------------------------------------
@@ -22,7 +22,6 @@ exports.config = {
 
     multiCapabilities: [{
         browserName: 'chrome',
-        version: '43.0',
         name: '[bitbloq-app] Linux-chrome-43',
         recordVideo: false,
         recordScreenshots: false,

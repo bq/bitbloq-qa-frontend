@@ -58,7 +58,7 @@ module.exports = function(grunt) {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic_local.js',
                     args: {
                         baseUrl: grunt.option('target') || 'http://localhost:9000/',
-                        seleniumAddress: 'http://localhost:4444/wd/hub'
+                        //seleniumAddress: 'http://localhost:4444/wd/hub'
                     }
                 }
             },
@@ -66,8 +66,7 @@ module.exports = function(grunt) {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/all_local.js',
                     args: {
-                        baseUrl: grunt.option('target') || 'http://localhost:9000/',
-                        seleniumAddress: 'http://localhost:4444/wd/hub'
+                        baseUrl: grunt.option('target') || 'http://localhost:9000/'
                     }
                 }
             },
@@ -76,7 +75,6 @@ module.exports = function(grunt) {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic_firefox.js',
                     args: {
                         baseUrl: grunt.option('target') || 'http://localhost:9000/',
-                        seleniumAddress: 'http://localhost:4444/wd/hub',
                         suite: 'unsupportedDesktop'
                     }
                 }
@@ -117,8 +115,7 @@ module.exports = function(grunt) {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
                     args: {
-                        baseUrl: 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        seleniumAddress: 'http://localhost:4444/wd/hub'
+                        baseUrl: 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
                     }
                 }
             },
@@ -126,8 +123,7 @@ module.exports = function(grunt) {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
                     args: {
-                        baseUrl: 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        seleniumAddress: 'http://localhost:4444/wd/hub'
+                        baseUrl: 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
                     }
                 }
             },
@@ -135,8 +131,7 @@ module.exports = function(grunt) {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
                     args: {
-                        baseUrl: 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        seleniumAddress: 'http://localhost:4444/wd/hub'
+                        baseUrl: 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
                     }
                 }
             },
@@ -144,8 +139,7 @@ module.exports = function(grunt) {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
                     args: {
-                        baseUrl: 'http://mvp-bitbloq.bq.com/',
-                        seleniumAddress: 'http://localhost:4444/wd/hub'
+                        baseUrl: 'http://mvp-bitbloq.bq.com/'
                     }
                 }
             },
@@ -153,8 +147,7 @@ module.exports = function(grunt) {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
                     args: {
-                        baseUrl: 'http://staging-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        seleniumAddress: 'http://localhost:4444/wd/hub'
+                        baseUrl: 'http://staging-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
                     }
                 }
             },
@@ -238,11 +231,48 @@ module.exports = function(grunt) {
                     }
                 }
             },
+            yenkins_qa: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/all_suite.js',
+                    maxInstances: 1,
+                    args: {
+                        baseUrl: 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
+                    }
+                }
+            },
             yenkins_next: {
                 options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_environment.js',
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/all_suite.js',
+                    maxInstances: 1,
                     args: {
                         baseUrl: 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
+                    }
+                }
+            },
+            yenkins_int: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/all_suite.js',
+                    maxInstances: 1,
+                    args: {
+                        baseUrl: 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
+                    }
+                }
+            },
+            yenkins_staging: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/all_suite.js',
+                    maxInstances: 1,
+                    args: {
+                        baseUrl: 'http://staging-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
+                    }
+                }
+            },
+            yenkins_mvp: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/all_suite.js',
+                    maxInstances: 1,
+                    args: {
+                        baseUrl:  'http://mvp-bitbloq.bq.com/'
                     }
                 }
             }
@@ -288,7 +318,7 @@ module.exports = function(grunt) {
             }
         } else {
             tasks.push('clean:target');
-            tasks.push('protractor_webdriver:e2eStart');
+            //tasks.push('protractor_webdriver:e2eStart');
             tasks.push('protractor:' + env);
         }
 
