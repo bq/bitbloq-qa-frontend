@@ -162,6 +162,7 @@ describe('Publish project', function() {
                         //Registered user
                         //Entramos como usuario registrado
                         make.get();
+                        browser.sleep(vars.timeToWaitTab);
                         make.saveProjectAndPublishNewUser().then(function(project2) {
                             projects.get();
                             header.navExplore.click();
@@ -182,7 +183,7 @@ describe('Publish project', function() {
                                         // en la URL en la que se encuentra el navegador
                                         browser.close().then(browser.switchTo().window(handles[0]));
                                         project.timesViewed.getText().then(function(timesViewedAfter2) {
-                                            expect(Number(timesViewedBefore2) < Number(timesViewedAfter2)).toBe(true);
+                                            expect(Number(timesViewedBefore2)<Number(timesViewedAfter2)).toBe(true);
                                         });
                                         header.navExplore.click();
                                         explore.exploreFind.clear().sendKeys(project2.projectName).then(function() {
@@ -236,7 +237,7 @@ describe('Publish project', function() {
                     project.addProjectButton.click();
                     modals.okDialog.click();
                     project.timesAdded.getText().then(function(timesAdded2) {
-                        expect(Number(timesAdded)<Number(timesAdded2)).toBeTruthy();
+                        expect(Number(timesAdded) < Number(timesAdded2)).toBeTruthy();
                         //Se comprueba que se ha añadido el proyecto
                         header.navProjects.click();
                         projects.findBar.clear().sendKeys('Copia de ' + project1.projectName).then(function() {
@@ -248,7 +249,6 @@ describe('Publish project', function() {
                     });
 
                 });
-
 
             });
         });
