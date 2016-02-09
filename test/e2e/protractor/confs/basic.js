@@ -9,7 +9,7 @@ exports.config = {
     // ---------------------------------------------------------------------------
 
     //seleniumArgs: ['--ignore-certificate-errors --standalone'],
-    //seleniumArgs: ['--standalone --ignore-certificate-errors'],
+    seleniumArgs: ['--standalone --ignore-certificate-errors'],
 
     // ---------------------------------------------------------------------------
     // ----- How to set up browsers ----------------------------------------------
@@ -31,7 +31,7 @@ exports.config = {
         chromeOptions: {
             // How to set browser language (menus & so on)
             //args: ['lang=fr-FR'],
-            //args: ['--no-sandbox'], //Only on jenkins 
+            //args: ['--no-sandbox'], //Only on jenkins
             prefs: {
                 // Set other language in navigator
                 // intl: {
