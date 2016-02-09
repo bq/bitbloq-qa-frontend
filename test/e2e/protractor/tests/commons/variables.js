@@ -16,7 +16,7 @@ var Variables = function() {
     this.userNameGoogle = 'qa2015';
     this.firstNameGoogle = 'Test';
     this.lastNameGoogle = 'Test';
-    this.passwordGoogle = 'test2015bitbloq';
+    this.passwordGoogle = 'test2016bitbloq';
 
     //count facebook for login
     this.emailFb = 'webpruebas.2@gmail.com';
