@@ -231,48 +231,43 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            yenkins_qa: {
+            jenkins_qa: {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/all_suite.js',
-                    maxInstances: 1,
                     args: {
                         baseUrl: 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
                     }
                 }
             },
-            yenkins_next: {
+           jenkins_next: {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/all_suite.js',
-                    maxInstances: 1,
                     args: {
                         baseUrl: 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
                     }
                 }
             },
-            yenkins_int: {
+            jenkins_int: {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/all_suite.js',
-                    maxInstances: 1,
                     args: {
                         baseUrl: 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
                     }
                 }
             },
-            yenkins_staging: {
+            jenkins_staging: {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/all_suite.js',
-                    maxInstances: 1,
                     args: {
                         baseUrl: 'http://staging-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
                     }
                 }
             },
-            yenkins_mvp: {
+            jenkins_mvp: {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/all_suite.js',
-                    maxInstances: 1,
                     args: {
-                        baseUrl:  'http://mvp-bitbloq.bq.com/'
+                        baseUrl: 'http://mvp-bitbloq.bq.com/'
                     }
                 }
             }
