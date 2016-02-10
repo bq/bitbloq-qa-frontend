@@ -15,7 +15,8 @@ var Login = require('../login/login.po.js'),
     Project = require('../explore/project.po.js'),
     Help = require('../help/help.po.js'),
     Modals = require('../modals/modals.po.js'),
-    CodeProject = require('../codeproject/codeproject.po.js');
+    CodeProject = require('../codeproject/codeproject.po.js'),
+    Forum = require('../help/forum/forum.po.js');
 
 var login = new Login(),
     make = new Make(),
@@ -28,7 +29,8 @@ var login = new Login(),
     project = new Project(),
     help = new Help(),
     globalFunctions = new GlobalFunctions(),
-    codeProject = new CodeProject();
+    codeProject = new CodeProject(),
+    forum = new Forum();
 
 globalFunctions.xmlReport('state');
 
@@ -196,7 +198,7 @@ describe('State ', function() {
         login.loginFromHeader('help/tutorial');
     });
 
-    it('bba-265:See a faq page', function() {
+    it('bba-265:See a changelog page', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -237,6 +239,32 @@ describe('State ', function() {
             expect(browser.getCurrentUrl()).toEqual(url);
         });
 
+    });
+
+    it('bba-310:Check login and back to where you were(Foro)', function() {
+        forum.get();
+        browser.getCurrentUrl().then(function(url) {
+            login.loginFromHeader('help/forum');
+            expect(browser.getCurrentUrl()).toEqual(url);
+            login.logout();
+        });
+        forum.get();
+        forum.categoryButton.click();
+        browser.getCurrentUrl().then(function(url) {
+            login.loginFromHeader('help/forum');
+            expect(browser.getCurrentUrl()).toEqual(url);
+            login.logout();
+        });
+        forum.createTopicNewUser();
+        login.logout();
+        forum.get();
+        forum.categoryButton.click();
+        forum.categoryTopicTitle.click();
+        browser.getCurrentUrl().then(function(url) {
+            login.loginFromHeader('help/forum');
+            expect(browser.getCurrentUrl()).toEqual(url);
+            login.logout();
+        });
     });
 
 });
