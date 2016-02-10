@@ -17,7 +17,8 @@ protractorConfig.config.suites.allLocal = [
     '../tests/projects/myprojects/myprojects.spec.local.js',
     '../tests/bloqsproject/makeActions/share/makeActionsShare.spec.local.js',
     '../tests/bloqsproject/hwtab/hwtab.spec.local.js',
-    '../tests/autosave/autosave.spec.local.js'
+    '../tests/autosave/autosave.spec.local.js',
+    '../tests/social/social.spec.local.js'
 ];
 
 exports.config = protractorConfig.config;

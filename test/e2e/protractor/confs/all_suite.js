@@ -13,7 +13,7 @@ protractorConfig.config.multiCapabilities =  [{
     recordScreenshots: false,
     //  specs: require('../testsuites/common.js'),
     shardTestFiles: true,
-    maxInstances: 6,
+    maxInstances: 1,
     chromeOptions: {
         // How to set browser language (menus & so on)
         //args: ['lang=fr-FR'],
@@ -77,7 +77,8 @@ protractorConfig.config.suites.ALL = [
   '../tests/state/state.spec.js',
   '../tests/autosave/autosave.spec.js',
   '../tests/projects/projects.spec.js',
-  '../tests/help/forum/forum.spec.js'
+  '../tests/help/forum/forum.spec.js',
+  '../tests/social/social.spec.local.js'
 ];
 
 exports.config = protractorConfig.config;

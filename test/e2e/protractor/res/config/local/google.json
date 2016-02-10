@@ -1,0 +1,22 @@
+{
+    "clientId": "846494928917-uj5odicj3fe7jn0in4a6lko0v0diuic2.apps.googleusercontent.com",
+    "apikey": "AIzaSyA4NIAP4k3TA0kpo6POxWcS_2-Rpj_JaoE",
+    "scope": [
+        "https://www.googleapis.com/auth/plus.login",
+        "https://www.googleapis.com/auth/plus.me",
+        "https://www.googleapis.com/auth/userinfo.email",
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/urlshortener"
+    ],
+    "apis": [{
+        "name": "plus",
+        "version": "v1"
+    }],
+    "visibleActions": "http://schemas.google.com/AddActivity",
+    "responseType": "token",
+    "display": "popup",
+    "popupOptions": {
+        "width": 580,
+        "height": 400
+    }
+}

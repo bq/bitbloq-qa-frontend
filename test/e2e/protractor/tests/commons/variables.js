@@ -11,19 +11,25 @@ var Variables = function() {
     this.user = 'luisangonzalez5';
     this.password = '123456';
 
-    //count google for login and forum admin
+    //STATIC (no del) count google for login and forum admin
     this.userGoogle = 'test2bitbloq@gmail.com';
     this.userNameGoogle = 'qa2015';
     this.firstNameGoogle = 'Test';
     this.lastNameGoogle = 'Test';
     this.passwordGoogle = 'test2016bitbloq';
 
+    //DINAMIC (del)
+    this.userGoogleTwo = 'testprove2016@gmail.com';
+    this.userNameGoogleTwo = 'googerUserTest' + Number(new Date());
+    this.firstNameGoogleTwo = 'Benito';
+    this.lastNameGoogleTwo = 'Camelas';
+    this.passwordGoogleTwo = 'test2016bitbloq';
+
     //count facebook for login
     this.emailFb = 'webpruebas.2@gmail.com';
     this.passwordFb = 'webpruebas.2webpruebas.2';
     this.userFb = 'Paco';
     this.lastnameFb = 'Gómez';
-
 
     //timers
     this.timeToWaitFadeModals = 2000;
@@ -78,7 +84,6 @@ var Variables = function() {
     this.contact = 'Contacto';
     this.contactEN = 'Contact';
 
-
     //Toast Literals
     this.toastResetPasswordNewLink = 'No se ha podido cambiar la contraseña. Por favor, solicita un nuevo link';
 
@@ -91,7 +96,14 @@ var Variables = function() {
                 lastname: this.lastNameGoogle,
                 password: this.passwordGoogle
             };
-
+        } else if (cuenta === 'googleProve') {
+            return {
+                user: this.userGoogleTwo,
+                username: this.userNameGoogleTwo,
+                firstname: this.firstNameGoogleTwo,
+                lastname: this.lastNameGoogleTwo,
+                password: this.passwordGoogleTwo
+            };
         } else if (cuenta === 'facebook') {
             return {
                 email: this.emailFb,

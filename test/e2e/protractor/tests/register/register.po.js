@@ -5,6 +5,7 @@
 
 'use strict';
 
+
 var Register = function() {
     //This elements are public (this) by reuse
     this.enterHome = $('[data-element="enter-home"]');
@@ -17,7 +18,7 @@ var Register = function() {
     this.inputYear = $('[data-element="login-year-input"]');
     this.enterRegister = $('[data-element="enter-register"]');
     this.checkBoxNewsletterAndTeacher = $('[data-element="register-newsletter-teacher-input"]');
-    this.checkBoxPropertiesTerm=$('[data-element="register-terms-input"]');
+    this.checkBoxPropertiesTerm = $('[data-element="register-terms-input"]');
     this.userLoginHeader = $('[data-element="user-login"]');
     //Show validate elements
     this.showNoCheck = $('[data-element="show-no-check"]');
@@ -39,7 +40,6 @@ var Register = function() {
     this.resetPasswordRepeatInput = $('[data-element="reset-password-repeat-input"]');
     this.resetPasswordOkButton = $('[data-element="reset-password-button-ok"]');
     /***************************/
-
 
     this.url = ('#/register');
     this.get = function() {
