@@ -287,5 +287,47 @@ describe('Forum', function() {
         });
 
     });
+    it('bba-290:check the last answer in the main page', function() {
+        var topicTitle2 = forum.createTopicNewUser('titulo_' + Number(new Date()), 'descripcion_' + Number(new Date()), forum.categoryListBienvenida).topicTitle;
+        var topicTitle = 'last answer topic' + Number(new Date());
+        browser.getCurrentUrl().then(function(topicUrl2) {
+
+            forum.createNewTopic(topicTitle, 'descripcion_' + Number(new Date()), forum.categoryListBienvenida);
+            browser.sleep(vars.timeToWaitTab);
+            browser.getCurrentUrl().then(function(topicUrl) {
+
+                forum.get();
+                browser.sleep(vars.timeToWaitTab);
+                element.all(by.repeater('category in section').row(1).column('category.lastTheme.threadName')).getText().then(function(lastTopicTitle) {
+                    expect(lastTopicTitle).toMatch(topicTitle);
+                    element.all(by.repeater('category in section').row(1).column('category.lastTheme.threadName')).click();
+                    browser.sleep(vars.timeToWaitTab);
+                    expect(browser.getCurrentUrl()).toMatch(topicUrl);
+                    login.logout();
+                    browser.sleep(vars.timeToWaitTab);
+                    login.loginWithRandomUser();
+                    forum.get();
+                    browser.sleep(vars.timeToWaitTab);
+                    element.all(by.repeater('category in section').row(1).column('category.name')).click();
+                    browser.sleep(vars.timeToWaitTab);
+                    element.all(by.repeater('theme in forum.categoryThemes').row(1).column('theme.title')).click();
+                    browser.sleep(vars.timeToWaitTab);
+                    forum.createAnswer();
+                    forum.get();
+                    browser.sleep(vars.timeToWaitTab);
+                    element.all(by.repeater('category in section').row(1).column('category.lastTheme.threadName')).getText().then(function(lastTopicTitle2) {
+                        expect(lastTopicTitle2).toMatch(topicTitle2);
+                        element.all(by.repeater('category in section').row(1).column('category.lastTheme.threadName')).click();
+                        browser.sleep(vars.timeToWaitTab);
+                        expect(browser.getCurrentUrl()).toMatch(topicUrl2);
+                        login.logout();
+                    });
+
+                });
+
+            });
+        });
+
+    });
 
 });

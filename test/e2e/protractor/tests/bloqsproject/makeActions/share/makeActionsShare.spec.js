@@ -23,7 +23,7 @@ var globalFunctions = new GlobalFunctions(),
     project = new Project();
 
 globalFunctions.xmlReport('makeActionsShare');
-describe('Menu Help of MakeActions', function() {
+describe('Menu Share of MakeActions', function() {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -43,7 +43,7 @@ describe('Menu Help of MakeActions', function() {
         makeActions.publishButton.click();
         explore.get();
         explore.exploreFind.sendKeys(projectName.projectName);
-        browser.sleep(2000);
+        browser.sleep(3000);
         expect(explore.projectName.getText()).toContain(projectName.projectName);
         login.logout();
 
@@ -80,7 +80,7 @@ describe('Menu Help of MakeActions', function() {
 
                 explore.get();
                 explore.exploreFind.sendKeys(projectName.projectName);
-                browser.sleep(2000);
+                browser.sleep(3000);
                 explore.exploreCounts.getText().then(function(value) {
                     value = value.split('/');
                     expect(Number(value[1])).toEqual(0);

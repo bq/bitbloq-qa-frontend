@@ -22,6 +22,7 @@ var Forum = function() {
     //new topic category dropdown
     this.categoryListNoticias = $('[data-element="Noticias"]');
     this.categoryListExposicion = $('[data-element="Exposición"]');
+    this.categoryListBienvenida = $('[data-element="Bienvenida"]');
 
     //category topic lists
     this.categoryTopicTitle = $('[data-element="forum-category-theme-title"]');
@@ -81,6 +82,18 @@ var Forum = function() {
         };
 
     };
+    this.createAnswer = function(answer) {
+        var answerText = answer || 'answer_' + Number(new Date());
+        this.answerTopic.all(by.css('div')).get(15).click();
+        this.answerTopic.all(by.css('div')).get(15).sendKeys(answerText);
+        browser.sleep(vars.timeToWaitSendKeys);
+        this.publishAnswerButton.click();
+        browser.sleep(vars.timeToWaitTab);
 
+        return {
+            answer: answerText,
+
+        };
+    };
 };
 module.exports = Forum;
