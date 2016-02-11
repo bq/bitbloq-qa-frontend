@@ -20,7 +20,7 @@ var register = new Register(),
     commons = new Commons(),
     alerts = new Alerts();
 
-globalFunctions.xmlReport('Register');
+globalFunctions.xmlReport('register');
 
 describe('Register ', function() {
 

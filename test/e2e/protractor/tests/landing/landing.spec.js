@@ -12,7 +12,7 @@ var vars = new Variables(),
     login = new Login(),
     modals = new Modals();
 
-globalFunctions.xmlReport('Landing');
+globalFunctions.xmlReport('landing');
 
 describe('Verify landing ', function() {
 

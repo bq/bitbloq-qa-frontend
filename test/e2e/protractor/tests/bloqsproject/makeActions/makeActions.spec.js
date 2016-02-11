@@ -18,7 +18,7 @@ var vars = new Variables(),
     make = new Make(),
     makeActions = new MakeActions();
 
-globalFunctions.xmlReport('makeActions');
+globalFunctions.xmlReport('bloqsprojectMakeActions');
 
 describe('Check makeActions actions in bloqsproject', function() {
 

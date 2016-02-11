@@ -22,7 +22,7 @@ var globalFunctions = new GlobalFunctions(),
     vars = new Variables(),
     project = new Project();
 
-globalFunctions.xmlReport('makeActionsShare');
+globalFunctions.xmlReport('bloqsprojectMakeActionsShare');
 describe('Menu Share of MakeActions', function() {
 
     //beforeEach commons

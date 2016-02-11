@@ -20,7 +20,7 @@ var vars = new Variables(),
     make = new Make(),
     makeActions = new MakeActions();
 
-globalFunctions.xmlReport('makeActionsEditLocal');
+globalFunctions.xmlReport('makeactionsEditLocal');
 
 describe('Menu file of MakeActions', function() {
 

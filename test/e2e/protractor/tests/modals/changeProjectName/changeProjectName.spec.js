@@ -18,7 +18,7 @@ var login = new Login(),
     modals = new Modals(),
     projects = new Projects();
 
-globalFunctions.xmlReport('changeProjectName');
+globalFunctions.xmlReport('modalsChangeProjectName');
 
 describe('Rename modal on make', function() {
 

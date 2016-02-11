@@ -16,7 +16,7 @@ var globalFunctions = new GlobalFunctions(),
     make = new Make(),
     login = new Login();
 
-globalFunctions.xmlReport('hardwareTabLocal');
+globalFunctions.xmlReport('bloqsprojectHardwareLocal');
 
 describe('Hardware tab testing from local for contextual menu to ', function() {
 

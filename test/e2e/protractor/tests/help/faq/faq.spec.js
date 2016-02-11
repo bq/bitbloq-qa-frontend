@@ -16,7 +16,7 @@ var login = new Login(),
     vars = new Variables(),
     globalFunctions = new GlobalFunctions();
 
-globalFunctions.xmlReport('faq');
+globalFunctions.xmlReport('helpFaq');
 
 describe('Tutorial ', function() {
 

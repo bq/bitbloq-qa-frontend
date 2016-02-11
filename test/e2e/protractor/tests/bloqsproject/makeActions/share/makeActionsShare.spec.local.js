@@ -29,7 +29,7 @@ var globalFunctions = new GlobalFunctions(),
     login = new Login(),
     commons = new Commons();
 
-globalFunctions.xmlReport('makeActionsShareLocal');
+globalFunctions.xmlReport('makeactionsShareLocal');
 describe('Menu share of makeactions local', function() {
 
     //beforeEach commons

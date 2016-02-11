@@ -22,7 +22,7 @@ var vars = new Variables(),
     myprojects = new MyProjects(),
     modals = new Modals();
 
-globalFunctions.xmlReport('make');
+globalFunctions.xmlReport('bloqsproject');
 
 describe('make tab', function() {
 

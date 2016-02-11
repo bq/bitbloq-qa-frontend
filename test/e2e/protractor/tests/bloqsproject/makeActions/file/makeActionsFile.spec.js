@@ -23,7 +23,7 @@ var vars = new Variables(),
     infotab = new Infotab(),
     projects = new Projects();
 
-globalFunctions.xmlReport('makeActionsFile');
+globalFunctions.xmlReport('bloqsprojectMakeActionsFile');
 
 describe('Menu file of MakeActions', function() {
 

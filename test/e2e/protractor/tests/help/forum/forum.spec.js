@@ -13,7 +13,7 @@ var globalFunctions = new GlobalFunctions(),
     commons = new Commons(),
     help = new Help();
 
-globalFunctions.xmlReport('forum');
+globalFunctions.xmlReport('helpForum');
 
 describe('Forum', function() {
     //beforeEach commons

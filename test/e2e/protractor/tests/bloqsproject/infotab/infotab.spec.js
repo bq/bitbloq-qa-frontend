@@ -21,7 +21,7 @@ var vars = new Variables(),
     login = new Login(),
     modals = new Modals();
 
-globalFunctions.xmlReport('infotab');
+globalFunctions.xmlReport('bloqsprojectInfo');
 
 describe('Info tab', function() {
     //beforeEach commons

@@ -24,7 +24,7 @@ var codeproject = new Codeproject(),
     infotab = new Infotab(),
     alert = new Alert();
 
-globalFunctions.xmlReport('codeproject');
+globalFunctions.xmlReport('codeProject');
 
 describe('Test Codeproject verify', function() {
 

@@ -20,7 +20,7 @@ var vars = new Variables(),
     make = new Make(),
     makeActions = new MakeActions();
 
-globalFunctions.xmlReport('makeActionsCodeProject');
+globalFunctions.xmlReport('codeProjectMakeActions');
 
 describe('Check makeActions actions in codeProjects', function() {
 

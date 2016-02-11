@@ -16,7 +16,7 @@ var globalFunctions = new GlobalFunctions(),
     walkthrough = new Walkthrough(),
     login = new Login();
 
-globalFunctions.xmlReport('Walkthrough');
+globalFunctions.xmlReport('bloqsprojectWalkthrough');
 
 describe('Walkthrough', function() {
 

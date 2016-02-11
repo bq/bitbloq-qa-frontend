@@ -9,7 +9,7 @@ var GlobalFunctions = require('../../../commons/globalFunctions.js');
 
 var globalFunctions = new GlobalFunctions();
 
-globalFunctions.xmlReport('makeActionsEdit');
+globalFunctions.xmlReport('bloqsprojectMakeActionsEdit');
 
 describe('Menu file of MakeActions', function() {
 

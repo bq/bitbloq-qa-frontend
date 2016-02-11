@@ -25,7 +25,7 @@ var globalFunctions = new GlobalFunctions(),
     projects = new Projects(),
     login = new Login();
 
-globalFunctions.xmlReport('project');
+globalFunctions.xmlReport('exploreProject');
 
 describe('Publish project', function() {
 

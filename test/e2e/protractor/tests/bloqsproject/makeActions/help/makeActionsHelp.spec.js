@@ -19,7 +19,7 @@ var vars = new Variables(),
     make = new Make(),
     modals = new Modals();
 
-globalFunctions.xmlReport('makeActionsHelp');
+globalFunctions.xmlReport('bloqsprojectMakeActionsHelp');
 
 describe('Menu Help of MakeActions', function() {
 
