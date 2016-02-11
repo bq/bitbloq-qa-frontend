@@ -2,6 +2,8 @@
 /* A reference configuration file. */
 /* For more options: https://github.com/angular/protractor/blob/master/docs/referenceConf.js */
 
+var path = require('path');
+
 exports.config = {
 
     // ---------------------------------------------------------------------------
@@ -47,40 +49,7 @@ exports.config = {
         }
     }],
 
-    suites: {
-        account: '../tests/account/account.spec.js',
-        autosave: '../tests/autosave/autosave.spec.js',
-        // bloqs: '../tests/bloqs/bloqs.spec.js',
-        bloqsprojectHardware: '../tests/bloqsproject/hwtab/hwtab.spec.js',
-        bloqsprojectInfo: '../tests/bloqsproject/infotab/infotab.spec.js',
-        bloqsprojectMakeActionsEdit: '../tests/bloqsproject/makeActions/edit/makeActionsEdit.spec.js',
-        bloqsprojectMakeActionsFile: '../tests/bloqsproject/makeActions/file/makeActionsFile.spec.js',
-        bloqsprojectMakeActionsHelp: '../tests/bloqsproject/makeActions/help/makeActionsHelp.spec.js',
-        bloqsprojectMakeActionsShare: '../tests/bloqsproject/makeActions/share/makeActionsShare.spec.js',
-        bloqsprojectMakeActions: '../tests/bloqsproject/makeActions/makeActions.spec.js',
-        bloqsprojectWalkthrough: '../tests/bloqsproject/walkthrough/walkthrough.spec.js',
-        bloqsproject: '../tests/bloqsproject/make.spec.js',
-        codeProjectMakeActions: '../tests/codeproject/makeActions/makeActions.spec.js',
-        codeProject: '../tests/codeproject/codeproject.spec.js',
-        cookiesBar: '../tests/cookiesBar/cookiesBar.spec.js',
-        // dragAndDrop: '../tests/dragAndDrop/dragAndDrop.spec.js',
-        explore: '../tests/explore/explore.spec.js',
-        exploreProject: '../tests/explore/project.spec.js',
-        header: '../tests/header/header.spec.js',
-        helpChangelog: '../tests/help/changelog/changelog.spec.js',
-        helpFaq: '../tests/help/faq/faq.spec.js',
-        helpForum: '../tests/help/forum/forum.spec.js',
-        helpTutorial: '../tests/help/tutorial/tutorial.spec.js',
-        help: '../tests/help/*.spec.js',
-        landing: '../tests/landing/landing.spec.js',
-        language: '../tests/language/language.spec.js',
-        login: '../tests/login/login.spec.js',
-        modalsChangeProjectName: '../tests/modals/changeProjectName/changeProjectName.spec.js',
-        myProjects: '../tests/projects/myprojects/myprojects.spec.js',
-        projects: '../tests/projects/projects.spec.js',
-        register: '../tests/register/register.spec.js',
-        state: '../tests/state/state.spec.js'
-    },
+    suites: require(path.resolve() + '/test/e2e/protractor/confs/suite.json'),
 
     // /*
     //  * Can be used to specify the phantomjs binary path.
