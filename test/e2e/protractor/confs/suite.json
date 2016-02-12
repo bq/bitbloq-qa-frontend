@@ -2,7 +2,7 @@
 
     "account": "../tests/account/account.spec.js",
     "autosave": "../tests/autosave/autosave.spec.js",
-    "bloqsprojectHardware": "../tests/bloqsproject/hwtab/hwtab.spec.js",
+  
     "bloqsprojectInfo": "../tests/bloqsproject/infotab/infotab.spec.js",
     "bloqsprojectMakeActionsEdit": "../tests/bloqsproject/makeActions/edit/makeActionsEdit.spec.js",
     "bloqsprojectMakeActionsFile": "../tests/bloqsproject/makeActions/file/makeActionsFile.spec.js",
@@ -50,7 +50,7 @@
     "ALL": [
         "../tests/account/account.spec.js",
         "../tests/autosave/autosave.spec.js",
-        "../tests/bloqsproject/hwtab/hwtab.spec.js",
+
         "../tests/bloqsproject/infotab/infotab.spec.js",
         "../tests/bloqsproject/makeActions/edit/makeActionsEdit.spec.js",
         "../tests/bloqsproject/makeActions/file/makeActionsFile.spec.js",
@@ -97,7 +97,7 @@
     "ALL_NO_LOCAL": [
         "../tests/account/account.spec.js",
         "../tests/autosave/autosave.spec.js",
-        "../tests/bloqsproject/hwtab/hwtab.spec.js",
+
         "../tests/bloqsproject/infotab/infotab.spec.js",
         "../tests/bloqsproject/makeActions/edit/makeActionsEdit.spec.js",
         "../tests/bloqsproject/makeActions/file/makeActionsFile.spec.js",

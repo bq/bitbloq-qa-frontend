@@ -33,7 +33,7 @@ var Variables = function() {
 
     //timers
     this.timeToWaitFadeModals = 2000;
-    this.timeToWaitAutoSave = 5600;
+    this.timeToWaitAutoSave = 6600;
     this.timeToWaitTab = 3000;
     this.timeToWaitMenu = 500;
     this.timeToWaitSendKeys = 1000;
