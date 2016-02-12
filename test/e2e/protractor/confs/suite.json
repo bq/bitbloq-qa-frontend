@@ -33,6 +33,20 @@
 
     "enviroment": "../tests/bloqsproject/makeActions/share/makeActionsShare.spec.env.js",
 
+    "accountLocal": "../tests/account/account.spec.local.js",
+    "autosaveLocal": "../tests/autosave/autosave.spec.local.js",
+    "bloqsprojectHardwareLocal": "../tests/bloqsproject/hwtab/hwtab.spec.local.js",
+    "infotabLocal": "../tests/bloqsproject/infotab/infotab.spec.local.js",
+    "makeactionsEditLocal": "../tests/bloqsproject/makeActions/edit/makeActionsEdit.spec.local.js",
+    "makeactionsFileLocal": "../tests/bloqsproject/makeActions/file/makeActionsFile.spec.local.js",
+    "makeactionsShareLocal": "../tests/bloqsproject/makeActions/share/makeActionsShare.spec.local.js",
+    "explorefiltersLocal": "../tests/explore/filters/filters.spec.local.js",
+    "projectLocal": "../tests/explore/project.spec.local.js",
+    "loginLocal": "../tests/login/login.spec.local.js",
+    "myProjectsLocal": "../tests/projects/myprojects/myprojects.spec.local.js",
+    "socialLocal": "../tests/social/social.spec.local.js",
+    "stateLocal": "../tests/state/state.spec.local.js",
+
     "ALL": [
         "../tests/account/account.spec.js",
         "../tests/autosave/autosave.spec.js",
@@ -128,6 +142,6 @@
         "../tests/social/social.spec.local.js",
         "../tests/state/state.spec.local.js"
     ],
-    "unsupportedDesktop" : "../tests/unsupported/unsupportedDesktop.spec.js"
+    "unsupportedDesktop": "../tests/unsupported/unsupportedDesktop.spec.js"
 
 }
