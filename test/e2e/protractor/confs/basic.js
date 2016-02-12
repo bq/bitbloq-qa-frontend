@@ -11,7 +11,7 @@ exports.config = {
     // ---------------------------------------------------------------------------
 
     //seleniumArgs: ['--ignore-certificate-errors --standalone'],
-    seleniumArgs: ['--standalone --ignore-certificate-errors'],
+    //seleniumArgs: ['--standalone --ignore-certificate-errors'],
 
     // ---------------------------------------------------------------------------
     // ----- How to set up browsers ----------------------------------------------

@@ -351,9 +351,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('testjenkins', 'Protractor e2e funcional test (Selenium) task on jenkins', function(env) {
         env = env || 'jenkins_next';
-        var tasks = ['jshint'];
-        tasks.push('clean:target');
-        tasks.push('protractor_webdriver:e2eStart');
+        var tasks = [];
         tasks.push('protractor:' + env);
         grunt.task.run(tasks);
     });

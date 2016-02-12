@@ -7,7 +7,7 @@ var protractorConfig = require('./basic.js');
 
 protractorConfig.config.multiCapabilities = [{
     browserName: 'chrome',
-    name: '[bitbloq-app] Linux-chrome-43',
+    name: '[bitbloq-app] Linux-jenkins',
     recordVideo: false,
     recordScreenshots: false,
     //  specs: require('../testsuites/common.js'),
@@ -31,5 +31,13 @@ protractorConfig.config.multiCapabilities = [{
         }
     }
 }];
+
+// The timeout in milliseconds for each script run on the browser. This should
+// be longer than the maximum time your application needs to stabilize between
+// tasks.
+protractorConfig.config.allScriptsTimeout = 25000;
+
+// How long to wait for a page to load.
+protractorConfig.config.getPageTimeout = 25000;
 
 exports.config = protractorConfig.config;
