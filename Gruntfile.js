@@ -353,6 +353,7 @@ module.exports = function(grunt) {
         env = env || 'jenkins_next';
         var tasks = ['jshint'];
         tasks.push('clean:target');
+        tasks.push('protractor_webdriver:e2eStart');
         tasks.push('protractor:' + env);
         grunt.task.run(tasks);
     });
