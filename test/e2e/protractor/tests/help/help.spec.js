@@ -30,7 +30,6 @@ describe('Help ', function() {
             .then(function(language) {
                 expect(help.contactUsLink.getAttribute('href')).toEqual(vars.supportEmail(language));
                 expect(help.feedbackAboutAnError.getAttribute('href')).toEqual(vars.supportEmail(language));
-                expect(help.feedbackIdeas.getAttribute('href')).toEqual(vars.supportEmail(language));
             });
     });
 
@@ -64,17 +63,6 @@ describe('Help ', function() {
             });
         modals.bladeClose.click();
         browser.sleep(vars.timeToWaitFadeModals);
-
-        help.feedbackIdeas.click();
-        browser.sleep(vars.feedbackIdeas);
-        globalFunctions.navigatorLanguage()
-            .then(function(language) {
-                if (language === 'es') {
-                    expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
-                } else {
-                    expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
-                }
-            });
     });
 
 });

@@ -69,9 +69,6 @@ var Variables = function() {
     };
 
     //Literals
-    this.sendCommentsLiteral = 'Enviar comentarios a Bitbloq';
-    this.sendCommentsLiteralEN = 'Send comments to Bitbloq';
-
     this.enterValidYoutubeUrl = 'Introduce una url de Youtube válida';
     this.enterValidYoutubeUrlEN = 'Enter a valid Youtube URL';
 
