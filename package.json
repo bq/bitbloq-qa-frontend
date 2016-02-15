@@ -1,49 +1,54 @@
 {
-  "name": "qa-web-bitbloq",
-  "version": "2.1.8",
-  "description": "test proyect to bitbloq-angularjs",
-  "contributors": [
-    "Irene Sanz <irene.sanz@bq.com>",
-    "Laura del Río <laura.delrio@bq.com>",
-    "Diego Segura <diego.segura@bq.com>",
-    "Tom Calvo <tomas.calvo@bq.com>",
-    "Sergio Morcuende <sergio.morcuende@bq.com> (http://smorcuend.es)",
-    "Luis Antonio Gonzalez <luisantonio.gonzalez@bq.com>"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://stash.bq.com/projects/SWROB/repos/qa-web-bitbloq/"
-  },
-  "devDependencies": {
-    "async": "^1.5.2",
-    "corbel-js": "^0.3.7",
-    "grunt": "^0.4.5",
-    "grunt-cli": "^0.1.13",
-    "grunt-contrib-clean": "^0.7.0",
-    "grunt-contrib-concat": "^0.5.1",
-    "grunt-contrib-jshint": "^0.12.0",
-    "grunt-newer": "^1.1.1",
-    "grunt-protractor-runner": "^3.0.0",
-    "grunt-protractor-webdriver": "^0.2.5",
-    "grunt-release": "^0.13.0",
-    "jasmine-core": "^2.4.1",
-    "jasmine-reporters": "^2.1.1",
-    "jasmine-spec-reporter": "^2.4.0",
-    "jshint-stylish": "^2.1.0",
-    "load-grunt-tasks": "^3.4.0",
-    "lodash": "^4.2.1",
-    "protractor": "^3.0.0",
-    "testlink-connect-proxy": "^0.5.4",
-    "time-grunt": "^1.3.0"
-  },
-  "engines": {
-    "node": ">=0.10.0",
-    "npm": ">=2.4.1"
-  },
-  "scripts": {
-    "postinstall": "node ./node_modules/protractor/bin/webdriver-manager update --standalone"
-  },
-  "dependencies": {
-    "q": "^1.4.1"
-  }
+    "name": "qa-web-bitbloq",
+    "version": "2.1.8",
+    "description": "test proyect to bitbloq-angularjs",
+    "contributors": [
+        "Irene Sanz <irene.sanz@bq.com>",
+        "Laura del Río <laura.delrio@bq.com>",
+        "Diego Segura <diego.segura@bq.com>",
+        "Tom Calvo <tomas.calvo@bq.com>",
+        "Sergio Morcuende <sergio.morcuende@bq.com> (http://smorcuend.es)",
+        "Luis Antonio Gonzalez <luisantonio.gonzalez@bq.com>",
+        "Oscar Alhambra <oscar.alhambra@bq.com>",
+        "Natalia Gomez <natalia.gomez@bq.com>"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://stash.bq.com/projects/SWROB/repos/qa-web-bitbloq/"
+    },
+    "devDependencies": {
+        "async": "^1.5.2",
+        "corbel-js": "^0.3.7",
+        "grunt": "^0.4.5",
+        "grunt-cli": "^0.1.13",
+        "grunt-contrib-clean": "^0.7.0",
+        "grunt-contrib-concat": "^0.5.1",
+        "grunt-contrib-jshint": "^0.12.0",
+        "grunt-newer": "^1.1.1",
+        "grunt-protractor-runner": "^3.0.0",
+        "grunt-protractor-webdriver": "^0.2.5",
+        "grunt-release": "^0.13.0",
+        "jasmine-core": "^2.4.1",
+        "jasmine-reporters": "^2.1.1",
+        "jasmine-spec-reporter": "^2.4.0",
+        "jshint-stylish": "^2.1.0",
+        "load-grunt-tasks": "^3.4.0",
+        "lodash": "^4.2.1",
+        "protractor": "^3.1.1",
+        "testlink-connect-proxy": "^0.5.4",
+        "time-grunt": "^1.3.0"
+    },
+    "engines": {
+        "node": ">=4.2.6",
+        "npm": ">=2.4.1"
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/protractor/bin/webdriver-manager update --standalone"
+    },
+    "dependencies": {
+        "protractor": "^3.1.1",
+        "jasmine-core": "^2.4.1",
+        "jasmine-reporters": "^2.1.1",
+        "jasmine-spec-reporter": "^2.4.0"
+    }
 }

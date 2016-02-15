@@ -107,7 +107,7 @@
         "../tests/bloqsproject/make.spec.js",
         "../tests/codeproject/makeActions/makeActions.spec.js",
         "../tests/codeproject/codeproject.spec.js",
-      
+
         "../tests/explore/explore.spec.js",
         "../tests/explore/project.spec.js",
         "../tests/header/header.spec.js",
@@ -138,6 +138,53 @@
         "../tests/social/social.spec.local.js",
         "../tests/state/state.spec.local.js"
 
+    ],
+    "ALL_JENKINS_NO_LOCAL": [
+        "../tests/account/account.spec.js",
+        "../tests/autosave/autosave.spec.js",
+
+        "../tests/bloqsproject/infotab/infotab.spec.js",
+        "../tests/bloqsproject/makeActions/edit/makeActionsEdit.spec.js",
+        "../tests/bloqsproject/makeActions/file/makeActionsFile.spec.js",
+        "../tests/bloqsproject/makeActions/help/makeActionsHelp.spec.js",
+        "../tests/bloqsproject/makeActions/share/makeActionsShare.spec.js",
+        "../tests/bloqsproject/makeActions/makeActions.spec.js",
+        "../tests/bloqsproject/walkthrough/walkthrough.spec.js",
+        "../tests/bloqsproject/make.spec.js",
+        "../tests/codeproject/makeActions/makeActions.spec.js",
+        "../tests/codeproject/codeproject.spec.js",
+
+        "../tests/explore/explore.spec.js",
+        "../tests/explore/project.spec.js",
+        "../tests/header/header.spec.js",
+        "../tests/help/changelog/changelog.spec.js",
+        "../tests/help/faq/faq.spec.js",
+        "../tests/help/forum/forum.spec.js",
+        "../tests/help/tutorial/tutorial.spec.js",
+        "../tests/help/*.spec.js",
+        "../tests/landing/landing.spec.js",
+        "../tests/language/language.spec.js",
+        "../tests/login/login.spec.js",
+        "../tests/modals/changeProjectName/changeProjectName.spec.js",
+        "../tests/projects/myprojects/myprojects.spec.js",
+        "../tests/projects/projects.spec.js",
+        "../tests/register/register.spec.js",
+        "../tests/state/state.spec.js"
+    ],
+    "JENKINS_ONLY_LOCAL": [
+        "../tests/account/account.spec.local.js",
+        "../tests/autosave/autosave.spec.local.js",
+        "../tests/bloqsproject/hwtab/hwtab.spec.local.js",
+        "../tests/bloqsproject/infotab/infotab.spec.local.js",
+        "../tests/bloqsproject/makeActions/edit/makeActionsEdit.spec.local.js",
+        "../tests/bloqsproject/makeActions/file/makeActionsFile.spec.local.js",
+        "../tests/bloqsproject/makeActions/share/makeActionsShare.spec.local.js",
+        "../tests/explore/filters/filters.spec.local.js",
+        "../tests/explore/project.spec.local.js",
+        "../tests/login/login.spec.local.js",
+        "../tests/projects/myprojects/myprojects.spec.local.js",
+        "../tests/social/social.spec.local.js",
+        "../tests/state/state.spec.local.js"
     ],
 
     "ALL_NO_LOCAL": [

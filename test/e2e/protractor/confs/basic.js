@@ -15,7 +15,6 @@ exports.config = {
     seleniumAddress: 'http://localhost:4444/wd/hub',
     directConnect: true,
 
-
     // ---------------------------------------------------------------------------
     // ----- How to set up browsers ----------------------------------------------
     // ---------------------------------------------------------------------------
@@ -112,7 +111,18 @@ exports.config = {
         var SpecReporter = require('jasmine-spec-reporter');
         // add jasmine spec reporter
         jasmine.getEnv().addReporter(new SpecReporter({
-            displayStacktrace: true
+            displayStacktrace: true,
+            displaySuiteNumber: true, // display each suite number (hierarchical)
+            colors: {
+                success: 'green',
+                failure: 'red',
+                pending: 'yellow'
+            },
+            prefixes: {
+                success: 'PASS ;) ',
+                failure: 'FAIL :( ',
+                pending: 'PENDING :)- '
+            },
         }));
     }
 
