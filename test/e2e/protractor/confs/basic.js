@@ -119,9 +119,9 @@ exports.config = {
                 pending: 'yellow'
             },
             prefixes: {
-                success: 'PASS ;) ',
-                failure: 'FAIL :( ',
-                pending: 'PENDING :)- '
+                success: ' PASS ;) ',
+                failure: ' FAIL :( ',
+                pending: ' PENDING :)- '
             },
         }));
     }
