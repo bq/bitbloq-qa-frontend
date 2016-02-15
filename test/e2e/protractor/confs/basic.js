@@ -11,7 +11,10 @@ exports.config = {
     // ---------------------------------------------------------------------------
 
     //seleniumArgs: ['--ignore-certificate-errors --standalone'],
-    //seleniumArgs: ['--standalone --ignore-certificate-errors'],
+    seleniumArgs: ['--standalone --ignore-certificate-errors'],
+    seleniumAddress: 'http://localhost:4444/wd/hub',
+    directConnect: true,
+
 
     // ---------------------------------------------------------------------------
     // ----- How to set up browsers ----------------------------------------------
