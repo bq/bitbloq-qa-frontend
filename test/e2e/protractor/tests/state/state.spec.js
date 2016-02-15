@@ -247,23 +247,24 @@ describe('State ', function() {
             login.loginFromHeader('help/forum');
             expect(browser.getCurrentUrl()).toEqual(url);
             login.logout();
-        });
-        forum.get();
-        forum.categoryButton.click();
-        browser.getCurrentUrl().then(function(url) {
-            login.loginFromHeader('help/forum');
-            expect(browser.getCurrentUrl()).toEqual(url);
-            login.logout();
-        });
-        forum.createTopicNewUser();
-        login.logout();
-        forum.get();
-        forum.categoryButton.click();
-        forum.categoryTopicTitle.click();
-        browser.getCurrentUrl().then(function(url) {
-            login.loginFromHeader('help/forum');
-            expect(browser.getCurrentUrl()).toEqual(url);
-            login.logout();
+            forum.get();
+            forum.categoryButton.click();
+            browser.getCurrentUrl().then(function(url) {
+                login.loginFromHeader('help/forum');
+                expect(browser.getCurrentUrl()).toEqual(url);
+                login.logout();
+                forum.createTopicNewUser();
+                login.logout();
+                forum.get();
+                forum.categoryButton.click();
+                forum.categoryTopicTitle.click();
+                browser.getCurrentUrl().then(function(url) {
+                    login.loginFromHeader('help/forum');
+                    expect(browser.getCurrentUrl()).toEqual(url);
+                    login.logout();
+                });
+            });
+
         });
     });
 
