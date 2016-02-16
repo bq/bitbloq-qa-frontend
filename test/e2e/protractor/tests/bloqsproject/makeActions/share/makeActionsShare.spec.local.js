@@ -274,7 +274,7 @@ describe('Menu share of makeactions local', function() {
             browser.sleep(vars.timeToWaitSendKeys);
             browser.actions().sendKeys(protractor.Key.ENTER).perform();
             modals.okDialog.click();
-            browser.sleep(vars.timeToWaitFadeModals+1000);
+            browser.sleep(vars.timeToWaitFadeModals + 1000);
             modals.okDialog.click();
             browser.sleep(vars.timeToWaitFadeModals);
             globalFunctions.navigatorLanguage()
@@ -299,7 +299,7 @@ describe('Menu share of makeactions local', function() {
             browser.sleep(vars.timeToWaitSendKeys);
             browser.actions().sendKeys(protractor.Key.ENTER).perform();
             modals.okDialog.click();
-            browser.sleep(vars.timeToWaitFadeModals+1000);
+            browser.sleep(vars.timeToWaitFadeModals + 1000);
             modals.okDialog.click();
             browser.sleep(vars.timeToWaitFadeModals);
             globalFunctions.navigatorLanguage()
@@ -438,7 +438,14 @@ describe('Menu share of makeactions local', function() {
                     browser.get(url);
                     browser.sleep(vars.timeToWaitTab);
                     modals.rejectTour();
-                    commons.expectToastTimeOutandText(commons.alertTextToast, 'Este es un proyecto privado y no tienes permisos para verlo.');
+                    globalFunctions.navigatorLanguage()
+                        .then(function(language) {
+                            if (language === 'es') {
+                                commons.expectToastTimeOutandText(commons.alertTextToast, vars.toastIsPrivateProject);
+                            } else {
+                                commons.expectToastTimeOutandText(commons.alertTextToast, vars.toastIsPrivateProjectEN);
+                            }
+                        });
                     expect(browser.getCurrentUrl()).toMatch('#/bloqsproject');
                     login.logout();
                     closeTabs();

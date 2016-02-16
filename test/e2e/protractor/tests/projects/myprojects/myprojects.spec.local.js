@@ -49,7 +49,14 @@ describe('My projects, only local', function() {
             browser.sleep(vars.timeToWaitFadeModals);
             modals.okDialog.click();
             browser.sleep(vars.timeToWaitAutoSave).then(function() {
-                expect(myprojects.projectName.getText()).toEqual('Copia de ' + nameProject);
+                globalFunctions.navigatorLanguage()
+                    .then(function(language) {
+                        if (language === 'es') {
+                            expect(myprojects.projectName.getText()).toEqual('Copia de ' + nameProject);
+                        } else {
+                            expect(myprojects.projectName.getText()).toEqual('Copy of ' + nameProject);
+                        }
+                    });
                 var file2 = path.resolve() + '/target/' + 'Copia_de_' + nameProject + '.ino';
                 browser.actions().mouseMove(myprojects.overMyProjects).perform();
                 browser.sleep(vars.timeToWaitFadeModals);

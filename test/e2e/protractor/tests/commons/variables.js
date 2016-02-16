@@ -81,6 +81,12 @@ var Variables = function() {
     this.contact = 'Contacto';
     this.contactEN = 'Contact';
 
+    this.diwoUrlLearn = 'http://diwo.bq.com//course/aprende-robotica-y-programacion-con-bitbloq-2/';
+    this.diwoUrlLearnEN = 'http://diwo.bq.com/en/course/aprende-robotica-y-programacion-con-bitbloq-2/';
+
+    this.toastIsPrivateProject = 'Este es un proyecto privado y no tienes permisos para verlo.';
+    this.toastIsPrivateProjectEN = 'This is a private project and you are not allowed to view it.';
+
     //Toast Literals
     this.toastResetPasswordNewLink = 'No se ha podido cambiar la contraseña. Por favor, solicita un nuevo link';
 
