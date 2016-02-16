@@ -90,6 +90,10 @@ var Variables = function() {
     //Toast Literals
     this.toastResetPasswordNewLink = 'No se ha podido cambiar la contraseña. Por favor, solicita un nuevo link';
 
+    //send comentes
+    this.sendCommentsLiteralEN = 'Send comments to Bitbloq';
+    this.sendCommentsLiteral = 'Enviar comentarios a Bitbloq';
+
     this.account = function(cuenta) {
         if (cuenta === 'google') {
             return {

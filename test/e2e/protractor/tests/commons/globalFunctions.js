@@ -50,12 +50,13 @@ var Global = function() {
     };
 
     this.toMatchUrlInNewTab = function(url) {
-        browser.sleep(vars.timeToWaitTab);
+        browser.sleep(vars.timeToWaitTab + 1000);
         return browser.getAllWindowHandles().then(function(handles) {
             return browser.switchTo().window(handles[1]).then(function() {
-                browser.sleep(vars.timeToWaitTab);
+                browser.sleep(vars.timeToWaitTab + 1000);
                 expect(browser.getCurrentUrl()).toMatch(url);
                 return browser.close().then(function() {
+                    browser.sleep(vars.timeToWaitTab + 1000);
                     return browser.switchTo().window(handles[0]);
                 });
             });
@@ -78,11 +79,11 @@ var Global = function() {
         });
     };
 
-    this.hasClass = function (element, cls) {
-    return element.getAttribute('class').then(function (classes) {
-        return classes.split(' ').indexOf(cls) !== -1;
-    });
-};
+    this.hasClass = function(element, cls) {
+        return element.getAttribute('class').then(function(classes) {
+            return classes.split(' ').indexOf(cls) !== -1;
+        });
+    };
 
 };
 
