@@ -86,7 +86,7 @@ describe('Info tab', function() {
         browser.sleep(vars.timeToWaitFadeModals);
         make.infoTab.click();
         infoTab.infotabYoutubeVideoInput.sendKeys('https://www.youtube.com/user/TheRedsMusic');
-        browser.sleep(vars.timeToWaitAutoSave + 1500);
+        browser.sleep(vars.timeToWaitAutoSave + 2500);
         globalFunctions.navigatorLanguage()
             .then(function(language) {
                 if (language === 'es') {
@@ -97,7 +97,7 @@ describe('Info tab', function() {
             });
         infoTab.infotabYoutubeVideoInput.clear();
         infoTab.infotabYoutubeVideoInput.sendKeys(validYoutubeUrl);
-        browser.sleep(vars.timeToWaitAutoSave + 1000);
+        browser.sleep(vars.timeToWaitAutoSave + 2500);
         browser.refresh();
         make.infoTab.click();
         expect(infoTab.infotabYoutubeVideoInput.getAttribute('value')).toBe(validYoutubeUrl);

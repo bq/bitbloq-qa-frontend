@@ -12,7 +12,7 @@ protractorConfig.config.multiCapabilities = [{
     recordScreenshots: false,
     //  specs: require('../testsuites/common.js'),
     shardTestFiles: true,
-    maxInstances: 8,
+    maxInstances: 10,
     chromeOptions: {
         // How to set browser language (menus & so on)
         //args: ['lang=fr-FR'],

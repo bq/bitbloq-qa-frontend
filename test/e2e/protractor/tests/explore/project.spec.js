@@ -183,7 +183,7 @@ describe('Publish project', function() {
                                         // en la URL en la que se encuentra el navegador
                                         browser.close().then(browser.switchTo().window(handles[0]));
                                         project.timesViewed.getText().then(function(timesViewedAfter2) {
-                                            expect(Number(timesViewedBefore2)<Number(timesViewedAfter2)).toBe(true);
+                                            expect(Number(timesViewedBefore2) < Number(timesViewedAfter2)).toBe(true);
                                         });
                                         header.navExplore.click();
                                         explore.exploreFind.clear().sendKeys(project2.projectName).then(function() {
@@ -240,16 +240,27 @@ describe('Publish project', function() {
                         expect(Number(timesAdded) < Number(timesAdded2)).toBeTruthy();
                         //Se comprueba que se ha añadido el proyecto
                         header.navProjects.click();
-                        projects.findBar.clear().sendKeys('Copia de ' + project1.projectName).then(function() {
-                            projects.getProjectCount().then(function(result) {
-                                expect(Number(result) >= 1).toBeTruthy();
-                                login.logout();
+
+                        globalFunctions.navigatorLanguage()
+                            .then(function(language) {
+                                if (language === 'es') {
+                                    projects.findBar.clear().sendKeys('Copia de ' + project1.projectName).then(function() {
+                                        projects.getProjectCount().then(function(result) {
+                                            expect(Number(result) >= 1).toBeTruthy();
+                                            login.logout();
+                                        });
+                                    });
+                                } else {
+                                    projects.findBar.clear().sendKeys('Copy of ' + project1.projectName).then(function() {
+                                        projects.getProjectCount().then(function(result) {
+                                            expect(Number(result) >= 1).toBeTruthy();
+                                            login.logout();
+                                        });
+                                    });
+                                }
                             });
-                        });
                     });
-
                 });
-
             });
         });
     });
