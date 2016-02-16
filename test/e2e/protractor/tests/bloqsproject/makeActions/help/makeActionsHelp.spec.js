@@ -41,19 +41,19 @@ describe('Menu Help of MakeActions', function() {
         expect(makeActions.menuHelpErrorFeedback.getAttribute('disabled')).not.toBeTruthy();
         // Test redirect to faq, forum and help
         makeActions.menuHelpFaq.click().then(function() {
-            browser.sleep(vars.timeToWaitTab);
+            browser.sleep(vars.timeToWaitTab + 1000);
             globalFunctions.toMatchUrlInNewTab(/#\/help/).then(function() {
-                makeActions.menuHelp.click();
-                browser.sleep(vars.timeToWaitTab);
-                makeActions.menuHelpTutorial.click().then(function() {
-                    globalFunctions.toMatchUrlInNewTab(/#\/help\/tutorial/).then(function() {
-
-                        // FOrum not ready yet to test
-                        // makeActions.menuHelpForum.click().then(function() {
-                        //     browser.sleep(vars.timeToWaitTab);
-                        //     _toMatchUrl(/#\/help\/forum/);
-                        // });
-
+                makeActions.menuHelp.click().then(function() {
+                    browser.sleep(vars.timeToWaitTab + 1000);
+                    makeActions.menuHelpTutorial.click().then(function() {
+                        browser.sleep(vars.timeToWaitTab + 1000);
+                        globalFunctions.toMatchUrlInNewTab(/#\/help\/tutorial/).then(function() {
+                            // makeActions.menuHelpForum.click().then(function() {
+                            //     browser.sleep(vars.timeToWaitTab);
+                            //     globalFunctions.toMatchUrlInNewTab(/#\/help\/tutorial/).then(function() {});
+                            //     login.logout();
+                            // });
+                        });
                         login.logout();
                     });
                 });
