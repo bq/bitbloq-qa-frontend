@@ -34,11 +34,11 @@ describe('Info tab', function() {
         var smallImagePath = '../../../res/550x350.jpg',
             bigImagePath = '../../../res/morethanonemb.jpg',
             perfectImagePath = '../../../res/perfectimage.jpg',
-            notImagePath='../../../res/imagen.sh',
+            notImagePath = '../../../res/imagen.sh',
             smallImageAbsolutePath = path.resolve(__dirname, smallImagePath),
             bigImageAbsolutePath = path.resolve(__dirname, bigImagePath),
             perfectImageAbsolutePath = path.resolve(__dirname, perfectImagePath),
-            notImageAbsolutePath=path.resolve(__dirname, notImagePath);
+            notImageAbsolutePath = path.resolve(__dirname, notImagePath);
 
         login.loginWithRandomUser();
         make.get();
@@ -47,16 +47,44 @@ describe('Info tab', function() {
         make.infoTab.click();
         infoTab.infotabFileUpload.sendKeys(smallImageAbsolutePath);
         browser.sleep(vars.timeToWaitSendKeys);
-        expect(commons.alertTextToast.getText()).toMatch('Las dimensiones de la imagen son demasiado pequeñas');
+
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.pictureSmall);
+                } else {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.pictureSmallEN);
+                }
+            });
+
         infoTab.infotabFileUpload.sendKeys(bigImageAbsolutePath);
         browser.sleep(vars.timeToWaitSendKeys);
-        expect(commons.alertTextToast.getText()).toMatch('Las dimensiones de la imagen son muy grandes');
+
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.pictureBig);
+                } else {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.pictureBigEN);
+                }
+            });
+
         infoTab.infotabFileUpload.sendKeys(perfectImageAbsolutePath);
+
         browser.sleep(vars.timeToWaitSendKeys);
         expect(infoTab.infotabProjectImage.getAttribute('src')).not.toBe('');
         infoTab.infotabFileUpload.sendKeys(notImageAbsolutePath);
         browser.sleep(vars.timeToWaitSendKeys);
-        expect(commons.alertTextToast.getText()).toMatch('El archivo no es una imagen');
+
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.fileNoPicture);
+                } else {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.fileNoPictureEN);
+                }
+            });
+
         login.logout();
     });
 });

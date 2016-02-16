@@ -94,6 +94,14 @@ var Variables = function() {
     this.sendCommentsLiteralEN = 'Send comments to Bitbloq';
     this.sendCommentsLiteral = 'Enviar comentarios a Bitbloq';
 
+    //Pictures Toast
+    this.pictureSmall = 'Las dimensiones de la imagen son demasiado pequeñas';
+    this.pictureSmallEN = 'The image dimensions are too small';
+    this.pictureBig = 'Las dimensiones de la imagen son muy grandes';
+    this.pictureBigEN = 'The image dimensions are too big';
+    this.fileNoPicture = 'El archivo no es una imagen';
+    this.fileNoPictureEN = 'This is not an image file';
+
     this.account = function(cuenta) {
         if (cuenta === 'google') {
             return {

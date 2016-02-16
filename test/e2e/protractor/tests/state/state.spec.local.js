@@ -33,6 +33,7 @@ describe('State, specs only in local', function() {
     it('bba-256:Save a bloqs project', function() {
         var name = 'Ultrasonidos_Bloqs';
         make.importFileGuestUser(path.resolve() + '/test/e2e/protractor/res/' + name +'.json');
+        browser.sleep(vars.timeToWaitAutoSave);
         login.loginFromHeader('bloqsproject');
         expect(make.projectName.getText()).toEqual(name);
         projects.get();
@@ -43,7 +44,7 @@ describe('State, specs only in local', function() {
     it('bba-257:Save a code project', function() {
         var name = 'Ultrasonidos_Bloqs';
         make.importFileGuestUser(path.resolve() + '/test/e2e/protractor/res/' + name +'.json');
-        browser.sleep(vars.timeToWaitFadeModals);
+        browser.sleep(vars.timeToWaitAutoSave);
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
         make.codeTab.click();

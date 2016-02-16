@@ -23,7 +23,7 @@ describe('Login, specs only in local ', function() {
   // afterEach commons
   globalFunctions.afterTest();
 
-    it('bba-107:Login with a Google account', function() {
+    xit('bba-107:Login with a Google account', function() {
 
         landing.get();
         landing.openLandingMenu.click();
