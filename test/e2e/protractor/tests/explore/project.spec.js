@@ -54,13 +54,24 @@ describe('Publish project', function() {
                 modals.okDialog.click();
                 //Se comprueba que se ha añadido el proyecto
                 header.navProjects.click();
-                projects.findBar.clear().sendKeys('Copia de ' + project1.projectName).then(function() {
-                    projects.getProjectCount().then(function(result) {
-                        expect(Number(result) >= 1).toBeTruthy();
-                        login.logout();
+                globalFunctions.navigatorLanguage()
+                    .then(function(language) {
+                        if (language === 'es') {
+                            projects.findBar.clear().sendKeys('Copia de ' + project1.projectName).then(function() {
+                                projects.getProjectCount().then(function(result) {
+                                    expect(Number(result) >= 1).toBeTruthy();
+                                    login.logout();
+                                });
+                            });
+                        } else {
+                            projects.findBar.clear().sendKeys('Copy of ' + project1.projectName).then(function() {
+                                projects.getProjectCount().then(function(result) {
+                                    expect(Number(result) >= 1).toBeTruthy();
+                                    login.logout();
+                                });
+                            });
+                        }
                     });
-                });
-
             });
         });
     });

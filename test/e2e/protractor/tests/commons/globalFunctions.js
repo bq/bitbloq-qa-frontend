@@ -52,6 +52,7 @@ var Global = function() {
     this.toMatchUrlInNewTab = function(url) {
         browser.sleep(vars.timeToWaitTab + 1000);
         return browser.getAllWindowHandles().then(function(handles) {
+          browser.sleep(vars.timeToWaitTab + 1000);
             return browser.switchTo().window(handles[1]).then(function() {
                 browser.sleep(vars.timeToWaitTab + 1000);
                 expect(browser.getCurrentUrl()).toMatch(url);

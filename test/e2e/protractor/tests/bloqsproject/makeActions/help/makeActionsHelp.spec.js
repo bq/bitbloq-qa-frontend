@@ -43,6 +43,7 @@ describe('Menu Help of MakeActions', function() {
         makeActions.menuHelpFaq.click().then(function() {
             browser.sleep(vars.timeToWaitTab + 1000);
             globalFunctions.toMatchUrlInNewTab(/#\/help/).then(function() {
+              browser.sleep(vars.timeToWaitTab + 1000);
                 makeActions.menuHelp.click().then(function() {
                     browser.sleep(vars.timeToWaitTab + 1000);
                     makeActions.menuHelpTutorial.click().then(function() {
@@ -53,8 +54,8 @@ describe('Menu Help of MakeActions', function() {
                             //     globalFunctions.toMatchUrlInNewTab(/#\/help\/tutorial/).then(function() {});
                             //     login.logout();
                             // });
-                        });
                         login.logout();
+                        });
                     });
                 });
             });
