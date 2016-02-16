@@ -9,5 +9,7 @@ var protractorConfig = require('./basic');
 protractorConfig.config.sauceUser = 'bitbloq';
 protractorConfig.config.sauceKey = '66222724-a846-4c20-a452-d7ab3b081320';
 protractorConfig.config.multiCapabilities.maxInstances = 1;
+protractorConfig.config.seleniumAddress = null;
+protractorConfig.config.directConnect = false;
 
 exports.config = protractorConfig.config;
