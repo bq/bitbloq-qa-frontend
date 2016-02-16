@@ -30,7 +30,7 @@ describe('User account view', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-158:Verify fields from new google user', function() {
+    xit('bba-158:Verify fields from new google user', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -77,21 +77,20 @@ describe('User account view', function() {
         account.get();
         browser.sleep(vars.timeToWaitFadeModals);
         account.fileinput.sendKeys(smallImageAbsolutePath);
-        browser.sleep(vars.timeToWaitSendKeys);
+        browser.sleep(vars.timeToWaitAutoSave);
 
         expect(commons.alertTextToast.getText()).toMatch('Las dimensiones de la imagen son demasiado pequeñas');
 
         account.fileinput.sendKeys(bigImageAbsolutePath);
-        browser.sleep(vars.timeToWaitSendKeys);
+        browser.sleep(vars.timeToWaitAutoSave);
         expect(commons.alertTextToast.getText()).toMatch('Las dimensiones de la imagen son muy grandes');
         account.fileinput.sendKeys(perfectImageAbsolutePath);
-        browser.sleep(vars.timeToWaitSendKeys);
         browser.sleep(vars.timeToWaitAutoSave);
-
+        browser.sleep(vars.timeToWaitAutoSave);
         account.get();
         expect(account.accountImage.getAttribute('src')).not.toBe('');
         account.fileinput.sendKeys(notImageAbsolutePath);
-        browser.sleep(vars.timeToWaitSendKeys);
+        browser.sleep(vars.timeToWaitAutoSave);
         expect(commons.alertTextToast.getText()).toMatch('El archivo no es una imagen');
 
         login.logout();

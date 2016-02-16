@@ -42,7 +42,7 @@ describe('My projects, only local', function() {
         myprojects.downloadIno.click();
         browser.driver.wait(function() {
             return fs.existsSync(file1);
-        }, 4000).then(function() {
+        }, 4001).then(function() {
             browser.actions().mouseMove(myprojects.overMyProjects).perform();
             browser.sleep(vars.timeToWaitFadeModals);
             myprojects.copyProject.click();
@@ -64,7 +64,7 @@ describe('My projects, only local', function() {
                 browser.driver.wait(function() {
                     return fs.existsSync(file2);
 
-                }, 4000).then(function() {
+                }, 4002).then(function() {
                     expect(fs.readFileSync(file1, 'utf8')).toEqual(fs.readFileSync(file2, 'utf8'));
                     login.logout();
                 });
