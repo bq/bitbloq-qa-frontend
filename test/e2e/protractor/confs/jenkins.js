@@ -48,7 +48,7 @@ protractorConfig.config.plugins = [{
     screenshotOnSpecFailure: true,
     screenshotPath: 'target/report/',
     failTestOnErrorLog: {
-        failTestOnErrorLogLevel: 900
+        failTestOnErrorLogLevel: 90000000000000000000000000
     }
 }];
 
