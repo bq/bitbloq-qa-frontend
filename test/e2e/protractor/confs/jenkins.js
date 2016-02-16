@@ -40,4 +40,16 @@ protractorConfig.config.allScriptsTimeout = 25000;
 // How long to wait for a page to load.
 protractorConfig.config.getPageTimeout = 25000;
 
+protractorConfig.config.seleniumAddress = 'http://localhost:4444/wd/hub';
+protractorConfig.config.directConnect = true;
+protractorConfig.config.plugins = [{
+    package: 'jasmine2-protractor-utils',
+    screenshotOnExpectFailure: true,
+    screenshotOnSpecFailure: true,
+    screenshotPath: 'target/report/',
+    failTestOnErrorLog: {
+        failTestOnErrorLogLevel: 900
+    }
+}];
+
 exports.config = protractorConfig.config;

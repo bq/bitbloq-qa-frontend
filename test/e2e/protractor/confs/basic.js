@@ -12,8 +12,8 @@ exports.config = {
 
     //seleniumArgs: ['--ignore-certificate-errors --standalone'],
     seleniumArgs: ['--standalone --ignore-certificate-errors'],
-    seleniumAddress: 'http://localhost:4444/wd/hub',
-    directConnect: true,
+    seleniumAddress: null,
+    directConnect: null,
 
     // ---------------------------------------------------------------------------
     // ----- How to set up browsers ----------------------------------------------
@@ -124,6 +124,8 @@ exports.config = {
                 pending: ' PENDING :)- '
             },
         }));
-    }
+    },
+
+    plugins: null
 
 };
