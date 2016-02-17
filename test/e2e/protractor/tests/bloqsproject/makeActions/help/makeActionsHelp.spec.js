@@ -29,39 +29,6 @@ describe('Menu Help of MakeActions', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-94:Login and test if there are all items visibles && redirect to faq, forum and help', function() {
-        login.loginWithRandomUser();
-        make.get();
-        modals.rejectTour();
-        browser.sleep(vars.timeToWaitFadeModals);
-        makeActions.menuHelp.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        //test item "Enviar comentarios" && "Informar de un error"  are enable
-        expect(makeActions.menuHelpComments.getAttribute('disabled')).not.toBeTruthy();
-        expect(makeActions.menuHelpErrorFeedback.getAttribute('disabled')).not.toBeTruthy();
-        // Test redirect to faq, forum and help
-        makeActions.menuHelpFaq.click().then(function() {
-            browser.sleep(vars.timeToWaitTab + 1000);
-            globalFunctions.toMatchUrlInNewTab(/#\/help/).then(function() {
-              browser.sleep(vars.timeToWaitTab + 1000);
-                makeActions.menuHelp.click().then(function() {
-                    browser.sleep(vars.timeToWaitTab + 1000);
-                    makeActions.menuHelpTutorial.click().then(function() {
-                        browser.sleep(vars.timeToWaitTab + 1000);
-                        globalFunctions.toMatchUrlInNewTab(/#\/help\/tutorial/).then(function() {
-                            // makeActions.menuHelpForum.click().then(function() {
-                            //     browser.sleep(vars.timeToWaitTab);
-                            //     globalFunctions.toMatchUrlInNewTab(/#\/help\/tutorial/).then(function() {});
-                            //     login.logout();
-                            // });
-                        login.logout();
-                        });
-                    });
-                });
-            });
-        });
-    });
-
     //TODO CHECK TOAST
     it('bba-103:Login and send comments', function() {
 
