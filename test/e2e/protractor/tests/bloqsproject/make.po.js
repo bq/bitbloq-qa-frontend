@@ -199,6 +199,7 @@ var Make = function() {
     this.importFileGuestUser = function(file) {
         browser.get('#/bloqsproject');
         modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         file = globalFunctions.filePath(file);
