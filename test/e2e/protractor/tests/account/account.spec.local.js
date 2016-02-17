@@ -62,15 +62,17 @@ describe('User account view', function() {
         login.logout();
 
     });
+    
     it('bba-60: verify user image upload', function() {
-        var smallImagePath = '../../res/imagenPequeña.jpg',
-            bigImagePath = '../../res/morethanonemb.jpg',
-            perfectImagePath = '../../res/perfectimage.jpg',
-            notImagePath = '../../../res/imagen.sh',
-            smallImageAbsolutePath = path.resolve(__dirname, smallImagePath),
-            bigImageAbsolutePath = path.resolve(__dirname, bigImagePath),
-            perfectImageAbsolutePath = path.resolve(__dirname, perfectImagePath),
-            notImageAbsolutePath = path.resolve(__dirname, notImagePath);
+
+        var smallImagePath = path.resolve() + '/test/e2e/protractor/res/smallPicture.jpg',
+            bigImagePath = path.resolve() + '/test/e2e/protractor/res/morethanonemb.jpg',
+            perfectImagePath = path.resolve() + '/test/e2e/protractor/res/perfectimage.jpg',
+            notImagePath = path.resolve() + '/test/e2e/protractor/res/imagen.sh',
+            smallImageAbsolutePath =  globalFunctions.filePath(smallImagePath),
+            bigImageAbsolutePath = globalFunctions.filePath(bigImagePath),
+            perfectImageAbsolutePath = globalFunctions.filePath(perfectImagePath),
+            notImageAbsolutePath = globalFunctions.filePath(notImagePath);
 
         login.loginWithRandomUser();
 
