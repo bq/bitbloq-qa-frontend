@@ -5,7 +5,6 @@
 
 'use strict';
 
-
 var Register = function() {
     //This elements are public (this) by reuse
     this.enterHome = $('[data-element="enter-home"]');
@@ -51,8 +50,8 @@ var Register = function() {
      */
     this.generateUser = function() {
         return {
-            username: 'userTest' + Number(new Date()),
-            userEmail: 'userTest' + Number(new Date()) + '@devfakebq.es',
+            username: 'userTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1),
+            userEmail: 'userTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1) + '@devfakebq.es',
             password: 'prueba',
             day: '08',
             month: '07',
@@ -111,7 +110,6 @@ var Register = function() {
 
         return true;
     };
-
 
 };
 

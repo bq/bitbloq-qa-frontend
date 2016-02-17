@@ -87,7 +87,7 @@ describe('Navbar --> ', function() {
 
         header.navExplore.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/explore');
-        browser.sleep(vars.timeToWaitTab);
+        browser.sleep(vars.timeToWaitTab + 1000);
         // Not run on jenkins or saucelabs url change but works ok on local machine
         //expect(header.navLearn.getAttribute('href')).toEqual(vars.diwoUrlLearn);
         globalFunctions.navigatorLanguage()

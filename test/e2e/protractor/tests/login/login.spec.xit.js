@@ -23,7 +23,9 @@ describe('Login, specs only in local ', function() {
   // afterEach commons
   globalFunctions.afterTest();
 
-    xit('bba-107:Login with a Google account', function() {
+
+    /* Thist test works, but google && facebook put captchas (run jenkis or saucelabs server on diferente contries)*/
+    it('bba-107:Login with a Google account', function() {
 
         landing.get();
         landing.openLandingMenu.click();
@@ -38,7 +40,7 @@ describe('Login, specs only in local ', function() {
 
     });
 
-    xit('bba-108:Login with a Facebook account', function() {
+    it('bba-108:Login with a Facebook account', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();

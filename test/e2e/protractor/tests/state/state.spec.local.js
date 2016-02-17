@@ -35,6 +35,7 @@ describe('State, specs only in local', function() {
         make.importFileGuestUser(path.resolve() + '/test/e2e/protractor/res/' + name +'.json');
         browser.sleep(vars.timeToWaitAutoSave);
         login.loginFromHeader('bloqsproject');
+        browser.sleep('2000'); // on jenkins name change more slow 
         expect(make.projectName.getText()).toEqual(name);
         projects.get();
         expect(projects.getProjectCount()).toBe(1);
