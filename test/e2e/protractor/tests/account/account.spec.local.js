@@ -62,7 +62,7 @@ describe('User account view', function() {
         login.logout();
 
     });
-    
+
     it('bba-60: verify user image upload', function() {
 
         var smallImagePath = path.resolve() + '/test/e2e/protractor/res/smallPicture.jpg',
@@ -81,11 +81,27 @@ describe('User account view', function() {
         account.fileinput.sendKeys(smallImageAbsolutePath);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        expect(commons.alertTextToast.getText()).toMatch('Las dimensiones de la imagen son demasiado pequeñas');
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.pictureSmall);
+                } else {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.pictureSmallEN);
+                }
+            });
 
         account.fileinput.sendKeys(bigImageAbsolutePath);
         browser.sleep(vars.timeToWaitAutoSave);
-        expect(commons.alertTextToast.getText()).toMatch('Las dimensiones de la imagen son muy grandes');
+
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.pictureBig);
+                } else {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.pictureBigEN);
+                }
+            });
+
         account.fileinput.sendKeys(perfectImageAbsolutePath);
         browser.sleep(vars.timeToWaitAutoSave);
         browser.sleep(vars.timeToWaitAutoSave);
@@ -93,8 +109,16 @@ describe('User account view', function() {
         expect(account.accountImage.getAttribute('src')).not.toBe('');
         account.fileinput.sendKeys(notImageAbsolutePath);
         browser.sleep(vars.timeToWaitAutoSave);
-        expect(commons.alertTextToast.getText()).toMatch('El archivo no es una imagen');
 
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.fileNoPicture);
+                } else {
+                    expect(commons.alertTextToast.getText()).toMatch(vars.fileNoPictureEN);
+                }
+            });
+            
         login.logout();
 
     });
