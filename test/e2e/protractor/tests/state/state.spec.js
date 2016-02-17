@@ -249,14 +249,17 @@ describe('State ', function() {
             login.logout();
             forum.get();
             forum.categoryButton.click();
+            browser.sleep(vars.timeToWaitLoadForumCategory);
             browser.getCurrentUrl().then(function(url) {
                 login.loginFromHeader('help/forum');
+                browser.sleep(vars.timeToWaitLoadForumCategory);
                 expect(browser.getCurrentUrl()).toEqual(url);
                 login.logout();
                 forum.createTopicNewUser();
                 login.logout();
                 forum.get();
                 forum.categoryButton.click();
+                browser.sleep(vars.timeToWaitLoadForumCategory);
                 forum.categoryTopicTitle.click();
                 browser.getCurrentUrl().then(function(url) {
                     login.loginFromHeader('help/forum');

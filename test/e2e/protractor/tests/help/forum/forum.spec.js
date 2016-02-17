@@ -93,6 +93,7 @@ describe('Forum', function() {
             browser.sleep(vars.timeToWaitTab);
 
             forum.categoryButton.click();
+            browser.sleep(vars.timeToWaitLoadForumCategory);
             forum.categoryTopicTitle.click();
 
             browser.sleep(vars.timeToWaitTab);
@@ -186,7 +187,7 @@ describe('Forum', function() {
         forum.get();
         browser.sleep(vars.timeToWaitTab);
         forum.categoryButton.click();
-        browser.sleep(vars.timeToWaitTab);
+        browser.sleep(vars.timeToWaitLoadForumCategory);
         element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.title')).click();
         browser.sleep(vars.timeToWaitTab);
         browser.getCurrentUrl().then(function(url) {
@@ -195,7 +196,7 @@ describe('Forum', function() {
             forum.get();
             browser.sleep(vars.timeToWaitTab);
             forum.categoryButton.click();
-            browser.sleep(vars.timeToWaitTab);
+            browser.sleep(vars.timeToWaitLoadForumCategory);
             element.all(by.repeater('theme in forum.categoryThemes').row(1).column('theme.title')).click();
             browser.sleep(vars.timeToWaitTab);
             expect(browser.getCurrentUrl()).not.toMatch(url);
@@ -211,7 +212,7 @@ describe('Forum', function() {
         forum.get();
         browser.sleep(vars.timeToWaitTab);
         forum.categoryButton.click();
-        browser.sleep(vars.timeToWaitTab);
+        browser.sleep(vars.timeToWaitLoadForumCategory);
         element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.title')).click();
         browser.sleep(vars.timeToWaitTab);
         var answer = 'answer_' + Number(new Date());
@@ -232,7 +233,7 @@ describe('Forum', function() {
         forum.get();
         browser.sleep(vars.timeToWaitTab);
         forum.categoryButton.click();
-        browser.sleep(vars.timeToWaitTab);
+        browser.sleep(vars.timeToWaitLoadForumCategory);
         element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.title')).click();
         browser.sleep(vars.timeToWaitTab);
         expect(forum.publishAnswerButton.getAttribute('aria-disabled')).toBe('true');
@@ -258,7 +259,7 @@ describe('Forum', function() {
         forum.get();
         browser.sleep(vars.timeToWaitTab);
         forum.categoryButton.click();
-        browser.sleep(vars.timeToWaitTab);
+        browser.sleep(vars.timeToWaitLoadForumCategory);
         element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.title')).click();
         expect(forum.topicTopicTitle.getText()).toBe(longTitle);
         login.logout();
@@ -273,7 +274,7 @@ describe('Forum', function() {
         forum.get();
         browser.sleep(vars.timeToWaitTab);
         forum.categoryButton.click();
-        browser.sleep(vars.timeToWaitTab);
+        browser.sleep(vars.timeToWaitLoadForumCategory);
         element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.title')).click();
         browser.sleep(vars.timeToWaitTab);
         forum.answerTopic.all(by.css('div')).get(15).click();
@@ -301,7 +302,7 @@ describe('Forum', function() {
                 element.all(by.repeater('category in section').row(1).column('category.lastTheme.threadName')).getText().then(function(lastTopicTitle) {
                     expect(lastTopicTitle).toMatch(topicTitle);
                     element.all(by.repeater('category in section').row(1).column('category.lastTheme.threadName')).click();
-                    browser.sleep(vars.timeToWaitTab);
+                    browser.sleep(vars.timeToWaitLoadForumCategory);
                     expect(browser.getCurrentUrl()).toMatch(topicUrl);
                     login.logout();
                     browser.sleep(vars.timeToWaitTab);
@@ -309,7 +310,7 @@ describe('Forum', function() {
                     forum.get();
                     browser.sleep(vars.timeToWaitTab);
                     element.all(by.repeater('category in section').row(1).column('category.name')).click();
-                    browser.sleep(vars.timeToWaitTab);
+                    browser.sleep(vars.timeToWaitLoadForumCategory);
                     element.all(by.repeater('theme in forum.categoryThemes').row(1).column('theme.title')).click();
                     browser.sleep(vars.timeToWaitTab);
                     forum.createAnswer();
@@ -318,7 +319,7 @@ describe('Forum', function() {
                     element.all(by.repeater('category in section').row(1).column('category.lastTheme.threadName')).getText().then(function(lastTopicTitle2) {
                         expect(lastTopicTitle2).toMatch(topicTitle2);
                         element.all(by.repeater('category in section').row(1).column('category.lastTheme.threadName')).click();
-                        browser.sleep(vars.timeToWaitTab);
+                        browser.sleep(vars.timeToWaitLoadForumCategory);
                         expect(browser.getCurrentUrl()).toMatch(topicUrl2);
                         login.logout();
                     });
@@ -328,6 +329,60 @@ describe('Forum', function() {
             });
         });
 
+    });
+
+    it('bba-289: check answer count for a topic', function() {
+        forum.createTopicNewUser();
+        forum.get();
+        browser.sleep(vars.timeToWaitTab);
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        browser.sleep(vars.timeToWaitTab);
+        element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.numberOfAnswers')).getText().then(function(answerCount) {
+            expect(answerCount).toMatch('0');
+        });
+        forum.categoryTopicTitle.click();
+        browser.sleep(vars.timeToWaitTab);
+        forum.createAnswer();
+        forum.createAnswer();
+        forum.createAnswer();
+        forum.createAnswer();
+        forum.createAnswer();
+        forum.get();
+        browser.sleep(vars.timeToWaitTab);
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        browser.sleep(vars.timeToWaitTab);
+        element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.numberOfAnswers')).getText().then(function(answerCount) {
+            expect(answerCount).toMatch('5');
+        });
+        login.logout();
+
+    });
+    xit('bba-288: check answer count for a category', function() { //bug +100 temas por categoria
+        forum.createTopicNewUser();
+        forum.get();
+        element.all(by.repeater('category in section').row(0).column('category.numberOfAnswers')).getText().then(function(categoryAnswers) {
+            var answerCount = parseInt(categoryAnswers);
+            browser.sleep(vars.timeToWaitTab);
+            forum.categoryButton.click();
+            browser.sleep(vars.timeToWaitLoadForumCategory);
+            forum.categoryTopicTitle.click();
+            browser.sleep(vars.timeToWaitTab);
+            forum.createAnswer();
+            forum.createAnswer();
+            forum.createAnswer();
+            forum.createAnswer();
+            answerCount += 4;
+            categoryAnswers = answerCount.toString();
+            forum.get();
+            browser.sleep(vars.timeToWaitTab);
+            element.all(by.repeater('category in section').row(0).column('category.numberOfAnswers')).getText().then(function(updateCategoryAnswers) {
+                expect(updateCategoryAnswers).toMatch(categoryAnswers);
+                login.logout();
+
+            });
+        });
     });
 
 });
