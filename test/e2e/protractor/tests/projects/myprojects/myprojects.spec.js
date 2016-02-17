@@ -121,6 +121,7 @@ describe('My Projects', function() {
     it('bba-44:Verify that the project can be published', function() {
 
         var nameProject = make.saveProjectNewUser().projectName;
+        browser.sleep(vars.timeToWaitSaveNewProject);
         projects.get();
         var projectElem = projects.project;
         browser.actions().mouseMove(projectElem).perform();
@@ -371,6 +372,7 @@ describe('My Projects', function() {
 
     it('bba-271:Verify you can change the name of a project', function() {
         var originalName = make.saveProjectNewUser().projectName;
+        browser.sleep(vars.timeToWaitSaveNewProject);
         projects.get();
         browser.sleep(vars.timeToWaitTab);
 

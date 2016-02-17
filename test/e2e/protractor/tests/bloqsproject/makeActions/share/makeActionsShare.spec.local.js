@@ -57,6 +57,7 @@ describe('Menu share of makeactions local', function() {
         login.logout();
         //share project
         var projectName1 = make.saveProjectNewUser().projectName;
+        browser.sleep(vars.timeToWaitSaveNewProject);
         makeActions.menuShare.click();
         makeActions.menuShareWithUsers.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -239,6 +240,7 @@ describe('Menu share of makeactions local', function() {
         var user3 = login.loginWithRandomUser();
         login.logout();
         var projectName1 = make.saveProjectNewUser().projectName;
+        browser.sleep(vars.timeToWaitSaveNewProject);
         //share a project with 1 user
         makeActions.menuShare.click();
         makeActions.menuShareWithUsers.click();
@@ -398,6 +400,7 @@ describe('Menu share of makeactions local', function() {
         var user1 = login.loginWithRandomUser();
         login.logout();
         var projectName1 = make.saveProjectNewUser().projectName;
+        browser.sleep(vars.timeToWaitSaveNewProject);
         //share the project with user 1
         makeActions.menuShare.click();
         makeActions.menuShareWithUsers.click();
