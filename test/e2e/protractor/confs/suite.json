@@ -115,7 +115,7 @@
         "../tests/header/header.spec.js",
         "../tests/help/changelog/changelog.spec.js",
         "../tests/help/faq/faq.spec.js",
-        "../tests/help/forum/forum.spec.js",
+
         "../tests/help/tutorial/tutorial.spec.js",
         "../tests/help/*.spec.js",
         "../tests/landing/landing.spec.js",
@@ -160,7 +160,7 @@
         "../tests/header/header.spec.js",
         "../tests/help/changelog/changelog.spec.js",
         "../tests/help/faq/faq.spec.js",
-        "../tests/help/forum/forum.spec.js",
+
         "../tests/help/tutorial/tutorial.spec.js",
         "../tests/help/*.spec.js",
         "../tests/landing/landing.spec.js",

@@ -169,6 +169,7 @@ var Login = function() {
             true,
             true);
         //wait succesfull login page
+        browser.sleep(1000);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
 
         //Add return for reuse user if is necessary
