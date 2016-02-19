@@ -248,6 +248,7 @@ describe('State ', function() {
             expect(browser.getCurrentUrl()).toEqual(url);
             login.logout();
             forum.get();
+            browser.sleep(vars.timeToWaitLoadForumCategory);
             forum.categoryButton.click();
             browser.sleep(vars.timeToWaitLoadForumCategory);
             browser.getCurrentUrl().then(function(url) {

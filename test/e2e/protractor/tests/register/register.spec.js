@@ -213,7 +213,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-100:in password is show "La contraseña debe tener 6 caracteres como mínimo" ?', function() {
+    it('bba-100:in password is show La contraseña debe tener 6 caracteres como mínimo', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -280,7 +280,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-102:validate DATE OF BIRTH BEFORE 14 YEARS (14 - DATENOW) ', function() {
+    it('bba-102:validate DATE OF BIRTH BEFORE 14 YEARS 14 - DATENOW ', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
