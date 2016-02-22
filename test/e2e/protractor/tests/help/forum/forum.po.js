@@ -10,6 +10,7 @@ var login = new Login(),
 var Forum = function() {
     //header
     this.newTopicButton = $('[data-element="forum-new-topic-button"]');
+    this.newTopicButtonArray = element.all(by.css('[data-element="forum-new-topic-button"]'));
     this.categoryButton = $('[data-element="forum-category-button"]');
 
     //new topic

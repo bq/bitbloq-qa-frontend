@@ -35,14 +35,16 @@ describe('Forum', function() {
         });
 
     });
-    xit('bba-284:helpForum:check create a new topic button', function() { //bloqueado hasta que se reorganice la header del foro
+    it('bba-284:helpForum:check create a new topic button', function() {
 
         login.loginWithRandomUser();
         //from the main forum page
         forum.get();
         browser.sleep(vars.timeToWaitTab);
-        expect(forum.newTopicButton.isPresent()).toBe(true);
-        forum.newTopicButton.click();
+        expect(forum.newTopicButtonArray.get(0).isPresent()).toBe(true);
+        forum.newTopicButtonArray.get(0).click();
+
+
         browser.sleep(vars.timeToWaitTab);
         browser.getCurrentUrl().then(function(url) {
             expect(url).toMatch(/#\/help\/forum\/new-theme/);
@@ -50,14 +52,24 @@ describe('Forum', function() {
             forum.get();
             browser.sleep(vars.timeToWaitTab);
             forum.categoryButton.click();
-            browser.sleep(vars.timeToWaitTab);
-            expect(forum.newTopicButton.isPresent()).toBe(true);
-            forum.newTopicButton.click();
+            browser.sleep(vars.timeToWaitLoadForumCategory);
+            expect(forum.newTopicButtonArray.get(1).isPresent()).toBe(true);
+            forum.newTopicButtonArray.get(1).click();
+
             browser.sleep(vars.timeToWaitTab);
             browser.getCurrentUrl().then(function(url) {
                 expect(url).toMatch(/#\/help\/forum\/new-theme/);
+                //from a topic
+                forum.get();
+                browser.sleep(vars.timeToWaitTab);
+                forum.categoryButton.click();
+                browser.sleep(vars.timeToWaitLoadForumCategory);
+                forum.categoryTopicTitle.click();
+                browser.sleep(vars.timeToWaitTab);
+                expect(forum.newTopicButton.isPresent()).toBe(false);
+                expect(forum.newTopicButton.isPresent()).toBe(false);
+
             });
-            //from a topic
 
         });
 
