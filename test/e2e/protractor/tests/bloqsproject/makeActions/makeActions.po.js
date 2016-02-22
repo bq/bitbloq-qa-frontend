@@ -40,7 +40,6 @@ var MakeActions = function() {
     this.menuHelp = $('[data-element="makeactions-menuhelp"]');
     this.menuHelpFaq = $('[data-element="makeactions-menuhelp-faq"]');
     this.menuHelpTutorial = $('[data-element="makeactions-menuhelp-tutorial"]');
-    this.menuHelpComments = $('[ data-element="makeactions-menuhelp-comments"]');
     this.menuHelpErrorFeedback = $('[data-element="makeactions-menuhelp-errorfeedback"]');
     this.menuHelpForum = $('[data-element="makeactions-menuhelp-forum"]');
 

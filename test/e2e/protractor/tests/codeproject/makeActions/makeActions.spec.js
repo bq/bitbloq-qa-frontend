@@ -71,9 +71,8 @@ describe('Check makeActions actions in codeProjects', function() {
         makeActions.menuHelp.click();
         expect(makeActions.menuHelpFaq.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuHelpTutorial.getAttribute('disabled')).not.toBeTruthy();
-        expect(makeActions.menuHelpComments.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuHelpErrorFeedback.getAttribute('disabled')).not.toBeTruthy();
-        //expect(makeActions.menuHelpForum.getAttribute('disabled')).not.toBeTruthy(); Remove, forum not created yet
+        expect(makeActions.menuHelpForum.getAttribute('disabled')).not.toBeTruthy(); //Remove, forum not created yet
 
         login.logout();
     });
@@ -121,11 +120,10 @@ describe('Check makeActions actions in codeProjects', function() {
         makeActions.menuHelp.click();
         expect(makeActions.menuHelpFaq.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuHelpTutorial.getAttribute('disabled')).not.toBeTruthy();
+        expect(makeActions.menuHelpForum.getAttribute('disabled')).not.toBeTruthy();
         globalFunctions.navigatorLanguage()
             .then(function(language) {
-                expect(makeActions.menuHelpComments.getAttribute('href')).toMatch(vars.supportEmail(language));
                 expect(makeActions.menuHelpErrorFeedback.getAttribute('href')).toMatch(vars.supportEmail(language));
-
             });
 
     });

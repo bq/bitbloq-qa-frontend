@@ -30,30 +30,6 @@ describe('Menu Help of MakeActions', function() {
     globalFunctions.afterTest();
 
     //TODO CHECK TOAST
-    it('bba-103:bloqsprojectMakeActionsHelp:Login and send comments', function() {
-
-        login.loginWithRandomUser();
-        make.get();
-
-        modals.rejectTour();
-        browser.sleep(vars.timeToWaitFadeModals);
-
-        makeActions.menuHelp.click();
-        makeActions.menuHelpComments.click();
-
-        modals.sendCommentsName.sendKeys('TestName');
-        modals.sendCommentsTextarea.sendKeys('Hell text area hello its a test 20 characters');
-        modals.okDialog.click();
-
-        // TOAST
-        // browser.sleep(500);
-        // expect(element(by.id('modal-comments-done')).isDisplayed()).toBeTruthy();
-        // expect(element(by.id('modal-comments-done')).isPresent()).toBe(true);
-
-        login.logout();
-    });
-
-    //TODO CHECK TOAST
     it('bba-104:bloqsprojectMakeActionsHelp:Login and feedback error', function() {
 
         login.loginWithRandomUser();
@@ -71,7 +47,7 @@ describe('Menu Help of MakeActions', function() {
         login.logout();
     });
 
-    it('bba-106:bloqsprojectMakeActionsHelp:NO login, send comment and feedback modal are not displayed but it posible send mailto', function() {
+    it('bba-106:bloqsprojectMakeActionsHelp:NO login, feedback modal are not displayed but it posible send mailto', function() {
 
         make.get();
         modals.attentionContinueGuest.click();
@@ -79,10 +55,9 @@ describe('Menu Help of MakeActions', function() {
         browser.sleep(vars.timeToWaitFadeModals);
 
         makeActions.menuHelp.click();
-        ///test item "Enviar comentarios" && "Informar de un error"  are enable
+        ///test item "Informar de un error"  are enable
         globalFunctions.navigatorLanguage()
             .then(function(language) {
-                expect(makeActions.menuHelpComments.getAttribute('href')).toMatch(vars.supportEmail(language));
                 expect(makeActions.menuHelpErrorFeedback.getAttribute('href')).toMatch(vars.supportEmail(language));
             });
 

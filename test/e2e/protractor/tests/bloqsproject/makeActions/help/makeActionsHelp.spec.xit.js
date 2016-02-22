@@ -37,8 +37,7 @@ describe('Menu Help of MakeActions', function() {
         browser.sleep(vars.timeToWaitFadeModals);
         makeActions.menuHelp.click();
         browser.sleep(vars.timeToWaitFadeModals);
-        //test item "Enviar comentarios" && "Informar de un error"  are enable
-        expect(makeActions.menuHelpComments.getAttribute('disabled')).not.toBeTruthy();
+        //test item  "Informar de un error"  are enable
         expect(makeActions.menuHelpErrorFeedback.getAttribute('disabled')).not.toBeTruthy();
         // Test redirect to faq, forum and help
         makeActions.menuHelpFaq.click().then(function() {
@@ -50,12 +49,16 @@ describe('Menu Help of MakeActions', function() {
                     makeActions.menuHelpTutorial.click().then(function() {
                         browser.sleep(vars.timeToWaitTab + 1000);
                         globalFunctions.toMatchUrlInNewTab(/#\/help\/tutorial/).then(function() {
-                            // makeActions.menuHelpForum.click().then(function() {
-                            //     browser.sleep(vars.timeToWaitTab);
-                            //     globalFunctions.toMatchUrlInNewTab(/#\/help\/tutorial/).then(function() {});
-                            //     login.logout();
-                            // });
-                            login.logout();
+                            makeActions.menuHelp.click().then(function() {
+                                browser.sleep(vars.timeToWaitTab + 1000);
+                                makeActions.menuHelpForum.click().then(function() {
+                                    browser.sleep(vars.timeToWaitTab + 1000);
+                                    globalFunctions.toMatchUrlInNewTab(/#\/help\/forum/).then(function() {
+
+                                        login.logout();
+                                    });
+                                });
+                            });
                         });
                     });
                 });
