@@ -79,6 +79,7 @@ describe('Menu Share of MakeActions', function() {
                 makeActions.privateButton.click();
 
                 explore.get();
+                browser.sleep(5000);
                 explore.exploreFind.sendKeys(projectName.projectName);
                 browser.sleep(3000);
                 explore.exploreCounts.getText().then(function(value) {
