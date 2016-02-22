@@ -58,7 +58,7 @@ module.exports = function(grunt) {
                 }
             },
             jenkins: {
-                cmd: function(env) {
+                cmd: function(env, buildN) {
                     switch (env) {
                         case 'NEXT':
                             env = 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/';
@@ -75,11 +75,11 @@ module.exports = function(grunt) {
                         default:
 
                     }
-                    return 'dbus-launch --exit-with-session xvfb-run -a --server-args="-screen 0 1024x768x24" node_modules/protractor/bin/protractor test/e2e/protractor/confs/jenkins.js --baseUrl=\"' + env + '\" --suite=$suite --jasmineNodeOpts.grep=$TEST_ID';
+                    return 'dbus-launch --exit-with-session xvfb-run -a --server-args="-screen 0 1024x768x24" node_modules/protractor/bin/protractor test/e2e/protractor/confs/jenkins.js --baseUrl=\"' + env + '\" --suite=$suite --jasmineNodeOpts.grep=$TEST_ID --resultJsonOutputFile=\"./target/report/' + buildN + 'resultTest.json\"';
                 }
             },
             retry_jenkins: {
-                cmd: function(env, failID, suiteFail) {
+                cmd: function(env, failID, suiteFail, buildN) {
                     switch (env) {
                         case 'NEXT':
                             env = 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/';
@@ -97,7 +97,7 @@ module.exports = function(grunt) {
 
                     }
                     // return 'dbus-launch --exit-with-session xvfb-run -a --server-args="-screen 0 1024x768x24" node_modules/protractor/bin/protractor test/e2e/protractor/confs/jenkins.js --baseUrl="http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/" --suite=$suite --jasmineNodeOpts.grep=bba-(' + failID + ')';
-                    return 'dbus-launch --exit-with-session xvfb-run -a --server-args="-screen 0 1024x768x24" node_modules/protractor/bin/protractor test/e2e/protractor/confs/jenkins.js --baseUrl=\"' + env + '\" --suite=\"' + suiteFail + '\" --jasmineNodeOpts.grep=\"bba-(' + failID + ')\"';
+                    return 'dbus-launch --exit-with-session xvfb-run -a --server-args="-screen 0 1024x768x24" node_modules/protractor/bin/protractor test/e2e/protractor/confs/jenkins.js --baseUrl=\"' + env + '\" --suite=\"' + suiteFail + '\" --jasmineNodeOpts.grep=\"bba-(' + failID + ')\" --resultJsonOutputFile=\"./target/report/' + buildN + 'resultTest.json\"';
                 }
             }
         },
@@ -600,7 +600,7 @@ module.exports = function(grunt) {
         // Force task into async mode and grab a handle to the "done" function.
         var done = this.async(),
             fs = require('fs'),
-            file = './target/report/resultTest.json',
+            file = './target/report/' + grunt.option('buildN') + 'resultTest.json', //--resultJsonOutputFile=\"./target/report/' + buildN + 'resultTest.json\"
             obj,
             id_test = '',
             id_suite = '',
@@ -636,8 +636,9 @@ module.exports = function(grunt) {
             },
             function(callback) {
                 if (isError) {
-                    grunt.log.ok('Read JSON Fail and retry test: ' + id_test + ' of suites :' + id_suite + ' on baseUrl' + env);
-                    grunt.task.run('exec:retry_jenkins:' + env + ':' + id_test + ':' + id_suite);
+                    grunt.log.ok('Read JSON Fail and retry test: ' + id_test + ' of suites :' + id_suite + ' on baseUrl' + env + ' result on file' + grunt.option('buildN'));
+                    grunt.task.run('exec:retry_jenkins:' + env + ':' + id_test + ':' + id_suite + ':' +
+                        grunt.option('buildN'));
 
                 }
                 callback();
