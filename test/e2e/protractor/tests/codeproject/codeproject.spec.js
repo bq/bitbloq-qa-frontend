@@ -34,7 +34,7 @@ describe('Test Codeproject verify', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-129:User guest edit code, OK edit and show modal && toast', function() {
+    it('bba-129:codeProject:User guest edit code, OK edit and show modal && toast', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -65,7 +65,7 @@ describe('Test Codeproject verify', function() {
 
     });
 
-    it('bba-130:Login edit code, OK edit and show modal && toast', function() {
+    it('bba-130:codeProject:Login edit code, OK edit and show modal && toast', function() {
 
         //Check modal show first time
         var user = login.loginWithRandomUser();
@@ -100,7 +100,7 @@ describe('Test Codeproject verify', function() {
 
     });
 
-    it('bba-131:Verify wit LOGIN user, undo change in TOAST (before create bloqsproject)', function() {
+    it('bba-131:codeProject:Verify wit LOGIN user, undo change in TOAST (before create bloqsproject)', function() {
 
         make.saveProjectNewUser();
 
@@ -120,7 +120,7 @@ describe('Test Codeproject verify', function() {
 
     });
 
-    it('bba-150:We can change the board in the info tab and saved it', function() {
+    it('bba-150:codeProject:We can change the board in the info tab and saved it', function() {
 
         var projectUser = make.saveProjectNewUser();
         make.softwareTab.click();
@@ -206,14 +206,14 @@ describe('Test Codeproject verify', function() {
 
     });
 
-    it('bba-154:If redirect to /#/codeproject NO show toast', function() {
+    it('bba-154:codeProject:If redirect to /#/codeproject NO show toast', function() {
 
         codeproject.get();
         expect(commons.editToast.isPresent()).toBe(false);
 
     });
 
-    it('bba-275:Project must have a name', function() {
+    it('bba-275:codeProject:Project must have a name', function() {
         codeproject.saveCodeProjectNewUser();
         projects.get();
         myprojects.overMyProjects.click().then(function() {

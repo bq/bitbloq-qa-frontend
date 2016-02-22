@@ -26,7 +26,7 @@ describe('Changelog ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-135:Verify that the changelog tab is displayed (Registered user)', function() {
+    it('bba-135:helpChangelog:Verify that the changelog tab is displayed (Registered user)', function() {
         login.loginWithRandomUser();
         header.navHelp.click();
         help.changelogTab.click();
@@ -34,13 +34,13 @@ describe('Changelog ', function() {
         login.logout();
     });
 
-    it('bba-136:Verify that the changelog tab is displayed (Unregistered user)', function() {
+    it('bba-136:helpChangelog:Verify that the changelog tab is displayed (Unregistered user)', function() {
         help.get();
         help.changelogTab.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help/updates');
     });
 
-    xit('bba-137:Verify that the change and bugs appears in the changelog tab (Registered user)', function() {
+    xit('bba-137:helpChangelog:Verify that the change and bugs appears in the changelog tab (Registered user)', function() {
         login.loginWithRandomUser();
         header.navHelp.click();
         help.changelogTab.click();
@@ -54,7 +54,7 @@ describe('Changelog ', function() {
         login.logout();
     });
 
-    xit('bba-138:Verify that the change and bugs appears in the changelog tab (Unregistered user)', function() {
+    xit('bba-138:helpChangelog:Verify that the change and bugs appears in the changelog tab (Unregistered user)', function() {
         help.get();
         help.changelogTab.click();
         help.changelogList.each(function(changelog) {

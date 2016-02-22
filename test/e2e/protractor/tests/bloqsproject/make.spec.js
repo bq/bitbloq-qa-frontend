@@ -32,11 +32,11 @@ describe('make tab', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-122:Save project', function() {
+    it('bba-122:bloqsproject:Save project', function() {
         make.saveProjectNewUserAndLogout();
     });
 
-    it('bba-110:We can move between all tabs', function() {
+    it('bba-110:bloqsproject:We can move between all tabs', function() {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -49,7 +49,7 @@ describe('make tab', function() {
         login.logout();
     });
 
-    it('bba-111:We can insert and save tag', function() {
+    it('bba-111:bloqsproject:We can insert and save tag', function() {
 
         var userLogin = login.loginWithRandomUser();
         make.get();
@@ -117,7 +117,7 @@ describe('make tab', function() {
         });
     });
 
-    it('bba-115:Delete tag', function() {
+    it('bba-115:bloqsproject:Delete tag', function() {
         var userLogin = login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -171,7 +171,7 @@ describe('make tab', function() {
         });
     });
 
-    it('bba-119:Rename project in make and test change in project', function() {
+    it('bba-119:bloqsproject:Rename project in make and test change in project', function() {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -226,7 +226,7 @@ describe('make tab', function() {
         });
     });
 
-    it('bba-116:Project must have a name', function() {
+    it('bba-116:bloqsproject:Project must have a name', function() {
 
         login.loginWithRandomUser();
 

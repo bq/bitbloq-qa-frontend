@@ -20,7 +20,7 @@ describe('Language', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-238:Supports email dependent of language', function() {
+    it('bba-238:language:Supports email dependent of language', function() {
 
         var checkSupportEmail = function(language, firstScroll) {
             var buttonLanguage;

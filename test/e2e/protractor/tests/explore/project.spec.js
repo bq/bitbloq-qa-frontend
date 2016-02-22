@@ -35,7 +35,7 @@ describe('Publish project', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-41:Verify that the "Add to my project" option is displayed', function() {
+    it('bba-41:exploreProject:Verify that the "Add to my project" option is displayed', function() {
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
@@ -76,7 +76,7 @@ describe('Publish project', function() {
         });
     });
 
-    it('bba-43:Verify that the project can be displayed', function() {
+    it('bba-43:exploreProject:Verify that the project can be displayed', function() {
         //Unregistered user
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
@@ -139,7 +139,7 @@ describe('Publish project', function() {
         });
     });
 
-    it('bba-152:Verify the viewered counter', function() {
+    it('bba-152:exploreProject:Verify the viewered counter', function() {
         //Unregistered user
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
@@ -229,7 +229,7 @@ describe('Publish project', function() {
         });
     });
 
-    it('bba-153:Verify the "Add to my project" counter', function() {
+    it('bba-153:exploreProject:Verify the "Add to my project" counter', function() {
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {

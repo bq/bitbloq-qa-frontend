@@ -22,7 +22,7 @@ describe('Forum', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-283:check forum tag is present', function() {
+    it('bba-283:helpForum:check forum tag is present', function() {
 
         help.get();
         browser.sleep(vars.timeToWaitTab);
@@ -35,7 +35,7 @@ describe('Forum', function() {
         });
 
     });
-    xit('bba-284:check create a new topic button', function() { //bloqueado hasta que se reorganice la header del foro
+    xit('bba-284:helpForum:check create a new topic button', function() { //bloqueado hasta que se reorganice la header del foro
 
         login.loginWithRandomUser();
         //from the main forum page
@@ -63,7 +63,7 @@ describe('Forum', function() {
 
     });
 
-    it('bba-292:create a new topic', function() {
+    it('bba-292:helpForum:create a new topic', function() {
 
         login.loginWithRandomUser();
         forum.get();
@@ -108,7 +108,7 @@ describe('Forum', function() {
         });
 
     });
-    it('bba-293:create a new topic (not registered)', function() {
+    it('bba-293:helpForum:create a new topic (not registered)', function() {
 
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -128,7 +128,7 @@ describe('Forum', function() {
         });
 
     });
-    it('bba-294:create a new topic wrong', function() {
+    it('bba-294:helpForum:create a new topic wrong', function() {
         login.loginWithRandomUser();
         //topic no category
         forum.get();
@@ -179,7 +179,7 @@ describe('Forum', function() {
         });
 
     });
-    it('bba-295:create topics with the same title', function() {
+    it('bba-295:helpForum:create topics with the same title', function() {
         var title = 'same title ' + Number(new Date());
         var description = 'same description' + Number(new Date());
         forum.createTopicNewUser(title, description);
@@ -207,7 +207,7 @@ describe('Forum', function() {
 
     });
 
-    it('bba-296:Answer a topic', function() {
+    it('bba-296:helpForum:Answer a topic', function() {
         var user = forum.createTopicNewUser().user;
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -228,7 +228,7 @@ describe('Forum', function() {
         });
 
     });
-    it('bba-297:Answer a topic (empty answer)', function() {
+    it('bba-297:helpForum:Answer a topic (empty answer)', function() {
         forum.createTopicNewUser();
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -249,7 +249,7 @@ describe('Forum', function() {
         login.logout();
     });
 
-    it('bba-298:topic title size limit', function() {
+    it('bba-298:helpForum:topic title size limit', function() {
         var longTitle = 'long title ' + Number(new Date());
         for (var i = 0; i < 200; i++) {
             longTitle = longTitle + ' even longer title ' + Number(new Date());
@@ -265,7 +265,7 @@ describe('Forum', function() {
         login.logout();
 
     });
-    it('bba-299:topic answer size limit', function() {
+    it('bba-299:helpForum:topic answer size limit', function() {
         forum.createTopicNewUser();
         var longanswer = 'long answer ' + Number(new Date());
         for (var i = 0; i < 200; i++) {
@@ -288,7 +288,7 @@ describe('Forum', function() {
         });
 
     });
-    it('bba-290:check the last answer in the main page', function() {
+    it('bba-290:helpForum:check the last answer in the main page', function() {
         var topicTitle2 = forum.createTopicNewUser('titulo_' + Number(new Date()), 'descripcion_' + Number(new Date()), forum.categoryListBienvenida).topicTitle;
         var topicTitle = 'last answer topic' + Number(new Date());
         browser.getCurrentUrl().then(function(topicUrl2) {
@@ -331,8 +331,8 @@ describe('Forum', function() {
 
     });
 
-    // if there are more instances element.all row(0) not run because there are more topic first 
-    xit('bba-289: check answer count for a topic', function() {
+    // if there are more instances element.all row(0) not run because there are more topic first
+    xit('bba-289:helpForum: check answer count for a topic', function() {
         forum.createTopicNewUser();
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -360,7 +360,7 @@ describe('Forum', function() {
         login.logout();
 
     });
-    xit('bba-288: check answer count for a category', function() { //bug +100 temas por categoria
+    xit('bba-288:helpForum: check answer count for a category', function() { //bug +100 temas por categoria
         forum.createTopicNewUser();
         forum.get();
         element.all(by.repeater('category in section').row(0).column('category.numberOfAnswers')).getText().then(function(categoryAnswers) {

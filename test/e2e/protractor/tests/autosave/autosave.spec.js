@@ -30,7 +30,7 @@ describe('Check makeActions actions in codeProjects', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-239:Verify that the project isnt autosaved when it is opened', function() {
+    it('bba-239:autosave:Verify that the project isnt autosaved when it is opened', function() {
         make.saveProjectNewUser();
         expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
         projects.get();
@@ -60,7 +60,7 @@ describe('Check makeActions actions in codeProjects', function() {
         });
     });
 
-    xit('bba-247:Verify that the autosave is launched when you change the information of the projects', function() {
+    xit('bba-247:autosave:Verify that the autosave is launched when you change the information of the projects', function() {
     });
 
 });

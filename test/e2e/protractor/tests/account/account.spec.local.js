@@ -30,7 +30,7 @@ describe('User account view', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bba-158:Verify fields from new google user', function() {
+    xit('bba-158:accountLocal:Verify fields from new google user', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -46,7 +46,7 @@ describe('User account view', function() {
 
     });
 
-    xit('bba-159:Verify fields from new facebook user', function() {
+    xit('bba-159:accountLocal:Verify fields from new facebook user', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -63,7 +63,7 @@ describe('User account view', function() {
 
     });
 
-    it('bba-60: verify user image upload', function() {
+    it('bba-60:accountLocal: verify user image upload', function() {
 
         var smallImagePath = path.resolve() + '/test/e2e/protractor/res/smallPicture.jpg',
             bigImagePath = path.resolve() + '/test/e2e/protractor/res/morethanonemb.jpg',
@@ -118,7 +118,7 @@ describe('User account view', function() {
                     expect(commons.alertTextToast.getText()).toMatch(vars.fileNoPictureEN);
                 }
             });
-            
+
         login.logout();
 
     });

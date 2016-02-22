@@ -30,7 +30,7 @@ describe('Info tab', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-7: Verificar en el tab de información que no aparecen las opciones que requieren registro', function() {
+    it('bba-7:bloqsprojectInfo: Verificar en el tab de información que no aparecen las opciones que requieren registro', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -44,7 +44,7 @@ describe('Info tab', function() {
         expect(infoTab.infotabTaginputButton.getAttribute('disabled')).toBe('true');
     });
 
-    it('bba-124: Verificar el cambio de tema del proyecto', function() {
+    it('bba-124:bloqsprojectInfo: Verificar el cambio de tema del proyecto', function() {
         function setThemeColor(color) {
             var themeColor;
             if (color === 'gray') {
@@ -78,7 +78,7 @@ describe('Info tab', function() {
         expect(element(by.css('.bloq-void-function')).getCssValue('color')).toBe('rgba(255, 255, 255, 1)');
     });
 
-    it('bba-164: Verify the Youtube URL', function() {
+    it('bba-164:bloqsprojectInfo: Verify the Youtube URL', function() {
         var validYoutubeUrl = 'https://youtu.be/f2WME8N8qXc?list=PL3AshJDPy8GQhVWkzsjc5IvrzD5ctpQXN';
         login.loginWithRandomUser();
         make.get();

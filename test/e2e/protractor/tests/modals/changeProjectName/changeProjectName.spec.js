@@ -28,7 +28,7 @@ describe('Rename modal on make', function() {
   // afterEach commons
   globalFunctions.afterTest();
 
-    it('bba-86:Rename project and save', function() {
+    it('bba-86:modalsChangeProjectName:Rename project and save', function() {
 
         login.loginWithRandomUser();
         make.get();
@@ -48,7 +48,7 @@ describe('Rename modal on make', function() {
     });
 
 
-    it('bba-87:Rename project and not save', function() {
+    it('bba-87:modalsChangeProjectName:Rename project and not save', function() {
 
         //test no saved if click in cancel modal
         login.loginWithRandomUser();
@@ -73,7 +73,7 @@ describe('Rename modal on make', function() {
         login.logout();
     });
 
-    it('bba-147:Verify save name when sendKeys enter in modal', function() {
+    it('bba-147:modalsChangeProjectName:Verify save name when sendKeys enter in modal', function() {
 
         //test no saved if click in cancel modal
         login.loginWithRandomUser();
@@ -91,7 +91,7 @@ describe('Rename modal on make', function() {
         login.logout();
     });
 
-    it('bba-246:Verify save name when sendKeys ESCAPE in modal no save name', function() {
+    it('bba-246:modalsChangeProjectName:Verify save name when sendKeys ESCAPE in modal no save name', function() {
 
         //test no saved if click in cancel modal
         login.loginWithRandomUser();

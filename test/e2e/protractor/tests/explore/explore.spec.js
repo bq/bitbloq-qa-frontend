@@ -37,7 +37,7 @@ describe('Explore tab', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bba-67:Show project using scroll', function() {
+    xit('bba-67:explore:Show project using scroll', function() {
 
         explore.get();
         //This sleep is necessary because the next statamente (executeScript) not syncronize with angularjs
@@ -98,7 +98,7 @@ describe('Explore tab', function() {
     });
 
     //TODO test show toast
-    it('bba-57:Verify that the Search bar work correctly', function() {
+    it('bba-57:explore:Verify that the Search bar work correctly', function() {
 
         //Save and publish 2 project begining in test_save__ , and use name of one
         make.saveProjectAndPublishNewUserAndLogout();
@@ -169,7 +169,7 @@ describe('Explore tab', function() {
 
     });
 
-    it('bba-17:Verify that the explore view is displayed correctly', function() {
+    it('bba-17:explore:Verify that the explore view is displayed correctly', function() {
         //Unregistered user
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto

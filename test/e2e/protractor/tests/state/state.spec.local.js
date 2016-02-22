@@ -30,19 +30,19 @@ describe('State, specs only in local', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-256:Save a bloqs project', function() {
+    it('bba-256:stateLocal:Save a bloqs project', function() {
         var name = 'Ultrasonidos_Bloqs';
         make.importFileGuestUser(path.resolve() + '/test/e2e/protractor/res/' + name +'.json');
         browser.sleep(vars.timeToWaitAutoSave);
         login.loginFromHeader('bloqsproject');
-        browser.sleep('2000'); // on jenkins name change more slow 
+        browser.sleep('2000'); // on jenkins name change more slow
         expect(make.projectName.getText()).toEqual(name);
         projects.get();
         expect(projects.getProjectCount()).toBe(1);
         login.logout();
     });
 
-    it('bba-257:Save a code project', function() {
+    it('bba-257:stateLocal:Save a code project', function() {
         var name = 'Ultrasonidos_Bloqs';
         make.importFileGuestUser(path.resolve() + '/test/e2e/protractor/res/' + name +'.json');
         browser.sleep(vars.timeToWaitAutoSave);

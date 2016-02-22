@@ -32,7 +32,7 @@ describe('Publish project', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-42:Verify that the project can be downloaded', function() {
+    it('bba-42:projectLocal:Verify that the project can be downloaded', function() {
         //Unregistered user
         var projectElem, filename;
         //Se salva un proyecto para que al menos explora tenga un proyecto

@@ -30,7 +30,7 @@ describe('Projects', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-272:New project button only appears in projects tab', function() {
+    it('bba-272:projects:New project button only appears in projects tab', function() {
         //search for the new project button w/ registered user
         login.loginWithRandomUser();
         expect(projects.newProject.isPresent()).toBe(true);

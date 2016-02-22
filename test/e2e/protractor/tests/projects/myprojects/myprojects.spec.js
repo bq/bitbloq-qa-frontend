@@ -41,7 +41,7 @@ describe('My Projects', function() {
     globalFunctions.afterTest();
 
     //TODO Check --> Alert (toast) && Create click into "Projecto sin titulo"
-    it('bba-105:Correct elemination --> Create project and eliminate ', function() {
+    it('bba-105:myProjects:Correct elemination --> Create project and eliminate ', function() {
 
         //Create and check saved project
         var newLoginRandom = login.loginWithRandomUser();
@@ -81,7 +81,7 @@ describe('My Projects', function() {
 
     });
 
-    it('bba-58:Verify that the Search bar work correctly', function() {
+    it('bba-58:myProjects:Verify that the Search bar work correctly', function() {
 
         //Save and publish 2 project begining in test_save__ , and use name of one
         // make.saveProjectAndPublish(true);
@@ -118,7 +118,7 @@ describe('My Projects', function() {
 
     });
 
-    it('bba-44:Verify that the project can be published', function() {
+    it('bba-44:myProjects:Verify that the project can be published', function() {
 
         var nameProject = make.saveProjectNewUser().projectName;
         browser.sleep(vars.timeToWaitSaveNewProject);
@@ -162,7 +162,7 @@ describe('My Projects', function() {
 
     });
 
-    it('bba-146:Verify if not have project, show create new project', function() {
+    it('bba-146:myProjects:Verify if not have project, show create new project', function() {
         login.loginWithRandomUser();
         myprojects.newProject.click();
         globalFunctions.toMatchUrlInNewTab(/#\/bloqsproject/);
@@ -170,7 +170,7 @@ describe('My Projects', function() {
 
     });
 
-    it('bba-16:Check if projects are show correctly in my projects', function() {
+    it('bba-16:myProjects:Check if projects are show correctly in my projects', function() {
 
         var checkNameProjects = function(row, contain) {
             expect(element.all(by.repeater('project in projectSearched').row(row).column('project.name')).getText()).toContain(contain);
@@ -370,7 +370,7 @@ describe('My Projects', function() {
         login.logout();
     });
 
-    it('bba-271:Verify you can change the name of a project', function() {
+    it('bba-271:myProjects:Verify you can change the name of a project', function() {
         var originalName = make.saveProjectNewUser().projectName;
         browser.sleep(vars.timeToWaitSaveNewProject);
         projects.get();

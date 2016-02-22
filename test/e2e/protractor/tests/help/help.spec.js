@@ -24,7 +24,7 @@ describe('Help ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-38:Comprobar botones Informar de un error en usuario invitado', function() {
+    it('bba-38:help:Comprobar botones Informar de un error en usuario invitado', function() {
         help.get();
         globalFunctions.navigatorLanguage()
             .then(function(language) {
@@ -33,7 +33,7 @@ describe('Help ', function() {
             });
     });
 
-    xit('bba-175:Comprobar botones Informar de un error en usuario registrado --> Xit pending traductions', function() {
+    xit('bba-175:help:Comprobar botones Informar de un error en usuario registrado --> Xit pending traductions', function() {
 
         login.loginWithRandomUser();
         header.navHelp.click();

@@ -31,7 +31,7 @@ describe('Check makeActions actions in codeProjects', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-244:Verify that the autosave is launched when you delete a board or a robot', function() {
+    it('bba-244:autosaveLocal:Verify that the autosave is launched when you delete a board or a robot', function() {
         //BOARD
         var name = 'Arduino_Bloqs';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
@@ -70,7 +70,7 @@ describe('Check makeActions actions in codeProjects', function() {
         });
     });
 
-    it('bba-280:Verify that the autosave is launched when you delete a component', function() {
+    it('bba-280:autosaveLocal:Verify that the autosave is launched when you delete a component', function() {
 
         var name = 'VariosComponentes';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
@@ -91,7 +91,7 @@ describe('Check makeActions actions in codeProjects', function() {
         });
     });
 
-    it('bba-281:Verify that the autosave is launched when you disconnect a component', function() {
+    it('bba-281:autosaveLocal:Verify that the autosave is launched when you disconnect a component', function() {
 
         var name = 'VariosComponentes';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');

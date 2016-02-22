@@ -26,7 +26,7 @@ describe('Walkthrough', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-118:not logged in user', function() {
+    it('bba-118:bloqsprojectWalkthrough:not logged in user', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.acceptTour.click();
@@ -36,7 +36,7 @@ describe('Walkthrough', function() {
         expect(walkthrough.stepTwo.isDisplayed()).toBeTruthy();
     });
 
-    it('bba-120:logged in user did not finish walkthrough', function() {
+    it('bba-120:bloqsprojectWalkthrough:logged in user did not finish walkthrough', function() {
         var userLogin = login.loginWithRandomUser();
         make.get();
         modals.acceptTour.click();
@@ -50,7 +50,7 @@ describe('Walkthrough', function() {
         login.logout();
     });
 
-    it('bba-121:logged in user rejected walkthrough', function() {
+    it('bba-121:bloqsprojectWalkthrough:logged in user rejected walkthrough', function() {
         var userLogin = login.loginWithRandomUser();
         make.get();
         modals.rejectTour();

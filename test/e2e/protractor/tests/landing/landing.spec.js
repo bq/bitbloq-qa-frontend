@@ -22,7 +22,7 @@ describe('Verify landing ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-35:Check that links to legal documents work', function() {
+    it('bba-35:landing:Check that links to legal documents work', function() {
         //landing.openLandingMenu.click();
         var cookies = '#/cookies',
             terms = '#/terms',
@@ -41,7 +41,7 @@ describe('Verify landing ', function() {
         });
     });
 
-    it('bba-183:check if NO login go to mailto in landing (link "contacto")', function() {
+    it('bba-183:landing:check if NO login go to mailto in landing (link "contacto")', function() {
 
         var script = landing.landingPage + '.scrollTo(0,6000);';
 
@@ -55,7 +55,7 @@ describe('Verify landing ', function() {
 
     });
 
-    it('bba-182:check if is login show modal feedback in landing (link "contacto")', function() {
+    it('bba-182:landing:check if is login show modal feedback in landing (link "contacto")', function() {
 
         var script = landing.landingPage + '.scrollTo(0,2000);';
         login.loginWithRandomUser();

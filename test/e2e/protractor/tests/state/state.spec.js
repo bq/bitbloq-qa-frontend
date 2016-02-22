@@ -41,7 +41,7 @@ describe('State ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-273:Verify that the empty bloqsproject isnt saved', function() {
+    it('bba-273:state:Verify that the empty bloqsproject isnt saved', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -63,7 +63,7 @@ describe('State ', function() {
         login.logout();
     });
 
-    it('bba-274:Verify that the empty codeproject isnt saved', function() {
+    it('bba-274:state:Verify that the empty codeproject isnt saved', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -80,7 +80,7 @@ describe('State ', function() {
         login.logout();
     });
 
-    it('bba-258:See a explore tab', function() {
+    it('bba-258:state:See a explore tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -91,7 +91,7 @@ describe('State ', function() {
         login.logout();
     });
 
-    it('bba-260:See a project in explore tab', function() {
+    it('bba-260:state:See a project in explore tab', function() {
         var projectElem;
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             make.get();
@@ -114,7 +114,7 @@ describe('State ', function() {
         });
     });
 
-    it('bba-261:See a bloqs project detail from explore tab', function() {
+    it('bba-261:state:See a bloqs project detail from explore tab', function() {
         var projectElem;
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             make.get();
@@ -145,7 +145,7 @@ describe('State ', function() {
         });
     });
 
-    it('bba-262:See a code project detail from explore tab', function() {
+    it('bba-262:state:See a code project detail from explore tab', function() {
         var projectElem;
         var projectSaved = codeProject.saveCodeProjectAndPublishNewUserAndLogout();
         make.get();
@@ -175,7 +175,7 @@ describe('State ', function() {
         });
     });
 
-    it('bba-263:See a faq page', function() {
+    it('bba-263:state:See a faq page', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -187,7 +187,7 @@ describe('State ', function() {
         login.loginFromHeader('help/faq');
     });
 
-    it('bba-264:See a tutorial page', function() {
+    it('bba-264:state:See a tutorial page', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -198,7 +198,7 @@ describe('State ', function() {
         login.loginFromHeader('help/tutorial');
     });
 
-    it('bba-265:See a changelog page', function() {
+    it('bba-265:state:See a changelog page', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -209,7 +209,7 @@ describe('State ', function() {
         login.loginFromHeader('help/update');
     });
 
-    it('bba-266:A search in the explora tab', function() {
+    it('bba-266:state:A search in the explora tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -224,7 +224,7 @@ describe('State ', function() {
 
     });
 
-    it('bba-267:A filter in the explora tab', function() {
+    it('bba-267:state:A filter in the explora tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -241,7 +241,7 @@ describe('State ', function() {
 
     });
 
-    it('bba-310:Check login and back to where you were(Foro)', function() {
+    it('bba-310:state:Check login and back to where you were(Foro)', function() {
         forum.get();
         browser.getCurrentUrl().then(function(url) {
             login.loginFromHeader('help/forum');
