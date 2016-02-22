@@ -58,12 +58,46 @@ module.exports = function(grunt) {
                 }
             },
             jenkins: {
-                cmd: 'dbus-launch --exit-with-session xvfb-run -a --server-args="-screen 0 1024x768x24" node_modules/protractor/bin/protractor test/e2e/protractor/confs/jenkins.js --baseUrl="http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/" --suite=$suite --jasmineNodeOpts.grep=$TEST_ID'
+                cmd: function(env) {
+                    switch (env) {
+                        case 'NEXT':
+                            env = 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/';
+                            break;
+                        case 'INT':
+                            env = 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/';
+                            break;
+                        case 'QA':
+                            env = 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/';
+                            break;
+                        case 'MVP':
+                            env = 'http://http://mvp-bitbloq.bq.com/';
+                            break;
+                        default:
+
+                    }
+                    return 'dbus-launch --exit-with-session xvfb-run -a --server-args="-screen 0 1024x768x24" node_modules/protractor/bin/protractor test/e2e/protractor/confs/jenkins.js --baseUrl=\"' + env + '\" --suite=$suite --jasmineNodeOpts.grep=$TEST_ID';
+                }
             },
             retry_jenkins: {
-                cmd: function(failID, suiteFail) {
+                cmd: function(env, failID, suiteFail) {
+                    switch (env) {
+                        case 'NEXT':
+                            env = 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/';
+                            break;
+                        case 'INT':
+                            env = 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/';
+                            break;
+                        case 'QA':
+                            env = 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/';
+                            break;
+                        case 'MVP':
+                            env = 'http://http://mvp-bitbloq.bq.com/';
+                            break;
+                        default:
+
+                    }
                     // return 'dbus-launch --exit-with-session xvfb-run -a --server-args="-screen 0 1024x768x24" node_modules/protractor/bin/protractor test/e2e/protractor/confs/jenkins.js --baseUrl="http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/" --suite=$suite --jasmineNodeOpts.grep=bba-(' + failID + ')';
-                    return 'dbus-launch --exit-with-session xvfb-run -a --server-args="-screen 0 1024x768x24" node_modules/protractor/bin/protractor test/e2e/protractor/confs/jenkins.js --baseUrl="http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/" --suite=\"' + suiteFail + '\" --jasmineNodeOpts.grep=\"bba-(' + failID + ')\"';
+                    return 'dbus-launch --exit-with-session xvfb-run -a --server-args="-screen 0 1024x768x24" node_modules/protractor/bin/protractor test/e2e/protractor/confs/jenkins.js --baseUrl=\"' + env + '\" --suite=\"' + suiteFail + '\" --jasmineNodeOpts.grep=\"bba-(' + failID + ')\"';
                 }
             }
         },
@@ -562,17 +596,16 @@ module.exports = function(grunt) {
 
     //
 
-    grunt.registerTask('readJSONRetryFailTest', 'Read JSON repeat fail test on jenkins', function(file) {
+    grunt.registerTask('readJSONRetryFailTest', 'Read JSON repeat fail test on jenkins', function() {
         // Force task into async mode and grab a handle to the "done" function.
         var done = this.async(),
-            fs = require('fs');
-        file = './target/report/resultTest.json';
-
-        //Red json result test && reprotTCResult
-        var obj,
+            fs = require('fs'),
+            file = './target/report/resultTest.json',
+            obj,
             id_test = '',
             id_suite = '',
-            isError = false;
+            isError = false,
+            env = grunt.option('env') || 'NEXT';
 
         function readFile(callback) {
             fs.readFile(file, 'utf8', function(err, data) {
@@ -603,8 +636,8 @@ module.exports = function(grunt) {
             },
             function(callback) {
                 if (isError) {
-                    grunt.log.ok('Read JSON Fail and retray test: ' + id_test + ' of suites :' + id_suite);
-                    grunt.task.run('exec:retry_jenkins:' + id_test + ':' + id_suite);
+                    grunt.log.ok('Read JSON Fail and retry test: ' + id_test + ' of suites :' + id_suite + ' on baseUrl' + env);
+                    grunt.task.run('exec:retry_jenkins:' + env + ':' + id_test + ':' + id_suite);
 
                 }
                 callback();
