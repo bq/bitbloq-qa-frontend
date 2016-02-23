@@ -2,7 +2,7 @@
     "env": "staging",
     "version": "",
     "defaultLang": "es-ES",
-    "supportedLanguages": ["es-ES", "en-GB", "ru-RU", "it-IT", "eu-ES", "ca-ES", "fr-FR", "de-DE", "pt-PT", "gl", "zh-CN"],
+    "supportedLanguages": ["es-ES", "en-GB", "ru-RU", "it-IT", "eu-ES", "ca-ES", "fr-FR", "de-DE", "pt-PT", "gl", "nl-NL"],
     "saveTime": 5000,
     "resourcesEndpoint": "https://resources-staging.bqws.io/v1.0/",
     "iamEndpoint": "https://iam-staging.bqws.io/v1.0/",
@@ -26,5 +26,5 @@
     "adminClientId": "868f0313",
     "adminSecret": "1bcd6f11bf337391c7efc2ca2f6d76c29a4420a7028f2b11bc0eed03070f2b97",
     "adminUsername": "bitbloq@bq.com",
-    "adminPassword": "bitbloqcodestheworld"
+    "adminPassword": "bitbloqcodestheworlddev"
 }
