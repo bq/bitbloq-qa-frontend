@@ -15,6 +15,12 @@ var Social = function() {
     this.loginSocialTermCheckbox = $('[data-element="login-social-term-checkbox"]');
     this.loginSocialCheckUserButton = $('[data-element="login-social-check-user-button"]');
     this.loginSocialEnterButton = $('[data-element="login-social-enter-button"]');
+    this.loginSocialUsernameInput = $('[data-element="login-social-username-input"]');
+    this.loginSocialCheckUserButton = $('[data-element="login-social-check-user-button"]');
+    this.loginSocialTermCheckbox = $('[data-element="login-social-term-checkbox"]');
+    this.loginSocialEnterButton = $('[data-element="login-social-enter-button"]');
+
+
 
     this.registerGoogle = function(email, password, username) {
         var that = this;

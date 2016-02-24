@@ -1,11 +1,13 @@
 'use strict';
 var Login = require('../../login/login.po.js'),
     Variables = require('../../commons/variables.js'),
-    Commons = require('../../commons/commons.po.js');
+    Commons = require('../../commons/commons.po.js'),
+    GlobalFunctions = require('../../commons/globalFunctions.js');
 
 var login = new Login(),
     vars = new Variables(),
-    commons = new Commons();
+    commons = new Commons(),
+    globalFunctions = new GlobalFunctions();
 
 var Forum = function() {
     //header
@@ -73,7 +75,14 @@ var Forum = function() {
         browser.sleep(vars.timeToWaitTab);
         //en el momento de creacion de este test, no existia traduccion para este toast
         //una vez exista, se añadira el control del idioma para saucelabs
-        commons.expectToastTimeOutandText(commons.alertTextToast, 'Tema creado');
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    commons.expectToastTimeOutandText(commons.alertTextToast, vars.threadCreated);
+                } else {
+                    commons.expectToastTimeOutandText(commons.alertTextToast, vars.threadCreatedEN);
+                }
+            });
         browser.sleep(vars.timeToWaitTab);
 
         return {

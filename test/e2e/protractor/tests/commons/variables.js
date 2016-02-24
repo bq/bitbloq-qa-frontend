@@ -104,6 +104,11 @@ var Variables = function() {
     this.fileNoPicture = 'El archivo no es una imagen';
     this.fileNoPictureEN = 'This is not an image file';
 
+    //Forum Toast
+    this.threadCreated = 'Tema creado';
+    this.threadCreatedEN = 'Thread created';
+
+
     this.account = function(cuenta) {
         if (cuenta === 'google') {
             return {

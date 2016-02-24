@@ -44,7 +44,6 @@ describe('Forum', function() {
         expect(forum.newTopicButtonArray.get(0).isPresent()).toBe(true);
         forum.newTopicButtonArray.get(0).click();
 
-
         browser.sleep(vars.timeToWaitTab);
         browser.getCurrentUrl().then(function(url) {
             expect(url).toMatch(/#\/help\/forum\/new-theme/);
@@ -100,7 +99,15 @@ describe('Forum', function() {
 
             //en el momento de creacion de este test, no existia traduccion para este toast
             //una vez exista, se añadira el control del idioma para saucelabs
-            commons.expectToastTimeOutandText(commons.alertTextToast, 'Tema creado');
+            globalFunctions.navigatorLanguage()
+                .then(function(language) {
+                    if (language === 'es') {
+                        commons.expectToastTimeOutandText(commons.alertTextToast, vars.threadCreated);
+                    } else {
+                        commons.expectToastTimeOutandText(commons.alertTextToast, vars.threadCreatedEN);
+                    }
+                });
+
             forum.get();
             browser.sleep(vars.timeToWaitTab);
 

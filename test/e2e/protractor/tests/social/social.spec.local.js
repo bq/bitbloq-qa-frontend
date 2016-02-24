@@ -34,6 +34,13 @@ describe('User account view', function() {
     xit('bba-2: Asociate Social to account', function() {
 
         mock.deleteUser('testprove2016@gmail.com', 'next');
+        login.loginWithRandomUser();
+        account.get();
+        globalFunctions.scrollBottomPage().then(function() {
+        browser.pause();
+
+        login.logout();
+        });
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
