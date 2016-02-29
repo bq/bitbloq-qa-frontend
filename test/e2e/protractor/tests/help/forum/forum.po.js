@@ -14,6 +14,8 @@ var Forum = function() {
     this.newTopicButton = $('[data-element="forum-new-topic-button"]');
     this.newTopicButtonArray = element.all(by.css('[data-element="forum-new-topic-button"]'));
     this.categoryButton = $('[data-element="forum-category-button"]');
+    this.breadcrumbs = $('[data-element="forum-header-breadcrumb"]');
+    this.breadcrumbsArray=element.all(by.css('[data-element="forum-header-breadcrumb"]'));
 
     //new topic
     this.categoryList = $('[data-element="forum_category_dropdown"]');

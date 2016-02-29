@@ -404,5 +404,48 @@ describe('Forum', function() {
             });
         });
     });
+    it('bba-285:helpForum:check breadcrumbs', function() {//"hecho" falta pasar todas las pruebas
+        //pagina principal
+        forum.get();
+        browser.sleep(vars.timeToWaitTab + 5000);
+        expect(forum.breadcrumbs.all(by.css('h2')).get(0).getText()).toMatch('Foro');
+        //categoria
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitLoadForumCategory + 7000);
+        expect(forum.breadcrumbsArray.get(1).all(by.css('h2')).get(0).getText()).toMatch('Foro');
+        expect(forum.breadcrumbsArray.get(1).all(by.css('a')).get(0).getAttribute('href')).toMatch('#\/help\/forum');
+        expect(forum.breadcrumbsArray.get(1).all(by.css('span')).get(0).getText()).toMatch('Noticias');
+        //tema
+        forum.categoryTopicTitle.click();
+        browser.sleep(vars.timeToWaitTab);
+        expect(forum.breadcrumbsArray.get(1).all(by.css('h2')).get(0).getText()).toMatch('Foro');
+        expect(forum.breadcrumbsArray.get(1).all(by.css('a')).get(0).getAttribute('href')).toMatch('#\/help\/forum');
+        expect(forum.breadcrumbsArray.get(1).all(by.css('a')).get(1).getText()).toMatch('Noticias');
+        expect(forum.breadcrumbsArray.get(1).all(by.css('a')).get(1).getAttribute('href')).toMatch('#\/help\/forum\/Noticias');
+
+        /*
+        expect(element.all(by.css('[data-element="forum-header-breadcrumb"]'))[1]);
+        .all(by.css('h2')).get(0).getText()).toMatch('Foro');
+                    expect(breadcrumb.all(by.css('h2')).get(0).getText()).toMatch('Foro');
+                    expect(breadcrumb.all(by.css('h2')).get(0).getAttribute('href').getText()).toMatch('#\/help\/forum');
+        */
+    });
+    it('bba-287:helpForum:check topic count category', function() {
+        forum.get();
+        browser.sleep(vars.timeToWaitTab);
+        element.all(by.repeater('category in section').row(0).column('category.numberOfThemes')).getText().then(function(topicsInCategory) {
+          var topicsInCategoryVal = parseInt(topicsInCategory);
+          forum.createTopicNewUser();
+          forum.createNewTopic();
+          forum.createNewTopic();
+          forum.get();
+          topicsInCategoryVal+=3;
+          topicsInCategory=topicsInCategoryVal.toString();
+          expect(element.all(by.repeater('category in section').row(0).column('category.numberOfThemes')).getText()).toMatch(topicsInCategory);
+          login.logout();
+
+        });
+
+    });
 
 });
