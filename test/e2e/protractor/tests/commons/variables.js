@@ -30,6 +30,7 @@ var Variables = function() {
     this.passwordFb = 'webpruebas.2webpruebas.2';
     this.userFb = 'Paco';
     this.lastnameFb = 'Gómez';
+    this.usernameFb = 'test128';
 
     //timers
     this.timeToWaitFadeModals = 2000;
@@ -131,7 +132,8 @@ var Variables = function() {
                 email: this.emailFb,
                 password: this.passwordFb,
                 user: this.userFb,
-                lastname: this.lastnameFb
+                lastname: this.lastnameFb,
+                username: this.usernameFb
             };
         } else if (cuenta === 'bitbloq') {
             return {

@@ -1,6 +1,7 @@
 {
 
     "account": "../tests/account/account.spec.js",
+    "accountXit": "../tests/account/account.spec.xit.js",
     "autosave": "../tests/autosave/autosave.spec.js",
 
     "bloqsprojectInfo": "../tests/bloqsproject/infotab/infotab.spec.js",
@@ -16,11 +17,13 @@
     "codeProject": "../tests/codeproject/codeproject.spec.js",
     "cookiesBar": "../tests/cookiesBar/cookiesBar.spec.js",
     "explore": "../tests/explore/explore.spec.js",
+    "exploreXit": "../tests/explore/explore.spec.xit.js",
     "exploreProject": "../tests/explore/project.spec.js",
     "header": "../tests/header/header.spec.js",
     "helpChangelog": "../tests/help/changelog/changelog.spec.js",
     "helpFaq": "../tests/help/faq/faq.spec.js",
     "helpForum": "../tests/help/forum/forum.spec.js",
+    "helpForumXit": "../tests/help/forum/forum.spec.xit.js",
     "helpTutorial": "../tests/help/tutorial/tutorial.spec.js",
     "help": "../tests/help/*.spec.js",
     "landing": "../tests/landing/landing.spec.js",
@@ -50,6 +53,7 @@
 
     "ALL": [
         "../tests/account/account.spec.js",
+        "../tests/account/account.spec.xit.js",
         "../tests/autosave/autosave.spec.js",
 
         "../tests/bloqsproject/infotab/infotab.spec.js",
@@ -65,11 +69,13 @@
         "../tests/codeproject/codeproject.spec.js",
         "../tests/cookiesBar/cookiesBar.spec.js",
         "../tests/explore/explore.spec.js",
+        "../tests/explore/explore.spec.xit.js",
         "../tests/explore/project.spec.js",
         "../tests/header/header.spec.js",
         "../tests/help/changelog/changelog.spec.js",
         "../tests/help/faq/faq.spec.js",
         "../tests/help/forum/forum.spec.js",
+        "../tests/help/forum/forum.spec.xit.js",
         "../tests/help/tutorial/tutorial.spec.js",
         "../tests/help/*.spec.js",
         "../tests/landing/landing.spec.js",
@@ -223,14 +229,17 @@
 
     "ONLY_LOCAL": [
         "../tests/account/account.spec.local.js",
+        "../tests/account/account.spec.xit.js",
         "../tests/autosave/autosave.spec.local.js",
         "../tests/bloqsproject/hwtab/hwtab.spec.local.js",
         "../tests/bloqsproject/infotab/infotab.spec.local.js",
         "../tests/bloqsproject/makeActions/edit/makeActionsEdit.spec.local.js",
         "../tests/bloqsproject/makeActions/file/makeActionsFile.spec.local.js",
         "../tests/bloqsproject/makeActions/share/makeActionsShare.spec.local.js",
+        "../tests/explore/explore.spec.xit.js",
         "../tests/explore/filters/filters.spec.local.js",
         "../tests/explore/project.spec.local.js",
+        "../tests/help/forum/forum.spec.xit.js",
         "../tests/login/login.spec.xit.js",
         "../tests/projects/myprojects/myprojects.spec.local.js",
         "../tests/social/social.spec.local.js",
