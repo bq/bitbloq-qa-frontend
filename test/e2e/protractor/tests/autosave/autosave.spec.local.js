@@ -11,6 +11,7 @@ var GlobalFunctions = require('../commons/globalFunctions.js'),
     MyProjects = require('../projects/myprojects/myprojects.po.js'),
     Login = require('../login/login.po.js'),
     path = require('path'),
+    InfoTab = require('../bloqsproject/infotab/infotab.po.js'),
     Hwtab = require('../bloqsproject/hwtab/hwtab.po.js');
 
 var globalFunctions = new GlobalFunctions(),
@@ -19,6 +20,7 @@ var globalFunctions = new GlobalFunctions(),
     projects = new Projects(),
     myprojects = new MyProjects(),
     login = new Login(),
+    infotab = new InfoTab(),
     hwtab = new Hwtab();
 
 globalFunctions.xmlReport('autosaveLocal');
@@ -116,5 +118,114 @@ describe('Check makeActions actions in codeProjects', function() {
             });
         });
     });
+
+    xit('bba-247:autosave:Verify that the autosave is launched when you change the information of the projects', function() {
+        var perfectImagePath = '../../res/perfectimage.jpg',
+        perfectImageAbsolutePath = path.resolve(__dirname, perfectImagePath);
+
+        make.saveProjectNewUser();
+        expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+        projects.get();
+
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]).then(function() {
+                browser.sleep(vars.timeToWaitTab);
+                infotab.infoTab.click();
+                infotab.infotabProjectName.sendKeys('hola');
+                browser.sleep(vars.timeToWaitAutoSave);
+                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                browser.close().then(browser.switchTo().window(handles[0]));
+            });
+        });
+
+        projects.get();
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]).then(function() {
+                browser.sleep(vars.timeToWaitTab);
+                infotab.infoTab.click();
+                infotab.infotabDescription.clear().sendKeys('Esto es una descripcion');
+                browser.sleep(vars.timeToWaitAutoSave);
+                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                browser.close().then(browser.switchTo().window(handles[0]));
+            });
+        });
+
+        projects.get();
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]).then(function() {
+                browser.sleep(vars.timeToWaitTab);
+                infotab.infoTab.click();
+                infotab.infotabYoutubeVideoInput.clear().sendKeys('https://www.youtube.com/watch?v=6R89_YL5ALM');
+                browser.sleep(vars.timeToWaitAutoSave);
+                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                browser.close().then(browser.switchTo().window(handles[0]));
+            });
+        });
+
+        projects.get();
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]).then(function() {
+                browser.sleep(vars.timeToWaitTab);
+                infotab.infoTab.click();
+                infotab.infotabFileUpload.sendKeys(perfectImageAbsolutePath);
+                browser.sleep(vars.timeToWaitSendKeys);
+                browser.sleep(vars.timeToWaitAutoSave);
+                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                browser.close().then(browser.switchTo().window(handles[0]));
+            });
+        });
+
+        projects.get();
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]).then(function() {
+                browser.sleep(vars.timeToWaitTab);
+                infotab.infoTab.click();
+                infotab.infotabTaginputText.clear().sendKeys('hola');
+                infotab.infotabTaginputButton.click();
+                browser.sleep(vars.timeToWaitAutoSave);
+                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                browser.close().then(browser.switchTo().window(handles[0]));
+            });
+        });
+
+        projects.get();
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]).then(function() {
+                browser.sleep(vars.timeToWaitTab);
+                infotab.infoTab.click();
+                element.all(by.repeater('tag in project.userTags').row(0)).click();
+                infotab.infotabRemoveTag.click();
+                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                browser.close().then(browser.switchTo().window(handles[0]));
+            });
+        });
+        projects.get();
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]).then(function() {
+                browser.sleep(vars.timeToWaitTab);
+                infotab.infoTab.click();
+                infotab.infotabChooseThemeButton.click();
+                infotab.infotabOptionGrayTheme.click();
+                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                browser.close().then(browser.switchTo().window(handles[0]));
+            });
+        });
+        login.logout();
+    });
+
 
 });

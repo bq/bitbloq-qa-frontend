@@ -94,19 +94,20 @@ describe('Info tab', function() {
                 } else {
                     expect(commons.alertTextToast.getText()).toMatch(vars.enterValidYoutubeUrlEN);
                 }
+                infoTab.infotabYoutubeVideoInput.clear();
+                browser.sleep(vars.timeToWaitAutoSave + 2500);
+                infoTab.infotabYoutubeVideoInput.sendKeys(validYoutubeUrl);
+                browser.sleep(vars.timeToWaitAutoSave + 2500);
+                browser.refresh();
+                make.infoTab.click();
+                expect(infoTab.infotabYoutubeVideoInput.getAttribute('value')).toBe(validYoutubeUrl);
+                infoTab.infotabYoutubeVideoInput.clear();
+                infoTab.infotabYoutubeVideoInput.sendKeys('');
+                browser.sleep(vars.timeToWaitAutoSave+2500);
+                browser.refresh();
+                make.infoTab.click();
+                expect(infoTab.infotabYoutubeVideoInput.getAttribute('value')).toBe('');
             });
-        infoTab.infotabYoutubeVideoInput.clear();
-        infoTab.infotabYoutubeVideoInput.sendKeys(validYoutubeUrl);
-        browser.sleep(vars.timeToWaitAutoSave + 2500);
-        browser.refresh();
-        make.infoTab.click();
-        expect(infoTab.infotabYoutubeVideoInput.getAttribute('value')).toBe(validYoutubeUrl);
-        infoTab.infotabYoutubeVideoInput.clear();
-        infoTab.infotabYoutubeVideoInput.sendKeys('');
-        browser.sleep(vars.timeToWaitAutoSave);
-        browser.refresh();
-        make.infoTab.click();
-        expect(infoTab.infotabYoutubeVideoInput.getAttribute('value')).toBe('');
 
     });
 });

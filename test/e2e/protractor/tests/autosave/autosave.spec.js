@@ -60,7 +60,5 @@ describe('Check makeActions actions in codeProjects', function() {
         });
     });
 
-    xit('bba-247:autosave:Verify that the autosave is launched when you change the information of the projects', function() {
-    });
 
 });
