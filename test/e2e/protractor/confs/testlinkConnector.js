@@ -16,7 +16,7 @@ console.log('start');
    //Configuration API
    var testlinkTestPlanID = '28822',
       testlinkBuildID = '921',
-      testlinkUser = 'luisangonzalez';
+      testlinkUser = 'natalia.gomez';
 
    //Obj result
    var passed = {

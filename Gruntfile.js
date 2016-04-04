@@ -486,7 +486,7 @@ module.exports = function(grunt) {
 
         var planID = grunt.option('plan') || '29389', // by default ALLTEST Plan Management
             buildID = grunt.option('build') || '1104', // by default 2.0.7 en Next - Corbel 1.22.0
-            user = grunt.option('user') || 'luisangonzalez',
+            user = grunt.option('user') || 'natalia.gomez',
             platform = grunt.option('platform') || 'Ubuntu 14.04 LTS',
             proxy = grunt.option('proxy'),
             proxyValues,
