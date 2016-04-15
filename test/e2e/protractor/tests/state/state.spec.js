@@ -243,33 +243,46 @@ describe('State ', function() {
 
     it('bba-310:state:Check login and back to where you were(Foro)', function() {
         forum.get();
+        var curl;
         browser.getCurrentUrl().then(function(url) {
-            login.loginFromHeader('help/forum');
-            expect(browser.getCurrentUrl()).toEqual(url);
-            login.logout();
-            forum.get();
-            browser.sleep(vars.timeToWaitLoadForumCategory);
-            forum.categoryButton.click();
-            browser.sleep(vars.timeToWaitLoadForumCategory);
-            browser.getCurrentUrl().then(function(url) {
-                login.loginFromHeader('help/forum');
-                browser.sleep(vars.timeToWaitLoadForumCategory);
-                expect(browser.getCurrentUrl()).toEqual(url);
-                login.logout();
-                forum.createTopicNewUser();
-                login.logout();
-                forum.get();
-                forum.categoryButton.click();
-                browser.sleep(vars.timeToWaitLoadForumCategory);
-                forum.categoryTopicTitle.click();
-                browser.getCurrentUrl().then(function(url) {
-                    login.loginFromHeader('help/forum');
-                    expect(browser.getCurrentUrl()).toEqual(url);
-                    login.logout();
-                });
-            });
+            curl = url;
+        });
+        login.loginFromHeader('help/forum');
+        browser.getCurrentUrl().then(function(url) {
+            expect(curl).toEqual(url);
 
         });
+        login.logout();
+        forum.get();
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        browser.getCurrentUrl().then(function(url) {
+            curl = url;
+        });
+        login.loginFromHeader('help/forum');
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        browser.getCurrentUrl().then(function(url) {
+            expect(curl).toEqual(url);
+        });
+        login.logout();
+        forum.createTopicNewUser();
+        login.logout();
+        forum.get();
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        forum.categoryTopicTitle.click();
+        browser.getCurrentUrl().then(function(url) {
+            curl = url;
+        });
+        login.loginFromHeader('help/forum');
+        browser.getCurrentUrl().then(function(url) {
+
+            expect(curl).toEqual(url);
+        });
+        login.logout();
+        /*
+         */
     });
 
 });

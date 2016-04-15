@@ -280,4 +280,151 @@ describe('Forum', function() {
         });
 
     });
+
+    it('bba-297:helpForum:Answer a topic (empty answer)', function() {
+        forum.createTopicNewUser();
+        forum.get();
+        browser.sleep(vars.timeToWaitTab);
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.title')).click();
+        browser.sleep(vars.timeToWaitTab);
+        expect(forum.publishAnswerButton.getAttribute('aria-disabled')).toBe('true');
+        forum.answerTopic.all(by.css('div')).get(15).click();
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys('random keystrokes');
+        browser.sleep(vars.timeToWaitSendKeys);
+        browser.sleep(vars.timeToWaitFadeModals);
+        expect(forum.publishAnswerButton.getAttribute('aria-disabled')).toBe('false');
+        forum.answerTopic.all(by.css('div')).get(15).click();
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys(protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE);
+        browser.sleep(vars.timeToWaitFadeModals);
+        expect(forum.publishAnswerButton.getAttribute('aria-disabled')).toBe('true');
+        login.logout();
+    });
+
+    it('bba-285:helpForum:check breadcrumbs', function() {
+        //pagina principal
+        forum.get();
+        browser.sleep(vars.timeToWaitTab + 5000);
+        expect(forum.breadcrumbs.all(by.css('h2')).get(0).getText()).toMatch('Foro');
+        //categoria
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitLoadForumCategory + 7000);
+        expect(forum.breadcrumbsArray.get(1).all(by.css('h2')).get(0).getText()).toMatch('Foro');
+        expect(forum.breadcrumbsArray.get(1).all(by.css('a')).get(0).getAttribute('href')).toMatch('#\/help\/forum');
+        expect(forum.breadcrumbsArray.get(1).all(by.css('span')).get(0).getText()).toMatch('Noticias');
+        //tema
+        forum.categoryTopicTitle.click();
+        browser.sleep(vars.timeToWaitTab);
+        expect(forum.breadcrumbsArray.get(1).all(by.css('h2')).get(0).getText()).toMatch('Foro');
+        expect(forum.breadcrumbsArray.get(1).all(by.css('a')).get(0).getAttribute('href')).toMatch('#\/help\/forum');
+        expect(forum.breadcrumbsArray.get(1).all(by.css('a')).get(1).getText()).toMatch('Noticias');
+        expect(forum.breadcrumbsArray.get(1).all(by.css('a')).get(1).getAttribute('href')).toMatch('#\/help\/forum\/Noticias');
+
+    });
+
+    it('bba-302:helpForum:check undo/redo buttons on editor', function() {
+        login.loginWithRandomUser();
+        forum.get();
+        //en nuevo tema
+        forum.newTopicButton.click();
+        browser.sleep(vars.timeToWaitTab);
+        forum.newTopicDescription.all(by.css('div')).get(15).click();
+        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys('random description');
+        browser.sleep(1000);
+        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys('123456');
+        forum.newTopicDescription.all(by.css('button')).get(9).click();//undo
+        expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).toMatch('random description');
+        expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).not.toMatch('random description123456');
+        forum.newTopicDescription.all(by.css('button')).get(9).click();//undo
+        expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).not.toMatch('random description');
+        forum.newTopicDescription.all(by.css('button')).get(10).click();//redo
+        expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).toMatch('random description');
+        forum.newTopicDescription.all(by.css('button')).get(10).click();//redo
+        expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).toMatch('random description123456');
+        //en respuesta
+        forum.get();
+        forum.categoryButton.click();
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        forum.categoryTopicTitle.click();
+        browser.sleep(vars.timeToWaitTab);
+        forum.answerTopic.all(by.css('div')).get(15).click();
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys('random description');
+        browser.sleep(1000);
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys('123456');
+        forum.answerTopic.all(by.css('button')).get(9).click();//undo
+        expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('random description');
+        expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).not.toMatch('random description123456');
+        forum.answerTopic.all(by.css('button')).get(9).click();//undo
+        expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).not.toMatch('random description');
+        forum.answerTopic.all(by.css('button')).get(10).click();//redo
+        expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('random description');
+        forum.answerTopic.all(by.css('button')).get(10).click();//redo
+        expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('random description123456');
+        login.logout();
+    });
+    it('bba-306:helpForum:special characters in editor', function(){
+      login.loginWithRandomUser();
+      forum.get();
+      forum.newTopicButton.click();
+      browser.sleep(vars.timeToWaitTab);
+      forum.newTopicDescription.all(by.css('div')).get(15).click();
+      forum.newTopicDescription.all(by.css('div')).get(15).sendKeys('<>&');
+      expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).toMatch('&lt;&gt;&amp;');
+      forum.get();
+      forum.categoryButton.click();
+      browser.sleep(vars.timeToWaitLoadForumCategory);
+      forum.categoryTopicTitle.click();
+      browser.sleep(vars.timeToWaitTab);
+      forum.answerTopic.all(by.css('div')).get(15).click();
+      forum.answerTopic.all(by.css('div')).get(15).sendKeys('<>&');
+      expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('&lt;&gt;&amp;');
+      login.logout();
+
+    });
+
+    it('bba-307:helpForumXit:check visit counter topic', function(){
+      forum.createTopicNewUser();
+      forum.get();
+      browser.sleep(vars.timeToWaitTab);
+      forum.categoryButton.click();
+      browser.sleep(vars.timeToWaitLoadForumCategory);
+      element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.numberOfViews')).getText().then(function(answerCount) {
+          expect(answerCount).toMatch('0');
+      });
+      forum.categoryTopicTitle.click();
+      browser.sleep(vars.timeToWaitTab);
+      forum.get();
+      browser.sleep(vars.timeToWaitTab);
+      forum.categoryButton.click();
+      browser.sleep(vars.timeToWaitLoadForumCategory);
+      element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.numberOfViews')).getText().then(function(answerCount) {
+          expect(answerCount).toMatch('0');
+      });
+      login.logout();
+      login.loginWithRandomUser();
+      forum.get();
+      browser.sleep(vars.timeToWaitTab);
+      forum.categoryButton.click();
+      browser.sleep(vars.timeToWaitLoadForumCategory);
+      forum.categoryTopicTitle.click();
+      browser.sleep(vars.timeToWaitTab);
+      forum.get();
+      browser.sleep(vars.timeToWaitTab);
+      forum.categoryButton.click();
+      browser.sleep(vars.timeToWaitLoadForumCategory);
+      forum.categoryTopicTitle.click();
+      browser.sleep(vars.timeToWaitTab);
+      forum.get();
+      browser.sleep(vars.timeToWaitTab);
+      forum.categoryButton.click();
+      browser.sleep(vars.timeToWaitLoadForumCategory);
+      element.all(by.repeater('theme in forum.categoryThemes').row(0).column('theme.numberOfViews')).getText().then(function(answerCount) {
+          expect(answerCount).toMatch('2');
+      });
+      login.logout();
+
+
+
+    });
 });
