@@ -508,4 +508,41 @@ describe('Register ', function() {
 
     });
 
+    it('bba-365:register:The date is incorrect', function() {
+        landing.openLandingMenu.click();
+        landing.enterButton.click();
+
+        //Go to create account form
+        register.createAccountButtn.click();
+
+        var user = register.generateUser();
+        //Register with user in use
+        register.createAccount(user.username, user.userEmail, user.password, 32, 3, 1986, false, true);
+        expect(register.showNoBirthdate.isDisplayed()).toBeTruthy();
+        register.createAccount(user.username, user.userEmail, user.password, 31, 13, 1986, false, true);
+        expect(register.showNoBirthdate.isDisplayed()).toBeTruthy();
+        register.createAccount(user.username, user.userEmail, user.password, 31, 12, 100, false, true);
+        expect(register.showNoBirthdate.isDisplayed()).toBeTruthy();
+    });
+
+    it('bba-366:register:Remember the password - EMAIL DOESNT EXIST', function() {
+        var email = 'fakeemail@fake.fake';
+        login.get();
+        login.user.sendKeys(email);
+        login.forgotPasswordButton.click();
+        login.emailToSendInput.sendKeys(email);
+        login.emailToSendButton.click();
+        expect(login.showEmailNotExist.isDisplayed()).toBeTruthy();
+    });
+
+    it('bba-366:register:Remember the password - EMAIL INCORRECT', function() {
+        var email = 'emailincorrect';
+        login.get();
+        login.user.sendKeys(email);
+        login.forgotPasswordButton.click();
+        login.emailToSendInput.sendKeys(email);
+        login.emailToSendButton.click();
+        expect(login.showEmailIncorrect.isDisplayed()).toBeTruthy();
+    });
+
 });

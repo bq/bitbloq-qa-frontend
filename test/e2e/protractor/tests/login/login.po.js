@@ -41,6 +41,7 @@ var Login = function() {
     this.showIncorrectUser = $('[data-element="show-no-user-or-email-register"]');
     //No remember password in login
     this.showEmailNotExist = $('[data-element="login-email-not-exist"]');
+    this.showEmailIncorrect = $('[data-element="invalid-email"]');
     //Forgot password
     this.forgotPasswordButton = $('[data-element="login-forgot-password-button"]');
     this.emailToSendInput = $('[data-element="login-email-to-send-input"]');

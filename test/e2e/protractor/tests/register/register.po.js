@@ -72,12 +72,12 @@ var Register = function() {
      * @return {Void} void
      */
     this.createAccount = function(user, email, password, day, month, year, isCheckNew, isCheckProp) {
-        this.userName.sendKeys(user);
-        this.email.sendKeys(email);
-        this.password.sendKeys(password);
-        this.inputDay.sendKeys(day);
-        this.inputMonth.sendKeys(month);
-        this.inputYear.sendKeys(year);
+        this.userName.clear().sendKeys(user);
+        this.email.clear().sendKeys(email);
+        this.password.clear().sendKeys(password);
+        this.inputDay.clear().sendKeys(day);
+        this.inputMonth.clear().sendKeys(month);
+        this.inputYear.clear().sendKeys(year);
 
         if (isCheckNew) {
             this.checkBoxNewsletterAndTeacher.click();
