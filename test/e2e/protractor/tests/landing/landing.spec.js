@@ -41,7 +41,7 @@ describe('Verify landing ', function() {
         });
     });
 
-    it('bba-183:landing:check if NO login go to mailto in landing (link "contacto")', function() {
+    xit('bba-183:landing:check if NO login go to mailto in landing (link "contacto")', function() {
 
         var script = landing.landingPage + '.scrollTo(0,6000);';
 
@@ -55,9 +55,9 @@ describe('Verify landing ', function() {
 
     });
 
-    it('bba-182:landing:check if is login show modal feedback in landing (link "contacto")', function() {
+    xit('bba-182:landing:check if is login show modal feedback in landing (link "contacto")', function() {
 
-        var script = landing.landingPage + '.scrollTo(0,2000);';
+        var script = landing.landingPage + '.scrollTo(0,4000);';
         login.loginWithRandomUser();
         landing.get();
         browser.sleep(5000); //Time to wait load explora project on landing (not wait angular)

@@ -20,9 +20,8 @@ describe('Language', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-238:language:Supports email dependent of language', function() {
-
-        var checkSupportEmail = function(language, firstScroll) {
+    fit('bba-238:language:Supports email dependent of language', function() {
+        var checkSupportEmail = function(language) {
             var buttonLanguage;
             var supportEmail;
             var noButton = false;
@@ -79,27 +78,23 @@ describe('Language', function() {
                     noButton = true;
                     supportEmail = vars.supportEmailEN;
             }
-
-            if (firstScroll) {
-                var script = landing.landingPage + '.scrollTo(0,6000);';
-                browser.sleep(5000); //Time to wait load explora project on landing (not wait angular)
-                browser.executeScript(script).then(function() {
-                    if (!noButton) {
-                        buttonLanguage.click();
-                    }
-                    expect(landing.contactButton.getAttribute('href')).toMatch(supportEmail);
-                });
-
-            } else {
-                if (!noButton) {
-                    buttonLanguage.click();
-                }
-                expect(landing.contactButton.getAttribute('href')).toMatch(supportEmail);
+            browser.sleep(1000);
+            if(!noButton) {
+                landing.dropdownLanguage.click();
+                browser.sleep(1000);
+                buttonLanguage.click();
             }
 
-        };
+            expect(landing.contactUsEmail.getAttribute('href')).toMatch(supportEmail);
 
-        checkSupportEmail('ES',true);
+
+
+        }; //Time to wait load explora project on landing (not wait angular)
+        browser.driver.manage().window().maximize();
+        browser.sleep(1000);
+        landing.helpButton.click();
+        browser.sleep(1000);
+        checkSupportEmail('ES');
         checkSupportEmail('EN');
         checkSupportEmail('FR');
         checkSupportEmail('DE');
@@ -110,7 +105,8 @@ describe('Language', function() {
         checkSupportEmail('EU');
         checkSupportEmail('CA');
         checkSupportEmail('GL');
-        // checkSupportEmail('CN');
+        checkSupportEmail('CN');
+
 
     });
 
