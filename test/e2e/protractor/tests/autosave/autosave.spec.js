@@ -32,27 +32,29 @@ describe('Check makeActions actions in codeProjects', function() {
 
     it('bba-239:autosave:Verify that the project isnt autosaved when it is opened', function() {
         make.saveProjectNewUser();
-        expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+        browser.sleep(vars.timeToWaitAutoSave);
+        expect(make.isProjectSavedShown()).toBeTruthy();
         projects.get();
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.switchTo().window(handles[1]).then(function() {
                 browser.sleep(vars.timeToWaitAutoSave);
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('true');
+                expect(make.isProjectSavedShown()).toBeFalsy();
                 browser.close().then(browser.switchTo().window(handles[0]));
                 login.logout();
             });
         });
         codeProjects.saveCodeProjectNewUser();
-        expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+        browser.sleep(vars.timeToWaitAutoSave);
+        expect(make.isProjectSavedShown()).toBeTruthy();
         projects.get();
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.switchTo().window(handles[1]).then(function() {
                 browser.sleep(vars.timeToWaitAutoSave);
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('true');
+                expect(make.isProjectSavedShown()).toBeFalsy();
                 login.logout();
                 browser.close().then(browser.switchTo().window(handles[0]));
 

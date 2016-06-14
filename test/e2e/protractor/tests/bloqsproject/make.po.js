@@ -22,8 +22,6 @@ var Make = function() {
 
     this.bloqsTab = $('[data-element="bloqs-tab"]');
     this.codeTab = $('[data-element="code-tab"]');
-    this.projectSave = $('[data-element="project-saved"]');
-    this.projectNotAllowSave = $('[data-element="project-not-allow-save"]');
 
     this.swToolboxFunctions = $('[data-element="sw-toolbox-functions"]');
     this.projectName = $('[data-element="project-name"]');
@@ -230,6 +228,16 @@ var Make = function() {
         file = globalFunctions.filePath(file);
         makeActions.inputUploadFile.sendKeys(file);
         browser.sleep(vars.timeToWaitFadeModals);
+    };
+    
+    this.isProjectSavedShown = function () {
+        var elem = element.all(by.xpath('//*[@data-element="project-save-label-make-project-saved-ok"]')).first();
+        return elem.isPresent();
+    };
+
+    this.isProjectNotAllowSaveShown = function () {
+        var elem = element.all(by.xpath('//*[@data-element="project-save-label-make-project-not-allow-to-save"]')).first();
+        return elem.isPresent();
     };
 };
 

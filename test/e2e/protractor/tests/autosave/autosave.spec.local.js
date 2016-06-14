@@ -42,12 +42,12 @@ describe('Check makeActions actions in codeProjects', function() {
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.switchTo().window(handles[1]).then(function() {
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('true');
+                expect(make.isProjectSavedShown()).toBeFalsy();
                 browser.actions().mouseMove(element(by.id('boardSchema'))).perform();
                 browser.actions().click(protractor.Button.RIGHT).perform();
                 hwtab.hwContextMenuDeleteBoard.click();
                 browser.sleep(vars.timeToWaitAutoSave);
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));
                 login.logout();
             });
@@ -60,19 +60,19 @@ describe('Check makeActions actions in codeProjects', function() {
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.switchTo().window(handles[1]).then(function() {
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('true');
+                expect(make.isProjectSavedShown()).toBeFalsy();
                 browser.actions().mouseMove(element(by.id('robotSchema'))).perform();
                 browser.actions().click(protractor.Button.RIGHT).perform();
                 hwtab.hwContextMenuDeleteRobot.click();
                 browser.sleep(vars.timeToWaitAutoSave);
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));
                 login.logout();
             });
         });
     });
 
-    it('bba-280:autosaveLocal:Verify that the autosave is launched when you delete a component', function() {
+    fit('bba-280:autosaveLocal:Verify that the autosave is launched when you delete a component', function() {
 
         var name = 'VariosComponentes';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
@@ -81,12 +81,12 @@ describe('Check makeActions actions in codeProjects', function() {
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.switchTo().window(handles[1]).then(function() {
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('true');
+                expect(make.isProjectSavedShown()).toBeFalsy();
                 browser.actions().mouseMove(hwtab.sampleBoton).perform();
                 browser.actions().click(protractor.Button.RIGHT).perform();
                 hwtab.hwContextMenuDeleteComponent.click();
                 browser.sleep(vars.timeToWaitAutoSave);
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));
                 login.logout();
             });
@@ -102,17 +102,17 @@ describe('Check makeActions actions in codeProjects', function() {
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.switchTo().window(handles[1]).then(function() {
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('true');
+                expect(make.isProjectSavedShown()).toBeFalsy();
                 browser.actions().mouseMove(hwtab.sampleBoton).perform();
                 browser.actions().click(protractor.Button.RIGHT).perform();
                 hwtab.hwContextMenuDisconnectComponent.click();
                 browser.sleep(vars.timeToWaitAutoSave);
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.actions().mouseMove(element(by.id('boardSchema'))).perform();
                 browser.actions().click(protractor.Button.RIGHT).perform();
                 hwtab.hwContextMenuDisconnectBoard.click();
                 browser.sleep(vars.timeToWaitAutoSave);
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));
                 login.logout();
             });
@@ -124,7 +124,7 @@ describe('Check makeActions actions in codeProjects', function() {
         perfectImageAbsolutePath = path.resolve(__dirname, perfectImagePath);
 
         make.saveProjectNewUser();
-        expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+        expect(make.isProjectSavedShown()).toBeTruthy();
         projects.get();
 
         myprojects.overMyProjects.click();
@@ -135,7 +135,7 @@ describe('Check makeActions actions in codeProjects', function() {
                 infotab.infoTab.click();
                 infotab.infotabProjectName.sendKeys('hola');
                 browser.sleep(vars.timeToWaitAutoSave);
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));
             });
         });
@@ -149,7 +149,7 @@ describe('Check makeActions actions in codeProjects', function() {
                 infotab.infoTab.click();
                 infotab.infotabDescription.clear().sendKeys('Esto es una descripcion');
                 browser.sleep(vars.timeToWaitAutoSave);
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));
             });
         });
@@ -163,7 +163,7 @@ describe('Check makeActions actions in codeProjects', function() {
                 infotab.infoTab.click();
                 infotab.infotabYoutubeVideoInput.clear().sendKeys('https://www.youtube.com/watch?v=6R89_YL5ALM');
                 browser.sleep(vars.timeToWaitAutoSave);
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));
             });
         });
@@ -178,7 +178,7 @@ describe('Check makeActions actions in codeProjects', function() {
                 infotab.infotabFileUpload.sendKeys(perfectImageAbsolutePath);
                 browser.sleep(vars.timeToWaitSendKeys);
                 browser.sleep(vars.timeToWaitAutoSave);
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));
             });
         });
@@ -193,7 +193,7 @@ describe('Check makeActions actions in codeProjects', function() {
                 infotab.infotabTaginputText.clear().sendKeys('hola');
                 infotab.infotabTaginputButton.click();
                 browser.sleep(vars.timeToWaitAutoSave);
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));
             });
         });
@@ -207,7 +207,7 @@ describe('Check makeActions actions in codeProjects', function() {
                 infotab.infoTab.click();
                 element.all(by.repeater('tag in project.userTags').row(0)).click();
                 infotab.infotabRemoveTag.click();
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));
             });
         });
@@ -220,7 +220,7 @@ describe('Check makeActions actions in codeProjects', function() {
                 infotab.infoTab.click();
                 infotab.infotabChooseThemeButton.click();
                 infotab.infotabOptionGrayTheme.click();
-                expect(make.projectSave.getAttribute('aria-hidden')).toBe('false');
+                expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));
             });
         });

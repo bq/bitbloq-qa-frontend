@@ -90,40 +90,40 @@ describe('Menu share of makeactions local', function() {
                     infoTab.infotabProjectName.clear();
                     infoTab.infotabProjectName.sendKeys('new project name');
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     infoTab.infotabDescription.clear();
                     infoTab.infotabDescription.sendKeys('new description');
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     infoTab.infotabYoutubeVideoInput.clear();
                     infoTab.infotabYoutubeVideoInput.sendKeys(validYoutubeUrl);
                     browser.sleep(vars.timeToWaitSendKeys);
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     //this does not causes autosave
                     infoTab.infotabYoutubeVideoInput.clear();
                     infoTab.infotabYoutubeVideoInput.sendKeys(invalidYoutubeUrl);
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     /////////////////////////////
                     infoTab.infotabFileUpload.sendKeys(perfectImageAbsolutePath);
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     infoTab.infotabTaginputText.sendKeys('TestTag_ONE_1');
                     infoTab.infotabTaginputButton.click();
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     infoTab.infotabChooseThemeButton.click();
                     infoTab.infotabOptionGrayTheme.click();
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     make.projectName.click();
                     modals.inputModalChangeN.clear();
                     modals.inputModalChangeN.sendKeys('new name modal');
                     browser.sleep(vars.timeToWaitSendKeys);
                     modals.okDialog.click();
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
 
                     //turn the bloqsproject into codeproject
                     //this does not cause autosave
@@ -139,40 +139,40 @@ describe('Menu share of makeactions local', function() {
                     infoTab.infotabProjectName.clear();
                     infoTab.infotabProjectName.sendKeys('new code project name');
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     infoTab.infotabDescription.clear();
                     infoTab.infotabDescription.sendKeys('new code description');
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     infoTab.infotabYoutubeVideoInput.clear();
                     infoTab.infotabYoutubeVideoInput.sendKeys(validYoutubeUrl);
                     browser.sleep(vars.timeToWaitSendKeys);
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     //this does not causes autosave
                     infoTab.infotabYoutubeVideoInput.clear();
                     infoTab.infotabYoutubeVideoInput.sendKeys(invalidYoutubeUrl);
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     /////////////////////////////
                     infoTab.infotabFileUpload.sendKeys(perfectImageAbsolutePath);
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     infoTab.infotabTaginputText.sendKeys('TestTag_TWO_2');
                     infoTab.infotabTaginputButton.click();
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     infoTab.infotabChooseThemeButton.click();
                     infoTab.infotabOptionGrayTheme.click();
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     make.projectName.click();
                     modals.inputModalChangeN.clear();
                     modals.inputModalChangeN.sendKeys('new name code modal');
                     browser.sleep(vars.timeToWaitSendKeys);
                     modals.okDialog.click();
                     browser.sleep(vars.timeToWaitAutoSave);
-                    expect(make.projectNotAllowSave.getAttribute('aria-hidden')).toBe('false');
+                    expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     myprojects.get();
                     browser.sleep(vars.timeToWaitTab);
                     projects.sharedProjects.click();
