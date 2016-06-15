@@ -41,50 +41,48 @@ describe('Verify landing ', function() {
         });
     });
 
-    xit('bba-183:landing:check if NO login go to mailto in landing (link "contacto")', function() {
+    it('bba-183:landing:check if NO login go to mailto in landing (link "contacto")', function() {
 
-        var script = landing.landingPage + '.scrollTo(0,6000);';
-
+        landing.openLandingMenu.click();
+        browser.sleep(1000);
+        landing.helpButton.click();
         browser.sleep(5000); //Time to wait load explora project on landing (not wait angular)
 
-        browser.executeScript(script)
-            .then(globalFunctions.navigatorLanguage)
-            .then(function(language) {
-                expect(landing.contactButton.getAttribute('href')).toMatch(vars.supportEmail(language));
+        globalFunctions.navigatorLanguage().then(function(language) {
+                expect(landing.contactUsLink.getAttribute('href')).toMatch(vars.supportEmail(language));
             });
 
     });
 
-    xit('bba-182:landing:check if is login show modal feedback in landing (link "contacto")', function() {
+    it('bba-182:landing:check if is login show modal feedback in landing (link "contacto")', function() {
 
-        var script = landing.landingPage + '.scrollTo(0,4000);';
         login.loginWithRandomUser();
         landing.get();
+        landing.openLandingMenu.click();
+        browser.sleep(1000);
+        landing.helpButton.click();
         browser.sleep(5000); //Time to wait load explora project on landing (not wait angular)
 
-        browser.executeScript(script).then(function() {
-            globalFunctions.navigatorLanguage()
-                .then(function(language) {
-                    if (language === 'es') {
-                        expect(landing.contactButton.getAttribute('href')).not.toMatch(vars.supportEmailES);
-                    } else {
-                        expect(landing.contactButton.getAttribute('href')).not.toMatch(vars.supportEmailEN);
-                    }
-                });
-            landing.contactButton.click();
-            browser.sleep(vars.timeToWaitFadeModals);
-            globalFunctions.navigatorLanguage()
-                .then(function(language) {
-                    if (language === 'es') {
-                        expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
-                    } else {
-                        expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
-                    }
-                });
-            modals.bladeClose.click();
-            browser.sleep(vars.timeToWaitFadeModals);
-            login.logout();
+        globalFunctions.navigatorLanguage().then(function(language) {
+            if (language === 'es') {
+                expect(landing.contactUsLink.getAttribute('href')).not.toMatch(vars.supportEmailES);
+            } else {
+                expect(landing.contactUsLink.getAttribute('href')).not.toMatch(vars.supportEmailEN);
+            }
         });
+        landing.contactUsLink.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        globalFunctions.navigatorLanguage().then(function(language) {
+            if (language === 'es') {
+                expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
+            } else {
+                expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
+            }
+        });
+        modals.bladeClose.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        login.logout();
+
     });
 
 });

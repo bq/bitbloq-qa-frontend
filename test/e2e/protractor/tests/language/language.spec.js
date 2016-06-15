@@ -20,7 +20,7 @@ describe('Language', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    fit('bba-238:language:Supports email dependent of language', function() {
+    it('bba-238:language:Supports email dependent of language', function() {
         var checkSupportEmail = function(language) {
             var buttonLanguage;
             var supportEmail;
@@ -85,7 +85,7 @@ describe('Language', function() {
                 buttonLanguage.click();
             }
 
-            expect(landing.contactUsEmail.getAttribute('href')).toMatch(supportEmail);
+            expect(landing.contactUsLink.getAttribute('href')).toMatch(supportEmail);
 
 
 
