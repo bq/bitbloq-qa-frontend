@@ -72,7 +72,7 @@ describe('Check makeActions actions in codeProjects', function() {
         });
     });
 
-    fit('bba-280:autosaveLocal:Verify that the autosave is launched when you delete a component', function() {
+    it('bba-280:autosaveLocal:Verify that the autosave is launched when you delete a component', function() {
 
         var name = 'VariosComponentes';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
