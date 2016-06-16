@@ -383,22 +383,19 @@ describe('Register ', function() {
                 $2('#modalMessage > div.modal-body > a').click();
                 //#modalMessage > div.modal-body > a
 
-                //Other tab
-                browserEmail.getAllWindowHandles().then(
-                    function(handles) {
-                        //Switch to popup
-                        browserEmail.switchTo().window(handles[1]);
-                        browserEmail.ignoreSynchronization = false;
-                        //News passwords
-                        $2(register.resetPasswordMainInput.elementArrayFinder_.locator_.value).sendKeys('123456');
-                        $2(register.resetPasswordRepeatInput.elementArrayFinder_.locator_.value).sendKeys('123456');
-                        $2(register.resetPasswordOkButton.elementArrayFinder_.locator_.value).click();
-                        browser.sleep(vars.timeToWaitAutoSave);
-                        //go back to the main window && login wiht new passwords
-                        login.get();
-                        login.login(newUser.username, '123456');
-                        login.logout();
-                    });
+
+                //Switch to popup
+                browserEmail.ignoreSynchronization = false;
+                //News passwords
+                $2(register.resetPasswordMainInput.elementArrayFinder_.locator_.value).sendKeys('123456');
+                $2(register.resetPasswordRepeatInput.elementArrayFinder_.locator_.value).sendKeys('123456');
+                $2(register.resetPasswordOkButton.elementArrayFinder_.locator_.value).click();
+                browser.sleep(vars.timeToWaitAutoSave);
+                //go back to the main window && login wiht new passwords
+                login.get();
+                login.login(newUser.username, '123456');
+                login.logout();
+
             });
         });
 
@@ -452,58 +449,50 @@ describe('Register ', function() {
                 //#modalMessage > div.modal-body > a
 
                 //Other tab
-                browserEmail.getAllWindowHandles().then(
-                    function(handles) {
-                        //Switch to popup
-                        browserEmail.switchTo().window(handles[1]);
-                        browserEmail.ignoreSynchronization = false;
-                        //News passwords
-                        $2(register.resetPasswordMainInput.elementArrayFinder_.locator_.value).sendKeys('123456');
-                        $2(register.resetPasswordRepeatInput.elementArrayFinder_.locator_.value).sendKeys('123456');
-                        $2(register.resetPasswordOkButton.elementArrayFinder_.locator_.value).click();
-                        browser.sleep(vars.timeToWaitAutoSave);
+                browserEmail.ignoreSynchronization = false;
+                //News passwords
+                $2(register.resetPasswordMainInput.elementArrayFinder_.locator_.value).sendKeys('123456');
+                $2(register.resetPasswordRepeatInput.elementArrayFinder_.locator_.value).sendKeys('123456');
+                $2(register.resetPasswordOkButton.elementArrayFinder_.locator_.value).click();
+                browser.sleep(vars.timeToWaitAutoSave);
 
-                        //Return and open link recovery again
-                        browserEmail.switchTo().window(handles[0]);
-                        browserEmail.ignoreSynchronization = true;
+                browserEmail.navigate().back();
+                browserEmail.navigate().back();
+                //Return and open link recovery again
+                browserEmail.ignoreSynchronization = true;
 
-                        $2('#msg_1 > td:nth-child(2)').click();
-                        browserEmail.sleep(5000);
-                        //Open popup email send
-                        $2('#modalMessage > div.modal-body > a').click();
-                        //Other tab
-                        browserEmail.getAllWindowHandles().then(
-                            function(handles) {
-                                //Switch to popup
-                                browserEmail.switchTo().window(handles[2]);
+                $2('#msg_1 > td:nth-child(2)').click();
+                browserEmail.sleep(5000);
+                //Open popup email send
+                $2('#modalMessage > div.modal-body > a').click();
+                //Other tab
 
-                                browserEmail.ignoreSynchronization = false;
-                                browser.sleep('2000');
-                                $2(register.resetPasswordMainInput.elementArrayFinder_.locator_.value).sendKeys('abcdef');
-                                $2(register.resetPasswordRepeatInput.elementArrayFinder_.locator_.value).sendKeys('abcdef');
-                                $2(register.resetPasswordOkButton.elementArrayFinder_.locator_.value).click();
-                                browser.sleep(vars.timeToWaitAutoSave);
 
-                                //Check toast no reset password
-                                globalFunctions.navigatorLanguage()
-                                    .then(function(language) {
-                                        if (language === 'es') {
-                                            expect($2(commons.alertTextToast.elementArrayFinder_.locator_.value).getText()).toMatch(alerts.textResetPasswordNewLink);
-                                        } else {
-                                            expect($2(commons.alertTextToast.elementArrayFinder_.locator_.value).getText()).toMatch(alerts.textResetPasswordNewLinkEN);
-                                        }
-                                    });
+                browserEmail.ignoreSynchronization = false;
+                browser.sleep('2000');
+                $2(register.resetPasswordMainInput.elementArrayFinder_.locator_.value).sendKeys('abcdef');
+                $2(register.resetPasswordRepeatInput.elementArrayFinder_.locator_.value).sendKeys('abcdef');
+                $2(register.resetPasswordOkButton.elementArrayFinder_.locator_.value).click();
+                browser.sleep(vars.timeToWaitAutoSave);
 
-                                commons.clickAlertCloseToast($2(commons.alertCloseToast.elementArrayFinder_.locator_.value));
-
-                                //Check that not login (no change password)
-                                login.get();
-                                login.loginFail(newUser.username, 'abcdef');
-
-                            });
-
+                //Check toast no reset password
+                globalFunctions.navigatorLanguage()
+                    .then(function(language) {
+                        if (language === 'es') {
+                            expect($2(commons.alertTextToast.elementArrayFinder_.locator_.value).getText()).toMatch(alerts.textResetPasswordNewLink);
+                        } else {
+                            expect($2(commons.alertTextToast.elementArrayFinder_.locator_.value).getText()).toMatch(alerts.textResetPasswordNewLinkEN);
+                        }
                     });
+
+                commons.clickAlertCloseToast($2(commons.alertCloseToast.elementArrayFinder_.locator_.value));
+
+                //Check that not login (no change password)
+                login.get();
+                login.loginFail(newUser.username, 'abcdef');
+
             });
+
         });
 
     });
@@ -535,7 +524,7 @@ describe('Register ', function() {
         expect(login.showEmailNotExist.isDisplayed()).toBeTruthy();
     });
 
-    it('bba-366:register:Remember the password - EMAIL INCORRECT', function() {
+    it('bba-367:register:Remember the password - EMAIL INCORRECT', function() {
         var email = 'emailincorrect';
         login.get();
         login.user.sendKeys(email);
