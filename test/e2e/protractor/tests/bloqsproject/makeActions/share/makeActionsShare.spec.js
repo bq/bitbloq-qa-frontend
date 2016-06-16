@@ -41,6 +41,7 @@ describe('Menu Share of MakeActions', function() {
         makeActions.menuSharePublish.click();
         browser.sleep(vars.timeToWaitTab);
         makeActions.publishButton.click();
+        browser.sleep(vars.timeToWaitTab);
         explore.get();
         explore.exploreFind.sendKeys(projectName.projectName);
         browser.sleep(3000);
@@ -48,6 +49,7 @@ describe('Menu Share of MakeActions', function() {
         login.logout();
 
     });
+
     it('bba-56:bloqsprojectMakeActionsShare:make private a project', function() {
         var projectName = make.saveProjectNewUser();
 
@@ -56,6 +58,7 @@ describe('Menu Share of MakeActions', function() {
         makeActions.menuSharePublish.click();
         browser.sleep(vars.timeToWaitTab);
         makeActions.publishButton.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         explore.get();
         explore.exploreFind.sendKeys(projectName.projectName);
         browser.sleep(vars.timeToWaitLoadExporeProjects);
@@ -64,7 +67,7 @@ describe('Menu Share of MakeActions', function() {
         explore.projectElem.click();
         browser.sleep(vars.timeToWaitFadeModals);
         explore.projectMoreInfoButton.click();
-
+        browser.sleep(vars.timeToWaitFadeModals);
         project.seeProjectButton.click();
 
         browser.sleep(vars.timeToWaitTab);
@@ -77,7 +80,7 @@ describe('Menu Share of MakeActions', function() {
                 makeActions.menuSharePrivate.click();
                 browser.sleep(vars.timeToWaitTab);
                 makeActions.privateButton.click();
-
+                browser.sleep(vars.timeToWaitFadeModals);
                 explore.get();
                 browser.sleep(5000);
                 explore.exploreFind.sendKeys(projectName.projectName);

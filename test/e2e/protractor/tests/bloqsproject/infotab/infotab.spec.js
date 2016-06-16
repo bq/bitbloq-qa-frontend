@@ -100,12 +100,15 @@ describe('Info tab', function() {
                 browser.sleep(vars.timeToWaitAutoSave + 2500);
                 browser.refresh();
                 make.infoTab.click();
+                browser.sleep(1000);
                 expect(infoTab.infotabYoutubeVideoInput.getAttribute('value')).toBe(validYoutubeUrl);
+                browser.sleep(2500);
                 infoTab.infotabYoutubeVideoInput.clear();
                 infoTab.infotabYoutubeVideoInput.sendKeys('');
                 browser.sleep(vars.timeToWaitAutoSave+2500);
                 browser.refresh();
                 make.infoTab.click();
+                browser.sleep(1000);
                 expect(infoTab.infotabYoutubeVideoInput.getAttribute('value')).toBe('');
             });
 
