@@ -116,7 +116,7 @@ describe('Forum', function() {
         browser.sleep(vars.timeToWaitSendKeys);
         forum.publishAnswerButton.click();
         browser.sleep(vars.timeToWaitTab);
-        element.all(by.repeater('answer in forum.themeAnswers').row(0).column('answer.creatorUsername')).getText().then(function(userAnswer) {
+        element.all(by.repeater('answer in forum.themeAnswers').row(0).column('answer.creator.username')).getText().then(function(userAnswer) {
             expect(userAnswer).toMatch(user.user.toLowerCase());
             expect(forum.answerContent.getText()).toMatch(answer);
             login.logout();
