@@ -136,7 +136,7 @@ describe('Test CookiesBar', function() {
         expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
         $2(landing.openLandingMenu.elementArrayFinder_.locator_.value).click();
-        $2(landing.downloadsButton.elementArrayFinder_.locator_.value).click();
+        $2(landing.howItWorksButton.elementArrayFinder_.locator_.value).click();
         expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
         $2(landing.openLandingMenu.elementArrayFinder_.locator_.value).click();
@@ -187,10 +187,6 @@ describe('Test CookiesBar', function() {
         $3(login.password.elementArrayFinder_.locator_.value).sendKeys(user.password);
         $3(login.loginButton.elementArrayFinder_.locator_.value).click();
         expect(browserCloseCookiesLogin.getCurrentUrl()).toMatch(browser.baseUrl + '#/projects');
-        //Cookies are open
-        expect($3(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(true);
-        //Close cookies
-        $3(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).click();
         //Cookies are closed
         expect($3(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
         browserCloseCookiesLogin.close();
