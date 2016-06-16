@@ -28,16 +28,25 @@ describe('Verify landing ', function() {
             terms = '#/terms',
             script = landing.landingPage + '.scrollTo(0,5000);';
         browser.executeScript(script).then(function() {
-
+            browser.sleep(5000);
             landing.cookiesButton.click();
-            expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + cookies);
-
+            browser.getAllWindowHandles().then(function(handles) {
+                browser.switchTo().window(handles[1]).then(function() {
+                    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + cookies);
+                    browser.close().then(browser.switchTo().window(handles[0]));
+                });
+            });
             landing.get();
             browser.executeScript(script).then(function() {
+                browser.sleep(5000);
                 landing.termsButton.click();
-                expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + terms);
+                browser.getAllWindowHandles().then(function(handles) {
+                    browser.switchTo().window(handles[1]).then(function() {
+                        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + terms);
+                        browser.close().then(browser.switchTo().window(handles[0]));
+                    });
+                });
             });
-
         });
     });
 
