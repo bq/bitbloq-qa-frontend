@@ -66,10 +66,10 @@ describe('User account view', function() {
         var randomUserInfo = login.loginWithRandomUser();
         account.get();
         account.firstname.clear().sendKeys('Manolo');
-        browser.sleep(1500);
+        browser.sleep(2000);
         commons.expectToastTimeOut(commons.alertTextToast);
         account.lastname.clear().sendKeys('Garcia');
-        browser.sleep(1500);
+        browser.sleep(2000);
         commons.expectToastTimeOut(commons.alertTextToast);
         browser.sleep(vars.timeToWaitAutoSave);
 
