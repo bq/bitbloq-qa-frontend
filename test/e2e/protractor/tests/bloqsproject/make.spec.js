@@ -245,12 +245,11 @@ describe('make tab', function() {
         make.infoTab.click();
         infotab.infotabProjectName.clear();
         browser.ignoreSynchronization = true;
-        infotab.infotabProjectName.sendKeys('Prueba blanco');
-        infotab.infotabProjectName.clear();
+        infotab.infotabProjectName.sendKeys('Prueba blanco').clear();
         browser.sleep(vars.timeToWaitAutoSave);
         browser.ignoreSynchronization = false;
-        browser.sleep(vars.timeToWaitAutoSave);
         projects.get();
+        browser.sleep(vars.timeToWaitAutoSave);
         globalFunctions.navigatorLanguage()
             .then(function(language) {
                 if (language === 'es') {
