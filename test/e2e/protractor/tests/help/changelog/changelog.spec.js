@@ -18,7 +18,7 @@ var login = new Login(),
 
 globalFunctions.xmlReport('helpChangelog');
 
-describe('Changelog ', function() {
+describe('Changelog ', function() { //OBSOLETO
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -26,7 +26,7 @@ describe('Changelog ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-135:helpChangelog:Verify that the changelog tab is displayed (Registered user)', function() {
+    xit('bba-135:helpChangelog:Verify that the changelog tab is displayed (Registered user)', function() {
         login.loginWithRandomUser();
         header.navHelp.click();
         help.changelogTab.click();
@@ -34,7 +34,7 @@ describe('Changelog ', function() {
         login.logout();
     });
 
-    it('bba-136:helpChangelog:Verify that the changelog tab is displayed (Unregistered user)', function() {
+    xit('bba-136:helpChangelog:Verify that the changelog tab is displayed (Unregistered user)', function() {
         help.get();
         help.changelogTab.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help/updates');

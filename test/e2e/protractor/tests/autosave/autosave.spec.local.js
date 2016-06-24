@@ -119,7 +119,7 @@ describe('Check makeActions actions in codeProjects', function() {
         });
     });
 
-    xit('bba-247:autosave:Verify that the autosave is launched when you change the information of the projects', function() {
+    it('bba-247:autosave:Verify that the autosave is launched when you change the information of the projects', function() {
         var perfectImagePath = '../../res/perfectimage.jpg',
         perfectImageAbsolutePath = path.resolve(__dirname, perfectImagePath);
 

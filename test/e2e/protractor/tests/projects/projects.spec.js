@@ -44,8 +44,8 @@ describe('Projects', function() {
         expect(projects.newProject.isPresent()).toBe(false);
         help.tutorialTab.click();
         expect(projects.newProject.isPresent()).toBe(false);
-        help.changelogTab.click();
-        expect(projects.newProject.isPresent()).toBe(false);
+        //help.changelogTab.click();
+        //expect(projects.newProject.isPresent()).toBe(false);
         login.logout();
         //search for new project button w/ unregistered user
         //you cannot get to projects without login
@@ -59,8 +59,8 @@ describe('Projects', function() {
         expect(projects.newProject.isPresent()).toBe(false);
         help.tutorialTab.click();
         expect(projects.newProject.isPresent()).toBe(false);
-        help.changelogTab.click();
-        expect(projects.newProject.isPresent()).toBe(false);
+        //help.changelogTab.click();
+        //expect(projects.newProject.isPresent()).toBe(false);
 
     });
 

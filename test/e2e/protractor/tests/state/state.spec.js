@@ -198,7 +198,7 @@ describe('State ', function() {
         login.loginFromHeader('help/tutorial');
     });
 
-    it('bba-265:state:See a changelog page', function() {
+    xit('bba-265:state:See a changelog page', function() { //OBSOLET
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
