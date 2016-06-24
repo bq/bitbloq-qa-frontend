@@ -41,6 +41,7 @@ var Make = function() {
         expect(infotab.infotabProjectName.isPresent()).toBe(true);
         infotab.infotabProjectName.clear();
         infotab.infotabProjectName.sendKeys(nameSavedProject);
+        infotab.infotabDescription.sendKeys('Esto es una descripcion de ejemplo proyecto:'+nameSavedProject);
         browser.sleep(vars.timeToWaitAutoSave);
         return {
             projectName: nameSavedProject
@@ -57,6 +58,7 @@ var Make = function() {
         expect(infotab.infotabProjectName.isPresent()).toBe(true);
         infotab.infotabProjectName.clear();
         infotab.infotabProjectName.sendKeys(nameSavedProject);
+        infotab.infotabDescription.sendKeys('Esto es una descripcion de ejemplo proyecto:'+nameSavedProject);
         browser.sleep(vars.timeToWaitAutoSave);
         //Create and check saved project
         return {
@@ -229,7 +231,7 @@ var Make = function() {
         makeActions.inputUploadFile.sendKeys(file);
         browser.sleep(vars.timeToWaitFadeModals);
     };
-    
+
     this.isProjectSavedShown = function () {
         var elem = element.all(by.xpath('//*[@data-element="project-save-label-make-project-saved-ok"]')).first();
         return elem.isPresent();
