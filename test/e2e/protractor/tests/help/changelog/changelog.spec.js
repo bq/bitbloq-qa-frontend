@@ -18,7 +18,7 @@ var login = new Login(),
 
 globalFunctions.xmlReport('helpChangelog');
 
-describe('Changelog ', function() { //OBSOLETO
+describe('Changelog ', function() { //This pages has been deleted
 
     //beforeEach commons
     globalFunctions.beforeTest();

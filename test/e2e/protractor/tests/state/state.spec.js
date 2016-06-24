@@ -198,7 +198,7 @@ describe('State ', function() {
         login.loginFromHeader('help/tutorial');
     });
 
-    xit('bba-265:state:See a changelog page', function() { //OBSOLET
+    xit('bba-265:state:See a changelog page', function() { //This page has been deleted
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
