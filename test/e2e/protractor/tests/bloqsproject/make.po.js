@@ -5,14 +5,16 @@ var Login = require('../login/login.po.js'),
     GlobalFunctions = require('../commons/globalFunctions.js'),
     Modals = require('../modals/modals.po.js'),
     Infotab = require('./infotab/infotab.po.js'),
-    MakeActions = require('./makeActions/makeActions.po.js');
+    MakeActions = require('./makeActions/makeActions.po.js'),
+    Bloqs = require('../bloqs/bloqs.po.js');
 
 var login = new Login(),
     globalFunctions = new GlobalFunctions(),
     modals = new Modals(),
     vars = new Variables(),
     infotab = new Infotab(),
-    makeActions = new MakeActions();
+    makeActions = new MakeActions(),
+    bloqs = new Bloqs();
 
 var Make = function() {
 
@@ -99,7 +101,17 @@ var Make = function() {
 
     this.saveProjectAndPublishNewUser = function() {
         var projectUser = this.saveProjectNewUser();
-        this.publishProject();
+        browser.sleep(vars.timeToWaitAutoSave);
+        var make =this;
+        make.softwareTab.click();
+        browser.sleep(vars.timeToWaitTab);
+        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+            bloqs.addToGroupVars(bloque1);
+            bloqs.closeTab();
+            browser.sleep(vars.timeToWaitAutoSave);
+            make.publishProject();
+            browser.sleep(vars.timeToWaitAutoSave);
+        });
         return browser.wait(function() {
             return browser.getCurrentUrl().then(function(url) {
                 return {
@@ -109,13 +121,21 @@ var Make = function() {
                 };
             });
         }, 1000, ' browser.getCurrentUrl TimeOut');
-
     };
 
     this.saveProjectAndPublishNewUserAndLogout = function() {
         var projectUser = this.saveProjectNewUser();
-        this.publishProject();
         browser.sleep(vars.timeToWaitAutoSave);
+        var make =this;
+        make.softwareTab.click();
+        browser.sleep(vars.timeToWaitTab);
+        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+            bloqs.addToGroupVars(bloque1);
+            bloqs.closeTab();
+            browser.sleep(vars.timeToWaitAutoSave);
+            make.publishProject();
+            browser.sleep(vars.timeToWaitAutoSave);
+        });
         return browser.wait(function() {
             return browser.getCurrentUrl().then(function(url) {
                 login.logout();
@@ -132,8 +152,16 @@ var Make = function() {
     this.saveProjectAndPublishUser = function(user, password) {
         var projectUser = this.saveProjectUser(user, password);
         browser.sleep(vars.timeToWaitAutoSave);
-        this.publishProject();
-        browser.sleep(vars.timeToWaitAutoSave);
+        var make =this;
+        make.softwareTab.click();
+        browser.sleep(vars.timeToWaitTab);
+        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+            bloqs.addToGroupVars(bloque1);
+            bloqs.closeTab();
+            browser.sleep(vars.timeToWaitAutoSave);
+            make.publishProject();
+            browser.sleep(vars.timeToWaitAutoSave);
+        });
         return browser.wait(function() {
             return browser.getCurrentUrl().then(function(url) {
                 return {
@@ -147,8 +175,17 @@ var Make = function() {
 
     this.saveProjectAndPublishUserAndLogout = function(user, password) {
         var projectUser = this.saveProjectUser(user, password);
-        this.publishProject();
         browser.sleep(vars.timeToWaitAutoSave);
+        var make =this;
+        make.softwareTab.click();
+        browser.sleep(vars.timeToWaitTab);
+        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+            bloqs.addToGroupVars(bloque1);
+            bloqs.closeTab();
+            browser.sleep(vars.timeToWaitAutoSave);
+            make.publishProject();
+            browser.sleep(vars.timeToWaitAutoSave);
+        });
         return browser.wait(function() {
             return browser.getCurrentUrl().then(function(url) {
                 login.logout();

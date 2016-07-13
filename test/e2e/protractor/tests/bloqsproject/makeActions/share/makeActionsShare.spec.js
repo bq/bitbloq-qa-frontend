@@ -38,10 +38,11 @@ describe('Menu Share of MakeActions', function() {
 
         var projectName = make.saveProjectNewUser();
         make.softwareTab.click();
+        browser.sleep(vars.timeToWaitTab);
         bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
             bloqs.addToGroupVars(bloque1);
             bloqs.closeTab();
-            browser.sleep(vars.timeToWaitTab);
+            browser.sleep(vars.timeToWaitAutoSave);
             makeActions.menuShare.click();
             browser.sleep(vars.timeToWaitTab);
             makeActions.menuSharePublish.click();
@@ -60,10 +61,11 @@ describe('Menu Share of MakeActions', function() {
     it('bba-56:bloqsprojectMakeActionsShare:make private a project', function() {
         var projectName = make.saveProjectNewUser();
         make.softwareTab.click();
+        browser.sleep(vars.timeToWaitTab);
         bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
             bloqs.addToGroupVars(bloque1);
             bloqs.closeTab();
-            browser.sleep(vars.timeToWaitTab);
+            browser.sleep(vars.timeToWaitAutoSave);
             makeActions.menuShare.click();
             browser.sleep(vars.timeToWaitTab);
             makeActions.menuSharePublish.click();
