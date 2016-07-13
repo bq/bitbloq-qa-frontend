@@ -221,11 +221,11 @@ describe('Test Codeproject verify', function() {
             browser.getAllWindowHandles().then(function(handles) {
                 browser.switchTo().window(handles[1]).then(function() {
                     infotab.infoTab.click();
-                    browser.ignoreSynchronization = true;
-                    infotab.infotabProjectName.clear().sendKeys('Prueba blanco');
-                    browser.ignoreSynchronization = false;
                     infotab.infotabProjectName.clear();
+                    browser.ignoreSynchronization = true;
+                    infotab.infotabProjectName.sendKeys('Prueba blanco').clear();
                     browser.sleep(vars.timeToWaitAutoSave);
+                    browser.ignoreSynchronization = false;
                     projects.get();
                     globalFunctions.navigatorLanguage()
                         .then(function(language) {
@@ -237,6 +237,7 @@ describe('Test Codeproject verify', function() {
                         });
 
                     browser.close().then(browser.switchTo().window(handles[0]));
+                    browser.sleep(1000);
                     login.logout();
                 });
             });
