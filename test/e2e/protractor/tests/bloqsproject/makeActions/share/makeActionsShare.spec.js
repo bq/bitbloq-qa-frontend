@@ -11,7 +11,8 @@ var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     Explore = require('../../../explore/explore.po.js'),
     Login = require('../../../login/login.po.js'),
     Variables = require('../../../commons/variables.js'),
-    Project = require('../../../explore/project.po.js');
+    Project = require('../../../explore/project.po.js'),
+    Bloqs = require('../../../bloqs/bloqs.po.js');
 
 
 var globalFunctions = new GlobalFunctions(),
@@ -20,7 +21,8 @@ var globalFunctions = new GlobalFunctions(),
     explore = new Explore(),
     login = new Login(),
     vars = new Variables(),
-    project = new Project();
+    project = new Project(),
+    bloqs = new Bloqs();
 
 globalFunctions.xmlReport('bloqsprojectMakeActionsShare');
 describe('Menu Share of MakeActions', function() {
@@ -35,62 +37,72 @@ describe('Menu Share of MakeActions', function() {
     it('bba-109:bloqsprojectMakeActionsShare:Publish project', function() {
 
         var projectName = make.saveProjectNewUser();
-
-        makeActions.menuShare.click();
-        browser.sleep(vars.timeToWaitTab);
-        makeActions.menuSharePublish.click();
-        browser.sleep(vars.timeToWaitTab);
-        makeActions.publishButton.click();
-        browser.sleep(vars.timeToWaitTab);
-        explore.get();
-        explore.exploreFind.sendKeys(projectName.projectName);
-        browser.sleep(3000);
-        expect(explore.projectName.getText()).toContain(projectName.projectName);
-        login.logout();
+        make.softwareTab.click();
+        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+            bloqs.addToGroupVars(bloque1);
+            bloqs.closeTab();
+            browser.sleep(vars.timeToWaitTab);
+            makeActions.menuShare.click();
+            browser.sleep(vars.timeToWaitTab);
+            makeActions.menuSharePublish.click();
+            browser.sleep(vars.timeToWaitTab);
+            makeActions.publishButton.click();
+            browser.sleep(vars.timeToWaitTab);
+            explore.get();
+            explore.exploreFind.sendKeys(projectName.projectName);
+            browser.sleep(3000);
+            expect(explore.projectName.getText()).toContain(projectName.projectName);
+            login.logout();
+        });
 
     });
 
     it('bba-56:bloqsprojectMakeActionsShare:make private a project', function() {
         var projectName = make.saveProjectNewUser();
+        make.softwareTab.click();
+        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+            bloqs.addToGroupVars(bloque1);
+            bloqs.closeTab();
+            browser.sleep(vars.timeToWaitTab);
+            makeActions.menuShare.click();
+            browser.sleep(vars.timeToWaitTab);
+            makeActions.menuSharePublish.click();
+            browser.sleep(vars.timeToWaitTab);
+            makeActions.publishButton.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+            explore.get();
+            explore.exploreFind.sendKeys(projectName.projectName);
+            browser.sleep(vars.timeToWaitLoadExporeProjects);
+            expect(explore.projectName.getText()).toContain(projectName.projectName);
 
-        makeActions.menuShare.click();
-        browser.sleep(vars.timeToWaitTab);
-        makeActions.menuSharePublish.click();
-        browser.sleep(vars.timeToWaitTab);
-        makeActions.publishButton.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        explore.get();
-        explore.exploreFind.sendKeys(projectName.projectName);
-        browser.sleep(vars.timeToWaitLoadExporeProjects);
-        expect(explore.projectName.getText()).toContain(projectName.projectName);
-
-        explore.projectElem.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        explore.projectMoreInfoButton.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        project.seeProjectButton.click();
-
-        browser.sleep(vars.timeToWaitTab);
-        browser.getAllWindowHandles().then(function(handles) {
+            explore.projectElem.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+            explore.projectMoreInfoButton.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+            project.seeProjectButton.click();
 
             browser.sleep(vars.timeToWaitTab);
-            browser.switchTo().window(handles[1]).then(function() {
-                makeActions.menuShare.click();
+            browser.getAllWindowHandles().then(function(handles) {
+
                 browser.sleep(vars.timeToWaitTab);
-                makeActions.menuSharePrivate.click();
-                browser.sleep(vars.timeToWaitTab);
-                makeActions.privateButton.click();
-                browser.sleep(vars.timeToWaitFadeModals);
-                explore.get();
-                browser.sleep(5000);
-                explore.exploreFind.sendKeys(projectName.projectName);
-                browser.sleep(3000);
-                explore.exploreCounts.getText().then(function(value) {
-                    value = value.split('/');
-                    expect(Number(value[1])).toEqual(0);
+                browser.switchTo().window(handles[1]).then(function() {
+                    makeActions.menuShare.click();
+                    browser.sleep(vars.timeToWaitTab);
+                    makeActions.menuSharePrivate.click();
+                    browser.sleep(vars.timeToWaitTab);
+                    makeActions.privateButton.click();
+                    browser.sleep(vars.timeToWaitFadeModals);
+                    explore.get();
+                    browser.sleep(5000);
+                    explore.exploreFind.sendKeys(projectName.projectName);
+                    browser.sleep(3000);
+                    explore.exploreCounts.getText().then(function(value) {
+                        value = value.split('/');
+                        expect(Number(value[1])).toEqual(0);
+                    });
                 });
+                login.logout();
             });
-            login.logout();
         });
     });
 
