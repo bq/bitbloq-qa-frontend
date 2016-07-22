@@ -24,13 +24,13 @@ describe('Login ', function() {
    // afterEach commons
    globalFunctions.afterTest();
 
-   it('bba-78:login:Login with a basic account', function() {
+   it('bbb-257:login:Login with a basic account', function() {
       login.loginWithRandomUser();
       login.logout();
    });
 
 
-   it('bba-79:login:Cant login with a non registered user', function() {
+   it('bbb-258:login:Cant login with a non registered user', function() {
 
       landing.openLandingMenu.click();
       landing.enterButton.click();
@@ -45,7 +45,7 @@ describe('Login ', function() {
    });
 
 
-   it('bba-81:login:is show "Introduce un nombre de usuario o e-mail" ?', function() {
+   it('bbb-259:login:is show "Introduce un nombre de usuario o e-mail" ?', function() {
 
       landing.openLandingMenu.click();
       landing.enterButton.click();
@@ -63,7 +63,7 @@ describe('Login ', function() {
 
    });
 
-   it('bba-82:login:is show "Introduce una contraseña" ?', function() {
+   it('bbb-260:login:is show "Introduce una contraseña" ?', function() {
 
       landing.openLandingMenu.click();
       landing.enterButton.click();
@@ -82,7 +82,7 @@ describe('Login ', function() {
 
    });
 
-   it('bba-83:login:is show "La contraseña debe tener 6 caracteres como mínimo" ?', function() {
+   it('bbb-261:login:is show "La contraseña debe tener 6 caracteres como mínimo" ?', function() {
 
       landing.openLandingMenu.click();
       landing.enterButton.click();
@@ -101,7 +101,7 @@ describe('Login ', function() {
 
    });
 
-   it('bba-84:login:is show "El usuario no está registrado" ?', function() {
+   it('bbb-262:login:is show "El usuario no está registrado" ?', function() {
 
       landing.openLandingMenu.click();
       landing.enterButton.click();
@@ -115,7 +115,7 @@ describe('Login ', function() {
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
    });
 
-   it('bba-85:login:is show "La contraseña es incorrecta" ?', function() {
+   it('bbb-263:login:is show "La contraseña es incorrecta" ?', function() {
 
       //Register && login and save username
       landing.openLandingMenu.click();
@@ -137,7 +137,7 @@ describe('Login ', function() {
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
    });
 
-   it('bba-162:login:Check show user not register if email is not register', function() {
+   it('bbb-266:login:Check show user not register if email is not register', function() {
 
        login.get();
        login.forgotPasswordButton.click();

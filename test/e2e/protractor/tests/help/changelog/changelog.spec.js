@@ -26,7 +26,7 @@ describe('Changelog ', function() { //This pages has been deleted
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bba-135:helpChangelog:Verify that the changelog tab is displayed (Registered user)', function() {
+    xit('bbb-135:helpChangelog:Verify that the changelog tab is displayed (Registered user)', function() {
         login.loginWithRandomUser();
         header.navHelp.click();
         help.changelogTab.click();
@@ -34,13 +34,13 @@ describe('Changelog ', function() { //This pages has been deleted
         login.logout();
     });
 
-    xit('bba-136:helpChangelog:Verify that the changelog tab is displayed (Unregistered user)', function() {
+    xit('bbb-136:helpChangelog:Verify that the changelog tab is displayed (Unregistered user)', function() {
         help.get();
         help.changelogTab.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help/updates');
     });
 
-    xit('bba-137:helpChangelog:Verify that the change and bugs appears in the changelog tab (Registered user)', function() {
+    xit('bbb-137:helpChangelog:Verify that the change and bugs appears in the changelog tab (Registered user)', function() {
         login.loginWithRandomUser();
         header.navHelp.click();
         help.changelogTab.click();
@@ -54,7 +54,7 @@ describe('Changelog ', function() { //This pages has been deleted
         login.logout();
     });
 
-    xit('bba-138:helpChangelog:Verify that the change and bugs appears in the changelog tab (Unregistered user)', function() {
+    xit('bbb-138:helpChangelog:Verify that the change and bugs appears in the changelog tab (Unregistered user)', function() {
         help.get();
         help.changelogTab.click();
         help.changelogList.each(function(changelog) {

@@ -30,7 +30,7 @@ describe('Menu file of MakeActions', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bba-133:makeactionsEditLocal: Verify undo&redo action on hwTab', function() {
+    xit('bbb-133:makeactionsEditLocal: Verify undo&redo action on hwTab', function() {
 
         make.get();
         modals.attentionContinueGuest.click();

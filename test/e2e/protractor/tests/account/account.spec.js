@@ -29,7 +29,7 @@ describe('User account view', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-157:account:Verify fields from new normal user', function() {
+    it('bbb-42:account:Verify fields from new normal user', function() {
 
         var randomUserInfo = login.loginWithRandomUser();
         account.get();
@@ -42,7 +42,7 @@ describe('User account view', function() {
         login.logout();
     });
 
-    it('bba-24:account:Verify reset password (no social login)', function() {
+    it('bbb-40:account:Verify reset password (no social login)', function() {
 
         var randomUserInfo = login.loginWithRandomUser();
         account.get();
@@ -61,7 +61,7 @@ describe('User account view', function() {
     });
 
 
-    it('bba-59:account:Check name and surmane are edits (input text)', function() {
+    it('bbb-41:account:Check name and surmane are edits (input text)', function() {
 
         var randomUserInfo = login.loginWithRandomUser();
         account.get();

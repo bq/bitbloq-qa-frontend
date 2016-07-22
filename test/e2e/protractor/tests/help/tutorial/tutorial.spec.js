@@ -26,7 +26,7 @@ describe('Tutorial ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-62:helpTutorial:Appears the tutorial with a registered user', function() {
+    it('bbb-198:helpTutorial:Appears the tutorial with a registered user', function() {
         login.loginWithRandomUser();
         header.navHelp.click();
         help.tutorialTab.click();
@@ -35,7 +35,7 @@ describe('Tutorial ', function() {
         login.logout();
     });
 
-    it('bba-80:helpTutorial:Appears the tutorial with an unregistered user', function() {
+    it('bbb-200:helpTutorial:Appears the tutorial with an unregistered user', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -46,7 +46,7 @@ describe('Tutorial ', function() {
         expect(help.basicTutorialTable.isPresent());
     });
 
-    it('bba-173:helpTutorial:Verify that you can click on tutorial (registered user)', function() {
+    it('bbb-201:helpTutorial:Verify that you can click on tutorial (registered user)', function() {
         login.loginWithRandomUser();
         header.navHelp.click();
         help.tutorialTab.click();
@@ -66,7 +66,7 @@ describe('Tutorial ', function() {
 
     });
 
-    it('bba-174:helpTutorial:Verify that you can click on tutorial (unregistered user)', function() {
+    it('bbb-202:helpTutorial:Verify that you can click on tutorial (unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -87,7 +87,7 @@ describe('Tutorial ', function() {
         });
     });
 
-    it('bba-63:helpTutorial:Verificar la acción de sugerir un tutorial', function() {
+    it('bbb-199:helpTutorial:Verificar la acción de sugerir un tutorial', function() {
 
         var script = help.helpView + '.scrollTo(0,5000);';
 

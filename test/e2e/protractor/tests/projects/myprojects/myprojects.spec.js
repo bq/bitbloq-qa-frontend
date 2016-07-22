@@ -15,7 +15,8 @@ var Variables = require('../../commons/variables.js'),
     MakeActions = require('../../bloqsproject/makeActions/makeActions.po.js'),
     Header = require('../../header/header.po.js'),
     Explore = require('../../explore/explore.po.js'),
-    CodeProject = require('../../codeproject/codeproject.po.js');
+    CodeProject = require('../../codeproject/codeproject.po.js'),
+    Bloqs = require('../../bloqs/bloqs.po.js');
 
 var vars = new Variables(),
     globalFunctions = new GlobalFunctions(),
@@ -28,7 +29,8 @@ var vars = new Variables(),
     makeActions = new MakeActions(),
     header = new Header(),
     explore = new Explore(),
-    codeProject = new CodeProject();
+    codeProject = new CodeProject(),
+    bloqs = new Bloqs();
 
 globalFunctions.xmlReport('myprojects');
 
@@ -41,7 +43,7 @@ describe('My Projects', function() {
     globalFunctions.afterTest();
 
     //TODO Check --> Alert (toast) && Create click into "Projecto sin titulo"
-    it('bba-105:myProjects:Correct elemination --> Create project and eliminate ', function() {
+    it('bbb-25:myProjects:Correct elemination --> Create project and eliminate ', function() {
 
         //Create and check saved project
         var newLoginRandom = login.loginWithRandomUser();
@@ -81,7 +83,7 @@ describe('My Projects', function() {
 
     });
 
-    it('bba-58:myProjects:Verify that the Search bar work correctly', function() {
+    it('bbb-27:myProjects:Verify that the Search bar work correctly', function() {
 
         //Save and publish 2 project begining in test_save__ , and use name of one
         // make.saveProjectAndPublish(true);
@@ -118,9 +120,15 @@ describe('My Projects', function() {
 
     });
 
-    it('bba-44:myProjects:Verify that the project can be published', function() {
+    it('bbb-28:myProjects:Verify that the project can be published', function() {
 
         var nameProject = make.saveProjectNewUser().projectName;
+        make.softwareTab.click();
+        browser.sleep(vars.timeToWaitTab);
+        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+            bloqs.addToGroupVars(bloque1);
+            bloqs.closeTab();
+        });
         browser.sleep(vars.timeToWaitSaveNewProject);
         projects.get();
         var projectElem = projects.project;
@@ -162,7 +170,7 @@ describe('My Projects', function() {
 
     });
 
-    it('bba-146:myProjects:Verify if not have project, show create new project', function() {
+    it('bbb-32:myProjects:Verify if not have project, show create new project', function() {
         login.loginWithRandomUser();
         myprojects.newProject.click();
         globalFunctions.toMatchUrlInNewTab(/#\/bloqsproject/);
@@ -170,7 +178,7 @@ describe('My Projects', function() {
 
     });
 
-    it('bba-16:myProjects:Check if projects are show correctly in my projects', function() {
+    it('bbb-30:myProjects:Check if projects are show correctly in my projects', function() {
 
         var checkNameProjects = function(row, contain) {
             expect(element.all(by.repeater('project in projectSearched').row(row).column('project.name')).getText()).toContain(contain);
@@ -370,7 +378,7 @@ describe('My Projects', function() {
         login.logout();
     });
 
-    it('bba-271:myProjects:Verify you can change the name of a project', function() {
+    it('bbb-35:myProjects:Verify you can change the name of a project', function() {
         var originalName = make.saveProjectNewUser().projectName;
         browser.sleep(vars.timeToWaitSaveNewProject);
         projects.get();

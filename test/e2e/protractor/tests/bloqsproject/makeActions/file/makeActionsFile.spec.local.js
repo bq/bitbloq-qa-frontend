@@ -33,7 +33,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-90:makeactionsFileLocal:Open from file, download and compare if is equal ', function() {
+    it('bbb-90:makeactionsFileLocal:Open from file, download and compare if is equal ', function() {
 
         var fileToUpload = path.resolve() + '/test/e2e/protractor/res/onlyBoardZum.json';
         make.importFileGuestUser(fileToUpload);
@@ -58,7 +58,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
     });
 
     // OjO need fix bug --> not charge dropdowns
-    it('bba-91:makeactionsFileLocal:Check export in arduino project (only one project)', function() {
+    it('bbb-91:makeactionsFileLocal:Check export in arduino project (only one project)', function() {
 
         var fileToUpload = path.resolve() + '/test/e2e/protractor/res/CreandoUnVoltimetroBitbloq.json';
         make.importFileGuestUser(fileToUpload);
@@ -141,7 +141,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
     });
 
-    it('bba-64:makeactionsFileLocal: delete a project', function() {
+    it('bbb-64:makeactionsFileLocal: delete a project', function() {
         login.loginWithRandomUser();
         projects.createNewProject();
         browser.sleep(vars.timeToWaitTab);

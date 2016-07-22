@@ -20,7 +20,7 @@ describe('Forum', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-292:helpForumXit:create a new topic', function() {
+    it('bbb-224:helpForumXit:create a new topic', function() {
 
         login.loginWithRandomUser();
         forum.get();
@@ -74,7 +74,7 @@ describe('Forum', function() {
 
     });
 
-    it('bba-295:helpForumXit:create topics with the same title', function() {
+    it('bbb-227:helpForumXit:create topics with the same title', function() {
         var title = 'same title ' + Number(new Date());
         var description = 'same description' + Number(new Date());
         forum.createTopicNewUser(title, description);
@@ -102,7 +102,7 @@ describe('Forum', function() {
 
     });
 
-    it('bba-296:helpForumXit:Answer a topic', function() {
+    it('bbb-228:helpForumXit:Answer a topic', function() {
         var user = forum.createTopicNewUser().user;
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -124,7 +124,7 @@ describe('Forum', function() {
 
     });
 
-    it('bba-298:helpForumXit:topic title size limit', function() {
+    it('bbb-230:helpForumXit:topic title size limit', function() {
         var longTitle = 'long title ' + Number(new Date());
         for (var i = 0; i < 200; i++) {
             longTitle = longTitle + ' even longer title ' + Number(new Date());
@@ -141,7 +141,7 @@ describe('Forum', function() {
 
     });
 
-    it('bba-299:helpForumXit:topic answer size limit', function() {
+    it('bbb-231:helpForumXit:topic answer size limit', function() {
         forum.createTopicNewUser();
         var longanswer = 'long answer ' + Number(new Date());
         for (var i = 0; i < 200; i++) {
@@ -165,7 +165,7 @@ describe('Forum', function() {
 
     });
 
-    xit('bba-290:helpForumXit:check the last answer in the main page', function() { //bug +100 temas
+    xit('bbb-222:helpForumXit:check the last answer in the main page', function() { //bug +100 temas
         var topicTitle2 = forum.createTopicNewUser('titulo_' + Number(new Date()), 'descripcion_' + Number(new Date()), forum.categoryListBienvenida).topicTitle;
         var topicTitle = 'last answer topic' + Number(new Date());
         browser.getCurrentUrl().then(function(topicUrl2) {
@@ -209,7 +209,7 @@ describe('Forum', function() {
     });
 
     // if there are more instances element.all row(0) not run because there are more topic first
-    it('bba-289:helpForumXit: check answer count for a topic', function() {
+    it('bbb-221:helpForumXit: check answer count for a topic', function() {
         forum.createTopicNewUser();
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -237,7 +237,7 @@ describe('Forum', function() {
         login.logout();
 
     });
-    xit('bba-288:helpForumXit: check answer count for a category', function() { //bug +100 temas por categoria
+    xit('bbb-220:helpForumXit: check answer count for a category', function() { //bug +100 temas por categoria
         forum.createTopicNewUser();
         forum.get();
         element.all(by.repeater('category in section').row(0).column('category.numberOfAnswers')).getText().then(function(categoryAnswers) {
@@ -263,7 +263,7 @@ describe('Forum', function() {
         });
     });
 
-    it('bba-287:helpForumXit:check topic count category', function() {
+    it('bbb-219:helpForumXit:check topic count category', function() {
         forum.get();
         browser.sleep(vars.timeToWaitTab);
         element.all(by.repeater('category in section').row(0).column('category.numberOfThreads')).getText().then(function(topicsInCategory) {
@@ -281,7 +281,7 @@ describe('Forum', function() {
 
     });
 
-    it('bba-297:helpForum:Answer a topic (empty answer)', function() {
+    it('bbb-229:helpForum:Answer a topic (empty answer)', function() {
         forum.createTopicNewUser();
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -302,7 +302,7 @@ describe('Forum', function() {
         login.logout();
     });
 
-    it('bba-285:helpForum:check breadcrumbs', function() {
+    it('bbb-217:helpForum:check breadcrumbs', function() {
         //pagina principal
         forum.get();
         browser.sleep(vars.timeToWaitTab + 5000);
@@ -323,7 +323,7 @@ describe('Forum', function() {
 
     });
 
-    it('bba-302:helpForum:check undo/redo buttons on editor', function() {
+    it('bbb-232:helpForum:check undo/redo buttons on editor', function() {
         login.loginWithRandomUser();
         forum.get();
         //en nuevo tema
@@ -363,7 +363,7 @@ describe('Forum', function() {
         expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('random description123456');
         login.logout();
     });
-    it('bba-306:helpForum:special characters in editor', function(){
+    it('bbb-235:helpForum:special characters in editor', function(){
       login.loginWithRandomUser();
       forum.get();
       forum.newTopicButton.click();
@@ -383,7 +383,7 @@ describe('Forum', function() {
 
     });
 
-    it('bba-307:helpForumXit:check visit counter topic', function(){
+    it('bbb-236:helpForumXit:check visit counter topic', function(){
       forum.createTopicNewUser();
       forum.get();
       browser.sleep(vars.timeToWaitTab);

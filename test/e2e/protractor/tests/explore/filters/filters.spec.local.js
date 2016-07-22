@@ -23,7 +23,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-145:explorefiltersLocal:Comprobar el filtrado de componentes uno a uno', function() {
+    it('bbb-178:explorefiltersLocal:Comprobar el filtrado de componentes uno a uno', function() {
 
         //Name project published
         var nameUltrasonidosProject,
@@ -318,7 +318,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
     });
 
-    it('bba-163:explorefiltersLocal:Check board filters on explora', function() {
+    it('bbb-179:explorefiltersLocal:Check board filters on explora', function() {
         //Name project published
         var nameZumProject,
             nameFreaduinoProject,

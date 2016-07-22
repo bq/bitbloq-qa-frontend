@@ -30,7 +30,7 @@ describe('Check makeActions actions in codeProjects', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-239:autosave:Verify that the project isnt autosaved when it is opened', function() {
+    it('bbb-46:autosave:Verify that the project isnt autosaved when it is opened', function() {
         make.saveProjectNewUser();
         browser.sleep(vars.timeToWaitAutoSave);
         expect(make.isProjectSavedShown()).toBeTruthy();

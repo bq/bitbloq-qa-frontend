@@ -26,7 +26,7 @@ describe('Hardware tab testing from local for contextual menu to ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-22:bloqsprojectHardwareLocal:Check menu options', function() {
+    it('bbb-105:bloqsprojectHardwareLocal:Check menu options', function() {
         //component contextual menu
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Bluetooth_Bloqs.json');
         expect(hwtab.hwContextMenuComponent.getAttribute('style')).toMatch('display: none;');
@@ -78,7 +78,7 @@ describe('Hardware tab testing from local for contextual menu to ', function() {
     });
 
     //Testing menu contextual for board
-    it('bba-313:bloqsprojectHardwareLocal:Remove board', function() {
+    it('bbb-114:bloqsprojectHardwareLocal:Remove board', function() {
         var name = 'Arduino_Bloqs';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
         browser.actions().mouseMove(element(by.id('boardSchema'))).perform();
@@ -89,7 +89,7 @@ describe('Hardware tab testing from local for contextual menu to ', function() {
     });
 
     //Testing menu contextual for component
-    it('bba-169:bloqsprojectHardwareLocal:Duplicate a component', function() {
+    it('bbb-108:bloqsprojectHardwareLocal:Duplicate a component', function() {
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Bluetooth_Bloqs.json');
         browser.actions().mouseMove(hwtab.bluetoothComp0).perform();
         browser.actions().click(protractor.Button.RIGHT).perform();
@@ -98,7 +98,7 @@ describe('Hardware tab testing from local for contextual menu to ', function() {
         login.logout();
     });
 
-    it('bba-314:bloqsprojectHardwareLocal:Disconnect a component', function() {
+    it('bbb-122:bloqsprojectHardwareLocal:Disconnect a component', function() {
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Bluetooth_Bloqs.json');
         browser.actions().mouseMove(hwtab.bluetoothComp0).perform();
         browser.actions().click(protractor.Button.RIGHT).perform();
@@ -108,7 +108,7 @@ describe('Hardware tab testing from local for contextual menu to ', function() {
         login.logout();
     });
 
-    it('bba-315:bloqsprojectHardwareLocal:Remove a component', function() {
+    it('bbb-123:bloqsprojectHardwareLocal:Remove a component', function() {
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Bluetooth_Bloqs.json');
         browser.actions().mouseMove(hwtab.bluetoothComp0).perform();
         browser.actions().click(protractor.Button.RIGHT).perform();

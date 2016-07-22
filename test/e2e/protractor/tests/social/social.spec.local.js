@@ -31,7 +31,7 @@ describe('User account view', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bba-2: Asociate Social to account', function() {
+    xit('bbb-19: Asociate Social to account', function() {
 
         mock.deleteUser('testprove2016@gmail.com', 'next');
         login.loginWithRandomUser();

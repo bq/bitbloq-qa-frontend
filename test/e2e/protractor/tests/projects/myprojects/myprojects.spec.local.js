@@ -31,7 +31,7 @@ describe('My projects, only local', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-149:myProjectsLocal:Verify copy a project', function() {
+    it('bbb-33:myProjectsLocal:Verify copy a project', function() {
         var nameProject = 'test';
         make.saveProjectNewUser(nameProject);
         projects.get();
@@ -74,7 +74,7 @@ describe('My projects, only local', function() {
         });
     });
 
-    it('bba-28:myProjectsLocal:Verify strange characters in project name do not appear in code export', function() {
+    it('bbb-29:myProjectsLocal:Verify strange characters in project name do not appear in code export', function() {
         var fileToUpload = path.resolve() + '/test/e2e/protractor/res/CreandoUnVoltimetroBitbloq.json';
         fileToUpload = globalFunctions.filePath(fileToUpload);
         var fileToCompare = path.resolve() + '/test/e2e/protractor/res/CreandoUnVoltimetroBitbloq.ino';

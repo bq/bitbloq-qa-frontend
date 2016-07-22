@@ -20,7 +20,7 @@ describe('Forum', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-283:helpForum:check forum tag is present', function() {
+    it('bbb-215:helpForum:check forum tag is present', function() {
 
         help.get();
         browser.sleep(vars.timeToWaitTab);
@@ -33,7 +33,7 @@ describe('Forum', function() {
         });
 
     });
-    it('bba-284:helpForum:check create a new topic button', function() {
+    it('bbb-216:helpForum:check create a new topic button', function() {
 
         login.loginWithRandomUser();
         //from the main forum page
@@ -72,7 +72,7 @@ describe('Forum', function() {
 
     });
 
-    it('bba-293:helpForum:create a new topic (not registered)', function() {
+    it('bbb-225:helpForum:create a new topic (not registered)', function() {
 
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -92,7 +92,7 @@ describe('Forum', function() {
         });
 
     });
-    it('bba-294:helpForum:create a new topic wrong', function() {
+    it('bbb-226:helpForum:create a new topic wrong', function() {
         login.loginWithRandomUser();
         //topic no category
         forum.get();

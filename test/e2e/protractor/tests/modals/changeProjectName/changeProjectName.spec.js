@@ -28,7 +28,7 @@ describe('Rename modal on make', function() {
   // afterEach commons
   globalFunctions.afterTest();
 
-    it('bba-86:modalsChangeProjectName:Rename project and save', function() {
+    it('bbb-267:modalsChangeProjectName:Rename project and save', function() {
 
         login.loginWithRandomUser();
         make.get();
@@ -48,7 +48,7 @@ describe('Rename modal on make', function() {
     });
 
 
-    it('bba-87:modalsChangeProjectName:Rename project and not save', function() {
+    it('bbb-268:modalsChangeProjectName:Rename project and not save', function() {
 
         //test no saved if click in cancel modal
         login.loginWithRandomUser();
@@ -69,11 +69,11 @@ describe('Rename modal on make', function() {
         modals.inputModalChangeN.sendKeys('ChangeTestName');
         modals.bladeClose.click();
         expect(make.projectName.getText()).not.toEqual('ChangeTestName');
-
+        projects.get();
         login.logout();
     });
 
-    it('bba-147:modalsChangeProjectName:Verify save name when sendKeys enter in modal', function() {
+    it('bbb-269:modalsChangeProjectName:Verify save name when sendKeys enter in modal', function() {
 
         //test no saved if click in cancel modal
         login.loginWithRandomUser();
@@ -87,11 +87,11 @@ describe('Rename modal on make', function() {
         expect(make.projectName.getText()).toEqual('ChangeTestName');
 
         browser.sleep(vars.timeToWaitFadeModals);
-
+        projects.get();
         login.logout();
     });
 
-    it('bba-246:modalsChangeProjectName:Verify save name when sendKeys ESCAPE in modal no save name', function() {
+    it('bbb-272:modalsChangeProjectName:Verify save name when sendKeys ESCAPE in modal no save name', function() {
 
         //test no saved if click in cancel modal
         login.loginWithRandomUser();
@@ -105,7 +105,7 @@ describe('Rename modal on make', function() {
         expect(make.projectName.getText()).not.toEqual('ChangeTestName');
 
         browser.sleep(vars.timeToWaitFadeModals);
-
+        projects.get();
         login.logout();
     });
 

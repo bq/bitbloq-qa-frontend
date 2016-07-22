@@ -28,7 +28,7 @@ describe('User account view', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-60:accountLocal: verify user image upload', function() {
+    it('bbb-275:accountLocal: verify user image upload', function() {
 
         var smallImagePath = path.resolve() + '/test/e2e/protractor/res/smallPicture.jpg',
             bigImagePath = path.resolve() + '/test/e2e/protractor/res/morethanonemb.jpg',

@@ -33,7 +33,7 @@ describe('Menu file of MakeActions', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-88:bloqsprojectMakeActionsFile:Open new project', function() {
+    it('bbb-88:bloqsprojectMakeActionsFile:Open new project', function() {
 
         make.get();
         modals.attentionContinueGuest.click();
@@ -61,7 +61,7 @@ describe('Menu file of MakeActions', function() {
 
     });
 
-    it('bba-155:bloqsprojectMakeActionsFile: Copy a project', function() {
+    it('bbb-155:bloqsprojectMakeActionsFile: Copy a project', function() {
         var nameSavedProject = 'Test_Save_' + Number(new Date());
         login.loginWithRandomUser();
         projects.createNewProject();

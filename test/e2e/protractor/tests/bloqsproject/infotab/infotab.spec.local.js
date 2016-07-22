@@ -30,7 +30,7 @@ describe('Info tab', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-123:infotabLocal: Verificar la subida de la imagen', function() {
+    it('bbb-276:infotabLocal: Verificar la subida de la imagen', function() {
         var smallImagePath = '../../../res/550x350.jpg',
             bigImagePath = '../../../res/morethanonemb.jpg',
             perfectImagePath = '../../../res/perfectimage.jpg',

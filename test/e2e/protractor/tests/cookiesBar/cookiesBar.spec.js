@@ -42,7 +42,7 @@ describe('Test CookiesBar', function() {
      *
      */
 
-    it('bba-125:cookiesBar:Check cookies bar shows any page if not login user', function() {
+    it('bbb-172:cookiesBar:Check cookies bar shows any page if not login user', function() {
 
         //check landing
         browser.manage().window().setSize(1024, 768);
@@ -118,7 +118,7 @@ describe('Test CookiesBar', function() {
 
     });
 
-    it('bba-126:cookiesBar:Check, If you close cookies bar it not appear again in other pages (in same session && no login user )', function() {
+    it('bbb-173:cookiesBar:Check, If you close cookies bar it not appear again in other pages (in same session && no login user )', function() {
 
         //check landing
         var browserCheckCookiesNoLogin = browser.forkNewDriverInstance(),
@@ -163,7 +163,7 @@ describe('Test CookiesBar', function() {
 
     });
 
-    it('bba-127:cookiesBar:Check, Login user accept cookies and never appear in other session', function() {
+    it('bbb-174:cookiesBar:Check, Login user accept cookies and never appear in other session', function() {
 
         /* Open browser with random user and close cookiesBar */
 
@@ -211,7 +211,7 @@ describe('Test CookiesBar', function() {
 
     });
 
-    it('bba-132:cookiesBar:Verify link to "Politica de cookies" is ok', function() {
+    it('bbb-175:cookiesBar:Verify link to "Politica de cookies" is ok', function() {
 
         //check landing
         var browserCheckCookiesURL = browser.forkNewDriverInstance(),

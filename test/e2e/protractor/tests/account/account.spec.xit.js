@@ -27,7 +27,7 @@ describe('User account view', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-158:accountLocalXit:Verify fields from new google user', function() {
+    it('bbb-43:accountLocalXit:Verify fields from new google user', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -43,7 +43,7 @@ describe('User account view', function() {
 
     });
 
-    it('bba-159:accountLocalXit:Verify fields from new facebook user', function() {
+    it('bbb-44:accountLocalXit:Verify fields from new facebook user', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();

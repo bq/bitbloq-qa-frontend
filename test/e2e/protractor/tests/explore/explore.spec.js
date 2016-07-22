@@ -38,7 +38,7 @@ describe('Explore tab', function() {
     globalFunctions.afterTest();
 
     //TODO test show toast
-    it('bba-57:explore:Verify that the Search bar work correctly', function() {
+    it('bbb-182:explore:Verify that the Search bar work correctly', function() {
 
         //Save and publish 2 project begining in test_save__ , and use name of one
         make.saveProjectAndPublishNewUserAndLogout();
@@ -109,7 +109,7 @@ describe('Explore tab', function() {
 
     });
 
-    it('bba-17:explore:Verify that the explore view is displayed correctly', function() {
+    it('bbb-180:explore:Verify that the explore view is displayed correctly', function() {
         //Unregistered user
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto

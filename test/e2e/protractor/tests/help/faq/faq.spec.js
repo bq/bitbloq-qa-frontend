@@ -18,7 +18,7 @@ var login = new Login(),
 
 globalFunctions.xmlReport('helpFaq');
 
-describe('Tutorial ', function() {
+describe('FAQ ', function() {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -26,7 +26,7 @@ describe('Tutorial ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-33:helpFaq:Verify that we can open a faq (registered user)', function() {
+    it('bbb-193:helpFaq:Verify that we can open a faq (registered user)', function() {
         login.loginWithRandomUser();
         header.navHelp.click();
         help.tutorialTab.click();
@@ -42,7 +42,7 @@ describe('Tutorial ', function() {
         login.logout();
     });
 
-    it('bba-92:helpFaq:Verify that we can open a faq (unregistered user)', function() {
+    it('bbb-196:helpFaq:Verify that we can open a faq (unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -60,7 +60,7 @@ describe('Tutorial ', function() {
         expect(help.isPresentAnswerFAQ(firstElement)).toBe(false);
     });
 
-    it('bba-77:helpFaq:Appears the FAQs with an unregistered user', function() {
+    it('bbb-195:helpFaq:Appears the FAQs with an unregistered user', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -72,7 +72,7 @@ describe('Tutorial ', function() {
         expect(help.faqTable.isPresent());
     });
 
-    it('bba-32:helpFaq:Appears the FAQs with a registered user', function() {
+    it('bbb-192:helpFaq:Appears the FAQs with a registered user', function() {
         login.loginWithRandomUser();
         header.navHelp.click();
         help.tutorialTab.click();

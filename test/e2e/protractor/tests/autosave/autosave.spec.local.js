@@ -7,21 +7,21 @@
 var GlobalFunctions = require('../commons/globalFunctions.js'),
     Variables = require('../commons/variables.js'),
     Make = require('../bloqsproject/make.po.js'),
-    Projects = require('../projects/projects.po.js'),
     MyProjects = require('../projects/myprojects/myprojects.po.js'),
     Login = require('../login/login.po.js'),
     path = require('path'),
     InfoTab = require('../bloqsproject/infotab/infotab.po.js'),
-    Hwtab = require('../bloqsproject/hwtab/hwtab.po.js');
+    Hwtab = require('../bloqsproject/hwtab/hwtab.po.js'),
+    Header = require('../header/header.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     vars = new Variables(),
     make = new Make(),
-    projects = new Projects(),
     myprojects = new MyProjects(),
     login = new Login(),
     infotab = new InfoTab(),
-    hwtab = new Hwtab();
+    hwtab = new Hwtab(),
+    header = new Header();
 
 globalFunctions.xmlReport('autosaveLocal');
 
@@ -33,11 +33,11 @@ describe('Check makeActions actions in codeProjects', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-244:autosaveLocal:Verify that the autosave is launched when you delete a board or a robot', function() {
+    it('bbb-48:autosaveLocal:Verify that the autosave is launched when you delete a board or a robot', function() {
         //BOARD
         var name = 'Arduino_Bloqs';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
-        projects.get();
+        header.navLogo.click();
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
@@ -55,7 +55,7 @@ describe('Check makeActions actions in codeProjects', function() {
         //ROBOTS
         name = 'zowibloqs';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
-        projects.get();
+        header.navLogo.click();
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
@@ -72,11 +72,11 @@ describe('Check makeActions actions in codeProjects', function() {
         });
     });
 
-    it('bba-280:autosaveLocal:Verify that the autosave is launched when you delete a component', function() {
+    it('bbb-56:autosaveLocal:Verify that the autosave is launched when you delete a component', function() {
 
         var name = 'VariosComponentes';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
-        projects.get();
+        header.navLogo.click();
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
@@ -93,11 +93,11 @@ describe('Check makeActions actions in codeProjects', function() {
         });
     });
 
-    it('bba-281:autosaveLocal:Verify that the autosave is launched when you disconnect a component', function() {
+    it('bbb-57:autosaveLocal:Verify that the autosave is launched when you disconnect a component', function() {
 
         var name = 'VariosComponentes';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
-        projects.get();
+        header.navLogo.click();
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
@@ -119,13 +119,13 @@ describe('Check makeActions actions in codeProjects', function() {
         });
     });
 
-    it('bba-247:autosave:Verify that the autosave is launched when you change the information of the projects', function() {
+    it('bbb-51:autosave:Verify that the autosave is launched when you change the information of the projects', function() {
         var perfectImagePath = '../../res/perfectimage.jpg',
         perfectImageAbsolutePath = path.resolve(__dirname, perfectImagePath);
 
         make.saveProjectNewUser();
         expect(make.isProjectSavedShown()).toBeTruthy();
-        projects.get();
+        header.navLogo.click();
 
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
@@ -140,7 +140,7 @@ describe('Check makeActions actions in codeProjects', function() {
             });
         });
 
-        projects.get();
+        header.navLogo.click();
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
@@ -154,7 +154,7 @@ describe('Check makeActions actions in codeProjects', function() {
             });
         });
 
-        projects.get();
+        header.navLogo.click();
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
@@ -168,7 +168,7 @@ describe('Check makeActions actions in codeProjects', function() {
             });
         });
 
-        projects.get();
+        header.navLogo.click();
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
@@ -183,7 +183,7 @@ describe('Check makeActions actions in codeProjects', function() {
             });
         });
 
-        projects.get();
+        header.navLogo.click();
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
@@ -198,7 +198,7 @@ describe('Check makeActions actions in codeProjects', function() {
             });
         });
 
-        projects.get();
+        header.navLogo.click();
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
@@ -211,7 +211,7 @@ describe('Check makeActions actions in codeProjects', function() {
                 browser.close().then(browser.switchTo().window(handles[0]));
             });
         });
-        projects.get();
+        header.navLogo.click();
         myprojects.overMyProjects.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {

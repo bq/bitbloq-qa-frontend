@@ -30,7 +30,7 @@ describe('Register ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-1:register:Register with a user basic account', function() {
+    it('bbb-1:register:Register with a user basic account', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -50,7 +50,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-96:register:Cant register without checking conditions', function() {
+    it('bbb-7:register:Cant register without checking conditions', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -69,7 +69,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-93:register:Cant register without an user name', function() {
+    it('bbb-5:register:Cant register without an user name', function() {
         landing.openLandingMenu.click();
         landing.enterButton.click();
 
@@ -87,7 +87,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-25:register:Cant register with the same user name', function() {
+    it('bbb-4:register:Cant register with the same user name', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -125,7 +125,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-95:register:validate INCORRECT FORMAT USER ', function() {
+    it('bbb-6:register:validate INCORRECT FORMAT USER ', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -150,7 +150,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-97:register:validate NO EMAIL ', function() {
+    it('bbb-8:register:validate NO EMAIL ', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -168,7 +168,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-98:register:validate INCORRECT EMAIL ', function() {
+    it('bbb-9:register:validate INCORRECT EMAIL ', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -192,7 +192,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-99:register:in password is show "Introduce una contraseña" ?', function() {
+    it('bbb-10:register:in password is show "Introduce una contraseña" ?', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -213,7 +213,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-100:register:in password is show La contraseña debe tener 6 caracteres como mínimo', function() {
+    it('bbb-11:register:in password is show La contraseña debe tener 6 caracteres como mínimo', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -234,7 +234,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-101:register:validate NOT DATE OF BIRTH ', function() {
+    it('bbb-12:register:validate NOT DATE OF BIRTH ', function() {
         landing.openLandingMenu.click();
         landing.enterButton.click();
 
@@ -280,7 +280,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-102:register:validate DATE OF BIRTH BEFORE 14 YEARS 14 - DATENOW ', function() {
+    it('bbb-13:register:validate DATE OF BIRTH BEFORE 14 YEARS 14 - DATENOW ', function() {
 
         landing.openLandingMenu.click();
         landing.enterButton.click();
@@ -302,7 +302,7 @@ describe('Register ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
     });
 
-    it('bba-21:register:The email is duplicated', function() {
+    it('bbb-2:register:The email is duplicated', function() {
         landing.openLandingMenu.click();
         landing.enterButton.click();
 
@@ -324,7 +324,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-184:register:Check that a checkbox appears to indicate that you are a teacher', function() {
+    it('bbb-14:register:Check that a checkbox appears to indicate that you are a teacher', function() {
         landing.openLandingMenu.click();
         landing.enterButton.click();
         register.createAccountButtn.click();
@@ -336,7 +336,7 @@ describe('Register ', function() {
         login.logout();
     });
 
-    it('bba-23:register:Verify remember password email', function() {
+    it('bbb-3:register:Verify remember password email', function() {
 
         //check bloqsproject
         var browserEmail = browser.forkNewDriverInstance();
@@ -401,7 +401,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-228:register:Check that link recovery password only use one time', function() {
+    it('bbb-15:register:Check that link recovery password only use one time', function() {
 
         //check bloqsproject
         var browserEmail = browser.forkNewDriverInstance();
@@ -497,7 +497,7 @@ describe('Register ', function() {
 
     });
 
-    it('bba-365:register:The date is incorrect', function() {
+    it('bbb-16:register:The date is incorrect', function() {
         landing.openLandingMenu.click();
         landing.enterButton.click();
 
@@ -514,7 +514,7 @@ describe('Register ', function() {
         expect(register.showNoBirthdate.isDisplayed()).toBeTruthy();
     });
 
-    it('bba-366:register:Remember the password - EMAIL DOESNT EXIST', function() {
+    it('bbb-17:register:Remember the password - EMAIL DOESNT EXIST', function() {
         var email = 'fakeemail@fake.fake';
         login.get();
         login.user.sendKeys(email);
@@ -524,7 +524,7 @@ describe('Register ', function() {
         expect(login.showEmailNotExist.isDisplayed()).toBeTruthy();
     });
 
-    it('bba-367:register:Remember the password - EMAIL INCORRECT', function() {
+    it('bbb-18:register:Remember the password - EMAIL INCORRECT', function() {
         var email = 'emailincorrect';
         login.get();
         login.user.sendKeys(email);

@@ -75,6 +75,7 @@ var Codeproject = function() {
         expect(infotab.infotabProjectName.isPresent()).toBe(true);
         browser.ignoreSynchronization = true;
         infotab.infotabProjectName.clear().sendKeys(nameSavedProject);
+        infotab.infotabDescription.clear().sendKeys('Esto es una descripcion');
         browser.ignoreSynchronization = false;
         browser.sleep(vars.timeToWaitAutoSave);
         bloqsproject.publishProject();

@@ -6,8 +6,6 @@
 
 var Register = require('../register/register.po.js'),
     register = new Register(),
-    Projects = require('../projects/projects.po.js'),
-    projects = new Projects(),
     Variables = require('../commons/variables.js'),
     vars = new Variables(),
     Header = require('../header/header.po.js'),
@@ -232,7 +230,7 @@ var Login = function() {
     };
 
     this.logout = function() {
-        projects.get();
+        header.navLogo.click();
         $('[data-element="open-header-menu"]').click();
         $('[data-element="header-menu-logout"]').click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/');

@@ -30,16 +30,16 @@ describe('Check unsupported in desktop', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-69:Check if open bitbloq on firefox redirect to unsupported/desktop', function() {
+    it('bbb-69:Check if open bitbloq on firefox redirect to unsupported/desktop', function() {
         expect(browser.getCurrentUrl()).toMatch(browser.baseUrl + '#/unsupported/desktop');
     });
 
-    it('bba-71:If click on "continuar de todos modos" redirect home page', function() {
+    it('bbb-71:If click on "continuar de todos modos" redirect home page', function() {
         unsupported.continueButton.click();
         expect(browser.getCurrentUrl()).toMatch(browser.baseUrl);
     });
 
-    it('bba-72:If click on "Descargar Google Chrome" redirect google chrome web', function() {
+    it('bbb-72:If click on "Descargar Google Chrome" redirect google chrome web', function() {
         unsupported.downloadGoogleButton.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
@@ -57,7 +57,7 @@ describe('Check unsupported in desktop', function() {
         });
     });
 
-    it('bba-70:Check if open bitbloq on firefox redirect to unsupported/desktop only first time', function() {
+    it('bbb-70:Check if open bitbloq on firefox redirect to unsupported/desktop only first time', function() {
         unsupported.continueButton.click();
         expect(browser.getCurrentUrl()).toMatch(browser.baseUrl);
         bloqsproject.get();

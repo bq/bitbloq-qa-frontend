@@ -30,7 +30,7 @@ describe('Menu Help of MakeActions', function() {
     globalFunctions.afterTest();
 
     //Xit on jenkins && saucelabs
-    it('bba-94:Login and test if there are all items visibles && redirect to faq, forum and help', function() {
+    it('bbb-94:Login and test if there are all items visibles && redirect to faq, forum and help', function() {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();

@@ -34,7 +34,7 @@ describe('Language', function() {
 
     //globalFunctions.xmlReport('header');
 
-    it('bba-74:header:Test language change', function() {
+    it('bbb-188:header:Test language change', function() {
 
         login.get();
         var randomUserCredentials = register.generateUser();
@@ -77,7 +77,7 @@ describe('Navbar --> ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-75:header:Elements if no login --> Explora, aprende, ayuda, entrar', function() {
+    it('bbb-189:header:Elements if no login --> Explora, aprende, ayuda, entrar', function() {
 
         //show always
         make.get();
@@ -111,7 +111,7 @@ describe('Navbar --> ', function() {
 
     });
 
-    it('bba-76:header:Elements with login user --> Mis proyectos, Explora, aprende, ayuda', function() {
+    it('bbb-190:header:Elements with login user --> Mis proyectos, Explora, aprende, ayuda', function() {
 
         login.loginWithRandomUser();
 

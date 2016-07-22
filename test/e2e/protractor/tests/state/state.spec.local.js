@@ -30,7 +30,7 @@ describe('State, specs only in local', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-256:stateLocal:Save a bloqs project', function() {
+    it('bbb-289:stateLocal:Save a bloqs project', function() {
         var name = 'Ultrasonidos_Bloqs';
         make.importFileGuestUser(path.resolve() + '/test/e2e/protractor/res/' + name +'.json');
         browser.sleep(vars.timeToWaitAutoSave);
@@ -42,7 +42,7 @@ describe('State, specs only in local', function() {
         login.logout();
     });
 
-    it('bba-257:stateLocal:Save a code project', function() {
+    it('bbb-290:stateLocal:Save a code project', function() {
         var name = 'Ultrasonidos_Bloqs';
         make.importFileGuestUser(path.resolve() + '/test/e2e/protractor/res/' + name +'.json');
         browser.sleep(vars.timeToWaitAutoSave);

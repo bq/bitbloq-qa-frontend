@@ -41,7 +41,7 @@ describe('State ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bba-273:state:Verify that the empty bloqsproject isnt saved', function() {
+    it('bbb-300:state:Verify that the empty bloqsproject isnt saved', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -63,7 +63,7 @@ describe('State ', function() {
         login.logout();
     });
 
-    it('bba-274:state:Verify that the empty codeproject isnt saved', function() {
+    it('bbb-301:state:Verify that the empty codeproject isnt saved', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -80,7 +80,7 @@ describe('State ', function() {
         login.logout();
     });
 
-    it('bba-258:state:See a explore tab', function() {
+    it('bbb-291:state:See a explore tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -91,7 +91,7 @@ describe('State ', function() {
         login.logout();
     });
 
-    it('bba-260:state:See a project in explore tab', function() {
+    it('bbb-292:state:See a project in explore tab', function() {
         var projectElem;
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             make.get();
@@ -114,7 +114,7 @@ describe('State ', function() {
         });
     });
 
-    it('bba-261:state:See a bloqs project detail from explore tab', function() {
+    it('bbb-293:state:See a bloqs project detail from explore tab', function() {
         var projectElem;
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             make.get();
@@ -138,6 +138,7 @@ describe('State ', function() {
                         login.loginFromHeader('bloqsproject');
                         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/bloqsproject/' + url[url.length - 1]);
                         browser.close().then(browser.switchTo().window(handles[0]));
+                        projects.get();
                         login.logout();
                     });
                 });
@@ -145,7 +146,7 @@ describe('State ', function() {
         });
     });
 
-    it('bba-262:state:See a code project detail from explore tab', function() {
+    it('bbb-294:state:See a code project detail from explore tab', function() {
         var projectElem;
         var projectSaved = codeProject.saveCodeProjectAndPublishNewUserAndLogout();
         make.get();
@@ -169,13 +170,14 @@ describe('State ', function() {
                     login.loginFromHeader('codeproject');
                     expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/codeproject/' + url[url.length - 1]);
                     browser.close().then(browser.switchTo().window(handles[0]));
+                    projects.get();
                     login.logout();
                 });
             });
         });
     });
 
-    it('bba-263:state:See a faq page', function() {
+    it('bbb-295:state:See a faq page', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -187,7 +189,7 @@ describe('State ', function() {
         login.loginFromHeader('help/faq');
     });
 
-    it('bba-264:state:See a tutorial page', function() {
+    it('bbb-296:state:See a tutorial page', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -198,7 +200,7 @@ describe('State ', function() {
         login.loginFromHeader('help/tutorial');
     });
 
-    xit('bba-265:state:See a changelog page', function() { //This page has been deleted
+    xit('bbb-265:state:See a changelog page', function() { //This page has been deleted
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -209,7 +211,7 @@ describe('State ', function() {
         login.loginFromHeader('help/update');
     });
 
-    it('bba-266:state:A search in the explora tab', function() {
+    it('bbb-298:state:A search in the explora tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -224,7 +226,7 @@ describe('State ', function() {
 
     });
 
-    it('bba-267:state:A filter in the explora tab', function() {
+    it('bbb-299:state:A filter in the explora tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -241,7 +243,7 @@ describe('State ', function() {
 
     });
 
-    it('bba-310:state:Check login and back to where you were(Foro)', function() {
+    it('bbb-302:state:Check login and back to where you were(Foro)', function() {
         forum.get();
         var curl;
         browser.getCurrentUrl().then(function(url) {
