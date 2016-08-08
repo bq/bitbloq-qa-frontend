@@ -141,7 +141,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
     });
 
-    it('bbb-64:makeactionsFileLocal: delete a project', function() {
+    it('bbb-88:makeactionsFileLocal: delete a project', function() {
         login.loginWithRandomUser();
         projects.createNewProject();
         browser.sleep(vars.timeToWaitTab);

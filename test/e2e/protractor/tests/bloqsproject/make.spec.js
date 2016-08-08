@@ -49,7 +49,7 @@ describe('make tab', function() {
         login.logout();
     });
 
-    it('bbb-111:bloqsproject:We can insert and save tag', function() {
+    it('bbb-145:bloqsproject:We can insert and save tag', function() {
 
         var userLogin = login.loginWithRandomUser();
         make.get();
@@ -117,7 +117,7 @@ describe('make tab', function() {
         });
     });
 
-    it('bbb-115:bloqsproject:Delete tag', function() {
+    it('bbb-146:bloqsproject:Delete tag', function() {
         var userLogin = login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -171,7 +171,7 @@ describe('make tab', function() {
         });
     });
 
-    it('bbb-119:bloqsproject:Rename project in make and test change in project', function() {
+    it('bbb-155:bloqsproject:Rename project in make and test change in project', function() {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();

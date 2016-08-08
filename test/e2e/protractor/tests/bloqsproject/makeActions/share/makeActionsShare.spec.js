@@ -34,7 +34,7 @@ describe('Menu Share of MakeActions', function() {
     globalFunctions.afterTest();
 
     //TODO test TOAST
-    it('bbb-109:bloqsprojectMakeActionsShare:Publish project', function() {
+    it('bbb-79:bloqsprojectMakeActionsShare:Publish project', function() {
 
         var projectName = make.saveProjectNewUser();
         make.softwareTab.click();
@@ -58,7 +58,7 @@ describe('Menu Share of MakeActions', function() {
 
     });
 
-    it('bbb-56:bloqsprojectMakeActionsShare:make private a project', function() {
+    it('bbb-78:bloqsprojectMakeActionsShare:make private a project', function() {
         var projectName = make.saveProjectNewUser();
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);

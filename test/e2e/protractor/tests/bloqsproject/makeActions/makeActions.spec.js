@@ -28,7 +28,7 @@ describe('Check makeActions actions in bloqsproject', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-112:bloqsprojectMakeActions:check enabled/disabled options by logged in user', function() {
+    it('bbb-99:bloqsprojectMakeActions:check enabled/disabled options by logged in user', function() {
 
         login.loginWithRandomUser();
 
@@ -72,7 +72,7 @@ describe('Check makeActions actions in bloqsproject', function() {
     /**
      * User not logged in
      */
-    it('bbb-113:bloqsprojectMakeActions:check enabled/disabled options by not logged in user', function() {
+    it('bbb-100:bloqsprojectMakeActions:check enabled/disabled options by not logged in user', function() {
 
         make.get();
         modals.attentionContinueGuest.click();

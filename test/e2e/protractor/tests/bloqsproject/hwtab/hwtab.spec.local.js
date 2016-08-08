@@ -78,7 +78,7 @@ describe('Hardware tab testing from local for contextual menu to ', function() {
     });
 
     //Testing menu contextual for board
-    it('bbb-114:bloqsprojectHardwareLocal:Remove board', function() {
+    it('bbb-121:bloqsprojectHardwareLocal:Remove board', function() {
         var name = 'Arduino_Bloqs';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
         browser.actions().mouseMove(element(by.id('boardSchema'))).perform();

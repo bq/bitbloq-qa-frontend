@@ -33,7 +33,7 @@ describe('Check makeActions actions in codeProjects', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-48:autosaveLocal:Verify that the autosave is launched when you delete a board or a robot', function() {
+    it('bbb-49:autosaveLocal:Verify that the autosave is launched when you delete a board or a robot', function() {
         //BOARD
         var name = 'Arduino_Bloqs';
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
