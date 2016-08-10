@@ -15,7 +15,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://stash.bq.com/projects/SWROB/repos/qa-web-bitbloq/"
+        "url": "https://github.com/bq/bitbloq-qa-frontend"
     },
     "devDependencies": {
         "async": "^1.5.2",
