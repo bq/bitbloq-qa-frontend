@@ -15,7 +15,7 @@ var Header = function() {
     this.navProjects = $('[data-element="nav-projects"]');
     this.navExplore = $('[data-element="nav-explore"]');
     this.navLearn = $('[data-element="nav-learn"]');
-    this.navHelp = $('[data-element="nav-help"]');
+    this.navForum = $('[data-element="nav-forum"]');
 
 };
 

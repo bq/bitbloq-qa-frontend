@@ -2,7 +2,7 @@
 
 var Help = function() {
     //Tabs
-    this.faqTab = $('[data-element="help-faqnav"]');
+    this.faqCategory = $('[data-element="forum-category-Preguntas frecuentes"]');
     this.tutorialTab = $('[data-element="help-tutorialnav"]');
     this.changelogTab = $('[data-element="help-changelognav"]');
     this.foroNav=$('[data-element="help-foronav"]');

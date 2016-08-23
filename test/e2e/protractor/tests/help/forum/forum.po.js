@@ -31,6 +31,7 @@ var Forum = function() {
 
     //category topic lists
     this.categoryTopicTitle = $('[data-element="forum-category-theme-title"]');
+    this.categoryTopicTitleArray = element.all(by.xpath('//*[@data-element="forum-category-theme-title"]'));
 
     //inside a topic
     this.topicTopicTitle = $('[data-element="forum-theme-theme-title"]');

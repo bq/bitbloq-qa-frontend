@@ -6,7 +6,8 @@ var Login = require('../../login/login.po.js'),
     Make = require('../../bloqsproject/make.po.js'),
     Modals = require('../../modals/modals.po.js'),
     Variables = require('../../commons/variables.js'),
-    GlobalFunctions = require('../../commons/globalFunctions.js');
+    GlobalFunctions = require('../../commons/globalFunctions.js'),
+    Forum = require('../forum/forum.po.js');
 
 var login = new Login(),
     header = new Header(),
@@ -14,7 +15,8 @@ var login = new Login(),
     make = new Make(),
     modals = new Modals(),
     vars = new Variables(),
-    globalFunctions = new GlobalFunctions();
+    globalFunctions = new GlobalFunctions(),
+    forum = new Forum();
 
 globalFunctions.xmlReport('helpFaq');
 
@@ -26,28 +28,20 @@ describe('FAQ ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-193:helpFaq:Verify that we can open a faq (registered user)', function() {
+    it('bbb-193:faq:Verify that we can open a faq (registered user)', function() {
         login.loginWithRandomUser();
-        header.navHelp.click();
-        help.tutorialTab.click();
-        help.faqTab.click();
-        var firstElement = help.firstElementFAQ();
-        firstElement.click();
-        expect(help.isPresentTextFAQ(firstElement)).toBe(true);
-        expect(help.isPresentAnswerFAQ(firstElement)).toBe(true);
-        browser.sleep(1000);
-        firstElement.click();
-        expect(help.isPresentTextFAQ(firstElement)).toBe(true);
-        expect(help.isPresentAnswerFAQ(firstElement)).toBe(false);
+        header.navForum.click();
+        help.faqCategory.click();
+        expect(forum.categoryTopicTitleArray.count()).toBe(10);
         login.logout();
     });
 
-    it('bbb-196:helpFaq:Verify that we can open a faq (unregistered user)', function() {
+    fit('bbb-196:helpFaq:Verify that we can open a faq (unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
-        header.navHelp.click();
+        header.navForum.click();
         help.tutorialTab.click();
         help.faqTab.click();
         var firstElement = help.firstElementFAQ();
@@ -65,7 +59,7 @@ describe('FAQ ', function() {
         modals.attentionContinueGuest.click();
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
-        header.navHelp.click();
+        header.navForum.click();
         help.tutorialTab.click();
         help.faqTab.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help/faq');
@@ -74,7 +68,7 @@ describe('FAQ ', function() {
 
     it('bbb-192:helpFaq:Appears the FAQs with a registered user', function() {
         login.loginWithRandomUser();
-        header.navHelp.click();
+        header.navForum.click();
         help.tutorialTab.click();
         help.faqTab.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help/faq');

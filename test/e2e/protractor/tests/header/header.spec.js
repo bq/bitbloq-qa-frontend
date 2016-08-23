@@ -77,7 +77,7 @@ describe('Navbar --> ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-189:header:Elements if no login --> Explora, aprende, ayuda, entrar', function() {
+    it('bbb-189:header:Elements if no login --> Explora, aprende, foro, entrar', function() {
 
         //show always
         make.get();
@@ -98,8 +98,8 @@ describe('Navbar --> ', function() {
                     expect(header.navLearn.getAttribute('href')).toEqual(vars.diwoUrlLearnEN);
                 }
             });
-        header.navHelp.click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help');
+        header.navForum.click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/forum');
 
         header.navLogo.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/');
@@ -129,8 +129,8 @@ describe('Navbar --> ', function() {
                     expect(header.navLearn.getAttribute('href')).toEqual(vars.diwoUrlLearnEN);
                 }
             });
-        header.navHelp.click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help');
+        header.navForum.click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/forum');
 
         header.navLogo.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
