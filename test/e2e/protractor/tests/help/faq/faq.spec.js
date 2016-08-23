@@ -36,22 +36,15 @@ describe('FAQ ', function() {
         login.logout();
     });
 
-    fit('bbb-196:helpFaq:Verify that we can open a faq (unregistered user)', function() {
+    it('bbb-196:faq:Verify that we can open a faq (unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         header.navForum.click();
-        help.tutorialTab.click();
-        help.faqTab.click();
-        var firstElement = help.firstElementFAQ();
-        firstElement.click();
-        expect(help.isPresentTextFAQ(firstElement)).toBe(true);
-        expect(help.isPresentAnswerFAQ(firstElement)).toBe(true);
-        browser.sleep(1000);
-        firstElement.click();
-        expect(help.isPresentTextFAQ(firstElement)).toBe(true);
-        expect(help.isPresentAnswerFAQ(firstElement)).toBe(false);
+        help.faqCategory.click();
+        expect(forum.categoryTopicTitleArray.count()).toBe(10);
+        login.logout();
     });
 
     it('bbb-195:helpFaq:Appears the FAQs with an unregistered user', function() {
