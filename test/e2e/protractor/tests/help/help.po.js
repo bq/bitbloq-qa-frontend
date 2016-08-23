@@ -35,14 +35,6 @@ var Help = function() {
         return elem;
     };
 
-    this.isPresentTextFAQ = function(elementFAQ) {
-        return elementFAQ.$('[data-element="help-faqText"]').isPresent();
-    };
-
-    this.isPresentAnswerFAQ = function(elementFAQ) {
-        return elementFAQ.$('[data-element="help-faqAnswer"]').isPresent();
-    };
-
     this.firstElementTutorial = function() {
         var elem = this.basicTutorialTable.all(by.className('tutorial--item')).first();
         return elem;

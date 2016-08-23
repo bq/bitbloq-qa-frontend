@@ -39,6 +39,9 @@ var Forum = function() {
     this.answerTopic = $('[data-element="forum-theme-answer-theme"]');
     this.publishAnswerButton = $('[data-element="forum-theme-publish-answer-button"]');
     this.answerContent = $('[data-element="forum-theme-answer"]');
+    
+    //FAQS
+    this.faqCategory = $('[data-element="forum-category-Preguntas frecuentes"]');
 
     this.url = '#/help/forum';
 
@@ -107,6 +110,14 @@ var Forum = function() {
             answer: answerText,
 
         };
+    };
+
+    this.isPresentTitle = function() {
+        return $('[data-element="forum-theme-theme-title"]').isPresent();
+    };
+
+    this.isPresentContentThread = function() {
+        return $('[data-element="forum-theme-theme-content"]').isPresent();
     };
 };
 module.exports = Forum;
