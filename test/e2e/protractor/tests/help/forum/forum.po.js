@@ -15,7 +15,7 @@ var Forum = function() {
     this.newTopicButtonArray = element.all(by.css('[data-element="forum-new-topic-button"]'));
     this.categoryButton = $('[data-element="forum-category-button"]');
     this.breadcrumbs = $('[data-element="forum-header-breadcrumb"]');
-    this.breadcrumbsArray=element.all(by.css('[data-element="forum-header-breadcrumb"]'));
+    this.breadcrumbsArray = element.all(by.css('[data-element="forum-header-breadcrumb"]'));
 
     //new topic
     this.categoryList = $('[data-element="forum_category_dropdown"]');
@@ -39,9 +39,20 @@ var Forum = function() {
     this.answerTopic = $('[data-element="forum-theme-answer-theme"]');
     this.publishAnswerButton = $('[data-element="forum-theme-publish-answer-button"]');
     this.answerContent = $('[data-element="forum-theme-answer"]');
-    
+
     //FAQS
     this.faqCategory = $('[data-element="forum-category-Preguntas frecuentes"]');
+    this.faqEnglishTrheadCounter = $('[data-element="forum-threads-counter-English"]');
+    this.faqNetherlandsTrheadCounter = $('[data-element="forum-threads-counter-Netherlands"]');
+    this.faqPyccknnTrheadCounter = $('[data-element="forum-threads-counter-Pусский"]');
+    this.faqItalianoTrheadCounter = $('[data-element="forum-threads-counter-Italiano"]');
+    this.faqEuskaraTrheadCounter = $('[data-element="forum-threads-counter-Euskara"]');
+    this.faqCatalaTrheadCounter = $('[data-element="forum-threads-counter-Català"]');
+    this.faqFrancaisTrheadCounter = $('[data-element="forum-threads-counter-Français"]');
+    this.faqDeutschTrheadCounter = $('[data-element="forum-threads-counter-Deutsch"]');
+    this.faqPortuguesTrheadCounter = $('[data-element="forum-threads-counter-Português"]');
+    this.faqGalegoTrheadCounter = $('[data-element="forum-threads-counter-Galego"]');
+    this.faqChineseTrheadCounter = $('[data-element="forum-threads-counter-简体中文"]');
 
     this.url = '#/help/forum';
 

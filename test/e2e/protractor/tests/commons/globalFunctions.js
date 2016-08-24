@@ -52,7 +52,7 @@ var Global = function() {
     this.toMatchUrlInNewTab = function(url) {
         browser.sleep(vars.timeToWaitTab + 1000);
         return browser.getAllWindowHandles().then(function(handles) {
-          browser.sleep(vars.timeToWaitTab + 1000);
+            browser.sleep(vars.timeToWaitTab + 1000);
             return browser.switchTo().window(handles[1]).then(function() {
                 browser.sleep(vars.timeToWaitTab + 1000);
                 expect(browser.getCurrentUrl()).toMatch(url);
@@ -86,6 +86,17 @@ var Global = function() {
         });
     };
 
+    this.toNumber = function(promiseOrValue) {
+        // if it is not a promise, then convert a value
+        if (!protractor.promise.isPromise(promiseOrValue)) {
+            return parseInt(promiseOrValue, 10);
+        }
+
+        // if promise - convert result to number
+        return promiseOrValue.then(function(stringNumber) {
+            return parseInt(stringNumber, 10);
+        });
+    };
 };
 
 module.exports = Global;

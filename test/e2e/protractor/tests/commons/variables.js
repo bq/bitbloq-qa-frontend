@@ -43,6 +43,9 @@ var Variables = function() {
     this.timeToWaitLoadForumCategory = 15000;
     this.timeToWaitSaveNewProject = 2000;
 
+    //FAQS
+    this.numberOfFaqs = 20;
+
     //Languages support email, default is EN
     this.supportEmailES = 'mailto:soporte.bitbloq@bq.com';
     this.supportEmailFR = 'mailto:support.bitbloq.fr@bq.com';
