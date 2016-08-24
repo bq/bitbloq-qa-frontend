@@ -46,6 +46,9 @@ var Variables = function() {
     //FAQS
     this.numberOfFaqs = 20;
 
+    //versions
+    this.versionBitbloq = '3.1.0';
+
     //Languages support email, default is EN
     this.supportEmailES = 'mailto:soporte.bitbloq@bq.com';
     this.supportEmailFR = 'mailto:support.bitbloq.fr@bq.com';
