@@ -2,16 +2,14 @@
 var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Variables = require('../../commons/variables.js'),
     Forum = require('./forum.po.js'),
-    Login = require('../../login/login.po.js'),
-    Help = require('../help.po.js');
+    Login = require('../../login/login.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     vars = new Variables(),
     forum = new Forum(),
-    login = new Login(),
-    help = new Help();
+    login = new Login();
 
-globalFunctions.xmlReport('helpForum');
+globalFunctions.xmlReport('forum');
 
 describe('Forum', function() {
     //beforeEach commons
@@ -20,20 +18,16 @@ describe('Forum', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-215:helpForum:check forum tag is present', function() {
-
-        help.get();
-        browser.sleep(vars.timeToWaitTab);
-        expect(help.foroNav.isPresent()).toBe(true);
-        help.foroNav.click();
+    it('bbb-215:forum:check forum tag is present', function() {
+        forum.get();
         browser.sleep(vars.timeToWaitTab);
         browser.getCurrentUrl().then(function(url) {
-            expect(url).toMatch(/#\/help\/forum/);
+            expect(url).toMatch(/#\/forum/);
 
         });
 
     });
-    it('bbb-216:helpForum:check create a new topic button', function() {
+    it('bbb-216:forum:check create a new topic button', function() {
 
         login.loginWithRandomUser();
         //from the main forum page
@@ -44,7 +38,7 @@ describe('Forum', function() {
 
         browser.sleep(vars.timeToWaitTab);
         browser.getCurrentUrl().then(function(url) {
-            expect(url).toMatch(/#\/help\/forum\/new-theme/);
+            expect(url).toMatch(/#\/forum\/new-theme/);
             //from a category
             forum.get();
             browser.sleep(vars.timeToWaitTab);
@@ -55,7 +49,7 @@ describe('Forum', function() {
 
             browser.sleep(vars.timeToWaitTab);
             browser.getCurrentUrl().then(function(url) {
-                expect(url).toMatch(/#\/help\/forum\/new-theme/);
+                expect(url).toMatch(/#\/forum\/new-theme/);
                 //from a topic
                 forum.get();
                 browser.sleep(vars.timeToWaitTab);
@@ -72,7 +66,7 @@ describe('Forum', function() {
 
     });
 
-    it('bbb-225:helpForum:create a new topic (not registered)', function() {
+    it('bbb-225:forum:create a new topic (not registered)', function() {
 
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -82,7 +76,7 @@ describe('Forum', function() {
             expect(url).toMatch(/#\/login/);
             forum.get();
             browser.sleep(vars.timeToWaitTab);
-            browser.get('#/help/forum/new-theme/');
+            browser.get('#/forum/new-theme/');
             browser.sleep(vars.timeToWaitTab);
             browser.getCurrentUrl().then(function(url2) {
                 expect(url2).toMatch(/#\/login/);
@@ -92,7 +86,7 @@ describe('Forum', function() {
         });
 
     });
-    it('bbb-226:helpForum:create a new topic wrong', function() {
+    it('bbb-226:forum:create a new topic wrong', function() {
         login.loginWithRandomUser();
         //topic no category
         forum.get();

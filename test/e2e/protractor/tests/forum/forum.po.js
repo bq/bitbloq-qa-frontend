@@ -26,7 +26,6 @@ var Forum = function() {
 
     //new topic category dropdown
     this.categoryListNoticias = $('[data-element="Noticias"]');
-    this.categoryListExposicion = $('[data-element="Exposición"]');
     this.categoryListBienvenida = $('[data-element="Bienvenida"]');
 
     //category topic lists
@@ -53,12 +52,12 @@ var Forum = function() {
     this.faqPortuguesTrheadCounter = $('[data-element="forum-threads-counter-Português"]');
     this.faqGalegoTrheadCounter = $('[data-element="forum-threads-counter-Galego"]');
     this.faqChineseTrheadCounter = $('[data-element="forum-threads-counter-简体中文"]');
-    
+
     //versions
     this.versionCategory = $('[data-element="forum-category-Versiones de Bitbloq"]');
-    
 
-    this.url = '#/help/forum';
+
+    this.url = '#/forum';
 
     this.get = function() {
         browser.get(this.url);

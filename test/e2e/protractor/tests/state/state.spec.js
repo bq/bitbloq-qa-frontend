@@ -16,7 +16,7 @@ var Login = require('../login/login.po.js'),
     Help = require('../help/help.po.js'),
     Modals = require('../modals/modals.po.js'),
     CodeProject = require('../codeproject/codeproject.po.js'),
-    Forum = require('../help/forum/forum.po.js');
+    Forum = require('./forum.po.js');
 
 var login = new Login(),
     make = new Make(),
@@ -183,10 +183,9 @@ describe('State ', function() {
         browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
-        header.navHelp.click();
-        help.tutorialTab.click();
-        help.faqTab.click();
-        login.loginFromHeader('help/faq');
+        header.navForum.click();
+        forum.faqCategory.click();
+        login.loginFromHeader('forum/Preguntas%20frecuentes');
     });
 
     it('bbb-296:state:See a tutorial page', function() {
@@ -195,20 +194,19 @@ describe('State ', function() {
         browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
-        header.navHelp.click();
-        help.tutorialTab.click();
-        login.loginFromHeader('help/tutorial');
+        header.navLearn.click();
+        login.loginFromHeader('learn');
     });
 
-    xit('bbb-265:state:See a changelog page', function() { //This page has been deleted
+    it('bbb-265:state:See a changelog page', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
-        header.navHelp.click();
-        help.changelogTab.click();
-        login.loginFromHeader('help/update');
+        header.navForum.click();
+        forum.versionCategory.click();
+        login.loginFromHeader('forum/Versiones%20de%20Bitbloq');
     });
 
     it('bbb-298:state:A search in the explora tab', function() {

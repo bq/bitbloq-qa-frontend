@@ -16,7 +16,7 @@ var login = new Login(),
     forum = new Forum(),
     globalFunctions = new GlobalFunctions();
 
-globalFunctions.xmlReport('helpChangelog');
+globalFunctions.xmlReport('changelog');
 
 describe('Changelog ', function() { //This pages has been deleted
 

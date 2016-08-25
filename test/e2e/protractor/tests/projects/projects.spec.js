@@ -39,10 +39,10 @@ describe('Projects', function() {
         header.navExplore.click();
         browser.sleep(vars.timeToWaitTab);
         expect(projects.newProject.isPresent()).toBe(false);
-        header.navHelp.click();
+        header.navForum.click();
         browser.sleep(vars.timeToWaitTab);
         expect(projects.newProject.isPresent()).toBe(false);
-        help.tutorialTab.click();
+        header.navLearn.click();
         expect(projects.newProject.isPresent()).toBe(false);
         //help.changelogTab.click();
         //expect(projects.newProject.isPresent()).toBe(false);
@@ -54,10 +54,10 @@ describe('Projects', function() {
         explore.get();
         browser.sleep(vars.timeToWaitTab);
         expect(projects.newProject.isPresent()).toBe(false);
-        header.navHelp.click();
+        header.navForum.click();
         browser.sleep(vars.timeToWaitTab);
         expect(projects.newProject.isPresent()).toBe(false);
-        help.tutorialTab.click();
+        header.navLearn.click();
         expect(projects.newProject.isPresent()).toBe(false);
         //help.changelogTab.click();
         //expect(projects.newProject.isPresent()).toBe(false);

@@ -16,7 +16,7 @@ var login = new Login(),
     globalFunctions = new GlobalFunctions(),
     forum = new Forum();
 
-globalFunctions.xmlReport('helpFaq');
+globalFunctions.xmlReport('faq');
 
 describe('FAQ ', function() {
 
