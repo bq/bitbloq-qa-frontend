@@ -90,7 +90,7 @@ describe('FAQ ', function() {
         expect(globalFunctions.toNumber(forum.faqChineseTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
     });
 
-    fit('faq:Appears all language FAQs with an unregistered user', function() {
+    it('faq:Appears all language FAQs with an unregistered user', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();

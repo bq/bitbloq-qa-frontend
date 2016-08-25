@@ -1,8 +1,8 @@
 'use strict';
-var Login = require('../../login/login.po.js'),
-    Variables = require('../../commons/variables.js'),
-    Commons = require('../../commons/commons.po.js'),
-    GlobalFunctions = require('../../commons/globalFunctions.js');
+var Login = require('../login/login.po.js'),
+    Variables = require('../commons/variables.js'),
+    Commons = require('../commons/commons.po.js'),
+    GlobalFunctions = require('../commons/globalFunctions.js');
 
 var login = new Login(),
     vars = new Variables(),
@@ -12,10 +12,13 @@ var login = new Login(),
 var Forum = function() {
     //header
     this.newTopicButton = $('[data-element="forum-new-topic-button"]');
-    this.newTopicButtonArray = element.all(by.css('[data-element="forum-new-topic-button"]'));
     this.categoryButton = $('[data-element="forum-category-button"]');
     this.breadcrumbs = $('[data-element="forum-header-breadcrumb"]');
     this.breadcrumbsArray = element.all(by.css('[data-element="forum-header-breadcrumb"]'));
+
+    //categories
+    this.newsCategory = $('[data-element="forum-category-Noticias"]');
+    this.faqCategory = $('[data-element="forum-category-Preguntas frecuentes"]');
 
     //new topic
     this.categoryList = $('[data-element="forum_category_dropdown"]');
@@ -40,7 +43,6 @@ var Forum = function() {
     this.answerContent = $('[data-element="forum-theme-answer"]');
 
     //FAQS
-    this.faqCategory = $('[data-element="forum-category-Preguntas frecuentes"]');
     this.faqEnglishTrheadCounter = $('[data-element="forum-threads-counter-English"]');
     this.faqNetherlandsTrheadCounter = $('[data-element="forum-threads-counter-Netherlands"]');
     this.faqPyccknnTrheadCounter = $('[data-element="forum-threads-counter-Pусский"]');

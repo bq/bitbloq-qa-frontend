@@ -1,9 +1,9 @@
 'use strict';
-var GlobalFunctions = require('../../commons/globalFunctions.js'),
-    Variables = require('../../commons/variables.js'),
+var GlobalFunctions = require('../commons/globalFunctions.js'),
+    Variables = require('../commons/variables.js'),
     Forum = require('./forum.po.js'),
-    Login = require('../../login/login.po.js'),
-    Commons = require('../../commons/commons.po.js');
+    Login = require('../login/login.po.js'),
+    Commons = require('../commons/commons.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     vars = new Variables(),
