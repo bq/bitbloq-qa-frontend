@@ -13,7 +13,6 @@ var Login = require('../login/login.po.js'),
     Header = require('../header/header.po.js'),
     Explore = require('../explore/explore.po.js'),
     Project = require('../explore/project.po.js'),
-    Help = require('../help/help.po.js'),
     Modals = require('../modals/modals.po.js'),
     CodeProject = require('../codeproject/codeproject.po.js'),
     Forum = require('./forum.po.js');
@@ -27,7 +26,6 @@ var login = new Login(),
     header = new Header(),
     explore = new Explore(),
     project = new Project(),
-    help = new Help(),
     globalFunctions = new GlobalFunctions(),
     codeProject = new CodeProject(),
     forum = new Forum();
@@ -247,7 +245,7 @@ describe('State ', function() {
         browser.getCurrentUrl().then(function(url) {
             curl = url;
         });
-        login.loginFromHeader('help/forum');
+        login.loginFromHeader('forum');
         browser.getCurrentUrl().then(function(url) {
             expect(curl).toEqual(url);
 
@@ -260,7 +258,7 @@ describe('State ', function() {
         browser.getCurrentUrl().then(function(url) {
             curl = url;
         });
-        login.loginFromHeader('help/forum');
+        login.loginFromHeader('forum');
         browser.sleep(vars.timeToWaitLoadForumCategory);
         browser.getCurrentUrl().then(function(url) {
             expect(curl).toEqual(url);
@@ -275,7 +273,7 @@ describe('State ', function() {
         browser.getCurrentUrl().then(function(url) {
             curl = url;
         });
-        login.loginFromHeader('help/forum');
+        login.loginFromHeader('forum');
         browser.getCurrentUrl().then(function(url) {
 
             expect(curl).toEqual(url);

@@ -8,7 +8,6 @@ var GlobalFunctions = require('../commons/globalFunctions.js'),
     Projects = require('./projects.po.js'),
     Header = require('../header/header.po.js'),
     Variables = require('../commons/variables.js'),
-    Help = require('../help/help.po.js'),
     Explore = require('../explore/explore.po.js'),
     Login = require('../login/login.po.js');
 
@@ -16,7 +15,6 @@ var globalFunctions = new GlobalFunctions(),
     projects = new Projects(),
     header = new Header(),
     vars = new Variables(),
-    help = new Help(),
     explore = new Explore(),
     login = new Login();
 
