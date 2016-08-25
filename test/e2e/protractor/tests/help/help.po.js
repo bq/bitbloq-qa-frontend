@@ -22,9 +22,12 @@ var Help = function() {
     //Elements of tutorial
     this.basicTutorialTable = $('[data-element="help-basicTutorial"]');
 
+    //learn
+    this.goToDIWOButton = $('[data-element="go-to-diwo"]');
+
 	this.changelogList = element.all(by.repeater('item in changeLogsApi'));
 
-    this.url = '#/help';
+    this.url = '#/learn';
 
     this.get = function() {
         browser.get(this.url);

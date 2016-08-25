@@ -44,10 +44,9 @@ describe('Tutorial ', function() {
         expect(help.basicTutorialTable.isPresent());
     });
 
-    it('bbb-201:helpTutorial:Verify that you can click on tutorial (registered user)', function() {
+    it('bbb-201:learn:Verify that you can click on tutorial (registered user)', function() {
         login.loginWithRandomUser();
-        header.navHelp.click();
-        help.tutorialTab.click();
+        header.navLearn.click();
         var elemTutorial = help.firstElementTutorial();
         elemTutorial.click();
         browser.sleep(vars.timeToWaitTab);
@@ -64,13 +63,12 @@ describe('Tutorial ', function() {
 
     });
 
-    it('bbb-202:helpTutorial:Verify that you can click on tutorial (unregistered user)', function() {
+    it('bbb-202:learn:Verify that you can click on tutorial (unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
-        header.navHelp.click();
-        help.tutorialTab.click();
+        header.navLearn.click();
         var elemTutorial = help.firstElementTutorial();
         elemTutorial.click();
         browser.sleep(vars.timeToWaitTab);
@@ -79,45 +77,63 @@ describe('Tutorial ', function() {
             browser.switchTo().window(handles[1]);
             browser.sleep(vars.timeToWaitTab);
             expect(browser.getCurrentUrl()).toMatch('http://diwo.bq.com/');
-            browser.close().then(browser.switchTo().window(handles[0]));
-            browser.sleep(vars.timeToWaitTab);
-            browser.ignoreSynchronization = false;
         });
     });
 
-    it('bbb-199:helpTutorial:Verificar la acción de sugerir un tutorial', function() {
-
-        var script = help.helpView + '.scrollTo(0,5000);';
-
-        help.get();
-
-        help.tutorialTab.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-
-        browser.executeScript(script)
-            .then(globalFunctions.navigatorLanguage)
-            .then(function(language) {
-                expect(help.contactUsTutorials.getAttribute('href')).toEqual(vars.supportEmail(language));
-            });
-
+    it('learn:Verify that you can click on "Show more tutorials in DIWO" (registered user)', function() {
         login.loginWithRandomUser();
-        header.navHelp.click();
-        help.tutorialTab.click();
-        browser.executeScript(script).then(function() {
-            help.contactUsTutorials.click();
-            browser.sleep(vars.feedbackIdeas);
-            globalFunctions.navigatorLanguage().then(function(language) {
-                if (language === 'es') {
-                    expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
-                } else {
-                    expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
-                }
-            });
-
-            modals.bladeClose.click();
-            browser.sleep(vars.timeToWaitFadeModals);
+        header.navLearn.click();
+        help.goToDIWOButton.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.ignoreSynchronization = true;
+            browser.switchTo().window(handles[1]);
+            browser.sleep(vars.timeToWaitTab);
+            expect(browser.getCurrentUrl()).toBe('http://diwo.bq.com/');
+            browser.close().then(browser.switchTo().window(handles[0]));
+            browser.sleep(vars.timeToWaitTab);
+            browser.ignoreSynchronization = false;
+            login.logout();
         });
+    });
 
+    it('learn:Verify that you can click on "Show more tutorials in DIWO" (unregistered user)', function() {
+        make.get();
+        modals.attentionContinueGuest.click();
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        header.navLearn.click();
+        help.goToDIWOButton.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.ignoreSynchronization = true;
+            browser.switchTo().window(handles[1]);
+            browser.sleep(vars.timeToWaitTab);
+            expect(browser.getCurrentUrl()).toBe('http://diwo.bq.com/');
+        });
+    });
+
+    it('bbb-199:learn:Verify suggest a tutorial action (registered user)', function() {
+        login.loginWithRandomUser();
+        header.navLearn.click();
+        help.contactUsTutorials.click();
+        browser.sleep(vars.feedbackIdeas);
+        globalFunctions.navigatorLanguage().then(function(language) {
+            if (language === 'es') {
+                expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
+            } else {
+                expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
+            }
+        });
+    });
+
+    it('learn:Verify suggest a tutorial action (unregistered user)', function() {
+        help.get();
+        browser.sleep(vars.timeToWaitFadeModals);
+        globalFunctions.navigatorLanguage().then(function(language) {
+            console.log('+++++++++++++++++++++++++++ ' + language);
+            expect(help.contactUsTutorials.getAttribute('href')).toEqual(vars.supportEmail(language));
+        });
     });
 
 });
