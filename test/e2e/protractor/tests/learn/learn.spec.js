@@ -1,24 +1,24 @@
 'use strict';
 
-var Login = require('../../login/login.po.js'),
-    Header = require('../../header/header.po.js'),
-    Help = require('../help.po.js'),
-    Make = require('../../bloqsproject/make.po.js'),
-    Modals = require('../../modals/modals.po.js'),
-    Variables = require('../../commons/variables.js'),
-    GlobalFunctions = require('../../commons/globalFunctions.js');
+var Login = require('../login/login.po.js'),
+    Learn = require('./learn.po.js'),
+    Header = require('../header/header.po.js'),
+    Make = require('../bloqsproject/make.po.js'),
+    Modals = require('../modals/modals.po.js'),
+    Variables = require('../commons/variables.js'),
+    GlobalFunctions = require('../commons/globalFunctions.js');
 
 var login = new Login(),
+    learn = new Learn(),
     header = new Header(),
-    help = new Help(),
     make = new Make(),
     modals = new Modals(),
     vars = new Variables(),
     globalFunctions = new GlobalFunctions();
 
-globalFunctions.xmlReport('helpTutorial');
+globalFunctions.xmlReport('learn');
 
-describe('Tutorial ', function() {
+describe('Learn ', function() {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -30,7 +30,7 @@ describe('Tutorial ', function() {
         login.loginWithRandomUser();
         header.navLearn.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/learn');
-        expect(help.basicTutorialTable.isPresent());
+        expect(learn.basicTutorialTable.isPresent());
         login.logout();
     });
 
@@ -41,13 +41,13 @@ describe('Tutorial ', function() {
         browser.sleep(vars.timeToWaitFadeModals);
         header.navLearn.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/learn');
-        expect(help.basicTutorialTable.isPresent());
+        expect(learn.basicTutorialTable.isPresent());
     });
 
     it('bbb-201:learn:Verify that you can click on tutorial (registered user)', function() {
         login.loginWithRandomUser();
         header.navLearn.click();
-        var elemTutorial = help.firstElementTutorial();
+        var elemTutorial = learn.firstElementTutorial();
         elemTutorial.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
@@ -69,7 +69,7 @@ describe('Tutorial ', function() {
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         header.navLearn.click();
-        var elemTutorial = help.firstElementTutorial();
+        var elemTutorial = learn.firstElementTutorial();
         elemTutorial.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
@@ -77,13 +77,15 @@ describe('Tutorial ', function() {
             browser.switchTo().window(handles[1]);
             browser.sleep(vars.timeToWaitTab);
             expect(browser.getCurrentUrl()).toMatch('http://diwo.bq.com/');
+            browser.close().then(browser.switchTo().window(handles[0]));
+            browser.ignoreSynchronization = false;
         });
     });
 
     it('learn:Verify that you can click on "Show more tutorials in DIWO" (registered user)', function() {
         login.loginWithRandomUser();
         header.navLearn.click();
-        help.goToDIWOButton.click();
+        learn.goToDIWOButton.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.ignoreSynchronization = true;
@@ -103,36 +105,40 @@ describe('Tutorial ', function() {
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         header.navLearn.click();
-        help.goToDIWOButton.click();
+        learn.goToDIWOButton.click();
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(function(handles) {
             browser.ignoreSynchronization = true;
             browser.switchTo().window(handles[1]);
             browser.sleep(vars.timeToWaitTab);
             expect(browser.getCurrentUrl()).toBe('http://diwo.bq.com/');
+            browser.close().then(browser.switchTo().window(handles[0]));
+            browser.ignoreSynchronization = false;
         });
     });
 
     it('bbb-199:learn:Verify suggest a tutorial action (registered user)', function() {
         login.loginWithRandomUser();
         header.navLearn.click();
-        help.contactUsTutorials.click();
-        browser.sleep(vars.feedbackIdeas);
+        learn.contactUsTutorials.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         globalFunctions.navigatorLanguage().then(function(language) {
             if (language === 'es') {
                 expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
             } else {
                 expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
             }
+            modals.bladeClose.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+            login.logout();
         });
     });
 
     it('learn:Verify suggest a tutorial action (unregistered user)', function() {
-        help.get();
+        learn.get();
         browser.sleep(vars.timeToWaitFadeModals);
         globalFunctions.navigatorLanguage().then(function(language) {
-            console.log('+++++++++++++++++++++++++++ ' + language);
-            expect(help.contactUsTutorials.getAttribute('href')).toEqual(vars.supportEmail(language));
+            expect(learn.contactUsTutorials.getAttribute('href')).toEqual(vars.supportEmail(language));
         });
     });
 
