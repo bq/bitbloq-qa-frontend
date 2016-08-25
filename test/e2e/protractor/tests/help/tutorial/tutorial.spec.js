@@ -26,23 +26,21 @@ describe('Tutorial ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-198:helpTutorial:Appears the tutorial with a registered user', function() {
+    it('bbb-198:learn:Appears the tutorial with a registered user', function() {
         login.loginWithRandomUser();
-        header.navHelp.click();
-        help.tutorialTab.click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help/tutorial');
+        header.navLearn.click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/learn');
         expect(help.basicTutorialTable.isPresent());
         login.logout();
     });
 
-    it('bbb-200:helpTutorial:Appears the tutorial with an unregistered user', function() {
+    it('bbb-200:learn:Appears the tutorial with an unregistered user', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
-        header.navHelp.click();
-        help.tutorialTab.click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/help/tutorial');
+        header.navLearn.click();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/learn');
         expect(help.basicTutorialTable.isPresent());
     });
 
