@@ -2,7 +2,6 @@
 
 var Login = require('../../login/login.po.js'),
     Header = require('../../header/header.po.js'),
-    Help = require('./../help.po.js'),
     Make = require('../../bloqsproject/make.po.js'),
     Modals = require('../../modals/modals.po.js'),
     Variables = require('../../commons/variables.js'),
@@ -11,7 +10,6 @@ var Login = require('../../login/login.po.js'),
 
 var login = new Login(),
     header = new Header(),
-    help = new Help(),
     make = new Make(),
     modals = new Modals(),
     vars = new Variables(),
@@ -88,31 +86,4 @@ describe('Changelog ', function() { //This pages has been deleted
         expect(forum.isPresentTitle()).toBe(true);
         expect(forum.isPresentContentThread()).toBe(true);
     });
-
-    xit('bbb-137:helpChangelog:Verify that the change and bugs appears in the changelog tab (Registered user)', function() {
-        login.loginWithRandomUser();
-        header.navHelp.click();
-        help.changelogTab.click();
-        help.changelogList.each(function(changelog) {
-            changelog.click();
-            changelog.getText().then(function(title) {
-                var text = help.getTitleChangelog(title);
-                expect(title).toEqual(text);
-            });
-        });
-        login.logout();
-    });
-
-    xit('bbb-138:helpChangelog:Verify that the change and bugs appears in the changelog tab (Unregistered user)', function() {
-        help.get();
-        help.changelogTab.click();
-        help.changelogList.each(function(changelog) {
-            changelog.click();
-            changelog.getText().then(function(title) {
-                var text = help.getTitleChangelog(title);
-                expect(title).toEqual(text);
-            });
-        });
-    });
-
 });
