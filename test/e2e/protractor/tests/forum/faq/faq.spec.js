@@ -54,6 +54,7 @@ describe('FAQ ', function() {
         modals.rejectTour();
         browser.sleep(vars.timeToWaitTab);
         header.navForum.click();
+        expect(globalFunctions.toNumber(forum.faqCastellanoThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
         forum.faqCategory.click();
         expect(forum.categoryTopicTitleArray.count()).toBe(10);
         browser.getCurrentUrl().then(function(url) {
@@ -67,6 +68,7 @@ describe('FAQ ', function() {
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         header.navForum.click();
+        expect(globalFunctions.toNumber(forum.faqCastellanoThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
         forum.faqCategory.click();
         expect(forum.categoryTopicTitleArray.count()).toBe(10);
         forum.categoryTopicTitle.click();
@@ -77,17 +79,17 @@ describe('FAQ ', function() {
     it('bbb-345:faq:Appears all language FAQs with a registered user', function() {
         login.loginWithRandomUser();
         header.navForum.click();
-        expect(globalFunctions.toNumber(forum.faqEnglishTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqNetherlandsTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqPyccknnTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqItalianoTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqEuskaraTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqCatalaTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqFrancaisTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqDeutschTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqPortuguesTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqGalegoTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqChineseTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqEnglishThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqNetherlandsThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqPyccknnThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqItalianoThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqEuskaraThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqCatalaThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqFrancaisThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqDeutschThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqPortuguesThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqGalegoThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqChineseThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
     });
 
     it('bbb-346:faq:Appears all language FAQs with an unregistered user', function() {
@@ -96,16 +98,16 @@ describe('FAQ ', function() {
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         header.navForum.click();
-        expect(globalFunctions.toNumber(forum.faqEnglishTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqNetherlandsTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqPyccknnTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqItalianoTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqEuskaraTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqCatalaTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqFrancaisTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqDeutschTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqPortuguesTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqGalegoTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
-        expect(globalFunctions.toNumber(forum.faqChineseTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqEnglishThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqNetherlandsThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqPyccknnThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqItalianoThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqEuskaraThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqCatalaThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqFrancaisThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqDeutschThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqPortuguesThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqGalegoThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
+        expect(globalFunctions.toNumber(forum.faqChineseThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
     });
 });

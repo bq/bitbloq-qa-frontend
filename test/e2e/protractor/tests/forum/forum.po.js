@@ -12,7 +12,6 @@ var login = new Login(),
 var Forum = function() {
     //header
     this.newTopicButton = $('[data-element="forum-new-topic-button"]');
-    this.categoryButton = $('[data-element="forum-category-button"]');
     this.breadcrumbs = $('[data-element="forum-header-breadcrumb"]');
     this.breadcrumbsArray = element.all(by.css('[data-element="forum-header-breadcrumb"]'));
 
@@ -43,17 +42,18 @@ var Forum = function() {
     this.answerContent = $('[data-element="forum-theme-answer"]');
 
     //FAQS
-    this.faqEnglishTrheadCounter = $('[data-element="forum-threads-counter-English"]');
-    this.faqNetherlandsTrheadCounter = $('[data-element="forum-threads-counter-Netherlands"]');
-    this.faqPyccknnTrheadCounter = $('[data-element="forum-threads-counter-Pусский"]');
-    this.faqItalianoTrheadCounter = $('[data-element="forum-threads-counter-Italiano"]');
-    this.faqEuskaraTrheadCounter = $('[data-element="forum-threads-counter-Euskara"]');
-    this.faqCatalaTrheadCounter = $('[data-element="forum-threads-counter-Català"]');
-    this.faqFrancaisTrheadCounter = $('[data-element="forum-threads-counter-Français"]');
-    this.faqDeutschTrheadCounter = $('[data-element="forum-threads-counter-Deutsch"]');
-    this.faqPortuguesTrheadCounter = $('[data-element="forum-threads-counter-Português"]');
-    this.faqGalegoTrheadCounter = $('[data-element="forum-threads-counter-Galego"]');
-    this.faqChineseTrheadCounter = $('[data-element="forum-threads-counter-简体中文"]');
+    this.faqCastellanoThreadCounter = $('[data-element="forum-threads-counter-Preguntas frecuentes"]');
+    this.faqEnglishThreadCounter = $('[data-element="forum-threads-counter-English"]');
+    this.faqNetherlandsThreadCounter = $('[data-element="forum-threads-counter-Netherlands"]');
+    this.faqPyccknnThreadCounter = $('[data-element="forum-threads-counter-Pусский"]');
+    this.faqItalianoThreadCounter = $('[data-element="forum-threads-counter-Italiano"]');
+    this.faqEuskaraThreadCounter = $('[data-element="forum-threads-counter-Euskara"]');
+    this.faqCatalaThreadCounter = $('[data-element="forum-threads-counter-Català"]');
+    this.faqFrancaisThreadCounter = $('[data-element="forum-threads-counter-Français"]');
+    this.faqDeutschThreadCounter = $('[data-element="forum-threads-counter-Deutsch"]');
+    this.faqPortuguesThreadCounter = $('[data-element="forum-threads-counter-Português"]');
+    this.faqGalegoThreadCounter = $('[data-element="forum-threads-counter-Galego"]');
+    this.faqChineseThreadCounter = $('[data-element="forum-threads-counter-简体中文"]');
 
     //versions
     this.versionCategory = $('[data-element="forum-category-Versiones de Bitbloq"]');
@@ -80,7 +80,6 @@ var Forum = function() {
         var nameDescription = description || 'descripcion_' + Number(new Date());
         var topicCategory = category || this.categoryListNoticias;
         this.get();
-        browser.sleep(vars.timeToWaitTab);
         this.newTopicButton.click();
         browser.sleep(vars.timeToWaitTab);
         this.categoryList.click();
@@ -92,9 +91,7 @@ var Forum = function() {
         this.newTopicDescription.all(by.css('div')).get(15).sendKeys(nameDescription);
 
         browser.sleep(vars.timeToWaitSendKeys);
-        browser.sleep(vars.timeToWaitFadeModals);
         this.publishTopic.click();
-        browser.sleep(vars.timeToWaitTab);
         //en el momento de creacion de este test, no existia traduccion para este toast
         //una vez exista, se añadira el control del idioma para saucelabs
         globalFunctions.navigatorLanguage()
@@ -109,7 +106,7 @@ var Forum = function() {
 
         return {
             topicTitle: nameTitle,
-            topicDescription: nameDescription,
+            topicDescription: nameDescription
 
         };
 
