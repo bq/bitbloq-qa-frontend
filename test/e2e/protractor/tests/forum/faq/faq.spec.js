@@ -74,7 +74,7 @@ describe('FAQ ', function() {
         expect(forum.isPresentContentThread()).toBe(true);
     });
 
-    it('faq:Appears all language FAQs with a registered user', function() {
+    it('bbb-345:faq:Appears all language FAQs with a registered user', function() {
         login.loginWithRandomUser();
         header.navForum.click();
         expect(globalFunctions.toNumber(forum.faqEnglishTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
@@ -90,7 +90,7 @@ describe('FAQ ', function() {
         expect(globalFunctions.toNumber(forum.faqChineseTrheadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
     });
 
-    it('faq:Appears all language FAQs with an unregistered user', function() {
+    it('bbb-346:faq:Appears all language FAQs with an unregistered user', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
