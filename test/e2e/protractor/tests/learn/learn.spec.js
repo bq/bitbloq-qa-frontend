@@ -82,7 +82,7 @@ describe('Learn ', function() {
         });
     });
 
-    it('learn:Verify that you can click on "Show more tutorials in DIWO" (registered user)', function() {
+    it('bbb-349:learn:Verify that you can click on "Show more tutorials in DIWO" (registered user)', function() {
         login.loginWithRandomUser();
         header.navLearn.click();
         learn.goToDIWOButton.click();
@@ -99,7 +99,7 @@ describe('Learn ', function() {
         });
     });
 
-    it('learn:Verify that you can click on "Show more tutorials in DIWO" (unregistered user)', function() {
+    it('bbb-350:learn:Verify that you can click on "Show more tutorials in DIWO" (unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -134,7 +134,7 @@ describe('Learn ', function() {
         });
     });
 
-    it('learn:Verify suggest a tutorial action (unregistered user)', function() {
+    it('bbb-351:learn:Verify suggest a tutorial action (unregistered user)', function() {
         learn.get();
         browser.sleep(vars.timeToWaitFadeModals);
         globalFunctions.navigatorLanguage().then(function(language) {
