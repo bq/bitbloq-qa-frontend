@@ -11,7 +11,6 @@ var Header = function() {
     this.enterButton = $('[data-element="header-enterbutton"]');
     //navbar
     this.navLogo = $('[data-element="nav-logo"]');
-    this.navMake = $('[data-element="nav-make"]');
     this.navProjects = $('[data-element="nav-projects"]');
     this.navExplore = $('[data-element="nav-explore"]');
     this.navLearn = $('[data-element="nav-learn"]');
