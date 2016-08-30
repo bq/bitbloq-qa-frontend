@@ -168,7 +168,7 @@ describe('Forum', function() {
     });
 
     // if there are more instances element.all row(0) not run because there are more topic first
-    fit('bbb-221:forumXit: check answer count for a topic', function() {
+    xit('bbb-221:forumXit: check answer count for a topic', function() {
         forum.createTopicNewUser();
         forum.get();
         forum.newsCategory.click();
@@ -188,7 +188,7 @@ describe('Forum', function() {
         // login.logout();
 
     });
-    xit('bbb-220:forumXit: check answer count for a category', function() { //bug +100 temas por categoria
+    it('bbb-220:forumXit: check answer count for a category', function() { //bug +100 temas por categoria
         forum.createTopicNewUser();
         forum.get();
         element.all(by.repeater('category in section').row(0).column('category.numberOfAnswers')).getText().then(function(categoryAnswers) {
@@ -253,7 +253,7 @@ describe('Forum', function() {
         login.logout();
     });
 
-    it('bbb-217:forum:check breadcrumbs', function() {
+    xit('bbb-217:forum:check breadcrumbs', function() {
         //pagina principal
         forum.get();
         browser.sleep(vars.timeToWaitTab + 5000);
@@ -334,7 +334,7 @@ describe('Forum', function() {
 
     });
 
-    it('bbb-236:forumXit:check visit counter topic', function() {
+    xit('bbb-236:forumXit:check visit counter topic', function() {
         forum.createTopicNewUser();
         forum.get();
         browser.sleep(vars.timeToWaitTab);
