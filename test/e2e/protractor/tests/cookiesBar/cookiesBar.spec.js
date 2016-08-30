@@ -10,9 +10,9 @@ var CookiesBar = require('./cookiesBar.po.js'),
     Make = require('../bloqsproject/make.po.js'),
     Modals = require('../modals/modals.po.js'),
     Landing = require('../landing/landing.po.js'),
+    Learn = require('../learn/learn.po.js'),
     Explore = require('../explore/explore.po.js'),
     Codeproject = require('../codeproject/codeproject.po.js'),
-    Help = require('../help/help.po.js'),
     Login = require('../login/login.po.js');
 
 var cookiesBar = new CookiesBar(),
@@ -21,9 +21,9 @@ var cookiesBar = new CookiesBar(),
     make = new Make(),
     modals = new Modals(),
     landing = new Landing(),
+    learn = new Learn(),
     explore = new Explore(),
     codeproject = new Codeproject(),
-    help = new Help(),
     login = new Login();
 
 globalFunctions.xmlReport('cookiesBar');
@@ -81,14 +81,14 @@ describe('Test CookiesBar', function() {
         $2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).click();
         browserCodeproject.close();
 
-        //check help
-        var browserHelp = browser.forkNewDriverInstance();
-        $2 = browserHelp.$;
-        browserHelp.get(browser.baseUrl + help.url);
-        browserHelp.manage().window().setSize(1024, 768);
-        browserHelp.waitForAngular();
+        //check learn
+        var browserLearn = browser.forkNewDriverInstance();
+        $2 = browserLearn.$;
+        browserLearn.get(browser.baseUrl + learn.url);
+        browserLearn.manage().window().setSize(1024, 768);
+        browserLearn.waitForAngular();
         $2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).click();
-        browserHelp.close();
+        browserLearn.close();
 
         //check bloqsproject/<id> && codeproject/<id>
 
@@ -155,8 +155,8 @@ describe('Test CookiesBar', function() {
         browserCheckCookiesNoLogin.get(browser.baseUrl + explore.url);
         expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
-        //help
-        browserCheckCookiesNoLogin.get(browser.baseUrl + help.url);
+        //learn
+        browserCheckCookiesNoLogin.get(browser.baseUrl + learn.url);
         expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
         browserCheckCookiesNoLogin.close();
