@@ -69,7 +69,7 @@ describe('Forum', function() {
     });
 
 
-    fit('bbb-226:forum:create a new topic wrong', function() {
+    it('bbb-226:forum:create a new topic wrong', function() {
         login.loginWithRandomUser();
 
         var titulo = 'tema automatico ' + Number(new Date());
