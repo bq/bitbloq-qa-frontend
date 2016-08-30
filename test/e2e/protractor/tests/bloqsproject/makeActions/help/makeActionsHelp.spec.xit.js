@@ -42,19 +42,18 @@ describe('Menu Help of MakeActions', function() {
         // Test redirect to faq, forum and help
         makeActions.menuHelpFaq.click().then(function() {
             browser.sleep(vars.timeToWaitTab + 1000);
-            globalFunctions.toMatchUrlInNewTab(/#\/help/).then(function() {
+            globalFunctions.toMatchUrlInNewTab(/#\/forum\/Preguntas%20frecuentes/).then(function() {
                 browser.sleep(vars.timeToWaitTab + 1000);
                 makeActions.menuHelp.click().then(function() {
                     browser.sleep(vars.timeToWaitTab + 1000);
                     makeActions.menuHelpTutorial.click().then(function() {
                         browser.sleep(vars.timeToWaitTab + 1000);
-                        globalFunctions.toMatchUrlInNewTab(/#\/help\/tutorial/).then(function() {
+                        globalFunctions.toMatchUrlInNewTab(/#\/learn/).then(function() {
                             makeActions.menuHelp.click().then(function() {
                                 browser.sleep(vars.timeToWaitTab + 1000);
                                 makeActions.menuHelpForum.click().then(function() {
                                     browser.sleep(vars.timeToWaitTab + 1000);
-                                    globalFunctions.toMatchUrlInNewTab(/#\/help\/forum/).then(function() {
-
+                                    globalFunctions.toMatchUrlInNewTab(/#\/forum/).then(function() {
                                         login.logout();
                                     });
                                 });
