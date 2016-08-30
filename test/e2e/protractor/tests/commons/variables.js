@@ -42,6 +42,7 @@ var Variables = function() {
     this.timeForDelete = 15000;
     this.timeToWaitLoadForumCategory = 15000;
     this.timeToWaitSaveNewProject = 2000;
+    this.timeToWaitAlert = 3500;
 
     //FAQS
     this.numberOfFaqs = 20;

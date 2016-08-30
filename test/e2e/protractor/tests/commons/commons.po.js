@@ -3,6 +3,9 @@
  */
 'use strict';
 
+var Variables = require('../commons/variables.js'),
+    vars = new Variables();
+
 var Commons = function() {
     //TOAST
     this.editToast = $('[data-id="edit-project"]');
@@ -20,7 +23,7 @@ var Commons = function() {
 
     this.expectToastTimeOutandText = function(alertElement,text) {
         browser.ignoreSynchronization = true;
-        browser.sleep(1000);
+        browser.sleep(vars.timeToWaitAlert);
         expect(alertElement.isDisplayed()).toBe(true);
         expect(alertElement.getText()).toMatch(text);
         browser.ignoreSynchronization = false;

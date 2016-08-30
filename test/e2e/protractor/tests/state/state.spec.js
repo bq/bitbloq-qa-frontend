@@ -253,7 +253,7 @@ describe('State ', function() {
         login.logout();
         forum.get();
         browser.sleep(vars.timeToWaitLoadForumCategory);
-        forum.categoryButton.click();
+        forum.newsCategory.click();
         browser.sleep(vars.timeToWaitLoadForumCategory);
         browser.getCurrentUrl().then(function(url) {
             curl = url;
@@ -267,7 +267,7 @@ describe('State ', function() {
         forum.createTopicNewUser();
         login.logout();
         forum.get();
-        forum.categoryButton.click();
+        forum.newsCategory.click();
         browser.sleep(vars.timeToWaitLoadForumCategory);
         forum.categoryTopicTitle.click();
         browser.getCurrentUrl().then(function(url) {
