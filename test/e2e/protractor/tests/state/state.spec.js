@@ -13,16 +13,14 @@ var Login = require('../login/login.po.js'),
     Header = require('../header/header.po.js'),
     Explore = require('../explore/explore.po.js'),
     Project = require('../explore/project.po.js'),
-    Modals = require('../modals/modals.po.js'),
     CodeProject = require('../codeproject/codeproject.po.js'),
-    Forum = require('./forum.po.js');
+    Forum = require('../forum/forum.po.js');
 
 var login = new Login(),
     make = new Make(),
     modals = new Modals(),
     projects = new Projects(),
     vars = new Variables(),
-    modals = new Modals(),
     header = new Header(),
     explore = new Explore(),
     project = new Project(),
