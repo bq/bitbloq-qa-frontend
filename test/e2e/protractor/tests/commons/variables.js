@@ -30,7 +30,7 @@ var Variables = function() {
     this.passwordFb = 'webpruebas.2webpruebas.2';
     this.userFb = 'Paco';
     this.lastnameFb = 'Gómez';
-    this.usernameFb = 'webpruebas.2';
+    this.usernameFb = 'webpruebas';
 
     //timers
     this.timeToWaitFadeModals = 2000;
