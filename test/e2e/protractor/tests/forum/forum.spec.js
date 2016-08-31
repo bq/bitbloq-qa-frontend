@@ -2,12 +2,14 @@
 var GlobalFunctions = require('../commons/globalFunctions.js'),
     Variables = require('../commons/variables.js'),
     Forum = require('./forum.po.js'),
-    Login = require('../login/login.po.js');
+    Login = require('../login/login.po.js'),
+    Modals = require('../modals/modals.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     vars = new Variables(),
     forum = new Forum(),
-    login = new Login();
+    login = new Login(),
+    modals = new Modals();
 
 globalFunctions.xmlReport('forum');
 
@@ -123,32 +125,16 @@ describe('Forum', function() {
             });
     });
 
-    xit('bbb-191:forum: contact us (register user)', function() {
+    it('bbb-191:forum: contact us (register user)', function() {
 
         login.loginWithRandomUser();
         forum.get();
-
-        globalFunctions.scrollBottomPage().then(function() {
-            forum.contactUsButton.click();
-            browser.sleep(vars.timeToWaitFadeModals);
+        browser.executeScript('arguments[0].click()', forum.contactUsButton.getWebElement()).then(function() {
+            expect(modals.okDialog.isEnabled()).toBe(false);
+            modals.sendCommentsTextarea.sendKeys('Esto es un mensaje');
+            browser.sleep(vars.timeToWaitSendKeys);
+            expect(modals.okDialog.isEnabled()).toBe(true);
+            modals.okDialog.click();
         });
-        // forum.contactUsButton.click();
-        // browser.sleep(vars.timeToWaitFadeModals);
-
-        // modals.bladeClose.click();
-        // browser.sleep(vars.timeToWaitFadeModals);
-        //
-        // help.feedbackAboutAnError.click();
-        // browser.sleep(vars.timeToWaitFadeModals);
-        // globalFunctions.navigatorLanguage()
-        //     .then(function(language) {
-        //         if (language === 'es') {
-        //             expect(modals.modalTitle.getText()).toEqual(vars.infoErrorLiteral);
-        //         } else {
-        //             expect(modals.modalTitle.getText()).toEqual(vars.infoErrorLiteralEN);
-        //         }
-        //     });
-        // modals.bladeClose.click();
-        // browser.sleep(vars.timeToWaitFadeModals);
     });
 });
