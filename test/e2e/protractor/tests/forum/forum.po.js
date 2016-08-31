@@ -14,6 +14,10 @@ var Forum = function() {
     this.newTopicButton = $('[data-element="forum-new-topic-button"]');
     this.breadcrumbs = $('[data-element="forum-header-breadcrumb"]');
     this.breadcrumbsArray = element.all(by.css('[data-element="forum-header-breadcrumb"]'));
+    
+    //Footer
+    this.contactUsLink = $('[data-element="forum-contact-us-link"]');
+    this.contactUsButton = $('[data-element="forum-contact-us-button"]');
 
     //categories
     this.newsCategory = $('[data-element="forum-category-Noticias"]');
