@@ -13,7 +13,6 @@ var Modals = function() {
     //P.O modal-change-project-name.html
     this.inputModalChangeN = $('[data-element="modal-change-name-input"]');
     //P.O modal-send-comments.html
-    this.sendCommentsName = $('[data-element="modal-send-comments-name"]');
     this.sendCommentsTextarea = $('[data-element="modal-send-comments-textarea"]');
     //P.O modal-notify-error.html
     this.notifyErrorTextArea = $('[data-element="modal-notify-error-textarea"]');
