@@ -7,8 +7,8 @@ var
     Bloqsproject = require('../bloqsproject/make.po.js'),
     Register = require('../register/register.po.js'),
     Explore = require('../explore/explore.po.js'),
-    Codeproject = require('../codeproject/codeproject.po.js'),
-    Help = require('../help/help.po.js');
+    Forum = require('../forum/forum.po.js'),
+    Codeproject = require('../codeproject/codeproject.po.js');
 
 var
     globalFunctions = new GlobalFunctions(),
@@ -17,8 +17,8 @@ var
     bloqsproject = new Bloqsproject(),
     register = new Register(),
     explore = new Explore(),
-    codeproject = new Codeproject(),
-    help = new Help();
+    forum = new Forum(),
+    codeproject = new Codeproject();
 
 globalFunctions.xmlReport('unsupportedDesktop');
 
@@ -68,8 +68,8 @@ describe('Check unsupported in desktop', function() {
         expect(browser.getCurrentUrl()).toMatch(browser.baseUrl + explore.url);
         codeproject.get();
         expect(browser.getCurrentUrl()).toMatch(browser.baseUrl + codeproject.url);
-        help.get();
-        expect(browser.getCurrentUrl()).toMatch(browser.baseUrl + help.url);
+        forum.get();
+        expect(browser.getCurrentUrl()).toMatch(browser.baseUrl + forum.url);
     });
 
 });
