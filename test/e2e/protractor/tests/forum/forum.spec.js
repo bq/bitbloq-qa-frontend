@@ -115,7 +115,7 @@ describe('Forum', function() {
         login.logout();
     });
 
-    it('bbb-194:forum: contact us (register user)', function() {
+    it('bbb-194:forum: contact us (unregister user)', function() {
         forum.get();
         globalFunctions.navigatorLanguage()
             .then(function(language) {
@@ -123,12 +123,12 @@ describe('Forum', function() {
             });
     });
 
-    xit('bbb-191:forum:Comprobar botones Informar de un error en usuario registrado', function() {
+    xit('bbb-191:forum: contact us (register user)', function() {
 
         login.loginWithRandomUser();
         forum.get();
 
-        globalFunctions.scrollBottomPage().then(function(){
+        globalFunctions.scrollBottomPage().then(function() {
             forum.contactUsButton.click();
             browser.sleep(vars.timeToWaitFadeModals);
         });
