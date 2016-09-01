@@ -49,7 +49,7 @@ describe('Publish project', function() {
                 projectElem.click();
                 browser.sleep(vars.timeToWaitFadeModals);
                 explore.projectMoreInfoButton.click();
-                filename = globalFunctions.filePath(path.resolve() + '/target/' + project1.projectName + '.json');
+                filename = globalFunctions.filePath(path.resolve() + '/target/' + project1.projectName + '.bitbloq');
                 //Se comprueba que el boton "descargar" descarga el proyecto
                 project.downloadProjectButton.click();
                 browser.driver.wait(function() {
@@ -65,7 +65,7 @@ describe('Publish project', function() {
                         browser.sleep(vars.timeToWaitFadeModals);
                         explore.projectMoreInfoButton.click();
                         //Se comprueba que el boton "descargar" descarga el proyecto
-                        filename = globalFunctions.filePath(path.resolve() + '/target/' + project1.projectName + '.json');
+                        filename = globalFunctions.filePath(path.resolve() + '/target/' + project1.projectName + '.bitbloq');
                         project.downloadProjectButton.click();
                         browser.driver.wait(function() {
                             return fs.existsSync(filename);
@@ -77,7 +77,7 @@ describe('Publish project', function() {
                             browser.sleep(vars.timeToWaitFadeModals);
                             explore.projectMoreInfoButton.click();
                             //Se comprueba que el boton "descargar" descarga el proyecto
-                            filename = globalFunctions.filePath(path.resolve() + '/target/' + project2.projectName + '.json');
+                            filename = globalFunctions.filePath(path.resolve() + '/target/' + project2.projectName + '.bitbloq');
                             project.downloadProjectButton.click();
                             browser.driver.wait(function() {
                                 return fs.existsSync(filename);

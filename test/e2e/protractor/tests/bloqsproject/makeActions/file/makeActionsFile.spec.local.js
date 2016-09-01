@@ -35,11 +35,11 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
     it('bbb-90:makeactionsFileLocal:Open from file, download and compare if is equal ', function() {
 
-        var fileToUpload = path.resolve() + '/test/e2e/protractor/res/onlyBoardZum.json';
+        var fileToUpload = path.resolve() + '/test/e2e/protractor/res/onlyBoardZum.bitbloq';
         make.importFileGuestUser(fileToUpload);
 
         //If file download exist, delete it
-        var fileDownload = path.resolve() + '/target/onlyBoardZum.json';
+        var fileDownload = path.resolve() + '/target/onlyBoardZum.bitbloq';
 
         //Download file
         makeActions.menuFile.click();

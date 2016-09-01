@@ -48,7 +48,7 @@ describe('Menu share of makeactions local', function() {
         });
     }
 
-    it('bbb-85:makeactionsShareLocal:Modify a project shared to you', function() {
+    fit('bbb-85:makeactionsShareLocal:Modify a project shared to you', function() {
         var validYoutubeUrl = 'https://youtu.be/f2WME8N8qXc?list=PL3AshJDPy8GQhVWkzsjc5IvrzD5ctpQXN';
         var invalidYoutubeUrl = 'https://www.youtube.com/user/TheRedsMusic';
         var user1 = login.loginWithRandomUser();
@@ -66,7 +66,7 @@ describe('Menu share of makeactions local', function() {
         modals.okDialog.click();
         browser.sleep(vars.timeToWaitFadeModals);
         //download original project
-        var file1 = path.resolve() + '/target/' + projectName1 + '.json';
+        var file1 = path.resolve() + '/target/' + projectName1 + '.bitbloq';
         makeActions.menuFile.click();
         browser.sleep(vars.timeToWaitMenu);
         makeActions.menuDownload.click();
@@ -180,7 +180,7 @@ describe('Menu share of makeactions local', function() {
                     browser.sleep(vars.timeToWaitTab);
                     browser.getAllWindowHandles().then(function(handles2) {
                         browser.switchTo().window(handles2[2]).then(function() {
-                            var file2 = path.resolve() + '/target/' + projectName1 + '.json';
+                            var file2 = path.resolve() + '/target/' + projectName1 + '.bitbloq';
                             makeActions.menuFile.click();
                             browser.sleep(vars.timeToWaitMenu);
                             makeActions.menuDownload.click();
@@ -233,7 +233,6 @@ describe('Menu share of makeactions local', function() {
     it('bbb-81:makeactionsShareLocal:share project with other users', function() {
 
         var user1 = login.loginWithRandomUser();
-
         login.logout();
         var user2 = login.loginWithRandomUser();
         login.logout();
@@ -248,8 +247,7 @@ describe('Menu share of makeactions local', function() {
         modals.inputEmailsUsers.all(by.css('input')).get(0).sendKeys(user1.userEmail);
         browser.actions().sendKeys(protractor.Key.ENTER).perform();
         modals.okDialog.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        //browser.sleep(1000);
+        browser.sleep(vars.timeToWaitFadeModals+1000);
         globalFunctions.navigatorLanguage()
             .then(function(language) {
                 if (language === 'es') {
@@ -259,7 +257,7 @@ describe('Menu share of makeactions local', function() {
                 }
             });
         //download project 1 to comapre
-        var file1 = path.resolve() + '/target/' + projectName1 + '.json';
+        var file1 = path.resolve() + '/target/' + projectName1 + '.bitbloq';
         makeActions.menuFile.click();
         browser.sleep(vars.timeToWaitMenu);
         makeActions.menuDownload.click();
@@ -313,7 +311,7 @@ describe('Menu share of makeactions local', function() {
                     }
                 });
             //download second project
-            var file2 = path.resolve() + '/target/' + projectName2 + '.json';
+            var file2 = path.resolve() + '/target/' + projectName2 + '.bitbloq';
             makeActions.menuFile.click();
             browser.sleep(vars.timeToWaitMenu);
             makeActions.menuDownload.click();
@@ -331,7 +329,7 @@ describe('Menu share of makeactions local', function() {
                 browser.getAllWindowHandles().then(function(handles) {
                     browser.sleep(vars.timeToWaitTab);
                     browser.switchTo().window(handles[1]).then(function() {
-                        var shareFile1 = path.resolve() + '/target/' + projectName1 + '.json';
+                        var shareFile1 = path.resolve() + '/target/' + projectName1 + '.bitbloq';
                         makeActions.menuFile.click();
                         browser.sleep(vars.timeToWaitMenu);
                         makeActions.menuDownload.click();
@@ -349,7 +347,7 @@ describe('Menu share of makeactions local', function() {
                             browser.getAllWindowHandles().then(function(handles2) {
                                 browser.sleep(vars.timeToWaitTab);
                                 browser.switchTo().window(handles2[2]).then(function() {
-                                    var shareFile2 = path.resolve() + '/target/' + projectName2 + '.json';
+                                    var shareFile2 = path.resolve() + '/target/' + projectName2 + '.bitbloq';
                                     makeActions.menuFile.click();
                                     browser.sleep(vars.timeToWaitMenu);
                                     makeActions.menuDownload.click();
@@ -366,7 +364,7 @@ describe('Menu share of makeactions local', function() {
                                         browser.getAllWindowHandles().then(function(handles3) {
                                             browser.sleep(vars.timeToWaitTab);
                                             browser.switchTo().window(handles3[3]).then(function() {
-                                                var shareFile3 = path.resolve() + '/target/' + projectName2 + '.json';
+                                                var shareFile3 = path.resolve() + '/target/' + projectName2 + '.bitbloq';
                                                 makeActions.menuFile.click();
                                                 browser.sleep(vars.timeToWaitMenu);
                                                 makeActions.menuDownload.click();
@@ -410,7 +408,7 @@ describe('Menu share of makeactions local', function() {
         modals.okDialog.click();
         browser.sleep(vars.timeToWaitFadeModals);
         //download the project to comapre
-        var file1 = path.resolve() + '/target/' + projectName1 + '.json';
+        var file1 = path.resolve() + '/target/' + projectName1 + '.bitbloq';
         makeActions.menuFile.click();
         browser.sleep(vars.timeToWaitMenu);
         makeActions.menuDownload.click();
@@ -428,7 +426,7 @@ describe('Menu share of makeactions local', function() {
 
                 browser.sleep(vars.timeToWaitTab);
 
-                var file2 = path.resolve() + '/target/' + projectName1 + '.json';
+                var file2 = path.resolve() + '/target/' + projectName1 + '.bitbloq';
                 makeActions.menuFile.click();
                 browser.sleep(vars.timeToWaitMenu);
                 makeActions.menuDownload.click();
