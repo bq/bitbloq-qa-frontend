@@ -507,7 +507,7 @@ module.exports = function(grunt) {
         //Connecto testlink
         var TestlinkConnect = require('testlink-connect-proxy'),
             fs = require('fs'),
-            testlinkConnect = new TestlinkConnect('8b4c278f1df8e4059f894acadf9932bb', 'http://testlink.bq.local/lib/api/xmlrpc/v1/xmlrpc.php'),
+            testlinkConnect = new TestlinkConnect('569c284c80d8b639342a8bfe90223095', 'http://testlink.bq.local/lib/api/xmlrpc/v1/xmlrpc.php'),
             file = './target/report/resultTest.json';
 
         if (old) {
@@ -553,9 +553,9 @@ module.exports = function(grunt) {
                         passedItem.status = 'f';
                     }
                     // if test is xit, time is < 100 and test is savedReport to bloqed
-                    else if (obj[i].duration < 100) {
-                        passedItem.status = 'b';
-                    }
+                    // else if (obj[i].duration < 100) {
+                    //     passedItem.status = 'b';
+                    // }
                     passedArray.push(passedItem);
                 }
                 callback();
