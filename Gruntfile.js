@@ -553,9 +553,9 @@ module.exports = function(grunt) {
                         passedItem.status = 'f';
                     }
                     // if test is xit, time is < 100 and test is savedReport to bloqed
-                    // else if (obj[i].duration < 100) {
-                    //     passedItem.status = 'b';
-                    // }
+                    else if (obj[i].duration < 100) {
+                        passedItem.status = 'b';
+                    }
                     passedArray.push(passedItem);
                 }
                 callback();
