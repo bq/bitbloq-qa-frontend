@@ -194,7 +194,7 @@ describe('State ', function() {
         login.loginFromHeader('learn');
     });
 
-    it('bbb-265:state:See a changelog page', function() {
+    it('bbb-297:state:See a changelog page', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);

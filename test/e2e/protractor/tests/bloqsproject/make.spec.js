@@ -32,11 +32,11 @@ describe('make tab', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-122:bloqsproject:Save project', function() {
+    it('bbb-156:bloqsproject:Save project', function() {
         make.saveProjectNewUserAndLogout();
     });
 
-    it('bbb-110:bloqsproject:We can move between all tabs', function() {
+    it('bbb-154:bloqsproject:We can move between all tabs', function() {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -226,7 +226,7 @@ describe('make tab', function() {
         });
     });
 
-    it('bbb-116:bloqsproject:Project must have a name', function() {
+    it('bbb-158:bloqsproject:Project must have a name', function() {
 
         login.loginWithRandomUser();
 
