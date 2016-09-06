@@ -19,6 +19,15 @@ var Register = function() {
     this.checkBoxNewsletterAndTeacher = $('[data-element="register-newsletter-teacher-input"]');
     this.checkBoxPropertiesTerm = $('[data-element="register-terms-input"]');
     this.userLoginHeader = $('[data-element="user-login"]');
+    //tutor data
+    this.tutorName = element(by.id('tutorName'));
+    this.tutorSurname = element(by.id('tutorSurname'));
+    this.tutorEmail = element(by.id('tutorEmail'));
+    this.showInvalidTutorEmail = $('[data-element="register-invalid-tutoremail"]');
+    this.showNoTutorEmail = $('[data-element="register-show-notutoremail"]');
+    this.showSameEmail = $('[data-element="register-same-email"]');
+    this.showNoNametutor = $('[data-element="show-nonametutor"]');
+    this.showNoSurnametutor = $('[data-element="show-nosurname"]');
     //Show validate elements
     this.showNoCheck = $('[data-element="show-no-check"]');
     this.showNoUser = $('[data-element="show-nouser"]');
@@ -48,17 +57,34 @@ var Register = function() {
     /**
      * generate Random user
      */
-    this.generateUser = function() {
-        return {
-            username: 'userTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1),
-            userEmail: 'userTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1) + '@devfakebq.es',
-            password: 'prueba',
-            day: '08',
-            month: '07',
-            year: '1987' //best year ever ;)
-        };
-    };
+    this.generateUser = function(young) {
+        var registerDate = new Date();
+        registerDate.setYear(registerDate.getFullYear() - 14);
+        if (young) {
+          registerDate.setDate(registerDate.getDate()+1);
+          return {
+              username: 'userTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1),
+              userEmail: 'userTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1) + '@devfakebq.es',
+              password: 'prueba',
+              day: registerDate.getDate(),
+              month: registerDate.getMonth()+1,
+              year: registerDate.getFullYear(),
+              tutorName: 'tutorTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1),
+              tutorSurname: 'tutorTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1),
+              tutorEmail: 'tutorTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1) + '@devfakebq.es'
+          };
+        } else {
+          return {
+              username: 'userTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1),
+              userEmail: 'userTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1) + '@devfakebq.es',
+              password: 'prueba',
+              day: registerDate.getDate(),
+              month: registerDate.getMonth()+1,
+              year: registerDate.getFullYear()
+          };
+        }
 
+    };
     /**
      * Create account by Random user
      * @user {String} register User
@@ -71,18 +97,25 @@ var Register = function() {
      * @isChecProp {boolean} true if want check conditions
      * @return {Void} void
      */
-    this.createAccount = function(user, email, password, day, month, year, isCheckNew, isCheckProp) {
+    this.createAccount = function(user, email, password, day, month, year, isCheckNew, isCheckProp, tutorN, tutorS, tutorE) {
         this.userName.clear().sendKeys(user);
         this.email.clear().sendKeys(email);
         this.password.clear().sendKeys(password);
         this.inputDay.clear().sendKeys(day);
         this.inputMonth.clear().sendKeys(month);
         this.inputYear.clear().sendKeys(year);
-
+        if (tutorN  || tutorS || tutorE) {
+            this.password.click();
+            this.tutorName.clear().sendKeys(tutorN);
+            this.tutorSurname.clear().sendKeys(tutorS);
+            this.tutorEmail.clear().sendKeys(tutorE);
+        }
         if (isCheckNew) {
+            this.userName.click(); //por si se mueve el formulario
             this.checkBoxNewsletterAndTeacher.click();
         }
         if (isCheckProp) {
+            this.userName.click(); //por si se mueve el formulario
             this.checkBoxPropertiesTerm.click();
         }
         //Checked checkbox
@@ -90,6 +123,7 @@ var Register = function() {
         //  that.driver.executeScript('arguments[0].setAttribute(\'checked\', \'checked\');', that.model.ui.toSCheckbox);
 
         this.enterRegister.click();
+
 
     };
 
