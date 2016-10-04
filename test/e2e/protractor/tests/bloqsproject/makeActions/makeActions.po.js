@@ -10,6 +10,7 @@ var MakeActions = function() {
     //FILE
     this.menuFile = $('[data-element="menu-file"]');
     this.menuNewProject = $('[data-element="menu-newproject"]');
+    this.menuNewProjectCode = $('[data-element="menu-newprojectcode"]');
     this.menuopenProject = $('[data-element="menu-openproject"]');
     this.menuOpenProjectFromFile = $('[data-element="menu-openprojectfromfile"]');
     this.menuChangeName = $('[data-element="menu-changename"]');
@@ -24,10 +25,12 @@ var MakeActions = function() {
     this.menuEditRedo = $('[data-element="makeactions-menuedit-redo"]');
     //VIEW
     this.menuView = $('[data-element="makeactions-menuview"]');
-    this.menuViewMoreZoom = $('[data-element="makeactions-menuview-morezoom"]');
-    this.menuViewResetZoom = $('[data-element="makeactions-menuview-resetzoom"]');
-    this.menuViewLessZoom = $('[data-element="makeactions-menuview-lesszoom"]');
+    // this.menuViewMoreZoom = $('[data-element="makeactions-menuview-morezoom"]');
+    // this.menuViewResetZoom = $('[data-element="makeactions-menuview-resetzoom"]');
+    // this.menuViewLessZoom = $('[data-element="makeactions-menuview-lesszoom"]');
     this.menuViewConsole = $('[data-element="makeactions-menuview-console"]');
+    this.menuViewWeb2board = $('[data-element="makeactions-menuview-web2board"]');
+    this.menuViewPlotter = $('[data-element="makeactions-menuview-plotter"]');
     //SHARE
     this.menuShare = $('[data-element="makeactions-menushare"]');
     this.menuSharePublish = $('[data-element="makeactions-menushare-publish"]');
