@@ -48,7 +48,7 @@ describe('Menu share of makeactions local', function() {
         });
     }
 
-    fit('bbb-85:makeactionsShareLocal:Modify a project shared to you', function() {
+    it('bbb-85:makeactionsShareLocal:Modify a project shared to you', function() {
         var validYoutubeUrl = 'https://youtu.be/f2WME8N8qXc?list=PL3AshJDPy8GQhVWkzsjc5IvrzD5ctpQXN';
         var invalidYoutubeUrl = 'https://www.youtube.com/user/TheRedsMusic';
         var user1 = login.loginWithRandomUser();
@@ -87,8 +87,10 @@ describe('Menu share of makeactions local', function() {
                     browser.sleep(vars.timeToWaitTab);
                     make.infoTab.click();
                     browser.sleep(vars.timeToWaitTab);
-                    infoTab.infotabProjectName.clear();
-                    infoTab.infotabProjectName.sendKeys('new project name');
+                    make.projectName.click();
+                    modals.inputModalChangeN.clear();
+                    modals.inputModalChangeN.sendKeys('new project name');
+                    modals.okDialog.click();
                     browser.sleep(vars.timeToWaitAutoSave);
                     expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     infoTab.infotabDescription.clear();
@@ -136,8 +138,10 @@ describe('Menu share of makeactions local', function() {
                     ////////////////////////////////////
                     make.infoTab.click();
                     browser.sleep(vars.timeToWaitTab);
-                    infoTab.infotabProjectName.clear();
-                    infoTab.infotabProjectName.sendKeys('new code project name');
+                    make.projectName.click();
+                    modals.inputModalChangeN.clear();
+                    modals.inputModalChangeN.sendKeys('new code project');
+                    modals.okDialog.click();
                     browser.sleep(vars.timeToWaitAutoSave);
                     expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     infoTab.infotabDescription.clear();
@@ -162,8 +166,8 @@ describe('Menu share of makeactions local', function() {
                     infoTab.infotabTaginputButton.click();
                     browser.sleep(vars.timeToWaitAutoSave);
                     expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
-                    infoTab.infotabChooseThemeButton.click();
-                    infoTab.infotabOptionGrayTheme.click();
+                    infoTab.infotabChooseBoardButton.click();
+                    infoTab.infotabBQZumButton.click();
                     browser.sleep(vars.timeToWaitAutoSave);
                     expect(make.isProjectNotAllowSaveShown()).toBeTruthy();
                     make.projectName.click();
@@ -247,7 +251,6 @@ describe('Menu share of makeactions local', function() {
         modals.inputEmailsUsers.all(by.css('input')).get(0).sendKeys(user1.userEmail);
         browser.actions().sendKeys(protractor.Key.ENTER).perform();
         modals.okDialog.click();
-        browser.sleep(vars.timeToWaitFadeModals+1000);
         globalFunctions.navigatorLanguage()
             .then(function(language) {
                 if (language === 'es') {
@@ -274,9 +277,8 @@ describe('Menu share of makeactions local', function() {
             browser.sleep(vars.timeToWaitSendKeys);
             browser.actions().sendKeys(protractor.Key.ENTER).perform();
             modals.okDialog.click();
-            browser.sleep(vars.timeToWaitFadeModals + 1000);
+            browser.sleep(vars.timeToWaitFadeModals +1000);
             modals.okDialog.click();
-            browser.sleep(vars.timeToWaitFadeModals);
             globalFunctions.navigatorLanguage()
                 .then(function(language) {
                     if (language === 'es') {
@@ -301,7 +303,6 @@ describe('Menu share of makeactions local', function() {
             modals.okDialog.click();
             browser.sleep(vars.timeToWaitFadeModals + 1000);
             modals.okDialog.click();
-            browser.sleep(vars.timeToWaitFadeModals);
             globalFunctions.navigatorLanguage()
                 .then(function(language) {
                     if (language === 'es') {

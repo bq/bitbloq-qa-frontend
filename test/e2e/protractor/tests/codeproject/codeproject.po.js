@@ -19,6 +19,7 @@ var Codeproject = function() {
     this.url = '#/codeproject';
     this.codeInfotabChooseBoard = $('[data-element="infotab-chooseboard"]');
     this.codeInfotabHeading = $('[data-element="infotab-chooseboard-heading"]');
+    this.projectName = $('[data-element="project-name"]');
 
     this.get = function() {
         browser.get(this.url);
@@ -28,9 +29,10 @@ var Codeproject = function() {
         var nameSavedProject = nameProject || 'Test_Save_' + Number(new Date());
         this.get();
         infotab.infoTab.click();
-        browser.ignoreSynchronization = true;
-        infotab.infotabProjectName.clear().sendKeys(nameSavedProject);
-        browser.ignoreSynchronization = false;
+        this.projectName.click();
+        modals.inputModalChangeN.clear();
+        modals.inputModalChangeN.sendKeys(nameSavedProject);
+        modals.okDialog.click();
         browser.sleep(vars.timeToWaitAutoSave);
     };
 
@@ -48,9 +50,10 @@ var Codeproject = function() {
         commons.expectToastTimeOut(commons.editToast);
         bloqsproject.infoTab.click();
         expect(infotab.infotabProjectName.isPresent()).toBe(true);
-        browser.ignoreSynchronization = true;
-        infotab.infotabProjectName.clear().sendKeys(nameSavedProject);
-        browser.ignoreSynchronization = false;
+        this.projectName.click();
+        modals.inputModalChangeN.clear();
+        modals.inputModalChangeN.sendKeys(nameSavedProject);
+        modals.okDialog.click();
         browser.sleep(vars.timeToWaitAutoSave);
         //Create and check saved project
         return {
@@ -73,10 +76,11 @@ var Codeproject = function() {
         commons.expectToastTimeOut(commons.editToast);
         bloqsproject.infoTab.click();
         expect(infotab.infotabProjectName.isPresent()).toBe(true);
-        browser.ignoreSynchronization = true;
-        infotab.infotabProjectName.clear().sendKeys(nameSavedProject);
+        this.projectName.click();
+        modals.inputModalChangeN.clear();
+        modals.inputModalChangeN.sendKeys(nameSavedProject);
+        modals.okDialog.click();
         infotab.infotabDescription.clear().sendKeys('Esto es una descripcion');
-        browser.ignoreSynchronization = false;
         browser.sleep(vars.timeToWaitAutoSave);
         bloqsproject.publishProject();
         browser.sleep(vars.timeToWaitAutoSave);

@@ -642,7 +642,7 @@ describe('Register ', function() {
 
     });
 
-    fit('bbb-16:register:The date is incorrect', function() {
+    it('bbb-16:register:The date is incorrect', function() {
         landing.openLandingMenu.click();
         landing.enterButton.click();
 

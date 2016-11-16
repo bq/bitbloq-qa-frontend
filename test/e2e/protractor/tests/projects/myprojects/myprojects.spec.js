@@ -55,7 +55,10 @@ describe('My Projects', function() {
 
         //Nombre del projecto
         var name = 'Test_Save_' + Number(new Date());
-        infotab.infotabProjectName.sendKeys(name);
+        make.projectName.click();
+        modals.inputModalChangeN.clear();
+        modals.inputModalChangeN.sendKeys(name);
+        modals.okDialog.click();
         browser.sleep(vars.timeToWaitAutoSave);
 
         //Comprobar que se ha guardado el projecto por el nombre

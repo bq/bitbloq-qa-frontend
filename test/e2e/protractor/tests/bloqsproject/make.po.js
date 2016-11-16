@@ -41,8 +41,10 @@ var Make = function() {
         this.get();
         this.infoTab.click();
         expect(infotab.infotabProjectName.isPresent()).toBe(true);
-        infotab.infotabProjectName.clear();
-        infotab.infotabProjectName.sendKeys(nameSavedProject);
+        this.projectName.click();
+        modals.inputModalChangeN.clear();
+        modals.inputModalChangeN.sendKeys(nameSavedProject);
+        modals.okDialog.click();
         infotab.infotabDescription.sendKeys('Esto es una descripcion de ejemplo proyecto:'+nameSavedProject);
         browser.sleep(vars.timeToWaitAutoSave);
         return {
@@ -58,8 +60,10 @@ var Make = function() {
         browser.sleep(vars.timeToWaitFadeModals);
         this.infoTab.click();
         expect(infotab.infotabProjectName.isPresent()).toBe(true);
-        infotab.infotabProjectName.clear();
-        infotab.infotabProjectName.sendKeys(nameSavedProject);
+        this.projectName.click();
+        modals.inputModalChangeN.clear();
+        modals.inputModalChangeN.sendKeys(nameSavedProject);
+        modals.okDialog.click();
         infotab.infotabDescription.sendKeys('Esto es una descripcion de ejemplo proyecto:'+nameSavedProject);
         browser.sleep(vars.timeToWaitAutoSave);
         //Create and check saved project

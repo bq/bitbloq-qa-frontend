@@ -12,7 +12,8 @@ var GlobalFunctions = require('../commons/globalFunctions.js'),
     path = require('path'),
     InfoTab = require('../bloqsproject/infotab/infotab.po.js'),
     Hwtab = require('../bloqsproject/hwtab/hwtab.po.js'),
-    Header = require('../header/header.po.js');
+    Header = require('../header/header.po.js'),
+    Modals = require('../modals/modals.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     vars = new Variables(),
@@ -21,7 +22,8 @@ var globalFunctions = new GlobalFunctions(),
     login = new Login(),
     infotab = new InfoTab(),
     hwtab = new Hwtab(),
-    header = new Header();
+    header = new Header(),
+    modals = new Modals();
 
 globalFunctions.xmlReport('autosaveLocal');
 
@@ -133,7 +135,10 @@ describe('Check makeActions actions in codeProjects', function() {
             browser.switchTo().window(handles[1]).then(function() {
                 browser.sleep(vars.timeToWaitTab);
                 infotab.infoTab.click();
-                infotab.infotabProjectName.sendKeys('hola');
+                make.projectName.click();
+                modals.inputModalChangeN.clear();
+                modals.inputModalChangeN.sendKeys('hola');
+                modals.okDialog.click();
                 browser.sleep(vars.timeToWaitAutoSave);
                 expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));
@@ -205,7 +210,7 @@ describe('Check makeActions actions in codeProjects', function() {
             browser.switchTo().window(handles[1]).then(function() {
                 browser.sleep(vars.timeToWaitTab);
                 infotab.infoTab.click();
-                element.all(by.repeater('tag in project.userTags').row(0)).click();
+                element.all(by.repeater('tag in projectService.project.userTags').row(0)).click();
                 infotab.infotabRemoveTag.click();
                 expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));

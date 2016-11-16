@@ -20,6 +20,8 @@ var Infotab = function() {
     this.infotabYoutubeVideoInput = $('[data-element="infotab-youtubevideo"]');
     this.infotabDescription = $('[data-element="infotab-description"]');
     this.infotabRemoveTag=$('[data-element="infotab-remove-tag"]');
+    this.infotabChooseBoardButton = $('[data-element="infotab-chooseboard"]');
+    this.infotabBQZumButton = $('[data-element="bq ZUM"]');
 };
 
 module.exports = Infotab;

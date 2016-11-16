@@ -58,7 +58,7 @@ describe('Forum', function() {
 
     });
 
-    it('bbb-227:forumXit:create topics with the same title', function() {
+    fit('bbb-227:forumXit:create topics with the same title', function() {
         var title = 'same title ' + Number(new Date()),
             description = 'same description' + Number(new Date());
 

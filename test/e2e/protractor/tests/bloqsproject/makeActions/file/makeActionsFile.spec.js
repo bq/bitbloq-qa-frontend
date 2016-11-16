@@ -11,7 +11,6 @@ var Variables = require('../../../commons/variables.js'),
     Make = require('../../make.po.js'),
     Modals = require('../../../modals/modals.po.js'),
     Login = require('../../../login/login.po.js'),
-    Infotab = require('../../infotab/infotab.po.js'),
     Projects = require('../../../projects/projects.po.js');
 
 var vars = new Variables(),
@@ -20,7 +19,6 @@ var vars = new Variables(),
     make = new Make(),
     modals = new Modals(),
     login = new Login(),
-    infotab = new Infotab(),
     projects = new Projects();
 
 globalFunctions.xmlReport('bloqsprojectMakeActionsFile');
@@ -72,8 +70,10 @@ describe('Menu file of MakeActions', function() {
             modals.rejectTour();
             browser.sleep(vars.timeToWaitFadeModals);
             make.infoTab.click();
-            infotab.infotabProjectName.clear();
-            infotab.infotabProjectName.sendKeys(nameSavedProject);
+            make.projectName.click();
+            modals.inputModalChangeN.clear();
+            modals.inputModalChangeN.sendKeys(nameSavedProject);
+            modals.okDialog.click();
             browser.sleep(vars.timeToWaitAutoSave);
             makeActions.menuFile.click();
             browser.sleep(vars.timeToWaitMenu);
