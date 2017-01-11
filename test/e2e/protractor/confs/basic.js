@@ -44,7 +44,7 @@ exports.config = {
                 download: {
                     'prompt_for_download': false,
                     'directory_upgrade': true,
-                    'default_directory': './target'
+                    'default_directory': path.resolve() + '/target'
                 }
 
             }
