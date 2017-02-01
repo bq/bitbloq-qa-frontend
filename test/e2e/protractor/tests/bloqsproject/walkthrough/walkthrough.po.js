@@ -2,7 +2,7 @@
 
 var Walkthrough = function() {
 	this.stepOne = $('.tour-step--first');
-	this.boards = $('[data-element="boards"]');
+	this.boards = $('[data-element="toolbox-boards"]');
 	this.freaduino = $('[data-transfer="Freaduino UNO"]');
 	this.protoboardCanvas = $('#protoboard-canvas');
 	this.stepTwo = $('.tour-step--second');

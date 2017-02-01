@@ -57,6 +57,7 @@ describe('Info tab', function() {
             themeColor.click();
             make.softwareTab.click();
             bloqsTab.infotabToolboxFunctions.click();
+            make.bloqsTab.click();
         }
         login.loginWithRandomUser();
         make.get();

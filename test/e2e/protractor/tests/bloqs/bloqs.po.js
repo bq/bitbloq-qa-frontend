@@ -5,17 +5,12 @@ var Bloqs = function() {
     //P.O
     this.bloqsTab = $('[data-element="bloqs-tab"]');
     this.sectionVars = $('[data-element="toolbox-functions"]');
-
+    this.advancedButtonToolbox = $('[data-element="toolbox-advanced-button"]');
+    this.basicButtonToolbox = $('[data-element="toolbox-basic-button"]');
     // This function returns the element associated
     // to the toolbox section passed in param
     this.getToolboxPO = function(section) {
         return $('[data-element="toolbox-' + section + '"]');
-    };
-
-    // This function returns the element associated to the
-    // advanced toolbox button
-    this.getAdvancedButton = function(toolbox) {
-        return toolbox.$('.btn--advanced');
     };
 
     // This function returns the element associated to each
@@ -191,13 +186,12 @@ var Bloqs = function() {
         var that = this,
             bloqsuniquetag = Date.now(),
             aleatorio = (Math.round(Math.random() * 100)) + 0;
-
-        return browser.executeScript('document.querySelectorAll(\'[data-element="toolbox-' + section + '"] .' + bloqClass + '\')[0].setAttribute("bloqsuniquetag", "' + bloqsuniquetag + aleatorio + '")').then(function() {
-            var toolbox = that.getToolboxPO(section);
-            toolbox.click();
-            if (advanced) {
-                that.getAdvancedButton(toolbox).click();
-            }
+        var toolbox = that.getToolboxPO(section);
+        toolbox.click();
+        if (advanced) {
+            that.advancedButtonToolbox.click();
+        }
+        return browser.executeScript('document.querySelectorAll(\'[data-element="toolbox-container-' + section + '"] .' + bloqClass + '\')[0].setAttribute("bloqsuniquetag", "' + bloqsuniquetag + aleatorio + '")').then(function() {
             browser.sleep(1000);
             return $('[bloqsuniquetag="' + bloqsuniquetag + aleatorio + '"]');
         });

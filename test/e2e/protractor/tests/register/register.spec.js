@@ -657,12 +657,12 @@ describe('Register ', function() {
         expect(register.showValidBirthdate.isDisplayed()).toBeTruthy();
         register.createAccount(user.username, user.userEmail, user.password, 31, 12, 100, false, false);
         expect(register.showValidBirthdate.isDisplayed()).toBeTruthy();
-        user = register.generateUser(true);
-        register.inputDay.clear().sendKeys(user.day);
-        register.inputMonth.clear().sendKeys(user.month);
-        register.inputYear.clear().sendKeys(user.year);
-        register.createAccount(user.username, user.userEmail, user.password, 32, 13, 1000, false, false, user.tutorName, user.tutorSurname, user.tutorEmail);
-        expect(register.showValidBirthdate.isDisplayed()).toBeTruthy();
+        // user = register.generateUser(true);
+        // register.inputDay.clear().sendKeys(user.day);
+        // register.inputMonth.clear().sendKeys(user.month);
+        // register.inputYear.clear().sendKeys(user.year);
+        // register.createAccount(user.username, user.userEmail, user.password, 32, 13, 1000, false, false, user.tutorName, user.tutorSurname, user.tutorEmail);
+        // expect(register.showValidBirthdate.isDisplayed()).toBeTruthy();
     });
 
     it('bbb-17:register:Remember the password - EMAIL DOESNT EXIST', function() {

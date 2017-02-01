@@ -168,7 +168,7 @@ describe('Forum', function() {
     });
 
     // if there are more instances element.all row(0) not run because there are more topic first
-    xit('bbb-221:forumXit: check answer count for a topic', function() {
+    it('bbb-221:forumXit: check answer count for a topic', function() {
         forum.createTopicNewUser();
         forum.get();
         forum.newsCategory.click();
@@ -181,11 +181,13 @@ describe('Forum', function() {
         forum.createAnswer();
         forum.createAnswer();
         forum.createAnswer();
+        forum.get();
         forum.newsCategory.click();
-        // element.all(by.repeater('thread in forum.categoryThemes').row(0).column('thread.numberOfAnswers')).getText().then(function(answerCount) {
-        //     expect(answerCount).toMatch('5');
-        // });
-        // login.logout();
+        element.all(by.repeater('thread in forum.categoryThemes').row(0).column('thread.numberOfAnswers')).getText().then(function(answerCount) {
+            expect(answerCount).toMatch('5');
+        });
+        login.logout();
+
 
     });
     it('bbb-220:forumXit: check answer count for a category', function() { //bug +100 temas por categoria
@@ -253,24 +255,24 @@ describe('Forum', function() {
         login.logout();
     });
 
-    xit('bbb-217:forum:check breadcrumbs', function() {
+    it('bbb-217:forum:check breadcrumbs', function() {
         //pagina principal
         forum.get();
-        browser.sleep(vars.timeToWaitTab + 5000);
-        expect(forum.breadcrumbs.all(by.css('h2')).get(0).getText()).toMatch('Foro');
+        browser.sleep(vars.timeToWaitTab);
+        expect(forum.breadcrumbsForo.getText()).toMatch('Foro');
         //categoria
         forum.newsCategory.click();
-        browser.sleep(vars.timeToWaitLoadForumCategory + 7000);
-        expect(forum.breadcrumbsArray.get(1).all(by.css('h2')).get(0).getText()).toMatch('Foro');
-        expect(forum.breadcrumbsArray.get(1).all(by.css('a')).get(0).getAttribute('href')).toMatch('#\/forum');
-        expect(forum.breadcrumbsArray.get(1).all(by.css('span')).get(0).getText()).toMatch('Noticias');
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        expect(forum.breadcrumbsForo.getText()).toMatch('Foro');
+        expect(forum.breadcrumbsForo.getAttribute('href')).toMatch('#\/forum');
+        expect(forum.breadcrumbsCategory.getText()).toMatch('Noticias');
         //tema
         forum.categoryTopicTitle.click();
         browser.sleep(vars.timeToWaitTab);
-        expect(forum.breadcrumbsArray.get(1).all(by.css('h2')).get(0).getText()).toMatch('Foro');
-        expect(forum.breadcrumbsArray.get(1).all(by.css('a')).get(0).getAttribute('href')).toMatch('#\/forum');
-        expect(forum.breadcrumbsArray.get(1).all(by.css('a')).get(1).getText()).toMatch('Noticias');
-        expect(forum.breadcrumbsArray.get(1).all(by.css('a')).get(1).getAttribute('href')).toMatch('#\/forum\/Noticias');
+        expect(forum.breadcrumbsForo.getText()).toMatch('Foro');
+        expect(forum.breadcrumbsForo.getAttribute('href')).toMatch('#\/forum');
+        expect(forum.breadcrumbsCategory.getText()).toMatch('Noticias');
+        expect(forum.breadcrumbsCategory.getAttribute('href')).toMatch('#\/forum\/Noticias');
 
     });
 
@@ -314,6 +316,7 @@ describe('Forum', function() {
         expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('random description123456');
         login.logout();
     });
+
     it('bbb-235:forum:special characters in editor', function() {
         login.loginWithRandomUser();
         forum.get();
@@ -334,7 +337,7 @@ describe('Forum', function() {
 
     });
 
-    xit('bbb-236:forumXit:check visit counter topic', function() {
+    it('bbb-236:forumXit:check visit counter topic', function() {
         forum.createTopicNewUser();
         forum.get();
         browser.sleep(vars.timeToWaitTab);

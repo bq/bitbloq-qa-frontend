@@ -210,7 +210,7 @@ describe('Check makeActions actions in codeProjects', function() {
             browser.switchTo().window(handles[1]).then(function() {
                 browser.sleep(vars.timeToWaitTab);
                 infotab.infoTab.click();
-                element.all(by.repeater('tag in projectService.project.userTags').row(0)).click();
+                element.all(by.repeater('tag in currentProject.userTags').row(0)).click();
                 infotab.infotabRemoveTag.click();
                 expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.close().then(browser.switchTo().window(handles[0]));

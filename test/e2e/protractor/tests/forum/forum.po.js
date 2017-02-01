@@ -12,9 +12,9 @@ var login = new Login(),
 var Forum = function() {
     //header
     this.newTopicButton = $('[data-element="forum-new-topic-button"]');
-    this.breadcrumbs = $('[data-element="forum-header-breadcrumb"]');
-    this.breadcrumbsArray = element.all(by.css('[data-element="forum-header-breadcrumb"]'));
-    
+    this.breadcrumbsForo = $('[data-element="forum-header-breadcrumb-forum"]');
+    this.breadcrumbsCategory = $('[data-element="forum-header-breadcrumb-category"]');
+
     //Footer
     this.contactUsLink = $('[data-element="forum-contact-us-link"]');
     this.contactUsButton = $('[data-element="forum-contact-us-button"]');

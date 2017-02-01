@@ -49,14 +49,14 @@ describe('Changelog ', function() { //This pages has been deleted
         });
     });
 
-    it('bbb-205:changelog:Verify that the last changelog post tell about the last version Bitbloq  (Registered user)', function() {
+    xit('bbb-205:changelog:Verify that the last changelog post tell about the last version Bitbloq  (Registered user)', function() {
         login.loginWithRandomUser();
         header.navForum.click();
         forum.versionCategory.click();
         expect(forum.categoryTopicTitle.getText()).toMatch(vars.versionBitbloq);
     });
 
-    it('bbb-206:changelog:Verify that the last changelog post tell about the last version Bitbloq  (Unregistered user)', function() {
+    xit('bbb-206:changelog:Verify that the last changelog post tell about the last version Bitbloq  (Unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -66,7 +66,7 @@ describe('Changelog ', function() { //This pages has been deleted
         expect(forum.categoryTopicTitle.getText()).toMatch(vars.versionBitbloq);
     });
 
-    it('bbb-347:changelog:Verify that we can open the last changelog post  (Registered user)', function() {
+    xit('bbb-347:changelog:Verify that we can open the last changelog post  (Registered user)', function() {
         login.loginWithRandomUser();
         header.navForum.click();
         forum.versionCategory.click();
@@ -75,7 +75,7 @@ describe('Changelog ', function() { //This pages has been deleted
         expect(forum.isPresentContentThread()).toBe(true);
     });
 
-    it('bbb-348:changelog:Verify that we can open the last changelog post (Unregistered user)', function() {
+    xit('bbb-348:changelog:Verify that we can open the last changelog post (Unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();

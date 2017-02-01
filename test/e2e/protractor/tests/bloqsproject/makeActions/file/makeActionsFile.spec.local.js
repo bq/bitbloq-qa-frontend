@@ -33,7 +33,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-90:makeactionsFileLocal:Open from file, download and compare if is equal ', function() {
+    xit('bbb-90:makeactionsFileLocal:Open from file, download and compare if is equal ', function() {
 
         var fileToUpload = path.resolve() + '/test/e2e/protractor/res/onlyBoardZum.bitbloq';
         make.importFileGuestUser(fileToUpload);

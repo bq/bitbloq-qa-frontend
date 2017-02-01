@@ -5,7 +5,7 @@ var Modals = function() {
     this.modalTitle = $('[data-element="modal-title"]');
     this.okDialog = $('[data-element="modal-ok-dialog"]');
     this.cancelDialog = $('[data-element="modal-cancel-dialog"]');
-    this.bladeClose = $('[data-element="modal-blade-close"]');
+    this.bladeClose = element(by.className('ngdialog-close'));
     //P.O modal-not-registered.html
     this.attentionContinueGuest = $('[data-element="atention-continue-guest"]');
     //P.O modal-change-language.html
