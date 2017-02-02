@@ -4,6 +4,7 @@ var Modals = function() {
     //P.O modal.html
     this.modalTitle = $('[data-element="modal-title"]');
     this.okDialog = $('[data-element="modal-ok-dialog"]');
+    this.extraOkDialog = $('[data-element="modal-extra-ok-dialog"]');
     this.cancelDialog = $('[data-element="modal-cancel-dialog"]');
     this.bladeClose = element(by.className('ngdialog-close'));
     //P.O modal-not-registered.html
@@ -33,6 +34,11 @@ var Modals = function() {
     this.accountResetPasswordOKButton = $('[data-element="modal-password-reset-ok-button"]');
     //PO modal-share-with-users
     this.inputEmailsUsers= $('[data-element="modals-share-with-users-input"]');
+
+    //centermode
+    this.inputNameCenter = $('[data-element="modals-center-name"]');
+    this.inputTelephoneCenter = $('[data-element="modals-center-telephone"]');
+    this.inputLocationCenter = $('[data-element="modals-center-location"]');
 
     this.rejectTour = function() {
         $('[data-element="reject-tour"]').click();
