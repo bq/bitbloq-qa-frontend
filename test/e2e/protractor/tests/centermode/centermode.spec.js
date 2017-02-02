@@ -14,7 +14,7 @@ var globalFunctions = new GlobalFunctions(),
 
 globalFunctions.xmlReport('centermode');
 
-describe('User account view', function() {
+describe('Center mode', function() {
 
     //beforeEach commons
     globalFunctions.beforeTest();
