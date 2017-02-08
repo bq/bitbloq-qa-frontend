@@ -20,6 +20,7 @@ var Header = function() {
     //centermode
     this.navCenter = $('[data-element="nav-center"]');
     this.navClass = $('[data-element="nav-class"]');
+    this.navExercise = $('[data-element="nav-exercise"]');
 
 };
 

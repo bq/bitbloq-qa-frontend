@@ -23,7 +23,7 @@ describe('Center mode', function() {
     globalFunctions.afterTest();
 
     it('bbb-389:centermode:Create a center', function() {
-        login.loginWithRandomUser();
+        login.loginWithRandomUser(false);
         browser.sleep(vars.timeToWaitTab);
         header.centerModeBanner.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -38,11 +38,26 @@ describe('Center mode', function() {
         browser.sleep(vars.timeToWaitTab);
         expect(header.navCenter.isDisplayed()).toBe(true);
         expect(header.navClass.isDisplayed()).toBe(true);
+        expect(header.navExercise.isPresent()).toBe(false);
         expect(header.navCenter.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/center');
         expect(header.navClass.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/teacher');
+        login.logout();
     });
 
-
-
+    it('bbb-390:centermode:Create a center - <14', function() {
+        login.loginWithRandomUser(true);
+        browser.sleep(vars.timeToWaitTab);
+        header.centerModeBanner.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        expect(modals.extraOkDialog.isPresent()).toBe(false);
+        expect(modals.okDialog.isDisplayed()).toBe(true);
+        modals.okDialog.click();
+        modals.okDialog.click();
+        expect(header.navCenter.isPresent()).toBe(false);
+        expect(header.navClass.isPresent()).toBe(false);
+        expect(header.navExercise.isPresent()).toBe(true);
+        expect(header.navExercise.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/student');
+        login.logout();
+    });
 
 });
