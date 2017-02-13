@@ -60,7 +60,7 @@ describe('Center mode', function() {
         login.logout();
     });
 
-    it('bbb-391:centermode:The user doesnt use the center mode', function() {
+    it('bbb-391:centermode:Create a center with empty fields', function() {
         login.loginWithRandomUser(false);
         browser.sleep(vars.timeToWaitTab);
         header.centerModeBanner.click();
@@ -91,6 +91,27 @@ describe('Center mode', function() {
         expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error');
         expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error');
         expect(modals.inputTelephoneCenter.getAttribute('class')).not.toContain('input--error');
+        modals.bladeClose.click();
+        browser.sleep(2000);
+        login.logout();
+    });
+
+    it('bbb-392:centermode:Create a center with wrong field', function() {
+        login.loginWithRandomUser(false);
+        browser.sleep(vars.timeToWaitTab);
+        header.centerModeBanner.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        modals.extraOkDialog.click();
+        modals.inputNameCenter.sendKeys('hola');
+        browser.sleep(vars.timeToSendKeys);
+        modals.inputLocationCenter.sendKeys('dir');
+        browser.sleep(vars.timeToSendKeys);
+        modals.inputTelephoneCenter.sendKeys('ee');
+        browser.sleep(vars.timeToSendKeys);
+        modals.okDialog.click();
+        expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error');
+        expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error');
         modals.bladeClose.click();
         browser.sleep(2000);
         login.logout();
