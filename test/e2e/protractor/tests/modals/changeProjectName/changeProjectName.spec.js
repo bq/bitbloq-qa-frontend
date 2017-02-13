@@ -73,7 +73,7 @@ describe('Rename modal on make', function() {
         login.logout();
     });
 
-    xit('bbb-269:modalsChangeProjectName:Verify save name when sendKeys enter in modal', function() {
+    it('bbb-269:modalsChangeProjectName:Verify save name when sendKeys enter in modal', function() {
 
         //test no saved if click in cancel modal
         login.loginWithRandomUser();
