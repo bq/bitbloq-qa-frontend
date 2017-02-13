@@ -117,4 +117,31 @@ describe('Center mode', function() {
         login.logout();
     });
 
+    it('bbb-393:centermode:The user use center mode', function() {
+        login.loginWithRandomUser(false);
+        browser.sleep(vars.timeToWaitTab);
+        header.centerModeBanner.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        modals.extraOkDialog.click();
+        modals.inputNameCenter.sendKeys('hola');
+        browser.sleep(vars.timeToSendKeys);
+        modals.inputLocationCenter.sendKeys('dir');
+        browser.sleep(vars.timeToSendKeys);
+        modals.inputTelephoneCenter.sendKeys('555');
+        browser.sleep(vars.timeToSendKeys);
+        modals.okDialog.click();
+        expect(header.centerModeBanner.isPresent()).toBe(false);
+        browser.sleep(2000);
+        login.logout();
+    });
+
+    it('bbb-394:centermode:The user doesnt use center mode', function() {
+        login.loginWithRandomUser(false);
+        browser.sleep(vars.timeToWaitTab);
+        expect(header.centerModeBanner.isPresent()).toBe(true);
+        expect(header.centerModeBanner.isDisplayed()).toBe(true);
+        browser.sleep(2000);
+        login.logout();
+    });
+
 });
