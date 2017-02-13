@@ -60,4 +60,40 @@ describe('Center mode', function() {
         login.logout();
     });
 
+    it('bbb-391:centermode:The user doesnt use the center mode', function() {
+        login.loginWithRandomUser(false);
+        browser.sleep(vars.timeToWaitTab);
+        header.centerModeBanner.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        modals.extraOkDialog.click();
+        modals.okDialog.click();
+        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error');
+        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error');
+        modals.inputNameCenter.sendKeys('hola');
+        browser.sleep(vars.timeToSendKeys);
+        modals.okDialog.click();
+        expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error');
+        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error');
+        modals.inputNameCenter.clear();
+        modals.inputLocationCenter.sendKeys('dir');
+        browser.sleep(vars.timeToSendKeys);
+        modals.okDialog.click();
+        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error');
+        expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error');
+        modals.inputNameCenter.clear();
+        modals.inputLocationCenter.clear();
+        modals.inputTelephoneCenter.sendKeys('333333333');
+        browser.sleep(vars.timeToSendKeys);
+        modals.okDialog.click();
+        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error');
+        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).not.toContain('input--error');
+        modals.bladeClose.click();
+        browser.sleep(2000);
+        login.logout();
+    });
+
 });
