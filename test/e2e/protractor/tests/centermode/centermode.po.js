@@ -39,14 +39,7 @@ var CenterMode = function() {
         browser.sleep(vars.timeToWaitTab);
         login.get();
         login.login(headMaster.user,headMaster.password);
-        header.navCenter.click();
-        browser.sleep(vars.timeToWaitTab);
-        mycenter.newTeacherButton.click();
-        modals.inputEmailsTeacher.all(by.css('input')).get(0).sendKeys(teacher.userEmail.toLowerCase());
-        browser.actions().sendKeys(protractor.Key.ENTER).perform();
-        browser.sleep(vars.timeToSendKeys);
-        modals.okDialog.click();
-        browser.sleep(vars.timeToWaitFadeModals);
+        mycenter.addNewTeacher(teacher.userEmail);
         login.logout();
         return teacher;
     };

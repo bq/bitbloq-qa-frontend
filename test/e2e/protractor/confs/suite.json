@@ -34,6 +34,7 @@
     "register": "../tests/register/register.spec.js",
     "state": "../tests/state/state.spec.js",
     "centermode": "../tests/centermode/centermode.spec.js",
+    "mycenter": "../tests/centermode/mycenter/mycenter.spec.js",
 
     "enviroment": "../tests/bloqsproject/makeActions/share/makeActionsShare.spec.env.js",
 
@@ -86,6 +87,7 @@
         "../tests/register/register.spec.js",
         "../tests/state/state.spec.js",
         "../tests/centermode/centermode.spec.js",
+        "../tests/centermode/mycenter/mycenter.spec.js",
         "../tests/account/account.spec.local.js",
         "../tests/autosave/autosave.spec.local.js",
         "../tests/bloqsproject/hwtab/hwtab.spec.local.js",

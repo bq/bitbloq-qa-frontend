@@ -40,6 +40,9 @@ var Modals = function() {
     this.inputTelephoneCenter = $('[data-element="modals-center-telephone"]');
     this.inputLocationCenter = $('[data-element="modals-center-location"]');
 
+    //teacher
+    this.inputEmailsTeacher = $('[data-element="modals-new-teacher-input"]');
+
     this.rejectTour = function() {
         $('[data-element="reject-tour"]').click();
     };
