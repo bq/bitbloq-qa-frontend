@@ -5,14 +5,16 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Variables = require('../../commons/variables.js'),
     MyCenter = require('./myCenter.po.js'),
     Header = require('../../header/header.po.js'),
-    Centermode = require('../centermode.po.js');
+    Centermode = require('../centermode.po.js'),
+    Modals = require('../../modals/modals.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     login = new Login(),
     vars = new Variables(),
     mycenter = new MyCenter(),
     header = new Header(),
-    centermode = new Centermode();
+    centermode = new Centermode(),
+    modals = new Modals();
 
 globalFunctions.xmlReport('mycenter');
 
@@ -93,5 +95,35 @@ describe('My center', function() {
         browser.sleep(vars.timeToWaitTab);
         expect(element.all(by.repeater('item in teachers').row(0)).getText()).toMatch(teacher.userEmail.toLowerCase());
         login.logout();
+    });
+
+    it('bbb-399:mycenter:Create a teacher - Wrong email', function() {
+        var headmaster = centermode.createHeadMaster();
+        login.get();
+        login.login(headmaster.user,headmaster.password);
+        browser.sleep(vars.timeToWaitTab);
+        header.navCenter.click();
+        browser.sleep(vars.timeToWaitTab);
+        mycenter.newTeacherButton.click();
+        modals.inputEmailsTeacher.all(by.css('input')).get(0).sendKeys('emailes');
+        browser.actions().sendKeys(protractor.Key.ENTER).perform();
+        var email = modals.inputEmailsTeacher.all(by.css('input')).get(0);
+        expect(email.getAttribute('class')).toContain('invalid-tag');
+        modals.okDialog.click();
+        browser.sleep(vars.timeToWaitTab);
+        login.logout();
+    });
+
+    it('bbb-399:mycenter:Create a teacher - Wrong email', function() {
+        var headmaster = centermode.createHeadMaster();
+        login.get();
+        login.login(headmaster.user,headmaster.password);
+        browser.sleep(vars.timeToWaitTab);
+        header.navCenter.click();
+        browser.sleep(vars.timeToWaitTab);
+        mycenter.newTeacherButton.click();
+        modals.inputEmailsTeacher.all(by.css('input')).get(0).sendKeys('emailfake@prueba.es');
+        browser.actions().sendKeys(protractor.Key.ENTER).perform();
+
     });
 });
