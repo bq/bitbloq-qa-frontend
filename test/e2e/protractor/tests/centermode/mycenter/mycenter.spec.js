@@ -114,7 +114,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-399:mycenter:Create a teacher - Wrong email', function() {
+    fit('bbb-400:mycenter:Create a teacher - The email doesnt exist', function() {
         var headmaster = centermode.createHeadMaster();
         login.get();
         login.login(headmaster.user,headmaster.password);
@@ -124,6 +124,8 @@ describe('My center', function() {
         mycenter.newTeacherButton.click();
         modals.inputEmailsTeacher.all(by.css('input')).get(0).sendKeys('emailfake@prueba.es');
         browser.actions().sendKeys(protractor.Key.ENTER).perform();
+        modals.okDialog.click();
+        browser.sleep(vars.timeToWaitFadeModals);
         modals.okDialog.click();
         browser.sleep(vars.timeToWaitFadeModals);
         login.logout();
