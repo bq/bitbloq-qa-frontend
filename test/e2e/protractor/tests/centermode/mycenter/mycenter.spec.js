@@ -4,17 +4,19 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Login = require('../../login/login.po.js'),
     Variables = require('../../commons/variables.js'),
     MyCenter = require('./myCenter.po.js'),
-    Header = require('../../header/header.po.js');
+    Header = require('../../header/header.po.js'),
+    Centermode = require('../centermode.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     login = new Login(),
     vars = new Variables(),
     mycenter = new MyCenter(),
-    header = new Header();
+    header = new Header(),
+    centermode = new Centermode();
 
-globalFunctions.xmlReport('centermode');
+globalFunctions.xmlReport('mycenter');
 
-describe('Center mode', function() {
+describe('My center', function() {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -22,7 +24,7 @@ describe('Center mode', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-396:centermode:Order the teacher', function() {
+    it('bbb-396:mycenter:Order the teacher', function() {
         var headMasterEmail = 'usertest148706146881447583@devfakebq.es';
         var headMasterPass = 'prueba';
         login.get();
@@ -70,6 +72,26 @@ describe('Center mode', function() {
         expect(element.all(by.repeater('item in teachers').row(2)).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
         expect(element.all(by.repeater('item in teachers').row(3)).getText()).toMatch(vars.userGoogle.toLowerCase());
         browser.sleep(vars.timeToWaitTab);
+        login.logout();
+    });
+
+    it('bbb-397:mycenter:Create a teacher - VALID', function() {
+        var headmaster = centermode.createHeadMaster();
+        var teacher = centermode.createTeacher(headmaster);
+        login.get();
+        login.login(teacher.user,teacher.password);
+        browser.sleep(vars.timeToWaitTab);
+        expect(header.navCenter.isPresent()).toBe(false);
+        expect(header.navClass.isDisplayed()).toBe(true);
+        expect(header.navExercise.isPresent()).toBe(false);
+        expect(header.navClass.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/teacher');
+        login.logout();
+        login.get();
+        login.login(headmaster.user,headmaster.password);
+        browser.sleep(vars.timeToWaitTab);
+        header.navCenter.click();
+        browser.sleep(vars.timeToWaitTab);
+        expect(element.all(by.repeater('item in teachers').row(0)).getText()).toMatch(teacher.userEmail.toLowerCase());
         login.logout();
     });
 });
