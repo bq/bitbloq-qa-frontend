@@ -36,9 +36,9 @@ describe('My center', function() {
         browser.sleep(vars.timeToWaitTab);
         header.navCenter.click();
         browser.sleep(vars.timeToWaitTab);
-        expect(element.all(by.repeater('item in teachers').row(0)).getText()).toMatch(vars.emailFb.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(1)).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(2)).getText()).toMatch(vars.userGoogle.toLowerCase());
+        expect(element.all(by.repeater('item in teachers').row(0)).getText()).toMatch(vars.userGoogle.toLowerCase());
+        expect(element.all(by.repeater('item in teachers').row(1)).getText()).toMatch(vars.emailFb.toLowerCase());
+        expect(element.all(by.repeater('item in teachers').row(2)).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
         expect(element.all(by.repeater('item in teachers').row(3)).getText()).toMatch(headMasterEmail);
         mycenter.teacherDropdownOrder.click();
         mycenter.teacherEmailDropdown.click();
@@ -206,9 +206,24 @@ describe('My center', function() {
     });
 
     it('bbb-455:mycenter:the list of teacher', function() {
-        var headmaster = centermode.createHeadMaster('prueba');
+        var headmaster = centermode.createHeadMaster('pruebacentro');
         login.get();
         login.login(headmaster.user,headmaster.password);
         browser.sleep(vars.timeToWaitTab);
+        header.navCenter.click();
+        browser.sleep(vars.timeToWaitTab);
+        expect(element.all(by.repeater('item in teachers')).count()).toBeGreaterThan(0);
+        login.logout();
+    });
+
+    it('bbb-398:mycenter:Create a teacher - The teacher is the headmaster', function() {
+        var headmaster = centermode.createHeadMaster('pruebacentro');
+        login.get();
+        login.login(headmaster.user,headmaster.password);
+        browser.sleep(vars.timeToWaitTab);
+        mycenter.addNewTeacher(headmaster.userEmail);
+        browser.sleep(vars.timeToWaitTab);
+        expect(element.all(by.repeater('item in teachers')).count()).toEqual(1);
+        login.logout();
     });
 });
