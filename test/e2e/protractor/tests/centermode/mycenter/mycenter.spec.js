@@ -193,4 +193,22 @@ describe('My center', function() {
           });
         });
     });
+
+    it('bbb-403:mycenter:Delete a teacher - The teacher is the headmaster', function() {
+        var headmaster = centermode.createHeadMaster('prueba');
+        login.get();
+        login.login(headmaster.user,headmaster.password);
+        browser.sleep(vars.timeToWaitTab);
+        header.navCenter.click();
+        browser.actions().mouseMove(element.all(by.repeater('item in teachers')).get(0)).perform();
+        expect(mycenter.deleteTeacherButton.isPresent()).toBe(false);
+        login.logout();
+    });
+
+    it('bbb-455:mycenter:the list of teacher', function() {
+        var headmaster = centermode.createHeadMaster('prueba');
+        login.get();
+        login.login(headmaster.user,headmaster.password);
+        browser.sleep(vars.timeToWaitTab);
+    });
 });
