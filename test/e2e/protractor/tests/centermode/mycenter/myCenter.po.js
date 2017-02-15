@@ -9,12 +9,17 @@ var header = new Header(),
 var MyCenter = function() {
 
     this.newTeacherButton = $('[data-element="centerMode_button_newTeacher"]');
+
+    this.deleteTeacherButton = $('[data-element="centerMode-delete-teacher"]');
+
     this.teacherDropdownOrder = $('[data-element="my-center-dropdown-order"]');
-    this.teacherEmailDropdown = $('[data-element="my-center-dropdown-email"]');
-    this.teacherNameDropdown = $('[data-element="my-center-dropdown-name"]');
-    this.teacherSurnameDropdown = $('[data-element="my-center-dropdown-surname"]');
-    this.teacherGroupsDropdown = $('[data-element="my-center-dropdown-centerMode_column_groups"]');
-    this.teacherStudentsDropdown = $('[data-element="my-center-dropdown-centerMode_column_students"]');
+    this.teacherRecentDropdown = $('[data-element="my-center-dropdown-0"]');
+    this.teacherEmailDropdown = $('[data-element="my-center-dropdown-1"]');
+    this.teacherNameDropdown = $('[data-element="my-center-dropdown-2"]');
+    this.teacherSurnameDropdown = $('[data-element="my-center-dropdown-3"]');
+    this.teacherGroupsDropdown = $('[data-element="my-center-dropdown-4"]');
+    this.teacherStudentsDropdown = $('[data-element="my-center-dropdown-5"]');
+
     this.url = '#/center-mode/center';
 
     this.get = function() {

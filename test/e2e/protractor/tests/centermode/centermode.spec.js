@@ -147,7 +147,7 @@ describe('Center mode', function() {
     });
 
     it('bbb-395:centermode:The tabs of center mode', function() {
-        var headMaster = centermode.createHeadMaster();
+        var headMaster = centermode.createHeadMaster('prueba');
         var teacher = centermode.createTeacher(headMaster);
         var student = centermode.createStudent();
 

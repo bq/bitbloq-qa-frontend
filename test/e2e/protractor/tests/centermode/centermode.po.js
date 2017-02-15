@@ -14,13 +14,13 @@ var login = new Login(),
 
 var CenterMode = function() {
 
-    this.createHeadMaster = function() {
+    this.createHeadMaster = function(nameCenter) {
         var user = login.loginWithRandomUser(false);
         browser.sleep(vars.timeToWaitTab);
         header.centerModeBanner.click();
         browser.sleep(vars.timeToWaitFadeModals);
         modals.extraOkDialog.click();
-        modals.inputNameCenter.sendKeys('hola');
+        modals.inputNameCenter.sendKeys(nameCenter);
         browser.sleep(vars.timeToSendKeys);
         modals.inputLocationCenter.sendKeys('dir');
         browser.sleep(vars.timeToSendKeys);

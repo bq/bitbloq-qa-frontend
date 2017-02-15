@@ -6,7 +6,8 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     MyCenter = require('./myCenter.po.js'),
     Header = require('../../header/header.po.js'),
     Centermode = require('../centermode.po.js'),
-    Modals = require('../../modals/modals.po.js');
+    Modals = require('../../modals/modals.po.js'),
+    MyClass = require('../myclass/myclass.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     login = new Login(),
@@ -14,7 +15,8 @@ var globalFunctions = new GlobalFunctions(),
     mycenter = new MyCenter(),
     header = new Header(),
     centermode = new Centermode(),
-    modals = new Modals();
+    modals = new Modals(),
+    myclass = new MyClass();
 
 globalFunctions.xmlReport('mycenter');
 
@@ -78,7 +80,7 @@ describe('My center', function() {
     });
 
     it('bbb-397:mycenter:Create a teacher - VALID', function() {
-        var headmaster = centermode.createHeadMaster();
+        var headmaster = centermode.createHeadMaster('pruebacentro');
         var teacher = centermode.createTeacher(headmaster);
         login.get();
         login.login(teacher.user,teacher.password);
@@ -98,7 +100,7 @@ describe('My center', function() {
     });
 
     it('bbb-399:mycenter:Create a teacher - Wrong email', function() {
-        var headmaster = centermode.createHeadMaster();
+        var headmaster = centermode.createHeadMaster('prueba');
         login.get();
         login.login(headmaster.user,headmaster.password);
         browser.sleep(vars.timeToWaitTab);
@@ -114,8 +116,8 @@ describe('My center', function() {
         login.logout();
     });
 
-    fit('bbb-400:mycenter:Create a teacher - The email doesnt exist', function() {
-        var headmaster = centermode.createHeadMaster();
+    it('bbb-400:mycenter:Create a teacher - The email doesnt exist', function() {
+        var headmaster = centermode.createHeadMaster('prueba');
         login.get();
         login.login(headmaster.user,headmaster.password);
         browser.sleep(vars.timeToWaitTab);
@@ -125,9 +127,70 @@ describe('My center', function() {
         modals.inputEmailsTeacher.all(by.css('input')).get(0).sendKeys('emailfake@prueba.es');
         browser.actions().sendKeys(protractor.Key.ENTER).perform();
         modals.okDialog.click();
+        expect(modals.emailNoTeacher.getText()).toEqual('emailfake@prueba.es');
         browser.sleep(vars.timeToWaitFadeModals);
         modals.okDialog.click();
         browser.sleep(vars.timeToWaitFadeModals);
         login.logout();
+    });
+
+    it('bbb-402:mycenter:Delete a teacher - The teacher belongs to a center', function() {
+        var headmaster = centermode.createHeadMaster('prueba');
+        var teacher = centermode.createTeacher(headmaster);
+        login.get();
+        login.login(headmaster.user,headmaster.password);
+        browser.sleep(vars.timeToWaitTab);
+        header.navCenter.click();
+        browser.actions().mouseMove(element.all(by.repeater('item in teachers')).get(0)).perform();
+        mycenter.deleteTeacherButton.click();
+        browser.sleep(vars.timeToWaitTab);
+        modals.okDialog.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        login.logout();
+        login.get();
+        login.login(teacher.user,teacher.password);
+        expect(header.navCenter.isPresent()).toBe(false);
+        expect(header.navClass.isPresent()).toBe(false);
+        expect(header.navExercise.isPresent()).toBe(false);
+        login.logout();
+    });
+
+    it('bbb-401:mycenter:Delete a teacher - The teacher belongs to several centers ', function() {
+        var headmaster = centermode.createHeadMaster('center1');
+        var teacher = centermode.createTeacher(headmaster);
+        var otherHeadmaster = centermode.createHeadMaster('center2');
+        login.get();
+        login.login(otherHeadmaster.user,otherHeadmaster.password);
+        browser.sleep(vars.timeToWaitTab);
+        mycenter.addNewTeacher(teacher.userEmail);
+        login.logout();
+        login.get();
+        login.login(teacher.user,teacher.password);
+        myclass.addNewGroup('newGroup','center1').then(function() {
+          myclass.addNewGroup('newGroup','center2').then(function(idgroup) {
+            browser.sleep(vars.timeToWaitFadeModals);
+            login.logout();
+            login.get();
+            login.login(headmaster.user,headmaster.password);
+            browser.sleep(vars.timeToWaitTab);
+            header.navCenter.click();
+            browser.actions().mouseMove(element.all(by.repeater('item in teachers')).get(0)).perform();
+            mycenter.deleteTeacherButton.click();
+            browser.sleep(vars.timeToWaitTab);
+            modals.okDialog.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+            login.logout();
+            login.get();
+            login.login(teacher.user,teacher.password);
+            browser.sleep(vars.timeToWaitTab);
+            expect(header.navCenter.isPresent()).toBe(false);
+            expect(header.navClass.isDisplayed()).toBe(true);
+            expect(header.navExercise.isPresent()).toBe(false);
+            expect(header.navClass.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/teacher');
+            header.navClass.click();
+            expect(element.all(by.repeater('group in groups').row(0)).getText()).toMatch(idgroup);
+            login.logout();
+          });
+        });
     });
 });
