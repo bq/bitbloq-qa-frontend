@@ -36,45 +36,45 @@ describe('My center', function() {
         browser.sleep(vars.timeToWaitTab);
         header.navCenter.click();
         browser.sleep(vars.timeToWaitTab);
-        expect(element.all(by.repeater('item in teachers').row(0)).getText()).toMatch(vars.userGoogle.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(1)).getText()).toMatch(vars.emailFb.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(2)).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(3)).getText()).toMatch(headMasterEmail);
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(vars.userGoogle.toLowerCase());
+        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.emailFb.toLowerCase());
+        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
+        expect(mycenter.teacherElems.get(3).getText()).toMatch(headMasterEmail);
         mycenter.teacherDropdownOrder.click();
         mycenter.teacherEmailDropdown.click();
         browser.sleep(vars.timeToWaitFadeModals);
-        expect(element.all(by.repeater('item in teachers').row(0)).getText()).toMatch(vars.userGoogle.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(1)).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(2)).getText()).toMatch(headMasterEmail);
-        expect(element.all(by.repeater('item in teachers').row(3)).getText()).toMatch(vars.emailFb.toLowerCase());
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(vars.userGoogle.toLowerCase());
+        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
+        expect(mycenter.teacherElems.get(2).getText()).toMatch(headMasterEmail);
+        expect(mycenter.teacherElems.get(3).getText()).toMatch(vars.emailFb.toLowerCase());
         mycenter.teacherDropdownOrder.click();
         mycenter.teacherNameDropdown.click();
         browser.sleep(vars.timeToWaitFadeModals);
-        expect(element.all(by.repeater('item in teachers').row(0)).getText()).toMatch(headMasterEmail);
-        expect(element.all(by.repeater('item in teachers').row(1)).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(2)).getText()).toMatch(vars.emailFb.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(3)).getText()).toMatch(vars.userGoogle.toLowerCase());
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(headMasterEmail);
+        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
+        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.emailFb.toLowerCase());
+        expect(mycenter.teacherElems.get(3).getText()).toMatch(vars.userGoogle.toLowerCase());
         mycenter.teacherDropdownOrder.click();
         mycenter.teacherSurnameDropdown.click();
         browser.sleep(vars.timeToWaitFadeModals);
-        expect(element.all(by.repeater('item in teachers').row(0)).getText()).toMatch(headMasterEmail);
-        expect(element.all(by.repeater('item in teachers').row(1)).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(2)).getText()).toMatch(vars.emailFb.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(3)).getText()).toMatch(vars.userGoogle.toLowerCase());
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(headMasterEmail);
+        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
+        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.emailFb.toLowerCase());
+        expect(mycenter.teacherElems.get(3).getText()).toMatch(vars.userGoogle.toLowerCase());
         mycenter.teacherDropdownOrder.click();
         mycenter.teacherGroupsDropdown.click();
         browser.sleep(vars.timeToWaitFadeModals);
-        expect(element.all(by.repeater('item in teachers').row(0)).getText()).toMatch(headMasterEmail);
-        expect(element.all(by.repeater('item in teachers').row(1)).getText()).toMatch(vars.emailFb.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(2)).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(3)).getText()).toMatch(vars.userGoogle.toLowerCase());
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(headMasterEmail);
+        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.emailFb.toLowerCase());
+        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
+        expect(mycenter.teacherElems.get(3).getText()).toMatch(vars.userGoogle.toLowerCase());
         mycenter.teacherDropdownOrder.click();
         mycenter.teacherStudentsDropdown.click();
         browser.sleep(vars.timeToWaitFadeModals);
-        expect(element.all(by.repeater('item in teachers').row(0)).getText()).toMatch(headMasterEmail);
-        expect(element.all(by.repeater('item in teachers').row(1)).getText()).toMatch(vars.emailFb.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(2)).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(element.all(by.repeater('item in teachers').row(3)).getText()).toMatch(vars.userGoogle.toLowerCase());
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(headMasterEmail);
+        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.emailFb.toLowerCase());
+        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
+        expect(mycenter.teacherElems.get(3).getText()).toMatch(vars.userGoogle.toLowerCase());
         browser.sleep(vars.timeToWaitTab);
         login.logout();
     });
@@ -95,7 +95,7 @@ describe('My center', function() {
         browser.sleep(vars.timeToWaitTab);
         header.navCenter.click();
         browser.sleep(vars.timeToWaitTab);
-        expect(element.all(by.repeater('item in teachers').row(0)).getText()).toMatch(teacher.userEmail.toLowerCase());
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(teacher.userEmail.toLowerCase());
         login.logout();
     });
 
@@ -141,7 +141,7 @@ describe('My center', function() {
         login.login(headmaster.user,headmaster.password);
         browser.sleep(vars.timeToWaitTab);
         header.navCenter.click();
-        browser.actions().mouseMove(element.all(by.repeater('item in teachers')).get(0)).perform();
+        browser.actions().mouseMove(mycenter.teacherElems.get(0)).perform();
         mycenter.deleteTeacherButton.click();
         browser.sleep(vars.timeToWaitTab);
         modals.okDialog.click();
@@ -174,7 +174,7 @@ describe('My center', function() {
             login.login(headmaster.user,headmaster.password);
             browser.sleep(vars.timeToWaitTab);
             header.navCenter.click();
-            browser.actions().mouseMove(element.all(by.repeater('item in teachers')).get(0)).perform();
+            browser.actions().mouseMove(mycenter.teacherElems.get(0)).perform();
             mycenter.deleteTeacherButton.click();
             browser.sleep(vars.timeToWaitTab);
             modals.okDialog.click();
@@ -200,7 +200,7 @@ describe('My center', function() {
         login.login(headmaster.user,headmaster.password);
         browser.sleep(vars.timeToWaitTab);
         header.navCenter.click();
-        browser.actions().mouseMove(element.all(by.repeater('item in teachers')).get(0)).perform();
+        browser.actions().mouseMove(mycenter.teacherElems.get(0)).perform();
         expect(mycenter.deleteTeacherButton.isPresent()).toBe(false);
         login.logout();
     });
@@ -212,7 +212,7 @@ describe('My center', function() {
         browser.sleep(vars.timeToWaitTab);
         header.navCenter.click();
         browser.sleep(vars.timeToWaitTab);
-        expect(element.all(by.repeater('item in teachers')).count()).toBeGreaterThan(0);
+        expect(mycenter.teacherElems.count()).toBeGreaterThan(0);
         login.logout();
     });
 
@@ -223,7 +223,71 @@ describe('My center', function() {
         browser.sleep(vars.timeToWaitTab);
         mycenter.addNewTeacher(headmaster.userEmail);
         browser.sleep(vars.timeToWaitTab);
-        expect(element.all(by.repeater('item in teachers')).count()).toEqual(1);
+        expect(mycenter.teacherElems.count()).toEqual(1);
+        login.logout();
+    });
+
+    it('bbb-454:mycenter:Create a teacher - The teacher is already on the list', function() {
+        var headmaster = centermode.createHeadMaster('pruebacentro');
+        var teacher = centermode.createTeacher(headmaster);
+        login.get();
+        login.login(headmaster.user,headmaster.password);
+        browser.sleep(vars.timeToWaitTab);
+        mycenter.addNewTeacher(teacher.userEmail);
+        browser.sleep(vars.timeToWaitTab);
+        expect(mycenter.teacherElems.count()).toEqual(2);
+        login.logout();
+    });
+
+    it('bbb-456:mycenter:Teacher view', function() {
+        var headmaster = centermode.createHeadMaster('pruebacentro');
+        var teacher = centermode.createTeacher(headmaster);
+        login.get();
+        login.login(headmaster.user,headmaster.password);
+        browser.sleep(vars.timeToWaitTab);
+        header.navCenter.click();
+        browser.sleep(vars.timeToWaitTab);
+        mycenter.teacherElems.filter(function(elem) {
+          return elem.getText().then(function(text) {
+            return text.includes(teacher.userEmail.toLowerCase());
+          });
+        }).first().click();
+        expect(browser.getCurrentUrl()).toMatch('#/center-mode/center-teacher/');
+        browser.sleep(vars.timeToWaitTab);
+        mycenter.get();
+        login.logout();
+    });
+
+    it('bbb-457:mycenter:The headmaster create a group in the teacher view', function() {
+        var headmaster = centermode.createHeadMaster('pruebacentro');
+        var teacher = centermode.createTeacher(headmaster);
+        login.get();
+        login.login(headmaster.user,headmaster.password);
+        browser.sleep(vars.timeToWaitTab);
+        header.navCenter.click();
+        browser.sleep(vars.timeToWaitTab);
+        mycenter.teacherElems.filter(function(elem) {
+          return elem.getText().then(function(text) {
+            return text.includes(teacher.userEmail.toLowerCase());
+          });
+        }).first().click();
+        expect(browser.getCurrentUrl()).toMatch('#/center-mode/center-teacher/');
+        myclass.newGroupButton.click();
+        modals.inputModalNoChangeN.sendKeys('prueba grupo de director');
+        browser.sleep(vars.timeToSendKeys);
+        modals.okDialog.click();
+        browser.sleep(vars.timeToWaitTab);
+        modals.cancelDialog.click();
+        mycenter.get();
+        browser.sleep(vars.timeToWaitFadeModals);
+        login.logout();
+        login.get();
+        browser.sleep(vars.timeToWaitTab);
+        login.login(teacher.user,teacher.password);
+        browser.sleep(vars.timeToWaitTab);
+        header.navClass.click();
+        expect(element.all(by.repeater('group in groups')).count()).toBe(1);
+        browser.sleep(vars.timeToWaitTab);
         login.logout();
     });
 });

@@ -9,8 +9,8 @@ var header = new Header(),
 var MyCenter = function() {
 
     this.newTeacherButton = $('[data-element="centerMode_button_newTeacher"]');
-
     this.deleteTeacherButton = $('[data-element="centerMode-delete-teacher"]');
+    this.teacherElems = element.all(by.xpath('//*[contains(@data-element,"centerMode-teacher-link")]'));
 
     this.teacherDropdownOrder = $('[data-element="my-center-dropdown-order"]');
     this.teacherRecentDropdown = $('[data-element="my-center-dropdown-0"]');
