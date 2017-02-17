@@ -35,6 +35,8 @@
     "state": "../tests/state/state.spec.js",
     "centermode": "../tests/centermode/centermode.spec.js",
     "mycenter": "../tests/centermode/mycenter/mycenter.spec.js",
+    "groups": "../tests/centermode/myclass/groups/groups.spec.js",
+    "myclass": "../tests/centermode/myclass/myclass.spec.js",
 
     "enviroment": "../tests/bloqsproject/makeActions/share/makeActionsShare.spec.env.js",
 
@@ -88,6 +90,8 @@
         "../tests/state/state.spec.js",
         "../tests/centermode/centermode.spec.js",
         "../tests/centermode/mycenter/mycenter.spec.js",
+        "../tests/centermode/myclass/groups/groups.spec.js",
+        "../tests/centermode/myclass/myclass.spec.js",
         "../tests/account/account.spec.local.js",
         "../tests/autosave/autosave.spec.local.js",
         "../tests/bloqsproject/hwtab/hwtab.spec.local.js",
