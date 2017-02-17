@@ -9,7 +9,7 @@ var header = new Header(),
 var MyClass = function() {
 
     this.newGroupButton = $('[data-element="centerMode_button_newGroup"]');
-
+    this.groupsElems = element.all(by.xpath('//*[contains(@data-element,"centerMode-groups-link")]'));
 
     this.url = '#/center-mode/teacher';
 
@@ -24,21 +24,26 @@ var MyClass = function() {
         browser.sleep(vars.timeToWaitFadeModals);
         modals.inputModalNoChangeN.sendKeys(nameGroup);
         browser.sleep(vars.timeToSendKeys);
-        modals.dropdown.click();
-        element.all(by.xpath('//*[contains(@data-element,"my-center-dropdown")]')).each(function(elem) {
-          elem.getText().then(function(text) {
-            if (text === nameCenter) {
-              elem.click();
-            }
+        return modals.dropdown.isPresent().then(function(present) {
+          if(present) {
+            modals.dropdown.click();
+            element.all(by.xpath('//*[contains(@data-element,"my-center-dropdown")]')).each(function(elem) {
+              elem.getText().then(function(text) {
+                if (text === nameCenter) {
+                  elem.click();
+                }
+              });
+            });
+          }
+          modals.okDialog.click();
+          browser.sleep(vars.timeToWaitFadeModals);
+          return modals.modalsText.getText().then(function(id) {
+            modals.cancelDialog.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+            return id;
           });
         });
-        modals.okDialog.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        return modals.modalsText.getText().then(function(id) {
-          modals.cancelDialog.click();
-          browser.sleep(vars.timeToWaitFadeModals);
-          return id;
-        });
+
     };
 };
 
