@@ -188,7 +188,7 @@ describe('My center', function() {
             expect(header.navExercise.isPresent()).toBe(false);
             expect(header.navClass.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/teacher');
             header.navClass.click();
-            expect(element.all(by.repeater('group in groups').row(0)).getText()).toMatch(idgroup);
+            expect(myclass.groupsElems.get(0).getText()).toMatch(idgroup);
             login.logout();
           });
         });
@@ -286,7 +286,7 @@ describe('My center', function() {
         login.login(teacher.user,teacher.password);
         browser.sleep(vars.timeToWaitTab);
         header.navClass.click();
-        expect(element.all(by.repeater('group in groups')).count()).toBe(1);
+        expect(myclass.groupsElems.count()).toBe(1);
         browser.sleep(vars.timeToWaitTab);
         login.logout();
     });
