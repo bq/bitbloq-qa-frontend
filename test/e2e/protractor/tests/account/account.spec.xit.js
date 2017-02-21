@@ -29,7 +29,6 @@ describe('User account view', function() {
 
     it('bbb-43:accountLocalXit:Verify fields from new google user', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
         var googleAccount = vars.account('google');
         login.loginGoogle(googleAccount.user, googleAccount.password);
@@ -45,7 +44,6 @@ describe('User account view', function() {
 
     it('bbb-44:accountLocalXit:Verify fields from new facebook user', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
         var facebookAccount = vars.account('facebook');
         login.loginFb(facebookAccount.email, facebookAccount.password);
