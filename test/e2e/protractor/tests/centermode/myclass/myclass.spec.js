@@ -77,7 +77,7 @@ describe('My Class', function() {
         browser.sleep(vars.timeToSendKeys);
         expect(modals.okDialog.isEnabled()).toBe(false);
         modals.inputModalNoChangeN.clear();
-        modals.dropdown.click();
+        modals.groupDropdown.click();
         element.all(by.xpath('//*[contains(@data-element,"my-center-dropdown")]')).first().click();
         expect(modals.okDialog.isEnabled()).toBe(false);
         modals.bladeClose.click();

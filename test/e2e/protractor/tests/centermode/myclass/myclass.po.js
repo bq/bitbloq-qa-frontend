@@ -24,9 +24,9 @@ var MyClass = function() {
         browser.sleep(vars.timeToWaitFadeModals);
         modals.inputModalNoChangeN.sendKeys(nameGroup);
         browser.sleep(vars.timeToSendKeys);
-        return modals.dropdown.isPresent().then(function(present) {
+        return modals.groupDropdown.isPresent().then(function(present) {
           if(present) {
-            modals.dropdown.click();
+            modals.groupDropdown.click();
             element.all(by.xpath('//*[contains(@data-element,"my-center-dropdown")]')).each(function(elem) {
               elem.getText().then(function(text) {
                 if (text === nameCenter) {

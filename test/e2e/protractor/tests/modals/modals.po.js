@@ -7,12 +7,12 @@ var Modals = function() {
     this.extraOkDialog = $('[data-element="modal-extra-ok-dialog"]');
     this.cancelDialog = $('[data-element="modal-cancel-dialog"]');
     this.bladeClose = element(by.className('ngdialog-close'));
-    this.dropdown = $('[data-element="dropdownDataElement"]');
+
     this.modalsText = $('[data-element="modals-text"]');
     //P.O modal-not-registered.html
     this.attentionContinueGuest = $('[data-element="atention-continue-guest"]');
     //P.O modal-change-language.html
-    this.languagesDropdownButton = $('[data-element="languages-dropdown-button"]');
+    this.languagesDropdownButton = $('[data-element="dropdownDataElement"]');
     //P.O modal-change-project-name.html
     this.inputModalChangeN = $('[data-element="modal-change-name-input"]');
     this.inputModalNoChangeN = $('[data-element="modal-no-change-input-name"]');
@@ -46,6 +46,8 @@ var Modals = function() {
     //teacher
     this.inputEmailsTeacher = $('[data-element="modals-new-teacher-input"]');
     this.emailNoTeacher = $('[data-element="modals-email-noteacher"]');
+    this.groupDropdown = $('[data-element="centerMode_dropdown-0"]');
+
     this.rejectTour = function() {
         $('[data-element="reject-tour"]').click();
     };
