@@ -2,7 +2,6 @@
 
 var Landing = function() {
 
-    this.openLandingMenu = $('[data-element="open-landing-menu"]');
     this.enterButton = $('[data-element="enter-button"]');
     this.feauturesButton = $('[data-element="landing-features-button"]');
     this.howItWorksButton = $('[data-element="landing-howitworks-button"]');

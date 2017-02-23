@@ -131,15 +131,12 @@ describe('Test CookiesBar', function() {
         $2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).click();
         expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
-        $2(landing.openLandingMenu.elementArrayFinder_.locator_.value).click();
         $2(landing.feauturesButton.elementArrayFinder_.locator_.value).click();
         expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
-        $2(landing.openLandingMenu.elementArrayFinder_.locator_.value).click();
         $2(landing.howItWorksButton.elementArrayFinder_.locator_.value).click();
         expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 
-        $2(landing.openLandingMenu.elementArrayFinder_.locator_.value).click();
         $2(landing.aboutusButton.elementArrayFinder_.locator_.value).click();
         expect($2(cookiesBar.cookiesBar.elementArrayFinder_.locator_.value).isDisplayed()).toBe(false);
 

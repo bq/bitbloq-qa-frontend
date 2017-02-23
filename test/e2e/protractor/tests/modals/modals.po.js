@@ -46,7 +46,7 @@ var Modals = function() {
     //teacher
     this.inputEmailsTeacher = $('[data-element="modals-new-teacher-input"]');
     this.emailNoTeacher = $('[data-element="modals-email-noteacher"]');
-    this.groupDropdown = $('[data-element="centerMode_dropdown-0"]');
+    this.groupDropdown = $('[data-element="centerMode_dropdown"]');
 
     this.rejectTour = function() {
         $('[data-element="reject-tour"]').click();

@@ -27,7 +27,7 @@ var MyClass = function() {
         return modals.groupDropdown.isPresent().then(function(present) {
           if(present) {
             modals.groupDropdown.click();
-            element.all(by.xpath('//*[contains(@data-element,"my-center-dropdown")]')).each(function(elem) {
+            element.all(by.xpath('//*[contains(@data-element,"centerMode_dropdown")]')).each(function(elem) {
               elem.getText().then(function(text) {
                 if (text === nameCenter) {
                   elem.click();
