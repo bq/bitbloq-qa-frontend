@@ -1,6 +1,6 @@
 'use strict';
-var Header = require('../../header/header.po.js'),
-    Variables = require('../../commons/variables.js'),
+var Header = require('../../../header/header.po.js'),
+    Variables = require('../../../commons/variables.js'),
     MyClass = require('../myclass.po.js');
 
 var header = new Header(),
@@ -26,6 +26,8 @@ var Groups = function() {
           });
         }).first().click();
         browser.sleep(vars.timeToWaitTab);
+        this.enrolmentButton.click();
+        browser.sleep(1000);
     };
 
 };

@@ -7,7 +7,7 @@ var Modals = function() {
     this.extraOkDialog = $('[data-element="modal-extra-ok-dialog"]');
     this.cancelDialog = $('[data-element="modal-cancel-dialog"]');
     this.bladeClose = element(by.className('ngdialog-close'));
-
+    this.inputError = $('[data-element="modals-input-error"]');
     this.modalsText = $('[data-element="modals-text"]');
     //P.O modal-not-registered.html
     this.attentionContinueGuest = $('[data-element="atention-continue-guest"]');
