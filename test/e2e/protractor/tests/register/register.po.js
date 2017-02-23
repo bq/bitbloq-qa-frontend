@@ -10,19 +10,19 @@ var Register = function() {
     this.enterHome = $('[data-element="enter-home"]');
     this.createAccountButtn = $('[data-element="create-account"]');
     this.userName = element(by.id('username'));
-    this.email = element(by.model('user.email'));
+    this.email = element(by.id('email'));
     this.password = $('[data-element="register-password-input"]');
-    this.inputDay = $('[data-element="login-day-input"]');
-    this.inputMonth = $('[data-element="login-month-input"]');
-    this.inputYear = $('[data-element="login-year-input"]');
+    this.inputDay = $('[data-element="register-day-input"]');
+    this.inputMonth = $('[data-element="register-month-input"]');
+    this.inputYear = $('[data-element="register-year-input"]');
     this.enterRegister = $('[data-element="enter-register"]');
     this.checkBoxNewsletterAndTeacher = $('[data-element="register-newsletter-teacher-input"]');
     this.checkBoxPropertiesTerm = $('[data-element="register-terms-input"]');
     this.userLoginHeader = $('[data-element="user-login"]');
     //tutor data
-    this.tutorName = element(by.id('tutorName'));
-    this.tutorSurname = element(by.id('tutorSurname'));
-    this.tutorEmail = element(by.id('tutorEmail'));
+    this.tutorName = $('[data-element="register-tutor-name"]');
+    this.tutorSurname = $('[data-element="register-tutor-lastname"]');
+    this.tutorEmail = $('[data-element="register-tutor-email"]');
     this.showInvalidTutorEmail = $('[data-element="register-invalid-tutoremail"]');
     this.showNoTutorEmail = $('[data-element="register-show-notutoremail"]');
     this.showSameEmail = $('[data-element="register-same-email"]');
