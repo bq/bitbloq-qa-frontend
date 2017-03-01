@@ -103,7 +103,7 @@ describe('Forum', function() {
 
     it('bbb-230:forumXit:topic title size limit', function() {
         var longTitle = 'long title ' + Number(new Date());
-        for (var i = 0; i < 200; i++) {
+        for (var i = 0; i < 125; i++) {
             longTitle = longTitle + ' even longer title ' + Number(new Date());
         }
         forum.createTopicNewUser(longTitle);
@@ -118,7 +118,7 @@ describe('Forum', function() {
     it('bbb-231:forumXit:topic answer size limit', function() {
         forum.createTopicNewUser();
         var longanswer = 'long answer ' + Number(new Date());
-        for (var i = 0; i < 200; i++) {
+        for (var i = 0; i < 125; i++) {
             longanswer = longanswer + ' even longer answer ' + Number(new Date());
         }
         forum.get();
@@ -345,39 +345,37 @@ describe('Forum', function() {
         browser.sleep(vars.timeToWaitLoadForumCategory);
         element.all(by.repeater('thread in forum.categoryThemes').row(0).column('thread.numberOfViews')).getText().then(function(answerCount) {
             expect(answerCount).toMatch('0');
+            forum.categoryTopicTitle.click();
+            browser.sleep(vars.timeToWaitTab);
+            forum.get();
+            browser.sleep(vars.timeToWaitTab);
+            forum.newsCategory.click();
+            browser.sleep(vars.timeToWaitLoadForumCategory);
+            element.all(by.repeater('thread in forum.categoryThemes').row(0).column('thread.numberOfViews')).getText().then(function(answerCount) {
+                expect(answerCount).toMatch('0');
+                login.logout();
+                login.loginWithRandomUser();
+                forum.get();
+                browser.sleep(vars.timeToWaitTab);
+                forum.newsCategory.click();
+                browser.sleep(vars.timeToWaitLoadForumCategory);
+                forum.categoryTopicTitle.click();
+                browser.sleep(vars.timeToWaitTab);
+                forum.get();
+                browser.sleep(vars.timeToWaitTab);
+                forum.newsCategory.click();
+                browser.sleep(vars.timeToWaitLoadForumCategory);
+                forum.categoryTopicTitle.click();
+                browser.sleep(vars.timeToWaitTab);
+                forum.get();
+                browser.sleep(vars.timeToWaitTab);
+                forum.newsCategory.click();
+                browser.sleep(vars.timeToWaitLoadForumCategory);
+                element.all(by.repeater('thread in forum.categoryThemes').row(0).column('thread.numberOfViews')).getText().then(function(answerCount) {
+                    expect(answerCount).toMatch('2');
+                    login.logout();
+                });
+            });
         });
-        forum.categoryTopicTitle.click();
-        browser.sleep(vars.timeToWaitTab);
-        forum.get();
-        browser.sleep(vars.timeToWaitTab);
-        forum.newsCategory.click();
-        browser.sleep(vars.timeToWaitLoadForumCategory);
-        element.all(by.repeater('thread in forum.categoryThemes').row(0).column('thread.numberOfViews')).getText().then(function(answerCount) {
-            expect(answerCount).toMatch('0');
-        });
-        login.logout();
-        login.loginWithRandomUser();
-        forum.get();
-        browser.sleep(vars.timeToWaitTab);
-        forum.newsCategory.click();
-        browser.sleep(vars.timeToWaitLoadForumCategory);
-        forum.categoryTopicTitle.click();
-        browser.sleep(vars.timeToWaitTab);
-        forum.get();
-        browser.sleep(vars.timeToWaitTab);
-        forum.newsCategory.click();
-        browser.sleep(vars.timeToWaitLoadForumCategory);
-        forum.categoryTopicTitle.click();
-        browser.sleep(vars.timeToWaitTab);
-        forum.get();
-        browser.sleep(vars.timeToWaitTab);
-        forum.newsCategory.click();
-        browser.sleep(vars.timeToWaitLoadForumCategory);
-        element.all(by.repeater('thread in forum.categoryThemes').row(0).column('thread.numberOfViews')).getText().then(function(answerCount) {
-            expect(answerCount).toMatch('2');
-        });
-        login.logout();
-
-
     });
 });
