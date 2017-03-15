@@ -13,11 +13,11 @@ var Myprojects = function() {
     this.downloadIno = $('[data-element="myprojects-export-arduino-code-button"]');
     this.itemLayoutListButton = $('[data-element="myprojects-item-layout-list-button"]');
     //Dropdown order
-    this.dropDownOrder = $('[data-element="my-proyects-dropdown-order"]');
-    this.dropDownOrderSortRecent = $('[data-element="explore-sortby-recent"]');
-    this.dropDownOrderSortOld = $('[data-element="explore-sortby-old"]');
-    this.dropDownOrderSortNameAZ = $('[data-element="explore-sortby-name-az"]');
-    this.dropDownOrderSortNameZA = $('[data-element="explore-sortby-name-za"]');
+    this.dropDownOrder = $('[data-element="myProyects_order_dropdown"]');
+    this.dropDownOrderSortRecent = $('[data-element="myProyects_order_dropdown-0"]');
+    this.dropDownOrderSortOld = $('[data-element="myProyects_order_dropdown-1"]');
+    this.dropDownOrderSortNameAZ = $('[data-element="myProyects_order_dropdown-2"]');
+    this.dropDownOrderSortNameZA = $('[data-element="myProyects_order_dropdown-3"]');
     this.timeTag = $('[data-element="myprojects-time-tag"]');
 	   //Data-tooltips
     this.renameProject = $('[data-element="myprojects-rename-project"]');
