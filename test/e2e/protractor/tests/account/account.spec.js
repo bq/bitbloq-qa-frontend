@@ -61,7 +61,7 @@ describe('User account view', function() {
     });
 
 
-    xit('bbb-41:account:Check name and surmane are edits (input text)', function() {
+    it('bbb-41:account:Check name and surmane are edits (input text)', function() {
 
         var randomUserInfo = login.loginWithRandomUser();
         account.get();
