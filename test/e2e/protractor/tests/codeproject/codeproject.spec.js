@@ -220,6 +220,7 @@ describe('Test Codeproject verify', function() {
             browser.sleep(vars.timeToWaitTab);
             browser.getAllWindowHandles().then(function(handles) {
                 browser.switchTo().window(handles[1]).then(function() {
+                    browser.sleep(vars.timeToWaitTab);
                     infotab.infoTab.click();
                     infotab.infotabProjectName.clear();
                     browser.ignoreSynchronization = true;
