@@ -12,13 +12,13 @@ var MyCenter = function() {
     this.deleteTeacherButton = $('[data-element="centerMode-delete-teacher"]');
     this.teacherElems = element.all(by.xpath('//*[contains(@data-element,"centerMode-teacher-link")]'));
 
-    this.teacherDropdownOrder = $('[data-element="my-center-dropdown-order"]');
-    this.teacherRecentDropdown = $('[data-element="my-center-dropdown-0"]');
-    this.teacherEmailDropdown = $('[data-element="my-center-dropdown-1"]');
-    this.teacherNameDropdown = $('[data-element="my-center-dropdown-2"]');
-    this.teacherSurnameDropdown = $('[data-element="my-center-dropdown-3"]');
-    this.teacherGroupsDropdown = $('[data-element="my-center-dropdown-4"]');
-    this.teacherStudentsDropdown = $('[data-element="my-center-dropdown-5"]');
+    this.teacherDropdownOrder = $('[data-element="my_center_dropdown_order"]');
+    this.teacherRecentDropdown = $('[data-element="my_center_dropdown_order-0"]');
+    this.teacherEmailDropdown = $('[data-element="my_center_dropdown_order-1"]');
+    this.teacherNameDropdown = $('[data-element="my_center_dropdown_order-2"]');
+    this.teacherSurnameDropdown = $('[data-element="my_center_dropdown_order-3"]');
+    this.teacherGroupsDropdown = $('[data-element="my_center_dropdown_order-4"]');
+    this.teacherStudentsDropdown = $('[data-element="my_center_dropdown_order-5"]');
 
     this.url = '#/center-mode/center';
 
