@@ -77,16 +77,16 @@ describe('make tab', function() {
         infotab.infotabTaginputButton.click();
 
         //Show saved tag
-        expect(element.all(by.repeater('tag in projectService.project.userTags').row(0)).getText()).toContain('TestTag_ONE_1');
-        expect(element.all(by.repeater('tag in projectService.project.userTags').row(1)).getText()).toContain('TestTag_TWO_2');
-        expect(element.all(by.repeater('tag in projectService.project.userTags').row(2)).getText()).toContain('TestTag__3');
-        expect(element.all(by.repeater('tag in projectService.project.userTags').row(3)).getText()).toContain('TestTag__4');
-        expect(element.all(by.repeater('tag in projectService.project.userTags').row(4)).getText()).toContain('TestTag');
-        expect(element.all(by.repeater('tag in projectService.project.userTags').row(5)).getText()).toContain('Test');
-        expect(element.all(by.repeater('tag in projectService.project.userTags').row(6)).getText()).toContain('t');
-        expect(element.all(by.repeater('tag in projectService.project.userTags').row(7)).getText()).toContain('e');
-        expect(element.all(by.repeater('tag in projectService.project.userTags').row(8)).getText()).toContain('s');
-        expect(element.all(by.repeater('tag in projectService.project.userTags')).count()).toBe(9);
+        expect(element.all(by.repeater('tag in currentProject.userTags').row(0)).getText()).toContain('TestTag_ONE_1');
+        expect(element.all(by.repeater('tag in currentProject.userTags').row(1)).getText()).toContain('TestTag_TWO_2');
+        expect(element.all(by.repeater('tag in currentProject.userTags').row(2)).getText()).toContain('TestTag__3');
+        expect(element.all(by.repeater('tag in currentProject.userTags').row(3)).getText()).toContain('TestTag__4');
+        expect(element.all(by.repeater('tag in currentProject.userTags').row(4)).getText()).toContain('TestTag');
+        expect(element.all(by.repeater('tag in currentProject.userTags').row(5)).getText()).toContain('Test');
+        expect(element.all(by.repeater('tag in currentProject.userTags').row(6)).getText()).toContain('t');
+        expect(element.all(by.repeater('tag in currentProject.userTags').row(7)).getText()).toContain('e');
+        expect(element.all(by.repeater('tag in currentProject.userTags').row(8)).getText()).toContain('s');
+        expect(element.all(by.repeater('tag in currentProject.userTags')).count()).toBe(9);
 
         //Logout and Login last user and test project exist with yours tags
         login.logout();
@@ -100,16 +100,16 @@ describe('make tab', function() {
                 browser.switchTo().window(handles[1]).then(function() {
                     make.infoTab.click();
                     //Show saved tag
-                    expect(element.all(by.repeater('tag in projectService.project.userTags').row(0)).getText()).toContain('TestTag_ONE_1');
-                    expect(element.all(by.repeater('tag in projectService.project.userTags').row(1)).getText()).toContain('TestTag_TWO_2');
-                    expect(element.all(by.repeater('tag in projectService.project.userTags').row(2)).getText()).toContain('TestTag__3');
-                    expect(element.all(by.repeater('tag in projectService.project.userTags').row(3)).getText()).toContain('TestTag__4');
-                    expect(element.all(by.repeater('tag in projectService.project.userTags').row(4)).getText()).toContain('TestTag');
-                    expect(element.all(by.repeater('tag in projectService.project.userTags').row(5)).getText()).toContain('Test');
-                    expect(element.all(by.repeater('tag in projectService.project.userTags').row(6)).getText()).toContain('t');
-                    expect(element.all(by.repeater('tag in projectService.project.userTags').row(7)).getText()).toContain('e');
-                    expect(element.all(by.repeater('tag in projectService.project.userTags').row(8)).getText()).toContain('s');
-                    expect(element.all(by.repeater('tag in projectService.project.userTags')).count()).toBe(9);
+                    expect(element.all(by.repeater('tag in currentProject.userTags').row(0)).getText()).toContain('TestTag_ONE_1');
+                    expect(element.all(by.repeater('tag in currentProject.userTags').row(1)).getText()).toContain('TestTag_TWO_2');
+                    expect(element.all(by.repeater('tag in currentProject.userTags').row(2)).getText()).toContain('TestTag__3');
+                    expect(element.all(by.repeater('tag in currentProject.userTags').row(3)).getText()).toContain('TestTag__4');
+                    expect(element.all(by.repeater('tag in currentProject.userTags').row(4)).getText()).toContain('TestTag');
+                    expect(element.all(by.repeater('tag in currentProject.userTags').row(5)).getText()).toContain('Test');
+                    expect(element.all(by.repeater('tag in currentProject.userTags').row(6)).getText()).toContain('t');
+                    expect(element.all(by.repeater('tag in currentProject.userTags').row(7)).getText()).toContain('e');
+                    expect(element.all(by.repeater('tag in currentProject.userTags').row(8)).getText()).toContain('s');
+                    expect(element.all(by.repeater('tag in currentProject.userTags')).count()).toBe(9);
                     login.logout();
                     browser.close().then(browser.switchTo().window(handles[0]));
 
@@ -139,18 +139,18 @@ describe('make tab', function() {
         browser.sleep(vars.timeToWaitAutoSave);
 
         //Show saved tag
-        expect(element.all(by.repeater('tag in projectService.project.userTags').row(0)).getText()).toContain('TestTag_ONE_1');
-        expect(element.all(by.repeater('tag in projectService.project.userTags').row(1)).getText()).toContain('TestTag_TWO_2');
+        expect(element.all(by.repeater('tag in currentProject.userTags').row(0)).getText()).toContain('TestTag_ONE_1');
+        expect(element.all(by.repeater('tag in currentProject.userTags').row(1)).getText()).toContain('TestTag_TWO_2');
 
         //Eliminate tag
-        element.all(by.repeater('tag in projectService.project.userTags').row(0)).click();
+        element.all(by.repeater('tag in currentProject.userTags').row(0)).click();
         browser.sleep(vars.timeToWaitFadeModals);
         infotab.infotabRemoveTag.click();
         infotab.infotabRemoveTag.click();
         browser.sleep(vars.timeToWaitFadeModals);
         browser.sleep(vars.timeToWaitAutoSave);
 
-        expect(element(by.repeater('tag in projectService.project.userTags')).isPresent()).toBe(false);
+        expect(element(by.repeater('tag in currentProject.userTags')).isPresent()).toBe(false);
 
         //Logout and Login last user and test tags are deleted
         login.logout();
@@ -165,7 +165,7 @@ describe('make tab', function() {
                 browser.switchTo().window(handles[1]).then(function() {
                     //Test eliminate tag tag
                     make.infoTab.click();
-                    expect(element(by.repeater('tag in projectService.project.userTags')).isPresent()).toBe(false);
+                    expect(element(by.repeater('tag in currentProject.userTags')).isPresent()).toBe(false);
                     login.logout();
                     browser.close().then(browser.switchTo().window(handles[0]));
                 });

@@ -14,14 +14,14 @@ var Infotab = function() {
     this.infotabUploadImageButton = $('[data-element="infotab-uploadimage"]');
     this.infotabFileUpload = $('[data-element="infotab-fileinput"]');
     this.infotabProjectImage = $('[data-element="infotab-projectimage"]');
-    this.infotabChooseThemeButton = $('[data-element="infotab-choosetheme"]');
-    this.infotabOptionGrayTheme = $('[data-element="infotab_option_grayTheme"]');
-    this.infotabOptionColorTheme = $('[data-element="infotab_option_colorTheme"]');
+    this.infotabChooseThemeButton = $('[data-element="infotab_choosetheme"]');
+    this.infotabOptionGrayTheme = $('[data-element="infotab_choosetheme-0"]');
+    this.infotabOptionColorTheme = $('[data-element="infotab_choosetheme-1"]');
     this.infotabYoutubeVideoInput = $('[data-element="infotab-youtubevideo"]');
     this.infotabDescription = $('[data-element="infotab-description"]');
     this.infotabRemoveTag=$('[data-element="infotab-remove-tag"]');
-    this.infotabChooseBoardButton = $('[data-element="infotab-chooseboard"]');
-    this.infotabBQZumButton = $('[data-element="bq ZUM"]');
+    this.infotabChooseBoardButton = $('[data-element="infotab_chooseboard"]');
+    this.infotabBQZumButton = $('[data-element="infotab_chooseboard-0"]');
 };
 
 module.exports = Infotab;

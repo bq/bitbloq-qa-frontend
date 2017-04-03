@@ -154,19 +154,35 @@ var Login = function() {
 
     };
 
-    this.loginWithRandomUser = function() {
+    this.loginWithRandomUser = function(young) {
         this.get();
-        var randomUserCredentials = register.generateUser();
+        var randomUserCredentials = register.generateUser(young);
         register.createAccountButtn.click();
-        register.createAccount(
-            randomUserCredentials.username,
-            randomUserCredentials.userEmail,
-            randomUserCredentials.password,
-            randomUserCredentials.day,
-            randomUserCredentials.month,
-            randomUserCredentials.year,
-            true,
-            true);
+        if (!young) {
+            register.createAccount(
+                randomUserCredentials.username,
+                randomUserCredentials.userEmail,
+                randomUserCredentials.password,
+                randomUserCredentials.day,
+                randomUserCredentials.month,
+                randomUserCredentials.year,
+                true,
+                true);
+        } else {
+            register.createAccount(
+                randomUserCredentials.username,
+                randomUserCredentials.userEmail,
+                randomUserCredentials.password,
+                randomUserCredentials.day,
+                randomUserCredentials.month,
+                randomUserCredentials.year,
+                true,
+                true,
+                randomUserCredentials.tutorName,
+                randomUserCredentials.tutorSurname,
+                randomUserCredentials.tutorEmail);
+        }
+
         //wait succesfull login page
         browser.sleep(1000);
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');

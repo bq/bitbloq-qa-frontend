@@ -90,24 +90,21 @@ describe('Language', function() {
 
 
         }; //Time to wait load explora project on landing (not wait angular)
-        browser.driver.manage().window().maximize();
-        browser.sleep(1000);
-        landing.helpButton.click();
-        browser.sleep(1000);
-        checkSupportEmail('ES');
-        checkSupportEmail('EN');
-        checkSupportEmail('FR');
-        checkSupportEmail('DE');
-        checkSupportEmail('PT');
-        checkSupportEmail('RU');
-        checkSupportEmail('IT');
-        checkSupportEmail('NL');
-        checkSupportEmail('EU');
-        checkSupportEmail('CA');
-        checkSupportEmail('GL');
-        checkSupportEmail('CN');
-
-
+        browser.executeScript('arguments[0].click()', landing.helpButton.getWebElement()).then(function() {
+            browser.sleep(1000);
+            checkSupportEmail('ES');
+            checkSupportEmail('EN');
+            checkSupportEmail('FR');
+            checkSupportEmail('DE');
+            checkSupportEmail('PT');
+            checkSupportEmail('RU');
+            checkSupportEmail('IT');
+            checkSupportEmail('NL');
+            checkSupportEmail('EU');
+            checkSupportEmail('CA');
+            checkSupportEmail('GL');
+            checkSupportEmail('CN');
+        });
     });
 
 });

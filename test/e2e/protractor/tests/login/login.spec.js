@@ -32,9 +32,7 @@ describe('Login ', function() {
 
    it('bbb-258:login:Cant login with a non registered user', function() {
 
-      landing.openLandingMenu.click();
       landing.enterButton.click();
-
 
       login.user.sendKeys('NO USER');
       login.password.sendKeys('asdf');
@@ -47,7 +45,6 @@ describe('Login ', function() {
 
    it('bbb-259:login:is show "Introduce un nombre de usuario o e-mail" ?', function() {
 
-      landing.openLandingMenu.click();
       landing.enterButton.click();
 
       //Login in bitbloq without user
@@ -65,7 +62,6 @@ describe('Login ', function() {
 
    it('bbb-260:login:is show "Introduce una contraseña" ?', function() {
 
-      landing.openLandingMenu.click();
       landing.enterButton.click();
 
       //Login in bitbloq without password
@@ -84,7 +80,6 @@ describe('Login ', function() {
 
    it('bbb-261:login:is show "La contraseña debe tener 6 caracteres como mínimo" ?', function() {
 
-      landing.openLandingMenu.click();
       landing.enterButton.click();
 
       //Login in bitbloq without password
@@ -103,7 +98,6 @@ describe('Login ', function() {
 
    it('bbb-262:login:is show "El usuario no está registrado" ?', function() {
 
-      landing.openLandingMenu.click();
       landing.enterButton.click();
       //Login in bitbloq with false  password
       login.user.sendKeys('User' + Number(new Date()));
@@ -118,14 +112,12 @@ describe('Login ', function() {
    it('bbb-263:login:is show "La contraseña es incorrecta" ?', function() {
 
       //Register && login and save username
-      landing.openLandingMenu.click();
       landing.enterButton.click();
       var username = 'User' + Number(new Date());
       login.loginWithUserName(username);
       login.logout();
 
       //Login in bitbloq with last username with incorrect password
-      landing.openLandingMenu.click();
       landing.enterButton.click();
       login.user.sendKeys(username);
       login.password.sendKeys(Number(new Date()));

@@ -32,7 +32,6 @@ describe('Register ', function() {
 
     it('bbb-1:register:Register with a user basic account', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
         //expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
 
@@ -52,7 +51,6 @@ describe('Register ', function() {
 
     it('bbb-7:register:Cant register without checking conditions', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -80,7 +78,6 @@ describe('Register ', function() {
     });
 
     it('bbb-5:register:Cant register without an user name', function() {
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -108,7 +105,6 @@ describe('Register ', function() {
 
     it('bbb-4:register:Cant register with the same user name', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -156,7 +152,6 @@ describe('Register ', function() {
 
     it('bbb-6:register:validate INCORRECT FORMAT USER ', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -191,7 +186,6 @@ describe('Register ', function() {
 
     it('bbb-8:register:validate NO EMAIL ', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -218,7 +212,6 @@ describe('Register ', function() {
 
     it('bbb-9:register:validate INCORRECT EMAIL ', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -240,7 +233,6 @@ describe('Register ', function() {
 
     it('bbb-10:register:in password is show "Introduce una contraseña" ?', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -265,7 +257,6 @@ describe('Register ', function() {
 
     it('bbb-11:register:in password is show La contraseña debe tener 6 caracteres como mínimo', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -290,7 +281,6 @@ describe('Register ', function() {
     });
 
     it('bbb-12:register:validate NOT DATE OF BIRTH ', function() {
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -345,7 +335,6 @@ describe('Register ', function() {
 
     it('bbb-13:register:validate DATE OF BIRTH BEFORE 14 YEARS 14 - DATENOW ', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -360,7 +349,6 @@ describe('Register ', function() {
 
     it('bbb-355:register:the tutor email match to student email', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -375,7 +363,6 @@ describe('Register ', function() {
 
     it('bbb-356:register:Register without tutor email', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -390,7 +377,6 @@ describe('Register ', function() {
 
     it('bbb-357:register:Register with incorrect tutor email', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -405,7 +391,6 @@ describe('Register ', function() {
 
     it('bbb-358:register:Register without tutor name', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -420,7 +405,6 @@ describe('Register ', function() {
 
     it('bbb-359:register:Register without tutor surname', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -434,7 +418,6 @@ describe('Register ', function() {
     });
 
     it('bbb-2:register:The email is duplicated', function() {
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -463,7 +446,6 @@ describe('Register ', function() {
     });
 
     it('bbb-14:register:Check that a checkbox appears to indicate that you are a teacher', function() {
-        landing.openLandingMenu.click();
         landing.enterButton.click();
         register.createAccountButtn.click();
 
@@ -643,7 +625,6 @@ describe('Register ', function() {
     });
 
     it('bbb-16:register:The date is incorrect', function() {
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Go to create account form
@@ -657,12 +638,12 @@ describe('Register ', function() {
         expect(register.showValidBirthdate.isDisplayed()).toBeTruthy();
         register.createAccount(user.username, user.userEmail, user.password, 31, 12, 100, false, false);
         expect(register.showValidBirthdate.isDisplayed()).toBeTruthy();
-        user = register.generateUser(true);
-        register.inputDay.clear().sendKeys(user.day);
-        register.inputMonth.clear().sendKeys(user.month);
-        register.inputYear.clear().sendKeys(user.year);
-        register.createAccount(user.username, user.userEmail, user.password, 32, 13, 1000, false, false, user.tutorName, user.tutorSurname, user.tutorEmail);
-        expect(register.showValidBirthdate.isDisplayed()).toBeTruthy();
+        // user = register.generateUser(true);
+        // register.inputDay.clear().sendKeys(user.day);
+        // register.inputMonth.clear().sendKeys(user.month);
+        // register.inputYear.clear().sendKeys(user.year);
+        // register.createAccount(user.username, user.userEmail, user.password, 32, 13, 1000, false, false, user.tutorName, user.tutorSurname, user.tutorEmail);
+        // expect(register.showValidBirthdate.isDisplayed()).toBeTruthy();
     });
 
     it('bbb-17:register:Remember the password - EMAIL DOESNT EXIST', function() {

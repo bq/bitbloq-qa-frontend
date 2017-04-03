@@ -28,7 +28,6 @@ describe('Login, specs only in local ', function() {
     it('bbb-264:Login with a Google account', function() {
 
         landing.get();
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         login.loginGoogle(vars.account('google').user, vars.account('google').password);
@@ -42,7 +41,6 @@ describe('Login, specs only in local ', function() {
 
     it('bbb-265:Login with a Facebook account', function() {
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
 
         //Login in bitbloq with facebook

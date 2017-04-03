@@ -180,7 +180,8 @@ describe('Menu share of makeactions local', function() {
                     myprojects.get();
                     browser.sleep(vars.timeToWaitTab);
                     projects.sharedProjects.click();
-                    myprojects.overMyProjects.click();
+                    browser.sleep(vars.timeToWaitTab);
+                    element.all(by.repeater('project in sharedProjects').row(0)).click();
                     browser.sleep(vars.timeToWaitTab);
                     browser.getAllWindowHandles().then(function(handles2) {
                         browser.switchTo().window(handles2[2]).then(function() {

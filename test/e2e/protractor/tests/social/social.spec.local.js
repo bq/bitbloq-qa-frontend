@@ -42,7 +42,6 @@ describe('User account view', function() {
         login.logout();
         });
 
-        landing.openLandingMenu.click();
         landing.enterButton.click();
         var googleAccount = vars.account('googleProve');
         social.registerGoogle(googleAccount.user, googleAccount.password, googleAccount.username);

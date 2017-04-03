@@ -43,7 +43,7 @@ describe('Check makeActions actions in bloqsproject', function() {
         expect(makeActions.menuOpenProjectFromFile.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuChangeName.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuClone.getAttribute('disabled')).toBeTruthy();
-        expect(makeActions.menuDownload.getAttribute('disabled')).not.toBeTruthy();
+        expect(makeActions.menuDownload.getAttribute('disabled')).toBeTruthy();
         expect(makeActions.menuExportArduino.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuChangeLanguage.getAttribute('disabled')).not.toBeTruthy();
         //only enabled when a projects have an id
@@ -90,7 +90,7 @@ describe('Check makeActions actions in bloqsproject', function() {
         expect(makeActions.menuOpenProjectFromFile.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuChangeName.getAttribute('disabled')).toBeTruthy();
         expect(makeActions.menuClone.getAttribute('disabled')).toBeTruthy();
-        expect(makeActions.menuDownload.getAttribute('disabled')).not.toBeTruthy();
+        expect(makeActions.menuDownload.getAttribute('disabled')).toBeTruthy();
         expect(makeActions.menuExportArduino.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuChangeLanguage.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.removeProject.getAttribute('disabled')).toBeTruthy();

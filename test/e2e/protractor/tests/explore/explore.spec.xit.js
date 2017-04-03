@@ -53,8 +53,8 @@ describe('Explore tab', function() {
             function() {
                 //Second and next test check last value is different next values
                 var i;
-                for (i = 2500; i < 8001; i += 1500) {
-                    script = explore.indexMain + '.scrollTo(0,' + i + ');';
+                for (i = 1; i < 5; i += 1) {
+                    script = explore.indexMain + '.scrollTo(0,' + 8500 + ');';
                     browser.executeScript(script).then(function() {
                         explore.exploreCounts.getText().then(function(value) {
                             value = value.split('/');

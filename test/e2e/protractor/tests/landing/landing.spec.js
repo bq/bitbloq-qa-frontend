@@ -25,7 +25,6 @@ describe('Verify landing ', function() {
     globalFunctions.afterTest();
 
     it('bbb-251:landing:Check that links to legal documents work', function() {
-        //landing.openLandingMenu.click();
         var cookies = '#/cookies',
             terms = '#/terms',
             script = landing.landingPage + '.scrollTo(0,5000);';
@@ -54,7 +53,6 @@ describe('Verify landing ', function() {
 
     it('bbb-250:landing:check if NO login go to mailto in landing (link "contacto")', function() {
 
-        landing.openLandingMenu.click();
         browser.sleep(1000);
         landing.helpButton.click();
         browser.sleep(5000); //Time to wait load explora project on landing (not wait angular)
@@ -69,7 +67,6 @@ describe('Verify landing ', function() {
 
         login.loginWithRandomUser();
         landing.get();
-        landing.openLandingMenu.click();
         browser.sleep(1000);
         landing.helpButton.click();
         browser.sleep(5000); //Time to wait load explora project on landing (not wait angular)
