@@ -45,7 +45,8 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             nameSensorDeHumedadProject,
             nameEncoderProject,
             nameFinDeCarreraProject,
-            nameZumbadorProject;
+            nameZumbadorProject,
+            nameBitbloqConnectProject;
 
 
         /********  PUBLISH PROJECT WITH DIFFERENTS COMPONENTES ***********/
@@ -149,6 +150,11 @@ describe('Menu file of MakeActions, specs only in local ', function() {
         make.importFileUser(path.resolve() + '/test/e2e/protractor/res/FinDeCarrera_Bloqs.json');
         nameFinDeCarreraProject = 'FinDeCarrera_Bloqs.json' + Number(new Date());
         make.publishProjectWithName(nameFinDeCarreraProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+        //Bitbloq Connect
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/BitbloqConnect_bloqs.json');
+        nameBitbloqConnectProject = 'BitbloqConnect_Bloqs.json' + Number(new Date());
+        make.publishProjectWithName(nameBitbloqConnectProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
         /********  EXPLORE WHIT FILTER **************************
@@ -313,6 +319,12 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             expect(explore.projectElem.getText()).toMatch(nameFinDeCarreraProject);
         });
 
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(0).column('compFilter.option')).click();
+        element.all(by.repeater('compFilter in componentsFilterOptions').row(21).column('compFilter.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameBitbloqConnectProject).then(function() {
+            expect(explore.projectElem.getText()).toMatch(nameBitbloqConnectProject);
+        });
 
         login.logout();
 
