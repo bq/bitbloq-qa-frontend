@@ -330,17 +330,21 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
     });
 
-    it('bbb-179:explorefiltersLocal:Check board filters on explora', function() {
+    fit('bbb-179:explorefiltersLocal:Check board filters on explora', function() {
         //Name project published
         var nameZumProject,
             nameFreaduinoProject,
             nameArduinoProject,
             nameZowiProject,
-            nameEvolutionProject;
+            nameEvolutionProject,
+            nameMbotProject,
+            nameMRangerProject,
+            nameStarterProject;
 
         /********  PUBLISH PROJECT WITH DIFFERENTS BOARD ***********/
-
-        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Zum_Bloqs.json');
+        login.get();
+        login.loginGoogle(vars.userGoogle,vars.passwordGoogle);
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Zum_Bloqs.json');
         nameZumProject = 'Zum_Bloqs' + Number(new Date());
         make.publishProjectWithName(nameZumProject);
         browser.sleep(vars.timeToWaitAutoSave);
@@ -365,6 +369,21 @@ describe('Menu file of MakeActions, specs only in local ', function() {
         make.publishProjectWithName(nameEvolutionProject);
         browser.sleep(vars.timeToWaitAutoSave);
 
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/mbot_bloqs.json');
+        nameMbotProject = 'mbotbloqs' + Number(new Date());
+        make.publishProjectWithName(nameMbotProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/ranger_bloqs.json');
+        nameMRangerProject = 'mrangerbloqs' + Number(new Date());
+        make.publishProjectWithName(nameMRangerProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+
+        make.importFileUser(path.resolve() + '/test/e2e/protractor/res/starter_bloqs.json');
+        nameStarterProject = 'starterbloqs' + Number(new Date());
+        make.publishProjectWithName(nameStarterProject);
+        browser.sleep(vars.timeToWaitAutoSave);
+
         /********  EXPLORE WHIT FILTER **************************
          *  Check checkbox board and find project                 *
          * *******************************************************/
@@ -383,6 +402,9 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             expect(explore.projectElem.getText()).not.toMatch(nameArduinoProject);
             expect(explore.projectElem.getText()).not.toMatch(nameZowiProject);
             expect(explore.projectElem.getText()).not.toMatch(nameEvolutionProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameMbotProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameMRangerProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameStarterProject);
         });
 
         // check no show other board
@@ -403,6 +425,18 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             browser.sleep(vars.timeToWaitAutoSave);
             expect(explore.projectElem.isPresent()).toBe(true);
         });
+        explore.exploreFind.clear().sendKeys(nameMbotProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameMRangerProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameStarterProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
 
         // Freduino check
         element.all(by.repeater('board in boardsFilterOptions').row(1).column('board.option')).click();
@@ -414,6 +448,9 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             expect(explore.projectElem.getText()).not.toMatch(nameArduinoProject);
             expect(explore.projectElem.getText()).not.toMatch(nameZowiProject);
             expect(explore.projectElem.getText()).not.toMatch(nameEvolutionProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameMbotProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameMRangerProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameStarterProject);
         });
 
         // check no show other board
@@ -431,6 +468,18 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             expect(explore.projectElem.isPresent()).toBe(false);
         });
         explore.exploreFind.clear().sendKeys(nameEvolutionProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameMbotProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameMRangerProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameStarterProject).then(function() {
             browser.sleep(vars.timeToWaitAutoSave);
             expect(explore.projectElem.isPresent()).toBe(false);
         });
@@ -465,6 +514,18 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             browser.sleep(vars.timeToWaitAutoSave);
             expect(explore.projectElem.isPresent()).toBe(false);
         });
+        explore.exploreFind.clear().sendKeys(nameMbotProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameMRangerProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameStarterProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
 
         //Zowi check
         element.all(by.repeater('board in boardsFilterOptions').row(3).column('board.option')).click();
@@ -476,6 +537,9 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             expect(explore.projectElem.getText()).not.toMatch(nameZumProject);
             expect(explore.projectElem.getText()).not.toMatch(nameArduinoProject);
             expect(explore.projectElem.getText()).not.toMatch(nameEvolutionProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameMbotProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameMRangerProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameStarterProject);
         });
 
         // check no show other board
@@ -493,6 +557,18 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             expect(explore.projectElem.isPresent()).toBe(false);
         });
         explore.exploreFind.clear().sendKeys(nameEvolutionProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameMbotProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameMRangerProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameStarterProject).then(function() {
             browser.sleep(vars.timeToWaitAutoSave);
             expect(explore.projectElem.isPresent()).toBe(false);
         });
@@ -507,6 +583,9 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             expect(explore.projectElem.getText()).not.toMatch(nameZumProject);
             expect(explore.projectElem.getText()).not.toMatch(nameArduinoProject);
             expect(explore.projectElem.getText()).toMatch(nameEvolutionProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameMbotProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameMRangerProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameStarterProject);
         });
 
         // check no show other board
@@ -524,6 +603,156 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             expect(explore.projectElem.isPresent()).toBe(false);
         });
         explore.exploreFind.clear().sendKeys(nameZowiProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameMbotProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameMRangerProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameStarterProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+
+        //Mbot check
+        // element.all(by.repeater('board in boardsFilterOptions').row(5).column('board.option')).click();
+        // browser.sleep(vars.timeToWaitAutoSave);
+        // explore.exploreFind.clear().sendKeys(nameMbotProject).then(function() {
+        //     browser.sleep(vars.timeToWaitAutoSave);
+        //     expect(explore.projectElem.getText()).not.toMatch(nameZowiProject);
+        //     expect(explore.projectElem.getText()).not.toMatch(nameFreaduinoProject);
+        //     expect(explore.projectElem.getText()).not.toMatch(nameZumProject);
+        //     expect(explore.projectElem.getText()).not.toMatch(nameArduinoProject);
+        //     expect(explore.projectElem.getText()).not.toMatch(nameEvolutionProject);
+        //     expect(explore.projectElem.getText()).toMatch(nameMbotProject);
+        //     expect(explore.projectElem.getText()).not.toMatch(nameMRangerProject);
+        //     expect(explore.projectElem.getText()).not.toMatch(nameStarterProject);
+        // });
+        //
+        // // check no show other board
+        // browser.sleep(vars.timeToWaitAutoSave);
+        // explore.exploreFind.clear().sendKeys(nameFreaduinoProject).then(function() {
+        //     browser.sleep(vars.timeToWaitAutoSave);
+        //     expect(explore.projectElem.isPresent()).toBe(false);
+        // });
+        // explore.exploreFind.clear().sendKeys(nameZumProject).then(function() {
+        //     browser.sleep(vars.timeToWaitAutoSave);
+        //     expect(explore.projectElem.isPresent()).toBe(false);
+        // });
+        // explore.exploreFind.clear().sendKeys(nameArduinoProject).then(function() {
+        //     browser.sleep(vars.timeToWaitAutoSave);
+        //     expect(explore.projectElem.isPresent()).toBe(false);
+        // });
+        // explore.exploreFind.clear().sendKeys(nameZowiProject).then(function() {
+        //     browser.sleep(vars.timeToWaitAutoSave);
+        //     expect(explore.projectElem.isPresent()).toBe(false);
+        // });
+        // explore.exploreFind.clear().sendKeys(nameEvolutionProject).then(function() {
+        //     browser.sleep(vars.timeToWaitAutoSave);
+        //     expect(explore.projectElem.isPresent()).toBe(false);
+        // });
+        // explore.exploreFind.clear().sendKeys(nameMRangerProject).then(function() {
+        //     browser.sleep(vars.timeToWaitAutoSave);
+        //     expect(explore.projectElem.isPresent()).toBe(false);
+        // });
+        // explore.exploreFind.clear().sendKeys(nameStarterProject).then(function() {
+        //     browser.sleep(vars.timeToWaitAutoSave);
+        //     expect(explore.projectElem.isPresent()).toBe(false);
+        // });
+
+        // MRanger check
+        element.all(by.repeater('board in boardsFilterOptions').row(6).column('board.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameMRangerProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.getText()).not.toMatch(nameZowiProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameFreaduinoProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameZumProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameArduinoProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameEvolutionProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameMbotProject);
+            expect(explore.projectElem.getText()).toMatch(nameMRangerProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameStarterProject);
+        });
+
+        // check no show other board
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameFreaduinoProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameZumProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameArduinoProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameZowiProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameEvolutionProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameMbotProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameStarterProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+
+        //Starter check
+        element.all(by.repeater('board in boardsFilterOptions').row(7).column('board.option')).click();
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameStarterProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.getText()).not.toMatch(nameZowiProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameFreaduinoProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameZumProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameArduinoProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameEvolutionProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameMbotProject);
+            expect(explore.projectElem.getText()).not.toMatch(nameMRangerProject);
+            expect(explore.projectElem.getText()).toMatch(nameStarterProject);
+        });
+
+        // check no show other board
+        browser.sleep(vars.timeToWaitAutoSave);
+        explore.exploreFind.clear().sendKeys(nameFreaduinoProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameZumProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameArduinoProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameZowiProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameEvolutionProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameMbotProject).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave);
+            expect(explore.projectElem.isPresent()).toBe(false);
+        });
+        explore.exploreFind.clear().sendKeys(nameMRangerProject).then(function() {
             browser.sleep(vars.timeToWaitAutoSave);
             expect(explore.projectElem.isPresent()).toBe(false);
         });
