@@ -48,6 +48,10 @@ var Register = function() {
     this.resetPasswordMainInput = $('[data-element="reset-password-main-input"]');
     this.resetPasswordRepeatInput = $('[data-element="reset-password-repeat-input"]');
     this.resetPasswordOkButton = $('[data-element="reset-password-button-ok"]');
+
+    this.under14Name = $('[data-element="under14-firstname"]');
+    this.under14Lastname = $('[data-element="under14-lastname"]');
+    this.under14TutorDni = $('[data-element="under14-tutor-dni"]');
     /***************************/
 
     this.url = ('#/register');
@@ -144,6 +148,20 @@ var Register = function() {
         }
 
         return true;
+    };
+
+    this.getExternalProviderEmail = function(driver) {
+        var mailProvider = 'http://www.my10minutemail.com/',
+            $2 = driver.$,
+            email = $2('body > div.container-narrow > div.jumbotron > p');
+
+        driver.get(mailProvider);
+        driver.manage().window().setSize(1024, 768);
+
+        return email.getText().then(function(value) {
+            return value;
+        });
+
     };
 
 };

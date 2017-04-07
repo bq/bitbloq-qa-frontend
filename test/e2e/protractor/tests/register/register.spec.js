@@ -10,7 +10,9 @@ var Register = require('./register.po.js'),
     Landing = require('../landing/landing.po.js'),
     Login = require('../login/login.po.js'),
     Commons = require('../commons/commons.po.js'),
-    Alerts = require('../alerts/alerts.po.js');
+    Alerts = require('../alerts/alerts.po.js'),
+    Cookies = require('../cookiesBar/cookiesBar.po.js'),
+    Account = require('../account/account.po.js');
 
 var register = new Register(),
     vars = new Variables(),
@@ -18,7 +20,9 @@ var register = new Register(),
     landing = new Landing(),
     login = new Login(),
     commons = new Commons(),
-    alerts = new Alerts();
+    alerts = new Alerts(),
+    cookies = new Cookies(),
+    account = new Account();
 
 globalFunctions.xmlReport('register');
 
@@ -469,21 +473,7 @@ describe('Register ', function() {
         var browserEmail = browser.forkNewDriverInstance();
         browserEmail.ignoreSynchronization = true;
 
-        var getExternalProviderEmail = function(driver) {
-            var mailProvider = 'http://www.my10minutemail.com/',
-                $2 = driver.$,
-                email = $2('body > div.container-narrow > div.jumbotron > p');
-
-            driver.get(mailProvider);
-            driver.manage().window().setSize(1024, 768);
-
-            return email.getText().then(function(value) {
-                return value;
-            });
-
-        };
-
-        getExternalProviderEmail(browserEmail).then(function(value) {
+        register.getExternalProviderEmail(browserEmail).then(function(value) {
             var email = value,
                 newUser = register.generateUser();
             browserEmail.ignoreSynchronization = false;
@@ -534,21 +524,7 @@ describe('Register ', function() {
         var browserEmail = browser.forkNewDriverInstance();
         browserEmail.ignoreSynchronization = true;
 
-        var getExternalProviderEmail = function(driver) {
-            var mailProvider = 'http://www.my10minutemail.com/',
-                $2 = driver.$,
-                email = $2('body > div.container-narrow > div.jumbotron > p');
-
-            driver.get(mailProvider);
-            driver.manage().window().setSize(1024, 768);
-
-            return email.getText().then(function(value) {
-                return value;
-            });
-
-        };
-
-        getExternalProviderEmail(browserEmail).then(function(value) {
+        register.getExternalProviderEmail(browserEmail).then(function(value) {
             var email = value,
                 newUser = register.generateUser();
             browserEmail.ignoreSynchronization = false;
@@ -638,12 +614,6 @@ describe('Register ', function() {
         expect(register.showValidBirthdate.isDisplayed()).toBeTruthy();
         register.createAccount(user.username, user.userEmail, user.password, 31, 12, 100, false, false);
         expect(register.showValidBirthdate.isDisplayed()).toBeTruthy();
-        // user = register.generateUser(true);
-        // register.inputDay.clear().sendKeys(user.day);
-        // register.inputMonth.clear().sendKeys(user.month);
-        // register.inputYear.clear().sendKeys(user.year);
-        // register.createAccount(user.username, user.userEmail, user.password, 32, 13, 1000, false, false, user.tutorName, user.tutorSurname, user.tutorEmail);
-        // expect(register.showValidBirthdate.isDisplayed()).toBeTruthy();
     });
 
     it('bbb-17:register:Remember the password - EMAIL DOESNT EXIST', function() {
@@ -666,4 +636,103 @@ describe('Register ', function() {
         expect(login.showEmailIncorrect.isDisplayed()).toBeTruthy();
     });
 
+    it('bbb-362:register:The legal tutor doesnt accept', function() {
+        //check bloqsproject
+        var browserEmail = browser.forkNewDriverInstance();
+
+        browserEmail.ignoreSynchronization = true;
+
+        register.getExternalProviderEmail(browserEmail).then(function(value) {
+            var email = value,
+                newUser = register.generateUser(true);
+            browserEmail.ignoreSynchronization = false;
+
+            register.get();
+            register.createAccount(newUser.username, newUser.userEmail, newUser.password, newUser.day, newUser.month, newUser.year, true, true,
+            'tutorName','tutorSurname',email);
+            browser.sleep('3000');
+            login.logout();
+
+            browserEmail.ignoreSynchronization = true;
+
+            var $2 = browserEmail.$;
+            globalFunctions.scrollBottomPage(browserEmail).then(function() {
+                browserEmail.sleep(3000);
+                $2('#msg_1 > td:nth-child(2)').click();
+                //Open popup email send
+                browserEmail.sleep(5000);
+                $2('#modalMessage > div.modal-body > a').click();
+                //#modalMessage > div.modal-body > a
+
+                //Other tab
+                browserEmail.ignoreSynchronization = false;
+
+                $2(cookies.cookiesBar.elementArrayFinder_.locator_.value).click();
+                $2('div > button[name="cancelform"]').click();
+
+                browser.sleep(vars.timeToWaitAutoSave);
+
+                //Check that not login (no change password)
+                login.get();
+                login.loginFail(newUser.username, newUser.password);
+
+            });
+
+        });
+    });
+
+    it('bbb-363:register:The legal tutor accept', function() {
+        //check bloqsproject
+        var browserEmail = browser.forkNewDriverInstance(),
+        userName,
+        userLastName,
+        dniTutor;
+
+        browserEmail.ignoreSynchronization = true;
+
+        register.getExternalProviderEmail(browserEmail).then(function(value) {
+            var email = value,
+                newUser = register.generateUser(true);
+            browserEmail.ignoreSynchronization = false;
+
+            register.get();
+            register.createAccount(newUser.username, newUser.userEmail, newUser.password, newUser.day, newUser.month, newUser.year, true, true,
+            'tutorName','tutorSurname',email);
+            browser.sleep('3000');
+            login.logout();
+
+            browserEmail.ignoreSynchronization = true;
+
+            var $2 = browserEmail.$;
+            globalFunctions.scrollBottomPage(browserEmail).then(function() {
+                browserEmail.sleep(3000);
+                $2('#msg_1 > td:nth-child(2)').click();
+                //Open popup email send
+                browserEmail.sleep(5000);
+                $2('#modalMessage > div.modal-body > a').click();
+                //#modalMessage > div.modal-body > a
+
+                //Other tab
+                browserEmail.ignoreSynchronization = false;
+                userName='Pepito';
+                userLastName='Grillo';
+                dniTutor='45454545A';
+                $2(cookies.cookiesBar.elementArrayFinder_.locator_.value).click();
+                $2(register.under14Name.elementArrayFinder_.locator_.value).sendKeys(userName);
+                $2(register.under14Lastname.elementArrayFinder_.locator_.value).sendKeys(userLastName);
+                $2(register.under14TutorDni.elementArrayFinder_.locator_.value).sendKeys(dniTutor);
+                $2('input.btn').click();
+                browser.sleep(vars.timeToWaitAutoSave);
+
+                //Check that not login (no change password)
+                login.get();
+                login.login(newUser.username, newUser.password);
+                account.get();
+                expect(account.firstname.getAttribute('value')).toEqual(userName);
+                expect(account.lastname.getAttribute('value')).toEqual(userLastName);
+                login.logout();
+            });
+
+        });
+    });
 });
