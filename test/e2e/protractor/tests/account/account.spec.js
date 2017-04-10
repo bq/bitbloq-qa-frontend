@@ -10,14 +10,16 @@ var GlobalFunctions = require('../commons/globalFunctions.js'),
     Account = require('./account.po.js'),
     Login = require('../login/login.po.js'),
     Modals = require('../modals/modals.po.js'),
-    Commons = require('../commons/commons.po.js');
+    Commons = require('../commons/commons.po.js'),
+    Alerts = require('../alerts/alerts.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     vars =  new Variables(),
     account = new Account(),
     login = new Login(),
     modals = new Modals(),
-    commons = new Commons();
+    commons = new Commons(),
+    alerts = new Alerts();
 
 globalFunctions.xmlReport('account');
 
@@ -83,5 +85,19 @@ describe('User account view', function() {
         expect(account.lastname.getAttribute('value')).toMatch('Garcia');
     });
 
+    it('bbb-322:account:Change the username', function() {
+        login.loginWithRandomUser();
+        account.get();
+        // var usernameNew = 'prueba'+ Number(new Date()) + Math.floor((Math.random() * 100000) + 1);
+        browser.sleep(vars.timeToWaitTab);
+        browser.ignoreSynchronization = true;
+        account.username.clear();
+        browser.sleep(vars.timeToWaitSendKeys);
+        account.username.sendKeys('ailatan');
+        browser.sleep(vars.timeToWaitAlert);
+        browser.ignoreSynchronization = false;
+        commons.expectToastTimeOut(commons.alertTextToast,alerts.alertTextDataAutosave);
+        login.logout();
 
+    });
 });
