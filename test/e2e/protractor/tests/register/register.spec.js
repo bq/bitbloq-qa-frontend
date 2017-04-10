@@ -663,16 +663,16 @@ describe('Register ', function() {
                 browserEmail.sleep(5000);
                 $2('#modalMessage > div.modal-body > a').click();
                 //#modalMessage > div.modal-body > a
-
-                //Other tab
                 browserEmail.ignoreSynchronization = false;
 
                 $2(cookies.cookiesBar.elementArrayFinder_.locator_.value).click();
                 $2('div > button[name="cancelform"]').click();
 
-                browser.sleep(vars.timeToWaitAutoSave);
-
-                //Check that not login (no change password)
+                browserEmail.ignoreSynchronization = true;
+                browserEmail.sleep(vars.timeToWaitAlert);
+                expect($2(commons.alertTextToast.elementArrayFinder_.locator_.value).isDisplayed()).toBe(true);
+                expect($2(commons.alertTextToast.elementArrayFinder_.locator_.value).getText()).toMatch(alerts.alertTextAuthorizationDenied);
+                browserEmail.ignoreSynchronization = false;
                 login.get();
                 login.loginFail(newUser.username, newUser.password);
 
@@ -722,7 +722,12 @@ describe('Register ', function() {
                 $2(register.under14Lastname.elementArrayFinder_.locator_.value).sendKeys(userLastName);
                 $2(register.under14TutorDni.elementArrayFinder_.locator_.value).sendKeys(dniTutor);
                 $2('input.btn').click();
-                browser.sleep(vars.timeToWaitAutoSave);
+
+                browserEmail.ignoreSynchronization = true;
+                browserEmail.sleep(vars.timeToWaitAlert);
+                expect($2(commons.alertTextToast.elementArrayFinder_.locator_.value).isDisplayed()).toBe(true);
+                expect($2(commons.alertTextToast.elementArrayFinder_.locator_.value).getText()).toMatch(alerts.alertTextAuthorization);
+                browserEmail.ignoreSynchronization = false;
 
                 //Check that not login (no change password)
                 login.get();
