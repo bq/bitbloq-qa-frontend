@@ -121,7 +121,7 @@ describe('Check makeActions actions in codeProjects', function() {
         });
     });
 
-    it('bbb-51:autosave:Verify that the autosave is launched when you change the information of the projects', function() {
+    it('bbb-51:autosaveLocal:Verify that the autosave is launched when you change the information of the projects', function() {
         var perfectImagePath = '../../res/perfectimage.jpg',
         perfectImageAbsolutePath = path.resolve(__dirname, perfectImagePath);
 
@@ -232,5 +232,43 @@ describe('Check makeActions actions in codeProjects', function() {
         login.logout();
     });
 
+    it('bbb-48:autosaveLocal:Verify that the autosave is launched when you add a board or a robot',function() {
+
+        var num;
+        login.loginWithRandomUser();
+
+        make.get();
+        browser.sleep(vars.timeToWaitTab);
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        make.hardwareTab.click();
+        make.boardsTab.click();
+        make.boardsElem.count().then(function(totalBoards) {
+            for (num=0; num<totalBoards; num+=1) {
+                make.boardsElem.get(num).click();
+                expect(make.isProjectSavedShown()).toBeTruthy();
+                browser.sleep(1000);
+                make.boardsTab.click();
+            }
+        });
+
+        browser.sleep(2000);
+
+        make.get();
+        browser.sleep(vars.timeToWaitTab);
+        make.hardwareTab.click();
+        make.robotsTab.click();
+        make.robotsElem.count().then(function(totalRobots) {
+            for (num=0; num<totalRobots; num+=1) {
+                make.robotsElem.get(num).click();
+                if (num>1) {
+                  modals.cancelDialog.click();
+                }
+                expect(make.isProjectSavedShown()).toBeTruthy();
+                browser.sleep(1000);
+                make.robotsTab.click();
+            }
+        });
+    });
 
 });
