@@ -242,13 +242,13 @@ describe('Check makeActions actions in codeProjects', function() {
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
         make.hardwareTab.click();
-        make.boardsTab.click();
-        make.boardsElem.count().then(function(totalBoards) {
+        hwtab.boardsTab.click();
+        hwtab.boardsElem.count().then(function(totalBoards) {
             for (num=0; num<totalBoards; num+=1) {
-                make.boardsElem.get(num).click();
+                hwtab.boardsElem.get(num).click();
                 expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.sleep(1000);
-                make.boardsTab.click();
+                hwtab.boardsTab.click();
             }
         });
 
@@ -257,18 +257,58 @@ describe('Check makeActions actions in codeProjects', function() {
         make.get();
         browser.sleep(vars.timeToWaitTab);
         make.hardwareTab.click();
-        make.robotsTab.click();
-        make.robotsElem.count().then(function(totalRobots) {
+        hwtab.robotsTab.click();
+        hwtab.robotsElem.count().then(function(totalRobots) {
             for (num=0; num<totalRobots; num+=1) {
-                make.robotsElem.get(num).click();
+                hwtab.robotsElem.get(num).click();
                 if (num>1) {
                   modals.cancelDialog.click();
                 }
                 expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.sleep(1000);
-                make.robotsTab.click();
+                hwtab.robotsTab.click();
             }
+            login.logout();
         });
     });
 
+    it('bbb-52:autosaveLocal:Verify that the autosave is launched when you modify the component name', function() {
+
+        var name = 'makeblockComponents';
+        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.bitbloq');
+        header.navLogo.click();
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]).then(function() {
+                expect(make.isProjectSavedShown()).toBeFalsy();
+                browser.ignoreSynchronization = true;
+                hwtab.lightSensor.click();
+                hwtab.hwComponentNameInput.clear().sendKeys('Cambio');
+                browser.ignoreSynchronization = false;
+                expect(make.isProjectSavedShown()).toBeTruthy();
+                browser.sleep(vars.timeToWaitTab);
+                name = 'VariosComponentes';
+                browser.sleep(vars.timeToWaitTab);
+                browser.close().then(browser.switchTo().window(handles[0]));
+            });
+        });
+        name = 'VariosComponentes';
+        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
+        header.navLogo.click();
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]).then(function() {
+                expect(make.isProjectSavedShown()).toBeFalsy();
+                browser.ignoreSynchronization = true;
+                hwtab.sampleBoton.click();
+                hwtab.hwComponentNameInput.clear().sendKeys('Cambio');
+                browser.ignoreSynchronization = false;
+                expect(make.isProjectSavedShown()).toBeTruthy();
+                login.logout();
+            });
+        });
+
+    });
 });

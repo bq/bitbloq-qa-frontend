@@ -21,10 +21,6 @@ var Make = function() {
     this.hardwareTab = $('[data-element="hardware-tab"]');
     this.softwareTab = $('[data-element="software-tab"]');
     this.infoTab = $('[data-element="info-tab"]');
-    this.boardsTab = $('[data-element="toolbox-boards"]');
-    this.robotsTab = $('[data-element="toolbox-robots"]');
-    this.boardsElem = element.all(by.repeater('board in hardware.boardList'));
-    this.robotsElem = element.all(by.repeater('robot in hardware.robotList'));
     this.bloqsTab = $('[data-element="bloqs-tab"]');
     this.codeTab = $('[data-element="code-tab"]');
 
