@@ -48,6 +48,7 @@ describe('User account view', function() {
 
         var randomUserInfo = login.loginWithRandomUser();
         account.get();
+        account.userTab.click();
         account.resetPasswordButton.click();
         browser.sleep(vars.timeToWaitFadeModals);
         modals.accountResetPasswordInput.sendKeys('123456');
@@ -67,6 +68,7 @@ describe('User account view', function() {
 
         var randomUserInfo = login.loginWithRandomUser();
         account.get();
+        account.userTab.click();
         account.firstname.clear().sendKeys('Manolo');
         browser.sleep(2000);
         commons.expectToastTimeOut(commons.alertTextToast);
@@ -86,17 +88,24 @@ describe('User account view', function() {
     });
 
     it('bbb-322:account:Change the username', function() {
-        login.loginWithRandomUser();
+        var user = login.loginWithRandomUser();
         account.get();
-        // var usernameNew = 'prueba'+ Number(new Date()) + Math.floor((Math.random() * 100000) + 1);
+        account.userTab.click();
+        var usernameNew = 'prueba'+ Number(new Date()) + Math.floor((Math.random() * 100000) + 1);
         browser.sleep(vars.timeToWaitTab);
         browser.ignoreSynchronization = true;
         account.username.clear();
         browser.sleep(vars.timeToWaitSendKeys);
-        account.username.sendKeys('ailatan');
+        account.username.sendKeys(usernameNew);
         browser.sleep(vars.timeToWaitAlert);
         browser.ignoreSynchronization = false;
         commons.expectToastTimeOut(commons.alertTextToast,alerts.alertTextDataAutosave);
+        login.logout();
+        login.get();
+        login.login(usernameNew,user.password);
+        account.get();
+        account.userTab.click();
+        expect(account.username.getAttribute('value')).toMatch(usernameNew);
         login.logout();
 
     });
