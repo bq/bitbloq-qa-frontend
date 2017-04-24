@@ -191,7 +191,8 @@ var Bloqs = function() {
         if (advanced) {
             that.advancedButtonToolbox.click();
         }
-        return browser.executeScript('document.querySelectorAll(\'[data-element="toolbox-container-' + section + '"] .' + bloqClass + '\')[0].setAttribute("bloqsuniquetag", "' + bloqsuniquetag + aleatorio + '")').then(function() {
+        browser.sleep(1000);
+        return browser.executeScript('document.querySelectorAll(\'[data-element="toolbox-' + section + 'Container"] .' + bloqClass + '\')[0].setAttribute("bloqsuniquetag", "' + bloqsuniquetag + aleatorio + '")').then(function() {
             browser.sleep(1000);
             return $('[bloqsuniquetag="' + bloqsuniquetag + aleatorio + '"]');
         });
