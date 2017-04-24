@@ -15,7 +15,7 @@ var Alerts = function() {
     this.alertTextDataAutosave ='¡Cambios guardados!';
 
     this.alertTextAuthorizationDenied = 'El usuario no ha sido autorizado y su cuenta ha sido bloqueada';
-    this.alertTextAuthorization = 'El usuario ha sido autorizado con exito';
+    this.alertTextAuthorization = 'El usuario ha sido autorizado con éxito';
 };
 
 module.exports = Alerts;
