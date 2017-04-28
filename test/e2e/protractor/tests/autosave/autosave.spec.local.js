@@ -290,6 +290,7 @@ describe('Check makeActions actions in codeProjects', function() {
                 browser.sleep(vars.timeToWaitTab);
                 name = 'VariosComponentes';
                 browser.sleep(vars.timeToWaitTab);
+                login.logout();
                 browser.close().then(browser.switchTo().window(handles[0]));
             });
         });
