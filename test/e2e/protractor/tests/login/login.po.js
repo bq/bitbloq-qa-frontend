@@ -26,10 +26,10 @@ var Login = function() {
     this.facebookEnter = element(by.id('loginbutton'));
     //Login Google
     this.googleButton = element(by.buttonText('Google +'));
-    this.googleNext = element(by.id('next'));
-    this.googleUser = element(by.id('Email'));
-    this.googlePassword = element(by.id('Passwd'));
-    this.googleEnter = element(by.id('signIn'));
+    this.googleNext = element(by.id('identifierNext'));
+    this.googleUser = element(by.id('identifierId'));
+    this.googlePassword = element(by.name('password'));
+    this.googleEnter = element(by.id('passwordNext'));
     this.googleAprove = element(by.id('submit_approve_access'));
     //Show validate elements
     this.showNoUserAndEmail = $('[data-element="show-no-user-and-email"]');
