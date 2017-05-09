@@ -28,7 +28,7 @@ var HwTab = function() {
     this.sampleBoton = $('[data-name="boton_0"]');
     this.lightSensor = $('[data-name="sensor_de_luz_0"]');
     this.bluetoothComp0 = $('[data-name="bluetooth_0"]');
-    this.bluetoothComp1 = $('[data-name="bluetooth_1"]');
+    this.bluetoothComp1 = $('[data-name="bluetooth_0_2"]');
 
 };
 
