@@ -203,9 +203,9 @@ module.exports = function(grunt) {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
                     args: {
-                        baseUrl: 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
+                        baseUrl: 'http://front.bitbloq.k8s-dev.bq.com/',
                         seleniumAddress: 'http://localhost:4444/wd/hub',
-                        suite: 'ALL_NO_LOCAL,enviroment'
+                        suite: 'ALL,enviroment'
                     }
                 }
             },
@@ -507,7 +507,7 @@ module.exports = function(grunt) {
         //Connecto testlink
         var TestlinkConnect = require('testlink-connect-proxy'),
             fs = require('fs'),
-            testlinkConnect = new TestlinkConnect('569c284c80d8b639342a8bfe90223095', 'http://testlink.bq.local/lib/api/xmlrpc/v1/xmlrpc.php'),
+            testlinkConnect = new TestlinkConnect('cfaf026e5f8af265b8b24133b13e8fcf', 'http://testlink.bq.local/lib/api/xmlrpc/v1/xmlrpc.php'),
             file = './target/report/resultTest.json';
 
         if (old) {
@@ -530,7 +530,7 @@ module.exports = function(grunt) {
                 notes: '',
                 status: 'p',
                 platformname: platform, // To check name and id --> getTestCasesForTestPlan
-                platform_id: 4,
+                platform_id: 31,
                 overwrite: true
             };
         };
@@ -578,7 +578,7 @@ module.exports = function(grunt) {
             function(callback) {
                 async.map(passedArray, reporter, function(err) {
                     if (err) {
-                        console.error(err);
+                        // console.error(err);
                     } else {
                         grunt.log.ok('All reports sent');
                     }
@@ -587,7 +587,7 @@ module.exports = function(grunt) {
             }
         ], function(err) {
             if (err) {
-                console.error(err);
+                // console.error(err);
             }
             done();
         });

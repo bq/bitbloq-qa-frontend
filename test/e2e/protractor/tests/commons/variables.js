@@ -12,29 +12,29 @@ var Variables = function() {
     this.password = '123456';
 
     //STATIC (no del) count google for login and forum admin
-    this.userGoogle = 'test2bitbloq@gmail.com';
-    this.userNameGoogle = 'qa2015';
-    this.firstNameGoogle = 'Test';
-    this.lastNameGoogle = 'Test';
-    this.passwordGoogle = 'test2016bitbloq';
+    this.userGoogle = 'test2bitbloq2@gmail.com';
+    this.userNameGoogle = 'qa2016';
+    this.firstNameGoogle = 'Pepito';
+    this.lastNameGoogle = 'Grillo';
+    this.passwordGoogle = '299SeptiembreBitbloq';
 
     //DINAMIC (del)
     this.userGoogleTwo = 'testprove2016@gmail.com';
-    this.userNameGoogleTwo = 'googerUserTest' + Number(new Date());
+    this.userNameGoogleTwo = 'googerUserTest';
     this.firstNameGoogleTwo = 'Benito';
     this.lastNameGoogleTwo = 'Camelas';
-    this.passwordGoogleTwo = 'test2016bitbloq';
+    this.passwordGoogleTwo = 'PruebasBitbloq2016';
 
     //count facebook for login
     this.emailFb = 'webpruebas.2@gmail.com';
-    this.passwordFb = 'webpruebas.2webpruebas.2';
+    this.passwordFb = '299SeptiembreBitbloq';
     this.userFb = 'Paco';
-    this.lastnameFb = 'Gómez';
+    this.lastnameFb = 'Gomez';
     this.usernameFb = 'webpruebas';
 
     //timers
     this.timeToWaitFadeModals = 2000;
-    this.timeToWaitAutoSave = 6600;
+    this.timeToWaitAutoSave = 7000;
     this.timeToWaitTab = 3000;
     this.timeToWaitMenu = 500;
     this.timeToWaitSendKeys = 1000;
