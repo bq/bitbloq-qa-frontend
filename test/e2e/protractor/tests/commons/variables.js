@@ -29,7 +29,7 @@ var Variables = function() {
     this.emailFb = 'webpruebas.2@gmail.com';
     this.passwordFb = '299SeptiembreBitbloq';
     this.userFb = 'Paco';
-    this.lastnameFb = 'Gomez';
+    this.lastnameFb = 'Gómez';
     this.usernameFb = 'webpruebas';
 
     //timers
