@@ -47,63 +47,88 @@ describe('Register ', function() {
         register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, true, true);
 
         // if ok go to #/projects
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
 
         login.logout();
 
     });
 
-    it('bbb-7:register:Cant register without checking conditions', function() {
-
+    it('bbb-2:register:The email is duplicated', function() {
         landing.enterButton.click();
 
         //Go to create account form
         register.createAccountButtn.click();
 
-        //Create account by Random User with not check conditions
         var user = register.generateUser(false);
-        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, false);
+        //Register with user in use
+        register.createAccount(user.username, user.userEmail, user.password, 31, 3, 1986, false, true);
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
+        login.logout();
+        login.get();
+        register.createAccountButtn.click();
+        register.createAccount(user.username + 'a', user.userEmail, user.password, 31, 3, 1986, false, true);
 
-        // Only show if not check conditions
-        expect(register.showNoCheck.isDisplayed()).toBeTruthy();
-
-        // if in #/login , --> Not in #/projects
+        // Only show if user is in use
+        expect(register.showEmailDuplicate.isDisplayed()).toBeTruthy();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
 
-        user = register.generateUser(true);
-        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, false, user.tutorName, user.tutorSurname, user.tutorEmail);
-
-        // Only show if not check conditions
-        expect(register.showNoCheck.isDisplayed()).toBeTruthy();
-
-        // if in #/login , --> Not in #/projects
+        login.get();
+        register.createAccountButtn.click();
+        var useryoung = register.generateUser(true);
+        register.createAccount(useryoung.username, user.userEmail, useryoung.password, useryoung.day, useryoung.month, useryoung.year, false, true, useryoung.tutorName, useryoung.tutorSurname, useryoung.tutorEmail);
+        expect(register.showEmailDuplicate.isDisplayed()).toBeTruthy();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
 
     });
 
-    it('bbb-5:register:Cant register without an user name', function() {
-        landing.enterButton.click();
+    it('bbb-3:register:Verify remember password email', function() {
 
-        //Go to create account form
-        register.createAccountButtn.click();
+        //check bloqsproject
+        var browserEmail = browser.forkNewDriverInstance();
+        browserEmail.ignoreSynchronization = true;
 
-        //Create account by Random User with not user
-        var user = register.generateUser(false);
-        register.createAccount('', user.userEmail, user.password, user.day, user.month, user.year, true, true);
+        register.getExternalProviderEmail(browserEmail).then(function(value) {
+            var email = value,
+                newUser = register.generateUser();
+            browserEmail.ignoreSynchronization = false;
 
-        // Only show if not user in form
-        expect(register.showNoUser.isDisplayed()).toBeTruthy();
+            register.get();
+            register.createAccount(newUser.username, email, newUser.password, newUser.day, newUser.month, newUser.year, true, true);
+            browser.sleep('3000');
+            login.logout();
+            login.get();
+            login.user.sendKeys(email);
+            login.forgotPasswordButton.click();
+            login.emailToSendInput.sendKeys(email);
+            login.emailToSendButton.click();
 
-        // if in #/login , --> Not in #/projects
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+            browser.sleep('9000');
 
-        user = register.generateUser(true);
-        register.createAccount('', user.userEmail, user.password, user.day, user.month, user.year, false, false, user.tutorName, user.tutorSurname, user.tutorEmail);
+            browserEmail.ignoreSynchronization = true;
 
-        // Only show if not user in form
-        expect(register.showNoUser.isDisplayed()).toBeTruthy();
-        // if in #/login , --> Not in #/projects
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+            var $2 = browserEmail.$;
+            globalFunctions.scrollBottomPage(browserEmail).then(function() {
+                $2('#msg_1 > td:nth-child(2)').click();
+                //Open popup email send
+                browserEmail.sleep(5000);
+                $2('#modalMessage > div.modal-body > a').click();
+                //#modalMessage > div.modal-body > a
+
+
+                //Switch to popup
+                browserEmail.ignoreSynchronization = false;
+                //News passwords
+                $2(register.resetPasswordMainInput.elementArrayFinder_.locator_.value).sendKeys('123456');
+                $2(register.resetPasswordRepeatInput.elementArrayFinder_.locator_.value).sendKeys('123456');
+                $2(register.resetPasswordOkButton.elementArrayFinder_.locator_.value).click();
+                browser.sleep(vars.timeToWaitAutoSave);
+                //go back to the main window && login wiht new passwords
+                login.get();
+                login.login(newUser.username, '123456');
+                login.logout();
+
+            });
+        });
 
     });
 
@@ -117,7 +142,7 @@ describe('Register ', function() {
         var user = register.generateUser(false);
         //Register with user in use
         register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, true, true);
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
         login.logout();
 
         login.get();
@@ -154,6 +179,32 @@ describe('Register ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
     });
 
+    it('bbb-5:register:Cant register without an user name', function() {
+        landing.enterButton.click();
+
+        //Go to create account form
+        register.createAccountButtn.click();
+
+        //Create account by Random User with not user
+        var user = register.generateUser(false);
+        register.createAccount('', user.userEmail, user.password, user.day, user.month, user.year, true, true);
+
+        // Only show if not user in form
+        expect(register.showNoUser.isDisplayed()).toBeTruthy();
+
+        // if in #/login , --> Not in #/projects
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+
+        user = register.generateUser(true);
+        register.createAccount('', user.userEmail, user.password, user.day, user.month, user.year, false, false, user.tutorName, user.tutorSurname, user.tutorEmail);
+
+        // Only show if not user in form
+        expect(register.showNoUser.isDisplayed()).toBeTruthy();
+        // if in #/login , --> Not in #/projects
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+
+    });
+
     it('bbb-6:register:validate INCORRECT FORMAT USER ', function() {
 
         landing.enterButton.click();
@@ -184,6 +235,34 @@ describe('Register ', function() {
         expect(register.showInvalidUser.isDisplayed()).toBeTruthy();
         register.createAccount('*/*/*-&%', user.userEmail, user.password, user.day, user.month, user.year, false, false, user.tutorName, user.tutorSurname, user.tutorEmail);
         expect(register.showInvalidUser.isDisplayed()).toBeTruthy();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+
+    });
+
+    it('bbb-7:register:Cant register without checking conditions', function() {
+
+        landing.enterButton.click();
+
+        //Go to create account form
+        register.createAccountButtn.click();
+
+        //Create account by Random User with not check conditions
+        var user = register.generateUser(false);
+        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, false);
+
+        // Only show if not check conditions
+        expect(register.showNoCheck.isDisplayed()).toBeTruthy();
+
+        // if in #/login , --> Not in #/projects
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+
+        user = register.generateUser(true);
+        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, false, user.tutorName, user.tutorSurname, user.tutorEmail);
+
+        // Only show if not check conditions
+        expect(register.showNoCheck.isDisplayed()).toBeTruthy();
+
+        // if in #/login , --> Not in #/projects
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
 
     });
@@ -348,105 +427,7 @@ describe('Register ', function() {
         register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, true, user.tutorName, user.tutorSurname, user.tutorEmail);
 
         // if in #/login , --> Not in #/projects
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
-    });
-
-    it('bbb-355:register:the tutor email match to student email', function() {
-
-        landing.enterButton.click();
-
-        //Go to create account form
-        register.createAccountButtn.click();
-
-        var user = register.generateUser(true);
-        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, true, user.tutorName, user.tutorSurname, user.userEmail);
-        expect(register.showSameEmail.isDisplayed()).toBeTruthy();
-        // if in #/login , --> Not in #/projects
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
-    });
-
-    it('bbb-356:register:Register without tutor email', function() {
-
-        landing.enterButton.click();
-
-        //Go to create account form
-        register.createAccountButtn.click();
-
-        var user = register.generateUser(true);
-        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, true, user.tutorName, user.tutorSurname, '');
-        expect(register.showNoTutorEmail.isDisplayed()).toBeTruthy();
-        // if in #/login , --> Not in #/projects
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
-    });
-
-    it('bbb-357:register:Register with incorrect tutor email', function() {
-
-        landing.enterButton.click();
-
-        //Go to create account form
-        register.createAccountButtn.click();
-
-        var user = register.generateUser(true);
-        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, true, user.tutorName, user.tutorSurname, 'aaaaaaaaaaaaaaaaaaaaaaa.es');
-        expect(register.showInvalidTutorEmail.isDisplayed()).toBeTruthy();
-        // if in #/login , --> Not in #/projects
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
-    });
-
-    it('bbb-358:register:Register without tutor name', function() {
-
-        landing.enterButton.click();
-
-        //Go to create account form
-        register.createAccountButtn.click();
-
-        var user = register.generateUser(true);
-        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, true, '', user.tutorSurname, user.tutorEmail);
-        expect(register.showNoNametutor.isDisplayed()).toBeTruthy();
-        // if in #/login , --> Not in #/projects
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
-    });
-
-    it('bbb-359:register:Register without tutor surname', function() {
-
-        landing.enterButton.click();
-
-        //Go to create account form
-        register.createAccountButtn.click();
-
-        var user = register.generateUser(true);
-        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, true, user.tutorName, '', user.tutorEmail);
-        expect(register.showNoSurnametutor.isDisplayed()).toBeTruthy();
-        // if in #/login , --> Not in #/projects
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
-    });
-
-    it('bbb-2:register:The email is duplicated', function() {
-        landing.enterButton.click();
-
-        //Go to create account form
-        register.createAccountButtn.click();
-
-        var user = register.generateUser(false);
-        //Register with user in use
-        register.createAccount(user.username, user.userEmail, user.password, 31, 3, 1986, false, true);
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
-        login.logout();
-        login.get();
-        register.createAccountButtn.click();
-        register.createAccount(user.username + 'a', user.userEmail, user.password, 31, 3, 1986, false, true);
-
-        // Only show if user is in use
-        expect(register.showEmailDuplicate.isDisplayed()).toBeTruthy();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
-
-        login.get();
-        register.createAccountButtn.click();
-        var useryoung = register.generateUser(true);
-        register.createAccount(useryoung.username, user.userEmail, useryoung.password, useryoung.day, useryoung.month, useryoung.year, false, true, useryoung.tutorName, useryoung.tutorSurname, useryoung.tutorEmail);
-        expect(register.showEmailDuplicate.isDisplayed()).toBeTruthy();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
-
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
     });
 
     it('bbb-14:register:Check that a checkbox appears to indicate that you are a teacher', function() {
@@ -456,67 +437,18 @@ describe('Register ', function() {
         var user = register.generateUser(false);
         //Register with user in use and check newsleettter
         register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, true, true);
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
         login.logout();
         login.get();
         register.createAccountButtn.click();
         user = register.generateUser(true);
         register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, true, true, user.tutorName, user.tutorSurname, user.tutorEmail);
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
         login.logout();
 
     });
 
-    it('bbb-3:register:Verify remember password email', function() {
 
-        //check bloqsproject
-        var browserEmail = browser.forkNewDriverInstance();
-        browserEmail.ignoreSynchronization = true;
-
-        register.getExternalProviderEmail(browserEmail).then(function(value) {
-            var email = value,
-                newUser = register.generateUser();
-            browserEmail.ignoreSynchronization = false;
-
-            register.get();
-            register.createAccount(newUser.username, email, newUser.password, newUser.day, newUser.month, newUser.year, true, true);
-            browser.sleep('3000');
-            login.logout();
-            login.get();
-            login.user.sendKeys(email);
-            login.forgotPasswordButton.click();
-            login.emailToSendInput.sendKeys(email);
-            login.emailToSendButton.click();
-
-            browser.sleep('9000');
-
-            browserEmail.ignoreSynchronization = true;
-
-            var $2 = browserEmail.$;
-            globalFunctions.scrollBottomPage(browserEmail).then(function() {
-                $2('#msg_1 > td:nth-child(2)').click();
-                //Open popup email send
-                browserEmail.sleep(5000);
-                $2('#modalMessage > div.modal-body > a').click();
-                //#modalMessage > div.modal-body > a
-
-
-                //Switch to popup
-                browserEmail.ignoreSynchronization = false;
-                //News passwords
-                $2(register.resetPasswordMainInput.elementArrayFinder_.locator_.value).sendKeys('123456');
-                $2(register.resetPasswordRepeatInput.elementArrayFinder_.locator_.value).sendKeys('123456');
-                $2(register.resetPasswordOkButton.elementArrayFinder_.locator_.value).click();
-                browser.sleep(vars.timeToWaitAutoSave);
-                //go back to the main window && login wiht new passwords
-                login.get();
-                login.login(newUser.username, '123456');
-                login.logout();
-
-            });
-        });
-
-    });
 
     it('bbb-15:register:Check that link recovery password only use one time', function() {
 
@@ -634,6 +566,76 @@ describe('Register ', function() {
         login.emailToSendInput.sendKeys(email);
         login.emailToSendButton.click();
         expect(login.showEmailIncorrect.isDisplayed()).toBeTruthy();
+    });
+
+    it('bbb-355:register:the tutor email match to student email', function() {
+
+        landing.enterButton.click();
+
+        //Go to create account form
+        register.createAccountButtn.click();
+
+        var user = register.generateUser(true);
+        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, true, user.tutorName, user.tutorSurname, user.userEmail);
+        expect(register.showSameEmail.isDisplayed()).toBeTruthy();
+        // if in #/login , --> Not in #/projects
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+    });
+
+    it('bbb-356:register:Register without tutor email', function() {
+
+        landing.enterButton.click();
+
+        //Go to create account form
+        register.createAccountButtn.click();
+
+        var user = register.generateUser(true);
+        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, true, user.tutorName, user.tutorSurname, '');
+        expect(register.showNoTutorEmail.isDisplayed()).toBeTruthy();
+        // if in #/login , --> Not in #/projects
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+    });
+
+    it('bbb-357:register:Register with incorrect tutor email', function() {
+
+        landing.enterButton.click();
+
+        //Go to create account form
+        register.createAccountButtn.click();
+
+        var user = register.generateUser(true);
+        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, true, user.tutorName, user.tutorSurname, 'aaaaaaaaaaaaaaaaaaaaaaa.es');
+        expect(register.showInvalidTutorEmail.isDisplayed()).toBeTruthy();
+        // if in #/login , --> Not in #/projects
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+    });
+
+    it('bbb-358:register:Register without tutor name', function() {
+
+        landing.enterButton.click();
+
+        //Go to create account form
+        register.createAccountButtn.click();
+
+        var user = register.generateUser(true);
+        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, true, '', user.tutorSurname, user.tutorEmail);
+        expect(register.showNoNametutor.isDisplayed()).toBeTruthy();
+        // if in #/login , --> Not in #/projects
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
+    });
+
+    it('bbb-359:register:Register without tutor surname', function() {
+
+        landing.enterButton.click();
+
+        //Go to create account form
+        register.createAccountButtn.click();
+
+        var user = register.generateUser(true);
+        register.createAccount(user.username, user.userEmail, user.password, user.day, user.month, user.year, false, true, user.tutorName, '', user.tutorEmail);
+        expect(register.showNoSurnametutor.isDisplayed()).toBeTruthy();
+        // if in #/login , --> Not in #/projects
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
     });
 
     it('bbb-362:register:The legal tutor doesnt accept', function() {
