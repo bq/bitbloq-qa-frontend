@@ -37,45 +37,6 @@ describe('State ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-300:state:Verify that the empty bloqsproject isnt saved', function() {
-        make.get();
-        modals.attentionContinueGuest.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        modals.rejectTour();
-        browser.sleep(vars.timeToWaitFadeModals);
-        login.loginFromHeader('bloqsproject');
-        modals.rejectTour();
-        browser.sleep(vars.timeToWaitFadeModals);
-        globalFunctions.navigatorLanguage()
-            .then(function(language) {
-                if (language === 'es') {
-                    expect(make.projectName.getText()).toEqual(vars.nameNewProject);
-                } else {
-                    expect(make.projectName.getText()).toEqual(vars.nameNewProjectEN);
-                }
-            });
-        projects.get();
-        expect(projects.getProjectCount()).toBe(0);
-        login.logout();
-    });
-
-    it('bbb-301:state:Verify that the empty codeproject isnt saved', function() {
-        make.get();
-        modals.attentionContinueGuest.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        modals.rejectTour();
-        browser.sleep(vars.timeToWaitFadeModals);
-        make.softwareTab.click();
-        browser.sleep(vars.timeToWaitTab);
-        make.codeTab.click();
-        make.softwareEditCode.click();
-        modals.modalAlertOk.click();
-        login.loginFromHeader('codeproject');
-        projects.get();
-        expect(projects.getProjectCount()).toBe(0);
-        login.logout();
-    });
-
     it('bbb-291:state:See a explore tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
@@ -235,6 +196,45 @@ describe('State ', function() {
             expect(browser.getCurrentUrl()).toEqual(url);
         });
 
+    });
+
+    it('bbb-300:state:Verify that the empty bloqsproject isnt saved', function() {
+        make.get();
+        modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        login.loginFromHeader('bloqsproject');
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        globalFunctions.navigatorLanguage()
+            .then(function(language) {
+                if (language === 'es') {
+                    expect(make.projectName.getText()).toEqual(vars.nameNewProject);
+                } else {
+                    expect(make.projectName.getText()).toEqual(vars.nameNewProjectEN);
+                }
+            });
+        projects.get();
+        expect(projects.getProjectCount()).toBe(0);
+        login.logout();
+    });
+
+    it('bbb-301:state:Verify that the empty codeproject is saved', function() {
+        make.get();
+        modals.attentionContinueGuest.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        make.softwareTab.click();
+        browser.sleep(vars.timeToWaitTab);
+        make.codeTab.click();
+        make.softwareEditCode.click();
+        modals.modalAlertOk.click();
+        login.loginFromHeader('codeproject');
+        projects.get();
+        expect(projects.getProjectCount()).toBe(1);
+        login.logout();
     });
 
     it('bbb-302:state:Check login and back to where you were(Foro)', function() {
