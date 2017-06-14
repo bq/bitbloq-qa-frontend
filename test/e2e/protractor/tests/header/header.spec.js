@@ -34,7 +34,7 @@ describe('Language', function() {
 
     //globalFunctions.xmlReport('header');
 
-    xit('bbb-188:header:Test language change', function() {
+    it('bbb-188:header:Test language change', function() {
 
         login.get();
         var randomUserCredentials = register.generateUser();
@@ -77,7 +77,7 @@ describe('Navbar --> ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bbb-189:header:Elements if no login --> Explora, aprende, foro, entrar', function() {
+    it('bbb-189:header:Elements if no login --> Explora, aprende, foro, entrar', function() {
 
         //show always
         make.get();
