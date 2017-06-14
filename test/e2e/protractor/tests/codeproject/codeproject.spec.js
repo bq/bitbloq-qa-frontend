@@ -79,7 +79,7 @@ describe('Test Codeproject verify', function() {
         make.softwareEditCode.click();
 
         modals.modalAlertOk.click();
-        browser.sleep(vars.timeToWaitAutoSave);
+        //browser.sleep(vars.timeToWaitAutoSave);
 
         commons.expectToastTimeOut(commons.editToast);
         login.logout();
