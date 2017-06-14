@@ -27,7 +27,7 @@ describe('User account view', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-43:accountLocalXit:Verify fields from new google user', function() {
+    xit('bbb-43:accountLocalXit:Verify fields from new google user', function() {
 
         landing.enterButton.click();
         var googleAccount = vars.account('google');

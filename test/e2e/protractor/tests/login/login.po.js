@@ -31,6 +31,7 @@ var Login = function() {
     this.googlePassword = element(by.name('password'));
     this.googleEnter = element(by.id('passwordNext'));
     this.googleAprove = element(by.id('submit_approve_access'));
+
     //Show validate elements
     this.showNoUserAndEmail = $('[data-element="show-no-user-and-email"]');
     this.showNoPass = $('[data-element="show-no-pass"]');
@@ -62,7 +63,7 @@ var Login = function() {
         this.password.sendKeys(password);
         this.loginButton.click();
         //wait succesfull login page
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
     };
 
     this.loginFail = function(user, password) {
@@ -116,7 +117,9 @@ var Login = function() {
      */
     this.loginGoogle = function(email, password) {
 
-        this.googleButton.click();
+        this.googleButton.click().then(function(){
+            console.log('click2');
+        });;
 
         browser.sleep(vars.timeToWaitTab);
 
@@ -132,26 +135,35 @@ var Login = function() {
             //TODO refactor
             that.googleUser.sendKeys(email);
             browser.sleep(1000);
-            that.googleNext.click();
+            that.googleNext.click().then(function(){
+            console.log('clic next');
+        });
             browser.sleep(1000);
             that.googlePassword.sendKeys(password);
             browser.sleep(1000);
             that.googleEnter.click();
             browser.sleep(5000);
 
-            if (browser.baseUrl === 'http://localhost:9000/') {
+           /* if (browser.baseUrl === 'http://localhost:9000/') {
                 that.googleAprove.click();
-            }
+            }*/
+            that.googleAprove.click();
 
-            browser.sleep(vars.timeToWaitTab);
+            /*browser.sleep(vars.timeToWaitTab).then(function(){
+            console.log('end sleep login');
+        });*/
 
             // go back to the main window
-            browser.switchTo().window(handles[0]);
+            browser.switchTo().window(handles[0]).then(function(){
+            console.log('end google login');
+        });
 
             //Not ignore sync, return angular
             browser.ignoreSynchronization = false;
         });
-
+this.googleButton.click().then(function(){
+            console.log('click3');
+        });;
     };
 
     this.loginWithRandomUser = function(young) {
@@ -185,7 +197,7 @@ var Login = function() {
 
         //wait succesfull login page
         browser.sleep(1000);
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
 
         //Add return for reuse user if is necessary
         return {
@@ -213,7 +225,7 @@ var Login = function() {
             true,
             true);
         //wait succesfull login page
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
 
         //Add return for reuse user if is necessary
         return {

@@ -28,13 +28,14 @@ describe('Login, specs only in local ', function() {
     it('bbb-264:Login with a Google account', function() {
 
         landing.get();
-        landing.enterButton.click();
-
+        landing.enterButton.click().then(function(){
+            console.log('click hereeeeee');
+        });
+        
         login.loginGoogle(vars.account('google').user, vars.account('google').password);
 
         // if in #/login , --> Not in #/projects
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
-
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
         login.logout();
 
     });
