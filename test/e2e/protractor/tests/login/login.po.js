@@ -119,7 +119,7 @@ var Login = function() {
 
         this.googleButton.click().then(function(){
             console.log('click2');
-        });;
+        });
 
         browser.sleep(vars.timeToWaitTab);
 
@@ -163,7 +163,7 @@ var Login = function() {
         });
 this.googleButton.click().then(function(){
             console.log('click3');
-        });;
+        });
     };
 
     this.loginWithRandomUser = function(young) {

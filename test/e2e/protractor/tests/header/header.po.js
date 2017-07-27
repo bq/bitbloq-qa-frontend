@@ -9,7 +9,7 @@ var Header = function() {
     this.changeLanguage = $('[data-element="header-change-language"]');
     this.menuLearn = $('[data-element="header-menu-learn"]');
     this.enterButton = $('[data-element="header-enterbutton"]');
-    this.centerModeBanner = $('[data-element="header-centermode"]');
+    this.centerModeBanner = $('[data-element="header-menu-create-center"]');
     //navbar
     this.navLogo = $('[data-element="nav-logo"]');
     this.navProjects = $('[data-element="nav-projects"]');

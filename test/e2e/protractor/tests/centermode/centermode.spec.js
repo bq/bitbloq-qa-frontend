@@ -26,23 +26,16 @@ describe('Center mode', function() {
 
     it('bbb-389:centermode:Create a center', function() {
         login.loginWithRandomUser(false);
-        browser.sleep(vars.timeToWaitTab);
+        header.openHeaderMenu.click();
         header.centerModeBanner.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        modals.extraOkDialog.click();
-        modals.inputNameCenter.sendKeys('hola');
-        browser.sleep(vars.timeToSendKeys);
-        modals.inputLocationCenter.sendKeys('dir');
-        browser.sleep(vars.timeToSendKeys);
-        modals.inputTelephoneCenter.sendKeys('333333333');
-        browser.sleep(vars.timeToSendKeys);
         modals.okDialog.click();
-        browser.sleep(vars.timeToWaitTab);
+        modals.inputNameCenter.sendKeys('hola');
+        modals.inputLocationCenter.sendKeys('dir');
+        modals.inputTelephoneCenter.sendKeys('333333333');
+        modals.okDialog.click();
         expect(header.navCenter.isDisplayed()).toBe(true);
         expect(header.navClass.isDisplayed()).toBe(true);
-        expect(header.navExercise.isPresent()).toBe(false);
-        expect(header.navCenter.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/center');
-        expect(header.navClass.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/teacher');
+        expect(header.navExercise.isPresent()).toBe(true);
         login.logout();
     });
 

@@ -153,52 +153,6 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            mac: {
-                options: {
-                    args: {
-                        baseUrl: grunt.option('target'),
-                        seleniumAddress: 'http://172.16.30.18:4444/wd/hub',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            win32: {
-                options: {
-                    args: {
-                        baseUrl: grunt.option('target'),
-                        seleniumAddress: 'http://172.16.30.26:4444/wd/hub',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            win64: {
-                options: {
-                    args: {
-                        baseUrl: grunt.option('target'),
-                        seleniumAddress: 'http://172.16.30.23:4444/wd/hub',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            linux32: {
-                options: {
-                    args: {
-                        baseUrl: grunt.option('target'),
-                        seleniumAddress: 'http://172.16.30.25:4444/wd/hub',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            integration: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
-                    args: {
-                        baseUrl: 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        seleniumAddress: 'http://localhost:4444/wd/hub',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
             qa: {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
@@ -206,166 +160,6 @@ module.exports = function(grunt) {
                         baseUrl: 'http://front.bitbloq.k8s-dev.bq.com/',
                         seleniumAddress: 'http://localhost:4444/wd/hub',
                         suite: 'ALL,enviroment'
-                    }
-                }
-            },
-            next: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
-                    args: {
-                        baseUrl: 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        seleniumAddress: 'http://localhost:4444/wd/hub',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            mvp: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
-                    args: {
-                        baseUrl: 'http://mvp-bitbloq.bq.com/',
-                        seleniumAddress: 'http://localhost:4444/wd/hub',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            staging: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
-                    args: {
-                        baseUrl: 'http://staging-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        seleniumAddress: 'http://localhost:4444/wd/hub',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            saucelabs_integration: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_saucelabs.js',
-                    args: {
-                        baseUrl: 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            saucelabs_qa: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_saucelabs.js',
-                    args: {
-                        baseUrl: 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            saucelabs_mvp: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_saucelabs.js',
-                    args: {
-                        baseUrl: 'http://mvp-bitbloq.bq.com/',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            saucelabs_next: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_saucelabs.js',
-                    args: {
-                        baseUrl: 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            saucelabs_staging: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic_saucelabs.js',
-                    args: {
-                        baseUrl: 'http://staging-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            saucelabs_integration_all: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/allOS_saucelabs.js',
-                    args: {
-                        baseUrl: 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            saucelabs_qa_all: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/allOS_saucelabs.js',
-                    args: {
-                        baseUrl: 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            saucelabs_next_all: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/allOS_saucelabs.js',
-                    args: {
-                        baseUrl: 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            saucelabs_staging_all: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/allOS_saucelabs.js',
-                    args: {
-                        baseUrl: 'http://staging-bitbloq.com.s3-website-eu-west-1.amazonaws.com/',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            saucelabs_mvp_all: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/allOS_saucelabs.js',
-                    args: {
-                        baseUrl: 'http://mvp-bitbloq.bq.com/',
-                        suite: 'ALL_NO_LOCAL,enviroment'
-                    }
-                }
-            },
-            jenkins_qa: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/jenkins.js',
-                    args: {
-                        baseUrl: 'http://qa-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
-                    }
-                }
-            },
-            jenkins_next: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/jenkins.js',
-                    args: {
-                        baseUrl: 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
-                    }
-                }
-            },
-            jenkins_int: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/jenkins.js',
-                    args: {
-                        baseUrl: 'http://int-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
-                    }
-                }
-            },
-            jenkins_staging: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/jenkins.js',
-                    args: {
-                        baseUrl: 'http://staging-bitbloq.com.s3-website-eu-west-1.amazonaws.com/'
-                    }
-                }
-            },
-            jenkins_mvp: {
-                options: {
-                    configFile: path.resolve() + '/test/e2e/protractor/confs/jenkins.js',
-                    args: {
-                        baseUrl: 'http://mvp-bitbloq.bq.com/'
                     }
                 }
             }
@@ -390,32 +184,13 @@ module.exports = function(grunt) {
     grunt.registerTask('listFiles', ['exec:list_all_files']);
 
     grunt.registerTask('test', 'Protractor e2e funcional test (Selenium) task.', function(env) {
-        //remember send --saucelabs=true --all or --all argument will be lost
-        var saucelabs = grunt.option('saucelabs'),
-            all = grunt.option('all'),
-            tasks = ['jshint'];
+        var tasks = ['jshint'];
 
         env = env || 'local';
-
-        if (saucelabs) {
-            if (env === 'local') {
-                grunt.fatal('we can send ' + env + ' to SauceLabs');
-            } else {
-                console.log('all=' + all);
-                console.log('saucelabs=' + saucelabs);
-                if (all) {
-
-                    tasks.push('protractor:saucelabs_' + env + '_all');
-                } else {
-                    tasks.push('protractor:saucelabs_' + env);
-                }
-
-            }
-        } else {
-            tasks.push('clean:target');
-            tasks.push('protractor_webdriver:e2eStart');
-            tasks.push('protractor:' + env);
-        }
+        
+        tasks.push('clean:target');
+        tasks.push('protractor_webdriver:e2eStart');
+        tasks.push('protractor:' + env);
 
         grunt.task.run(tasks);
 

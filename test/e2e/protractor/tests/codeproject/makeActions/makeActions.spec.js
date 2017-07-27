@@ -46,28 +46,28 @@ describe('Check makeActions actions in codeProjects', function() {
         browser.sleep(vars.timeToWaitFadeModals);
         //FILE
         makeActions.menuFile.click();
-        expect(makeActions.menuNewProject.getAttribute('disabled')).not.toBeTruthy("newProject")
-        expect(makeActions.menuNewProjectCode.getAttribute('disabled')).not.toBeTruthy("newProjectCode");
-        expect(makeActions.menuopenProject.getAttribute('disabled')).not.toBeTruthy("openProject");
-        expect(makeActions.menuChangeName.getAttribute('disabled')).not.toBeTruthy("changeName");
-        expect(makeActions.menuClone.getAttribute('disabled')).toBeTruthy("Clone");
-        expect(makeActions.menuExportArduino.getAttribute('disabled')).not.toBeTruthy("ExportArduino");
-        expect(makeActions.menuChangeLanguage.getAttribute('disabled')).not.toBeTruthy("ChangeLanguage");
+        expect(makeActions.menuNewProject.getAttribute('disabled')).not.toBeTruthy('newProject');
+        expect(makeActions.menuNewProjectCode.getAttribute('disabled')).not.toBeTruthy('newProjectCode');
+        expect(makeActions.menuopenProject.getAttribute('disabled')).not.toBeTruthy('openProject');
+        expect(makeActions.menuChangeName.getAttribute('disabled')).not.toBeTruthy('changeName');
+        expect(makeActions.menuClone.getAttribute('disabled')).toBeTruthy('Clone');
+        expect(makeActions.menuExportArduino.getAttribute('disabled')).not.toBeTruthy('ExportArduino');
+        expect(makeActions.menuChangeLanguage.getAttribute('disabled')).not.toBeTruthy('ChangeLanguage');
         //only enabled when a projects have an id
-        expect(makeActions.removeProject.getAttribute('disabled')).toBeTruthy("removeProject");
+        expect(makeActions.removeProject.getAttribute('disabled')).toBeTruthy('removeProject');
 
         //VIEW
         makeActions.menuView.click();
-        expect(makeActions.menuViewConsole.getAttribute('disabled')).not.toBeTruthy("ViewConsole");
-        expect(makeActions.menuViewWeb2board.getAttribute('disabled')).not.toBeTruthy("ViewWeb2Board");
-        expect(makeActions.menuViewPlotter.getAttribute('disabled')).not.toBeTruthy("viewPlotter");
+        expect(makeActions.menuViewConsole.getAttribute('disabled')).not.toBeTruthy('ViewConsole');
+        expect(makeActions.menuViewWeb2board.getAttribute('disabled')).not.toBeTruthy('ViewWeb2Board');
+        expect(makeActions.menuViewPlotter.getAttribute('disabled')).not.toBeTruthy('viewPlotter');
 
         //SHARE
         //TODO NEW SPEC PUBLISH AND THEN SHOW PRIVATE
         makeActions.menuShare.click();
-        expect(makeActions.menuSharePublish.getAttribute('disabled')).toBeTruthy("sharepublish"); //Tiene que estar deshabilitado hasta que se guarde
-        expect(makeActions.menuShareSocial.getAttribute('disabled')).toBeTruthy("sharesocial");
-        expect(makeActions.menuShareWithUsers.getAttribute('disabled')).toBeTruthy("sharewithusers");
+        expect(makeActions.menuSharePublish.getAttribute('disabled')).toBeTruthy('sharepublish'); //Tiene que estar deshabilitado hasta que se guarde
+        expect(makeActions.menuShareSocial.getAttribute('disabled')).toBeTruthy('sharesocial');
+        expect(makeActions.menuShareWithUsers.getAttribute('disabled')).toBeTruthy('sharewithusers');
 
         //HELP
         makeActions.menuHelp.click();
