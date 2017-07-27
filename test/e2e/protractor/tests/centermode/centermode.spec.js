@@ -25,7 +25,7 @@ describe('Center mode', function() {
     globalFunctions.afterTest();
 
     it('bbb-389:centermode:Create a center', function() {
-        login.loginWithRandomUser(false);
+        login.loginWithRandomUser();
         header.openHeaderMenu.click();
         header.centerModeBanner.click();
         modals.okDialog.click();
@@ -39,24 +39,17 @@ describe('Center mode', function() {
         login.logout();
     });
 
-    it('bbb-390:centermode:Create a center - <14', function() {
-        login.loginWithRandomUser(true);
-        browser.sleep(vars.timeToWaitTab);
-        header.centerModeBanner.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        expect(modals.extraOkDialog.isPresent()).toBe(false);
-        expect(modals.okDialog.isDisplayed()).toBe(true);
-        modals.okDialog.click();
-        modals.okDialog.click();
-        expect(header.navCenter.isPresent()).toBe(false);
-        expect(header.navClass.isPresent()).toBe(false);
-        expect(header.navExercise.isPresent()).toBe(true);
-        expect(header.navExercise.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/student');
+    it('bbb-390:centermode:Create a center by user <14', function() {
+        login.loginWithRandomUser({
+            youngThan14:true
+        });
+        header.openHeaderMenu.click();
+        expect(header.centerModeBanner.isPresent()).toBe(false);
         login.logout();
     });
 
     it('bbb-391:centermode:Create a center with empty fields', function() {
-        login.loginWithRandomUser(false);
+        login.loginWithRandomUser();
         browser.sleep(vars.timeToWaitTab);
         header.centerModeBanner.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -92,7 +85,7 @@ describe('Center mode', function() {
     });
 
     it('bbb-392:centermode:Create a center with wrong field', function() {
-        login.loginWithRandomUser(false);
+        login.loginWithRandomUser();
         browser.sleep(vars.timeToWaitTab);
         header.centerModeBanner.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -113,7 +106,7 @@ describe('Center mode', function() {
     });
 
     it('bbb-393:centermode:The user use center mode', function() {
-        login.loginWithRandomUser(false);
+        login.loginWithRandomUser();
         browser.sleep(vars.timeToWaitTab);
         header.centerModeBanner.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -131,7 +124,7 @@ describe('Center mode', function() {
     });
 
     it('bbb-394:centermode:The user doesnt use center mode', function() {
-        login.loginWithRandomUser(false);
+        login.loginWithRandomUser();
         browser.sleep(vars.timeToWaitTab);
         expect(header.centerModeBanner.isPresent()).toBe(true);
         expect(header.centerModeBanner.isDisplayed()).toBe(true);

@@ -166,11 +166,12 @@ this.googleButton.click().then(function(){
         });
     };
 
-    this.loginWithRandomUser = function(young) {
+    this.loginWithRandomUser = function(options) {
+        var options = options || {};
         this.get();
-        var randomUserCredentials = register.generateUser(young);
+        var randomUserCredentials = register.generateUser(options.youngThan14);
         register.createAccountButtn.click();
-        if (!young) {
+        if (!options.youngThan14) {
             register.createAccount(
                 randomUserCredentials.username,
                 randomUserCredentials.userEmail,

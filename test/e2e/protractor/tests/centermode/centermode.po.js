@@ -15,7 +15,7 @@ var login = new Login(),
 var CenterMode = function() {
 
     this.createHeadMaster = function(nameCenter) {
-        var user = login.loginWithRandomUser(false);
+        var user = login.loginWithRandomUser();
         browser.sleep(vars.timeToWaitTab);
         header.centerModeBanner.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -33,7 +33,7 @@ var CenterMode = function() {
     };
 
     this.createTeacher = function(headMaster) {
-        var teacher = login.loginWithRandomUser(false);
+        var teacher = login.loginWithRandomUser();
         browser.sleep(vars.timeToWaitTab);
         login.logout();
         browser.sleep(vars.timeToWaitTab);
@@ -45,7 +45,7 @@ var CenterMode = function() {
     };
 
     this.createStudent = function() {
-        var student = login.loginWithRandomUser(false);
+        var student = login.loginWithRandomUser();
         browser.sleep(vars.timeToWaitTab);
         header.centerModeBanner.click();
         browser.sleep(vars.timeToWaitFadeModals);
