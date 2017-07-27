@@ -50,58 +50,59 @@ describe('Center mode', function() {
 
     it('bbb-391:centermode:Create a center with empty fields', function() {
         login.loginWithRandomUser();
-        browser.sleep(vars.timeToWaitTab);
+        header.openHeaderMenu.click();
         header.centerModeBanner.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        modals.extraOkDialog.click();
+        
         modals.okDialog.click();
-        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error');
-        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error');
+        modals.okDialog.click();
+        
+        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error', '1');
+        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error','2');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error','3');
         modals.inputNameCenter.sendKeys('hola');
-        browser.sleep(vars.timeToSendKeys);
         modals.okDialog.click();
-        expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error');
-        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error');
+        
+        expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error','4');
+        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error','5');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error','6');
         modals.inputNameCenter.clear();
         modals.inputLocationCenter.sendKeys('dir');
-        browser.sleep(vars.timeToSendKeys);
         modals.okDialog.click();
-        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error');
-        expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error');
+        
+        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error','7');
+        expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error','8');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error','9');
         modals.inputNameCenter.clear();
         modals.inputLocationCenter.clear();
         modals.inputTelephoneCenter.sendKeys('333333333');
-        browser.sleep(vars.timeToSendKeys);
+
         modals.okDialog.click();
-        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error');
-        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).not.toContain('input--error');
+        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error','10');
+        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error','11');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).not.toContain('input--error','12');
+        
         modals.bladeClose.click();
-        browser.sleep(2000);
+        browser.sleep(vars.timeToWaitFadeModals);
         login.logout();
     });
 
     it('bbb-392:centermode:Create a center with wrong field', function() {
         login.loginWithRandomUser();
-        browser.sleep(vars.timeToWaitTab);
+        header.openHeaderMenu.click();
         header.centerModeBanner.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        modals.extraOkDialog.click();
-        modals.inputNameCenter.sendKeys('hola');
-        browser.sleep(vars.timeToSendKeys);
-        modals.inputLocationCenter.sendKeys('dir');
-        browser.sleep(vars.timeToSendKeys);
-        modals.inputTelephoneCenter.sendKeys('ee');
-        browser.sleep(vars.timeToSendKeys);
+        
         modals.okDialog.click();
-        expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error');
-        expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error');
+        modals.inputNameCenter.sendKeys('hola');
+        modals.inputLocationCenter.sendKeys('dir');
+        modals.inputTelephoneCenter.sendKeys('ee');
+        
+        modals.okDialog.click();
+        expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error', 'Name');
+        expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error', 'Location');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error', 'Phone');
         modals.bladeClose.click();
-        browser.sleep(2000);
+
+        browser.sleep(vars.timeToWaitFadeModals);
         login.logout();
     });
 
