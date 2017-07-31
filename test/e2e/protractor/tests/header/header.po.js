@@ -17,10 +17,13 @@ var Header = function() {
     this.navLearn = $('[data-element="nav-learn"]');
     this.navForum = $('[data-element="nav-forum"]');
 
+    this.navShowMoreMenu = $('[data-element="nav-show-menu"]');
+
     //centermode
     this.navCenter = $('[data-element="nav-center"]');
     this.navClass = $('[data-element="nav-class"]');
-    this.navExercise = $('[data-element="nav-exercise"]');
+    this.navExercise = $('[data-element="nav-exercises"]');
+    this.navTasks = $('[data-element="nav-exercise"]');
 
 };
 

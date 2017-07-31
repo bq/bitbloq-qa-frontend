@@ -28,11 +28,9 @@ var MyCenter = function() {
 
     this.addNewTeacher = function(email) {
         header.navCenter.click();
-        browser.sleep(vars.timeToWaitTab);
         this.newTeacherButton.click();
         modals.inputEmailsTeacher.all(by.css('input')).get(0).sendKeys(email.toLowerCase());
         browser.actions().sendKeys(protractor.Key.ENTER).perform();
-        browser.sleep(vars.timeToSendKeys);
         modals.okDialog.click();
         browser.sleep(vars.timeToWaitFadeModals);
     };

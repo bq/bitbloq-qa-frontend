@@ -167,7 +167,7 @@ this.googleButton.click().then(function(){
     };
 
     this.loginWithRandomUser = function(options) {
-        var options = options || {};
+        options = options || {};
         this.get();
         var randomUserCredentials = register.generateUser(options.youngThan14);
         register.createAccountButtn.click();

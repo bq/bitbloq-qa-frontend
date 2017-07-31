@@ -4,45 +4,121 @@ var Login = require('../login/login.po.js'),
     Header = require('../header/header.po.js'),
     Variables = require('../commons/variables.js'),
     Modals = require('../modals/modals.po.js'),
+    Register = require('../register/register.po.js'),
+    GlobalFunctions = require('../commons/globalFunctions.js'),
     MyCenter = require('./mycenter/myCenter.po.js');
 
 var login = new Login(),
+    register = new Register(),
     header = new Header(),
     modals = new Modals(),
     vars = new Variables(),
+    globalFunctions = new GlobalFunctions(),
     mycenter = new MyCenter();
 
 var CenterMode = function() {
 
-    this.createHeadMaster = function(nameCenter) {
+    this.createHeadMaster = function(options) {
+        options = options || {};
         var user = login.loginWithRandomUser();
-        browser.sleep(vars.timeToWaitTab);
+        header.openHeaderMenu.click();
         header.centerModeBanner.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        modals.extraOkDialog.click();
-        modals.inputNameCenter.sendKeys(nameCenter);
-        browser.sleep(vars.timeToSendKeys);
-        modals.inputLocationCenter.sendKeys('dir');
-        browser.sleep(vars.timeToSendKeys);
-        modals.inputTelephoneCenter.sendKeys('333333333');
-        browser.sleep(vars.timeToSendKeys);
         modals.okDialog.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        login.logout();
+        modals.inputNameCenter.sendKeys(options.nameCenter || this.createRandomCenterName());
+        modals.inputLocationCenter.sendKeys('dir');
+        modals.inputTelephoneCenter.sendKeys('333333333');
+        modals.okDialog.click();
+        expect(header.navCenter.isDisplayed()).toBe(true);
+        expect(header.navClass.isDisplayed()).toBe(true);
+        expect(header.navExercise.isPresent()).toBe(true);
+        
+        if(!options.keepLogin){
+            login.logout();
+        }
         return user;
     };
 
-    this.createTeacher = function(headMaster) {
-        var teacher = login.loginWithRandomUser();
-        browser.sleep(vars.timeToWaitTab);
-        login.logout();
-        browser.sleep(vars.timeToWaitTab);
-        login.get();
-        login.login(headMaster.user,headMaster.password);
-        mycenter.addNewTeacher(teacher.userEmail);
-        login.logout();
-        return teacher;
-    };
+    
+    this.createTeacher = function(options) {
+        options = options || {};
+        var teacher,
+            deferred = protractor.promise.defer(),
+            browserEmail = browser.forkNewDriverInstance();
+
+        browserEmail.ignoreSynchronization = true;
+
+        register.getExternalProviderEmail(browserEmail).then(function(email) {
+            teacher = register.generateUser();
+            teacher.userEmail = email;
+            browserEmail.ignoreSynchronization = false;
+
+            register.get();
+            register.createAccount(teacher.username, teacher.userEmail, teacher.password, teacher.day, teacher.month, teacher.year, true, true);
+            login.logout();
+            console.log('options.headMaster', options.headMaster);
+            if(!options.headMaster){
+                options.headMaster = this.createHeadMaster();
+            }
+            console.log('headMaster', options.headMaster);
+            login.get();
+            login.login(options.headMaster.userEmail,options.headMaster.password);
+            console.log('teacher', teacher);
+            mycenter.addNewTeacher(teacher.userEmail);
+            login.logout();
+
+            browserEmail.ignoreSynchronization = true;
+
+            var $2 = browserEmail.$;
+            globalFunctions.scrollBottomPage(browserEmail).then(function() {
+                browserEmail.sleep(5000);
+                $2('#msg_1 > td:nth-child(2)').click();
+                //Open popup email send
+                browserEmail.sleep(1000);
+                $2('#modalMessage > div.modal-body > a').click();
+
+                //Switch to popup
+                browserEmail.ignoreSynchronization = false;
+                //News passwords
+                $2(login.user.elementArrayFinder_.locator_.value).sendKeys(teacher.userEmail);
+                $2(login.password.elementArrayFinder_.locator_.value).sendKeys(teacher.password);
+                $2(login.loginButton.elementArrayFinder_.locator_.value).click();
+                browser.sleep('3000');
+
+                $2(modals.okDialog.elementArrayFinder_.locator_.value).click();
+                //go back to the main window && login wiht new passwords
+                login.get();
+                login.login(teacher.username, teacher.password);
+                //check
+                expect(header.navClass.isDisplayed()).toBe(true, 'Teacher creation fails- cant see "My classes" section');
+                expect(header.navExercise.isPresent()).toBe(true, 'Teacher creation fails- cant see "My Exercises" section');
+                if(!options.keepLogin){
+                    login.logout();
+                }
+                deferred.fulfill(teacher);
+
+            });
+        });
+        return deferred.promise;
+    }
+    // //Simply method, return teacher data
+    // this.createTeacher = function(options) {
+    //     options = options || {
+    //         headMaster: this.createHeadMaster()
+    //     };
+    //     var teacher = login.loginWithRandomUser();
+        
+        
+    //     login.logout();
+    //     login.get();
+    //     login.login(options.headMaster.user,options.headMaster.password);
+    //     mycenter.addNewTeacher(teacher.userEmail);
+        
+    //     if(!options.keepLogin){
+    //         login.logout();
+    //     }
+        
+    //     return teacher;
+    // };
 
     this.createStudent = function() {
         var student = login.loginWithRandomUser();
@@ -54,6 +130,10 @@ var CenterMode = function() {
         browser.sleep(vars.timeToWaitFadeModals);
         login.logout();
         return student;
+    };
+
+    this.createRandomCenterName = function(){
+        return 'centerTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1);
     };
 
 
