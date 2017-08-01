@@ -103,46 +103,48 @@ describe('Center mode', function() {
     });
 
     it('bbb-395:centermode:The tabs of center mode', function() {
-        
-        var headMaster = centermode.createHeadMaster({keepLogin:true});
-
-        expect(header.navCenter.isDisplayed()).toBe(true, 'My center');
-        expect(header.navClass.isDisplayed()).toBe(true, 'My classes');
-        expect(header.navExercise.isPresent()).toBe(true, 'My Exercises');
-        header.navShowMoreMenu.click();
+        //test student (default user)
+        login.loginWithRandomUser();
+        expect(header.navShowMoreMenu.isPresent()).toBe(false, 'Extra menu');
         expect(header.navProjects.isDisplayed()).toBe(true, 'Projects');
         expect(header.navTasks.isDisplayed()).toBe(true, 'Tasks');
         expect(header.navExplore.isDisplayed()).toBe(true, 'Explore');
         expect(header.navLearn.isDisplayed()).toBe(true, 'Learn');
         expect(header.navForum.isDisplayed()).toBe(true, 'Forum');
-        
         login.logout();
 
+        //test headmaster
+        var headMaster = centermode.createHeadMaster({keepLogin:true});
+
+        expect(header.navCenter.isDisplayed()).toBe(true, 'HeadMaster - My center');
+        expect(header.navClass.isDisplayed()).toBe(true, 'HeadMaster - My classes');
+        expect(header.navExercise.isDisplayed()).toBe(true, 'HeadMaster - My Exercises');
+        header.navShowMoreMenu.click();
+        expect(header.navProjects.isDisplayed()).toBe(true, 'HeadMaster - Projects');
+        expect(header.navTasks.isDisplayed()).toBe(true, 'HeadMaster - Tasks');
+        expect(header.navExplore.isDisplayed()).toBe(true, 'HeadMaster - Explore');
+        expect(header.navLearn.isDisplayed()).toBe(true, 'HeadMaster - Learn');
+        expect(header.navForum.isDisplayed()).toBe(true, 'HeadMaster - Forum');
+        
+        login.logout();
+        
+        //test teacher
         centermode.createTeacher({
             headMaster:headMaster,
             keepLogin:true
         }).then(function(teacher){
+            expect(header.navCenter.isPresent()).toBe(false, 'HeadMaster - My center');
             expect(header.navClass.isDisplayed()).toBe(true, 'Teacher - My classes');
-            expect(header.navExercise.isPresent()).toBe(true, 'Teacher - My Exercises');
+            expect(header.navExercise.isDisplayed()).toBe(true, 'Teacher - My Exercises');
             header.navShowMoreMenu.click();
             expect(header.navProjects.isDisplayed()).toBe(true, 'Teacher - Projects');
             expect(header.navTasks.isDisplayed()).toBe(true, 'Teacher - Tasks');
             expect(header.navExplore.isDisplayed()).toBe(true, 'Teacher - Explore');
             expect(header.navLearn.isDisplayed()).toBe(true, 'Teacher - Learn');
-            expect(header.navForum.isDisplayed()).toBe(true, 'Teacher - Forum');  
+            expect(header.navForum.isDisplayed()).toBe(true, 'Teacher - Forum');
+
+            login.logout();  
         });
-
-        /*expect(header.navCenter.isDisplayed()).toBe(false, 'My center');
-        expect(header.navClass.isDisplayed()).toBe(true, 'My classes');
-        expect(header.navExercise.isPresent()).toBe(true, 'My Exercises');
-        header.navShowMoreMenu.click();
-        expect(header.navProjects.isDisplayed()).toBe(true, 'Projects');
-        expect(header.navTasks.isDisplayed()).toBe(true, 'Tasks');
-        expect(header.navExplore.isDisplayed()).toBe(true, 'Explore');
-        expect(header.navLearn.isDisplayed()).toBe(true, 'Learn');
-        expect(header.navForum.isDisplayed()).toBe(true, 'Forum');
-        login.logout();*/
-
 
     });
 

@@ -55,14 +55,14 @@ var CenterMode = function() {
             register.get();
             register.createAccount(teacher.username, teacher.userEmail, teacher.password, teacher.day, teacher.month, teacher.year, true, true);
             login.logout();
-            console.log('options.headMaster', options.headMaster);
+            //console.log('options.headMaster', options.headMaster);
             if(!options.headMaster){
                 options.headMaster = this.createHeadMaster();
             }
-            console.log('headMaster', options.headMaster);
+            //console.log('headMaster', options.headMaster);
             login.get();
             login.login(options.headMaster.userEmail,options.headMaster.password);
-            console.log('teacher', teacher);
+            //console.log('teacher', teacher);
             mycenter.addNewTeacher(teacher.userEmail);
             login.logout();
 
@@ -82,7 +82,7 @@ var CenterMode = function() {
                 $2(login.user.elementArrayFinder_.locator_.value).sendKeys(teacher.userEmail);
                 $2(login.password.elementArrayFinder_.locator_.value).sendKeys(teacher.password);
                 $2(login.loginButton.elementArrayFinder_.locator_.value).click();
-                browser.sleep('3000');
+                browser.sleep('5000');
 
                 $2(modals.okDialog.elementArrayFinder_.locator_.value).click();
                 //go back to the main window && login wiht new passwords
