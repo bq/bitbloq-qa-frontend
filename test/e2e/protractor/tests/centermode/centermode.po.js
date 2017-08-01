@@ -100,25 +100,6 @@ var CenterMode = function() {
         });
         return deferred.promise;
     }
-    // //Simply method, return teacher data
-    // this.createTeacher = function(options) {
-    //     options = options || {
-    //         headMaster: this.createHeadMaster()
-    //     };
-    //     var teacher = login.loginWithRandomUser();
-        
-        
-    //     login.logout();
-    //     login.get();
-    //     login.login(options.headMaster.user,options.headMaster.password);
-    //     mycenter.addNewTeacher(teacher.userEmail);
-        
-    //     if(!options.keepLogin){
-    //         login.logout();
-    //     }
-        
-    //     return teacher;
-    // };
 
     this.createStudent = function() {
         var student = login.loginWithRandomUser();

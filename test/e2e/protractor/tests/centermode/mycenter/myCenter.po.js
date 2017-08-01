@@ -8,6 +8,10 @@ var header = new Header(),
     vars = new Variables();
 var MyCenter = function() {
 
+    this.centerTeachersTab = $('[data-element="center-teachers-tab"]');
+    this.centerSettingsTab = $('[data-element="center-settings-tab"]');
+    this.centerInfoTab = $('[data-element="center-info-tab"]');
+
     this.newTeacherButton = $('[data-element="centerMode_button_newTeacher"]');
     this.deleteTeacherButton = $('[data-element="centerMode-delete-teacher"]');
     this.teacherElems = element.all(by.xpath('//*[contains(@data-element,"centerMode-teacher-link")]'));

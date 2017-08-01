@@ -28,54 +28,53 @@ describe('My center', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-396:mycenter:Order the teacher', function() {
+    xit('bbb-396:mycenter:Order the teacher', function() {
         var headMasterEmail = '210417prueba@prueba.es';
         var headMasterPass = 'prueba';
         login.get();
         login.login(headMasterEmail,headMasterPass);
-        browser.sleep(vars.timeToWaitTab);
         header.navCenter.click();
-        browser.sleep(vars.timeToWaitTab);
-        expect(mycenter.teacherElems.get(0).getText()).toMatch(vars.emailFb.toLowerCase());
-        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.userGoogle.toLowerCase());
-        expect(mycenter.teacherElems.get(3).getText()).toMatch(headMasterEmail);
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(vars.emailFb.toLowerCase(), 'Default order - 0');
+        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase(), 'Default order - 1');
+        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.userGoogle.toLowerCase(), 'Default order - 2');
+        expect(mycenter.teacherElems.get(3).getText()).toMatch(headMasterEmail, 'Default order - 3');
+        
         mycenter.teacherDropdownOrder.click();
         mycenter.teacherEmailDropdown.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        expect(mycenter.teacherElems.get(0).getText()).toMatch(headMasterEmail);
-        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogle.toLowerCase());
-        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(mycenter.teacherElems.get(3).getText()).toMatch(vars.emailFb.toLowerCase());
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(headMasterEmail, 'Email order - 0');
+        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogle.toLowerCase(), 'Email order - 1');
+        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.userGoogleTwo.toLowerCase(), 'Email order - 2');
+        expect(mycenter.teacherElems.get(3).getText()).toMatch(vars.emailFb.toLowerCase(), 'Email order - 3');
+        
         mycenter.teacherDropdownOrder.click();
         mycenter.teacherNameDropdown.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        expect(mycenter.teacherElems.get(0).getText()).toMatch(headMasterEmail);
-        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.emailFb.toLowerCase());
-        expect(mycenter.teacherElems.get(3).getText()).toMatch(vars.userGoogle.toLowerCase());
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(headMasterEmail, 'Name order - 0');
+        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase(), 'Name order - 1');
+        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.emailFb.toLowerCase(), 'Name order - 2');
+        expect(mycenter.teacherElems.get(3).getText()).toMatch(vars.userGoogle.toLowerCase(), 'Name order - 3');
+        
         mycenter.teacherDropdownOrder.click();
         mycenter.teacherSurnameDropdown.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        expect(mycenter.teacherElems.get(0).getText()).toMatch(headMasterEmail);
-        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.emailFb.toLowerCase());
-        expect(mycenter.teacherElems.get(3).getText()).toMatch(vars.userGoogle.toLowerCase());
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(headMasterEmail, 'Surname order - 0');
+        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase(), 'Surname order - 1');
+        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.userGoogle.toLowerCase(), 'Surname order - 2');
+        expect(mycenter.teacherElems.get(3).getText()).toMatch(vars.emailFb.toLowerCase(), 'Surname order - 3');
+        
+        
         mycenter.teacherDropdownOrder.click();
         mycenter.teacherGroupsDropdown.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        expect(mycenter.teacherElems.get(0).getText()).toMatch(vars.emailFb.toLowerCase());
-        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.userGoogle.toLowerCase());
-        expect(mycenter.teacherElems.get(3).getText()).toMatch(headMasterEmail);
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(vars.emailFb.toLowerCase(), 'Groups order - 0');
+        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase(), 'Groups order - 1');
+        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.userGoogle.toLowerCase(), 'Groups order - 2');
+        expect(mycenter.teacherElems.get(3).getText()).toMatch(headMasterEmail, 'Groups order - 3');
+        
         mycenter.teacherDropdownOrder.click();
         mycenter.teacherStudentsDropdown.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        expect(mycenter.teacherElems.get(0).getText()).toMatch(vars.emailFb.toLowerCase());
-        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase());
-        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.userGoogle.toLowerCase());
-        expect(mycenter.teacherElems.get(3).getText()).toMatch(headMasterEmail);
-        browser.sleep(vars.timeToWaitTab);
+        expect(mycenter.teacherElems.get(0).getText()).toMatch(vars.emailFb.toLowerCase(), 'Students order - 0');
+        expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase(), 'Students order - 1');
+        expect(mycenter.teacherElems.get(2).getText()).toMatch(vars.userGoogle.toLowerCase(), 'Students order - 2');
+        expect(mycenter.teacherElems.get(3).getText()).toMatch(headMasterEmail, 'Students order - 3');
+        
         login.logout();
     });
 
@@ -99,7 +98,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-399:mycenter:Create a teacher - Wrong email', function() {
+    xit('bbb-399:mycenter:Create a teacher - Wrong email', function() {
         var headmaster = centermode.createHeadMaster('prueba');
         login.get();
         login.login(headmaster.user,headmaster.password);
@@ -116,7 +115,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-400:mycenter:Create a teacher - The email doesnt exist', function() {
+    xit('bbb-400:mycenter:Create a teacher - The email doesnt exist', function() {
         var headmaster = centermode.createHeadMaster('prueba');
         login.get();
         login.login(headmaster.user,headmaster.password);
@@ -134,7 +133,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-402:mycenter:Delete a teacher - The teacher belongs to a center', function() {
+    xit('bbb-402:mycenter:Delete a teacher - The teacher belongs to a center', function() {
         var headmaster = centermode.createHeadMaster('prueba');
         var teacher = centermode.createTeacher(headmaster);
         login.get();
@@ -155,7 +154,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-401:mycenter:Delete a teacher - The teacher belongs to several centers ', function() {
+    xit('bbb-401:mycenter:Delete a teacher - The teacher belongs to several centers ', function() {
         var headmaster = centermode.createHeadMaster('center1');
         var teacher = centermode.createTeacher(headmaster);
         var otherHeadmaster = centermode.createHeadMaster('center2');
@@ -194,7 +193,7 @@ describe('My center', function() {
         });
     });
 
-    it('bbb-403:mycenter:Delete a teacher - The teacher is the headmaster', function() {
+    xit('bbb-403:mycenter:Delete a teacher - The teacher is the headmaster', function() {
         var headmaster = centermode.createHeadMaster('prueba');
         login.get();
         login.login(headmaster.user,headmaster.password);
@@ -205,7 +204,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-455:mycenter:the list of teacher', function() {
+    xit('bbb-455:mycenter:the list of teacher', function() {
         var headmaster = centermode.createHeadMaster('pruebacentro');
         login.get();
         login.login(headmaster.user,headmaster.password);
@@ -216,7 +215,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-398:mycenter:Create a teacher - The teacher is the headmaster', function() {
+    xit('bbb-398:mycenter:Create a teacher - The teacher is the headmaster', function() {
         var headmaster = centermode.createHeadMaster('pruebacentro');
         login.get();
         login.login(headmaster.user,headmaster.password);
@@ -227,7 +226,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-454:mycenter:Create a teacher - The teacher is already on the list', function() {
+    xit('bbb-454:mycenter:Create a teacher - The teacher is already on the list', function() {
         var headmaster = centermode.createHeadMaster('pruebacentro');
         var teacher = centermode.createTeacher(headmaster);
         login.get();
@@ -239,7 +238,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-456:mycenter:Teacher view', function() {
+    xit('bbb-456:mycenter:Teacher view', function() {
         var headmaster = centermode.createHeadMaster('pruebacentro');
         var teacher = centermode.createTeacher(headmaster);
         login.get();
@@ -258,7 +257,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-457:mycenter:The headmaster create a group in the teacher view', function() {
+    xit('bbb-457:mycenter:The headmaster create a group in the teacher view', function() {
         var headmaster = centermode.createHeadMaster('pruebacentro');
         var teacher = centermode.createTeacher(headmaster);
         login.get();
@@ -289,5 +288,16 @@ describe('My center', function() {
         expect(myclass.groupsElems.count()).toBe(1);
         browser.sleep(vars.timeToWaitTab);
         login.logout();
+    });
+    xit('bbb-631:mycenter:The tabs of center mode', function() {
+        
+
+        //test headmaster
+        var headMaster = centermode.createHeadMaster({keepLogin:true});
+
+        header.navCenter.click();
+        
+        login.logout();
+
     });
 });

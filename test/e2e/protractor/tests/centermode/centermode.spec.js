@@ -24,11 +24,11 @@ describe('Center mode', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-389:centermode:Create a center', function() {
+    xit('bbb-389:centermode:Create a center', function() {
         centermode.createHeadMaster();
     });
 
-    it('bbb-390:centermode:Create a center by user <14', function() {
+    xit('bbb-390:centermode:Create a center by user <14', function() {
         login.loginWithRandomUser({
             youngThan14:true
         });
@@ -37,7 +37,7 @@ describe('Center mode', function() {
         login.logout();
     });
 
-    it('bbb-391:centermode:Create a center with empty fields', function() {
+    xit('bbb-391:centermode:Create a center with empty fields', function() {
         login.loginWithRandomUser();
         header.openHeaderMenu.click();
         header.centerModeBanner.click();
@@ -75,7 +75,7 @@ describe('Center mode', function() {
         login.logout();
     });
 
-    it('bbb-392:centermode:Create a center with wrong field', function() {
+    xit('bbb-392:centermode:Create a center with wrong field', function() {
         login.loginWithRandomUser();
         header.openHeaderMenu.click();
         header.centerModeBanner.click();
@@ -95,14 +95,14 @@ describe('Center mode', function() {
         login.logout();
     });
 
-    it('bbb-393:centermode:Create center option dissapear if the user have a center', function() {
+    xit('bbb-393:centermode:Create center option dissapear if the user have a center', function() {
         centermode.createHeadMaster({keepLogin:true});
         header.openHeaderMenu.click();
         expect(header.centerModeBanner.isPresent()).toBe(false);
         login.logout();
     });
 
-    it('bbb-395:centermode:The tabs of center mode', function() {
+    xit('bbb-395:centermode:The tabs of center mode', function() {
         //test student (default user)
         login.loginWithRandomUser();
         expect(header.navShowMoreMenu.isPresent()).toBe(false, 'Extra menu');
