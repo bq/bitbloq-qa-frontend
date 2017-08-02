@@ -44,7 +44,7 @@ var CenterMode = function() {
         var teacher,
             deferred = protractor.promise.defer(),
             browserEmail = browser.forkNewDriverInstance();
-
+        
         browserEmail.ignoreSynchronization = true;
 
         register.getExternalProviderEmail(browserEmail).then(function(email) {

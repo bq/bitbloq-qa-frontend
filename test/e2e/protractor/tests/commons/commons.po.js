@@ -21,11 +21,14 @@ var Commons = function() {
         browser.ignoreSynchronization = false;
     };
 
-    this.expectToastTimeOutandText = function(alertElement,text) {
+    this.expectToastTimeOutandText = function(options) {
+        options = options || {};
+        options.alertElement = options.alertElement || this.alertTextToast;
+
         browser.ignoreSynchronization = true;
         browser.sleep(vars.timeToWaitAlert);
-        expect(alertElement.isDisplayed()).toBe(true);
-        expect(alertElement.getText()).toMatch(text);
+        expect(options.alertElement.isDisplayed()).toBe(true);
+        expect(options.alertElement.getText()).toMatch(options.text);
         browser.ignoreSynchronization = false;
     };
 
