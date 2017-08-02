@@ -58,9 +58,13 @@ var Login = function() {
      * @param {String} password bitbloq user
      * @return {Void} void
      */
-    this.login = function(user, password) {
-        this.user.sendKeys(user);
-        this.password.sendKeys(password);
+    this.login = function(options) {
+        options = options || {};
+        if (!options.dontTravel) {
+            this.get();
+        }
+        this.user.sendKeys(options.user);
+        this.password.sendKeys(options.password);
         this.loginButton.click();
         //wait succesfull login page
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
@@ -117,7 +121,7 @@ var Login = function() {
      */
     this.loginGoogle = function(email, password) {
 
-        this.googleButton.click().then(function(){
+        this.googleButton.click().then(function() {
             console.log('click2');
         });
 
@@ -135,18 +139,18 @@ var Login = function() {
             //TODO refactor
             that.googleUser.sendKeys(email);
             browser.sleep(1000);
-            that.googleNext.click().then(function(){
-            console.log('clic next');
-        });
+            that.googleNext.click().then(function() {
+                console.log('clic next');
+            });
             browser.sleep(1000);
             that.googlePassword.sendKeys(password);
             browser.sleep(1000);
             that.googleEnter.click();
             browser.sleep(5000);
 
-           /* if (browser.baseUrl === 'http://localhost:9000/') {
-                that.googleAprove.click();
-            }*/
+            /* if (browser.baseUrl === 'http://localhost:9000/') {
+                 that.googleAprove.click();
+             }*/
             that.googleAprove.click();
 
             /*browser.sleep(vars.timeToWaitTab).then(function(){
@@ -154,14 +158,14 @@ var Login = function() {
         });*/
 
             // go back to the main window
-            browser.switchTo().window(handles[0]).then(function(){
-            console.log('end google login');
-        });
+            browser.switchTo().window(handles[0]).then(function() {
+                console.log('end google login');
+            });
 
             //Not ignore sync, return angular
             browser.ignoreSynchronization = false;
         });
-this.googleButton.click().then(function(){
+        this.googleButton.click().then(function() {
             console.log('click3');
         });
     };
@@ -280,7 +284,7 @@ this.googleButton.click().then(function(){
             true);
         //wait succesfull login page
         browser.getCurrentUrl().then(function(url) {
-            expect(url.indexOf(browser.baseUrl + '#/'+urlDest)>-1).toBeTruthy();
+            expect(url.indexOf(browser.baseUrl + '#/' + urlDest) > -1).toBeTruthy();
         });
 
         //Add return for reuse user if is necessary

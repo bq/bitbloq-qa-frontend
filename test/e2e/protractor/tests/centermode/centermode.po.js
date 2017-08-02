@@ -31,14 +31,14 @@ var CenterMode = function() {
         expect(header.navCenter.isDisplayed()).toBe(true);
         expect(header.navClass.isDisplayed()).toBe(true);
         expect(header.navExercise.isPresent()).toBe(true);
-        
-        if(!options.keepLogin){
+
+        if (!options.keepLogin) {
             login.logout();
         }
         return user;
     };
 
-    
+
     this.createTeacher = function(options) {
         options = options || {};
         var teacher,
@@ -56,12 +56,15 @@ var CenterMode = function() {
             register.createAccount(teacher.username, teacher.userEmail, teacher.password, teacher.day, teacher.month, teacher.year, true, true);
             login.logout();
             //console.log('options.headMaster', options.headMaster);
-            if(!options.headMaster){
+            if (!options.headMaster) {
                 options.headMaster = this.createHeadMaster();
             }
             //console.log('headMaster', options.headMaster);
-            login.get();
-            login.login(options.headMaster.userEmail,options.headMaster.password);
+
+            login.login({
+                user: options.headMaster.userEmail,
+                password: options.headMaster.password
+            });
             //console.log('teacher', teacher);
             mycenter.addNewTeacher(teacher.userEmail);
             login.logout();
@@ -86,12 +89,15 @@ var CenterMode = function() {
 
                 $2(modals.okDialog.elementArrayFinder_.locator_.value).click();
                 //go back to the main window && login wiht new passwords
-                login.get();
-                login.login(teacher.username, teacher.password);
+                login.login({
+                    user: teacher.username,
+                    password: teacher.password
+                });
                 //check
+                expect(header.navCenter.isPresent()).toBe(false, 'Teacher creation fails- can see "My center" section');
                 expect(header.navClass.isDisplayed()).toBe(true, 'Teacher creation fails- cant see "My classes" section');
-                expect(header.navExercise.isPresent()).toBe(true, 'Teacher creation fails- cant see "My Exercises" section');
-                if(!options.keepLogin){
+                expect(header.navExercise.isDisplayed()).toBe(true, 'Teacher creation fails- cant see "My Exercises" section');
+                if (!options.keepLogin) {
                     login.logout();
                 }
                 deferred.fulfill(teacher);
@@ -113,7 +119,7 @@ var CenterMode = function() {
         return student;
     };
 
-    this.createRandomCenterName = function(){
+    this.createRandomCenterName = function() {
         return 'centerTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1);
     };
 

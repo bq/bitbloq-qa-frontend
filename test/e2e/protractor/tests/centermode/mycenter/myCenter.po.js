@@ -14,6 +14,7 @@ var MyCenter = function() {
 
     this.newTeacherButton = $('[data-element="centerMode_button_newTeacher"]');
     this.deleteTeacherButton = $('[data-element="centerMode-delete-teacher"]');
+    this.teacherNotConfirmedText = $('[data-element="centerMode-teacher-notconfirmed"]');
     this.teacherElems = element.all(by.xpath('//*[contains(@data-element,"centerMode-teacher-link")]'));
 
     this.teacherDropdownOrder = $('[data-element="my_center_dropdown_order"]');

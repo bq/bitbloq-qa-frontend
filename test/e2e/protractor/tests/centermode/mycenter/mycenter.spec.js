@@ -79,23 +79,20 @@ describe('My center', function() {
     });
 
     it('bbb-397:mycenter:Create a teacher - VALID', function() {
-        var headmaster = centermode.createHeadMaster('pruebacentro');
-        var teacher = centermode.createTeacher(headmaster);
-        login.get();
-        login.login(teacher.user,teacher.password);
-        browser.sleep(vars.timeToWaitTab);
-        expect(header.navCenter.isPresent()).toBe(false);
-        expect(header.navClass.isDisplayed()).toBe(true);
-        expect(header.navExercise.isPresent()).toBe(false);
-        expect(header.navClass.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/teacher');
-        login.logout();
-        login.get();
-        login.login(headmaster.user,headmaster.password);
-        browser.sleep(vars.timeToWaitTab);
-        header.navCenter.click();
-        browser.sleep(vars.timeToWaitTab);
-        expect(mycenter.teacherElems.get(0).getText()).toMatch(teacher.userEmail.toLowerCase());
-        login.logout();
+        var headMaster = centermode.createHeadMaster();
+        
+        centermode.createTeacher({
+            headMaster:headMaster
+        }).then(function(teacher){
+            login.login({
+                user: headMaster.userEmail,
+                password:headMaster.password
+            });
+            header.navCenter.click();
+            expect(mycenter.teacherElems.get(0).getText()).toMatch(teacher.userEmail.toLowerCase());
+            expect(mycenter.teacherNotConfirmedText.isPresent(false));
+            login.logout();  
+        });
     });
 
     xit('bbb-399:mycenter:Create a teacher - Wrong email', function() {
