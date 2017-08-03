@@ -262,67 +262,47 @@ describe('My center', function() {
         });
     });
 
-    it('bbb-456:mycenter:Teacher view', function() {
-        var headmaster = centermode.createHeadMaster('pruebacentro');
-        var teacher = centermode.createTeacher(headmaster);
-        login.get();
-        login.login(headmaster.user, headmaster.password);
-        browser.sleep(vars.timeToWaitTab);
-        header.navCenter.click();
-        browser.sleep(vars.timeToWaitTab);
-        mycenter.teacherElems.filter(function(elem) {
-            return elem.getText().then(function(text) {
-                return text.includes(teacher.userEmail.toLowerCase());
-            });
-        }).first().click();
-        expect(browser.getCurrentUrl()).toMatch('#/center-mode/center-teacher/');
-        browser.sleep(vars.timeToWaitTab);
-        mycenter.get();
-        login.logout();
-    });
+    xit('bbb-631:mycenter:Modify center mode information', function() {
 
-    xit('bbb-457:mycenter:The headmaster create a group in the teacher view', function() {
-        var headmaster = centermode.createHeadMaster('pruebacentro');
-        var teacher = centermode.createTeacher(headmaster);
-        login.get();
-        login.login(headmaster.user, headmaster.password);
-        browser.sleep(vars.timeToWaitTab);
-        header.navCenter.click();
-        browser.sleep(vars.timeToWaitTab);
-        mycenter.teacherElems.filter(function(elem) {
-            return elem.getText().then(function(text) {
-                return text.includes(teacher.userEmail.toLowerCase());
-            });
-        }).first().click();
-        expect(browser.getCurrentUrl()).toMatch('#/center-mode/center-teacher/');
-        myclass.newGroupButton.click();
-        modals.inputModalNoChangeN.sendKeys('prueba grupo de director');
-        browser.sleep(vars.timeToSendKeys);
-        modals.okDialog.click();
-        browser.sleep(vars.timeToWaitTab);
-        modals.cancelDialog.click();
-        mycenter.get();
-        browser.sleep(vars.timeToWaitFadeModals);
-        login.logout();
-        login.get();
-        browser.sleep(vars.timeToWaitTab);
-        login.login(teacher.user, teacher.password);
-        browser.sleep(vars.timeToWaitTab);
-        header.navClass.click();
-        expect(myclass.groupsElems.count()).toBe(1);
-        browser.sleep(vars.timeToWaitTab);
-        login.logout();
-    });
-    xit('bbb-631:mycenter:The tabs of center mode', function() {
-
-        //test headmaster
         var headMaster = centermode.createHeadMaster({
-            keepLogin: true
-        });
-
+                keepLogin: true
+            }),
+            fakeCenterInfo = {
+                name: 'fakeCenterName',
+                address: 'c/Falsa 123',
+                phone: '666'
+            };
         header.navCenter.click();
+        mycenter.centerInfoTab.click();
 
+        expect(mycenter.centerInfoEmailInput.isEnabled()).toBe(false, 'email should be disabled');
+
+        mycenter.centerInfoNameInput.clear();
+        mycenter.centerInfoNameInput.sendKeys(fakeCenterInfo.name);
+
+        mycenter.centerInfoAddressInput.clear();
+        expect(vars.toastCenterSavedData.isPresent(true, 'Named not changed'));
+
+        mycenter.centerInfoAddressInput.sendKeys(fakeCenterInfo.address);
+
+        mycenter.centerInfoPhoneInput.clear();
+        expect(vars.toastCenterSavedData.isPresent(true, 'Address not changed'));
+
+        mycenter.centerInfoPhoneInput.sendKeys(fakeCenterInfo.phone);
+        mycenter.centerInfoPhoneInput.sendKeys(fakeCenterInfo.phone);
+
+        expect(vars.toastCenterSavedData.isPresent(true, 'Phone not changed'));
         login.logout();
 
+        login.login({
+            user: headMaster.userEmail,
+            password: headMaster.password
+        });
+        header.navCenter.click();
+        mycenter.centerInfoTab.click();
+        expect(mycenter.centerInfoNameInput.getAttribute('value')).toMatch(fakeCenterInfo.name);
+        expect(mycenter.centerInfoAddressInput.getAttribute('value')).toMatch(fakeCenterInfo.address);
+        expect(mycenter.centerInfoPhoneInput.getAttribute('value')).toMatch(fakeCenterInfo.phone);
+        login.logout();
     });
 });

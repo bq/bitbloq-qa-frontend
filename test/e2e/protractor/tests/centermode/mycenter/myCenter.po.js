@@ -12,6 +12,11 @@ var MyCenter = function() {
     this.centerSettingsTab = $('[data-element="center-settings-tab"]');
     this.centerInfoTab = $('[data-element="center-info-tab"]');
 
+    this.centerInfoNameInput = $('[data-element="center-info-name"]');
+    this.centerInfoAddressInput = $('[data-element="center-info-address"]');
+    this.centerInfoPhoneInput = $('[data-element="center-info-phone"]');
+    this.centerInfoEmailInput = $('[data-element="center-info-email"]');
+
     this.newTeacherButton = $('[data-element="centerMode_button_newTeacher"]');
     this.deleteTeacherButton = $('[data-element="centerMode-delete-teacher"]');
     this.teacherNotConfirmedText = $('[data-element="centerMode-teacher-notconfirmed"]');

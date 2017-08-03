@@ -116,6 +116,8 @@ var Variables = function() {
     this.threadCreated = 'Tema creado';
     this.threadCreatedEN = 'Thread created';
 
+    //toasts ID
+    this.toastCenterSavedData = $('[data-id="saved-user"]');
 
     this.account = function(cuenta) {
         if (cuenta === 'google') {
