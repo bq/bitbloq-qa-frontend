@@ -11,3 +11,5 @@ target/
 *.sublime-project
 *.sublime-workspace
 .idea/
+privateConfig.js
+privateConfig.json

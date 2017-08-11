@@ -8,6 +8,7 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Centermode = require('../centermode.po.js'),
     Modals = require('../../modals/modals.po.js'),
     Commons = require('../../commons/commons.po.js'),
+    ThirdPartyRobotsApi = require('../../commons/api/ThirdPartyRobotsApi.js'),
     MyClass = require('../myclass/myclass.po.js');
 
 var globalFunctions = new GlobalFunctions(),
@@ -18,6 +19,7 @@ var globalFunctions = new GlobalFunctions(),
     centermode = new Centermode(),
     modals = new Modals(),
     commons = new Commons(),
+    thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
     myclass = new MyClass();
 
 globalFunctions.xmlReport('mycenter');
@@ -113,7 +115,7 @@ describe('My center', function() {
     });
 
     xit('bbb-399:mycenter:Create a teacher - Wrong email', function() {
-        var headMaster = centermode.createHeadMaster({
+        centermode.createHeadMaster({
             keepLogin: true
         });
 
@@ -129,7 +131,7 @@ describe('My center', function() {
     });
 
     xit('bbb-400:mycenter:Create a teacher - The email doesnt exist', function() {
-        var headmaster = centermode.createHeadMaster({
+        centermode.createHeadMaster({
             keepLogin: true
         });
 
@@ -211,7 +213,7 @@ describe('My center', function() {
     });
 
     xit('bbb-403:mycenter:Delete a teacher - The teacher is the headmaster', function() {
-        var headmaster = centermode.createHeadMaster({
+        centermode.createHeadMaster({
             keepLogin: true
         });
 
@@ -247,10 +249,10 @@ describe('My center', function() {
         var headMaster = centermode.createHeadMaster();
         centermode.createTeacher({
             headMaster: headMaster
-        }).then(function(teacher1) {
+        }).then(function() {
             centermode.createTeacher({
                 headMaster: headMaster
-            }).then(function(teacher2) {
+            }).then(function() {
                 login.login({
                     user: headMaster.userEmail,
                     password: headMaster.password
@@ -281,17 +283,17 @@ describe('My center', function() {
         mycenter.centerInfoNameInput.sendKeys(fakeCenterInfo.name);
 
         mycenter.centerInfoAddressInput.clear();
-        expect(vars.toastCenterSavedData.isPresent(true, 'Named not changed'));
+        expect(commons.toastCenterSavedData.isPresent(true, 'Named not changed'));
 
         mycenter.centerInfoAddressInput.sendKeys(fakeCenterInfo.address);
 
         mycenter.centerInfoPhoneInput.clear();
-        expect(vars.toastCenterSavedData.isPresent(true, 'Address not changed'));
+        expect(commons.toastCenterSavedData.isPresent(true, 'Address not changed'));
 
         mycenter.centerInfoPhoneInput.sendKeys(fakeCenterInfo.phone);
         mycenter.centerInfoPhoneInput.sendKeys(fakeCenterInfo.phone);
 
-        expect(vars.toastCenterSavedData.isPresent(true, 'Phone not changed'));
+        expect(commons.toastCenterSavedData.isPresent(true, 'Phone not changed'));
         login.logout();
 
         login.login({
@@ -304,5 +306,64 @@ describe('My center', function() {
         expect(mycenter.centerInfoAddressInput.getAttribute('value')).toMatch(fakeCenterInfo.address);
         expect(mycenter.centerInfoPhoneInput.getAttribute('value')).toMatch(fakeCenterInfo.phone);
         login.logout();
+    });
+
+    it('bbb-632:mycenter:Check robot activation', function() {
+        login.login({
+            user: vars.developHeadMaster.userEmail,
+            password: vars.developHeadMaster.password
+        });
+
+        header.navCenter.click();
+        mycenter.centerSettingsTab.click();
+        browser.ignoreSynchronization = true;
+
+        var code;
+        thirdPartyRobotsApi.generateCode({
+            robots: ['mBot']
+        }).then(function(result) {
+            console.log('setting Code');
+            code = result[0].code;
+            mycenter.activateMBotButton.click();
+            modals.activateRobotCode1.sendKeys(result[0].code);
+            modals.okDialog.click();
+        });
+        browser.ignoreSynchronization = false;
+        browser.sleep(5000);
+        expect(modals.activateRobotErrorText.isPresent(false, 'The code should be invalid'));
+        modals.okDialog.click();
+        mycenter.centerInfoTab.click();
+        browser.sleep(5000);
+        /*mycenter.activateMBotButton.click();
+        modals.activateRobotCode1.sendKeys(code);
+        browser.sleep(10000);
+        modals.okDialog.click();
+        expect(modals.activateRobotErrorText.isPresent(true, 'The code should be invalid'));*/
+
+        /*// fake code
+        mycenter.activateMBotButton.click();
+        modals.activateRobotCode1.sendKeys('12345678');
+        modals.activateRobotCode2.sendKeys('12345678');
+        modals.activateRobotCode3.sendKeys('12345678');
+        modals.activateRobotCode4.sendKeys('12345678');
+        modals.okDialog.click();
+        expect(modals.activateRobotErrorText.isPresent(true, 'The code should be invalid'));
+        modals.cancelDialog.click();
+        */
+        //robot user-type-code
+
+        /*codigo inventado // error
+        código de usuario //error porq tiene que ser de centermode
+        código válido ya usado // error no puede usarse dos veces
+
+        xCada robot{
+            Crear código de robot
+            pulsar sobre Activar en el robot
+            Poner el código de licencia
+            Comprobar que ha dado OK el toast
+            Comprobar que el aspecto visual ha cambiado    
+            Comprobar que funciona se hace en otro sitio.
+        }//de esto sacar una función sin tanta comprobación para que se puedan hacer otros test pidiendo activar un robot a un centro
+        */
     });
 });

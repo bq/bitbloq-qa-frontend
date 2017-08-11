@@ -30,7 +30,7 @@ describe('Center mode', function() {
 
     xit('bbb-390:centermode:Create a center by user <14', function() {
         login.loginWithRandomUser({
-            youngThan14:true
+            youngThan14: true
         });
         header.openHeaderMenu.click();
         expect(header.centerModeBanner.isPresent()).toBe(false);
@@ -41,35 +41,35 @@ describe('Center mode', function() {
         login.loginWithRandomUser();
         header.openHeaderMenu.click();
         header.centerModeBanner.click();
-        
+
         modals.okDialog.click();
         modals.okDialog.click();
-        
+
         expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error', '1');
-        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error','2');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error','3');
+        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error', '2');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error', '3');
         modals.inputNameCenter.sendKeys('hola');
         modals.okDialog.click();
-        
-        expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error','4');
-        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error','5');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error','6');
+
+        expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error', '4');
+        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error', '5');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error', '6');
         modals.inputNameCenter.clear();
         modals.inputLocationCenter.sendKeys('dir');
         modals.okDialog.click();
-        
-        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error','7');
-        expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error','8');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error','9');
+
+        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error', '7');
+        expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error', '8');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error', '9');
         modals.inputNameCenter.clear();
         modals.inputLocationCenter.clear();
         modals.inputTelephoneCenter.sendKeys('333333333');
 
         modals.okDialog.click();
-        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error','10');
-        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error','11');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).not.toContain('input--error','12');
-        
+        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error', '10');
+        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error', '11');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).not.toContain('input--error', '12');
+
         modals.bladeClose.click();
         browser.sleep(vars.timeToWaitFadeModals);
         login.logout();
@@ -79,12 +79,12 @@ describe('Center mode', function() {
         login.loginWithRandomUser();
         header.openHeaderMenu.click();
         header.centerModeBanner.click();
-        
+
         modals.okDialog.click();
         modals.inputNameCenter.sendKeys('hola');
         modals.inputLocationCenter.sendKeys('dir');
         modals.inputTelephoneCenter.sendKeys('ee');
-        
+
         modals.okDialog.click();
         expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error', 'Name');
         expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error', 'Location');
@@ -96,7 +96,9 @@ describe('Center mode', function() {
     });
 
     xit('bbb-393:centermode:Create center option dissapear if the user have a center', function() {
-        centermode.createHeadMaster({keepLogin:true});
+        centermode.createHeadMaster({
+            keepLogin: true
+        });
         header.openHeaderMenu.click();
         expect(header.centerModeBanner.isPresent()).toBe(false);
         login.logout();
@@ -114,7 +116,9 @@ describe('Center mode', function() {
         login.logout();
 
         //test headmaster
-        var headMaster = centermode.createHeadMaster({keepLogin:true});
+        var headMaster = centermode.createHeadMaster({
+            keepLogin: true
+        });
 
         expect(header.navCenter.isDisplayed()).toBe(true, 'HeadMaster - My center');
         expect(header.navClass.isDisplayed()).toBe(true, 'HeadMaster - My classes');
@@ -125,14 +129,14 @@ describe('Center mode', function() {
         expect(header.navExplore.isDisplayed()).toBe(true, 'HeadMaster - Explore');
         expect(header.navLearn.isDisplayed()).toBe(true, 'HeadMaster - Learn');
         expect(header.navForum.isDisplayed()).toBe(true, 'HeadMaster - Forum');
-        
+
         login.logout();
-        
+
         //test teacher
         centermode.createTeacher({
-            headMaster:headMaster,
-            keepLogin:true
-        }).then(function(teacher){
+            headMaster: headMaster,
+            keepLogin: true
+        }).then(function() {
             expect(header.navCenter.isPresent()).toBe(false, 'HeadMaster - My center');
             expect(header.navClass.isDisplayed()).toBe(true, 'Teacher - My classes');
             expect(header.navExercise.isDisplayed()).toBe(true, 'Teacher - My Exercises');
@@ -143,7 +147,7 @@ describe('Center mode', function() {
             expect(header.navLearn.isDisplayed()).toBe(true, 'Teacher - Learn');
             expect(header.navForum.isDisplayed()).toBe(true, 'Teacher - Forum');
 
-            login.logout();  
+            login.logout();
         });
 
     });

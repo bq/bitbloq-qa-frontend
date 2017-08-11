@@ -9,6 +9,7 @@ var Variables = require('../commons/variables.js'),
 var Commons = function() {
     //TOAST
     this.editToast = $('[data-id="edit-project"]');
+    this.toastCenterSavedData = $('[data-id="saved-user"]');
     this.alertTextToast = $('[data-element="alert-text-toast"]');
     this.alertCloseToast = $('[data-element="alert-close-toast"]');
     this.alertSvgIcon = $('[data-element="alert-svg-icon"]');

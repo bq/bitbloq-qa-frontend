@@ -116,9 +116,6 @@ var Variables = function() {
     this.threadCreated = 'Tema creado';
     this.threadCreatedEN = 'Thread created';
 
-    //toasts ID
-    this.toastCenterSavedData = $('[data-id="saved-user"]');
-
     this.account = function(cuenta) {
         if (cuenta === 'google') {
             return {
@@ -152,6 +149,15 @@ var Variables = function() {
         } else {
             throw 'NOT IS VALID ACCOUNT';
         }
+    };
+
+    this.developHeadMaster = {
+        userEmail: 'tttt',
+        password: 'tomtomtom'
+    };
+
+    this.defaults = {
+        env: 'qa'
     };
 
 };

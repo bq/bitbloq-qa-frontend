@@ -36,7 +36,7 @@ var Modals = function() {
     this.accountResetPasswordRepitInput = $('[data-element="modal-password-reset-repeat-input"]');
     this.accountResetPasswordOKButton = $('[data-element="modal-password-reset-ok-button"]');
     //PO modal-share-with-users
-    this.inputEmailsUsers= $('[data-element="modals-share-with-users-input"]');
+    this.inputEmailsUsers = $('[data-element="modals-share-with-users-input"]');
 
     //centermode
     this.inputNameCenter = $('[data-element="modals-center-name"]');
@@ -47,6 +47,15 @@ var Modals = function() {
     this.inputEmailsTeacher = $('[data-element="modals-new-teacher-input"]');
     this.emailNoTeacher = $('[data-element="modals-email-noteacher"]');
     this.groupDropdown = $('[data-element="centerMode_dropdown"]');
+
+    //activateRobot
+    this.activateRobotCode1 = $('[data-element="modal-activate-robot-code-1"]');
+    this.activateRobotCode2 = $('[data-element="modal-activate-robot-code-2"]');
+    this.activateRobotCode3 = $('[data-element="modal-activate-robot-code-3"]');
+    this.activateRobotCode4 = $('[data-element="modal-activate-robot-code-4"]');
+    this.activateRobotErrorText = $('[data-element="activation-error-message"]');
+    
+
 
     this.rejectTour = function() {
         $('[data-element="reject-tour"]').click();

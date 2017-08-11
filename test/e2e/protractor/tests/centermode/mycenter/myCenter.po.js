@@ -30,6 +30,9 @@ var MyCenter = function() {
     this.teacherGroupsDropdown = $('[data-element="my_center_dropdown_order-4"]');
     this.teacherStudentsDropdown = $('[data-element="my_center_dropdown_order-5"]');
 
+    //settings
+    this.activateMBotButton = $('[data-element="activate-robot-mBot"]');
+
     this.url = '#/center-mode/center';
 
     this.get = function() {

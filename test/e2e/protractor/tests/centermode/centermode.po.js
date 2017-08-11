@@ -38,13 +38,12 @@ var CenterMode = function() {
         return user;
     };
 
-
     this.createTeacher = function(options) {
         options = options || {};
         var teacher,
             deferred = protractor.promise.defer(),
             browserEmail = browser.forkNewDriverInstance();
-        
+
         browserEmail.ignoreSynchronization = true;
 
         register.getExternalProviderEmail(browserEmail).then(function(email) {
@@ -105,7 +104,7 @@ var CenterMode = function() {
             });
         });
         return deferred.promise;
-    }
+    };
 
     this.createStudent = function() {
         var student = login.loginWithRandomUser();
@@ -122,7 +121,6 @@ var CenterMode = function() {
     this.createRandomCenterName = function() {
         return 'centerTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1);
     };
-
 
 };
 
