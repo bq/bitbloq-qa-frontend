@@ -20,7 +20,8 @@ var globalFunctions = new GlobalFunctions(),
     modals = new Modals(),
     commons = new Commons(),
     thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
-    myclass = new MyClass();
+    myclass = new MyClass(),
+    flow = browser.controlFlow();
 
 globalFunctions.xmlReport('mycenter');
 
@@ -32,11 +33,13 @@ describe('My center', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bbb-396:mycenter:Order the teacher', function() {
+    it('bbb-396:mycenter:Order the teacher', function() {
         var headMasterEmail = '210417prueba@prueba.es';
         var headMasterPass = 'prueba';
-        login.get();
-        login.login(headMasterEmail, headMasterPass);
+        login.login({
+            user: headMasterEmail,
+            password: headMasterPass
+        });
         header.navCenter.click();
         expect(mycenter.teacherElems.get(0).getText()).toMatch(vars.emailFb.toLowerCase(), 'Default order - 0');
         expect(mycenter.teacherElems.get(1).getText()).toMatch(vars.userGoogleTwo.toLowerCase(), 'Default order - 1');
@@ -81,7 +84,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    xit('bbb-397:mycenter:Create a teacher - VALID', function() {
+    it('bbb-397:mycenter:Create a teacher - VALID', function() {
         var headMaster = centermode.createHeadMaster();
 
         centermode.createTeacher({
@@ -98,7 +101,7 @@ describe('My center', function() {
         });
     });
 
-    xit('bbb-398:mycenter:Create a teacher - headmaster email', function() {
+    it('bbb-398:mycenter:Create a teacher - headmaster email', function() {
         var headMaster = centermode.createHeadMaster({
             keepLogin: true
         });
@@ -114,7 +117,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    xit('bbb-399:mycenter:Create a teacher - Wrong email', function() {
+    it('bbb-399:mycenter:Create a teacher - Wrong email', function() {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -130,7 +133,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    xit('bbb-400:mycenter:Create a teacher - The email doesnt exist', function() {
+    it('bbb-400:mycenter:Create a teacher - The email doesnt exist', function() {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -146,46 +149,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    xit('bbb-401:mycenter:Delete a teacher - The teacher belongs to several centers ', function() {
-        var headmaster = centermode.createHeadMaster('center1');
-        var teacher = centermode.createTeacher(headmaster);
-        var otherHeadmaster = centermode.createHeadMaster('center2');
-        login.get();
-        login.login(otherHeadmaster.user, otherHeadmaster.password);
-        browser.sleep(vars.timeToWaitTab);
-        mycenter.addNewTeacher(teacher.userEmail);
-        login.logout();
-        login.get();
-        login.login(teacher.user, teacher.password);
-        myclass.addNewGroup('newGroup', 'center1').then(function() {
-            myclass.addNewGroup('newGroup', 'center2').then(function(idgroup) {
-                browser.sleep(vars.timeToWaitFadeModals);
-                login.logout();
-                login.get();
-                login.login(headmaster.user, headmaster.password);
-                browser.sleep(vars.timeToWaitTab);
-                header.navCenter.click();
-                browser.actions().mouseMove(mycenter.teacherElems.get(0)).perform();
-                mycenter.deleteTeacherButton.click();
-                browser.sleep(vars.timeToWaitTab);
-                modals.okDialog.click();
-                browser.sleep(vars.timeToWaitFadeModals);
-                login.logout();
-                login.get();
-                login.login(teacher.user, teacher.password);
-                browser.sleep(vars.timeToWaitTab);
-                expect(header.navCenter.isPresent()).toBe(false);
-                expect(header.navClass.isDisplayed()).toBe(true);
-                expect(header.navExercise.isPresent()).toBe(false);
-                expect(header.navClass.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl + '#/center-mode/teacher');
-                header.navClass.click();
-                expect(myclass.groupsElems.get(0).getText()).toMatch(idgroup);
-                login.logout();
-            });
-        });
-    });
-
-    xit('bbb-402:mycenter:Delete a teacher - The teacher belongs to a center', function() {
+    it('bbb-402:mycenter:Delete a teacher - The teacher belongs to a center', function() {
         var headMaster = centermode.createHeadMaster();
 
         centermode.createTeacher({
@@ -212,7 +176,7 @@ describe('My center', function() {
         });
     });
 
-    xit('bbb-403:mycenter:Delete a teacher - The teacher is the headmaster', function() {
+    it('bbb-403:mycenter:Delete a teacher - The teacher is the headmaster', function() {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -223,7 +187,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    xit('bbb-454:mycenter:Create a teacher - The teacher is already on the list', function() {
+    it('bbb-454:mycenter:Create a teacher - The teacher is already on the list', function() {
         var headMaster = centermode.createHeadMaster();
         centermode.createTeacher({
             headMaster: headMaster
@@ -245,7 +209,7 @@ describe('My center', function() {
         });
     });
 
-    xit('bbb-455:mycenter:the list of teacher', function() {
+    it('bbb-455:mycenter:the list of teacher', function() {
         var headMaster = centermode.createHeadMaster();
         centermode.createTeacher({
             headMaster: headMaster
@@ -264,7 +228,7 @@ describe('My center', function() {
         });
     });
 
-    xit('bbb-631:mycenter:Modify center mode information', function() {
+    it('bbb-631:mycenter:Modify center mode information', function() {
 
         var headMaster = centermode.createHeadMaster({
                 keepLogin: true
@@ -309,61 +273,68 @@ describe('My center', function() {
     });
 
     it('bbb-632:mycenter:Check robot activation', function() {
-        login.login({
-            user: vars.developHeadMaster.userEmail,
-            password: vars.developHeadMaster.password
+        var headMaster = centermode.createHeadMaster({
+            keepLogin: true
         });
 
         header.navCenter.click();
         mycenter.centerSettingsTab.click();
-        browser.ignoreSynchronization = true;
+        mycenter.activateMBotButton.click();
 
-        var code;
-        thirdPartyRobotsApi.generateCode({
-            robots: ['mBot']
-        }).then(function(result) {
-            console.log('setting Code');
-            code = result[0].code;
-            mycenter.activateMBotButton.click();
+        modals.activateRobotCode1.sendKeys('aaaaaaaa-bbbbbbbbb-cccccccc-dddddddd');
+        modals.okDialog.click();
+        expect(modals.activateRobotErrorText.isDisplayed()).toBe(true, 'An error message should appear with a fake code');
+
+        flow.execute(thirdPartyRobotsApi.getMBotPersonalCode).then(function(result) {
+            mycenter.clearCodeInput();
             modals.activateRobotCode1.sendKeys(result[0].code);
             modals.okDialog.click();
+            expect(modals.activateRobotErrorText.isDisplayed()).toBe(true, 'An error message should appear with a mbot personal code');
         });
-        browser.ignoreSynchronization = false;
-        browser.sleep(5000);
-        expect(modals.activateRobotErrorText.isPresent(false, 'The code should be invalid'));
-        modals.okDialog.click();
-        mycenter.centerInfoTab.click();
-        browser.sleep(5000);
-        /*mycenter.activateMBotButton.click();
-        modals.activateRobotCode1.sendKeys(code);
-        browser.sleep(10000);
-        modals.okDialog.click();
-        expect(modals.activateRobotErrorText.isPresent(true, 'The code should be invalid'));*/
 
-        /*// fake code
-        mycenter.activateMBotButton.click();
-        modals.activateRobotCode1.sendKeys('12345678');
-        modals.activateRobotCode2.sendKeys('12345678');
-        modals.activateRobotCode3.sendKeys('12345678');
-        modals.activateRobotCode4.sendKeys('12345678');
-        modals.okDialog.click();
-        expect(modals.activateRobotErrorText.isPresent(true, 'The code should be invalid'));
-        modals.cancelDialog.click();
-        */
-        //robot user-type-code
+        //activate mBot
+        flow.execute(thirdPartyRobotsApi.getMBotCenterCode).then(function(result2) {
+            mycenter.clearCodeInput();
+            modals.activateRobotCode1.sendKeys(result2[0].code);
+            modals.okDialog.click();
+            expect(modals.activateRobotErrorText.isPresent()).toBe(false, 'Good code for mBot, error shouldnt appear');
+        });
+        expect(mycenter.toastRobotActivated.isPresent(true, 'mBot activation dont show confirmation'));
+        expect(mycenter.activateMBotButton.isEnabled()).toBe(false, 'Activate mbot button should be disabled');
 
-        /*codigo inventado // error
-        código de usuario //error porq tiene que ser de centermode
-        código válido ya usado // error no puede usarse dos veces
+        //activate mranger
+        flow.execute(thirdPartyRobotsApi.getMRangerCenterCode).then(function(result) {
+            mycenter.activateMRangerButton.click();
+            mycenter.clearCodeInput();
+            modals.activateRobotCode1.sendKeys(result[0].code);
+            modals.okDialog.click();
+            expect(modals.activateRobotErrorText.isPresent()).toBe(false, 'Good code for mRanger, error shouldnt appear');
+        });
+        expect(mycenter.toastRobotActivated.isPresent(true, 'mRanger activation dont show confirmation'));
+        expect(mycenter.activateMRangerButton.isEnabled()).toBe(false, 'Activate mranger button should be disabled');
 
-        xCada robot{
-            Crear código de robot
-            pulsar sobre Activar en el robot
-            Poner el código de licencia
-            Comprobar que ha dado OK el toast
-            Comprobar que el aspecto visual ha cambiado    
-            Comprobar que funciona se hace en otro sitio.
-        }//de esto sacar una función sin tanta comprobación para que se puedan hacer otros test pidiendo activar un robot a un centro
-        */
+        //activate starterkit
+        flow.execute(thirdPartyRobotsApi.getStarterKitCenterCode).then(function(result) {
+            mycenter.activateStarterKitButton.click();
+            mycenter.clearCodeInput();
+            modals.activateRobotCode1.sendKeys(result[0].code);
+            modals.okDialog.click();
+            expect(modals.activateRobotErrorText.isPresent()).toBe(false, 'Good code for starterKit, error shouldnt appear');
+            expect(mycenter.toastRobotActivated.isPresent(true, 'StarterKit activation dont show confirmation'));
+            expect(mycenter.activateStarterKitButton.isEnabled()).toBe(false, 'Activate starterKit button should be disabled');
+
+            login.logout();
+
+            var headMaster2 = centermode.createHeadMaster({
+                keepLogin: true
+            });
+            header.navCenter.click();
+            mycenter.centerSettingsTab.click();
+            mycenter.activateStarterKitButton.click();
+            modals.activateRobotCode1.sendKeys(result[0].code);
+            modals.okDialog.click();
+            expect(modals.activateRobotErrorText.isDisplayed()).toBe(true, 'An error message should appear with a used mbot center code');
+        });
+
     });
 });

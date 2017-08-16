@@ -30,8 +30,13 @@ var MyCenter = function() {
     this.teacherGroupsDropdown = $('[data-element="my_center_dropdown_order-4"]');
     this.teacherStudentsDropdown = $('[data-element="my_center_dropdown_order-5"]');
 
-    //settings
+    //Settings tab
     this.activateMBotButton = $('[data-element="activate-robot-mBot"]');
+    this.activateMRangerButton = $('[data-element="activate-robot-mRanger"]');
+    this.activateStarterKitButton = $('[data-element="activate-robot-starterKit"]');
+
+    //Toasts
+    this.toastRobotActivated = $('[data-id="activatedError"]');
 
     this.url = '#/center-mode/center';
 
@@ -47,6 +52,13 @@ var MyCenter = function() {
         modals.okDialog.click();
         browser.sleep(vars.timeToWaitFadeModals);
     };
+
+    this.clearCodeInput = function() {
+        modals.activateRobotCode1.clear();
+        modals.activateRobotCode2.clear();
+        modals.activateRobotCode3.clear();
+        modals.activateRobotCode4.clear();
+    }
 };
 
 module.exports = MyCenter;

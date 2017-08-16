@@ -151,6 +151,11 @@ var Variables = function() {
         }
     };
 
+    /*login.login({
+        user: vars.developHeadMaster.userEmail,
+        password: vars.developHeadMaster.password
+    });*/
+
     this.developHeadMaster = {
         userEmail: 'tttt',
         password: 'tomtomtom'
