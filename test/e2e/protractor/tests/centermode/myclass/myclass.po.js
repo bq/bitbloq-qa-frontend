@@ -9,6 +9,11 @@ var header = new Header(),
 var MyClass = function() {
 
     this.createClassButton = $('[data-element="centerMode_button_newGroup"]');
+    this.orderDropdown = $('[data-element="order_dropdown"]');
+    this.orderDropdownName = $('[data-element="order_dropdown-0"]');
+    this.orderDropdownLastFirst = $('[data-element="order_dropdown-1"]');
+    this.orderDropdownOldFirst = $('[data-element="order_dropdown-2"]');
+    this.classesList = element.all(by.xpath('//*[contains(@data-element,"class-list-name")]'));
 
     this.url = '#/center-mode/teacher';
 
@@ -40,6 +45,10 @@ var MyClass = function() {
 
     this.getClassObject = function(classId) {
         return $('[data-element="class-' + classId + '"]');
+    };
+
+    this.getClassIdObject = function(classId) {
+        return $('[data-element="classId-' + classId + '"]');
     };
 };
 
