@@ -8,8 +8,9 @@ var header = new Header(),
     vars = new Variables();
 var MyClass = function() {
 
-    this.newGroupButton = $('[data-element="centerMode_button_newGroup"]');
-    this.groupsElems = element.all(by.xpath('//*[contains(@data-element,"centerMode-groups-link")]'));
+    this.createClassButton = $('[data-element="centerMode_button_newGroup"]');
+    this.studentsTab = $('[data-element="students-tab"]');
+    this.exercisesTab = $('[data-element="exercises-tab"]');
 
     this.url = '#/center-mode/teacher';
 
@@ -17,34 +18,35 @@ var MyClass = function() {
         browser.get(this.url);
     };
 
-    this.addNewGroup = function(nameGroup,nameCenter) {
+    this.createClass = function(options) {
+        options = options || {};
+        options.name = options.name || 'className_' + Date.now();
+
         header.navClass.click();
-        browser.sleep(vars.timeToWaitTab);
-        this.newGroupButton.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        modals.inputModalNoChangeN.sendKeys(nameGroup);
-        browser.sleep(vars.timeToSendKeys);
-        return modals.groupDropdown.isPresent().then(function(present) {
-          if(present) {
-            modals.groupDropdown.click();
-            element.all(by.xpath('//*[contains(@data-element,"centerMode_dropdown")]')).each(function(elem) {
-              elem.getText().then(function(text) {
-                if (text === nameCenter) {
-                  elem.click();
-                }
-              });
-            });
-          }
-          modals.okDialog.click();
-          browser.sleep(vars.timeToWaitFadeModals);
-          return modals.modalsText.getText().then(function(id) {
+        this.createClassButton.click();
+
+        modals.inputModalChangeN.sendKeys(options.name);
+        modals.okDialog.click();
+
+        expect(modals.modalsText.isDisplayed()).toBe(true, 'The modal with the ID isn\'t displayed');
+
+        return modals.modalsText.getText().then(function(classId) {
             modals.cancelDialog.click();
             browser.sleep(vars.timeToWaitFadeModals);
-            return id;
-          });
+            return {
+                name: options.name,
+                id: classId
+            }
         });
-
     };
+
+    this.getClassObject = function(classId) {
+        return $('[data-element="class-' + classId + '"]');
+    };
+
+    this.getStudentsObjectInStudentsTable = function(username) {
+        return $('[data-element="student-' + username.toLowerCase() + '"]');
+    }
 };
 
 module.exports = MyClass;

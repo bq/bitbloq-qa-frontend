@@ -20,21 +20,32 @@ var CenterMode = function() {
 
     this.createHeadMaster = function(options) {
         options = options || {};
-        var user = login.loginWithRandomUser();
-        header.openHeaderMenu.click();
-        header.centerModeBanner.click();
-        modals.okDialog.click();
-        modals.inputNameCenter.sendKeys(options.nameCenter || this.createRandomCenterName());
-        modals.inputLocationCenter.sendKeys('dir');
-        modals.inputTelephoneCenter.sendKeys('333333333');
-        modals.okDialog.click();
-        expect(header.navCenter.isDisplayed()).toBe(true);
-        expect(header.navClass.isDisplayed()).toBe(true);
-        expect(header.navExercise.isPresent()).toBe(true);
+        if (!options.useDevelopHeadMaster) {
+            var user = login.loginWithRandomUser();
+            header.openHeaderMenu.click();
+            header.centerModeBanner.click();
+            modals.okDialog.click();
+            modals.inputNameCenter.sendKeys(options.nameCenter || this.createRandomCenterName());
+            modals.inputLocationCenter.sendKeys('dir');
+            modals.inputTelephoneCenter.sendKeys('333333333');
+            modals.okDialog.click();
+            expect(header.navCenter.isDisplayed()).toBe(true);
+            expect(header.navClass.isDisplayed()).toBe(true);
+            expect(header.navExercise.isPresent()).toBe(true);
 
+        } else {
+            //options to develop faster, don't use in test, remove always that option
+            console.log('Cuidado!! estás usando un usuario pregenerado!');
+            user = vars.developHeadMaster;
+            login.login({
+                user: vars.developHeadMaster.userEmail,
+                password: vars.developHeadMaster.password
+            });
+        }
         if (!options.keepLogin) {
             login.logout();
         }
+
         return user;
     };
 

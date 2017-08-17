@@ -7,7 +7,8 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Login = require('../../login/login.po.js'),
     Centermode = require('../centermode.po.js'),
     Myclass = require('../myclass/myclass.po.js'),
-    Mycenter = require('../mycenter/myCenter.po.js');
+    Mycenter = require('../mycenter/myCenter.po.js'),
+    Exercise = require('../exercise/exercise.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     header = new Header(),
@@ -16,7 +17,8 @@ var globalFunctions = new GlobalFunctions(),
     login = new Login(),
     centermode = new Centermode(),
     myclass = new Myclass(),
-    mycenter = new Mycenter();
+    mycenter = new Mycenter(),
+    exercise = new Exercise();
 
 globalFunctions.xmlReport('myclass');
 
@@ -28,31 +30,46 @@ describe('My Class', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-404:myclass:Create a group', function() {
-        var headmaster = centermode.createHeadMaster('centermode');
-        var teacher = centermode.createTeacher(headmaster);
-        login.get();
-        login.login(headmaster.user,headmaster.password);
-        myclass.addNewGroup('prueba 404 headmaster').then(function(idheadmaster) {
-          expect(myclass.groupsElems.count()).toBe(1);
-          expect(myclass.groupsElems.get(0).getText()).toMatch(idheadmaster);
-          login.logout();
-          login.get();
-          login.login(teacher.user,teacher.password);
-          myclass.addNewGroup('prueba 404 teacher').then(function(idteacher) {
-            expect(myclass.groupsElems.count()).toBe(1);
-            expect(myclass.groupsElems.get(0).getText()).toMatch(idteacher);
+    it('bbb-404:myclass:User can enter in a director open class', function() {
+        var student = login.loginWithRandomUser();
+        login.logout();
+
+        var headmaster = centermode.createHeadMaster({
+            keepLogin: true,
+            useDevelopHeadMaster: true
+        });
+        console.log(headmaster);
+        console.log(student);
+
+        myclass.createClass().then(function(classInfo) {
+            console.log('classInfo', classInfo);
             login.logout();
-          });
+            login.login({
+                user: student.user,
+                password: student.password
+            });
+            exercise.registerInClass({
+                idClass: classInfo.id
+            });
+            login.logout();
+            login.login({
+                user: headmaster.userEmail,
+                password: headmaster.password
+            });
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            myclass.studentsTab.click();
+            browser.sleep(5000);
+            expect(myclass.getStudentsObjectInStudentsTable(student.user).isDisplayed()).toBe(true, 'the student is not in the class list');
         });
     });
 
-    it('bbb-405:myclass:Create a group - The field is empty', function() {
+    xit('bbb-405:myclass:Create a group - The field is empty', function() {
         var headmaster = centermode.createHeadMaster('centermode');
         var headmaster2 = centermode.createHeadMaster('centermode2');
 
         login.get();
-        login.login(headmaster.user,headmaster.password);
+        login.login(headmaster.user, headmaster.password);
         header.navClass.click();
         browser.sleep(vars.timeToWaitTab);
         myclass.newGroupButton.click();
@@ -64,12 +81,12 @@ describe('My Class', function() {
         browser.sleep(vars.timeToWaitTab);
 
         login.get();
-        login.login(headmaster2.user,headmaster2.password);
+        login.login(headmaster2.user, headmaster2.password);
         mycenter.addNewTeacher(headmaster.userEmail);
         login.logout();
         browser.sleep(vars.timeToWaitTab);
         login.get();
-        login.login(headmaster.user,headmaster.password);
+        login.login(headmaster.user, headmaster.password);
         header.navClass.click();
         browser.sleep(vars.timeToWaitTab);
         myclass.newGroupButton.click();
@@ -87,28 +104,28 @@ describe('My Class', function() {
         login.logout();
     });
 
-    it('bbb-435:myclass:Create a group - The group already exists', function() {
+    xit('bbb-435:myclass:Create a group - The group already exists', function() {
         var headmaster = centermode.createHeadMaster('centermode');
         var teacher = centermode.createTeacher(headmaster);
         login.get();
-        login.login(headmaster.user,headmaster.password);
+        login.login(headmaster.user, headmaster.password);
         myclass.addNewGroup('prueba 404 headmaster').then(function(idheadmaster) {
-          myclass.addNewGroup('prueba 404 headmaster').then(function(idheadmaster2) {
-            expect(myclass.groupsElems.count()).toBe(2);
-            expect(myclass.groupsElems.get(0).getText()).toMatch(idheadmaster);
-            expect(myclass.groupsElems.get(1).getText()).toMatch(idheadmaster2);
-            login.logout();
-            login.get();
-            login.login(teacher.user,teacher.password);
-            myclass.addNewGroup('prueba 404 teacher').then(function(idteacher) {
-              myclass.addNewGroup('prueba 404 teacher').then(function(idteacher2) {
+            myclass.addNewGroup('prueba 404 headmaster').then(function(idheadmaster2) {
                 expect(myclass.groupsElems.count()).toBe(2);
-                expect(myclass.groupsElems.get(0).getText()).toMatch(idteacher);
-                expect(myclass.groupsElems.get(1).getText()).toMatch(idteacher2);
+                expect(myclass.groupsElems.get(0).getText()).toMatch(idheadmaster);
+                expect(myclass.groupsElems.get(1).getText()).toMatch(idheadmaster2);
                 login.logout();
-              });
+                login.get();
+                login.login(teacher.user, teacher.password);
+                myclass.addNewGroup('prueba 404 teacher').then(function(idteacher) {
+                    myclass.addNewGroup('prueba 404 teacher').then(function(idteacher2) {
+                        expect(myclass.groupsElems.count()).toBe(2);
+                        expect(myclass.groupsElems.get(0).getText()).toMatch(idteacher);
+                        expect(myclass.groupsElems.get(1).getText()).toMatch(idteacher2);
+                        login.logout();
+                    });
+                });
             });
-          });
         });
     });
 });
