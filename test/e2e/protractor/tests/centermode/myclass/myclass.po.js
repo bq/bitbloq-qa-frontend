@@ -9,8 +9,6 @@ var header = new Header(),
 var MyClass = function() {
 
     this.createClassButton = $('[data-element="centerMode_button_newGroup"]');
-    this.studentsTab = $('[data-element="students-tab"]');
-    this.exercisesTab = $('[data-element="exercises-tab"]');
 
     this.url = '#/center-mode/teacher';
 
@@ -43,10 +41,6 @@ var MyClass = function() {
     this.getClassObject = function(classId) {
         return $('[data-element="class-' + classId + '"]');
     };
-
-    this.getStudentsObjectInStudentsTable = function(username) {
-        return $('[data-element="student-' + username.toLowerCase() + '"]');
-    }
 };
 
 module.exports = MyClass;

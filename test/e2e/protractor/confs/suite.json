@@ -37,6 +37,7 @@
     "mycenter": "../tests/centermode/mycenter/mycenter.spec.js",
     "groups": "../tests/centermode/myclass/groups/groups.spec.js",
     "myclass": "../tests/centermode/myclass/myclass.spec.js",
+    "classDetail": "../tests/centermode/myclass/classDetail/classDetail.spec.js",
 
     "enviroment": "../tests/bloqsproject/makeActions/share/makeActionsShare.spec.env.js",
 

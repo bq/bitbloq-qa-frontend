@@ -30,38 +30,12 @@ describe('My Class', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-404:myclass:User can enter in a director open class', function() {
-        var student = login.loginWithRandomUser();
-        login.logout();
-
+    it('bbb-404:myclass:new class', function() {
         var headmaster = centermode.createHeadMaster({
-            keepLogin: true,
-            useDevelopHeadMaster: true
+            keepLogin: true
         });
-        console.log(headmaster);
-        console.log(student);
 
-        myclass.createClass().then(function(classInfo) {
-            console.log('classInfo', classInfo);
-            login.logout();
-            login.login({
-                user: student.user,
-                password: student.password
-            });
-            exercise.registerInClass({
-                idClass: classInfo.id
-            });
-            login.logout();
-            login.login({
-                user: headmaster.userEmail,
-                password: headmaster.password
-            });
-            header.navClass.click();
-            myclass.getClassObject(classInfo.id).click();
-            myclass.studentsTab.click();
-            browser.sleep(5000);
-            expect(myclass.getStudentsObjectInStudentsTable(student.user).isDisplayed()).toBe(true, 'the student is not in the class list');
-        });
+        myclass.createClass();
     });
 
     xit('bbb-405:myclass:Create a group - The field is empty', function() {
