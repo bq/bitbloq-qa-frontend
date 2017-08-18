@@ -32,7 +32,7 @@ describe('My Class', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bbb-404:myclass:new class', function() {
+    it('bbb-404:myclass:new class', function() {
         var headmaster = centermode.createHeadMaster({
             keepLogin: true
         });
@@ -40,7 +40,7 @@ describe('My Class', function() {
         myclass.createClass();
     });
 
-    xit('bbb-405:myclass:Create a group - The field is empty', function() {
+    it('bbb-405:myclass:Create a group - The field is empty', function() {
         var headmaster = centermode.createHeadMaster({
             keepLogin: true
         });
@@ -70,22 +70,27 @@ describe('My Class', function() {
         }), myclass.createClass({
             name: 'b'
         })]).then(function(classes) {
-            console.log(classes[0]);
-            console.log(classes[1]);
-            console.log(classes[2]);
             myclass.orderDropdown.click();
             myclass.orderDropdownName.click();
-            console.log('myclass.classesList');
-            console.log(myclass.classesList);
-            console.log(myclass.classesList.get(0));
-            console.log(myclass.classesList.get(0).getText());
-            expect(myclass.classesList.get(0).getText()).toMatch(classes[0], 'Classes order - 0');
-            expect(myclass.classesList.get(1).getText()).toMatch(classes[1], 'Classes order - 1');
-            expect(myclass.classesList.get(2).getText()).toMatch(classes[2], 'Classes order - 2');
+            expect(myclass.classesList.get(0).getText()).toMatch(classes[1].name, 'Classes name - 0');
+            expect(myclass.classesList.get(1).getText()).toMatch(classes[2].name, 'Classes name - 1');
+            expect(myclass.classesList.get(2).getText()).toMatch(classes[0].name, 'Classes name - 2');
+
+            myclass.orderDropdown.click();
+            myclass.orderDropdownLastFirst.click();
+            expect(myclass.classesList.get(0).getText()).toMatch(classes[2].name, 'Classes lastFirst - 0');
+            expect(myclass.classesList.get(1).getText()).toMatch(classes[1].name, 'Classes lastFirst - 1');
+            expect(myclass.classesList.get(2).getText()).toMatch(classes[0].name, 'Classes lastFirst - 2');
+
+            myclass.orderDropdown.click();
+            myclass.orderDropdownOldFirst.click();
+            expect(myclass.classesList.get(0).getText()).toMatch(classes[0].name, 'Classes oldFirst - 0');
+            expect(myclass.classesList.get(1).getText()).toMatch(classes[1].name, 'Classes oldFirst - 1');
+            expect(myclass.classesList.get(2).getText()).toMatch(classes[2].name, 'Classes oldFirst - 2');
         });
     });
 
-    xit('bbb-649:myclass:Check that the classId is visible', function() {
+    it('bbb-649:myclass:Check that the classId is visible', function() {
         var headmaster = centermode.createHeadMaster({
             keepLogin: true
         });
