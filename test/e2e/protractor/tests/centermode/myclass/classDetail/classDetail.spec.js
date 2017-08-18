@@ -6,7 +6,8 @@ var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     ClassDetail = require('./classDetail.po.js'),
     Login = require('../../../login/login.po.js'),
     Centermode = require('../../centermode.po.js'),
-    Exercise = require('../../exercise/exercise.po.js'),
+    Exercises = require('../../exercises/exercises.po.js'),
+    MyExercises = require('../../myexercises/myexercises.po.js'),
     Variables = require('../../../commons/variables.js'),
     Modals = require('../../../modals/modals.po.js');
 
@@ -16,7 +17,8 @@ var globalFunctions = new GlobalFunctions(),
     classDetail = new ClassDetail(),
     login = new Login(),
     centermode = new Centermode(),
-    exercise = new Exercise(),
+    exercises = new Exercises(),
+    myExercises = new MyExercises(),
     vars = new Variables(),
     modals = new Modals();
 
@@ -44,7 +46,7 @@ describe('Class Detail', function() {
                 user: student.user,
                 password: student.password
             });
-            exercise.registerInClass({
+            exercises.registerInClass({
                 idClass: classInfo.id
             });
             login.logout();
@@ -71,7 +73,7 @@ describe('Class Detail', function() {
             login.logout();
 
             login.loginWithRandomUser();
-            exercise.registerInClass({
+            exercises.registerInClass({
                 idClass: classInfo.id,
                 dontCheckError: true
             });
@@ -92,13 +94,13 @@ describe('Class Detail', function() {
             login.logout();
 
             var student1 = login.loginWithRandomUser();
-            exercise.registerInClass({
+            exercises.registerInClass({
                 idClass: classInfo.id
             });
             login.logout();
 
             var student2 = login.loginWithRandomUser();
-            exercise.registerInClass({
+            exercises.registerInClass({
                 idClass: classInfo.id
             });
             login.logout();
@@ -125,15 +127,19 @@ describe('Class Detail', function() {
         });
 
         myclass.createClass().then(function(classInfo) {
-            login.logout();
 
-            header.navClass.click();
-            myclass.getClassObject(classInfo.id).click();
-            classDetail.exercisesTab.click();
-            expect(classDetail.getStudentsObjectInStudentsTable(student1.user).isDisplayed()).toBe(true, 'the student 1 is not in the class list');
-            expect(classDetail.getStudentsObjectInStudentsTable(student2.user).isDisplayed()).toBe(true, 'the student 2 is not in the class list');
+            myExercises.createExercise().then(function(exercise) {
+                console.log('exercise');
+                console.log(exercise);
+                header.navClass.click();
+                /*
+                myclass.getClassObject(classInfo.id).click();
+                classDetail.exercisesTab.click();
+                expect(classDetail.getStudentsObjectInStudentsTable(student1.user).isDisplayed()).toBe(true, 'the student 1 is not in the class list');
+                expect(classDetail.getStudentsObjectInStudentsTable(student2.user).isDisplayed()).toBe(true, 'the student 2 is not in the class list');
 
-            login.logout();
+                login.logout();*/
+            });
         });
     });
 

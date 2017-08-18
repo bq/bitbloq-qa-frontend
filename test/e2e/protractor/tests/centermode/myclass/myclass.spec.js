@@ -8,8 +8,7 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Centermode = require('../centermode.po.js'),
     Myclass = require('../myclass/myclass.po.js'),
     Mycenter = require('../mycenter/myCenter.po.js'),
-    ClassDetail = require('../myclass/classDetail/classDetail.po.js'),
-    Exercise = require('../exercise/exercise.po.js');
+    ClassDetail = require('../myclass/classDetail/classDetail.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     header = new Header(),
@@ -19,8 +18,7 @@ var globalFunctions = new GlobalFunctions(),
     centermode = new Centermode(),
     myclass = new Myclass(),
     mycenter = new Mycenter(),
-    classDetail = new ClassDetail(),
-    exercise = new Exercise();
+    classDetail = new ClassDetail();
 
 globalFunctions.xmlReport('myclass');
 
