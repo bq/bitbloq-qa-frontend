@@ -9,24 +9,10 @@ var header = new Header(),
 
 var MyExercise = function() {
 
-    this.registerGroupButton = $('[data-element="centerMode_button_registerInGroup"]');
+    this.newExerciseButton = $('[data-element="centerMode_button_newExercise"]');
 
-    this.url = '#/center-mode/student';
+    this.url = '#/exercises';
 
-    this.get = function() {
-        browser.get(this.url);
-    };
-
-    this.registerNewGroup = function(idGroup) {
-        header.navExercise.click();
-        browser.sleep(vars.timeToWaitTab);
-        this.registerGroupButton.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        modals.inputModalNoChangeN.sendKeys(idGroup);
-        browser.sleep(vars.timeToSendKeys);
-        modals.okDialog.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-    };
 };
 
 module.exports = MyExercise;

@@ -7,6 +7,7 @@ var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     Login = require('../../../login/login.po.js'),
     Centermode = require('../../centermode.po.js'),
     Exercise = require('../../exercise/exercise.po.js'),
+    Variables = require('../../../commons/variables.js'),
     Modals = require('../../../modals/modals.po.js');
 
 var globalFunctions = new GlobalFunctions(),
@@ -16,6 +17,7 @@ var globalFunctions = new GlobalFunctions(),
     login = new Login(),
     centermode = new Centermode(),
     exercise = new Exercise(),
+    vars = new Variables(),
     modals = new Modals();
 
 globalFunctions.xmlReport('classDetail');
@@ -28,7 +30,7 @@ describe('Class Detail', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-440:myclass:User can enter in a director open class', function() {
+    xit('bbb-440:myclass:User can enter in a director open class', function() {
         var student = login.loginWithRandomUser();
         login.logout();
 
@@ -56,4 +58,83 @@ describe('Class Detail', function() {
             expect(classDetail.getStudentsObjectInStudentsTable(student.user).isDisplayed()).toBe(true, 'the student is not in the class list');
         });
     });
+
+    xit('bbb-441:classDetail:User get an error entering in a director closed class', function() {
+
+        var headmaster = centermode.createHeadMaster({
+            keepLogin: true
+        });
+
+        myclass.createClass().then(function(classInfo) {
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.closeClassButton.click();
+            login.logout();
+
+            login.loginWithRandomUser();
+            exercise.registerInClass({
+                idClass: classInfo.id,
+                dontCheckError: true
+            });
+            expect(modals.inputError.isDisplayed()).toBe(true, 'User must see an error entering to a closed class')
+            modals.cancelDialog.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+            login.logout();
+        });
+    });
+
+    xit('bbb-442:classDetail:Must be a list of student', function() {
+
+        var headMaster = centermode.createHeadMaster({
+            keepLogin: true
+        });
+
+        myclass.createClass().then(function(classInfo) {
+            login.logout();
+
+            var student1 = login.loginWithRandomUser();
+            exercise.registerInClass({
+                idClass: classInfo.id
+            });
+            login.logout();
+
+            var student2 = login.loginWithRandomUser();
+            exercise.registerInClass({
+                idClass: classInfo.id
+            });
+            login.logout();
+
+            login.login({
+                user: headMaster.userEmail,
+                password: headMaster.password
+            });
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.studentsTab.click();
+            expect(classDetail.getStudentsObjectInStudentsTable(student1.user).isDisplayed()).toBe(true, 'the student 1 is not in the class list');
+            expect(classDetail.getStudentsObjectInStudentsTable(student2.user).isDisplayed()).toBe(true, 'the student 2 is not in the class list');
+
+            login.logout();
+        });
+    });
+
+    it('bbb-443:classDetail:Must be a list of exercises', function() {
+
+        var headMaster = centermode.createHeadMaster({
+            keepLogin: true,
+            useDevelopHeadMaster: true
+        });
+
+        myclass.createClass().then(function(classInfo) {
+            login.logout();
+
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.exercisesTab.click();
+            expect(classDetail.getStudentsObjectInStudentsTable(student1.user).isDisplayed()).toBe(true, 'the student 1 is not in the class list');
+            expect(classDetail.getStudentsObjectInStudentsTable(student2.user).isDisplayed()).toBe(true, 'the student 2 is not in the class list');
+
+            login.logout();
+        });
+    });
+
 });

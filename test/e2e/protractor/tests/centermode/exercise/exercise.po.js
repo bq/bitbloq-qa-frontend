@@ -27,7 +27,9 @@ var MyExercise = function() {
         modals.inputModalChangeN.sendKeys(options.idClass);
         modals.okDialog.click();
         browser.sleep(vars.timeToWaitFadeModals);
-        expect(modals.inputError.isPresent()).toBe(false, 'Shouldnt appear an error when a user enter in a class');
+        if (!options.dontCheckError) {
+            expect(modals.inputError.isPresent()).toBe(false, 'Shouldnt appear an error when a user enter in a class');
+        }
     };
 };
 
