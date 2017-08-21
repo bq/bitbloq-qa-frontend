@@ -155,6 +155,7 @@ var Variables = function() {
         user: vars.developHeadMaster.userEmail,
         password: vars.developHeadMaster.password
     });*/
+    //useDevelopHeadMaster
 
     this.developHeadMaster = {
         userEmail: 'tttt',

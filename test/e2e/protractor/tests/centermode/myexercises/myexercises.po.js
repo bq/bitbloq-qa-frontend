@@ -46,6 +46,8 @@ var MyExercise = function() {
             expect(bloqsExercise.savedMessageOK.isDisplayed()).toBe(true, 'Error saving the exercise');
             return browser.close().then(function() {
                 browser.switchTo().window(handles[0]);
+                header.navClass.click(); //to refresh
+                header.navExercise.click();
                 return exercise;
             });
         });

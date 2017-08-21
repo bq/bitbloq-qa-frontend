@@ -15,6 +15,8 @@ var Commons = function() {
     this.alertSvgIcon = $('[data-element="alert-svg-icon"]');
     this.alertUndoButton = $('[data-element="alert-undo-button"]');
 
+    this.toastClassArchivedOK = $('[data-id="closeGroup"]');
+
     this.expectToastTimeOut = function(alertElement) {
         browser.ignoreSynchronization = true;
         browser.sleep(1000);

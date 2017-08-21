@@ -2,6 +2,7 @@
 
 var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     Header = require('../../../header/header.po.js'),
+    Commons = require('../../../commons/commons.po.js'),
     Myclass = require('../../myclass/myclass.po.js'),
     ClassDetail = require('./classDetail.po.js'),
     Login = require('../../../login/login.po.js'),
@@ -9,11 +10,13 @@ var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     Exercises = require('../../exercises/exercises.po.js'),
     MyExercises = require('../../myexercises/myexercises.po.js'),
     ExercisesTable = require('../../exercisesTable/exercisesTable.po.js'),
+    EditClassesModal = require('../../editClassesModal/editClassesModal.po.js'),
     Variables = require('../../../commons/variables.js'),
     Modals = require('../../../modals/modals.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     header = new Header(),
+    commons = new Commons(),
     myclass = new Myclass(),
     classDetail = new ClassDetail(),
     login = new Login(),
@@ -21,6 +24,7 @@ var globalFunctions = new GlobalFunctions(),
     exercises = new Exercises(),
     myExercises = new MyExercises(),
     exercisesTable = new ExercisesTable(),
+    editClassesModal = new EditClassesModal(),
     vars = new Variables(),
     modals = new Modals();
 
@@ -151,6 +155,74 @@ describe('Class Detail', function() {
             classDetail.exercisesTab.click();
             expect(exercisesTable.getExerciseNameObject(exerciseInfo1.name).isDisplayed()).toBe(true, 'the exercise 1 is not in the class list');
             expect(exercisesTable.getExerciseNameObject(exerciseInfo2.name).isDisplayed()).toBe(true, 'the exercise 2 is not in the class list');
+            login.logout();
+        });
+    });
+
+    xit('bbb-444:classDetail:Verify that a Class can be archived', function() {
+        protractor.promise.all([
+            centermode.createHeadMaster({
+                keepLogin: true
+            }),
+            myclass.createClass(),
+            myExercises.createExercise()
+        ]).then(function(results) {
+
+            var headMaster = results[0],
+                classInfo = results[1],
+                exerciseInfo1 = results[2];
+
+            header.navExercise.click();
+            exercisesTable.getExerciseOptionButton(exerciseInfo1.name).click();
+            exercisesTable.getContextMenuOptionEditGroups(exerciseInfo1.name).click();
+            expect(editClassesModal.getClassCheckbox(classInfo.name).isDisplayed()).toBe(true, 'The class should appear');
+            modals.cancelDialog.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.moreActionsButton.click();
+            classDetail.archiveClassButton.click();
+            modals.okDialog.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+
+            expect(commons.toastClassArchivedOK.isPresent(true, 'Class not archived'));
+            header.navClass.click();
+            expect(myclass.getArchivedClassObject(classInfo.id).isDisplayed()).toBe(true, 'Must appear an archived tag in the list');
+
+            header.navExercise.click();
+            exercisesTable.getExerciseOptionButton(exerciseInfo1.name).click();
+            exercisesTable.getContextMenuOptionEditGroups(exerciseInfo1.name).click();
+            expect(editClassesModal.getClassCheckbox(classInfo.name).isPresent()).toBe(false, 'The class shouldnt appear');
+            modals.cancelDialog.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+
+            login.logout();
+        });
+    });
+
+    it('bbb-445:classDetail:Verify that is possible to cancel the process of archive a class', function() {
+        protractor.promise.all([
+            centermode.createHeadMaster({
+                keepLogin: true
+            }),
+            myclass.createClass()
+        ]).then(function(results) {
+
+            var headMaster = results[0],
+                classInfo = results[1];
+
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.moreActionsButton.click();
+            classDetail.archiveClassButton.click();
+            modals.cancelDialog.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+
+            expect(commons.toastClassArchivedOK.isPresent()).toBe(false, 'Class not archived');
+            header.navClass.click();
+            expect(myclass.getArchivedClassObject(classInfo.id).isPresent()).toBe(false, 'Cant appear an archived tag in the list');
+
             login.logout();
         });
     });

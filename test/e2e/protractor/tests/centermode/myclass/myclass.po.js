@@ -50,6 +50,10 @@ var MyClass = function() {
     this.getClassIdObject = function(classId) {
         return $('[data-element="classId-' + classId + '"]');
     };
+
+    this.getArchivedClassObject = function(classId) {
+        return element(by.xpath('//li[@data-element= "class-' + classId + '"]//div[@data-element= "archived-class"]'));
+    };
 };
 
 module.exports = MyClass;
