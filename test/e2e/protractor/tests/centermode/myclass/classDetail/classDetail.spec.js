@@ -8,6 +8,7 @@ var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     Centermode = require('../../centermode.po.js'),
     Exercises = require('../../exercises/exercises.po.js'),
     MyExercises = require('../../myexercises/myexercises.po.js'),
+    ExercisesTable = require('../../exercisesTable/exercisesTable.po.js'),
     Variables = require('../../../commons/variables.js'),
     Modals = require('../../../modals/modals.po.js');
 
@@ -19,6 +20,7 @@ var globalFunctions = new GlobalFunctions(),
     centermode = new Centermode(),
     exercises = new Exercises(),
     myExercises = new MyExercises(),
+    exercisesTable = new ExercisesTable(),
     vars = new Variables(),
     modals = new Modals();
 
@@ -119,27 +121,37 @@ describe('Class Detail', function() {
         });
     });
 
-    it('bbb-443:classDetail:Must be a list of exercises', function() {
+    xit('bbb-443:classDetail:Must be a list of exercises', function() {
 
         var headMaster = centermode.createHeadMaster({
             keepLogin: true,
-            useDevelopHeadMaster: true
         });
 
-        myclass.createClass().then(function(classInfo) {
+        protractor.promise.all([
+            myclass.createClass(),
+            myExercises.createExercise(),
+            myExercises.createExercise()
+        ]).then(function(results) {
+            var classInfo = results[0];
+            var exerciseInfo1 = results[1];
+            var exerciseInfo2 = results[2];
 
-            myExercises.createExercise().then(function(exercise) {
-                console.log('exercise');
-                console.log(exercise);
-                header.navClass.click();
-                /*
-                myclass.getClassObject(classInfo.id).click();
-                classDetail.exercisesTab.click();
-                expect(classDetail.getStudentsObjectInStudentsTable(student1.user).isDisplayed()).toBe(true, 'the student 1 is not in the class list');
-                expect(classDetail.getStudentsObjectInStudentsTable(student2.user).isDisplayed()).toBe(true, 'the student 2 is not in the class list');
-
-                login.logout();*/
-            });
+            protractor.promise.all([
+                myExercises.addExerciseToClass({
+                    classInfo: classInfo,
+                    exerciseInfo: exerciseInfo1
+                }),
+                myExercises.addExerciseToClass({
+                    classInfo: classInfo,
+                    exerciseInfo: exerciseInfo2
+                })
+            ]);
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.exercisesTab.click();
+            expect(exercisesTable.getExerciseNameObject(exerciseInfo1.name).isDisplayed()).toBe(true, 'the exercise 1 is not in the class list');
+            expect(exercisesTable.getExerciseNameObject(exerciseInfo2.name).isDisplayed()).toBe(true, 'the exercise 2 is not in the class list');
+            login.logout();
         });
     });
 

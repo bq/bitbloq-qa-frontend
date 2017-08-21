@@ -97,6 +97,9 @@ var Global = function() {
             return parseInt(stringNumber, 10);
         });
     };
+    this.getRandomNumber = function() {
+        return Number(new Date()) + Math.floor((Math.random() * 100000) + 1);
+    }
 };
 
 module.exports = Global;
