@@ -10,6 +10,7 @@ var header = new Header(),
 var MyExercise = function() {
 
     this.registerInClassButton = $('[data-element="centerMode_button_registerInGroup"]');
+    this.currentClassName = $('[data-element="tasks-dashboard-class-name"]');
 
     this.url = '#/tasks';
 

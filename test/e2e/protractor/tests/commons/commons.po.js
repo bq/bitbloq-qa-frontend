@@ -16,6 +16,7 @@ var Commons = function() {
     this.alertUndoButton = $('[data-element="alert-undo-button"]');
 
     this.toastClassArchivedOK = $('[data-id="closeGroup"]');
+    this.toastClassDeletedOK = $('[data-id="deleteGroup"]');
 
     this.expectToastTimeOut = function(alertElement) {
         browser.ignoreSynchronization = true;

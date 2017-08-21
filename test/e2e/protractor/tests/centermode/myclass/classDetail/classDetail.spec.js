@@ -201,7 +201,7 @@ describe('Class Detail', function() {
         });
     });
 
-    it('bbb-445:classDetail:Verify that is possible to cancel the process of archive a class', function() {
+    xit('bbb-445:classDetail:Verify that is possible to cancel the process of archive a class', function() {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -224,6 +224,94 @@ describe('Class Detail', function() {
             expect(myclass.getArchivedClassObject(classInfo.id).isPresent()).toBe(false, 'Cant appear an archived tag in the list');
 
             login.logout();
+        });
+    });
+
+    xit('bbb-446:classDetail:Verify that a class can be deleted', function() {
+        protractor.promise.all([
+            centermode.createHeadMaster({
+                keepLogin: true
+            }),
+            myclass.createClass(),
+            login.logout(),
+            login.loginWithRandomUser()
+        ]).then(function(results) {
+
+            var headMaster = results[0],
+                classInfo = results[1],
+                student = results[3];
+
+            exercises.registerInClass({
+                idClass: classInfo.id
+            });
+            header.navTasks.click();
+            expect(exercises.currentClassName.isDisplayed()).toBe(true, 'Should appear the class name in the tasks dashboard');
+            login.logout();
+
+            login.login({
+                user: headMaster.userEmail,
+                password: headMaster.password
+            });
+
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.moreActionsButton.click();
+            classDetail.deleteClassButton.click();
+            modals.ok();
+            header.navExercise.click(); //force refresh
+            header.navClass.click();
+            expect(myclass.getClassObject(classInfo.id).isPresent()).toBe(false, 'Class should be deleted');
+            login.logout();
+            login.login({
+                user: student.user,
+                password: student.password
+            });
+            header.navTasks.click();
+            expect(exercises.currentClassName.isPresent()).toBe(false, 'Shouldnt appear the class name in the tasks dashboard');
+        });
+    });
+
+    it('bbb-448:classDetail:Verify that is possible to cancel the process of delete a class', function() {
+        protractor.promise.all([
+            centermode.createHeadMaster({
+                keepLogin: true
+            }),
+            myclass.createClass(),
+            login.logout(),
+            login.loginWithRandomUser()
+        ]).then(function(results) {
+
+            var headMaster = results[0],
+                classInfo = results[1],
+                student = results[3];
+
+            exercises.registerInClass({
+                idClass: classInfo.id
+            });
+            header.navTasks.click();
+            expect(exercises.currentClassName.isDisplayed()).toBe(true, 'Should appear the class name in the tasks dashboard, just created');
+            login.logout();
+
+            login.login({
+                user: headMaster.userEmail,
+                password: headMaster.password
+            });
+
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.moreActionsButton.click();
+            classDetail.deleteClassButton.click();
+            modals.cancel();
+            header.navExercise.click(); //force refresh
+            header.navClass.click();
+            expect(myclass.getClassObject(classInfo.id).isDisplayed()).toBe(true, 'Class should appear');
+            login.logout();
+            login.login({
+                user: student.user,
+                password: student.password
+            });
+            header.navTasks.click();
+            expect(exercises.currentClassName.isDisplayed()).toBe(true, 'Should appear the class name in the tasks dashboard before cancel delete');
         });
     });
 
