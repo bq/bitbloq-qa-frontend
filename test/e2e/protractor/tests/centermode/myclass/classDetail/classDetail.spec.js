@@ -10,6 +10,7 @@ var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     Exercises = require('../../exercises/exercises.po.js'),
     MyExercises = require('../../myexercises/myexercises.po.js'),
     ExercisesTable = require('../../exercisesTable/exercisesTable.po.js'),
+    TaskTable = require('../../taskTable/taskTable.po.js'),
     EditClassesModal = require('../../editClassesModal/editClassesModal.po.js'),
     Variables = require('../../../commons/variables.js'),
     Modals = require('../../../modals/modals.po.js');
@@ -24,6 +25,7 @@ var globalFunctions = new GlobalFunctions(),
     exercises = new Exercises(),
     myExercises = new MyExercises(),
     exercisesTable = new ExercisesTable(),
+    taskTable = new TaskTable(),
     editClassesModal = new EditClassesModal(),
     vars = new Variables(),
     modals = new Modals();
@@ -271,7 +273,7 @@ describe('Class Detail', function() {
         });
     });
 
-    it('bbb-448:classDetail:Verify that is possible to cancel the process of delete a class', function() {
+    xit('bbb-448:classDetail:Verify that is possible to cancel the process of delete a class', function() {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -312,6 +314,68 @@ describe('Class Detail', function() {
             });
             header.navTasks.click();
             expect(exercises.currentClassName.isDisplayed()).toBe(true, 'Should appear the class name in the tasks dashboard before cancel delete');
+        });
+    });
+
+    xit('bbb-475:classDetail:delete task', function() {
+        protractor.promise.all([
+            centermode.createHeadMaster({
+                keepLogin: true
+            }),
+            myclass.createClass(),
+            myExercises.createExercise(),
+            login.logout(),
+            login.loginWithRandomUser()
+        ]).then(function(results) {
+
+            var headMaster = results[0],
+                classInfo = results[1],
+                exerciseInfo = results[2],
+                student = results[4];
+
+            exercises.registerInClass({
+                idClass: classInfo.id
+            });
+
+            login.logout();
+            login.login({
+                user: headMaster.userEmail,
+                password: headMaster.password
+            });
+
+            myExercises.addExerciseToClass({
+                exerciseInfo: exerciseInfo,
+                classInfo: classInfo
+            });
+
+            login.logout();
+            login.login({
+                user: student.user,
+                password: student.password
+            });
+
+            header.navTasks.click();
+            expect(taskTable.getTaskNameObject(exerciseInfo.name).isDisplayed()).toBe(true, 'Should appear the task');
+            login.logout();
+            login.login({
+                user: headMaster.userEmail,
+                password: headMaster.password
+            });
+
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            exercisesTable.getExerciseOptionButton(exerciseInfo.name).click();
+            exercisesTable.getContextMenuOptionRemoveFromThisClass(exerciseInfo.name).click();
+            modals.ok();
+
+            login.logout();
+            login.login({
+                user: student.user,
+                password: student.password
+            });
+
+            header.navTasks.click();
+            expect(taskTable.getTaskNameObject(exerciseInfo.name).isPresent()).toBe(false, 'the task should disappear');
         });
     });
 

@@ -21,6 +21,10 @@ var ExerciseTable = function() {
         return element(by.xpath('//div[@data-element= "exercise-' + exerciseName + '"]//li[@data-element= "menu-edit-groups"]'));
     };
 
+    this.getContextMenuOptionRemoveFromThisClass = function(exerciseName) {
+        return element(by.xpath('//div[@data-element= "exercise-' + exerciseName + '"]//li[@data-element= "menu-delete-exercise-from-class"]'));
+    };
+
     this.getExerciseNameObject = function(name) {
         return $('[data-element="centerMode-item-' + name + '"]');
     }
