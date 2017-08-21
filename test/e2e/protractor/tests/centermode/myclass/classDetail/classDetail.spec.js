@@ -40,7 +40,7 @@ describe('Class Detail', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bbb-440:myclass:User can enter in a director open class', function() {
+    it('bbb-440:myclass:User can enter in a director open class', function() {
         var student = login.loginWithRandomUser();
         login.logout();
 
@@ -69,7 +69,7 @@ describe('Class Detail', function() {
         });
     });
 
-    xit('bbb-441:classDetail:User get an error entering in a director closed class', function() {
+    it('bbb-441:classDetail:User get an error entering in a director closed class', function() {
 
         var headmaster = centermode.createHeadMaster({
             keepLogin: true
@@ -92,7 +92,7 @@ describe('Class Detail', function() {
         });
     });
 
-    xit('bbb-442:classDetail:Must be a list of student', function() {
+    it('bbb-442:classDetail:Must be a list of student', function() {
 
         var headMaster = centermode.createHeadMaster({
             keepLogin: true
@@ -127,7 +127,7 @@ describe('Class Detail', function() {
         });
     });
 
-    xit('bbb-443:classDetail:Must be a list of exercises', function() {
+    it('bbb-443:classDetail:Must be a list of exercises', function() {
 
         var headMaster = centermode.createHeadMaster({
             keepLogin: true,
@@ -161,7 +161,7 @@ describe('Class Detail', function() {
         });
     });
 
-    xit('bbb-444:classDetail:Verify that a Class can be archived', function() {
+    it('bbb-444:classDetail:Verify that a Class can be archived', function() {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -203,7 +203,7 @@ describe('Class Detail', function() {
         });
     });
 
-    xit('bbb-445:classDetail:Verify that is possible to cancel the process of archive a class', function() {
+    it('bbb-445:classDetail:Verify that is possible to cancel the process of archive a class', function() {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -229,7 +229,7 @@ describe('Class Detail', function() {
         });
     });
 
-    xit('bbb-446:classDetail:Verify that a class can be deleted', function() {
+    it('bbb-446:classDetail:Verify that a class can be deleted', function() {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -273,7 +273,7 @@ describe('Class Detail', function() {
         });
     });
 
-    xit('bbb-448:classDetail:Verify that is possible to cancel the process of delete a class', function() {
+    it('bbb-448:classDetail:Verify that is possible to cancel the process of delete a class', function() {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -317,7 +317,7 @@ describe('Class Detail', function() {
         });
     });
 
-    xit('bbb-475:classDetail:delete task', function() {
+    it('bbb-475:classDetail:delete task', function() {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -376,6 +376,39 @@ describe('Class Detail', function() {
 
             header.navTasks.click();
             expect(taskTable.getTaskNameObject(exerciseInfo.name).isPresent()).toBe(false, 'the task should disappear');
+        });
+    });
+
+    it('bbb-648:myclass:User can enter in a profesor open class', function() {
+        var headMaster = centermode.createHeadMaster();
+        var student = login.loginWithRandomUser();
+        login.logout();
+
+        centermode.createTeacher({
+            headMaster: headMaster,
+            keepLogin: true
+        }).then(function(teacher) {
+
+            myclass.createClass().then(function(classInfo) {
+                login.logout();
+                login.login({
+                    user: student.user,
+                    password: student.password
+                });
+                exercises.registerInClass({
+                    idClass: classInfo.id
+                });
+                login.logout();
+                login.login({
+                    user: teacher.userEmail,
+                    password: teacher.password
+                });
+                header.navClass.click();
+                myclass.getClassObject(classInfo.id).click();
+                classDetail.studentsTab.click();
+                expect(classDetail.getStudentsObjectInStudentsTable(student.user).isDisplayed()).toBe(true, 'the student is not in the class list');
+                login.logout();
+            });
         });
     });
 
