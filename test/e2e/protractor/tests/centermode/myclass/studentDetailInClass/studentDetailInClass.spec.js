@@ -12,6 +12,7 @@ var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     Mycenter = require('../../mycenter/myCenter.po.js'),
     TaskTable = require('../../taskTable/taskTable.po.js'),
     ExercisesTable = require('../../exercisesTable/exercisesTable.po.js'),
+    StudentDetailInClass = require('./studentDetailInClass.po.js'),
     ClassDetail = require('../../myclass/classDetail/classDetail.po.js');
 
 var globalFunctions = new GlobalFunctions(),
@@ -26,6 +27,7 @@ var globalFunctions = new GlobalFunctions(),
     myclass = new Myclass(),
     mycenter = new Mycenter(),
     exercisesTable = new ExercisesTable(),
+    studentDetailInClass = new StudentDetailInClass(),
     classDetail = new ClassDetail();
 
 globalFunctions.xmlReport('studentDetailInClass');
@@ -38,7 +40,7 @@ describe('Student Detail inside class Detail', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-473:studentDetailInClass: Must appear a list of exercises', function() {
+    xit('bbb-473:studentDetailInClass: Must appear a list of exercises', function() {
 
         protractor.promise.all([
             login.loginWithRandomUser(),
@@ -102,6 +104,54 @@ describe('Student Detail inside class Detail', function() {
             expect(taskTable.getTaskNameObject(exerciseInfo1.name).isPresent()).toBe(false, 'Shouldnt appear the first task');
             expect(taskTable.getTaskNameObject(exerciseInfo2.name).isDisplayed()).toBe(true, 'Should appear the second task');
             login.logout();
+        });
+
+    });
+
+    it('bbb-474:studentDetailInClass: Delete student from class', function() {
+
+        protractor.promise.all([
+            centermode.createHeadMaster({
+                keepLogin: true
+            }),
+            myclass.createClass(),
+            login.logout(),
+            login.loginWithRandomUser()
+        ]).then(function(results) {
+            var headMaster = results[0],
+                classInfo = results[1],
+                student = results[3];
+
+            exercises.registerInClass({
+                idClass: classInfo.id
+            });
+
+            expect(exercises.currentClassName.getText()).toBe(classInfo.name, 'Should appear the class name in the tasks dashboard');
+
+            login.logout();
+            login.login({
+                user: headMaster.userEmail,
+                password: headMaster.password
+            });
+
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.studentsTab.click();
+            classDetail.getStudentsObjectInStudentsTable(student.user).click();
+            studentDetailInClass.deleteStudent.click();
+            modals.ok();
+
+            classDetail.studentsTab.click();
+            expect(classDetail.getStudentsObjectInStudentsTable(student.user).isPresent()).toBe(false, 'Shouldnt appear the  student');
+            login.logout();
+
+            login.login({
+                user: student.user,
+                password: student.password
+            });
+
+            header.navTasks.click();
+            expect(exercises.currentClassName.isPresent()).toBe(false, 'Shouldnt appear the class name in the tasks dashboard');
         });
 
     });
