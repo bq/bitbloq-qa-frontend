@@ -14,7 +14,7 @@ var ClassDetail = function() {
 
     this.getStudentsObjectInStudentsTable = function(username) {
         return $('[data-element="student-' + username.toLowerCase() + '"]');
-    }
+    };
 };
 
 module.exports = ClassDetail;

@@ -71,7 +71,7 @@ describe('Class Detail', function() {
 
     it('bbb-441:classDetail:User get an error entering in a director closed class', function() {
 
-        var headmaster = centermode.createHeadMaster({
+        centermode.createHeadMaster({
             keepLogin: true
         });
 
@@ -85,7 +85,7 @@ describe('Class Detail', function() {
                 idClass: classInfo.id,
                 dontCheckError: true
             });
-            expect(modals.inputError.isDisplayed()).toBe(true, 'User must see an error entering to a closed class')
+            expect(modals.inputError.isDisplayed()).toBe(true, 'User must see an error entering to a closed class');
             modals.cancelDialog.click();
             browser.sleep(vars.timeToWaitFadeModals);
             login.logout();
@@ -129,7 +129,7 @@ describe('Class Detail', function() {
 
     it('bbb-443:classDetail:Must be a list of exercises', function() {
 
-        var headMaster = centermode.createHeadMaster({
+        centermode.createHeadMaster({
             keepLogin: true,
         });
 
@@ -170,8 +170,7 @@ describe('Class Detail', function() {
             myExercises.createExercise()
         ]).then(function(results) {
 
-            var headMaster = results[0],
-                classInfo = results[1],
+            var classInfo = results[1],
                 exerciseInfo1 = results[2];
 
             header.navExercise.click();
@@ -211,8 +210,7 @@ describe('Class Detail', function() {
             myclass.createClass()
         ]).then(function(results) {
 
-            var headMaster = results[0],
-                classInfo = results[1];
+            var classInfo = results[1];
 
             header.navClass.click();
             myclass.getClassObject(classInfo.id).click();

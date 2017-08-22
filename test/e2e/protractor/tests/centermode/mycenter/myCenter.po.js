@@ -58,7 +58,7 @@ var MyCenter = function() {
         modals.activateRobotCode2.clear();
         modals.activateRobotCode3.clear();
         modals.activateRobotCode4.clear();
-    }
+    };
 };
 
 module.exports = MyCenter;

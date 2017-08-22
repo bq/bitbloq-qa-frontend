@@ -8,8 +8,7 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Centermode = require('../centermode.po.js'),
     Modals = require('../../modals/modals.po.js'),
     Commons = require('../../commons/commons.po.js'),
-    ThirdPartyRobotsApi = require('../../commons/api/ThirdPartyRobotsApi.js'),
-    MyClass = require('../myclass/myclass.po.js');
+    ThirdPartyRobotsApi = require('../../commons/api/ThirdPartyRobotsApi.js');
 
 var globalFunctions = new GlobalFunctions(),
     login = new Login(),
@@ -20,7 +19,6 @@ var globalFunctions = new GlobalFunctions(),
     modals = new Modals(),
     commons = new Commons(),
     thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
-    myclass = new MyClass(),
     flow = browser.controlFlow();
 
 globalFunctions.xmlReport('mycenter');
@@ -273,7 +271,7 @@ describe('My center', function() {
     });
 
     it('bbb-632:mycenter:Check robot activation', function() {
-        var headMaster = centermode.createHeadMaster({
+        centermode.createHeadMaster({
             keepLogin: true
         });
 
@@ -325,7 +323,7 @@ describe('My center', function() {
 
             login.logout();
 
-            var headMaster2 = centermode.createHeadMaster({
+            centermode.createHeadMaster({
                 keepLogin: true
             });
             header.navCenter.click();

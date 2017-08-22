@@ -16,7 +16,6 @@ var header = new Header(),
     vars = new Variables();
 
 var MyExercise = function() {
-    var that = this;
     this.newExerciseButton = $('[data-element="centerMode_button_newExercise"]');
 
     this.url = '#/exercises';

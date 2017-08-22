@@ -39,7 +39,7 @@ var MyClass = function() {
             return {
                 name: options.name,
                 id: classId
-            }
+            };
         });
     };
 

@@ -21,7 +21,7 @@ var Api = function() {
         var deferred = protractor.promise.defer(),
             serverUrlFieldInConfigFile;
         params = params || {};
-        params.env = vars.defaults.env
+        params.env = vars.defaults.env;
         switch (params.serverName) {
             case 'api':
                 serverUrlFieldInConfigFile = 'serverUrl';

@@ -20,8 +20,9 @@ var CenterMode = function() {
 
     this.createHeadMaster = function(options) {
         options = options || {};
+        var user;
         if (!options.useDevelopHeadMaster) {
-            var user = login.loginWithRandomUser();
+            user = login.loginWithRandomUser();
             header.openHeaderMenu.click();
             header.centerModeBanner.click();
             modals.okDialog.click();

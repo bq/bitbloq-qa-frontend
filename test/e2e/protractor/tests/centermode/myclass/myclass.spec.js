@@ -2,22 +2,16 @@
 
 var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Header = require('../../header/header.po.js'),
-    Variables = require('../../commons/variables.js'),
     Modals = require('../../modals/modals.po.js'),
-    Login = require('../../login/login.po.js'),
     Centermode = require('../centermode.po.js'),
     Myclass = require('../myclass/myclass.po.js'),
-    Mycenter = require('../mycenter/myCenter.po.js'),
     ClassDetail = require('../myclass/classDetail/classDetail.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     header = new Header(),
-    vars = new Variables(),
     modals = new Modals(),
-    login = new Login(),
     centermode = new Centermode(),
     myclass = new Myclass(),
-    mycenter = new Mycenter(),
     classDetail = new ClassDetail();
 
 globalFunctions.xmlReport('myclass');
@@ -31,7 +25,7 @@ describe('My Class', function() {
     globalFunctions.afterTest();
 
     it('bbb-404:myclass:new class', function() {
-        var headmaster = centermode.createHeadMaster({
+        centermode.createHeadMaster({
             keepLogin: true
         });
 
@@ -39,7 +33,7 @@ describe('My Class', function() {
     });
 
     it('bbb-405:myclass:Create a group - The field is empty', function() {
-        var headmaster = centermode.createHeadMaster({
+        centermode.createHeadMaster({
             keepLogin: true
         });
         header.navClass.click();
@@ -52,13 +46,13 @@ describe('My Class', function() {
 
         expect(modals.modalsText.isDisplayed()).toBe(true, 'The modal with the ID isn\'t displayed');
 
-        modals.modalsText.getText().then(function(classId) {
+        modals.modalsText.getText().then(function() {
             modals.cancelDialog.click();
         });
     });
 
     it('bbb-642:myclass:Order and filters', function() {
-        var headmaster = centermode.createHeadMaster({
+        centermode.createHeadMaster({
             keepLogin: true
         });
         protractor.promise.all([myclass.createClass({
@@ -89,7 +83,7 @@ describe('My Class', function() {
     });
 
     it('bbb-649:myclass:Check that the classId is visible', function() {
-        var headmaster = centermode.createHeadMaster({
+        centermode.createHeadMaster({
             keepLogin: true
         });
         myclass.createClass().then(function(classInfo) {
