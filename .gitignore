@@ -13,3 +13,4 @@ target/
 .idea/
 privateConfig.js
 privateConfig.json
+settings.json

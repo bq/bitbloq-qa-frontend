@@ -1,15 +1,12 @@
 'use strict';
-
 var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     Header = require('../../../header/header.po.js'),
-    Variables = require('../../../commons/variables.js'),
     Modals = require('../../../modals/modals.po.js'),
     Login = require('../../../login/login.po.js'),
     Centermode = require('../../centermode.po.js'),
     MyExercises = require('../../myexercises/myexercises.po.js'),
     Exercises = require('../../exercises/exercises.po.js'),
     Myclass = require('../../myclass/myclass.po.js'),
-    Mycenter = require('../../mycenter/myCenter.po.js'),
     TaskTable = require('../../taskTable/taskTable.po.js'),
     ExercisesTable = require('../../exercisesTable/exercisesTable.po.js'),
     StudentDetailInClass = require('./studentDetailInClass.po.js'),
@@ -17,7 +14,6 @@ var GlobalFunctions = require('../../../commons/globalFunctions.js'),
 
 var globalFunctions = new GlobalFunctions(),
     header = new Header(),
-    vars = new Variables(),
     modals = new Modals(),
     login = new Login(),
     taskTable = new TaskTable(),
@@ -25,14 +21,13 @@ var globalFunctions = new GlobalFunctions(),
     exercises = new Exercises(),
     centermode = new Centermode(),
     myclass = new Myclass(),
-    mycenter = new Mycenter(),
     exercisesTable = new ExercisesTable(),
     studentDetailInClass = new StudentDetailInClass(),
     classDetail = new ClassDetail();
 
 globalFunctions.xmlReport('studentDetailInClass');
 
-describe('Student Detail inside class Detail', function() {
+describe('Student Detail inside class Detail', function () {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -40,7 +35,7 @@ describe('Student Detail inside class Detail', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bbb-473:studentDetailInClass: Must appear a list of exercises', function() {
+    xit('bbb-473:studentDetailInClass: Must appear a list of exercises', function () {
 
         protractor.promise.all([
             login.loginWithRandomUser(),
@@ -51,7 +46,7 @@ describe('Student Detail inside class Detail', function() {
             myclass.createClass(),
             myExercises.createExercise(),
             myExercises.createExercise(),
-        ]).then(function(results) {
+        ]).then(function (results) {
             var student = results[0],
                 headMaster = results[2],
                 classInfo = results[3],
@@ -108,7 +103,7 @@ describe('Student Detail inside class Detail', function() {
 
     });
 
-    it('bbb-474:studentDetailInClass: Delete student from class', function() {
+    it('bbb-474:studentDetailInClass: Delete student from class', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -117,7 +112,7 @@ describe('Student Detail inside class Detail', function() {
             myclass.createClass(),
             login.logout(),
             login.loginWithRandomUser()
-        ]).then(function(results) {
+        ]).then(function (results) {
             var headMaster = results[0],
                 classInfo = results[1],
                 student = results[3];
