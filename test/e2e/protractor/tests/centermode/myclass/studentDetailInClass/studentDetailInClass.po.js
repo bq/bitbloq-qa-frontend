@@ -8,7 +8,7 @@ var header = new Header(),
     vars = new Variables();
 
 var StudentDetailInClass = function() {
-
+    this.deleteStudent = $('[data-element="centerMode_button_deleteStudent"]');
 };
 
 module.exports = StudentDetailInClass;

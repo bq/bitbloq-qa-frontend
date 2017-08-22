@@ -1,0 +1,109 @@
+'use strict';
+
+var GlobalFunctions = require('../../../commons/globalFunctions.js'),
+    Header = require('../../../header/header.po.js'),
+    Variables = require('../../../commons/variables.js'),
+    Modals = require('../../../modals/modals.po.js'),
+    Login = require('../../../login/login.po.js'),
+    Centermode = require('../../centermode.po.js'),
+    MyExercises = require('../../myexercises/myexercises.po.js'),
+    Exercises = require('../../exercises/exercises.po.js'),
+    Myclass = require('../../myclass/myclass.po.js'),
+    Mycenter = require('../../mycenter/myCenter.po.js'),
+    TaskTable = require('../../taskTable/taskTable.po.js'),
+    ExercisesTable = require('../../exercisesTable/exercisesTable.po.js'),
+    ClassDetail = require('../../myclass/classDetail/classDetail.po.js');
+
+var globalFunctions = new GlobalFunctions(),
+    header = new Header(),
+    vars = new Variables(),
+    modals = new Modals(),
+    login = new Login(),
+    taskTable = new TaskTable(),
+    myExercises = new MyExercises(),
+    exercises = new Exercises(),
+    centermode = new Centermode(),
+    myclass = new Myclass(),
+    mycenter = new Mycenter(),
+    exercisesTable = new ExercisesTable(),
+    classDetail = new ClassDetail();
+
+globalFunctions.xmlReport('studentDetailInClass');
+
+describe('Student Detail inside class Detail', function() {
+
+    //beforeEach commons
+    globalFunctions.beforeTest();
+
+    // afterEach commons
+    globalFunctions.afterTest();
+
+    it('bbb-473:studentDetailInClass: Must appear a list of exercises', function() {
+
+        protractor.promise.all([
+            login.loginWithRandomUser(),
+            login.logout(),
+            centermode.createHeadMaster({
+                keepLogin: true
+            }),
+            myclass.createClass(),
+            myExercises.createExercise(),
+            myExercises.createExercise(),
+        ]).then(function(results) {
+            var student = results[0],
+                headMaster = results[2],
+                classInfo = results[3],
+                exerciseInfo1 = results[4],
+                exerciseInfo2 = results[5];
+
+            protractor.promise.all([
+                myExercises.addExerciseToClass({
+                    classInfo: classInfo,
+                    exerciseInfo: exerciseInfo1
+                }),
+                myExercises.addExerciseToClass({
+                    classInfo: classInfo,
+                    exerciseInfo: exerciseInfo2
+                })
+            ]);
+
+            login.logout();
+            login.login({
+                user: student.user,
+                password: student.password
+            });
+
+            exercises.registerInClass({
+                idClass: classInfo.id
+            });
+
+            login.logout();
+            login.login({
+                user: headMaster.userEmail,
+                password: headMaster.password
+            });
+
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.studentsTab.click();
+            classDetail.getStudentsObjectInStudentsTable(student.user).click();
+            expect(taskTable.getTaskNameObject(exerciseInfo1.name).isDisplayed()).toBe(true, 'Should appear the first task');
+            expect(taskTable.getTaskNameObject(exerciseInfo2.name).isDisplayed()).toBe(true, 'Should appear the second task');
+
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.exercisesTab.click();
+            exercisesTable.getExerciseOptionButton(exerciseInfo1.name).click();
+            exercisesTable.getContextMenuOptionRemoveFromThisClass(exerciseInfo1.name).click();
+            modals.ok();
+
+            classDetail.studentsTab.click();
+            classDetail.getStudentsObjectInStudentsTable(student.user).click();
+            expect(taskTable.getTaskNameObject(exerciseInfo1.name).isPresent()).toBe(false, 'Shouldnt appear the first task');
+            expect(taskTable.getTaskNameObject(exerciseInfo2.name).isDisplayed()).toBe(true, 'Should appear the second task');
+            login.logout();
+        });
+
+    });
+
+});
