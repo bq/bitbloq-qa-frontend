@@ -103,7 +103,7 @@ describe('Student Detail inside class Detail', function () {
 
     });
 
-    it('bbb-474:studentDetailInClass: Delete student from class', function () {
+    xit('bbb-474:studentDetailInClass: Delete student from class', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -147,6 +147,75 @@ describe('Student Detail inside class Detail', function () {
 
             header.navTasks.click();
             expect(exercises.currentClassName.isPresent()).toBe(false, 'Shouldnt appear the class name in the tasks dashboard');
+        });
+
+    });
+
+    it('bbb-477:studentDetailInClass: correct exercise', function () {
+
+        protractor.promise.all([
+            centermode.createHeadMaster({
+                keepLogin: true
+            }),
+            myclass.createClass(),
+            myExercises.createExercise(),
+            myExercises.createExercise(),
+        ]).then(function (results) {
+            var headMaster = results[0],
+                classInfo = results[1],
+                exerciseInfo1 = results[2],
+                exerciseInfo2 = results[3];
+
+            myExercises.addExerciseToClass({
+                classInfo: classInfo,
+                exerciseInfo: exerciseInfo1
+            });
+            myExercises.addExerciseToClass({
+                classInfo: classInfo,
+                exerciseInfo: exerciseInfo2
+            });
+
+            login.logout();
+
+            var student = login.loginWithRandomUser();
+
+            exercises.registerInClass({
+                idClass: classInfo.id
+            });
+
+            exercises.sendExerciseToCorrect({
+                exerciseInfo: exerciseInfo1
+            });
+            exercises.sendExerciseToCorrect({
+                exerciseInfo: exerciseInfo2
+            });
+
+            login.logout();
+
+            login.login({
+                user: headMaster.userEmail,
+                password: headMaster.password
+            });
+
+            header.navClass.click();
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.studentsTab.click();
+            classDetail.getStudentsObjectInStudentsTable(student.user).click();
+
+            studentDetailInClass.correctExercise({
+                markNum: 8,
+                markDec: 6,
+                observations: 'Nice Job!',
+                exerciseInfo: exerciseInfo1
+            });
+
+            header.navClass.click();//refresh
+            myclass.getClassObject(classInfo.id).click();
+            classDetail.studentsTab.click();
+            classDetail.getStudentsObjectInStudentsTable(student.user).click();
+            expect(taskTable.getTaskStatusObject(exerciseInfo1.name).getText()).toBe('8.6', 'The mark is different');
+            login.logout();
+
         });
 
     });

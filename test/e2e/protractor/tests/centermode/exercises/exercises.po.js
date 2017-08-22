@@ -1,24 +1,28 @@
 'use strict';
 var Header = require('../../header/header.po.js'),
     Variables = require('../../commons/variables.js'),
+    BloqsExercise = require('../bloqsExercise/bloqsExercise.po.js'),
+    TaskTable = require('../taskTable/taskTable.po.js'),
     Modals = require('../../modals/modals.po.js');
 
 var header = new Header(),
     modals = new Modals(),
+    bloqsExercise = new BloqsExercise(),
+    taskTable = new TaskTable(),
     vars = new Variables();
 
-var MyExercise = function() {
+var MyExercise = function () {
 
     this.registerInClassButton = $('[data-element="centerMode_button_registerInGroup"]');
     this.currentClassName = $('[data-element="tasks-dashboard-class-name"]');
 
     this.url = '#/tasks';
 
-    this.get = function() {
+    this.get = function () {
         browser.get(this.url);
     };
 
-    this.registerInClass = function(options) {
+    this.registerInClass = function (options) {
         options = options || {};
         if (options.isTeacher) {
             header.navShowMoreMenu.click();
@@ -31,6 +35,27 @@ var MyExercise = function() {
         if (!options.dontCheckError) {
             expect(modals.inputError.isPresent()).toBe(false, 'Shouldnt appear an error when a user enter in a class');
         }
+    };
+
+    this.sendExerciseToCorrect = function (options) {
+        options = options || {};
+        header.navTasks.click();
+
+        browser.actions().mouseMove(taskTable.getTask(options.exerciseInfo.name)).perform();
+
+        taskTable.getTaskButton(options.exerciseInfo.name).click();
+        return browser.getAllWindowHandles().then(function (handles) {
+            browser.sleep(vars.timeToWaitTab);
+            browser.switchTo().window(handles[1]);
+
+            bloqsExercise.sendTaskButton.click();
+            modals.ok();
+
+            return browser.close().then(function () {
+                browser.switchTo().window(handles[0]);
+            });
+        });
+
     };
 };
 
