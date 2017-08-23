@@ -41,7 +41,7 @@ var MyExercise = function () {
         options = options || {};
         header.navTasks.click();
 
-        browser.actions().mouseMove(taskTable.getTask(options.exerciseInfo.name)).perform();
+        browser.actions().mouseMove(taskTable.getTaskByExerciseName(options.exerciseInfo.name)).perform();
 
         taskTable.getTaskButton(options.exerciseInfo.name).click();
         return browser.getAllWindowHandles().then(function (handles) {

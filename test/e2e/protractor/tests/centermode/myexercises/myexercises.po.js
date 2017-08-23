@@ -15,12 +15,12 @@ var header = new Header(),
     editClassesModal = new EditClassesModal(),
     vars = new Variables();
 
-var MyExercise = function() {
+var MyExercise = function () {
     this.newExerciseButton = $('[data-element="centerMode_button_newExercise"]');
 
     this.url = '#/exercises';
 
-    this.createExercise = function(options) {
+    this.createExercise = function (options) {
         options = options || {};
         var exercise = {
             name: 'Exercise_' + globalFunctions.getRandomNumber()
@@ -30,7 +30,7 @@ var MyExercise = function() {
         this.newExerciseButton.click();
         browser.sleep(vars.timeToWaitTab);
 
-        return browser.getAllWindowHandles().then(function(handles) {
+        return browser.getAllWindowHandles().then(function (handles) {
 
             browser.sleep(vars.timeToWaitTab);
 
@@ -43,7 +43,7 @@ var MyExercise = function() {
             modals.okDialog.click();
             browser.sleep(vars.timeToWaitAutoSave);
             expect(bloqsExercise.savedMessageOK.isDisplayed()).toBe(true, 'Error saving the exercise');
-            return browser.close().then(function() {
+            return browser.close().then(function () {
                 browser.switchTo().window(handles[0]);
                 header.navClass.click(); //to refresh
                 header.navExercise.click();
@@ -52,15 +52,16 @@ var MyExercise = function() {
         });
     };
 
-    this.addExerciseToClass = function(options) {
+    this.addExerciseToClass = function (options) {
         options = options || {};
         header.navClass.click(); //to refresh
         header.navExercise.click();
+
         exercisesTable.getExerciseOptionButton(options.exerciseInfo.name).click();
         exercisesTable.getContextMenuOptionEditGroups(options.exerciseInfo.name).click();
         editClassesModal.getClassCheckbox(options.classInfo.name).click();
 
-        return browser.executeScript('window.scrollTo(0,200);').then(function() {
+        return browser.executeScript('window.scrollTo(0,200);').then(function () {
             modals.okDialog.click();
             browser.sleep(vars.timeToWaitFadeModals);
             return true;

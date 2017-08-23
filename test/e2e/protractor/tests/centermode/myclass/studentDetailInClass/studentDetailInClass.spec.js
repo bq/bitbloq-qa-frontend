@@ -35,7 +35,7 @@ describe('Student Detail inside class Detail', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bbb-473:studentDetailInClass: Must appear a list of exercises', function () {
+    it('bbb-473:studentDetailInClass: Must appear a list of exercises', function () {
 
         protractor.promise.all([
             login.loginWithRandomUser(),
@@ -103,7 +103,7 @@ describe('Student Detail inside class Detail', function () {
 
     });
 
-    xit('bbb-474:studentDetailInClass: Delete student from class', function () {
+    it('bbb-474:studentDetailInClass: Delete student from class', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -213,7 +213,7 @@ describe('Student Detail inside class Detail', function () {
             myclass.getClassObject(classInfo.id).click();
             classDetail.studentsTab.click();
             classDetail.getStudentsObjectInStudentsTable(student.user).click();
-            expect(taskTable.getTaskStatusObject(exerciseInfo1.name).getText()).toBe('8.6', 'The mark is different');
+            expect(taskTable.getTaskStatusObjectByExerciseName(exerciseInfo1.name).getText()).toBe('8.6', 'The mark is different');
             login.logout();
 
         });
