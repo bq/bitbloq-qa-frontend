@@ -8,7 +8,7 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Centermode = require('../centermode.po.js'),
     Modals = require('../../modals/modals.po.js'),
     Commons = require('../../commons/commons.po.js'),
-    ThirdPartyRobotsApi = require('../../commons/api/ThirdPartyRobotsApi.js');
+    ThirdPartyRobotsApi = require('../../commons/api/thirdPartyRobotsApi.js');
 
 var globalFunctions = new GlobalFunctions(),
     login = new Login(),
@@ -23,7 +23,7 @@ var globalFunctions = new GlobalFunctions(),
 
 globalFunctions.xmlReport('mycenter');
 
-describe('My center', function() {
+describe('My center', function () {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -31,7 +31,7 @@ describe('My center', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-396:mycenter:Order the teacher', function() {
+    it('bbb-396:mycenter:Order the teacher', function () {
         var headMasterEmail = '210417prueba@prueba.es';
         var headMasterPass = 'prueba';
         login.login({
@@ -82,12 +82,12 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-397:mycenter:Create a teacher - VALID', function() {
+    it('bbb-397:mycenter:Create a teacher - VALID', function () {
         var headMaster = centermode.createHeadMaster();
 
         centermode.createTeacher({
             headMaster: headMaster
-        }).then(function(teacher) {
+        }).then(function (teacher) {
             login.login({
                 user: headMaster.userEmail,
                 password: headMaster.password
@@ -99,7 +99,7 @@ describe('My center', function() {
         });
     });
 
-    it('bbb-398:mycenter:Create a teacher - headmaster email', function() {
+    it('bbb-398:mycenter:Create a teacher - headmaster email', function () {
         var headMaster = centermode.createHeadMaster({
             keepLogin: true
         });
@@ -115,7 +115,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-399:mycenter:Create a teacher - Wrong email', function() {
+    it('bbb-399:mycenter:Create a teacher - Wrong email', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -131,7 +131,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-400:mycenter:Create a teacher - The email doesnt exist', function() {
+    it('bbb-400:mycenter:Create a teacher - The email doesnt exist', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -147,12 +147,12 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-402:mycenter:Delete a teacher - The teacher belongs to a center', function() {
+    it('bbb-402:mycenter:Delete a teacher - The teacher belongs to a center', function () {
         var headMaster = centermode.createHeadMaster();
 
         centermode.createTeacher({
             headMaster: headMaster
-        }).then(function(teacher) {
+        }).then(function (teacher) {
             login.login({
                 user: headMaster.userEmail,
                 password: headMaster.password
@@ -174,7 +174,7 @@ describe('My center', function() {
         });
     });
 
-    it('bbb-403:mycenter:Delete a teacher - The teacher is the headmaster', function() {
+    it('bbb-403:mycenter:Delete a teacher - The teacher is the headmaster', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -185,11 +185,11 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-454:mycenter:Create a teacher - The teacher is already on the list', function() {
+    it('bbb-454:mycenter:Create a teacher - The teacher is already on the list', function () {
         var headMaster = centermode.createHeadMaster();
         centermode.createTeacher({
             headMaster: headMaster
-        }).then(function(teacher) {
+        }).then(function (teacher) {
             login.login({
                 user: headMaster.userEmail,
                 password: headMaster.password
@@ -207,14 +207,14 @@ describe('My center', function() {
         });
     });
 
-    it('bbb-455:mycenter:the list of teacher', function() {
+    it('bbb-455:mycenter:the list of teacher', function () {
         var headMaster = centermode.createHeadMaster();
         centermode.createTeacher({
             headMaster: headMaster
-        }).then(function() {
+        }).then(function () {
             centermode.createTeacher({
                 headMaster: headMaster
-            }).then(function() {
+            }).then(function () {
                 login.login({
                     user: headMaster.userEmail,
                     password: headMaster.password
@@ -226,11 +226,11 @@ describe('My center', function() {
         });
     });
 
-    it('bbb-631:mycenter:Modify center mode information', function() {
+    it('bbb-631:mycenter:Modify center mode information', function () {
 
         var headMaster = centermode.createHeadMaster({
-                keepLogin: true
-            }),
+            keepLogin: true
+        }),
             fakeCenterInfo = {
                 name: 'fakeCenterName',
                 address: 'c/Falsa 123',
@@ -270,7 +270,7 @@ describe('My center', function() {
         login.logout();
     });
 
-    it('bbb-632:mycenter:Check robot activation', function() {
+    fit('bbb-632:mycenter:Check robot activation', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -283,7 +283,7 @@ describe('My center', function() {
         modals.okDialog.click();
         expect(modals.activateRobotErrorText.isDisplayed()).toBe(true, 'An error message should appear with a fake code');
 
-        flow.execute(thirdPartyRobotsApi.getMBotPersonalCode).then(function(result) {
+        flow.execute(thirdPartyRobotsApi.getMBotPersonalCode).then(function (result) {
             mycenter.clearCodeInput();
             modals.activateRobotCode1.sendKeys(result[0].code);
             modals.okDialog.click();
@@ -291,7 +291,7 @@ describe('My center', function() {
         });
 
         //activate mBot
-        flow.execute(thirdPartyRobotsApi.getMBotCenterCode).then(function(result2) {
+        flow.execute(thirdPartyRobotsApi.getMBotCenterCode).then(function (result2) {
             mycenter.clearCodeInput();
             modals.activateRobotCode1.sendKeys(result2[0].code);
             modals.okDialog.click();
@@ -301,7 +301,7 @@ describe('My center', function() {
         expect(mycenter.activateMBotButton.isEnabled()).toBe(false, 'Activate mbot button should be disabled');
 
         //activate mranger
-        flow.execute(thirdPartyRobotsApi.getMRangerCenterCode).then(function(result) {
+        flow.execute(thirdPartyRobotsApi.getMRangerCenterCode).then(function (result) {
             mycenter.activateMRangerButton.click();
             mycenter.clearCodeInput();
             modals.activateRobotCode1.sendKeys(result[0].code);
@@ -312,7 +312,7 @@ describe('My center', function() {
         expect(mycenter.activateMRangerButton.isEnabled()).toBe(false, 'Activate mranger button should be disabled');
 
         //activate starterkit
-        flow.execute(thirdPartyRobotsApi.getStarterKitCenterCode).then(function(result) {
+        flow.execute(thirdPartyRobotsApi.getStarterKitCenterCode).then(function (result) {
             mycenter.activateStarterKitButton.click();
             mycenter.clearCodeInput();
             modals.activateRobotCode1.sendKeys(result[0].code);
