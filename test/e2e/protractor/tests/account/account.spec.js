@@ -80,7 +80,7 @@ describe('User account view', function () {
         login.logout();
 
         login.get();
-        login.login(randomUserInfo.user, randomUserInfo.password);
+        login.login({ 'user': randomUserInfo.user, 'password': randomUserInfo.password });
         account.get();
 
         expect(account.firstname.getAttribute('value')).toMatch('Manolo');
@@ -102,7 +102,7 @@ describe('User account view', function () {
         commons.expectToastTimeOut(commons.alertTextToast, alerts.alertTextDataAutosave);
         login.logout();
         login.get();
-        login.login(usernameNew, user.password);
+        login.login({ 'user': usernameNew, 'password': user.password });
         account.get();
         account.userTab.click();
         expect(account.username.getAttribute('value')).toMatch(usernameNew);
