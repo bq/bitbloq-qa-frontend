@@ -58,8 +58,6 @@ describe('User account view', function () {
         login.logout();
 
         login.get();
-        console.log("randomUserInfo.user");
-        console.log(randomUserInfo.user);
         login.login({ 'user': randomUserInfo.user, 'password': '123456' });
 
         login.logout();
