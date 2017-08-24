@@ -1,7 +1,6 @@
 'use strict';
 var GlobalFunctions = require('../../../commons/globalFunctions.js'),
     Header = require('../../../header/header.po.js'),
-    Modals = require('../../../modals/modals.po.js'),
     Login = require('../../../login/login.po.js'),
     Centermode = require('../../centermode.po.js'),
     MyExercises = require('../../myexercises/myexercises.po.js'),
@@ -14,7 +13,6 @@ var GlobalFunctions = require('../../../commons/globalFunctions.js'),
 
 var globalFunctions = new GlobalFunctions(),
     header = new Header(),
-    modals = new Modals(),
     login = new Login(),
     taskTable = new TaskTable(),
     myExercises = new MyExercises(),

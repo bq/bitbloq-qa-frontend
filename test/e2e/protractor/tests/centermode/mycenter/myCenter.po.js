@@ -1,12 +1,17 @@
 'use strict';
 var Header = require('../../header/header.po.js'),
     Variables = require('../../commons/variables.js'),
+    MyCenter = require('./myCenter.po.js'),
+    ThirdPartyRobotsApi = require('../../commons/api/ThirdPartyRobotsApi.js'),
     Modals = require('../../modals/modals.po.js');
 
 var header = new Header(),
     modals = new Modals(),
-    vars = new Variables();
-var MyCenter = function() {
+    vars = new Variables(),
+    thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
+    flow = browser.controlFlow();
+
+var MyCenter = function () {
 
     this.centerTeachersTab = $('[data-element="center-teachers-tab"]');
     this.centerSettingsTab = $('[data-element="center-settings-tab"]');
@@ -40,11 +45,11 @@ var MyCenter = function() {
 
     this.url = '#/center-mode/center';
 
-    this.get = function() {
+    this.get = function () {
         browser.get(this.url);
     };
 
-    this.addNewTeacher = function(email) {
+    this.addNewTeacher = function (email) {
         header.navCenter.click();
         this.newTeacherButton.click();
         modals.inputEmailsTeacher.all(by.css('input')).get(0).sendKeys(email.toLowerCase());
@@ -53,11 +58,30 @@ var MyCenter = function() {
         browser.sleep(vars.timeToWaitFadeModals);
     };
 
-    this.clearCodeInput = function() {
+    this.clearCodeInput = function () {
         modals.activateRobotCode1.clear();
         modals.activateRobotCode2.clear();
         modals.activateRobotCode3.clear();
         modals.activateRobotCode4.clear();
+    };
+
+    /**
+     * options.robot = MBot
+     */
+
+    this.activateRobot = function (options) {
+        options = options || {};
+        header.navCenter.click();
+        this.centerSettingsTab.click();
+        this['activate' + options.robot + 'Button'].click();
+
+        flow.execute(thirdPartyRobotsApi['get' + options.robot + 'CenterCode']).then(function (result) {
+
+            modals.activateRobotCode1.sendKeys(result[0].code);
+            modals.ok();
+            expect(modals.activateRobotErrorText.isPresent()).toBe(false, 'Good code for mBot, error shouldnt appear');
+        });
+
     };
 };
 

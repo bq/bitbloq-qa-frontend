@@ -4,7 +4,7 @@
 
 'use strict';
 
-var MakeActions = function() {
+var MakeActions = function () {
 
     this.hideBar = $('[data-element="hide-bar"]');
     //FILE
@@ -48,6 +48,10 @@ var MakeActions = function() {
 
     //Hidden input to upload file
     this.inputUploadFile = $('[data-element="makeactions-input-upload-file"]');
+
+    this.compileButton = $('[data-element="makeactions-compile"]');
+
+    this.uploadButton = $('[data-element="makeactions-upload"]');
 
 };
 

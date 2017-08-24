@@ -40,9 +40,13 @@ var MyExercise = function () {
             bloqsExercise.name.click();
             modals.inputModalChangeN.clear();
             modals.inputModalChangeN.sendKeys(exercise.name);
-            modals.okDialog.click();
-            browser.sleep(vars.timeToWaitAutoSave);
+            modals.ok();
             expect(bloqsExercise.savedMessageOK.isDisplayed()).toBe(true, 'Error saving the exercise');
+
+            if (options.withRobot) {
+                bloqsExercise.addRobot(options.withRobot);
+            }
+
             return browser.close().then(function () {
                 browser.switchTo().window(handles[0]);
                 header.navClass.click(); //to refresh

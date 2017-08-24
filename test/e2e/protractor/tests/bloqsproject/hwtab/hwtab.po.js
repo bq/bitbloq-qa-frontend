@@ -4,9 +4,9 @@
 
 'use strict';
 
-var HwTab = function() {
+var HwTab = function () {
 
-	//BOARDS
+    //BOARDS
     this.hwContextMenuBoard = $('[id="board-context-menu"]');
     this.hwContextMenuDeleteBoard = $('[data-element="hw-contextmenu-board-delete"]');
     this.hwContextMenuDisconnectBoard = $('[data-element="hw-contextmenu-board-disconnect"]');
@@ -29,6 +29,8 @@ var HwTab = function() {
     this.lightSensor = $('[data-name="sensor_de_luz_0"]');
     this.bluetoothComp0 = $('[data-name="bluetooth_0"]');
     this.bluetoothComp1 = $('[data-name="bluetooth_0_2"]');
+
+    this.robotActivationInfoWindow = $('[data-element="robot-activation-info"]');
 
 };
 
