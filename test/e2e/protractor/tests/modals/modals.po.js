@@ -4,7 +4,7 @@ var Variables = require('../commons/variables.js');
 
 var vars = new Variables();
 
-var Modals = function() {
+var Modals = function () {
     //P.O modal.html
     this.modalTitle = $('[data-element="modal-title"]');
     this.okDialog = $('[data-element="modal-ok-dialog"]');
@@ -59,18 +59,23 @@ var Modals = function() {
     this.activateRobotCode4 = $('[data-element="modal-activate-robot-code-4"]');
     this.activateRobotErrorText = $('[data-element="activation-error-message"]');
 
-    this.rejectTour = function() {
+    this.rejectTour = function () {
         $('[data-element="reject-tour"]').click();
     };
     this.acceptTour = $('[data-element="accept-tour"]');
 
-    this.ok = function() {
+    this.ok = function () {
         this.okDialog.click();
         browser.sleep(vars.timeToWaitFadeModals);
     };
 
-    this.cancel = function() {
+    this.cancel = function () {
         this.cancelDialog.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+    };
+
+    this.rejectTour = function () {
+        this.rejectTourPO.click();
         browser.sleep(vars.timeToWaitFadeModals);
     };
 };

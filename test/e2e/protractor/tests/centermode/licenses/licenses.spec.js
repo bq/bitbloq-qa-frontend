@@ -13,6 +13,7 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     ExercisesTable = require('../exercisesTable/exercisesTable.po.js'),
     Licenses = require('./licenses.po.js'),
     MakeActions = require('../../bloqsproject/makeActions/makeActions.po.js'),
+    Myprojects = require('../../projects/myprojects/myprojects.po.js'),
     Hwtab = require('../../bloqsproject/hwtab/hwtab.po.js');
 
 
@@ -30,6 +31,7 @@ var globalFunctions = new GlobalFunctions(),
     exercisesTable = new ExercisesTable(),
     licenses = new Licenses(),
     makeActions = new MakeActions(),
+    myprojects = new Myprojects(),
     hwtab = new Hwtab();
 
 globalFunctions.xmlReport('licenses');
@@ -435,4 +437,18 @@ describe('Test licenses', function () {
             login.logout();
         });
     });
+
+    fit('bbb-XXX:licenses:Cant compile a robot project without activate it', function () {
+        var user = login.loginWithRandomUser();
+        console.log('user');
+        console.log(user);
+        myprojects.createProject({
+            withRobot: 'MBot',
+            firstProyect: true,
+            activateRobot: true
+        });
+
+
+    });
+
 });

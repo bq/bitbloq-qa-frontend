@@ -6,6 +6,8 @@ var Login = require('../login/login.po.js'),
     Modals = require('../modals/modals.po.js'),
     Infotab = require('./infotab/infotab.po.js'),
     MakeActions = require('./makeActions/makeActions.po.js'),
+    Hwtab = require('../bloqsproject/hwtab/hwtab.po.js'),
+    ThirdPartyRobotsApi = require('../commons/api/ThirdPartyRobotsApi.js'),
     Bloqs = require('../bloqs/bloqs.po.js');
 
 var login = new Login(),
@@ -14,9 +16,12 @@ var login = new Login(),
     vars = new Variables(),
     infotab = new Infotab(),
     makeActions = new MakeActions(),
-    bloqs = new Bloqs();
+    thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
+    bloqs = new Bloqs(),
+    hwtab = new Hwtab(),
+    flow = browser.controlFlow();
 
-var Make = function() {
+var Make = function () {
 
     this.hardwareTab = $('[data-element="hardware-tab"]');
     this.softwareTab = $('[data-element="software-tab"]');
@@ -28,14 +33,15 @@ var Make = function() {
     this.projectName = $('[data-element="project-name"]');
     this.hideBar = $('[data-element="hide-bar"]');
     this.url = '#/bloqsproject';
+    this.savedMessageOK = $('[data-element="project-save-label-make-project-saved-ok"]');
 
     this.softwareEditCode = $('[data-element="software-edit-code"]');
 
-    this.get = function() {
+    this.get = function () {
         browser.get(this.url);
     };
 
-    this.saveProject = function(nameProject) {
+    this.saveProject = function (nameProject) {
         var nameSavedProject = nameProject || 'Test_Save_' + Number(new Date());
         this.get();
         this.infoTab.click();
@@ -44,14 +50,14 @@ var Make = function() {
         modals.inputModalChangeN.clear();
         modals.inputModalChangeN.sendKeys(nameSavedProject);
         modals.okDialog.click();
-        infotab.infotabDescription.sendKeys('Esto es una descripcion de ejemplo proyecto:'+nameSavedProject);
+        infotab.infotabDescription.sendKeys('Esto es una descripcion de ejemplo proyecto:' + nameSavedProject);
         browser.sleep(vars.timeToWaitAutoSave);
         return {
             projectName: nameSavedProject
         };
     };
 
-    this.saveProjectNewUser = function(nameProject) {
+    this.saveProjectNewUser = function (nameProject) {
         var user = login.loginWithRandomUser();
         var nameSavedProject = nameProject || 'Test_Save_' + Number(new Date());
         this.get();
@@ -63,7 +69,7 @@ var Make = function() {
         modals.inputModalChangeN.clear();
         modals.inputModalChangeN.sendKeys(nameSavedProject);
         modals.okDialog.click();
-        infotab.infotabDescription.sendKeys('Esto es una descripcion de ejemplo proyecto:'+nameSavedProject);
+        infotab.infotabDescription.sendKeys('Esto es una descripcion de ejemplo proyecto:' + nameSavedProject);
         browser.sleep(vars.timeToWaitAutoSave);
         //Create and check saved project
         return {
@@ -73,7 +79,7 @@ var Make = function() {
 
     };
 
-    this.saveProjectNewUserAndLogout = function() {
+    this.saveProjectNewUserAndLogout = function () {
         var project = this.saveProjectNewUser();
         login.logout();
         return {
@@ -83,7 +89,7 @@ var Make = function() {
 
     };
 
-    this.saveProjectUser = function(user, password) {
+    this.saveProjectUser = function (user, password) {
         login.get();
         login.login(user, password);
         var project = this.saveProject();
@@ -92,7 +98,7 @@ var Make = function() {
         };
     };
 
-    this.saveProjectUserAndLogout = function(user, password) {
+    this.saveProjectUserAndLogout = function (user, password) {
         login.login(user, password);
         var project = this.saveProject();
         login.logout();
@@ -102,21 +108,21 @@ var Make = function() {
 
     };
 
-    this.saveProjectAndPublishNewUser = function() {
+    this.saveProjectAndPublishNewUser = function () {
         var projectUser = this.saveProjectNewUser();
         browser.sleep(vars.timeToWaitAutoSave);
-        var make =this;
+        var make = this;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
-        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+        bloqs.getBloqFunctions('bloq-return-function').then(function (bloque1) {
             bloqs.addToGroupVars(bloque1);
             bloqs.closeTab();
             browser.sleep(vars.timeToWaitAutoSave);
             make.publishProject();
             browser.sleep(vars.timeToWaitAutoSave);
         });
-        return browser.wait(function() {
-            return browser.getCurrentUrl().then(function(url) {
+        return browser.wait(function () {
+            return browser.getCurrentUrl().then(function (url) {
                 return {
                     projectName: projectUser.projectName,
                     user: projectUser.user,
@@ -126,21 +132,21 @@ var Make = function() {
         }, 1000, ' browser.getCurrentUrl TimeOut');
     };
 
-    this.saveProjectAndPublishNewUserAndLogout = function() {
+    this.saveProjectAndPublishNewUserAndLogout = function () {
         var projectUser = this.saveProjectNewUser();
         browser.sleep(vars.timeToWaitAutoSave);
-        var make =this;
+        var make = this;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
-        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+        bloqs.getBloqFunctions('bloq-return-function').then(function (bloque1) {
             bloqs.addToGroupVars(bloque1);
             bloqs.closeTab();
             browser.sleep(vars.timeToWaitAutoSave);
             make.publishProject();
             browser.sleep(vars.timeToWaitAutoSave);
         });
-        return browser.wait(function() {
-            return browser.getCurrentUrl().then(function(url) {
+        return browser.wait(function () {
+            return browser.getCurrentUrl().then(function (url) {
                 login.logout();
                 return {
                     projectName: projectUser.projectName,
@@ -152,21 +158,21 @@ var Make = function() {
 
     };
 
-    this.saveProjectAndPublishUser = function(user, password) {
+    this.saveProjectAndPublishUser = function (user, password) {
         var projectUser = this.saveProjectUser(user, password);
         browser.sleep(vars.timeToWaitAutoSave);
-        var make =this;
+        var make = this;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
-        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+        bloqs.getBloqFunctions('bloq-return-function').then(function (bloque1) {
             bloqs.addToGroupVars(bloque1);
             bloqs.closeTab();
             browser.sleep(vars.timeToWaitAutoSave);
             make.publishProject();
             browser.sleep(vars.timeToWaitAutoSave);
         });
-        return browser.wait(function() {
-            return browser.getCurrentUrl().then(function(url) {
+        return browser.wait(function () {
+            return browser.getCurrentUrl().then(function (url) {
                 return {
                     projectName: projectUser.projectName,
                     urlid: url
@@ -176,21 +182,21 @@ var Make = function() {
 
     };
 
-    this.saveProjectAndPublishUserAndLogout = function(user, password) {
+    this.saveProjectAndPublishUserAndLogout = function (user, password) {
         var projectUser = this.saveProjectUser(user, password);
         browser.sleep(vars.timeToWaitAutoSave);
-        var make =this;
+        var make = this;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
-        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+        bloqs.getBloqFunctions('bloq-return-function').then(function (bloque1) {
             bloqs.addToGroupVars(bloque1);
             bloqs.closeTab();
             browser.sleep(vars.timeToWaitAutoSave);
             make.publishProject();
             browser.sleep(vars.timeToWaitAutoSave);
         });
-        return browser.wait(function() {
-            return browser.getCurrentUrl().then(function(url) {
+        return browser.wait(function () {
+            return browser.getCurrentUrl().then(function (url) {
                 login.logout();
                 return {
                     projectName: projectUser.projectName,
@@ -201,7 +207,7 @@ var Make = function() {
 
     };
 
-    this.publishProject = function() {
+    this.publishProject = function () {
         makeActions.menuShare.click();
         browser.sleep(vars.timeToWaitMenu);
         makeActions.menuSharePublish.click();
@@ -209,7 +215,7 @@ var Make = function() {
         makeActions.publishButton.click();
     };
 
-    this.publishProjectWithName = function(name) {
+    this.publishProjectWithName = function (name) {
 
         makeActions.menuFile.click();
         browser.sleep(vars.timeToWaitMenu);
@@ -226,7 +232,7 @@ var Make = function() {
         makeActions.publishButton.click();
     };
 
-    this.importFile = function(file) {
+    this.importFile = function (file) {
         browser.get('#/bloqsproject');
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -236,7 +242,7 @@ var Make = function() {
 
     };
 
-    this.importFileGuestUser = function(file) {
+    this.importFileGuestUser = function (file) {
         browser.get('#/bloqsproject');
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -248,16 +254,16 @@ var Make = function() {
 
     };
 
-    this.importFileNewUser = function(file) {
+    this.importFileNewUser = function (file) {
         var user = login.loginWithRandomUser();
-        return this.importFile(file).then(function() {
+        return this.importFile(file).then(function () {
             return {
                 user: user
             };
         });
     };
 
-    this.importFileUserLogin = function(file, user) {
+    this.importFileUserLogin = function (file, user) {
         login.login(user.user, user.password);
         browser.get('#/bloqsproject');
         file = globalFunctions.filePath(file);
@@ -265,7 +271,7 @@ var Make = function() {
         browser.sleep(vars.timeToWaitFadeModals);
     };
 
-    this.importFileUser = function(file) {
+    this.importFileUser = function (file) {
         browser.get('#/bloqsproject');
         file = globalFunctions.filePath(file);
         makeActions.inputUploadFile.sendKeys(file);
@@ -280,6 +286,22 @@ var Make = function() {
     this.isProjectNotAllowSaveShown = function () {
         var elem = element.all(by.xpath('//*[@data-element="project-save-label-make-project-not-allow-to-save"]')).first();
         return elem.isPresent();
+    };
+
+    this.activateRobot = function (options) {
+        options = options || {};
+        flow.execute(thirdPartyRobotsApi['get' + options.robot + 'PersonalCode']).then(function (result) {
+            console.log('result');
+            console.log(result);
+            modals.activateRobotCode1.sendKeys(result[0].code);
+            modals.ok();
+            browser.pause();
+
+            expect(modals.activateRobotErrorText.isPresent()).toBe(false, 'Good code for mBot, error shouldnt appear');
+            expect(hwtab.robotActivationInfoWindow.isDisplayed()).toBe(false, 'Activated robot/board still show a warning window ');
+
+        });
+
     };
 };
 
