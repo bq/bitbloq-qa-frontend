@@ -457,23 +457,23 @@ describe('Test licenses', function () {
         });
     });
 
-    fit('bbb-XXX:licenses:Cant compile a robot project without activate it', function () {
-        var user = login.loginWithRandomUser();
-        console.log('user');
-        console.log(user);
-        var projectInfo = myprojects.createProject({
-            withRobot: 'MBot',
-            firstProyect: true,
-            activateRobot: true
-        });
+    it('bbb-XXX:licenses:Can compile an activated robot project', function () {
+        protractor.promise.all([
+            login.loginWithRandomUser(),
+            myprojects.createProject({
+                withRobot: 'MBot',
+                firstProyect: true,
+                activateRobot: true
+            })
+        ]).then(function (results) {
+            var projectInfo = results[1];
 
-        licenses.checkEnableOnRobotsOnProject({
-            projectInfo: projectInfo,
-            boardName: 'mcore',
-            errorMessageSufix: '',
-            checkDisabled: true
+            licenses.checkEnableOnRobotsOnProject({
+                projectInfo: projectInfo,
+                boardName: 'mcore',
+                errorMessageSufix: ''
+            });
         });
-
     });
 
 });
