@@ -476,17 +476,17 @@ describe('Test licenses', function () {
         });
     });
 
-    xit('bbb-XXX:licenses:Cant activate a personal proyect robot with a centermode code', function () {
+    it('bbb-XXX:licenses:Cant activate a personal proyect robot with a centermode code', function () {
 
         flow.execute(thirdPartyRobotsApi.getMBotCenterCode).then(function (result) {
-            console.log('centermode code', result);
             protractor.promise.all([
                 login.loginWithRandomUser(),
                 myprojects.createProject({
                     withRobot: 'MBot',
                     firstProyect: true,
                     activateRobot: true,
-                    activateRobotCode: result[0].code
+                    activateRobotCode: result[0].code,
+                    disableActivateRobotExpects: true
                 })
             ]).then(function (results) {
                 var projectInfo = results[1];
@@ -496,6 +496,7 @@ describe('Test licenses', function () {
                     boardName: 'mcore',
                     checkDisabled: true
                 });
+                login.logout();
             });
         });
     });

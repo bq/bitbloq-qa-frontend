@@ -291,21 +291,26 @@ var Make = function () {
         return elem.isPresent();
     };
 
-    function _activateRobotAndCheck(code) {
-        modals.activateRobotCode1.sendKeys(code);
-        modals.ok();
+    function _activateRobotAndCheck(options) {
+        options = options || {};
 
-        expect(modals.activateRobotErrorText.isPresent()).toBe(false, 'Good code for mBot, error shouldnt appear');
-        expect(hwtab.robotActivationInfoWindow.isDisplayed()).toBe(false, 'Activated robot/board still show a warning window ');
+        modals.activateRobotCode1.sendKeys(options.code);
+        modals.ok();
+        if (!options.disableActivateRobotExpects) {
+            expect(modals.activateRobotErrorText.isPresent()).toBe(false, 'Good code for mBot, error shouldnt appear');
+            expect(hwtab.robotActivationInfoWindow.isDisplayed()).toBe(false, 'Activated robot/board still show a warning window ');
+        }
+
     }
 
     this.activateRobot = function (options) {
         options = options || {};
         if (options.code) {
-            _activateRobotAndCheck(options.code);
+            _activateRobotAndCheck(options);
         } else {
             flow.execute(thirdPartyRobotsApi['get' + options.robot + 'PersonalCode']).then(function (result) {
-                _activateRobotAndCheck(result[0].code);
+                options.code = result[0].code;
+                _activateRobotAndCheck(options);
             });
         }
     };

@@ -79,7 +79,8 @@ var Myprojects = function () {
                 if (options.activateRobot) {
                     make.activateRobot({
                         robot: options.withRobot,
-                        code: options.activateRobotCode
+                        code: options.activateRobotCode,
+                        disableActivateRobotExpects: options.disableActivateRobotExpects
                     });
                 } else {
                     switch (options.withRobot) {
