@@ -40,7 +40,7 @@ describe('Test licenses', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-XXX:licenses: As Director i and mu students cant compile no activated robots exercises', function () {
+    it('bbb-XXX:licenses: A Director and their students cant compile no activated robots exercises', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -117,7 +117,7 @@ describe('Test licenses', function () {
 
     });
 
-    fit('bbb-XXX:licenses: As Director i cant compile activated robots exercises if is not asigned to a center', function () {
+    it('bbb-XXX:licenses: A Director cant compile activated robots exercises if is not asigned to a center', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -163,7 +163,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-XXX:licenses: As Director i and my students can compile activated robots exercises', function () {
+    fit('bbb-XXX:licenses: A Director and their students can compile activated robots exercises', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -177,14 +177,19 @@ describe('Test licenses', function () {
                 withRobot: 'MBot'
             })
         ]).then(function (results) {
-            var classInfo = results[1],
+            var headMaster = results[0],
+                classInfo = results[1],
                 exerciseInfo = results[3];
+
+            myExercises.addExerciseToClass({
+                classInfo: classInfo,
+                exerciseInfo: exerciseInfo
+            });
+
 
             header.navExercise.click();
             exercisesTable.getExerciseOptionButton(exerciseInfo.name).click();
             exercisesTable.getContextMenuOptionEditExercise(exerciseInfo).click();
-
-            browser.sleep(vars.timeToWaitTab);
 
             browser.getAllWindowHandles().then(function (handles) {
 
@@ -193,6 +198,7 @@ describe('Test licenses', function () {
                 browser.switchTo().window(handles[1]);
 
                 bloqsExercise.hardwareTabButton.click();
+                browser.sleep(5000);
                 expect(bloqsExercise.getBoardMainImage('mcore').isDisplayed()).toBe(true, 'The robot mbot image is not in hardware tab');
                 expect(bloqsExercise.compileButton.isEnabled()).toBe(true, 'The user cant compile not activated robot from header');
                 expect(bloqsExercise.uploadButton.isEnabled()).toBe(true, 'The user cant upload not activated robot from header');
@@ -206,37 +212,65 @@ describe('Test licenses', function () {
                 browser.close();
                 browser.switchTo().window(handles[0]);
 
-                myExercises.addExerciseToClass({
-                    classInfo: classInfo,
-                    exerciseInfo: exerciseInfo
-                });
                 login.logout();
-
-                login.loginWithRandomUser();
-                exercises.registerInClass({
-                    idClass: classInfo.id
+                login.login({
+                    user: headMaster.userEmail,
+                    password: headMaster.password
                 });
-                browser.actions().mouseMove(taskTable.getTaskByExerciseName(exerciseInfo.name)).perform();
 
-                taskTable.getTaskButton(exerciseInfo.name).click();
+                header.navExercise.click();
+                exercisesTable.getExerciseOptionButton(exerciseInfo.name).click();
+                exercisesTable.getContextMenuOptionEditExercise(exerciseInfo).click();
 
-                browser.getAllWindowHandles().then(function (handles2) {
+                browser.getAllWindowHandles().then(function (handles) {
+
                     browser.sleep(vars.timeToWaitTab);
-                    browser.switchTo().window(handles2[1]);
+
+                    browser.switchTo().window(handles[1]);
 
                     bloqsExercise.hardwareTabButton.click();
-                    expect(bloqsExercise.getBoardMainImage('mcore').isDisplayed()).toBe(true, 'The robot mbot image is not in hardware tab - student');
-                    expect(bloqsExercise.compileButton.isEnabled()).toBe(true, 'The user cant compile not activated robot from header - student');
-                    expect(bloqsExercise.uploadButton.isEnabled()).toBe(true, 'The user cant upload not activated robot from header - student');
+                    browser.sleep(5000);
+                    expect(bloqsExercise.getBoardMainImage('mcore').isDisplayed()).toBe(true, 'The robot mbot image is not in hardware tab after relogin');
+                    expect(bloqsExercise.compileButton.isEnabled()).toBe(true, 'The user cant compile not activated robot from header after relogin');
+                    expect(bloqsExercise.uploadButton.isEnabled()).toBe(true, 'The user cant upload not activated robot from header after relogin');
                     makeActions.hideBar.click();
                     browser.sleep(vars.timeToWaitMenu);
 
-                    expect(makeActions.compileButton.isEnabled()).toBe(true, 'The user cant compile not activated robot from makeactions - student');
-                    expect(makeActions.uploadButton.isEnabled()).toBe(true, 'The user cant upload not activated robot from makeactions - student');
+                    expect(makeActions.compileButton.isEnabled()).toBe(true, 'The user cant compile not activated robot from makeactions after relogin');
+                    expect(makeActions.uploadButton.isEnabled()).toBe(true, 'The user cant upload not activated robot from makeactions after relogin');
 
+                    expect(hwtab.robotActivationInfoWindow.isDisplayed()).toBe(false, 'Not activated robot must show a warning window after relogin');
                     browser.close();
-                    browser.switchTo().window(handles2[0]);
+                    browser.switchTo().window(handles[0]);
+
                     login.logout();
+
+                    login.loginWithRandomUser();
+                    exercises.registerInClass({
+                        idClass: classInfo.id
+                    });
+                    browser.actions().mouseMove(taskTable.getTaskByExerciseName(exerciseInfo.name)).perform();
+
+                    taskTable.getTaskButton(exerciseInfo.name).click();
+
+                    browser.getAllWindowHandles().then(function (handles2) {
+                        browser.sleep(vars.timeToWaitTab);
+                        browser.switchTo().window(handles2[1]);
+                        browser.sleep(5000);
+                        bloqsExercise.hardwareTabButton.click();
+                        expect(bloqsExercise.getBoardMainImage('mcore').isDisplayed()).toBe(true, 'The robot mbot image is not in hardware tab - student');
+                        expect(bloqsExercise.compileButton.isEnabled()).toBe(true, 'The user cant compile not activated robot from header - student');
+                        expect(bloqsExercise.uploadButton.isEnabled()).toBe(true, 'The user cant upload not activated robot from header - student');
+                        makeActions.hideBar.click();
+                        browser.sleep(vars.timeToWaitMenu);
+
+                        expect(makeActions.compileButton.isEnabled()).toBe(true, 'The user cant compile not activated robot from makeactions - student');
+                        expect(makeActions.uploadButton.isEnabled()).toBe(true, 'The user cant upload not activated robot from makeactions - student');
+
+                        browser.close();
+                        browser.switchTo().window(handles2[0]);
+                        login.logout();
+                    });
                 });
             });
         });
