@@ -24,7 +24,7 @@ var login = new LoginBitbloq(),
 
 globalFunctions.xmlReport('header');
 
-describe('Language', function() {
+describe('Language', function () {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -34,7 +34,7 @@ describe('Language', function() {
 
     //globalFunctions.xmlReport('header');
 
-    it('bbb-188:header:Test language change', function() {
+    xit('bbb-188:header:Test language change', function () {
 
         login.get();
         var randomUserCredentials = register.generateUser();
@@ -69,7 +69,7 @@ describe('Language', function() {
 
 });
 
-describe('Navbar --> ', function() {
+describe('Navbar --> ', function () {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -77,7 +77,7 @@ describe('Navbar --> ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-189:header:Elements if no login --> Explora, aprende, foro, entrar', function() {
+    it('bbb-189:header:Elements if no login --> Explora, aprende, foro, entrar', function () {
 
         //show always
         make.get();
@@ -86,7 +86,7 @@ describe('Navbar --> ', function() {
         browser.sleep(vars.timeToWaitFadeModals);
 
         header.navExplore.click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/explore');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/explore?page=1');
         browser.sleep(vars.timeToWaitTab + 1000);
 
         header.navLearn.click();
@@ -105,7 +105,7 @@ describe('Navbar --> ', function() {
 
     });
 
-    it('bbb-190:header:Elements with login user --> Mis proyectos, Explora, aprende, ayuda', function() {
+    it('bbb-190:header:Elements with login user --> Mis proyectos, Explora, aprende, ayuda', function () {
 
         login.loginWithRandomUser();
 
@@ -114,7 +114,7 @@ describe('Navbar --> ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects?page=1');
 
         header.navExplore.click();
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/explore');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/explore?page=1');
 
         header.navLearn.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/learn');
