@@ -31,7 +31,7 @@ var Licenses = function () {
      */
     this.checkEnableOnRobotsOnExercise = function (options) {
         options = options || {};
-
+        options.errorMessageSufix = options.errorMessageSufix || '';
 
         if (options.student) {
             header.navTasks.click();
@@ -67,6 +67,7 @@ var Licenses = function () {
 
     this.checkEnableOnRobotsOnProject = function (options) {
         options = options || {};
+        options.errorMessageSufix = options.errorMessageSufix || '';
         header.navProjects.click();
 
         myprojects.getProjectObject(options.projectInfo).click();

@@ -14,7 +14,8 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Licenses = require('./licenses.po.js'),
     MakeActions = require('../../bloqsproject/makeActions/makeActions.po.js'),
     Myprojects = require('../../projects/myprojects/myprojects.po.js'),
-    Hwtab = require('../../bloqsproject/hwtab/hwtab.po.js');
+    Hwtab = require('../../bloqsproject/hwtab/hwtab.po.js'),
+    ThirdPartyRobotsApi = require('../../commons/api/ThirdPartyRobotsApi.js');
 
 
 var globalFunctions = new GlobalFunctions(),
@@ -32,6 +33,8 @@ var globalFunctions = new GlobalFunctions(),
     licenses = new Licenses(),
     makeActions = new MakeActions(),
     myprojects = new Myprojects(),
+    thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
+    flow = browser.controlFlow(),
     hwtab = new Hwtab();
 
 globalFunctions.xmlReport('licenses');
@@ -112,7 +115,6 @@ describe('Test licenses', function () {
             licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
-                errorMessageSufix: '',
                 checkDisabled: true
             });
 
@@ -451,7 +453,6 @@ describe('Test licenses', function () {
             licenses.checkEnableOnRobotsOnProject({
                 projectInfo: projectInfo,
                 boardName: 'mcore',
-                errorMessageSufix: '',
                 checkDisabled: true
             });
         });
@@ -470,8 +471,31 @@ describe('Test licenses', function () {
 
             licenses.checkEnableOnRobotsOnProject({
                 projectInfo: projectInfo,
-                boardName: 'mcore',
-                errorMessageSufix: ''
+                boardName: 'mcore'
+            });
+        });
+    });
+
+    fit('bbb-XXX:licenses:Cant activate a personal proyect robot with a centermode code', function () {
+
+        flow.execute(thirdPartyRobotsApi.getMBotCenterCode).then(function (result) {
+            console.log('centermode code', result);
+            protractor.promise.all([
+                login.loginWithRandomUser(),
+                myprojects.createProject({
+                    withRobot: 'MBot',
+                    firstProyect: true,
+                    activateRobot: true,
+                    activateRobotCode: result[0].code
+                })
+            ]).then(function (results) {
+                var projectInfo = results[1];
+
+                licenses.checkEnableOnRobotsOnProject({
+                    projectInfo: projectInfo,
+                    boardName: 'mcore',
+                    checkDisabled: true
+                });
             });
         });
     });

@@ -291,19 +291,23 @@ var Make = function () {
         return elem.isPresent();
     };
 
+    function _activateRobotAndCheck(code) {
+        modals.activateRobotCode1.sendKeys(code);
+        modals.ok();
+
+        expect(modals.activateRobotErrorText.isPresent()).toBe(false, 'Good code for mBot, error shouldnt appear');
+        expect(hwtab.robotActivationInfoWindow.isDisplayed()).toBe(false, 'Activated robot/board still show a warning window ');
+    }
+
     this.activateRobot = function (options) {
         options = options || {};
-        flow.execute(thirdPartyRobotsApi['get' + options.robot + 'PersonalCode']).then(function (result) {
-            console.log('result');
-            console.log(result);
-            modals.activateRobotCode1.sendKeys(result[0].code);
-            modals.ok();
-
-            expect(modals.activateRobotErrorText.isPresent()).toBe(false, 'Good code for mBot, error shouldnt appear');
-            expect(hwtab.robotActivationInfoWindow.isDisplayed()).toBe(false, 'Activated robot/board still show a warning window ');
-
-        });
-
+        if (options.code) {
+            _activateRobotAndCheck(options.code);
+        } else {
+            flow.execute(thirdPartyRobotsApi['get' + options.robot + 'PersonalCode']).then(function (result) {
+                _activateRobotAndCheck(result[0].code);
+            });
+        }
     };
 };
 

@@ -78,7 +78,8 @@ var Myprojects = function () {
                 bloqsExercise.addRobot(options.withRobot);
                 if (options.activateRobot) {
                     make.activateRobot({
-                        robot: options.withRobot
+                        robot: options.withRobot,
+                        code: options.activateRobotCode
                     });
                 } else {
                     switch (options.withRobot) {
