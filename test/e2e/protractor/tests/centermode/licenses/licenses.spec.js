@@ -476,7 +476,7 @@ describe('Test licenses', function () {
         });
     });
 
-    fit('bbb-XXX:licenses:Cant activate a personal proyect robot with a centermode code', function () {
+    xit('bbb-XXX:licenses:Cant activate a personal proyect robot with a centermode code', function () {
 
         flow.execute(thirdPartyRobotsApi.getMBotCenterCode).then(function (result) {
             console.log('centermode code', result);
@@ -500,4 +500,51 @@ describe('Test licenses', function () {
         });
     });
 
+    it('bbb-XXX:licenses:Cant compile a exercise, when i have a personal code', function () {
+        protractor.promise.all([
+            centermode.createHeadMaster({
+                keepLogin: true
+            }),
+            myclass.createClass(),
+            myExercises.createExercise({
+                withRobot: 'MBot'
+            })
+        ]).then(function (results) {
+            var classInfo = results[1],
+                exerciseInfo = results[2];
+
+            myExercises.addExerciseToClass({
+                classInfo: classInfo,
+                exerciseInfo: exerciseInfo
+            });
+            login.logout();
+
+            protractor.promise.all([
+                login.loginWithRandomUser(),
+                exercises.registerInClass({
+                    idClass: classInfo.id
+                }),
+                myprojects.createProject({
+                    withRobot: 'MBot',
+                    firstProyect: true,
+                    activateRobot: true,
+                })
+            ]).then(function (results2) {
+                var projectInfo = results2[2];
+
+                licenses.checkEnableOnRobotsOnExercise({
+                    exerciseInfo: exerciseInfo,
+                    boardName: 'mcore',
+                    errorMessageSufix: 'check the exercise on student',
+                    student: true,
+                    checkDisabled: true
+                });
+                licenses.checkEnableOnRobotsOnProject({
+                    projectInfo: projectInfo,
+                    boardName: 'mcore'
+                });
+                login.logout();
+            });
+        });
+    });
 });
