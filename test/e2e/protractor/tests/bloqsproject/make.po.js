@@ -37,6 +37,9 @@ var Make = function () {
 
     this.softwareEditCode = $('[data-element="software-edit-code"]');
 
+    this.compileButton = $('[data-element="header-compile"]');
+    this.uploadButton = $('[data-element="header-upload"]');
+
     this.get = function () {
         browser.get(this.url);
     };
@@ -295,7 +298,6 @@ var Make = function () {
             console.log(result);
             modals.activateRobotCode1.sendKeys(result[0].code);
             modals.ok();
-            browser.pause();
 
             expect(modals.activateRobotErrorText.isPresent()).toBe(false, 'Good code for mBot, error shouldnt appear');
             expect(hwtab.robotActivationInfoWindow.isDisplayed()).toBe(false, 'Activated robot/board still show a warning window ');

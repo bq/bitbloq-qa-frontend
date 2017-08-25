@@ -58,7 +58,7 @@ describe('Test licenses', function () {
             var classInfo = results[1],
                 exerciseInfo = results[2];
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'first check without assign',
@@ -70,7 +70,7 @@ describe('Test licenses', function () {
                 exerciseInfo: exerciseInfo
             });
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check assigned',
@@ -82,7 +82,7 @@ describe('Test licenses', function () {
             exercises.registerInClass({
                 idClass: classInfo.id
             });
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check student',
@@ -109,7 +109,7 @@ describe('Test licenses', function () {
         ]).then(function (results) {
             var exerciseInfo = results[2];
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: '',
@@ -143,7 +143,7 @@ describe('Test licenses', function () {
                 exerciseInfo: exerciseInfo
             });
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check when the exercise is assigned',
@@ -155,7 +155,7 @@ describe('Test licenses', function () {
                 password: headMaster.password
             });
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check when the headmaster do a relogin',
@@ -167,7 +167,7 @@ describe('Test licenses', function () {
             exercises.registerInClass({
                 idClass: classInfo.id
             });
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check when the exercise is assigned on student',
@@ -191,7 +191,7 @@ describe('Test licenses', function () {
             var classInfo = results[1],
                 exerciseInfo = results[2];
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'first check without assing exercise',
@@ -203,7 +203,7 @@ describe('Test licenses', function () {
                 exerciseInfo: exerciseInfo
             });
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check when the exercise is assigned',
@@ -217,7 +217,7 @@ describe('Test licenses', function () {
                 idClass: classInfo.id
             });
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check the student when the exercise is assigned',
@@ -257,7 +257,7 @@ describe('Test licenses', function () {
                 exerciseInfo: exerciseInfo
             });
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'first check'
@@ -269,7 +269,7 @@ describe('Test licenses', function () {
                 user: teacher.userEmail,
                 password: teacher.password
             });
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'relogin check'
@@ -281,7 +281,7 @@ describe('Test licenses', function () {
             exercises.registerInClass({
                 idClass: classInfo.id
             });
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'student check',
@@ -311,7 +311,7 @@ describe('Test licenses', function () {
                 exerciseInfo: exerciseInfo
             });
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check when the exercise is assigned',
@@ -324,7 +324,7 @@ describe('Test licenses', function () {
             exercises.registerInClass({
                 idClass: classInfo.id
             });
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check when the exercise is assigned on student',
@@ -340,7 +340,7 @@ describe('Test licenses', function () {
                 robot: 'MBot'
             });
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check when the robot is activated',
@@ -351,7 +351,7 @@ describe('Test licenses', function () {
                 user: student.userEmail,
                 password: student.password
             });
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check when the robot is activated on student',
@@ -382,7 +382,7 @@ describe('Test licenses', function () {
                 exerciseInfo: exerciseInfo
             });
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check when the exercise is assigned',
@@ -395,7 +395,7 @@ describe('Test licenses', function () {
             exercises.registerInClass({
                 idClass: classInfo.id
             });
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check when the exercise is assigned on student',
@@ -417,7 +417,7 @@ describe('Test licenses', function () {
                 password: teacher.password
             });
 
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check when the robot is activated',
@@ -428,7 +428,7 @@ describe('Test licenses', function () {
                 user: student.userEmail,
                 password: student.password
             });
-            licenses.checkEnableOnRobots({
+            licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: exerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check when the robot is activated on student',
@@ -438,16 +438,41 @@ describe('Test licenses', function () {
         });
     });
 
+    it('bbb-XXX:licenses:Cant compile a robot project without activate it', function () {
+        protractor.promise.all([
+            login.loginWithRandomUser(),
+            myprojects.createProject({
+                withRobot: 'MBot',
+                firstProyect: true
+            })
+        ]).then(function (results) {
+            var projectInfo = results[1];
+
+            licenses.checkEnableOnRobotsOnProject({
+                projectInfo: projectInfo,
+                boardName: 'mcore',
+                errorMessageSufix: '',
+                checkDisabled: true
+            });
+        });
+    });
+
     fit('bbb-XXX:licenses:Cant compile a robot project without activate it', function () {
         var user = login.loginWithRandomUser();
         console.log('user');
         console.log(user);
-        myprojects.createProject({
+        var projectInfo = myprojects.createProject({
             withRobot: 'MBot',
             firstProyect: true,
             activateRobot: true
         });
 
+        licenses.checkEnableOnRobotsOnProject({
+            projectInfo: projectInfo,
+            boardName: 'mcore',
+            errorMessageSufix: '',
+            checkDisabled: true
+        });
 
     });
 

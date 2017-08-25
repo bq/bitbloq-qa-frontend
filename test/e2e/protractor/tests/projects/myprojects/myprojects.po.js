@@ -41,6 +41,10 @@ var Myprojects = function () {
         browser.get(this.url);
     };
 
+    this.getProjectObject = function (projectInfo) {
+        return $('[data-element2="project-' + projectInfo.name + '"]');
+    };
+
 
     this.createProject = function (options) {
         options = options || {};
@@ -76,6 +80,14 @@ var Myprojects = function () {
                     make.activateRobot({
                         robot: options.withRobot
                     });
+                } else {
+                    switch (options.withRobot) {
+                        case 'MBot':
+                        case 'MRanger':
+                        case 'Starterkit':
+                            modals.cancel();
+                            break;
+                    }
                 }
             }
 
