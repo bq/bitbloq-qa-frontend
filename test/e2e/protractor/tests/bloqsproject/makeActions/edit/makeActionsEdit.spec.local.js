@@ -22,7 +22,7 @@ var vars = new Variables(),
 
 globalFunctions.xmlReport('makeactionsEditLocal');
 
-describe('Menu file of MakeActions', function() {
+describe('Menu file of MakeActions', function () {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -30,7 +30,7 @@ describe('Menu file of MakeActions', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bbb-96:makeactionsEditLocal: Verify undo&redo action on hwTab', function() {
+    xit('bbb-96:makeactionsEditLocal: Verify undo&redo action on hwTab', function () {
 
         make.get();
         modals.attentionContinueGuest.click();

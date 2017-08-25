@@ -24,7 +24,7 @@ var vars = new Variables(),
 
 globalFunctions.xmlReport('bloqsproject');
 
-describe('make tab', function() {
+describe('make tab', function () {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -32,11 +32,11 @@ describe('make tab', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-156:bloqsproject:Save project', function() {
+    it('bbb-156:bloqsproject:Save project', function () {
         make.saveProjectNewUserAndLogout();
     });
 
-    it('bbb-154:bloqsproject:We can move between all tabs', function() {
+    it('bbb-154:bloqsproject:We can move between all tabs', function () {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -49,7 +49,7 @@ describe('make tab', function() {
         login.logout();
     });
 
-    it('bbb-145:bloqsproject:We can insert and save tag', function() {
+    it('bbb-145:bloqsproject:We can insert and save tag', function () {
 
         var userLogin = login.loginWithRandomUser();
         make.get();
@@ -91,13 +91,13 @@ describe('make tab', function() {
         //Logout and Login last user and test project exist with yours tags
         login.logout();
         login.get();
-        login.login(userLogin.user, userLogin.password);
+        login.login({ 'user': userLogin.user, 'password': userLogin.password });
         projects.get();
         //Open saved project
-        myprojects.overMyProjects.click().then(function() {
+        myprojects.overMyProjects.click().then(function () {
             browser.sleep(vars.timeToWaitTab);
-            browser.getAllWindowHandles().then(function(handles) {
-                browser.switchTo().window(handles[1]).then(function() {
+            browser.getAllWindowHandles().then(function (handles) {
+                browser.switchTo().window(handles[1]).then(function () {
                     make.infoTab.click();
                     //Show saved tag
                     expect(element.all(by.repeater('tag in currentProject.userTags').row(0)).getText()).toContain('TestTag_ONE_1');
@@ -118,7 +118,7 @@ describe('make tab', function() {
         });
     });
 
-    it('bbb-146:bloqsproject:Delete tag', function() {
+    it('bbb-146:bloqsproject:Delete tag', function () {
         var userLogin = login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -155,14 +155,14 @@ describe('make tab', function() {
         //Logout and Login last user and test tags are deleted
         login.logout();
         login.get();
-        login.login(userLogin.user, userLogin.password);
+        login.login({ 'user': userLogin.user, 'password': userLogin.password });
         projects.get();
         //Open saved project
-        myprojects.overMyProjects.click().then(function() {
+        myprojects.overMyProjects.click().then(function () {
             browser.sleep(vars.timeToWaitTab);
-            browser.getAllWindowHandles().then(function(handles) {
+            browser.getAllWindowHandles().then(function (handles) {
                 console.log(handles);
-                browser.switchTo().window(handles[1]).then(function() {
+                browser.switchTo().window(handles[1]).then(function () {
                     //Test eliminate tag tag
                     make.infoTab.click();
                     expect(element(by.repeater('tag in currentProject.userTags')).isPresent()).toBe(false);
@@ -173,7 +173,7 @@ describe('make tab', function() {
         });
     });
 
-    it('bbb-155:bloqsproject:Rename project in make and test change in project', function() {
+    it('bbb-155:bloqsproject:Rename project in make and test change in project', function () {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -187,10 +187,10 @@ describe('make tab', function() {
         browser.sleep(vars.timeToWaitAutoSave);
         //Open saved project
         projects.get();
-        myprojects.overMyProjects.click().then(function() {
+        myprojects.overMyProjects.click().then(function () {
             browser.sleep(vars.timeToWaitTab);
-            browser.getAllWindowHandles().then(function(handles) {
-                browser.switchTo().window(handles[1]).then(function() {
+            browser.getAllWindowHandles().then(function (handles) {
+                browser.switchTo().window(handles[1]).then(function () {
                     //Change name
                     make.projectName.click();
                     modals.inputModalChangeN.clear();
@@ -201,14 +201,14 @@ describe('make tab', function() {
                     //Close tab make
                     browser.close();
                     // Test if name is change in projects tab (the first tab opened)
-                    browser.switchTo().window(handles[0]).then(function() {
+                    browser.switchTo().window(handles[0]).then(function () {
                         browser.sleep(vars.timeToWaitTab);
                         projects.get();
                         expect(projects.projectsName.getText()).toEqual('ChangeTestName');
-                        myprojects.overMyProjects.click().then(function() {
+                        myprojects.overMyProjects.click().then(function () {
                             browser.sleep(vars.timeToWaitTab);
-                            browser.getAllWindowHandles().then(function(handles2) {
-                                browser.switchTo().window(handles2[1]).then(function() {
+                            browser.getAllWindowHandles().then(function (handles2) {
+                                browser.switchTo().window(handles2[1]).then(function () {
                                     make.infoTab.click();
                                     infotab.infotabProjectName.clear();
                                     browser.sleep(vars.timeToWaitAutoSave);
@@ -229,7 +229,7 @@ describe('make tab', function() {
         });
     });
 
-    it('bbb-158:bloqsproject:Project must have a name', function() {
+    it('bbb-158:bloqsproject:Project must have a name', function () {
 
         login.loginWithRandomUser();
 
@@ -238,7 +238,7 @@ describe('make tab', function() {
         browser.sleep(vars.timeToWaitFadeModals);
         expect(make.projectName.isPresent()).toBe(true);
         globalFunctions.navigatorLanguage()
-            .then(function(language) {
+            .then(function (language) {
                 if (language === 'es') {
                     expect(make.projectName.getText()).toBe(vars.nameNewProject);
                 } else {
@@ -251,7 +251,7 @@ describe('make tab', function() {
         projects.get();
         browser.sleep(vars.timeToWaitAutoSave);
         globalFunctions.navigatorLanguage()
-            .then(function(language) {
+            .then(function (language) {
                 if (language === 'es') {
                     expect(myprojects.projectName.getText()).toBe(vars.nameNewProject);
                 } else {
