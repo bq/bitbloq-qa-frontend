@@ -16,9 +16,9 @@ var login = new Login(),
     globalFunctions = new GlobalFunctions(),
     mycenter = new MyCenter();
 
-var CenterMode = function() {
-
-    this.createHeadMaster = function(options) {
+var CenterMode = function () {
+    var that = this;
+    this.createHeadMaster = function (options) {
         options = options || {};
         var user;
         if (!options.useDevelopHeadMaster) {
@@ -50,7 +50,7 @@ var CenterMode = function() {
         return user;
     };
 
-    this.createTeacher = function(options) {
+    this.createTeacher = function (options) {
         options = options || {};
         var teacher,
             deferred = protractor.promise.defer(),
@@ -58,7 +58,7 @@ var CenterMode = function() {
 
         browserEmail.ignoreSynchronization = true;
 
-        register.getExternalProviderEmail(browserEmail).then(function(email) {
+        register.getExternalProviderEmail(browserEmail).then(function (email) {
             teacher = register.generateUser();
             teacher.userEmail = email;
             browserEmail.ignoreSynchronization = false;
@@ -68,7 +68,7 @@ var CenterMode = function() {
             login.logout();
             //console.log('options.headMaster', options.headMaster);
             if (!options.headMaster) {
-                options.headMaster = this.createHeadMaster();
+                options.headMaster = that.createHeadMaster();
             }
             //console.log('headMaster', options.headMaster);
 
@@ -83,7 +83,7 @@ var CenterMode = function() {
             browserEmail.ignoreSynchronization = true;
 
             var $2 = browserEmail.$;
-            globalFunctions.scrollBottomPage(browserEmail).then(function() {
+            globalFunctions.scrollBottomPage(browserEmail).then(function () {
                 browserEmail.sleep(5000);
                 $2('#msg_1 > td:nth-child(2)').click();
                 //Open popup email send
@@ -118,7 +118,7 @@ var CenterMode = function() {
         return deferred.promise;
     };
 
-    this.createStudent = function() {
+    this.createStudent = function () {
         var student = login.loginWithRandomUser();
         browser.sleep(vars.timeToWaitTab);
         header.centerModeBanner.click();
@@ -130,7 +130,7 @@ var CenterMode = function() {
         return student;
     };
 
-    this.createRandomCenterName = function() {
+    this.createRandomCenterName = function () {
         return 'centerTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1);
     };
 

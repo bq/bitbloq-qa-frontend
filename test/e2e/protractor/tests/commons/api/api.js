@@ -1,6 +1,6 @@
 'use strict';
 
-var Api = function() {
+var Api = function () {
     var path = require('path'),
         fs = require('fs'),
         http = require('http'),
@@ -17,7 +17,7 @@ var Api = function() {
         return true;
     }
     //method, endPoint, headers, data, callback
-    this.requestToServer = function(params) {
+    this.requestToServer = function (params) {
         var deferred = protractor.promise.defer(),
             serverUrlFieldInConfigFile;
         params = params || {};
@@ -38,17 +38,18 @@ var Api = function() {
             match = urlRegExp.exec(configFile[serverUrlFieldInConfigFile][params.env]),
             options = {
                 hostname: match[3],
-                port: match[4],
+                port: match[4] || 80,
                 path: match[5] + match[7] + params.endPoint,
                 method: params.method
             },
             data = JSON.stringify(params.data);
+        //console.log(options, data);
 
         options.headers = params.headers || {};
         options.headers['Content-Type'] = 'application/json';
         options.headers['Content-Length'] = Buffer.byteLength(data);
-        var postRequest = http.request(options, function(res) {
-            res.on('data', function(chunk) {
+        var postRequest = http.request(options, function (res) {
+            res.on('data', function (chunk) {
                 // console.log('Received body data:', res.statusCode);
                 // console.log(JSON.parse(chunk.toString()).token);
                 //console.log('res.statusCode', res.statusCode);
@@ -57,14 +58,16 @@ var Api = function() {
                     if (isJsonString(result)) {
                         result = JSON.parse(result);
                     }
+                    //console.log(result);
                     deferred.fulfill(result);
                 } else {
+                    //console.log(res);
                     deferred.fulfill(res.statusCode);
                 }
             });
         });
 
-        postRequest.on('error', function(err) {
+        postRequest.on('error', function (err) {
             console.log('problem with request:', err.message);
             deferred.fulfill(err);
         });
@@ -74,7 +77,7 @@ var Api = function() {
         return deferred.promise;
     };
 
-    this.getToken = function() {
+    this.getToken = function () {
 
         var data = {
             email: configFile.adminUser,
@@ -89,16 +92,16 @@ var Api = function() {
     };
 
     //method, endPoint, data, callback
-    this.adminRequestToServer = function(options) {
+    this.adminRequestToServer = function (options) {
         var deferred = protractor.promise.defer(),
             that = this;
 
         options = options || {};
         options.headers = options.headers || {};
 
-        this.getToken().then(function(res) {
+        this.getToken().then(function (res) {
             options.headers.Authorization = 'Bearer ' + res.token;
-            that.requestToServer(options).then(function(result) {
+            that.requestToServer(options).then(function (result) {
                 deferred.fulfill(result);
             });
         });
