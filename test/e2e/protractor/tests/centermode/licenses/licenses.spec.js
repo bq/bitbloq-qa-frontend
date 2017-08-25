@@ -358,4 +358,81 @@ describe('Test licenses', function () {
             login.logout();
         });
     });
+
+    it('bbb-XXX:licenses: A Teacher and their students can compile only after activate robots exercises', function () {
+        var headMaster = centermode.createHeadMaster();
+        protractor.promise.all([
+            centermode.createTeacher({
+                keepLogin: true,
+                headMaster: headMaster
+            }),
+            myclass.createClass(),
+            myExercises.createExercise({
+                withRobot: 'MBot'
+            })
+        ]).then(function (results) {
+            var teacher = results[0],
+                classInfo = results[1],
+                exerciseInfo = results[2];
+
+            myExercises.addExerciseToClass({
+                classInfo: classInfo,
+                exerciseInfo: exerciseInfo
+            });
+
+            licenses.checkEnableOnRobots({
+                exerciseInfo: exerciseInfo,
+                boardName: 'mcore',
+                errorMessageSufix: 'check when the exercise is assigned',
+                checkDisabled: true
+            });
+
+            login.logout();
+
+            var student = login.loginWithRandomUser();
+            exercises.registerInClass({
+                idClass: classInfo.id
+            });
+            licenses.checkEnableOnRobots({
+                exerciseInfo: exerciseInfo,
+                boardName: 'mcore',
+                errorMessageSufix: 'check when the exercise is assigned on student',
+                student: true,
+                checkDisabled: true
+            });
+            login.logout();
+            login.login({
+                user: headMaster.userEmail,
+                password: headMaster.password
+            });
+            mycenter.activateRobot({
+                robot: 'MBot'
+            });
+            login.logout();
+
+            login.login({
+                user: teacher.userEmail,
+                password: teacher.password
+            });
+
+            licenses.checkEnableOnRobots({
+                exerciseInfo: exerciseInfo,
+                boardName: 'mcore',
+                errorMessageSufix: 'check when the robot is activated',
+            });
+            login.logout();
+
+            login.login({
+                user: student.userEmail,
+                password: student.password
+            });
+            licenses.checkEnableOnRobots({
+                exerciseInfo: exerciseInfo,
+                boardName: 'mcore',
+                errorMessageSufix: 'check when the robot is activated on student',
+                student: true,
+            });
+            login.logout();
+        });
+    });
 });
