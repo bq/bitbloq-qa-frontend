@@ -9,7 +9,7 @@ var login = new Login(),
     commons = new Commons(),
     globalFunctions = new GlobalFunctions();
 
-var Forum = function() {
+var Forum = function () {
     //header
     this.newTopicButton = $('[data-element="forum-new-topic-button"]');
     this.breadcrumbsForo = $('[data-element="forum-header-breadcrumb-forum"]');
@@ -65,10 +65,10 @@ var Forum = function() {
 
     this.url = '#/forum';
 
-    this.get = function() {
+    this.get = function () {
         browser.get(this.url);
     };
-    this.createTopicNewUser = function(title, description, category) {
+    this.createTopicNewUser = function (title, description, category) {
         var user = login.loginWithRandomUser();
         var results = this.createNewTopic(title, description, category);
         return {
@@ -79,7 +79,7 @@ var Forum = function() {
         };
 
     };
-    this.createNewTopic = function(title, description, category) {
+    this.createNewTopic = function (title, description, category) {
         var nameTitle = title || 'titulo_' + Number(new Date());
         var nameDescription = description || 'descripcion_' + Number(new Date());
         var topicCategory = category || this.categoryListNoticias;
@@ -99,13 +99,14 @@ var Forum = function() {
         //en el momento de creacion de este test, no existia traduccion para este toast
         //una vez exista, se añadira el control del idioma para saucelabs
         globalFunctions.navigatorLanguage()
-            .then(function(language) {
+            .then(function (language) {
                 if (language === 'es') {
-                    commons.expectToastTimeOutandText(commons.alertTextToast, vars.threadCreated);
+                    commons.expectToastTimeOutandText({ 'alertElement': commons.alertTextToast, 'text': vars.threadCreated });
                 } else {
-                    commons.expectToastTimeOutandText(commons.alertTextToast, vars.threadCreatedEN);
+                    commons.expectToastTimeOutandText({ 'alertElement': commons.alertTextToast, 'text': vars.threadCreatedEN });
                 }
             });
+
         browser.sleep(vars.timeToWaitTab);
 
         return {
@@ -115,7 +116,7 @@ var Forum = function() {
         };
 
     };
-    this.createAnswer = function(answer) {
+    this.createAnswer = function (answer) {
         var answerText = answer || 'answer_' + Number(new Date());
         this.answerTopic.all(by.css('div')).get(15).click();
         this.answerTopic.all(by.css('div')).get(15).sendKeys(answerText);
@@ -129,11 +130,11 @@ var Forum = function() {
         };
     };
 
-    this.isPresentTitle = function() {
+    this.isPresentTitle = function () {
         return $('[data-element="forum-theme-theme-title"]').isPresent();
     };
 
-    this.isPresentContentThread = function() {
+    this.isPresentContentThread = function () {
         return $('[data-element="forum-theme-theme-content"]').isPresent();
     };
 };
