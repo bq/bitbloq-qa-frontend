@@ -47,7 +47,7 @@ describe('Test licenses', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-XXX:licenses: A Director and their students cant compile no activated robots exercises', function () {
+    it('bbb-653:licenses: A Director and their students cant compile no activated robots exercises', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -97,7 +97,7 @@ describe('Test licenses', function () {
 
     });
 
-    it('bbb-XXX:licenses: A Director cant compile activated robots exercises if is not asigned to a center', function () {
+    it('bbb-654:licenses: A Director cant compile activated robots exercises if is not asigned to a center', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -122,7 +122,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-XXX:licenses: A Director and their students can compile activated robots exercises', function () {
+    it('bbb-655:licenses: A Director and their students can compile activated robots exercises', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -179,7 +179,7 @@ describe('Test licenses', function () {
         });
 
     });
-    it('bbb-XXX:licenses: A teacher and their students cant compile no activated robots exercises', function () {
+    it('bbb-656:licenses: A teacher and their students cant compile no activated robots exercises', function () {
 
         protractor.promise.all([
             centermode.createTeacher({
@@ -232,7 +232,7 @@ describe('Test licenses', function () {
 
     });
 
-    it('bbb-XXX:licenses: A Teacher and their students can compile activated robots exercises', function () {
+    it('bbb-657:licenses: A Teacher and their students can compile activated robots exercises', function () {
         var headMaster = centermode.createHeadMaster({
             keepLogin: true
         });
@@ -293,7 +293,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-XXX:licenses: A Director and their students can compile only after activate robots exercises', function () {
+    it('bbb-658:licenses: A Director and their students can compile only after activate robots exercises', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -363,7 +363,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-XXX:licenses: A Teacher and their students can compile only after activate robots exercises', function () {
+    it('bbb-659:licenses: A Teacher and their students can compile only after activate robots exercises', function () {
         var headMaster = centermode.createHeadMaster();
         protractor.promise.all([
             centermode.createTeacher({
@@ -440,7 +440,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-XXX:licenses:Cant compile a robot project without activate it', function () {
+    it('bbb-660:licenses:Cant compile a robot project without activate it', function () {
         protractor.promise.all([
             login.loginWithRandomUser(),
             myprojects.createProject({
@@ -458,7 +458,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-XXX:licenses:Can compile an activated robot project', function () {
+    it('bbb-661:licenses:Can compile an activated robot project', function () {
         protractor.promise.all([
             login.loginWithRandomUser(),
             myprojects.createProject({
@@ -476,7 +476,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-XXX:licenses:Cant activate a personal proyect robot with a centermode code', function () {
+    it('bbb-662:licenses:Cant activate a personal proyect robot with a centermode code', function () {
 
         flow.execute(thirdPartyRobotsApi.getMBotCenterCode).then(function (result) {
             protractor.promise.all([
@@ -501,7 +501,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-XXX:licenses:Cant compile a exercise, when i have a personal code', function () {
+    it('bbb-663:licenses:Cant compile a exercise, when i have a personal code', function () {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
