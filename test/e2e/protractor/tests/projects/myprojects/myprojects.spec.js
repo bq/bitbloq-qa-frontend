@@ -77,7 +77,7 @@ describe('My Projects', function() {
 
         //Login with a user creator last project
         login.get();
-        login.login(newLoginRandom.user, newLoginRandom.password);
+        login.login({'user': newLoginRandom.user, 'password': newLoginRandom.password});
 
         //Check no exist las project
         projects.get();

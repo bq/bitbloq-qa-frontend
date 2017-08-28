@@ -61,7 +61,7 @@ describe('Language', function () {
         login.logout();
 
         login.get();
-        login.login(randomUserCredentials.username, randomUserCredentials.password);
+        login.login({'user': randomUserCredentials.username, 'password': randomUserCredentials.password});
         expect(header.menuLearn.getText()).toBe('Learn');
         // browser.pause();
         login.logout();

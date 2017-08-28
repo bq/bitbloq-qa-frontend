@@ -94,7 +94,7 @@ var Make = function () {
 
     this.saveProjectUser = function (user, password) {
         login.get();
-        login.login(user, password);
+        login.login({'user': user, 'password': password});
         var project = this.saveProject();
         return {
             projectName: project.projectName
@@ -102,7 +102,7 @@ var Make = function () {
     };
 
     this.saveProjectUserAndLogout = function (user, password) {
-        login.login(user, password);
+        login.login({'user': user, 'password': password});
         var project = this.saveProject();
         login.logout();
         return {
@@ -267,7 +267,7 @@ var Make = function () {
     };
 
     this.importFileUserLogin = function (file, user) {
-        login.login(user.user, user.password);
+        login.login({'user': user.user, 'password': user.password});
         browser.get('#/bloqsproject');
         file = globalFunctions.filePath(file);
         makeActions.inputUploadFile.sendKeys(file);

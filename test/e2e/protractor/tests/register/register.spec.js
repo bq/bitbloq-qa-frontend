@@ -124,7 +124,7 @@ describe('Register ', function() {
                 browser.sleep(vars.timeToWaitAutoSave);
                 //go back to the main window && login wiht new passwords
                 login.get();
-                login.login(newUser.username, '123456');
+                login.login({'user': newUser.username, 'password':'123456'});
                 login.logout();
 
             });
@@ -733,7 +733,7 @@ describe('Register ', function() {
 
                 //Check that not login (no change password)
                 login.get();
-                login.login(newUser.username, newUser.password);
+                login.login({'user': newUser.username, 'password': newUser.password});
                 account.get();
                 expect(account.firstname.getAttribute('value')).toEqual(userName);
                 expect(account.lastname.getAttribute('value')).toEqual(userLastName);
