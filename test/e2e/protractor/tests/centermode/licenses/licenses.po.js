@@ -38,12 +38,8 @@ var Licenses = function () {
             browser.actions().mouseMove(taskTable.getTaskByExerciseName(options.exerciseInfo.name)).perform();
             taskTable.getTaskButton(options.exerciseInfo.name).click();
         } else {
-            header.navExercise.click().then(function () {
-                console.log('click on nav exercise');
-            });
-            exercisesTable.getExerciseOptionButton(options.exerciseInfo.name).click().then(function () {
-                console.log('click on nav options button');
-            });
+            header.navExercise.click();
+            exercisesTable.getExerciseOptionButton(options.exerciseInfo.name).click();
             exercisesTable.getContextMenuOptionEditExercise(options.exerciseInfo).click();
         }
 
@@ -101,6 +97,7 @@ var Licenses = function () {
             browser.switchTo().window(handles[0]);
         });
     };
+
 };
 
 module.exports = Licenses;

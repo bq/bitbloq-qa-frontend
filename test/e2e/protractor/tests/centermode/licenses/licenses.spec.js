@@ -599,13 +599,13 @@ describe('Test licenses', function () {
         });
     });
 
-    fit('bbb-665:licenses:Cant compile ranger and starter if an mbot is activated', function () {
+    function checkThatARobotActivationAffectOnlyHimself(robot) {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
             }),
             mycenter.activateRobot({
-                robot: 'MBot'
+                robot: robot
             }),
             myclass.createClass(),
             myExercises.createExercise({
@@ -639,21 +639,22 @@ describe('Test licenses', function () {
             licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: mBotExerciseInfo,
                 boardName: 'mcore',
-                errorMessageSufix: 'check the exercise with mBot'
+                errorMessageSufix: 'check the exercise with mBot',
+                checkDisabled: (robot !== 'MBot') ? true : false
             });
 
             licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: mRangerExerciseInfo,
                 boardName: 'meauriga',
                 errorMessageSufix: 'check the exercise with mRanger',
-                checkDisabled: true
+                checkDisabled: (robot !== 'MRanger') ? true : false
             });
 
             licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: starterExerciseInfo,
                 boardName: 'meorion',
                 errorMessageSufix: 'check the exercise with starter',
-                checkDisabled: true
+                checkDisabled: (robot !== 'StarterKit') ? true : false
             });
 
             login.logout();
@@ -667,27 +668,41 @@ describe('Test licenses', function () {
                 exerciseInfo: mBotExerciseInfo,
                 boardName: 'mcore',
                 errorMessageSufix: 'check the mbot exercise on student',
-                student: true
+                student: true,
+                checkDisabled: (robot !== 'MBot') ? true : false
             });
 
             licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: mRangerExerciseInfo,
                 boardName: 'meauriga',
                 errorMessageSufix: 'check the mranger exercise on student',
-                checkDisabled: true,
-                student: true
+                student: true,
+                checkDisabled: (robot !== 'MRanger') ? true : false
             });
 
             licenses.checkEnableOnRobotsOnExercise({
                 exerciseInfo: starterExerciseInfo,
                 boardName: 'meorion',
                 errorMessageSufix: 'check the starter exercise on student',
-                checkDisabled: true,
-                student: true
+                student: true,
+                checkDisabled: (robot !== 'StarterKit') ? true : false
             });
 
             login.logout();
 
         });
+    }
+
+    it('bbb-665:licenses:Cant compile ranger and starter if a mbot is activated', function () {
+        checkThatARobotActivationAffectOnlyHimself('Mbot');
     });
+
+    it('bbb-666:licenses:Cant compile mbot and starter if a mranger is activated', function () {
+        checkThatARobotActivationAffectOnlyHimself('MRanger');
+    });
+
+    it('bbb-667:licenses:Cant compile mbot and mranger if a starter is activated', function () {
+        checkThatARobotActivationAffectOnlyHimself('StarterKit');
+    });
+
 });
