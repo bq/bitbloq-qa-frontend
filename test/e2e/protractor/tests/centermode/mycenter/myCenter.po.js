@@ -27,6 +27,11 @@ var MyCenter = function () {
     this.teacherNotConfirmedText = $('[data-element="centerMode-teacher-notconfirmed"]');
     this.teacherElems = element.all(by.xpath('//*[contains(@data-element,"centerMode-teacher-link")]'));
 
+    this.getTeacherResendButton = function (teacher) {
+        return $('[data-element="resend-to-' + teacher.username.toLowerCase() + '"]');
+
+    };
+
     this.teacherDropdownOrder = $('[data-element="my_center_dropdown_order"]');
     this.teacherRecentDropdown = $('[data-element="my_center_dropdown_order-0"]');
     this.teacherEmailDropdown = $('[data-element="my_center_dropdown_order-1"]');

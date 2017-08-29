@@ -694,7 +694,7 @@ describe('Test licenses', function () {
     }
 
     it('bbb-665:licenses:Cant compile ranger and starter if a mbot is activated', function () {
-        checkThatARobotActivationAffectOnlyHimself('Mbot');
+        checkThatARobotActivationAffectOnlyHimself('MBot');
     });
 
     it('bbb-666:licenses:Cant compile mbot and starter if a mranger is activated', function () {
@@ -703,6 +703,44 @@ describe('Test licenses', function () {
 
     it('bbb-667:licenses:Cant compile mbot and mranger if a starter is activated', function () {
         checkThatARobotActivationAffectOnlyHimself('StarterKit');
+    });
+
+    fit('bbb-668:licenses: Teacher and students can use robots activated in teacher\'s other centers', function () {
+        var headMaster1 = centermode.createHeadMaster({
+            keepLogin: true
+        });
+        mycenter.activateRobot({
+            robot: 'MBot'
+        });
+        login.logout();
+
+        protractor.promise.all([
+            centermode.createTeacher({
+                headMaster: headMaster1
+            }),
+            centermode.createHeadMaster({
+                keepLogin: true
+            })
+        ]).then(function (results) {
+            var teacher1 = results[0],
+                headMaster2 = results[1];
+
+            centermode.addTeacher({
+                teacher: teacher1,
+                resend: true
+            });
+
+            login.logout();
+            login.login({
+                user: teacher1.userEmail,
+                password: teacher1.password
+            });
+            var class1 = myclass.createClass({
+                centerName: headMaster1.centerName //TODO:crear en un centro específico
+            });
+
+            login.logout();
+        });
     });
 
 });

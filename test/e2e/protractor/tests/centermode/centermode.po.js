@@ -23,10 +23,11 @@ var CenterMode = function () {
         var user;
         if (!options.useDevelopHeadMaster) {
             user = login.loginWithRandomUser();
+            user.centerName = options.nameCenter || this.createRandomCenterName();
             header.openHeaderMenu.click();
             header.centerModeBanner.click();
             modals.okDialog.click();
-            modals.inputNameCenter.sendKeys(options.nameCenter || this.createRandomCenterName());
+            modals.inputNameCenter.sendKeys(user.centerName);
             modals.inputLocationCenter.sendKeys('dir');
             modals.inputTelephoneCenter.sendKeys('333333333');
             modals.okDialog.click();
@@ -99,6 +100,11 @@ var CenterMode = function () {
                 browser.sleep('5000');
 
                 $2(modals.okDialog.elementArrayFinder_.locator_.value).click();
+                if (!options.keepEmailBrowserLogin) {
+                    $2(header.navLogo.elementArrayFinder_.locator_.value).click();
+                    $2($('[data-element="open-header-menu"]').elementArrayFinder_.locator_.value).click();
+                    $2($('[data-element="header-menu-logout"]').elementArrayFinder_.locator_.value).click();
+                }
                 //go back to the main window && login wiht new passwords
                 login.login({
                     user: teacher.username,
@@ -111,6 +117,8 @@ var CenterMode = function () {
                 if (!options.keepLogin) {
                     login.logout();
                 }
+
+                teacher.browserEmail = browserEmail;
                 deferred.fulfill(teacher);
 
             });
@@ -118,17 +126,45 @@ var CenterMode = function () {
         return deferred.promise;
     };
 
-    this.createStudent = function () {
-        var student = login.loginWithRandomUser();
-        browser.sleep(vars.timeToWaitTab);
-        header.centerModeBanner.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        modals.okDialog.click();
-        modals.okDialog.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        login.logout();
-        return student;
+    this.addTeacher = function (options) {
+        options = options || {};
+        var deferred = protractor.promise.defer(),
+            emailNumber = 2;
+
+        mycenter.addNewTeacher(options.teacher.userEmail);
+        if (options.resend) {
+            mycenter.getTeacherResendButton(options.teacher).click();
+            emailNumber = 3;
+        }
+        var $2 = options.teacher.browserEmail.$;
+        options.teacher.browserEmail.ignoreSynchronization = true;
+        options.teacher.browserEmail.get('http://www.my10minutemail.com/');
+        globalFunctions.scrollBottomPage(options.teacher.browserEmail).then(function () {
+            options.teacher.browserEmail.sleep(5000);
+            $2('#msg_' + emailNumber + ' > td:nth-child(2)').click();
+            //Open popup email send
+            options.teacher.browserEmail.sleep(1000);
+            $2('#modalMessage > div.modal-body > a').click();
+
+            //Switch to popup
+            options.teacher.browserEmail.ignoreSynchronization = false;
+            //News passwords
+            $2(login.user.elementArrayFinder_.locator_.value).sendKeys(options.teacher.userEmail);
+            $2(login.password.elementArrayFinder_.locator_.value).sendKeys(options.teacher.password);
+            $2(login.loginButton.elementArrayFinder_.locator_.value).click();
+            browser.sleep('5000');
+
+            $2(modals.okDialog.elementArrayFinder_.locator_.value).click();
+            if (!options.keepEmailBrowserLogin) {
+                $2(header.navLogo.elementArrayFinder_.locator_.value).click();
+                $2($('[data-element="open-header-menu"]').elementArrayFinder_.locator_.value).click();
+                $2($('[data-element="header-menu-logout"]').elementArrayFinder_.locator_.value).click();
+            }
+            deferred.fulfill();
+        });
+        return deferred.promise;
     };
+
 
     this.createRandomCenterName = function () {
         return 'centerTest' + Number(new Date()) + Math.floor((Math.random() * 100000) + 1);
