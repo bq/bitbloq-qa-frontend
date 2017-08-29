@@ -19,6 +19,8 @@ var BloqsExercise = function () {
     //Hardware Tab
     this.harwareToolboxRobots = $('[data-element="toolbox-robots"]');
     this.hardwareToolboxMBot = $('[data-element="toolbox-hardware-mbot"]');
+    this.hardwareToolboxMRanger = $('[data-element="toolbox-hardware-rangerlandraider"]');
+    this.hardwareToolboxStarterKit = $('[data-element="toolbox-hardware-startertank"]');
 
 
     //Mark Tab

@@ -598,4 +598,96 @@ describe('Test licenses', function () {
             });
         });
     });
+
+    fit('bbb-665:licenses:Cant compile ranger and starter if an mbot is activated', function () {
+        protractor.promise.all([
+            centermode.createHeadMaster({
+                keepLogin: true
+            }),
+            mycenter.activateRobot({
+                robot: 'MBot'
+            }),
+            myclass.createClass(),
+            myExercises.createExercise({
+                withRobot: 'MBot'
+            }),
+            myExercises.createExercise({
+                withRobot: 'MRanger'
+            }),
+            myExercises.createExercise({
+                withRobot: 'StarterKit'
+            })
+        ]).then(function (results) {
+            var classInfo = results[2],
+                mBotExerciseInfo = results[3],
+                mRangerExerciseInfo = results[4],
+                starterExerciseInfo = results[5];
+
+            myExercises.addExerciseToClass({
+                classInfo: classInfo,
+                exerciseInfo: mBotExerciseInfo
+            });
+            myExercises.addExerciseToClass({
+                classInfo: classInfo,
+                exerciseInfo: mRangerExerciseInfo
+            });
+            myExercises.addExerciseToClass({
+                classInfo: classInfo,
+                exerciseInfo: starterExerciseInfo
+            });
+
+            licenses.checkEnableOnRobotsOnExercise({
+                exerciseInfo: mBotExerciseInfo,
+                boardName: 'mcore',
+                errorMessageSufix: 'check the exercise with mBot'
+            });
+
+            licenses.checkEnableOnRobotsOnExercise({
+                exerciseInfo: mRangerExerciseInfo,
+                boardName: 'meauriga',
+                errorMessageSufix: 'check the exercise with mRanger',
+                checkDisabled: true
+            });
+
+            licenses.checkEnableOnRobotsOnExercise({
+                exerciseInfo: starterExerciseInfo,
+                boardName: 'meorion',
+                errorMessageSufix: 'check the exercise with starter',
+                checkDisabled: true
+            });
+
+            login.logout();
+
+            login.loginWithRandomUser();
+            exercises.registerInClass({
+                idClass: classInfo.id
+            });
+
+            licenses.checkEnableOnRobotsOnExercise({
+                exerciseInfo: mBotExerciseInfo,
+                boardName: 'mcore',
+                errorMessageSufix: 'check the mbot exercise on student',
+                student: true
+            });
+
+            licenses.checkEnableOnRobotsOnExercise({
+                exerciseInfo: mRangerExerciseInfo,
+                boardName: 'meauriga',
+                errorMessageSufix: 'check the mranger exercise on student',
+                checkDisabled: true,
+                student: true
+            });
+
+            licenses.checkEnableOnRobotsOnExercise({
+                exerciseInfo: starterExerciseInfo,
+                boardName: 'meorion',
+                errorMessageSufix: 'check the starter exercise on student',
+                checkDisabled: true,
+                student: true
+            });
+
+            login.logout();
+
+        });
+    });
 });

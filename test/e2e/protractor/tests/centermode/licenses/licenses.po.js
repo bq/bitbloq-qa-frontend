@@ -38,8 +38,12 @@ var Licenses = function () {
             browser.actions().mouseMove(taskTable.getTaskByExerciseName(options.exerciseInfo.name)).perform();
             taskTable.getTaskButton(options.exerciseInfo.name).click();
         } else {
-            header.navExercise.click();
-            exercisesTable.getExerciseOptionButton(options.exerciseInfo.name).click();
+            header.navExercise.click().then(function () {
+                console.log('click on nav exercise');
+            });
+            exercisesTable.getExerciseOptionButton(options.exerciseInfo.name).click().then(function () {
+                console.log('click on nav options button');
+            });
             exercisesTable.getContextMenuOptionEditExercise(options.exerciseInfo).click();
         }
 
@@ -62,6 +66,10 @@ var Licenses = function () {
             expect(hwtab.robotActivationInfoWindow.isDisplayed()).toBe(options.checkDisabled || false, 'Not activated robot/board must show a warning window ' + options.errorMessageSufix);
             browser.close();
             browser.switchTo().window(handles[0]);
+            if (!options.student) {
+                header.navClass.click();//refresh
+            };
+
         });
     };
 
