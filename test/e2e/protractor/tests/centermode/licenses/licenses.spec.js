@@ -548,4 +548,54 @@ describe('Test licenses', function () {
             });
         });
     });
+
+    it('bbb-664:licenses:Cant compile a proyect, when i have a center with an activated code', function () {
+        protractor.promise.all([
+            centermode.createHeadMaster({
+                keepLogin: true
+            }),
+            mycenter.activateRobot({
+                robot: 'MBot'
+            }),
+            myclass.createClass(),
+            myExercises.createExercise({
+                withRobot: 'MBot'
+            })
+        ]).then(function (results) {
+            var classInfo = results[2],
+                exerciseInfo = results[3];
+
+            myExercises.addExerciseToClass({
+                classInfo: classInfo,
+                exerciseInfo: exerciseInfo
+            });
+            login.logout();
+
+            protractor.promise.all([
+                login.loginWithRandomUser(),
+                exercises.registerInClass({
+                    idClass: classInfo.id
+                }),
+                myprojects.createProject({
+                    withRobot: 'MBot',
+                    firstProyect: true
+                })
+            ]).then(function (results2) {
+                var projectInfo = results2[2];
+
+                licenses.checkEnableOnRobotsOnExercise({
+                    exerciseInfo: exerciseInfo,
+                    boardName: 'mcore',
+                    errorMessageSufix: 'check the exercise on student',
+                    student: true
+                });
+                licenses.checkEnableOnRobotsOnProject({
+                    projectInfo: projectInfo,
+                    boardName: 'mcore',
+                    checkDisabled: true
+                });
+                login.logout();
+            });
+        });
+    });
 });
