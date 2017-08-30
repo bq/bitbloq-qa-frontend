@@ -7,6 +7,8 @@ var Header = require('../../header/header.po.js'),
     ExercisesTable = require('../exercisesTable/exercisesTable.po.js'),
     Myprojects = require('../../projects/myprojects/myprojects.po.js'),
     Make = require('../../bloqsproject/make.po.js'),
+    Exercises = require('../exercises/exercises.po.js'),
+    Commons = require('../../commons/commons.po.js'),
     BloqsExercise = require('../bloqsExercise/bloqsExercise.po.js');
 
 var header = new Header(),
@@ -17,6 +19,8 @@ var header = new Header(),
     exercisesTable = new ExercisesTable(),
     myprojects = new Myprojects(),
     make = new Make(),
+    exercises = new Exercises(),
+    commons = new Commons(),
     vars = new Variables();
 
 var Licenses = function () {
@@ -34,7 +38,19 @@ var Licenses = function () {
         options.errorMessageSufix = options.errorMessageSufix || '';
 
         if (options.student) {
+            if (options.isTeacher) {
+                header.navShowMoreMenu.click();
+            }
             header.navTasks.click();
+
+            if (options.classInfo) {
+                exercises.classesDropdown.click();
+                commons.getItemInDropdownByName({
+                    dropdownDataElement: 'classes_dropdown',
+                    itemLabel: options.classInfo.name
+                }).click();
+            }
+
             browser.actions().mouseMove(taskTable.getTaskByExerciseName(options.exerciseInfo.name)).perform();
             taskTable.getTaskButton(options.exerciseInfo.name).click();
         } else {

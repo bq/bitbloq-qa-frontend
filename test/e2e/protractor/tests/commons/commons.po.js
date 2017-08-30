@@ -25,6 +25,11 @@ var Commons = function () {
         browser.ignoreSynchronization = false;
     };
 
+    this.getItemInDropdownByName = function (options) {
+        options = options || {};
+        return element(by.xpath('//*[@data-element="' + options.dropdownDataElement + '"]//button[text() = "' + options.itemLabel + '"]'));
+    };
+
     this.expectToastTimeOutandText = function (options) {
         options = options || {};
         options.alertElement = options.alertElement || this.alertTextToast;

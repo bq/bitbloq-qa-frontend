@@ -97,9 +97,10 @@ var CenterMode = function () {
                 $2(login.user.elementArrayFinder_.locator_.value).sendKeys(teacher.userEmail);
                 $2(login.password.elementArrayFinder_.locator_.value).sendKeys(teacher.password);
                 $2(login.loginButton.elementArrayFinder_.locator_.value).click();
-                browser.sleep('5000');
 
                 $2(modals.okDialog.elementArrayFinder_.locator_.value).click();
+                browserEmail.sleep(vars.timeToWaitFadeModals);
+
                 if (!options.keepEmailBrowserLogin) {
                     $2(header.navLogo.elementArrayFinder_.locator_.value).click();
                     $2($('[data-element="open-header-menu"]').elementArrayFinder_.locator_.value).click();
@@ -143,7 +144,7 @@ var CenterMode = function () {
             options.teacher.browserEmail.sleep(5000);
             $2('#msg_' + emailNumber + ' > td:nth-child(2)').click();
             //Open popup email send
-            options.teacher.browserEmail.sleep(1000);
+            options.teacher.browserEmail.sleep(2000);
             $2('#modalMessage > div.modal-body > a').click();
 
             //Switch to popup
@@ -152,13 +153,15 @@ var CenterMode = function () {
             $2(login.user.elementArrayFinder_.locator_.value).sendKeys(options.teacher.userEmail);
             $2(login.password.elementArrayFinder_.locator_.value).sendKeys(options.teacher.password);
             $2(login.loginButton.elementArrayFinder_.locator_.value).click();
-            browser.sleep('5000');
 
             $2(modals.okDialog.elementArrayFinder_.locator_.value).click();
+            options.teacher.browserEmail.sleep(vars.timeToWaitFadeModals);
+
             if (!options.keepEmailBrowserLogin) {
                 $2(header.navLogo.elementArrayFinder_.locator_.value).click();
                 $2($('[data-element="open-header-menu"]').elementArrayFinder_.locator_.value).click();
                 $2($('[data-element="header-menu-logout"]').elementArrayFinder_.locator_.value).click();
+
             }
             deferred.fulfill();
         });

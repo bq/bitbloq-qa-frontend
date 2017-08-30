@@ -705,7 +705,7 @@ describe('Test licenses', function () {
         checkThatARobotActivationAffectOnlyHimself('StarterKit');
     });
 
-    fit('bbb-668:licenses: Teacher and students can use robots activated in teacher\'s other centers', function () {
+    it('bbb-668:licenses: Teacher and students can use robots activated in teacher\'s other centers', function () {
         var headMaster1 = centermode.createHeadMaster({
             keepLogin: true
         });
@@ -725,21 +725,88 @@ describe('Test licenses', function () {
             var teacher1 = results[0],
                 headMaster2 = results[1];
 
-            centermode.addTeacher({
-                teacher: teacher1,
-                resend: true
-            });
+            protractor.promise.all([
+                centermode.addTeacher({
+                    teacher: teacher1,
+                    resend: true
+                }),
+                login.logout(),
+                login.login({
+                    user: teacher1.userEmail,
+                    password: teacher1.password
+                }),
+                myclass.createClass({
+                    centerName: headMaster1.centerName
+                }),
+                myclass.createClass({
+                    centerName: headMaster2.centerName
+                }),
+                myExercises.createExercise({
+                    name: 'exercise1',
+                    withRobot: 'MBot'
+                }), myExercises.createExercise({
+                    name: 'exercise2',
+                    withRobot: 'MBot'
+                })
+            ]).then(function (results2) {
+                var classInfo1 = results2[3],
+                    classInfo2 = results2[4],
+                    exerciseInfo1 = results2[5],
+                    exerciseInfo2 = results2[6];
 
-            login.logout();
-            login.login({
-                user: teacher1.userEmail,
-                password: teacher1.password
-            });
-            var class1 = myclass.createClass({
-                centerName: headMaster1.centerName //TODO:crear en un centro específico
-            });
+                myExercises.addExerciseToClass({
+                    classInfo: classInfo1,
+                    exerciseInfo: exerciseInfo1
+                });
 
-            login.logout();
+                myExercises.addExerciseToClass({
+                    classInfo: classInfo2,
+                    exerciseInfo: exerciseInfo2
+                });
+
+                licenses.checkEnableOnRobotsOnExercise({
+                    exerciseInfo: exerciseInfo1,
+                    boardName: 'mcore',
+                    errorMessageSufix: 'class with robot activated',
+                });
+
+                licenses.checkEnableOnRobotsOnExercise({
+                    exerciseInfo: exerciseInfo2,
+                    boardName: 'mcore',
+                    errorMessageSufix: 'class without robot activated',
+                    checkDisabled: true
+                });
+                login.logout();
+
+                login.loginWithRandomUser();
+
+                exercises.registerInClass({
+                    idClass: classInfo1.id
+                });
+
+                exercises.registerInClass({
+                    idClass: classInfo2.id
+                });
+
+                licenses.checkEnableOnRobotsOnExercise({
+                    exerciseInfo: exerciseInfo1,
+                    classInfo: classInfo1,
+                    boardName: 'mcore',
+                    errorMessageSufix: 'student in class with robot activated',
+                    student: true,
+                });
+
+                licenses.checkEnableOnRobotsOnExercise({
+                    exerciseInfo: exerciseInfo2,
+                    classInfo: classInfo2,
+                    boardName: 'mcore',
+                    errorMessageSufix: 'student in class without robot activated',
+                    student: true,
+                    checkDisabled: true
+                });
+
+                login.logout();
+            });
         });
     });
 

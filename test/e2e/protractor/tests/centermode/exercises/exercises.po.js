@@ -16,6 +16,9 @@ var MyExercise = function () {
     this.registerInClassButton = $('[data-element="centerMode_button_registerInGroup"]');
     this.currentClassName = $('[data-element="tasks-dashboard-class-name"]');
 
+    this.classesDropdown = $('[data-element="classes_dropdown"]');
+
+
     this.url = '#/tasks';
 
     this.get = function () {
@@ -55,7 +58,6 @@ var MyExercise = function () {
                 browser.switchTo().window(handles[0]);
             });
         });
-
     };
 };
 
