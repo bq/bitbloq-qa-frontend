@@ -809,5 +809,4 @@ describe('Test licenses', function () {
             });
         });
     });
-
 });

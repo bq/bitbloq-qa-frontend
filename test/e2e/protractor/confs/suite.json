@@ -34,6 +34,7 @@
     "centermode": "../tests/centermode/centermode.spec.js",
     "mycenter": "../tests/centermode/mycenter/mycenter.spec.js",
     "myExercises": "../tests/centermode/myexercises/myExercises.spec.js",
+    "exercises": "../tests/centermode/exercises/exercises.spec.js",
     "myclass": "../tests/centermode/myclass/myclass.spec.js",
     "licenses": "../tests/centermode/licenses/licenses.spec.js",
     "classDetail": "../tests/centermode/myclass/classDetail/classDetail.spec.js",
