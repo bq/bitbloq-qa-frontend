@@ -77,4 +77,20 @@ describe('Exercises/tasks view', function () {
 
     });
 
+    it('bbb-514:exercises:add class button should be disabled if text is empty', function () {
+        login.loginWithRandomUser();
+        header.navTasks.click();
+        exercises.registerInClassButton.click();
+
+        expect(modals.okDialog.isEnabled()).toBe(false, 'confirm button should be disabled');
+        modals.inputModalChangeN.sendKeys('patata');
+        expect(modals.okDialog.isEnabled()).toBe(true, 'confirm button should be enabled');
+        modals.inputModalChangeN.clear();
+        expect(modals.okDialog.isEnabled()).toBe(false, 'confirm button should be disabled after clean');
+        modals.cancel();
+
+        login.logout();
+
+    });
+
 });
