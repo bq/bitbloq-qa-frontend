@@ -14,6 +14,7 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     MakeActions = require('../../bloqsproject/makeActions/makeActions.po.js'),
     Myprojects = require('../../projects/myprojects/myprojects.po.js'),
     Hwtab = require('../../bloqsproject/hwtab/hwtab.po.js'),
+    Modals = require('../../modals/modals.po.js'),
     ThirdPartyRobotsApi = require('../../commons/api/ThirdPartyRobotsApi.js');
 
 
@@ -33,6 +34,7 @@ var globalFunctions = new GlobalFunctions(),
     myprojects = new Myprojects(),
     thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
     flow = browser.controlFlow(),
+    modals = new Modals(),
     hwtab = new Hwtab();
 
 globalFunctions.xmlReport('exercises');
@@ -59,6 +61,20 @@ describe('Exercises/tasks view', function () {
                 idClass: classInfo.id
             });
         });
+    });
+
+    it('bbb-513:exercises:should appear an error when the class id used is wrong', function () {
+        login.loginWithRandomUser();
+        exercises.registerInClass({
+            idClass: 'tooFakeToBeReal',
+            dontCheckError: true
+        });
+
+        expect(modals.inputError.isDisplayed()).toBe(true, 'User must see an error entering to a wrong class id');
+        modals.cancel();
+
+        login.logout();
+
     });
 
 });
