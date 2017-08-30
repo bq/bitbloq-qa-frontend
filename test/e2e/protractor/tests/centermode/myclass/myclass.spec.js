@@ -5,6 +5,7 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Modals = require('../../modals/modals.po.js'),
     Centermode = require('../centermode.po.js'),
     Myclass = require('../myclass/myclass.po.js'),
+    Login = require('../../login/login.po.js'),
     ClassDetail = require('../myclass/classDetail/classDetail.po.js');
 
 var globalFunctions = new GlobalFunctions(),
@@ -12,11 +13,12 @@ var globalFunctions = new GlobalFunctions(),
     modals = new Modals(),
     centermode = new Centermode(),
     myclass = new Myclass(),
+    login = new Login(),
     classDetail = new ClassDetail();
 
 globalFunctions.xmlReport('myclass');
 
-describe('My Class', function() {
+describe('My Class', function () {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -24,7 +26,7 @@ describe('My Class', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-404:myclass:new class', function() {
+    it('bbb-404:myclass:new class', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -32,7 +34,7 @@ describe('My Class', function() {
         myclass.createClass();
     });
 
-    it('bbb-405:myclass:Create a group - The field is empty', function() {
+    it('bbb-405:myclass:Create a group - The field is empty', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -46,12 +48,64 @@ describe('My Class', function() {
 
         expect(modals.modalsText.isDisplayed()).toBe(true, 'The modal with the ID isn\'t displayed');
 
-        modals.modalsText.getText().then(function() {
+        modals.modalsText.getText().then(function () {
             modals.cancelDialog.click();
         });
     });
 
-    it('bbb-642:myclass:Order and filters', function() {
+    it('bbb-438:myclass:Check that the centers combo is visible', function () {
+        var headMaster1 = centermode.createHeadMaster({
+            keepLogin: true
+        });
+
+        login.logout();
+
+        protractor.promise.all([
+            centermode.createTeacher({
+                headMaster: headMaster1
+            }),
+            centermode.createHeadMaster({
+                keepLogin: true
+            })
+        ]).then(function (results) {
+            var teacher1 = results[0],
+                headMaster2 = results[1];
+
+            centermode.addTeacher({
+                teacher: teacher1,
+                resend: true
+            });
+            login.logout();
+            login.login({
+                user: teacher1.userEmail,
+                password: teacher1.password
+            });
+            header.navClass.click();
+            expect(myclass.centersDropdown.isDisplayed()).toBe(true, 'Teacher should see a combo to select the center');
+            myclass.centersDropdown.click();
+            expect(myclass.getCenterInDropdownByName(headMaster1.centerName).isDisplayed()).toBe(true, 'Teacher need to see the first center');
+            expect(myclass.getCenterInDropdownByName(headMaster2.centerName).isDisplayed()).toBe(true, 'Teacher need to see the second center');
+
+            login.logout();
+
+            //test on relog
+            login.login({
+                user: teacher1.userEmail,
+                password: teacher1.password
+            });
+
+            header.navClass.click();
+            expect(myclass.centersDropdown.isDisplayed()).toBe(true, 'Teacher should see a combo to select the center on relog');
+            myclass.centersDropdown.click();
+            expect(myclass.getCenterInDropdownByName(headMaster1.centerName).isDisplayed()).toBe(true, 'Teacher need to see the first center');
+            expect(myclass.getCenterInDropdownByName(headMaster2.centerName).isDisplayed()).toBe(true, 'Teacher need to see the second center');
+
+            login.logout();
+
+        });
+    });
+
+    it('bbb-642:myclass:Order and filters', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -61,7 +115,7 @@ describe('My Class', function() {
             name: 'a'
         }), myclass.createClass({
             name: 'b'
-        })]).then(function(classes) {
+        })]).then(function (classes) {
             myclass.orderDropdown.click();
             myclass.orderDropdownName.click();
             expect(myclass.classesList.get(0).getText()).toMatch(classes[1].name, 'Classes name - 0');
@@ -82,15 +136,16 @@ describe('My Class', function() {
         });
     });
 
-    it('bbb-649:myclass:Check that the classId is visible', function() {
+    it('bbb-649:myclass:Check that the classId is visible', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
-        myclass.createClass().then(function(classInfo) {
+        myclass.createClass().then(function (classInfo) {
             expect(myclass.getClassIdObject(classInfo.id).isDisplayed()).toBe(true, 'Cant see classId in the list');
             myclass.getClassObject(classInfo.id).click();
             expect(classDetail.breadcrumbSubtext.isDisplayed()).toBe(true, 'the student is not in the class list');
             expect(classDetail.breadcrumbSubtext.getText()).toBe(classInfo.id, 'The id is wrong in the class Detail');
         });
     });
+
 });
