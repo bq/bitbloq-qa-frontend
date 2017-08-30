@@ -23,7 +23,7 @@ var MyExercise = function () {
     this.createExercise = function (options) {
         options = options || {};
         var exercise = {
-            name: options.name || 'Exercise_' + globalFunctions.getRandomNumber()
+            name: options.name || ('Exercise_' + globalFunctions.getRandomNumber())
         };
 
         header.navExercise.click();

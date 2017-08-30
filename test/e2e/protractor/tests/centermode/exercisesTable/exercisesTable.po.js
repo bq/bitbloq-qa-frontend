@@ -2,6 +2,14 @@
 
 var ExerciseTable = function () {
 
+    this.sortDropdown = $('[data-element="sortexercises_dropdown"]');
+
+    this.filterByClassDropdown = $('[data-element="filterbyclass_dropdown"]');
+
+    this.filterByStatusDropdown = $('[data-element="filterbystatus_dropdown"]');
+
+    this.searchField = $('[data-element="classes-searcher"]');
+
     this.getExercise = function (name) {
         return $('[data-element="exercise-' + name + '"]');
     };
@@ -25,6 +33,11 @@ var ExerciseTable = function () {
     this.getExerciseNameObject = function (name) {
         return $('[data-element="centerMode-item-' + name + '"]');
     };
+
+    this.getExerciseClassesObject = function (exerciseInfo) {
+        return $('[data-element="exercisestable-classes-' + exerciseInfo.name + '"]');
+    };
+
 };
 
 module.exports = ExerciseTable;
