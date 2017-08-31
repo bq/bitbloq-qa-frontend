@@ -16,6 +16,7 @@ var Variables = require('../../commons/variables.js'),
     Header = require('../../header/header.po.js'),
     Explore = require('../../explore/explore.po.js'),
     CodeProject = require('../../codeproject/codeproject.po.js'),
+    Commons = require('../../commons/commons.po.js'),
     Bloqs = require('../../bloqs/bloqs.po.js');
 
 var vars = new Variables(),
@@ -30,6 +31,7 @@ var vars = new Variables(),
     header = new Header(),
     explore = new Explore(),
     codeProject = new CodeProject(),
+    commons = new Commons(),
     bloqs = new Bloqs();
 
 globalFunctions.xmlReport('myprojects');
@@ -42,9 +44,64 @@ describe('My Projects', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    //TODO Check --> Alert (toast) && Create click into "Projecto sin titulo"
-    it('bbb-25:myProjects:Correct elemination --> Create project and eliminate ', function() {
+    it('bbb-XX:myProjects: Delete a project - send to trash', function() {
+        sendProjectToTrash();
+        login.logout();
+    });
 
+    it('bbb-XX:myProjects: Delete a project - delete permanently', function() {
+        var projectName = sendProjectToTrash();
+        browser.actions().mouseMove(projects.getTrashObject({
+            'name': projectName
+        })).perform();
+        projects.getTrashOptions(projectName).click();
+        projects.eliminate4ever.click();
+        expect(commons.toastSendProjectToTrash.isPresent(true, 'Project not deleted'));
+        projects.getTrashCount().then(function(result) {
+            expect(Number(result)).toEqual(0);
+        });
+        projects.trashCount.getText().then(function(result) {
+            expect(Number(result.slice(1, -1))).toEqual(0);
+        });
+        projects.myprojectsTab.click();
+        expect(projects.projectsName.isPresent()).toBe(false);
+        projects.getProjectCount().then(function(result) {
+            expect(Number(result)).toEqual(0);
+        });
+
+        myprojects.projectsCount.getText().then(function(result) {
+            expect(Number(result.slice(1, -1))).toEqual(0);
+        });
+        login.logout();
+    });
+
+    it('bbb-XX:myProjects: Delete a project - restore project', function() {
+        var projectName = sendProjectToTrash();
+        browser.actions().mouseMove(projects.getTrashObject({
+            'name': projectName
+        })).perform();
+        projects.getTrashOptions(projectName).click();
+        projects.restoreProject.click();
+        expect(commons.toastSendProjectToTrash.isPresent(true, 'Project not deleted'));
+        projects.getTrashCount().then(function(result) {
+            expect(Number(result)).toEqual(0);
+        });
+        projects.trashCount.getText().then(function(result) {
+            expect(Number(result.slice(1, -1))).toEqual(0);
+        });
+        projects.myprojectsTab.click();
+        expect(projects.projectsName.isPresent()).toBe(true);
+        projects.getProjectCount().then(function(result) {
+            expect(Number(result)).toEqual(1);
+        });
+
+        myprojects.projectsCount.getText().then(function(result) {
+            expect(Number(result.slice(1, -1))).toEqual(1);
+        });
+        login.logout();
+    });
+
+    function sendProjectToTrash() {
         //Create and check saved project
         var newLoginRandom = login.loginWithRandomUser();
         make.get();
@@ -65,26 +122,34 @@ describe('My Projects', function() {
         projects.get();
         expect(projects.projectsName.getText()).toEqual(name);
 
-        //Eliminar el projecto
-        browser.actions().mouseMove(myprojects.overMyProjects).perform();
-        browser.sleep(vars.timeToWaitFadeModals);
-        myprojects.eliminateMyProjects.click();
-        browser.sleep(18000);
-        //Comprobar que aparece la alerta de se ha eliminado
-        //expect(projects.alert.isDisplayed()).toBeTruthy();
+        projects.getProjectCount().then(function(result) {
+            expect(Number(result)).toEqual(1);
+        });
+        myprojects.projectsCount.getText().then(function(result) {
+            expect(Number(result.slice(1, -1))).toEqual(1);
+        });
+        browser.actions().mouseMove(myprojects.getProjectObject({
+            'name': name
+        })).perform();
+        myprojects.getProjectInfo(name).click();
+        myprojects.getElementFromProjectMenu('trash').click();
+        expect(commons.toastSendProjectToTrash.isPresent(true, 'Project not deleted'));
 
-        login.logout();
-
-        //Login with a user creator last project
-        login.get();
-        login.login({'user': newLoginRandom.user, 'password': newLoginRandom.password});
-
-        //Check no exist las project
-        projects.get();
         expect(projects.projectsName.isPresent()).toBe(false);
-        login.logout();
+        projects.getProjectCount().then(function(result) {
+            expect(Number(result)).toEqual(0);
+        });
 
-    });
+        myprojects.projectsCount.getText().then(function(result) {
+            expect(Number(result.slice(1, -1))).toEqual(0);
+        });
+        projects.trashProjects.click();
+        expect(projects.projectsName.isPresent()).toBe(true);
+        projects.trashCount.getText().then(function(result) {
+            expect(Number(result.slice(1, -1))).toEqual(1);
+        });
+        return name;
+    }
 
     it('bbb-27:myProjects:Verify that the Search bar work correctly', function() {
 
@@ -137,9 +202,14 @@ describe('My Projects', function() {
         var projectElem = projects.project;
         browser.actions().mouseMove(projectElem).perform();
         browser.sleep(6000);
-        //Publish the project. Click on publish icon
-        var icon = projectElem.$('[data-element="myprojects-footer-publish"]');
-        icon.click();
+
+        browser.actions().mouseMove(myprojects.getProjectObject({
+            'name': nameProject
+        })).perform();
+
+        myprojects.getProjectInfo(nameProject).click();
+        myprojects.getElementFromProjectMenu('explore').click();
+
         //confirm that we want publish our project.
         makeActions.publishButton.click();
         header.navExplore.click();
@@ -153,8 +223,12 @@ describe('My Projects', function() {
                 browser.actions().mouseMove(projectElem).perform();
                 browser.sleep(6000);
                 //Publish the project. Click on publish icon
-                icon = projectElem.$('[data-element="myprojects-footer-private"]');
-                icon.click();
+                browser.actions().mouseMove(myprojects.getProjectObject({
+                    'name': nameProject
+                })).perform();
+
+                myprojects.getProjectInfo(nameProject).click();
+                myprojects.getElementFromProjectMenu('private').click();
                 //confirm that we want publish our project.
                 makeActions.privateButton.click();
                 header.navExplore.click();
@@ -339,7 +413,6 @@ describe('My Projects', function() {
         checkNameProjects(8, 'a');
         checkNameProjects(9, '5');
 
-
         /*   DRAFT TODO check tooltips
 
         WebElement elem = driver.findElement(By.tagName("div"));
@@ -377,20 +450,25 @@ describe('My Projects', function() {
         // browser.pause();
           */
 
-
         login.logout();
     });
 
-    it('bbb-35:myProjects:Verify you can change the name of a project', function() {
+    fit('bbb-35:myProjects:Verify you can change the name of a project', function() {
         var originalName = make.saveProjectNewUser().projectName;
         browser.sleep(vars.timeToWaitSaveNewProject);
         projects.get();
         browser.sleep(vars.timeToWaitTab);
 
+        //rename
+
         myprojects.timeTag.getText().then(function(timeCreation) {
             browser.actions().mouseMove(myprojects.overMyProjects).perform();
             browser.sleep(vars.timeToWaitFadeModals);
-            myprojects.renameProject.click();
+            browser.actions().mouseMove(myprojects.getProjectObject({
+                'name': originalName
+            })).perform();
+            myprojects.getProjectInfo(originalName).click();
+            myprojects.getElementFromProjectMenu('rename').click();
             modals.inputModalChangeN.clear();
             modals.inputModalChangeN.sendKeys('new name');
             browser.sleep(vars.timeToWaitSendKeys);
