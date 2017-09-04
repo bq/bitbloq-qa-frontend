@@ -48,7 +48,6 @@ describe('Menu file of MakeActions, specs only in local ', function() {
             nameZumbadorProject,
             nameBitbloqConnectProject;
 
-
         /********  PUBLISH PROJECT WITH DIFFERENTS COMPONENTES ***********/
 
         make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/Ultrasonidos_Bloqs.json');
@@ -330,7 +329,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
     });
 
-    it('bbb-179:explorefiltersLocal:Check board filters on explora', function() {
+    fit('bbb-179:explorefiltersLocal:Check board filters on explora', function() {
         //Name project published
         var nameZumProject,
             nameFreaduinoProject,
@@ -343,7 +342,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
         /********  PUBLISH PROJECT WITH DIFFERENTS BOARD ***********/
         login.get();
-        login.loginGoogle(vars.userGoogle,vars.passwordGoogle);
+        login.loginGoogle(vars.userGoogle, vars.passwordGoogle);
         make.importFileUser(path.resolve() + '/test/e2e/protractor/res/Zum_Bloqs.json');
         nameZumProject = 'Zum_Bloqs' + Number(new Date());
         make.publishProjectWithName(nameZumProject);
@@ -390,7 +389,6 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
         explore.get();
         explore.exploreFilterDrowdown.click();
-
 
         // bq ZUM check
         element.all(by.repeater('board in boardsFilterOptions').row(0).column('board.option')).click();

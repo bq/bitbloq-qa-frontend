@@ -35,7 +35,7 @@ var Myprojects = function() {
     this.downloadProject = $('[data-element="myprojects-download-project"]');
     this.exportArduinoProject = $('[data-element="myprojects-export-arduino-code-button"]')
     this.projectsCount = $('[data-element="projects-count"]');
-    this.url = '#/projects';
+    this.url = '#/projects/myprojects';
     this.get = function() {
         browser.get(this.url);
     };
@@ -50,6 +50,10 @@ var Myprojects = function() {
 
     this.getProjectInfo = function(name) {
         return $('[data-element="project-' + name + '-options"]');
+    }
+
+    this.getMyProjectsPage = function(pageno) {
+        return $('[data-element="page-' + pageno + '"]');
     }
 
     this.createProject = function(options) {

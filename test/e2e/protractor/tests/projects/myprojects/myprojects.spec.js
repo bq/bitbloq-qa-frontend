@@ -44,12 +44,12 @@ describe('My Projects', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-XX:myProjects: Delete a project - send to trash', function() {
+    it('bbb-674:myProjects: Delete a project - send to trash', function() {
         sendProjectToTrash();
         login.logout();
     });
 
-    it('bbb-XX:myProjects: Delete a project - delete permanently', function() {
+    it('bbb-675:myProjects: Delete a project - delete permanently', function() {
         var projectName = sendProjectToTrash();
         browser.actions().mouseMove(projects.getTrashObject({
             'name': projectName
@@ -75,7 +75,7 @@ describe('My Projects', function() {
         login.logout();
     });
 
-    it('bbb-XX:myProjects: Delete a project - restore project', function() {
+    it('bbb-676:myProjects: Delete a project - restore project', function() {
         var projectName = sendProjectToTrash();
         browser.actions().mouseMove(projects.getTrashObject({
             'name': projectName
@@ -453,7 +453,7 @@ describe('My Projects', function() {
         login.logout();
     });
 
-    fit('bbb-35:myProjects:Verify you can change the name of a project', function() {
+    it('bbb-35:myProjects:Verify you can change the name of a project', function() {
         var originalName = make.saveProjectNewUser().projectName;
         browser.sleep(vars.timeToWaitSaveNewProject);
         projects.get();
@@ -481,6 +481,50 @@ describe('My Projects', function() {
             login.logout();
         });
 
+    });
+
+    fit('bbb-XX:myProjects: Check Pagination', function() {
+        make.saveProjectNewUser('Project_1');
+        make.saveProject('Project_2');
+        make.saveProject('Project_3');
+        make.saveProject('Project_4');
+        make.saveProject('Project_5');
+        make.saveProject('Project_6');
+        make.saveProject('Project_7');
+        make.saveProject('Project_8');
+        make.saveProject('Project_9');
+        make.saveProject('Project_10');
+        make.saveProject('Project_11');
+        make.saveProject('Project_12');
+        make.saveProject('Project_13');
+        make.saveProject('Project_14');
+        make.saveProject('Project_15');
+        make.saveProject('Project_16');
+        make.saveProject('Project_17');
+        make.saveProject('Project_18');
+        make.saveProject('Project_19');
+        make.saveProject('Project_20');
+        make.saveProject('Project_21');
+        make.saveProject('Project_22');
+        myprojects.get();
+
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
+
+        projects.getProjectCount().then(function(result) {
+            expect(Number(result)).toEqual(20);
+        });
+
+        browser.sleep(3000);
+        browser.executeScript('$("#projects__view").scrollTop(10000);').then(function() {
+            myprojects.getMyProjectsPage(2).click();
+            browser.sleep(3000);
+            expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=2');
+            projects.getProjectCount().then(function(result) {
+                expect(Number(result)).toEqual(2);
+            });
+            myprojects.getMyProjectsPage(1).click();
+            expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
+        });
     });
 
 });
