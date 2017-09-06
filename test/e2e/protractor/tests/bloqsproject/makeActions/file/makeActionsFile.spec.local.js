@@ -50,9 +50,11 @@ describe('Menu file of MakeActions, specs only in local ', function() {
         browser.driver.wait(function() {
             return fs.existsSync(fileDownload);
         }, 4000).then(function() {
-
-            expect(JSON.parse(fs.readFileSync(fileDownload, 'utf8'))).toEqual(JSON.parse(fs.readFileSync(fileToUpload, 'utf8')));
-
+            var doc1 = JSON.parse(fs.readFileSync(fileDownload, 'utf8')),
+                doc2 = JSON.parse(fs.readFileSync(fileToUpload, 'utf8'));
+            doc1.code = doc1.code.replace(/\s/g,'');
+            doc2.code = doc2.code.replace(/\s/g,'');
+            expect(doc1).toEqual(doc2);
         });
 
     });
