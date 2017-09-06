@@ -123,7 +123,7 @@ describe('Check makeActions actions in codeProjects', function() {
 
     it('bbb-51:autosaveLocal:Verify that the autosave is launched when you change the information of the projects', function() {
         var perfectImagePath = '../../res/perfectimage.jpg',
-        perfectImageAbsolutePath = path.resolve(__dirname, perfectImagePath);
+            perfectImageAbsolutePath = path.resolve(__dirname, perfectImagePath);
 
         make.saveProjectNewUser();
         expect(make.isProjectSavedShown()).toBeTruthy();
@@ -232,7 +232,7 @@ describe('Check makeActions actions in codeProjects', function() {
         login.logout();
     });
 
-    it('bbb-48:autosaveLocal:Verify that the autosave is launched when you add a board or a robot',function() {
+    fit('bbb-48:autosaveLocal:Verify that the autosave is launched when you add a board or a robot', function() {
 
         var num;
         login.loginWithRandomUser();
@@ -244,7 +244,7 @@ describe('Check makeActions actions in codeProjects', function() {
         make.hardwareTab.click();
         hwtab.boardsTab.click();
         hwtab.boardsElem.count().then(function(totalBoards) {
-            for (num=0; num<totalBoards; num+=1) {
+            for (num = 0; num < totalBoards; num += 1) {
                 hwtab.boardsElem.get(num).click();
                 expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.sleep(1000);
@@ -259,10 +259,10 @@ describe('Check makeActions actions in codeProjects', function() {
         make.hardwareTab.click();
         hwtab.robotsTab.click();
         hwtab.robotsElem.count().then(function(totalRobots) {
-            for (num=0; num<totalRobots; num+=1) {
+            for (num = 0; num < totalRobots; num += 1) {
                 hwtab.robotsElem.get(num).click();
-                if (num>1) {
-                  modals.cancelDialog.click();
+                if (num > 1 && num < totalRobots - 1) {
+                    modals.cancelDialog.click();
                 }
                 expect(make.isProjectSavedShown()).toBeTruthy();
                 browser.sleep(1000);

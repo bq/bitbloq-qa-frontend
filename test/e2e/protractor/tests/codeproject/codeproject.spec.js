@@ -26,7 +26,7 @@ var codeproject = new Codeproject(),
 
 globalFunctions.xmlReport('codeProject');
 
-describe('Test Codeproject verify', function () {
+describe('Test Codeproject verify', function() {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -34,7 +34,7 @@ describe('Test Codeproject verify', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-164:codeProject:User guest edit code, OK edit and show modal && toast', function () {
+    it('bbb-164:codeProject:User guest edit code, OK edit and show modal && toast', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -50,7 +50,7 @@ describe('Test Codeproject verify', function () {
         expect(commons.editToast.isDisplayed()).toBe(true);
 
         globalFunctions.navigatorLanguage()
-            .then(function (language) {
+            .then(function(language) {
                 if (language === 'es') {
                     expect(commons.alertTextToast.getText()).toMatch(alert.alertTextEditCode);
                 } else {
@@ -65,7 +65,7 @@ describe('Test Codeproject verify', function () {
 
     });
 
-    it('bbb-165:codeProject:Login edit code, OK edit and show modal && toast', function () {
+    it('bbb-165:codeProject:Login edit code, OK edit and show modal && toast', function() {
 
         //Check modal show first time
         var user = login.loginWithRandomUser();
@@ -86,7 +86,10 @@ describe('Test Codeproject verify', function () {
 
         //Check modal NO show second time
         login.get();
-        login.login({ 'user': user.user, 'password': user.password });
+        login.login({
+            'user': user.user,
+            'password': user.password
+        });
         make.get();
         make.softwareTab.click();
         make.codeTab.click();
@@ -100,11 +103,11 @@ describe('Test Codeproject verify', function () {
 
     });
 
-    it('bbb-166:codeProject:Verify wit LOGIN user, undo change in TOAST (before create bloqsproject)', function () {
+    it('bbb-166:codeProject:Verify wit LOGIN user, undo change in TOAST (before create bloqsproject)', function() {
 
         make.saveProjectNewUser();
 
-        browser.getCurrentUrl().then(function (urlBloqsproject) {
+        browser.getCurrentUrl().then(function(urlBloqsproject) {
 
             make.softwareTab.click();
             make.codeTab.click();
@@ -120,7 +123,7 @@ describe('Test Codeproject verify', function () {
 
     });
 
-    it('bbb-167:codeProject:We can change the board in the info tab and saved it', function () {
+    it('bbb-167:codeProject:We can change the board in the info tab and saved it', function() {
 
         var projectUser = make.saveProjectNewUser();
         make.softwareTab.click();
@@ -141,12 +144,15 @@ describe('Test Codeproject verify', function () {
         //Logout, login and check if saved
         login.logout();
         login.get();
-        login.login({ 'user': projectUser.user.user, 'password': projectUser.user.password });
-        myprojects.overMyProjects.click().then(function () {
+        login.login({
+            'user': projectUser.user.user,
+            'password': projectUser.user.password
+        });
+        myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
-            browser.getAllWindowHandles().then(function (handles) {
+            browser.getAllWindowHandles().then(function(handles) {
                 console.log(handles);
-                browser.switchTo().window(handles[1]).then(function () {
+                browser.switchTo().window(handles[1]).then(function() {
                     make.infoTab.click();
 
                     expect(codeproject.codeInfotabHeading.getText()).toMatch('Arduino UNO');
@@ -164,13 +170,16 @@ describe('Test Codeproject verify', function () {
         });
 
         login.get();
-        login.login({ 'user': projectUser.user.user, 'password': projectUser.user.password });
+        login.login({
+            'user': projectUser.user.user,
+            'password': projectUser.user.password
+        });
 
-        myprojects.overMyProjects.click().then(function () {
+        myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
-            browser.getAllWindowHandles().then(function (handles) {
+            browser.getAllWindowHandles().then(function(handles) {
                 console.log(handles);
-                browser.switchTo().window(handles[1]).then(function () {
+                browser.switchTo().window(handles[1]).then(function() {
                     make.infoTab.click();
 
                     expect(codeproject.codeInfotabHeading.getText()).toMatch('Freaduino UNO');
@@ -189,12 +198,15 @@ describe('Test Codeproject verify', function () {
 
         //Logout, login and check if saved
         login.get();
-        login.login({ 'user': projectUser.user.user, 'password': projectUser.user.password });
-        myprojects.overMyProjects.click().then(function () {
+        login.login({
+            'user': projectUser.user.user,
+            'password': projectUser.user.password
+        });
+        myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
-            browser.getAllWindowHandles().then(function (handles) {
+            browser.getAllWindowHandles().then(function(handles) {
                 console.log(handles);
-                browser.switchTo().window(handles[1]).then(function () {
+                browser.switchTo().window(handles[1]).then(function() {
                     make.infoTab.click();
                     expect(codeproject.codeInfotabHeading.getText()).toMatch('bq ZUM');
                     login.logout();
@@ -206,20 +218,20 @@ describe('Test Codeproject verify', function () {
 
     });
 
-    it('bbb-168:codeProject:If redirect to /#/codeproject NO show toast', function () {
+    it('bbb-168:codeProject:If redirect to /#/codeproject NO show toast', function() {
 
         codeproject.get();
         expect(commons.editToast.isPresent()).toBe(false);
 
     });
 
-    it('bbb-169:codeProject:Project must have a name', function () {
+    it('bbb-169:codeProject:Project must have a name', function() {
         codeproject.saveCodeProjectNewUser();
         projects.get();
-        myprojects.overMyProjects.click().then(function () {
+        myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
-            browser.getAllWindowHandles().then(function (handles) {
-                browser.switchTo().window(handles[1]).then(function () {
+            browser.getAllWindowHandles().then(function(handles) {
+                browser.switchTo().window(handles[1]).then(function() {
                     browser.sleep(vars.timeToWaitTab);
                     infotab.infoTab.click();
                     infotab.infotabProjectName.clear();
@@ -229,7 +241,7 @@ describe('Test Codeproject verify', function () {
                     browser.ignoreSynchronization = false;
                     projects.get();
                     globalFunctions.navigatorLanguage()
-                        .then(function (language) {
+                        .then(function(language) {
                             if (language === 'es') {
                                 expect(projects.projectsName.getText()).toEqual(vars.nameNewProject);
                             } else {

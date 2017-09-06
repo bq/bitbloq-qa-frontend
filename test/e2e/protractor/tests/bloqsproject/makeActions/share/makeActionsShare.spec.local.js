@@ -78,7 +78,10 @@ describe('Menu share of makeactions local', function() {
             //open shared project
             login.get();
             browser.sleep(vars.timeToWaitTab);
-            login.login({'user': user1.user, 'password': user1.password});
+            login.login({
+                'user': user1.user,
+                'password': user1.password
+            });
             projects.sharedProjects.click();
             myprojects.overMyProjects.click();
             browser.getAllWindowHandles().then(function(handles) {
@@ -278,7 +281,7 @@ describe('Menu share of makeactions local', function() {
             browser.sleep(vars.timeToWaitSendKeys);
             browser.actions().sendKeys(protractor.Key.ENTER).perform();
             modals.okDialog.click();
-            browser.sleep(vars.timeToWaitFadeModals +1000);
+            browser.sleep(vars.timeToWaitFadeModals + 1000);
             modals.okDialog.click();
             globalFunctions.navigatorLanguage()
                 .then(function(language) {
@@ -325,7 +328,10 @@ describe('Menu share of makeactions local', function() {
                 browser.sleep(vars.timeToWaitTab);
 
                 //check user 1 has Project
-                login.login({'user': user1.user, 'password': user1.password});
+                login.login({
+                    'user': user1.user,
+                    'password': user1.password
+                });
                 projects.sharedProjects.click();
                 myprojects.overMyProjects.click();
                 browser.getAllWindowHandles().then(function(handles) {
@@ -343,7 +349,10 @@ describe('Menu share of makeactions local', function() {
                             login.logout();
                             login.get();
                             browser.sleep(vars.timeToWaitTab);
-                            login.login({'user': user2.user, 'password': user2.password});
+                            login.login({
+                                'user': user2.user,
+                                'password': user2.password
+                            });
                             projects.sharedProjects.click();
                             myprojects.overMyProjects.click();
                             browser.getAllWindowHandles().then(function(handles2) {
@@ -360,7 +369,10 @@ describe('Menu share of makeactions local', function() {
                                         login.logout();
                                         login.get();
                                         browser.sleep(vars.timeToWaitTab);
-                                        login.login({'user': user3.user, 'password': user3.password});
+                                        login.login({
+                                            'user': user3.user,
+                                            'password': user3.password
+                                        });
                                         projects.sharedProjects.click();
                                         myprojects.overMyProjects.click();
                                         browser.getAllWindowHandles().then(function(handles3) {
@@ -423,7 +435,10 @@ describe('Menu share of makeactions local', function() {
                 login.logout();
                 login.get();
                 browser.sleep(vars.timeToWaitTab);
-                login.login({'user': user1.user, 'password': user1.password});
+                login.login({
+                    'user': user1.user,
+                    'password': user1.password
+                });
                 browser.get(url);
 
                 browser.sleep(vars.timeToWaitTab);

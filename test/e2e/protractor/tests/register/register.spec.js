@@ -53,7 +53,7 @@ describe('Register ', function() {
 
     });
 
-    it('bbb-2:register:The email is duplicated', function() {
+    fit('bbb-2:register:The email is duplicated', function() {
         landing.enterButton.click();
 
         //Go to create account form
@@ -114,7 +114,6 @@ describe('Register ', function() {
                 $2('#modalMessage > div.modal-body > a').click();
                 //#modalMessage > div.modal-body > a
 
-
                 //Switch to popup
                 browserEmail.ignoreSynchronization = false;
                 //News passwords
@@ -124,7 +123,10 @@ describe('Register ', function() {
                 browser.sleep(vars.timeToWaitAutoSave);
                 //go back to the main window && login wiht new passwords
                 login.get();
-                login.login({'user': newUser.username, 'password':'123456'});
+                login.login({
+                    'user': newUser.username,
+                    'password': '123456'
+                });
                 login.logout();
 
             });
@@ -149,7 +151,7 @@ describe('Register ', function() {
 
         register.createAccountButtn.click();
 
-        register.createAccount(user.username, 'a'+user.userEmail, user.password, user.day, user.month, user.year, true, true);
+        register.createAccount(user.username, 'a' + user.userEmail, user.password, user.day, user.month, user.year, true, true);
 
         // Only show if user is in use
         expect(register.showInUse.isDisplayed()).toBeTruthy();
@@ -160,7 +162,7 @@ describe('Register ', function() {
 
         register.createAccountButtn.click();
 
-        register.createAccount(user.username.toUpperCase(), 'a'+user.userEmail, user.password, user.day, user.month, user.year, true, true);
+        register.createAccount(user.username.toUpperCase(), 'a' + user.userEmail, user.password, user.day, user.month, user.year, true, true);
 
         // Only show if user is in use
         expect(register.showInUse.isDisplayed()).toBeTruthy();
@@ -448,8 +450,6 @@ describe('Register ', function() {
 
     });
 
-
-
     it('bbb-15:register:Check that link recovery password only use one time', function() {
 
         //check bloqsproject
@@ -501,7 +501,6 @@ describe('Register ', function() {
                 //Open popup email send
                 $2('#modalMessage > div.modal-body > a').click();
                 //Other tab
-
 
                 browserEmail.ignoreSynchronization = false;
                 browser.sleep('2000');
@@ -651,7 +650,7 @@ describe('Register ', function() {
 
             register.get();
             register.createAccount(newUser.username, newUser.userEmail, newUser.password, newUser.day, newUser.month, newUser.year, true, true,
-            'tutorName','tutorSurname',email);
+                'tutorName', 'tutorSurname', email);
             browser.sleep('3000');
             login.logout();
 
@@ -686,9 +685,9 @@ describe('Register ', function() {
     it('bbb-363:register:The legal tutor accept', function() {
         //check bloqsproject
         var browserEmail = browser.forkNewDriverInstance(),
-        userName,
-        userLastName,
-        dniTutor;
+            userName,
+            userLastName,
+            dniTutor;
 
         browserEmail.ignoreSynchronization = true;
 
@@ -699,7 +698,7 @@ describe('Register ', function() {
 
             register.get();
             register.createAccount(newUser.username, newUser.userEmail, newUser.password, newUser.day, newUser.month, newUser.year, true, true,
-            'tutorName','tutorSurname',email);
+                'tutorName', 'tutorSurname', email);
             browser.sleep('3000');
             login.logout();
 
@@ -716,9 +715,9 @@ describe('Register ', function() {
 
                 //Other tab
                 browserEmail.ignoreSynchronization = false;
-                userName='Pepito';
-                userLastName='Grillo';
-                dniTutor='45454545A';
+                userName = 'Pepito';
+                userLastName = 'Grillo';
+                dniTutor = '45454545A';
                 $2(cookies.cookiesBar.elementArrayFinder_.locator_.value).click();
                 $2(register.under14Name.elementArrayFinder_.locator_.value).sendKeys(userName);
                 $2(register.under14Lastname.elementArrayFinder_.locator_.value).sendKeys(userLastName);
@@ -733,7 +732,10 @@ describe('Register ', function() {
 
                 //Check that not login (no change password)
                 login.get();
-                login.login({'user': newUser.username, 'password': newUser.password});
+                login.login({
+                    'user': newUser.username,
+                    'password': newUser.password
+                });
                 account.get();
                 expect(account.firstname.getAttribute('value')).toEqual(userName);
                 expect(account.lastname.getAttribute('value')).toEqual(userLastName);

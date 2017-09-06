@@ -148,25 +148,12 @@ var Login = function() {
             that.googleEnter.click();
             browser.sleep(5000);
 
-            /* if (browser.baseUrl === 'http://localhost:9000/') {
-                 that.googleAprove.click();
-             }*/
-            that.googleAprove.click();
-
-            /*browser.sleep(vars.timeToWaitTab).then(function(){
-            console.log('end sleep login');
-        });*/
-
+            browser.sleep(5000);
             // go back to the main window
-            browser.switchTo().window(handles[0]).then(function() {
-                console.log('end google login');
-            });
+            browser.switchTo().window(handles[0]);
 
             //Not ignore sync, return angular
             browser.ignoreSynchronization = false;
-        });
-        this.googleButton.click().then(function() {
-            console.log('click3');
         });
     };
 

@@ -17,23 +17,23 @@ var login = new Login(),
 globalFunctions.xmlReport('loginLocal');
 describe('Login, specs only in local ', function() {
 
-  //beforeEach commons
-  globalFunctions.beforeTest();
+    //beforeEach commons
+    globalFunctions.beforeTest();
 
-  // afterEach commons
-  globalFunctions.afterTest();
-
+    // afterEach commons
+    globalFunctions.afterTest();
 
     /* Thist test works, but google && facebook put captchas (run jenkis or saucelabs server on diferente contries)*/
     it('bbb-264:Login with a Google account', function() {
 
         landing.get();
-        landing.enterButton.click().then(function(){
+        landing.enterButton.click().then(function() {
             console.log('click hereeeeee');
         });
-        
+
         login.loginGoogle(vars.account('google').user, vars.account('google').password);
 
+        browser.sleep(3000);
         // if in #/login , --> Not in #/projects
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
         login.logout();
@@ -47,9 +47,8 @@ describe('Login, specs only in local ', function() {
         //Login in bitbloq with facebook
         login.loginFb(vars.account('facebook').email, vars.account('facebook').password);
 
-
         // if ok go to #/projects
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
 
         login.logout();
 

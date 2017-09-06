@@ -41,17 +41,23 @@ describe('Forum', function() {
 
     });
 
-    it('bbb-219:forumXit:check topic count category', function() {
+    fit('bbb-219:forumXit:check topic count category', function() {
         forum.get();
         browser.sleep(vars.timeToWaitTab);
         element.all(by.repeater('category in section').row(0).column('category.numberOfThreads')).getText().then(function(topicsInCategory) {
             var topicsInCategoryVal = parseInt(topicsInCategory);
+            console.log('topicsInCategory');
+            console.log(topicsInCategory);
             forum.createTopicNewUser();
             forum.createNewTopic();
             forum.createNewTopic();
             forum.get();
             topicsInCategoryVal += 3;
+            console.log('topicsInCategoryVal2');
+            console.log(topicsInCategoryVal);
             topicsInCategory = topicsInCategoryVal.toString();
+            console.log("topicsInCategory");
+            console.log(topicsInCategoryVal);
             expect(element.all(by.repeater('category in section').row(0).column('category.numberOfThreads')).getText()).toMatch(topicsInCategory);
             login.logout();
 
@@ -285,14 +291,14 @@ describe('Forum', function() {
         forum.newTopicDescription.all(by.css('div')).get(15).sendKeys('random description');
         browser.sleep(1000);
         forum.newTopicDescription.all(by.css('div')).get(15).sendKeys('123456');
-        forum.newTopicDescription.all(by.css('button')).get(9).click();//undo
+        forum.newTopicDescription.all(by.css('button')).get(9).click(); //undo
         expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).toMatch('random description');
         expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).not.toMatch('random description123456');
-        forum.newTopicDescription.all(by.css('button')).get(9).click();//undo
+        forum.newTopicDescription.all(by.css('button')).get(9).click(); //undo
         expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).not.toMatch('random description');
-        forum.newTopicDescription.all(by.css('button')).get(10).click();//redo
+        forum.newTopicDescription.all(by.css('button')).get(10).click(); //redo
         expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).toMatch('random description');
-        forum.newTopicDescription.all(by.css('button')).get(10).click();//redo
+        forum.newTopicDescription.all(by.css('button')).get(10).click(); //redo
         expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).toMatch('random description123456');
         //en respuesta
         forum.get();
@@ -304,14 +310,14 @@ describe('Forum', function() {
         forum.answerTopic.all(by.css('div')).get(15).sendKeys('random description');
         browser.sleep(1000);
         forum.answerTopic.all(by.css('div')).get(15).sendKeys('123456');
-        forum.answerTopic.all(by.css('button')).get(9).click();//undo
+        forum.answerTopic.all(by.css('button')).get(9).click(); //undo
         expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('random description');
         expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).not.toMatch('random description123456');
-        forum.answerTopic.all(by.css('button')).get(9).click();//undo
+        forum.answerTopic.all(by.css('button')).get(9).click(); //undo
         expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).not.toMatch('random description');
-        forum.answerTopic.all(by.css('button')).get(10).click();//redo
+        forum.answerTopic.all(by.css('button')).get(10).click(); //redo
         expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('random description');
-        forum.answerTopic.all(by.css('button')).get(10).click();//redo
+        forum.answerTopic.all(by.css('button')).get(10).click(); //redo
         expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('random description123456');
         login.logout();
     });

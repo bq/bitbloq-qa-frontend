@@ -329,7 +329,7 @@ describe('Menu file of MakeActions, specs only in local ', function() {
 
     });
 
-    fit('bbb-179:explorefiltersLocal:Check board filters on explora', function() {
+    it('bbb-179:explorefiltersLocal:Check board filters on explora', function() {
         //Name project published
         var nameZumProject,
             nameFreaduinoProject,

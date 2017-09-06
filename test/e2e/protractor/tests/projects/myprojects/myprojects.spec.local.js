@@ -31,7 +31,7 @@ describe('My projects, only local', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-33:myProjectsLocal:Verify copy a project', function() {
+    fit('bbb-33:myProjectsLocal:Verify copy a project', function() {
         var nameProject = 'test';
         make.saveProjectNewUser(nameProject);
         projects.get();
@@ -39,13 +39,14 @@ describe('My projects, only local', function() {
         var file1 = path.resolve() + '/target/' + nameProject + '.ino';
         browser.actions().mouseMove(myprojects.overMyProjects).perform();
         browser.sleep(vars.timeToWaitFadeModals);
-        myprojects.downloadIno.click();
+        myprojects.getProjectInfo(nameProject).click();
+        myprojects.getElementFromProjectMenu('export').click();
         browser.driver.wait(function() {
             return fs.existsSync(file1);
         }, 4001).then(function() {
             browser.actions().mouseMove(myprojects.overMyProjects).perform();
             browser.sleep(vars.timeToWaitFadeModals);
-            myprojects.copyProject.click();
+            myprojects.getElementFromProjectMenu('copy').click();
             browser.sleep(vars.timeToWaitFadeModals);
             modals.okDialog.click();
             browser.sleep(vars.timeToWaitAutoSave).then(function() {
@@ -60,21 +61,24 @@ describe('My projects, only local', function() {
                             file2 = path.resolve() + '/target/' + 'Copy_of_' + nameProject + '.ino';
                         }
                     });
+
                 browser.actions().mouseMove(myprojects.overMyProjects).perform();
                 browser.sleep(vars.timeToWaitFadeModals);
-                myprojects.downloadIno.click();
+                myprojects.getProjectInfo("Copia de " + nameProject).click();
+                browser.sleep(vars.timeToWaitFadeModals);
+                myprojects.getElementFromProjectMenu('export').click();
+
                 browser.driver.wait(function() {
                     return fs.existsSync(file2);
-
                 }, 4002).then(function() {
-                    expect(fs.readFileSync(file1, 'utf8')).toEqual(fs.readFileSync(file2, 'utf8'));
+                    expect(fs.readFileSync(file1, 'utf8')).toEqual(fs.readFileSync(file2, 'utf8'), 'not equal');
                     login.logout();
                 });
             });
         });
     });
 
-    fit('bbb-29:myProjectsLocal:Verify strange characters in project name do not appear in code export', function() {
+    it('bbb-29:myProjectsLocal:Verify strange characters in project name do not appear in code export', function() {
         var name = 'asdf!·$%&';
         var fileToUpload = path.resolve() + '/test/e2e/protractor/res/CreandoUnVoltimetroBitbloq.json';
         fileToUpload = globalFunctions.filePath(fileToUpload);
