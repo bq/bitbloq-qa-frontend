@@ -105,7 +105,7 @@ describe('Check makeActions actions in codeProjects', function () {
         expect(makeActions.menuClone.getAttribute('disabled')).toBeTruthy();
         expect(makeActions.menuExportArduino.getAttribute('disabled')).not.toBeTruthy();
         expect(makeActions.menuChangeLanguage.getAttribute('disabled')).not.toBeTruthy();
-        expect(makeActions.removeProject.getAttribute('disabled')).toBeTruthy();
+        expect(browser.isElementPresent(makeActions.removeProject)).toBe(false);
 
         //VIEW
         makeActions.menuView.click();
