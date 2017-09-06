@@ -21,7 +21,7 @@ describe('Explore tab', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-184:exploreXit:Show project using scroll', function() {
+    xit('bbb-184:exploreXit:Show project using scroll', function() { //No aplica porque ya no hay scroll infinito
 
         explore.get();
         //This sleep is necessary because the next statamente (executeScript) not syncronize with angularjs
