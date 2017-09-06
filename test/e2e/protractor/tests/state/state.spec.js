@@ -187,7 +187,6 @@ describe('State ', function() {
         });
     });
 
-
     it('bbb-299:state:A filter in the explora tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
@@ -197,13 +196,19 @@ describe('State ', function() {
         header.navExplore.click();
         explore.exploreFilterDrowdown.click();
         element.all(by.repeater('compFilter in componentsFilterOptions').row(1).column('compFilter.option')).click();
-        browser.sleep(vars.timeToWaitAutoSave);
         browser.getCurrentUrl().then(function(url) {
             login.loginFromHeader('explore');
-            expect(browser.getCurrentUrl()).toEqual(url);
+            browser.getCurrentUrl().then(function(url2){
+                var baseUrl1 = url.split('?')[0],
+                    baseUrl2 = url2.split('?')[0],
+                    params1 = url.split('?')[1].split('&'),
+                    params2 = url2.split('?')[1].split('&');
+                expect(baseUrl1).toEqual(baseUrl2);
+                expect(params1.sort()).toEqual(params2.sort());
+            });
         });
-
     });
+
 
     it('bbb-300:state:Verify that the empty bloqsproject isnt saved', function() {
         make.get();
