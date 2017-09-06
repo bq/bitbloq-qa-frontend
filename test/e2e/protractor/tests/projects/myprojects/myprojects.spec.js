@@ -483,7 +483,24 @@ describe('My Projects', function() {
 
     });
 
-    fit('bbb-XX:myProjects: Check Pagination', function() {
+    it('bbb-XX:myProjects: Check no pagination when not enough projects', function() {
+        make.saveProjectNewUser('Project_1');
+        myprojects.get();
+
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
+
+        projects.getProjectCount().then(function(result) {
+            expect(Number(result)).toEqual(1);
+        });
+
+        browser.sleep(3000);
+        browser.executeScript('$("#projects__view").scrollTop(10000);').then(function() {
+            expect(browser.isElementPresent((myprojects.getMyProjectsPage(1)))).toBe(false);
+        });
+        login.logout();
+    });
+
+    it('bbb-XX:myProjects: Check Pagination', function() {
         make.saveProjectNewUser('Project_1');
         make.saveProject('Project_2');
         make.saveProject('Project_3');
@@ -525,6 +542,95 @@ describe('My Projects', function() {
             myprojects.getMyProjectsPage(1).click();
             expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
         });
+        login.logout();
+    });
+
+    it('bbb-XX:myProjects: Check Pagination Back and Next', function() {
+        make.saveProjectNewUser('Project_1');
+        make.saveProject('Project_2');
+        make.saveProject('Project_3');
+        make.saveProject('Project_4');
+        make.saveProject('Project_5');
+        make.saveProject('Project_6');
+        make.saveProject('Project_7');
+        make.saveProject('Project_8');
+        make.saveProject('Project_9');
+        make.saveProject('Project_10');
+        make.saveProject('Project_11');
+        make.saveProject('Project_12');
+        make.saveProject('Project_13');
+        make.saveProject('Project_14');
+        make.saveProject('Project_15');
+        make.saveProject('Project_16');
+        make.saveProject('Project_17');
+        make.saveProject('Project_18');
+        make.saveProject('Project_19');
+        make.saveProject('Project_20');
+        make.saveProject('Project_21');
+        make.saveProject('Project_22');
+        myprojects.get();
+
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
+
+        projects.getProjectCount().then(function(result) {
+            expect(Number(result)).toEqual(20);
+        });
+
+        browser.sleep(3000);
+        browser.executeScript('$("#projects__view").scrollTop(10000);').then(function() {
+            myprojects.paginationLast.click();
+            expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
+            myprojects.paginationNext.click();
+            browser.sleep(3000);
+            expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=2');
+            projects.getProjectCount().then(function(result) {
+                expect(Number(result)).toEqual(2);
+            });
+            myprojects.paginationLast.click();
+            expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
+        });
+        login.logout();
+    });
+
+    fit('bbb-XX:myProjects: Check Pagination Enter Url', function() {
+        make.saveProjectNewUser('Project_1');
+        make.saveProject('Project_2');
+        make.saveProject('Project_3');
+        make.saveProject('Project_4');
+        make.saveProject('Project_5');
+        make.saveProject('Project_6');
+        make.saveProject('Project_7');
+        make.saveProject('Project_8');
+        make.saveProject('Project_9');
+        make.saveProject('Project_10');
+        make.saveProject('Project_11');
+        make.saveProject('Project_12');
+        make.saveProject('Project_13');
+        make.saveProject('Project_14');
+        make.saveProject('Project_15');
+        make.saveProject('Project_16');
+        make.saveProject('Project_17');
+        make.saveProject('Project_18');
+        make.saveProject('Project_19');
+        make.saveProject('Project_20');
+        make.saveProject('Project_21');
+        make.saveProject('Project_22');
+        myprojects.get();
+
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
+
+        projects.getProjectCount().then(function(result) {
+            expect(Number(result)).toEqual(20);
+        });
+
+        browser.get('#/projects/myprojects?page=2');
+        projects.getProjectCount().then(function(result) {
+            expect(Number(result)).toEqual(2);
+        });
+
+        expect(browser.isElementPresent($('[data-element2="project-Project_2"]'))).toBe(true);
+        expect(browser.isElementPresent($('[data-element2="project-Project_1"]'))).toBe(true);
+
     });
 
 });

@@ -74,7 +74,8 @@ describe('My projects, only local', function() {
         });
     });
 
-    it('bbb-29:myProjectsLocal:Verify strange characters in project name do not appear in code export', function() {
+    fit('bbb-29:myProjectsLocal:Verify strange characters in project name do not appear in code export', function() {
+        var name = 'asdf!·$%&';
         var fileToUpload = path.resolve() + '/test/e2e/protractor/res/CreandoUnVoltimetroBitbloq.json';
         fileToUpload = globalFunctions.filePath(fileToUpload);
         var fileToCompare = path.resolve() + '/test/e2e/protractor/res/CreandoUnVoltimetroBitbloq.ino';
@@ -84,15 +85,15 @@ describe('My projects, only local', function() {
         make.importFileNewUser(fileToUpload);
         make.projectName.click();
         modals.inputModalChangeN.clear();
-        modals.inputModalChangeN.sendKeys('asdf!"·$%&');
+        modals.inputModalChangeN.sendKeys(name);
         browser.sleep(vars.timeToWaitSendKeys);
         modals.okDialog.click();
         browser.sleep(vars.timeToWaitAutoSave);
         projects.get();
         browser.sleep(vars.timeToWaitTab);
         browser.actions().mouseMove(myprojects.overMyProjects).perform();
-        browser.sleep(vars.timeToWaitFadeModals);
-        myprojects.downloadIno.click();
+        myprojects.getProjectInfo(name).click();
+        myprojects.getElementFromProjectMenu('export').click();
         browser.wait(function() {
             return fs.existsSync(fileDownload);
         }, 4000).then(function() {
