@@ -1,5 +1,6 @@
 'use strict';
 var GlobalFunctions = require('../../commons/globalFunctions.js'),
+    Commons = require('../../commons/commons.po.js'),
     Header = require('../../header/header.po.js'),
     Login = require('../../login/login.po.js'),
     Variables = require('../../commons/variables.js'),
@@ -15,10 +16,12 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     MakeActions = require('../../bloqsproject/makeActions/makeActions.po.js'),
     Myprojects = require('../../projects/myprojects/myprojects.po.js'),
     Hwtab = require('../../bloqsproject/hwtab/hwtab.po.js'),
+    CodeProjects = require('../../codeproject/codeproject.po.js'),
     ThirdPartyRobotsApi = require('../../commons/api/ThirdPartyRobotsApi.js');
 
 
 var globalFunctions = new GlobalFunctions(),
+    commons = new Commons(),
     header = new Header(),
     login = new Login(),
     taskTable = new TaskTable(),
@@ -34,6 +37,7 @@ var globalFunctions = new GlobalFunctions(),
     makeActions = new MakeActions(),
     myprojects = new Myprojects(),
     thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
+    codeProjects = new CodeProjects(),
     flow = browser.controlFlow(),
     hwtab = new Hwtab();
 
@@ -809,4 +813,21 @@ describe('Test licenses', function () {
             });
         });
     });
+    fit('bbb-669:licenses:Cant compile codeproject of not activated robots', function () {
+        login.loginWithRandomUser();
+        codeProjects.get();
+        expect(makeActions.compileButton.isEnabled()).toBe(true, 'without library the user can compile');
+        $('[class="ace_text-input"]').sendKeys('#include <BitbloqMBotRanger.h>');
+        makeActions.compileButton.click();
+        makeActions.compileButton.click();
+        browser.sleep(5000);
+        expect(commons.toastCantCompileRobot.isPresent()).toBe(true, 'users cant compile with the robot library');
+
+        browser.sleep(5000);
+
+        /*
+        #include < BitbloqMBotRanger.h >
+            checkThatARobotActivationAffectOnlyHimself('MBot');*/
+    });
+
 });
