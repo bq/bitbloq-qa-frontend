@@ -176,10 +176,17 @@ describe('State ', function() {
         explore.exploreFind.clear().sendKeys('Test_Save_');
         browser.getCurrentUrl().then(function(url) {
             login.loginFromHeader('explore');
-            expect(browser.getCurrentUrl()).toEqual(url);
+            browser.getCurrentUrl().then(function(url2){
+                var baseUrl1 = url.split('?')[0],
+                    baseUrl2 = url2.split('?')[0],
+                    params1 = url.split('?')[1].split('&'),
+                    params2 = url2.split('?')[1].split('&');
+                expect(baseUrl1).toEqual(baseUrl2);
+                expect(params1.sort()).toEqual(params2.sort());
+            });
         });
-
     });
+
 
     it('bbb-299:state:A filter in the explora tab', function() {
         make.get();
