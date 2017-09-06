@@ -162,7 +162,6 @@ describe('Menu file of MakeActions, specs only in local ', function() {
                 browser.sleep(vars.timeToWaitMenu);
                 makeActions.removeProject.click();
                 browser.sleep(vars.timeToWaitTab);
-                browser.sleep(vars.timeForDelete);
                 projects.get();
                 expect(projects.projectsName.isPresent()).toBe(false);
                 login.logout();
@@ -174,19 +173,8 @@ describe('Menu file of MakeActions, specs only in local ', function() {
                 browser.sleep(vars.timeToWaitFadeModals);
                 makeActions.menuFile.click();
                 browser.sleep(vars.timeToWaitMenu);
-                makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled2) {
-                    expect(disabled2).toBe('true');
-                    makeActions.inputUploadFile.sendKeys(globalFunctions.filePath(path.resolve() + '/res/Boton_Bloqs.json'));
-                    browser.sleep(vars.timeToWaitSendKeys);
-                    makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled3) {
-                        expect(disabled3).toBe('true');
-                    });
-                });
-
+                expect(browser.isElementPresent(makeActions.removeProject)).toBe(false);
             });
-
         });
-
     });
-
 });
