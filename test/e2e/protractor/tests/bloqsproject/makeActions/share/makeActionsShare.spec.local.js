@@ -197,7 +197,6 @@ describe('Menu share of makeactions local', function() {
                             }, 4000).then(function() {
                                 expect(JSON.parse(fs.readFileSync(file1, 'utf8'))).toEqual(JSON.parse(fs.readFileSync(file2, 'utf8')));
                                 login.logout();
-
                                 closeTabs();
                             });
 
@@ -258,9 +257,15 @@ describe('Menu share of makeactions local', function() {
         globalFunctions.navigatorLanguage()
             .then(function(language) {
                 if (language === 'es') {
-                    commons.expectToastTimeOutandText(commons.alertTextToast, 'Tu proyecto se ha compartido con 1 personas');
+                    commons.expectToastTimeOutandText({
+                        'alertElement': commons.alertTextToast,
+                        'text': 'Tu proyecto se ha compartido con 1 personas'
+                    });
                 } else {
-                    commons.expectToastTimeOutandText(commons.alertTextToast, 'Your project has been shared with 1 people');
+                    commons.expectToastTimeOutandText({
+                        'alertElement': commons.alertTextToast,
+                        'text': 'Your project has been shared with 1 people'
+                    });
                 }
             });
         //download project 1 to comapre
@@ -286,9 +291,15 @@ describe('Menu share of makeactions local', function() {
             globalFunctions.navigatorLanguage()
                 .then(function(language) {
                     if (language === 'es') {
-                        commons.expectToastTimeOutandText(commons.alertTextToast, 'Tu proyecto se ha compartido con 0 personas');
+                        commons.expectToastTimeOutandText({
+                            'alertElement': commons.alertTextToast,
+                            'text': 'Tu proyecto se ha compartido con 0 personas'
+                        });
                     } else {
-                        commons.expectToastTimeOutandText(commons.alertTextToast, 'Your project has been shared with 0 people');
+                        commons.expectToastTimeOutandText({
+                            'alertElement': commons.alertTextToast,
+                            'text': 'Your project has been shared with 0 people'
+                        });
                     }
                 });
             //share project multiple user+incorrect
@@ -310,9 +321,15 @@ describe('Menu share of makeactions local', function() {
             globalFunctions.navigatorLanguage()
                 .then(function(language) {
                     if (language === 'es') {
-                        commons.expectToastTimeOutandText(commons.alertTextToast, 'Tu proyecto se ha compartido con 2 personas');
+                        commons.expectToastTimeOutandText({
+                            'alertElement': commons.alertTextToast,
+                            'text': 'Tu proyecto se ha compartido con 2 personas'
+                        });
                     } else {
-                        commons.expectToastTimeOutandText(commons.alertTextToast, 'Your project has been shared with 2 people');
+                        commons.expectToastTimeOutandText({
+                            'alertElement': commons.alertTextToast,
+                            'text': 'Your project has been shared with 2 people'
+                        });
                     }
                 });
             //download second project
@@ -408,6 +425,7 @@ describe('Menu share of makeactions local', function() {
         });
 
     });
+
     it('bbb-84:makeactionsShareLocal:Access the project from URL only if you have been shared the project', function() {
         var user1 = login.loginWithRandomUser();
         login.logout();
@@ -431,7 +449,6 @@ describe('Menu share of makeactions local', function() {
         }, 4000).then(function() {
             browser.getCurrentUrl().then(function(url) {
                 console.log(url);
-
                 login.logout();
                 login.get();
                 browser.sleep(vars.timeToWaitTab);
@@ -450,7 +467,7 @@ describe('Menu share of makeactions local', function() {
                 browser.driver.wait(function() {
                     return fs.existsSync(file2);
                 }, 4000).then(function() {
-                    expect(JSON.parse(fs.readFileSync(file1, 'utf8'))).toEqual(JSON.parse(fs.readFileSync(file2, 'utf8')));
+                    expect(JSON.parse(fs.readFileSync(file1, 'utf8'))).toEqual(JSON.parse(fs.readFileSync(file2, 'utf8')), 'expect1 ');
                     login.logout();
                     login.loginWithRandomUser();
                     browser.get(url);
@@ -459,11 +476,18 @@ describe('Menu share of makeactions local', function() {
                     globalFunctions.navigatorLanguage()
                         .then(function(language) {
                             if (language === 'es') {
-                                commons.expectToastTimeOutandText(commons.alertTextToast, vars.toastIsPrivateProject);
+                                commons.expectToastTimeOutandText({
+                                    'alertElement': commons.alertTextToast,
+                                    'text': vars.toastIsPrivateProject
+                                });
                             } else {
-                                commons.expectToastTimeOutandText(commons.alertTextToast, vars.toastIsPrivateProjectEN);
+                                commons.expectToastTimeOutandText({
+                                    'alertElement': commons.alertTextToast,
+                                    'text': vars.toastIsPrivateProjectEN
+                                });
                             }
                         });
+
                     expect(browser.getCurrentUrl()).toMatch('#/bloqsproject');
                     login.logout();
                     closeTabs();

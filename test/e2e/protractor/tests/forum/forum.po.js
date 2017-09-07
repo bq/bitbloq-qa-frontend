@@ -31,8 +31,8 @@ var Forum = function() {
     this.publishTopic = $('[data-element="forum-publish-theme"]');
 
     //new topic category dropdown
-    this.categoryListNoticias = $('[data-element="forum_category_dropdown-10"]');
-    this.categoryListBienvenida = $('[data-element="forum_category_dropdown-12"]');
+    this.categoryListNoticias = $('[data-element2="forum_category_dropdown-Noticias"]');
+    this.categoryListBienvenida = $('[data-element2="forum_category_dropdown-Bienvenida"]');
 
     //category topic lists
     this.categoryTopicTitle = $('[data-element="forum-category-theme-title"]');

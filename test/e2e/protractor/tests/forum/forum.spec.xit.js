@@ -41,23 +41,17 @@ describe('Forum', function() {
 
     });
 
-    fit('bbb-219:forumXit:check topic count category', function() {
+    it('bbb-219:forumXit:check topic count category', function() {
         forum.get();
         browser.sleep(vars.timeToWaitTab);
         element.all(by.repeater('category in section').row(0).column('category.numberOfThreads')).getText().then(function(topicsInCategory) {
             var topicsInCategoryVal = parseInt(topicsInCategory);
-            console.log('topicsInCategory');
-            console.log(topicsInCategory);
             forum.createTopicNewUser();
             forum.createNewTopic();
             forum.createNewTopic();
             forum.get();
             topicsInCategoryVal += 3;
-            console.log('topicsInCategoryVal2');
-            console.log(topicsInCategoryVal);
             topicsInCategory = topicsInCategoryVal.toString();
-            console.log("topicsInCategory");
-            console.log(topicsInCategoryVal);
             expect(element.all(by.repeater('category in section').row(0).column('category.numberOfThreads')).getText()).toMatch(topicsInCategory);
             login.logout();
 
@@ -163,9 +157,15 @@ describe('Forum', function() {
         //una vez exista, se añadira el control del idioma para saucelabs
         globalFunctions.navigatorLanguage().then(function(language) {
             if (language === 'es') {
-                commons.expectToastTimeOutandText(commons.alertTextToast, vars.threadCreated);
+                commons.expectToastTimeOutandText({
+                    'alertElement': commons.alertTextToast,
+                    'text': vars.threadCreated
+                });
             } else {
-                commons.expectToastTimeOutandText(commons.alertTextToast, vars.threadCreatedEN);
+                commons.expectToastTimeOutandText({
+                    'alertElement': commons.alertTextToast,
+                    'text': vars.threadCreatedEN
+                });
             }
         });
 
