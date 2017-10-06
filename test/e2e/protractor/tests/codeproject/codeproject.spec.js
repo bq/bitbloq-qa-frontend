@@ -79,14 +79,17 @@ describe('Test Codeproject verify', function() {
         make.softwareEditCode.click();
 
         modals.modalAlertOk.click();
-        browser.sleep(vars.timeToWaitAutoSave);
+        //browser.sleep(vars.timeToWaitAutoSave);
 
         commons.expectToastTimeOut(commons.editToast);
         login.logout();
 
         //Check modal NO show second time
         login.get();
-        login.login(user.user, user.password);
+        login.login({
+            'user': user.user,
+            'password': user.password
+        });
         make.get();
         make.softwareTab.click();
         make.codeTab.click();
@@ -141,7 +144,10 @@ describe('Test Codeproject verify', function() {
         //Logout, login and check if saved
         login.logout();
         login.get();
-        login.login(projectUser.user.user, projectUser.user.password);
+        login.login({
+            'user': projectUser.user.user,
+            'password': projectUser.user.password
+        });
         myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
             browser.getAllWindowHandles().then(function(handles) {
@@ -164,7 +170,10 @@ describe('Test Codeproject verify', function() {
         });
 
         login.get();
-        login.login(projectUser.user.user, projectUser.user.password);
+        login.login({
+            'user': projectUser.user.user,
+            'password': projectUser.user.password
+        });
 
         myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
@@ -189,7 +198,10 @@ describe('Test Codeproject verify', function() {
 
         //Logout, login and check if saved
         login.get();
-        login.login(projectUser.user.user, projectUser.user.password);
+        login.login({
+            'user': projectUser.user.user,
+            'password': projectUser.user.password
+        });
         myprojects.overMyProjects.click().then(function() {
             browser.sleep(vars.timeToWaitTab);
             browser.getAllWindowHandles().then(function(handles) {

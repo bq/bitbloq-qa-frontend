@@ -25,156 +25,131 @@ describe('Center mode', function() {
     globalFunctions.afterTest();
 
     it('bbb-389:centermode:Create a center', function() {
-        login.loginWithRandomUser(false);
-        browser.sleep(vars.timeToWaitTab);
-        header.centerModeBanner.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        modals.extraOkDialog.click();
-        modals.inputNameCenter.sendKeys('hola');
-        browser.sleep(vars.timeToSendKeys);
-        modals.inputLocationCenter.sendKeys('dir');
-        browser.sleep(vars.timeToSendKeys);
-        modals.inputTelephoneCenter.sendKeys('333333333');
-        browser.sleep(vars.timeToSendKeys);
-        modals.okDialog.click();
-        browser.sleep(vars.timeToWaitTab);
-        expect(header.navCenter.isDisplayed()).toBe(true);
-        expect(header.navClass.isDisplayed()).toBe(true);
-        expect(header.navExercise.isPresent()).toBe(false);
-        expect(header.navCenter.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/center');
-        expect(header.navClass.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/teacher');
-        login.logout();
+        centermode.createHeadMaster();
     });
 
-    it('bbb-390:centermode:Create a center - <14', function() {
-        login.loginWithRandomUser(true);
-        browser.sleep(vars.timeToWaitTab);
-        header.centerModeBanner.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        expect(modals.extraOkDialog.isPresent()).toBe(false);
-        expect(modals.okDialog.isDisplayed()).toBe(true);
-        modals.okDialog.click();
-        modals.okDialog.click();
-        expect(header.navCenter.isPresent()).toBe(false);
-        expect(header.navClass.isPresent()).toBe(false);
-        expect(header.navExercise.isPresent()).toBe(true);
-        expect(header.navExercise.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/student');
+    it('bbb-390:centermode:Create a center by user <14', function() {
+        login.loginWithRandomUser({
+            youngThan14: true
+        });
+        header.openHeaderMenu.click();
+        expect(header.centerModeBanner.isPresent()).toBe(false);
         login.logout();
     });
 
     it('bbb-391:centermode:Create a center with empty fields', function() {
-        login.loginWithRandomUser(false);
-        browser.sleep(vars.timeToWaitTab);
+        login.loginWithRandomUser();
+        header.openHeaderMenu.click();
         header.centerModeBanner.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        modals.extraOkDialog.click();
+
         modals.okDialog.click();
-        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error');
-        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error');
+        modals.okDialog.click();
+
+        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error', '1');
+        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error', '2');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error', '3');
         modals.inputNameCenter.sendKeys('hola');
-        browser.sleep(vars.timeToSendKeys);
         modals.okDialog.click();
-        expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error');
-        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error');
+
+        expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error', '4');
+        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error', '5');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error', '6');
         modals.inputNameCenter.clear();
         modals.inputLocationCenter.sendKeys('dir');
-        browser.sleep(vars.timeToSendKeys);
         modals.okDialog.click();
-        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error');
-        expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error');
+
+        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error', '7');
+        expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error', '8');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error', '9');
         modals.inputNameCenter.clear();
         modals.inputLocationCenter.clear();
         modals.inputTelephoneCenter.sendKeys('333333333');
-        browser.sleep(vars.timeToSendKeys);
+
         modals.okDialog.click();
-        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error');
-        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).not.toContain('input--error');
+        expect(modals.inputNameCenter.getAttribute('class')).toContain('input--error', '10');
+        expect(modals.inputLocationCenter.getAttribute('class')).toContain('input--error', '11');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).not.toContain('input--error', '12');
+
         modals.bladeClose.click();
-        browser.sleep(2000);
+        browser.sleep(vars.timeToWaitFadeModals);
         login.logout();
     });
 
     it('bbb-392:centermode:Create a center with wrong field', function() {
-        login.loginWithRandomUser(false);
-        browser.sleep(vars.timeToWaitTab);
+        login.loginWithRandomUser();
+        header.openHeaderMenu.click();
         header.centerModeBanner.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        modals.extraOkDialog.click();
+
+        modals.okDialog.click();
         modals.inputNameCenter.sendKeys('hola');
-        browser.sleep(vars.timeToSendKeys);
         modals.inputLocationCenter.sendKeys('dir');
-        browser.sleep(vars.timeToSendKeys);
         modals.inputTelephoneCenter.sendKeys('ee');
-        browser.sleep(vars.timeToSendKeys);
+
         modals.okDialog.click();
-        expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error');
-        expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error');
-        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error');
+        expect(modals.inputNameCenter.getAttribute('class')).not.toContain('input--error', 'Name');
+        expect(modals.inputLocationCenter.getAttribute('class')).not.toContain('input--error', 'Location');
+        expect(modals.inputTelephoneCenter.getAttribute('class')).toContain('input--error', 'Phone');
         modals.bladeClose.click();
-        browser.sleep(2000);
-        login.logout();
-    });
 
-    it('bbb-393:centermode:The user use center mode', function() {
-        login.loginWithRandomUser(false);
-        browser.sleep(vars.timeToWaitTab);
-        header.centerModeBanner.click();
         browser.sleep(vars.timeToWaitFadeModals);
-        modals.extraOkDialog.click();
-        modals.inputNameCenter.sendKeys('hola');
-        browser.sleep(vars.timeToSendKeys);
-        modals.inputLocationCenter.sendKeys('dir');
-        browser.sleep(vars.timeToSendKeys);
-        modals.inputTelephoneCenter.sendKeys('555');
-        browser.sleep(vars.timeToSendKeys);
-        modals.okDialog.click();
-        expect(header.centerModeBanner.isPresent()).toBe(false);
-        browser.sleep(2000);
         login.logout();
     });
 
-    it('bbb-394:centermode:The user doesnt use center mode', function() {
-        login.loginWithRandomUser(false);
-        browser.sleep(vars.timeToWaitTab);
-        expect(header.centerModeBanner.isPresent()).toBe(true);
-        expect(header.centerModeBanner.isDisplayed()).toBe(true);
-        browser.sleep(2000);
+    it('bbb-393:centermode:Create center option dissapear if the user have a center', function() {
+        centermode.createHeadMaster({
+            keepLogin: true
+        });
+        header.openHeaderMenu.click();
+        expect(header.centerModeBanner.isPresent()).toBe(false);
         login.logout();
     });
 
     it('bbb-395:centermode:The tabs of center mode', function() {
-        var headMaster = centermode.createHeadMaster('prueba');
-        var teacher = centermode.createTeacher(headMaster);
-        var student = centermode.createStudent();
-
-        login.get();
-        login.login(headMaster.user,headMaster.password);
-        expect(header.navCenter.isDisplayed()).toBe(true);
-        expect(header.navClass.isDisplayed()).toBe(true);
-        expect(header.navExercise.isPresent()).toBe(false);
-        expect(header.navCenter.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/center');
-        expect(header.navClass.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/teacher');
+        //test student (default user)
+        login.loginWithRandomUser();
+        expect(header.navShowMoreMenu.isPresent()).toBe(false, 'Extra menu');
+        expect(header.navProjects.isDisplayed()).toBe(true, 'Projects');
+        expect(header.navTasks.isDisplayed()).toBe(true, 'Tasks');
+        expect(header.navExplore.isDisplayed()).toBe(true, 'Explore');
+        expect(header.navLearn.isDisplayed()).toBe(true, 'Learn');
+        expect(header.navForum.isDisplayed()).toBe(true, 'Forum');
         login.logout();
 
-        login.get();
-        login.login(teacher.user,teacher.password);
-        expect(header.navCenter.isPresent()).toBe(false);
-        expect(header.navClass.isDisplayed()).toBe(true);
-        expect(header.navExercise.isPresent()).toBe(false);
-        expect(header.navClass.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/teacher');
+        //test headmaster
+        var headMaster = centermode.createHeadMaster({
+            keepLogin: true
+        });
+
+        expect(header.navCenter.isDisplayed()).toBe(true, 'HeadMaster - My center');
+        expect(header.navClass.isDisplayed()).toBe(true, 'HeadMaster - My classes');
+        expect(header.navExercise.isDisplayed()).toBe(true, 'HeadMaster - My Exercises');
+        header.navShowMoreMenu.click();
+        expect(header.navProjects.isDisplayed()).toBe(true, 'HeadMaster - Projects');
+        expect(header.navTasks.isDisplayed()).toBe(true, 'HeadMaster - Tasks');
+        expect(header.navExplore.isDisplayed()).toBe(true, 'HeadMaster - Explore');
+        expect(header.navLearn.isDisplayed()).toBe(true, 'HeadMaster - Learn');
+        expect(header.navForum.isDisplayed()).toBe(true, 'HeadMaster - Forum');
+
         login.logout();
 
-        login.get();
-        login.login(student.user,student.password);
-        expect(header.navCenter.isPresent()).toBe(false);
-        expect(header.navClass.isPresent()).toBe(false);
-        expect(header.navExercise.isDisplayed()).toBe(true);
-        expect(header.navExercise.all(by.css('a')).first().getAttribute('href')).toEqual(browser.baseUrl+'#/center-mode/student');
-        login.logout();
+        //test teacher
+        centermode.createTeacher({
+            headMaster: headMaster,
+            keepLogin: true
+        }).then(function() {
+            expect(header.navCenter.isPresent()).toBe(false, 'HeadMaster - My center');
+            expect(header.navClass.isDisplayed()).toBe(true, 'Teacher - My classes');
+            expect(header.navExercise.isDisplayed()).toBe(true, 'Teacher - My Exercises');
+            header.navShowMoreMenu.click();
+            expect(header.navProjects.isDisplayed()).toBe(true, 'Teacher - Projects');
+            expect(header.navTasks.isDisplayed()).toBe(true, 'Teacher - Tasks');
+            expect(header.navExplore.isDisplayed()).toBe(true, 'Teacher - Explore');
+            expect(header.navLearn.isDisplayed()).toBe(true, 'Teacher - Learn');
+            expect(header.navForum.isDisplayed()).toBe(true, 'Teacher - Forum');
+
+            login.logout();
+        });
+
     });
 
 });

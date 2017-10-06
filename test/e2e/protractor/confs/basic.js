@@ -31,7 +31,7 @@ exports.config = {
         recordScreenshots: false,
         //  specs: require('../testsuites/common.js'),
         shardTestFiles: true,
-        maxInstances: 4,
+        maxInstances: 1,
         chromeOptions: {
             // How to set browser language (menus & so on)
             //args: ['lang=fr-FR'],

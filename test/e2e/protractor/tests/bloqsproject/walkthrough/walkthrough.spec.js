@@ -18,7 +18,7 @@ var globalFunctions = new GlobalFunctions(),
 
 globalFunctions.xmlReport('bloqsprojectWalkthrough');
 
-describe('Walkthrough', function() {
+describe('Walkthrough', function () {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -26,7 +26,7 @@ describe('Walkthrough', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-73:bloqsprojectWalkthrough:not logged in user', function() {
+    it('bbb-73:bloqsprojectWalkthrough:not logged in user', function () {
         make.get();
         modals.attentionContinueGuest.click();
         modals.acceptTour.click();
@@ -36,7 +36,7 @@ describe('Walkthrough', function() {
         expect(walkthrough.stepTwo.isDisplayed()).toBeTruthy();
     });
 
-    it('bbb-74:bloqsprojectWalkthrough:logged in user did not finish walkthrough', function() {
+    it('bbb-74:bloqsprojectWalkthrough:logged in user did not finish walkthrough', function () {
         var userLogin = login.loginWithRandomUser();
         make.get();
         modals.acceptTour.click();
@@ -44,7 +44,7 @@ describe('Walkthrough', function() {
         expect(walkthrough.stepOne.isDisplayed()).toBeTruthy();
         login.logout();
         login.get();
-        login.login(userLogin.user, userLogin.password);
+        login.login({ 'user': userLogin.user, 'password': userLogin.password });
         make.get();
         expect(modals.acceptTour.isDisplayed()).toBe(true);
         modals.rejectTour();
@@ -52,7 +52,7 @@ describe('Walkthrough', function() {
         login.logout();
     });
 
-    it('bbb-75:bloqsprojectWalkthrough:logged in user rejected walkthrough', function() {
+    it('bbb-75:bloqsprojectWalkthrough:logged in user rejected walkthrough', function () {
         var userLogin = login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -60,7 +60,7 @@ describe('Walkthrough', function() {
         expect(walkthrough.stepOne.isDisplayed()).toBe(false);
         login.logout();
         login.get();
-        login.login(userLogin.user, userLogin.password);
+        login.login({ 'user': userLogin.user, 'password': userLogin.password });
         make.get();
         browser.sleep(500);
         make.softwareTab.click();

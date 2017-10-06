@@ -23,14 +23,14 @@ var vars = new Variables(),
 
 globalFunctions.xmlReport('bloqsprojectInfo');
 
-describe('Info tab', function() {
+describe('Info tab', function () {
     //beforeEach commons
     globalFunctions.beforeTest();
 
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-144:bloqsprojectInfo: Verificar en el tab de información que no aparecen las opciones que requieren registro', function() {
+    it('bbb-144:bloqsprojectInfo: Verificar en el tab de información que no aparecen las opciones que requieren registro', function () {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -44,7 +44,7 @@ describe('Info tab', function() {
         expect(infoTab.infotabTaginputButton.getAttribute('disabled')).toBe('true');
     });
 
-    it('bbb-148:bloqsprojectInfo: Verificar el cambio de tema del proyecto', function() {
+    it('bbb-148:bloqsprojectInfo: Verificar el cambio de tema del proyecto', function () {
         function setThemeColor(color) {
             var themeColor;
             if (color === 'gray') {
@@ -79,7 +79,7 @@ describe('Info tab', function() {
         expect(element(by.css('.bloq-void-function')).getCssValue('color')).toBe('rgba(255, 255, 255, 1)');
     });
 
-    it('bbb-149:bloqsprojectInfo: Verify the Youtube URL', function() {
+    fit('bbb-149:bloqsprojectInfo: Verify the Youtube URL', function () {
         var validYoutubeUrl = 'https://youtu.be/f2WME8N8qXc?list=PL3AshJDPy8GQhVWkzsjc5IvrzD5ctpQXN';
         login.loginWithRandomUser();
         make.get();
@@ -89,7 +89,7 @@ describe('Info tab', function() {
         infoTab.infotabYoutubeVideoInput.sendKeys('https://www.youtube.com/user/TheRedsMusic');
         browser.sleep(vars.timeToWaitAutoSave + 2500);
         globalFunctions.navigatorLanguage()
-            .then(function(language) {
+            .then(function (language) {
                 if (language === 'es') {
                     expect(commons.alertTextToast.getText()).toMatch(vars.enterValidYoutubeUrl);
                 } else {
@@ -106,7 +106,7 @@ describe('Info tab', function() {
                 browser.sleep(2500);
                 infoTab.infotabYoutubeVideoInput.clear();
                 infoTab.infotabYoutubeVideoInput.sendKeys('');
-                browser.sleep(vars.timeToWaitAutoSave+2500);
+                browser.sleep(vars.timeToWaitAutoSave + 2500);
                 browser.refresh();
                 make.infoTab.click();
                 browser.sleep(1000);

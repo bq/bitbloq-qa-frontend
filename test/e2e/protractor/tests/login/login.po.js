@@ -26,11 +26,12 @@ var Login = function() {
     this.facebookEnter = element(by.id('loginbutton'));
     //Login Google
     this.googleButton = element(by.buttonText('Google +'));
-    this.googleNext = element(by.id('next'));
-    this.googleUser = element(by.id('Email'));
-    this.googlePassword = element(by.id('Passwd'));
-    this.googleEnter = element(by.id('signIn'));
+    this.googleNext = element(by.id('identifierNext'));
+    this.googleUser = element(by.id('identifierId'));
+    this.googlePassword = element(by.name('password'));
+    this.googleEnter = element(by.id('passwordNext'));
     this.googleAprove = element(by.id('submit_approve_access'));
+
     //Show validate elements
     this.showNoUserAndEmail = $('[data-element="show-no-user-and-email"]');
     this.showNoPass = $('[data-element="show-no-pass"]');
@@ -57,12 +58,16 @@ var Login = function() {
      * @param {String} password bitbloq user
      * @return {Void} void
      */
-    this.login = function(user, password) {
-        this.user.sendKeys(user);
-        this.password.sendKeys(password);
+    this.login = function(options) {
+        options = options || {};
+        if (!options.dontTravel) {
+            this.get();
+        }
+        this.user.sendKeys(options.user);
+        this.password.sendKeys(options.password);
         this.loginButton.click();
         //wait succesfull login page
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
     };
 
     this.loginFail = function(user, password) {
@@ -116,7 +121,9 @@ var Login = function() {
      */
     this.loginGoogle = function(email, password) {
 
-        this.googleButton.click();
+        this.googleButton.click().then(function() {
+            console.log('click2');
+        });
 
         browser.sleep(vars.timeToWaitTab);
 
@@ -132,33 +139,30 @@ var Login = function() {
             //TODO refactor
             that.googleUser.sendKeys(email);
             browser.sleep(1000);
-            that.googleNext.click();
+            that.googleNext.click().then(function() {
+                console.log('clic next');
+            });
             browser.sleep(1000);
             that.googlePassword.sendKeys(password);
             browser.sleep(1000);
             that.googleEnter.click();
             browser.sleep(5000);
 
-            if (browser.baseUrl === 'http://localhost:9000/') {
-                that.googleAprove.click();
-            }
-
-            browser.sleep(vars.timeToWaitTab);
-
+            browser.sleep(5000);
             // go back to the main window
             browser.switchTo().window(handles[0]);
 
             //Not ignore sync, return angular
             browser.ignoreSynchronization = false;
         });
-
     };
 
-    this.loginWithRandomUser = function(young) {
+    this.loginWithRandomUser = function(options) {
+        options = options || {};
         this.get();
-        var randomUserCredentials = register.generateUser(young);
+        var randomUserCredentials = register.generateUser(options.youngThan14);
         register.createAccountButtn.click();
-        if (!young) {
+        if (!options.youngThan14) {
             register.createAccount(
                 randomUserCredentials.username,
                 randomUserCredentials.userEmail,
@@ -185,7 +189,7 @@ var Login = function() {
 
         //wait succesfull login page
         browser.sleep(1000);
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
 
         //Add return for reuse user if is necessary
         return {
@@ -213,7 +217,7 @@ var Login = function() {
             true,
             true);
         //wait succesfull login page
-        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
 
         //Add return for reuse user if is necessary
         return {
@@ -267,7 +271,7 @@ var Login = function() {
             true);
         //wait succesfull login page
         browser.getCurrentUrl().then(function(url) {
-            expect(url.indexOf(browser.baseUrl + '#/'+urlDest)>-1).toBeTruthy();
+            expect(url.indexOf(browser.baseUrl + '#/' + urlDest) > -1).toBeTruthy();
         });
 
         //Add return for reuse user if is necessary

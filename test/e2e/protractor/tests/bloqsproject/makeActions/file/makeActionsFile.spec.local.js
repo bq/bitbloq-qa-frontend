@@ -50,9 +50,11 @@ describe('Menu file of MakeActions, specs only in local ', function() {
         browser.driver.wait(function() {
             return fs.existsSync(fileDownload);
         }, 4000).then(function() {
-
-            expect(JSON.parse(fs.readFileSync(fileDownload, 'utf8'))).toEqual(JSON.parse(fs.readFileSync(fileToUpload, 'utf8')));
-
+            var doc1 = JSON.parse(fs.readFileSync(fileDownload, 'utf8')),
+                doc2 = JSON.parse(fs.readFileSync(fileToUpload, 'utf8'));
+            doc1.code = doc1.code.replace(/\s/g,'');
+            doc2.code = doc2.code.replace(/\s/g,'');
+            expect(doc1).toEqual(doc2);
         });
 
     });
@@ -160,7 +162,6 @@ describe('Menu file of MakeActions, specs only in local ', function() {
                 browser.sleep(vars.timeToWaitMenu);
                 makeActions.removeProject.click();
                 browser.sleep(vars.timeToWaitTab);
-                browser.sleep(vars.timeForDelete);
                 projects.get();
                 expect(projects.projectsName.isPresent()).toBe(false);
                 login.logout();
@@ -172,19 +173,8 @@ describe('Menu file of MakeActions, specs only in local ', function() {
                 browser.sleep(vars.timeToWaitFadeModals);
                 makeActions.menuFile.click();
                 browser.sleep(vars.timeToWaitMenu);
-                makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled2) {
-                    expect(disabled2).toBe('true');
-                    makeActions.inputUploadFile.sendKeys(globalFunctions.filePath(path.resolve() + '/res/Boton_Bloqs.json'));
-                    browser.sleep(vars.timeToWaitSendKeys);
-                    makeActions.removeProject.getAttribute('aria-disabled').then(function(disabled3) {
-                        expect(disabled3).toBe('true');
-                    });
-                });
-
+                expect(browser.isElementPresent(makeActions.removeProject)).toBe(false);
             });
-
         });
-
     });
-
 });

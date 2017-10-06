@@ -46,7 +46,7 @@ var Codeproject = function() {
         bloqsproject.codeTab.click();
         bloqsproject.softwareEditCode.click();
         modals.modalAlertOk.click();
-        browser.sleep(vars.timeToWaitAutoSave);
+       // browser.sleep(vars.timeToWaitAutoSave);
         commons.expectToastTimeOut(commons.editToast);
         bloqsproject.infoTab.click();
         expect(infotab.infotabProjectName.isPresent()).toBe(true);
@@ -72,7 +72,6 @@ var Codeproject = function() {
         bloqsproject.codeTab.click();
         bloqsproject.softwareEditCode.click();
         modals.modalAlertOk.click();
-        browser.sleep(vars.timeToWaitAutoSave);
         commons.expectToastTimeOut(commons.editToast);
         bloqsproject.infoTab.click();
         expect(infotab.infotabProjectName.isPresent()).toBe(true);

@@ -2,25 +2,23 @@
 
 var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Header = require('../../header/header.po.js'),
-    Variables = require('../../commons/variables.js'),
     Modals = require('../../modals/modals.po.js'),
-    Login = require('../../login/login.po.js'),
     Centermode = require('../centermode.po.js'),
     Myclass = require('../myclass/myclass.po.js'),
-    Mycenter = require('../mycenter/myCenter.po.js');
+    Login = require('../../login/login.po.js'),
+    ClassDetail = require('../myclass/classDetail/classDetail.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     header = new Header(),
-    vars = new Variables(),
     modals = new Modals(),
-    login = new Login(),
     centermode = new Centermode(),
     myclass = new Myclass(),
-    mycenter = new Mycenter();
+    login = new Login(),
+    classDetail = new ClassDetail();
 
 globalFunctions.xmlReport('myclass');
 
-describe('My Class', function() {
+describe('My Class', function () {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -28,87 +26,126 @@ describe('My Class', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-404:myclass:Create a group', function() {
-        var headmaster = centermode.createHeadMaster('centermode');
-        var teacher = centermode.createTeacher(headmaster);
-        login.get();
-        login.login(headmaster.user,headmaster.password);
-        myclass.addNewGroup('prueba 404 headmaster').then(function(idheadmaster) {
-          expect(myclass.groupsElems.count()).toBe(1);
-          expect(myclass.groupsElems.get(0).getText()).toMatch(idheadmaster);
-          login.logout();
-          login.get();
-          login.login(teacher.user,teacher.password);
-          myclass.addNewGroup('prueba 404 teacher').then(function(idteacher) {
-            expect(myclass.groupsElems.count()).toBe(1);
-            expect(myclass.groupsElems.get(0).getText()).toMatch(idteacher);
-            login.logout();
-          });
+    it('bbb-404:myclass:new class', function () {
+        centermode.createHeadMaster({
+            keepLogin: true
+        });
+
+        myclass.createClass();
+    });
+
+    it('bbb-405:myclass:Create a group - The field is empty', function () {
+        centermode.createHeadMaster({
+            keepLogin: true
+        });
+        header.navClass.click();
+
+        myclass.createClassButton.click();
+        expect(modals.okDialog.isEnabled()).toBe(false);
+        modals.inputModalChangeN.sendKeys('className-' + Date.now());
+        expect(modals.okDialog.isEnabled()).toBe(true);
+        modals.okDialog.click();
+
+        expect(modals.modalsText.isDisplayed()).toBe(true, 'The modal with the ID isn\'t displayed');
+
+        modals.modalsText.getText().then(function () {
+            modals.cancelDialog.click();
         });
     });
 
-    it('bbb-405:myclass:Create a group - The field is empty', function() {
-        var headmaster = centermode.createHeadMaster('centermode');
-        var headmaster2 = centermode.createHeadMaster('centermode2');
+    it('bbb-438:myclass:Check that the centers combo is visible', function () {
+        var headMaster1 = centermode.createHeadMaster({
+            keepLogin: true
+        });
 
-        login.get();
-        login.login(headmaster.user,headmaster.password);
-        header.navClass.click();
-        browser.sleep(vars.timeToWaitTab);
-        myclass.newGroupButton.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        expect(modals.okDialog.isEnabled()).toBe(false);
-        modals.bladeClose.click();
-        browser.sleep(vars.timeToWaitFadeModals);
         login.logout();
-        browser.sleep(vars.timeToWaitTab);
 
-        login.get();
-        login.login(headmaster2.user,headmaster2.password);
-        mycenter.addNewTeacher(headmaster.userEmail);
-        login.logout();
-        browser.sleep(vars.timeToWaitTab);
-        login.get();
-        login.login(headmaster.user,headmaster.password);
-        header.navClass.click();
-        browser.sleep(vars.timeToWaitTab);
-        myclass.newGroupButton.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        expect(modals.okDialog.isEnabled()).toBe(false);
-        modals.inputModalNoChangeN.sendKeys('example');
-        browser.sleep(vars.timeToSendKeys);
-        expect(modals.okDialog.isEnabled()).toBe(false);
-        modals.inputModalNoChangeN.clear();
-        modals.groupDropdown.click();
-        element.all(by.xpath('//*[contains(@data-element,"centerMode_dropdown")]')).first().click();
-        expect(modals.okDialog.isEnabled()).toBe(false);
-        modals.bladeClose.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        login.logout();
-    });
+        protractor.promise.all([
+            centermode.createTeacher({
+                headMaster: headMaster1
+            }),
+            centermode.createHeadMaster({
+                keepLogin: true
+            })
+        ]).then(function (results) {
+            var teacher1 = results[0],
+                headMaster2 = results[1];
 
-    it('bbb-435:myclass:Create a group - The group already exists', function() {
-        var headmaster = centermode.createHeadMaster('centermode');
-        var teacher = centermode.createTeacher(headmaster);
-        login.get();
-        login.login(headmaster.user,headmaster.password);
-        myclass.addNewGroup('prueba 404 headmaster').then(function(idheadmaster) {
-          myclass.addNewGroup('prueba 404 headmaster').then(function(idheadmaster2) {
-            expect(myclass.groupsElems.count()).toBe(2);
-            expect(myclass.groupsElems.get(0).getText()).toMatch(idheadmaster);
-            expect(myclass.groupsElems.get(1).getText()).toMatch(idheadmaster2);
-            login.logout();
-            login.get();
-            login.login(teacher.user,teacher.password);
-            myclass.addNewGroup('prueba 404 teacher').then(function(idteacher) {
-              myclass.addNewGroup('prueba 404 teacher').then(function(idteacher2) {
-                expect(myclass.groupsElems.count()).toBe(2);
-                expect(myclass.groupsElems.get(0).getText()).toMatch(idteacher);
-                expect(myclass.groupsElems.get(1).getText()).toMatch(idteacher2);
-                login.logout();
-              });
+            centermode.addTeacher({
+                teacher: teacher1,
+                resend: true
             });
-          });
+            login.logout();
+            login.login({
+                user: teacher1.userEmail,
+                password: teacher1.password
+            });
+            header.navClass.click();
+            expect(myclass.centersDropdown.isDisplayed()).toBe(true, 'Teacher should see a combo to select the center');
+            myclass.centersDropdown.click();
+            expect(myclass.getCenterInDropdownByName(headMaster1.centerName).isDisplayed()).toBe(true, 'Teacher need to see the first center');
+            expect(myclass.getCenterInDropdownByName(headMaster2.centerName).isDisplayed()).toBe(true, 'Teacher need to see the second center');
+
+            login.logout();
+
+            //test on relog
+            login.login({
+                user: teacher1.userEmail,
+                password: teacher1.password
+            });
+
+            header.navClass.click();
+            expect(myclass.centersDropdown.isDisplayed()).toBe(true, 'Teacher should see a combo to select the center on relog');
+            myclass.centersDropdown.click();
+            expect(myclass.getCenterInDropdownByName(headMaster1.centerName).isDisplayed()).toBe(true, 'Teacher need to see the first center');
+            expect(myclass.getCenterInDropdownByName(headMaster2.centerName).isDisplayed()).toBe(true, 'Teacher need to see the second center');
+
+            login.logout();
+
         });
     });
+
+    it('bbb-642:myclass:Order and filters', function () {
+        centermode.createHeadMaster({
+            keepLogin: true
+        });
+        protractor.promise.all([myclass.createClass({
+            name: 'c'
+        }), myclass.createClass({
+            name: 'a'
+        }), myclass.createClass({
+            name: 'b'
+        })]).then(function (classes) {
+            myclass.orderDropdown.click();
+            myclass.orderDropdownName.click();
+            expect(myclass.classesList.get(0).getText()).toMatch(classes[1].name, 'Classes name - 0');
+            expect(myclass.classesList.get(1).getText()).toMatch(classes[2].name, 'Classes name - 1');
+            expect(myclass.classesList.get(2).getText()).toMatch(classes[0].name, 'Classes name - 2');
+
+            myclass.orderDropdown.click();
+            myclass.orderDropdownLastFirst.click();
+            expect(myclass.classesList.get(0).getText()).toMatch(classes[2].name, 'Classes lastFirst - 0');
+            expect(myclass.classesList.get(1).getText()).toMatch(classes[1].name, 'Classes lastFirst - 1');
+            expect(myclass.classesList.get(2).getText()).toMatch(classes[0].name, 'Classes lastFirst - 2');
+
+            myclass.orderDropdown.click();
+            myclass.orderDropdownOldFirst.click();
+            expect(myclass.classesList.get(0).getText()).toMatch(classes[0].name, 'Classes oldFirst - 0');
+            expect(myclass.classesList.get(1).getText()).toMatch(classes[1].name, 'Classes oldFirst - 1');
+            expect(myclass.classesList.get(2).getText()).toMatch(classes[2].name, 'Classes oldFirst - 2');
+        });
+    });
+
+    it('bbb-649:myclass:Check that the classId is visible', function () {
+        centermode.createHeadMaster({
+            keepLogin: true
+        });
+        myclass.createClass().then(function (classInfo) {
+            expect(myclass.getClassIdObject(classInfo.id).isDisplayed()).toBe(true, 'Cant see classId in the list');
+            myclass.getClassObject(classInfo.id).click();
+            expect(classDetail.breadcrumbSubtext.isDisplayed()).toBe(true, 'the student is not in the class list');
+            expect(classDetail.breadcrumbSubtext.getText()).toBe(classInfo.id, 'The id is wrong in the class Detail');
+        });
+    });
+
 });

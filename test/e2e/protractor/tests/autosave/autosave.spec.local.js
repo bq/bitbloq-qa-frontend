@@ -121,9 +121,9 @@ describe('Check makeActions actions in codeProjects', function() {
         });
     });
 
-    it('bbb-51:autosave:Verify that the autosave is launched when you change the information of the projects', function() {
+    it('bbb-51:autosaveLocal:Verify that the autosave is launched when you change the information of the projects', function() {
         var perfectImagePath = '../../res/perfectimage.jpg',
-        perfectImageAbsolutePath = path.resolve(__dirname, perfectImagePath);
+            perfectImageAbsolutePath = path.resolve(__dirname, perfectImagePath);
 
         make.saveProjectNewUser();
         expect(make.isProjectSavedShown()).toBeTruthy();
@@ -232,5 +232,84 @@ describe('Check makeActions actions in codeProjects', function() {
         login.logout();
     });
 
+    fit('bbb-48:autosaveLocal:Verify that the autosave is launched when you add a board or a robot', function() {
 
+        var num;
+        login.loginWithRandomUser();
+
+        make.get();
+        browser.sleep(vars.timeToWaitTab);
+        modals.rejectTour();
+        browser.sleep(vars.timeToWaitFadeModals);
+        make.hardwareTab.click();
+        hwtab.boardsTab.click();
+        hwtab.boardsElem.count().then(function(totalBoards) {
+            for (num = 0; num < totalBoards; num += 1) {
+                hwtab.boardsElem.get(num).click();
+                expect(make.isProjectSavedShown()).toBeTruthy();
+                browser.sleep(1000);
+                hwtab.boardsTab.click();
+            }
+        });
+
+        browser.sleep(2000);
+
+        make.get();
+        browser.sleep(vars.timeToWaitTab);
+        make.hardwareTab.click();
+        hwtab.robotsTab.click();
+        hwtab.robotsElem.count().then(function(totalRobots) {
+            for (num = 0; num < totalRobots; num += 1) {
+                hwtab.robotsElem.get(num).click();
+                if (num > 1 && num < totalRobots - 1) {
+                    modals.cancelDialog.click();
+                }
+                expect(make.isProjectSavedShown()).toBeTruthy();
+                browser.sleep(1000);
+                hwtab.robotsTab.click();
+            }
+            login.logout();
+        });
+    });
+
+    it('bbb-52:autosaveLocal:Verify that the autosave is launched when you modify the component name', function() {
+
+        var name = 'makeblockComponents';
+        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.bitbloq');
+        header.navLogo.click();
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]).then(function() {
+                expect(make.isProjectSavedShown()).toBeFalsy();
+                browser.ignoreSynchronization = true;
+                hwtab.lightSensor.click();
+                hwtab.hwComponentNameInput.clear().sendKeys('Cambio');
+                browser.ignoreSynchronization = false;
+                expect(make.isProjectSavedShown()).toBeTruthy();
+                browser.sleep(vars.timeToWaitTab);
+                name = 'VariosComponentes';
+                browser.sleep(vars.timeToWaitTab);
+                login.logout();
+                browser.close().then(browser.switchTo().window(handles[0]));
+            });
+        });
+        name = 'VariosComponentes';
+        make.importFileNewUser(path.resolve() + '/test/e2e/protractor/res/' + name + '.json');
+        header.navLogo.click();
+        myprojects.overMyProjects.click();
+        browser.sleep(vars.timeToWaitTab);
+        browser.getAllWindowHandles().then(function(handles) {
+            browser.switchTo().window(handles[1]).then(function() {
+                expect(make.isProjectSavedShown()).toBeFalsy();
+                browser.ignoreSynchronization = true;
+                hwtab.sampleBoton.click();
+                hwtab.hwComponentNameInput.clear().sendKeys('Cambio');
+                browser.ignoreSynchronization = false;
+                expect(make.isProjectSavedShown()).toBeTruthy();
+                login.logout();
+            });
+        });
+
+    });
 });

@@ -6,6 +6,8 @@ var Login = require('../login/login.po.js'),
     Modals = require('../modals/modals.po.js'),
     Infotab = require('./infotab/infotab.po.js'),
     MakeActions = require('./makeActions/makeActions.po.js'),
+    Hwtab = require('../bloqsproject/hwtab/hwtab.po.js'),
+    ThirdPartyRobotsApi = require('../commons/api/ThirdPartyRobotsApi.js'),
     Bloqs = require('../bloqs/bloqs.po.js');
 
 var login = new Login(),
@@ -14,14 +16,16 @@ var login = new Login(),
     vars = new Variables(),
     infotab = new Infotab(),
     makeActions = new MakeActions(),
-    bloqs = new Bloqs();
+    thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
+    bloqs = new Bloqs(),
+    hwtab = new Hwtab(),
+    flow = browser.controlFlow();
 
 var Make = function() {
 
     this.hardwareTab = $('[data-element="hardware-tab"]');
     this.softwareTab = $('[data-element="software-tab"]');
     this.infoTab = $('[data-element="info-tab"]');
-
     this.bloqsTab = $('[data-element="bloqs-tab"]');
     this.codeTab = $('[data-element="code-tab"]');
 
@@ -29,8 +33,12 @@ var Make = function() {
     this.projectName = $('[data-element="project-name"]');
     this.hideBar = $('[data-element="hide-bar"]');
     this.url = '#/bloqsproject';
+    this.savedMessageOK = $('[data-element="project-save-label-make-project-saved-ok"]');
 
     this.softwareEditCode = $('[data-element="software-edit-code"]');
+
+    this.compileButton = $('[data-element="header-compile"]');
+    this.uploadButton = $('[data-element="header-upload"]');
 
     this.get = function() {
         browser.get(this.url);
@@ -45,7 +53,7 @@ var Make = function() {
         modals.inputModalChangeN.clear();
         modals.inputModalChangeN.sendKeys(nameSavedProject);
         modals.okDialog.click();
-        infotab.infotabDescription.sendKeys('Esto es una descripcion de ejemplo proyecto:'+nameSavedProject);
+        infotab.infotabDescription.sendKeys('Esto es una descripcion de ejemplo proyecto:' + nameSavedProject);
         browser.sleep(vars.timeToWaitAutoSave);
         return {
             projectName: nameSavedProject
@@ -64,7 +72,7 @@ var Make = function() {
         modals.inputModalChangeN.clear();
         modals.inputModalChangeN.sendKeys(nameSavedProject);
         modals.okDialog.click();
-        infotab.infotabDescription.sendKeys('Esto es una descripcion de ejemplo proyecto:'+nameSavedProject);
+        infotab.infotabDescription.sendKeys('Esto es una descripcion de ejemplo proyecto:' + nameSavedProject);
         browser.sleep(vars.timeToWaitAutoSave);
         //Create and check saved project
         return {
@@ -86,7 +94,10 @@ var Make = function() {
 
     this.saveProjectUser = function(user, password) {
         login.get();
-        login.login(user, password);
+        login.login({
+            'user': user,
+            'password': password
+        });
         var project = this.saveProject();
         return {
             projectName: project.projectName
@@ -94,7 +105,10 @@ var Make = function() {
     };
 
     this.saveProjectUserAndLogout = function(user, password) {
-        login.login(user, password);
+        login.login({
+            'user': user,
+            'password': password
+        });
         var project = this.saveProject();
         login.logout();
         return {
@@ -106,7 +120,7 @@ var Make = function() {
     this.saveProjectAndPublishNewUser = function() {
         var projectUser = this.saveProjectNewUser();
         browser.sleep(vars.timeToWaitAutoSave);
-        var make =this;
+        var make = this;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
         bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
@@ -130,7 +144,7 @@ var Make = function() {
     this.saveProjectAndPublishNewUserAndLogout = function() {
         var projectUser = this.saveProjectNewUser();
         browser.sleep(vars.timeToWaitAutoSave);
-        var make =this;
+        var make = this;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
         bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
@@ -156,7 +170,7 @@ var Make = function() {
     this.saveProjectAndPublishUser = function(user, password) {
         var projectUser = this.saveProjectUser(user, password);
         browser.sleep(vars.timeToWaitAutoSave);
-        var make =this;
+        var make = this;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
         bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
@@ -180,7 +194,7 @@ var Make = function() {
     this.saveProjectAndPublishUserAndLogout = function(user, password) {
         var projectUser = this.saveProjectUser(user, password);
         browser.sleep(vars.timeToWaitAutoSave);
-        var make =this;
+        var make = this;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
         bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
@@ -259,7 +273,10 @@ var Make = function() {
     };
 
     this.importFileUserLogin = function(file, user) {
-        login.login(user.user, user.password);
+        login.login({
+            'user': user.user,
+            'password': user.password
+        });
         browser.get('#/bloqsproject');
         file = globalFunctions.filePath(file);
         makeActions.inputUploadFile.sendKeys(file);
@@ -273,14 +290,38 @@ var Make = function() {
         browser.sleep(vars.timeToWaitFadeModals);
     };
 
-    this.isProjectSavedShown = function () {
+    this.isProjectSavedShown = function() {
         var elem = element.all(by.xpath('//*[@data-element="project-save-label-make-project-saved-ok"]')).first();
         return elem.isPresent();
     };
 
-    this.isProjectNotAllowSaveShown = function () {
+    this.isProjectNotAllowSaveShown = function() {
         var elem = element.all(by.xpath('//*[@data-element="project-save-label-make-project-not-allow-to-save"]')).first();
         return elem.isPresent();
+    };
+
+    function _activateRobotAndCheck(options) {
+        options = options || {};
+
+        modals.activateRobotCode1.sendKeys(options.code);
+        modals.ok();
+        if (!options.disableActivateRobotExpects) {
+            expect(modals.activateRobotErrorText.isPresent()).toBe(false, 'Good code for mBot, error shouldnt appear');
+            expect(hwtab.robotActivationInfoWindow.isDisplayed()).toBe(false, 'Activated robot/board still show a warning window ');
+        }
+
+    }
+
+    this.activateRobot = function(options) {
+        options = options || {};
+        if (options.code) {
+            _activateRobotAndCheck(options);
+        } else {
+            flow.execute(thirdPartyRobotsApi['get' + options.robot + 'PersonalCode']).then(function(result) {
+                options.code = result[0].code;
+                _activateRobotAndCheck(options);
+            });
+        }
     };
 };
 

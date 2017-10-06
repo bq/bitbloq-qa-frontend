@@ -18,7 +18,7 @@ var login = new Login(),
 
 globalFunctions.xmlReport('faq');
 
-describe('FAQ ', function() {
+describe('FAQ ', function () {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -26,18 +26,18 @@ describe('FAQ ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    xit('bbb-192:faq:Appears the FAQs with a registered user', function() {
+    it('bbb-192:faq:Appears the FAQs with a registered user', function () {
         login.loginWithRandomUser();
         header.navForum.click();
         forum.faqCategory.click();
         expect(forum.categoryTopicTitleArray.count()).toBe(10);
-        browser.getCurrentUrl().then(function(url) {
+        browser.getCurrentUrl().then(function (url) {
             expect(url).toMatch(/#\/forum\/Preguntas%20frecuentes/);
             login.logout();
         });
     });
 
-    xit('bbb-193:faq:Verify that we can open a faq (registered user)', function() {
+    xit('bbb-193:faq:Verify that we can open a faq (registered user)', function () {
         login.loginWithRandomUser();
         header.navForum.click();
         forum.faqCategory.click();
@@ -48,7 +48,7 @@ describe('FAQ ', function() {
         login.logout();
     });
 
-    xit('bbb-195:faq:Appears the FAQs with an unregistered user', function() {
+    xit('bbb-195:faq:Appears the FAQs with an unregistered user', function () {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -57,12 +57,12 @@ describe('FAQ ', function() {
         expect(globalFunctions.toNumber(forum.faqCastellanoThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
         forum.faqCategory.click();
         expect(forum.categoryTopicTitleArray.count()).toBe(10);
-        browser.getCurrentUrl().then(function(url) {
+        browser.getCurrentUrl().then(function (url) {
             expect(url).toMatch(/#\/forum\/Preguntas%20frecuentes/);
         });
     });
 
-    xit('bbb-196:faq:Verify that we can open a faq (unregistered user)', function() {
+    xit('bbb-196:faq:Verify that we can open a faq (unregistered user)', function () {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -76,7 +76,7 @@ describe('FAQ ', function() {
         expect(forum.isPresentContentThread()).toBe(true);
     });
 
-    xit('bbb-345:faq:Appears all language FAQs with a registered user', function() {
+    xit('bbb-345:faq:Appears all language FAQs with a registered user', function () {
         login.loginWithRandomUser();
         header.navForum.click();
         expect(globalFunctions.toNumber(forum.faqEnglishThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
@@ -92,7 +92,7 @@ describe('FAQ ', function() {
         expect(globalFunctions.toNumber(forum.faqChineseThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
     });
 
-    xit('bbb-346:faq:Appears all language FAQs with an unregistered user', function() {
+    xit('bbb-346:faq:Appears all language FAQs with an unregistered user', function () {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();

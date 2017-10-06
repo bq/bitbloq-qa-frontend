@@ -32,7 +32,7 @@ describe('Menu Share of MakeActions', function() {
 
     //TODO test TOAST
     //Solo se puede jugar en un entorno
-    it('bbb-151:Publish project in social media (the project has already been published in Explora)', function() {
+    xit('bbb-151a:Publish project in social media (the project has already been published in Explora)', function() {
 
         //make.saveProjectAndPublishNewUser();
         make.saveProjectAndPublishNewUser().then(function() {
@@ -104,7 +104,7 @@ describe('Menu Share of MakeActions', function() {
     //TODO test TOAST
     //Solo se puede jugar en un entorno
 
-    it('bbb-156:Publish project in social media (the project hasnt been published in Explora)', function() {
+    xit('bbb-156a:Publish project in social media (the project hasnt been published in Explora)', function() {
 
         //make.saveProjectAndPublishNewUser();
         make.saveProjectNewUser();

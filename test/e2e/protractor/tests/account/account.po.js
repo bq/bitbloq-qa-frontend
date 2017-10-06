@@ -6,7 +6,8 @@
 var Account = function() {
 
     this.url = ('#/account');
-
+    this.userTab = $('[data-element="account-user-tab"]');
+    this.settingsTab = $('[data-element="account-settings-tab"]');
     this.firstname = $('[data-element="firstname"]');
     this.lastname = $('[data-element="lastname"]');
     this.username = $('[data-element="username"]');
