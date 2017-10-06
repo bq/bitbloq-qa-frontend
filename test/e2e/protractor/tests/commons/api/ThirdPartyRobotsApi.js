@@ -3,11 +3,11 @@
 var Api = require('./api.js'),
     api = new Api();
 
-var ThirdPartyRobotsApi = function() {
+var ThirdPartyRobotsApi = function () {
     var that = this;
     /**
      * @param  {number} number "num of codes"
-     * @param  {Array}  robots "mBot", "mRagner", ...
+     * @param  {Array}  robots "mBot", "mRanger", "starterKit"
      * @param  {string} reason ""
      * @param  {string} reporter ""
      * @param  {string} type "personal" || "center"
@@ -22,7 +22,7 @@ var ThirdPartyRobotsApi = function() {
      *   "type":  "personal"
      * }
      */
-    this.generateCode = function(options) {
+    this.generateCode = function (options) {
         options = options || {};
         return api.adminRequestToServer({
             method: 'POST',
@@ -38,27 +38,27 @@ var ThirdPartyRobotsApi = function() {
         });
     };
 
-    this.getMBotPersonalCode = function() {
+    this.getMBotPersonalCode = function () {
         return that.generateCode({
             robots: ['mBot']
         });
     };
 
-    this.getMBotCenterCode = function() {
+    this.getMBotCenterCode = function () {
         return that.generateCode({
             robots: ['mBot'],
             type: 'center'
         });
     };
 
-    this.getMRangerCenterCode = function() {
+    this.getMRangerCenterCode = function () {
         return that.generateCode({
             robots: ['mRanger'],
             type: 'center'
         });
     };
 
-    this.getStarterKitCenterCode = function() {
+    this.getStarterKitCenterCode = function () {
         return that.generateCode({
             robots: ['starterKit'],
             type: 'center'
