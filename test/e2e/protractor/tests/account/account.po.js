@@ -3,7 +3,7 @@
  */
 'use strict';
 
-var Account = function() {
+var Account = function () {
 
     this.url = ('#/account');
     this.userTab = $('[data-element="account-user-tab"]');
@@ -15,8 +15,10 @@ var Account = function() {
     this.resetPasswordButton = $('[data-element="account-reset-password-button"]');
     this.fileinput = $('[data-element="account-fileinput"]');
     this.accountImage = $('[data-element="account-image"]');
+    //checkbox
+    this.imATeacher = $('[data-element="teacher-checkbox"]')
 
-    this.get = function() {
+    this.get = function () {
         browser.get(this.url);
     };
 

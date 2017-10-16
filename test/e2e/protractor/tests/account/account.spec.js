@@ -8,6 +8,7 @@
 var GlobalFunctions = require('../commons/globalFunctions.js'),
     Variables = require('../commons/variables.js'),
     Account = require('./account.po.js'),
+    Header = require('../header/header.po.js'),
     Login = require('../login/login.po.js'),
     Modals = require('../modals/modals.po.js'),
     Commons = require('../commons/commons.po.js'),
@@ -18,6 +19,7 @@ var globalFunctions = new GlobalFunctions(),
     account = new Account(),
     login = new Login(),
     modals = new Modals(),
+    header = new Header(),
     commons = new Commons(),
     alerts = new Alerts();
 
@@ -106,6 +108,16 @@ describe('User account view', function () {
         account.get();
         account.userTab.click();
         expect(account.username.getAttribute('value')).toMatch(usernameNew);
+        login.logout();
+
+    });
+
+    fit('bbb-45:account:verify teacher checkbox', function () {
+        login.loginWithRandomUser();
+        header.openHeaderMenu.click();
+        header.settings.click();
+        expect(account.imATeacher.isDisplayed()).toBe(true, 'The check is not showed');
+
         login.logout();
 
     });

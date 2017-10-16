@@ -4,9 +4,10 @@
 
 'use strict';
 
-var Header = function() {
+var Header = function () {
     this.openHeaderMenu = $('[data-element="open-header-menu"]');
     this.changeLanguage = $('[data-element="header-change-language"]');
+    this.settings = $('[data-element="nav-settings"]');
     this.menuLearn = $('[data-element="header-menu-learn"]');
     this.enterButton = $('[data-element="header-enterbutton"]');
     this.centerModeBanner = $('[data-element="header-menu-create-center"]');
