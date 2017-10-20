@@ -7,8 +7,10 @@ var Login = require('../login/login.po.js'),
     Infotab = require('./infotab/infotab.po.js'),
     MakeActions = require('./makeActions/makeActions.po.js'),
     Hwtab = require('../bloqsproject/hwtab/hwtab.po.js'),
+    Infotab = require('../bloqsproject/infotab/infotab.po.js'),
     ThirdPartyRobotsApi = require('../commons/api/ThirdPartyRobotsApi.js'),
-    Bloqs = require('../bloqs/bloqs.po.js');
+    Bloqs = require('../bloqs/bloqs.po.js'),
+    Projects = require('../projects/projects.po.js');
 
 var login = new Login(),
     globalFunctions = new GlobalFunctions(),
@@ -18,7 +20,9 @@ var login = new Login(),
     makeActions = new MakeActions(),
     thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
     bloqs = new Bloqs(),
+    projects = new Projects(),
     hwtab = new Hwtab(),
+    infotab = new Infotab(),
     flow = browser.controlFlow();
 
 var Make = function() {
@@ -28,7 +32,6 @@ var Make = function() {
     this.infoTab = $('[data-element="info-tab"]');
     this.bloqsTab = $('[data-element="bloqs-tab"]');
     this.codeTab = $('[data-element="code-tab"]');
-
     this.swToolboxFunctions = $('[data-element="sw-toolbox-functions"]');
     this.projectName = $('[data-element="project-name"]');
     this.hideBar = $('[data-element="hide-bar"]');

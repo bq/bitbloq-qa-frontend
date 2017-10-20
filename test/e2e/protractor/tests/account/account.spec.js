@@ -112,13 +112,19 @@ describe('User account view', function () {
 
     });
 
-    fit('bbb-45:account:verify teacher checkbox', function () {
+    it('bbb-45:account:verify teacher checkbox', function () {
         login.loginWithRandomUser();
         header.openHeaderMenu.click();
         header.settings.click();
         expect(account.imATeacher.isDisplayed()).toBe(true, 'The check is not showed');
-
         login.logout();
+    });
 
+    it('bbb-353:account:verify chromeapp checkbox', function () {
+        login.loginWithRandomUser();
+        header.openHeaderMenu.click();
+        header.settings.click();
+        expect(account.imAChromeApp.isDisplayed()).toBe(true, 'The check is not showed');
+        login.logout();
     });
 });

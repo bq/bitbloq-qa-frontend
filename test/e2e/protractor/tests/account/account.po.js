@@ -16,7 +16,9 @@ var Account = function () {
     this.fileinput = $('[data-element="account-fileinput"]');
     this.accountImage = $('[data-element="account-image"]');
     //checkbox
-    this.imATeacher = $('[data-element="teacher-checkbox"]')
+    this.imATeacher = $('[data-element="teacher-checkbox"]');
+    this.imAChromeApp = $('[data-element="chromeapp-checkbox"]');
+
 
     this.get = function () {
         browser.get(this.url);

@@ -19,9 +19,16 @@ var Forum = function() {
     this.contactUsLink = $('[data-element="forum-contact-us-link"]');
     this.contactUsButton = $('[data-element="forum-contact-us-button"]');
 
+    //forum
+    this.forumBackground = element(by.xpath('//body/div/div[contains(@class, "forum")]'));
+
+    //sections
+    this.sectionsArray = element.all(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")]'));
+
     //categories
     this.newsCategory = $('[data-element="forum-category-Noticias"]');
     this.faqCategory = $('[data-element="forum-category-Preguntas frecuentes"]');
+    this.othersCategory = $('[data-element="forum-category-Otros"]');
 
     //new topic
     this.categoryList = $('[data-element="forum_category_dropdown"]');
@@ -37,6 +44,7 @@ var Forum = function() {
     //category topic lists
     this.categoryTopicTitle = $('[data-element="forum-category-theme-title"]');
     this.categoryTopicTitleArray = element.all(by.xpath('//*[@data-element="forum-category-theme-title"]'));
+    this.firstTopicVisitCount = element(by.xpath('//div[@class="forum__block"]/div[1]/div[3]//span'));
 
     //inside a topic
     this.topicTopicTitle = $('[data-element="forum-theme-theme-title"]');
@@ -44,6 +52,11 @@ var Forum = function() {
     this.answerTopic = $('[data-element="forum-theme-answer-theme"]');
     this.publishAnswerButton = $('[data-element="forum-theme-publish-answer-button"]');
     this.answerContent = $('[data-element="forum-theme-answer"]');
+    this.firstAnswerTopic = element(by.xpath('//div[contains(@class, "ng-scope")]/div[1]/div/span[contains(@class, "forum__answer-number")]'));
+    this.secondAnswerTopic = element(by.xpath('//div[contains(@class, "ng-scope")]/div[2]/div/span[contains(@class, "forum__answer-number")]'));
+    this.answerUser = element(by.xpath('//div[contains(@class, "answer__header")]/h2[contains(@class, "ng-binding")]'));
+    this.answerUpdatedAt = element(by.xpath('//*[contains(@ng-if, "answer.updatedAt")]'));
+
 
     //FAQS
     this.faqCastellanoThreadCounter = $('[data-element="forum-threads-counter-Preguntas frecuentes"]');
