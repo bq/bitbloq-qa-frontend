@@ -21,6 +21,8 @@ var Forum = function() {
 
     //forum
     this.forumBackground = element(by.xpath('//body/div/div[contains(@class, "forum")]'));
+    this.forumThreadsCounterArray = element.all(by.xpath('//*[contains(@data-element, "forum-threads")]'));
+    this.forumBlockItemTitleArray = element.all(by.xpath('//*[contains(@class, "block__item__title")]'));
 
     //sections
     this.sectionsArray = element.all(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")]'));
@@ -29,6 +31,11 @@ var Forum = function() {
     this.newsCategory = $('[data-element="forum-category-Noticias"]');
     this.faqCategory = $('[data-element="forum-category-Preguntas frecuentes"]');
     this.othersCategory = $('[data-element="forum-category-Otros"]');
+    this.othersForumThreadsCounter = $('[data-element="forum-threads-counter-Otros"]');
+    this.lastTopicArray = element.all(by.xpath('//*[contains(@class, "block__last-theme__title")]'));
+    this.lastTopicOthers = element(by.xpath('//*/div[3]/div[5]/div[4]/ul/li/a/h3'));
+    this.noTopicCategories = element.all(by.xpath('//span[contains(@data-element, "forum-threads")][text()="0"]/../../../..//a'));
+    this.moreThanTenTopicCategories = element.all(by.xpath('//*[contains(@data-element, "forum-threads")][.>11]/../../../..//*[contains(@data-element, "forum-category")]'));
 
     //new topic
     this.categoryList = $('[data-element="forum_category_dropdown"]');
@@ -40,6 +47,7 @@ var Forum = function() {
     //new topic category dropdown
     this.categoryListNoticias = $('[data-element2="forum_category_dropdown-Noticias"]');
     this.categoryListBienvenida = $('[data-element2="forum_category_dropdown-Bienvenida"]');
+    this.categoryListOtros = $('[data-element2="forum_category_dropdown-Otros"]');
 
     //category topic lists
     this.categoryTopicTitle = $('[data-element="forum-category-theme-title"]');
@@ -56,6 +64,8 @@ var Forum = function() {
     this.secondAnswerTopic = element(by.xpath('//div[contains(@class, "ng-scope")]/div[2]/div/span[contains(@class, "forum__answer-number")]'));
     this.answerUser = element(by.xpath('//div[contains(@class, "answer__header")]/h2[contains(@class, "ng-binding")]'));
     this.answerUpdatedAt = element(by.xpath('//*[contains(@ng-if, "answer.updatedAt")]'));
+    this.loginButton = element(by.xpath('//*[contains(@class, "btn--primary")]'));
+    this.paginationList = element(by.xpath('//*[contains(@class, "pagination__list")]'));
 
 
     //FAQS

@@ -3,12 +3,14 @@ var GlobalFunctions = require('../commons/globalFunctions.js'),
     Variables = require('../commons/variables.js'),
     Forum = require('./forum.po.js'),
     Login = require('../login/login.po.js'),
+    Header = require('../header/header.po.js'),
     Modals = require('../modals/modals.po.js');
 
 var globalFunctions = new GlobalFunctions(),
     vars = new Variables(),
     forum = new Forum(),
     login = new Login(),
+    header = new Header(),
     modals = new Modals();
 
 globalFunctions.xmlReport('forum');
@@ -171,18 +173,12 @@ describe('Forum', function () {
 
     it('bbb-221:forum:verify check answer count for topic', function () {
 
-
         var titulo = 'tema automatico ' + Number(new Date());
         var contenido = 'comentario automatico ' + Number(new Date());
 
         login.loginWithRandomUser();
         forum.get();
-        forum.newTopicButton.click()
-        forum.categoryList.click();
-        forum.categoryList.all(by.css('li')).get(5).click();
-        forum.newTopicTitle.sendKeys(titulo);
-        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys(contenido);
-        forum.publishTopic.click();
+        forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
         forum.createAnswer();
         expect(forum.firstAnswerTopic.getText()).toContain("1", 'Wrong answer number 1');
         forum.createAnswer();
@@ -191,7 +187,7 @@ describe('Forum', function () {
         expect(element(by.xpath('//*[@data-element="forum-category-theme-title"][contains(text(), "'+titulo+'")]/../../../../../div[2]//span')).getText()).toContain("2", 'Wrong answer count');
         login.logout();
 
-    })
+    });
 
     it('bbb-223:forum:check the last answer in a topic', function () {
 
@@ -203,12 +199,7 @@ describe('Forum', function () {
 
         var user = login.loginWithRandomUser();
         forum.get();
-        forum.newTopicButton.click()
-        forum.categoryList.click();
-        forum.categoryList.all(by.css('li')).get(5).click();
-        forum.newTopicTitle.sendKeys(titulo);
-        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys(contenido);
-        forum.publishTopic.click();
+        forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
 
         protractor.promise.all([
             forum.createAnswer()
@@ -217,14 +208,8 @@ describe('Forum', function () {
             browser.driver.navigate().refresh();
             expect(forum.answerUser.getText()).toBe(user.user.toLowerCase(), 'Usuario incorrecto en respuesta 1');
             expect(forum.answerUpdatedAt.getText()).toBe(date, 'Fecha incorrecta en respuesta 1');
-
             forum.breadcrumbsCategory.click();
-            forum.newTopicButton.click();
-            forum.categoryList.click();
-            forum.categoryList.all(by.css('li')).get(5).click();
-            forum.newTopicTitle.sendKeys(titulo2);
-            forum.newTopicDescription.all(by.css('div')).get(15).sendKeys(contenido2);
-            forum.publishTopic.click();
+            forum.createNewTopic(titulo2, contenido2, forum.categoryListOtros);
             protractor.promise.all([
                 forum.createAnswer()
             ]).then(function (results) {
@@ -254,7 +239,7 @@ describe('Forum', function () {
         }
 
 
-    })
+    });
 
     it('bbb-218:forum:check differeciated sections on the forum', function () {
 
@@ -301,7 +286,7 @@ describe('Forum', function () {
                  });
             }
         });
-    })
+    });
 
     it('bbb-236:forum:check visit counter to a topic', function () {
 
@@ -312,12 +297,7 @@ describe('Forum', function () {
         //create topic and visit topic (visit count does not increment)
         login.loginWithRandomUser();
         forum.get();
-        forum.newTopicButton.click()
-        forum.categoryList.click();
-        forum.categoryList.all(by.css('li')).get(5).click();
-        forum.newTopicTitle.sendKeys(titulo);
-        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys(contenido);
-        forum.publishTopic.click();
+        forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
         forum.breadcrumbsCategory.click();
         forum.categoryTopicTitle.click();
         forum.breadcrumbsCategory.click();
@@ -340,7 +320,93 @@ describe('Forum', function () {
         forum.breadcrumbsCategory.click();
         expect(forum.firstTopicVisitCount.getText()).toContain("1", 'Wrong visits count 3');
 
-    })
+    });
+
+    it('bbb-237:forum:Answer a topic (not registered)', function () {
+
+        forum.get();
+        forum.othersCategory.click();
+        forum.categoryTopicTitle.click();
+        browser.sleep(vars.timeToWaitTab);
+        expect(header.enterButton.isPresent()).toBe(true, 'Header Enter is not present');
+        expect(forum.loginButton.isPresent()).toBe(true, 'Login Enter is not present');
+
+    });
+
+    it('bbb-238:forum:check category pages when many topics', function () {
+
+        login.loginWithRandomUser();
+        forum.get();
+        forum.noTopicCategories.then(function(noTopic){
+            noTopic[0].click();
+            browser.sleep(3000);
+            expect(forum.paginationList.isPresent()).toBe(false, 'Pagination is present');
+            forum.get();
+            forum.moreThanTenTopicCategories.then(function(moreThanTen){
+                moreThanTen[0].click();
+                browser.sleep(8000);
+                expect(forum.paginationList.isPresent()).toBe(true, 'Pagination is not present');
+                login.logout();
+            });
+        });
+    });
+
+    it('bbb-240:forum:verify click last topic', function () {
+
+        var titulo = 'tema automatico ' + Number(new Date());
+        var contenido = 'comentario automatico ' + Number(new Date());
+
+        login.loginWithRandomUser();
+        forum.get();
+        forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
+        forum.breadcrumbsForo.click();
+        forum.lastTopicOthers.click();
+        browser.sleep(vars.timeToWaitTab);
+        expect(forum.topicTopicTitle.getText()).toMatch(titulo, 'Wrong topic')
+        login.logout();
+
+    });
+
+    it('bbb-241:check answer pages when too many answers', function () {
+
+        var titulo = 'tema automatico ' + Number(new Date());
+        var contenido = 'comentario automatico ' + Number(new Date());
+
+        login.loginWithRandomUser();
+        forum.get();
+        forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
+        //bucle 10 anwsers (no pagination)
+        for (var i=0;i<10;i++){
+            forum.createAnswer();
+            expect(forum.paginationList.isPresent()).toBe(false, 'Pagination is present')
+        }
+        //create the 11 answer (pagination is present)
+        forum.createAnswer();
+        expect(forum.paginationList.isPresent()).toBe(true, 'No pagination is present');
+        forum.breadcrumbsForo.click();
+        forum.lastTopicOthers.click();
+        browser.sleep(vars.timeToWaitTab);
+        expect(forum.topicTopicTitle.getText()).toMatch(titulo, 'Wrong topic')
+        login.logout();
+
+    });
+
+    it('bbb-242:check categories are always in the same order', function () {
+
+        var titulo = 'tema automatico ' + Number(new Date());
+        var contenido = 'comentario automatico ' + Number(new Date());
+
+        login.loginWithRandomUser();
+        forum.get();
+        forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
+        forum.breadcrumbsForo.click();
+        forum.lastTopicOthers.click();
+        browser.sleep(vars.timeToWaitTab);
+        expect(forum.topicTopicTitle.getText()).toMatch(titulo, 'Wrong topic')
+        login.logout();
+
+    });
+
 
 
 });

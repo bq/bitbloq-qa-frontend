@@ -277,7 +277,7 @@ describe('make tab', function () {
         login.logout();
      });
 
-    fit('bbb-147:bloqsproject:verify robot and board tags', function () {
+    it('bbb-147:bloqsproject:verify robot and board tags', function () {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
