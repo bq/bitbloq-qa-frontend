@@ -159,7 +159,7 @@ describe('Forum', function () {
         forum.breadcrumbsForo.click();
         forum.newsCategory.click();
         //tema
-        forum.categoryTopicTitle.click();
+        forum.categoryTopicTitleArray.get(0).click();
         expect(forum.breadcrumbsCategory.isPresent()).toBe(true, 'Topic breadcrumb fail 1');
         expect(forum.breadcrumbsForo.getCssValue('color')).toBe('rgba(55, 59, 68, 1)','Forum breadcrumb color fail 3');
         expect(forum.breadcrumbsCategory.getCssValue('color')).toBe('rgba(55, 59, 68, 1)','Category breadcrumb color fail 2');
@@ -299,7 +299,7 @@ describe('Forum', function () {
         forum.get();
         forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
         forum.breadcrumbsCategory.click();
-        forum.categoryTopicTitle.click();
+        forum.categoryTopicTitleArray.get(0).click();
         forum.breadcrumbsCategory.click();
         expect(forum.firstTopicVisitCount.getText()).toContain("0", 'Wrong visits count 1');
         login.logout();
@@ -308,7 +308,7 @@ describe('Forum', function () {
         login.loginWithRandomUser();
         forum.get();
         forum.othersCategory.click();
-        forum.categoryTopicTitle.click();
+        forum.categoryTopicTitleArray.get(0).click();
         forum.breadcrumbsCategory.click();
         expect(forum.firstTopicVisitCount.getText()).toContain("1", 'Wrong visits count 2');
         login.logout();
@@ -316,7 +316,7 @@ describe('Forum', function () {
         //visit topic with visitor (visit count does not increment)
         forum.get();
         forum.othersCategory.click();
-        forum.categoryTopicTitle.click();
+        forum.categoryTopicTitleArray.get(0).click();
         forum.breadcrumbsCategory.click();
         expect(forum.firstTopicVisitCount.getText()).toContain("1", 'Wrong visits count 3');
 
@@ -326,7 +326,7 @@ describe('Forum', function () {
 
         forum.get();
         forum.othersCategory.click();
-        forum.categoryTopicTitle.click();
+        forum.categoryTopicTitleArray.get(0).click();
         browser.sleep(vars.timeToWaitTab);
         expect(header.enterButton.isPresent()).toBe(true, 'Header Enter is not present');
         expect(forum.loginButton.isPresent()).toBe(true, 'Login Enter is not present');
@@ -339,12 +339,12 @@ describe('Forum', function () {
         forum.get();
         forum.noTopicCategories.then(function(noTopic){
             noTopic[0].click();
-            browser.sleep(3000);
+            browser.sleep(10000);
             expect(forum.paginationList.isPresent()).toBe(false, 'Pagination is present');
             forum.get();
             forum.moreThanTenTopicCategories.then(function(moreThanTen){
                 moreThanTen[0].click();
-                browser.sleep(8000);
+                browser.sleep(10000);
                 expect(forum.paginationList.isPresent()).toBe(true, 'Pagination is not present');
                 login.logout();
             });
@@ -362,7 +362,7 @@ describe('Forum', function () {
         forum.breadcrumbsForo.click();
         forum.lastTopicOthers.click();
         browser.sleep(vars.timeToWaitTab);
-        expect(forum.topicTopicTitle.getText()).toMatch(titulo, 'Wrong topic')
+        expect(forum.topicTopicTitle.getText()).toMatch(titulo, 'Wrong topic');
         login.logout();
 
     });
@@ -382,7 +382,7 @@ describe('Forum', function () {
         }
         //create the 11 answer (pagination is present)
         forum.createAnswer();
-        expect(forum.paginationList.isPresent()).toBe(true, 'No pagination is present');
+        expect(forum.paginationList.isPresent()).toBe(true, 'No pagination is present')
         forum.breadcrumbsForo.click();
         forum.lastTopicOthers.click();
         browser.sleep(vars.timeToWaitTab);
@@ -393,20 +393,47 @@ describe('Forum', function () {
 
     it('bbb-242:check categories are always in the same order', function () {
 
+        forum.get();
+        forum.checkCategoriesOrder();
+        forum.faqCategory.click();
+        browser.driver.navigate().refresh();
+        forum.get();
+        forum.checkCategoriesOrder();
+        login.loginFromHeaderForum();
+        forum.checkCategoriesOrder();
+        header.menuLearn.click();
+        browser.driver.navigate().refresh();
+        forum.get();
+        forum.checkCategoriesOrder();
+        login.logout();
+
+    });
+
+    it('bbb-243:check category dropdown when creating a topic from within a category', function () {
+
+        login.loginWithRandomUser();
+        forum.get();
+        forum.othersCategory.click();
+        forum.newTopicButton.click();
+        expect(forum.categoryDropdownHeader.getText()).toMatch("Otros", 'Wrong category');
+        login.logout();
+
+    });
+
+    it('bbb-368:Boton Responder a un tema', function () {
+
         var titulo = 'tema automatico ' + Number(new Date());
         var contenido = 'comentario automatico ' + Number(new Date());
 
         login.loginWithRandomUser();
         forum.get();
+        expect(forum.answerTopicButton.isPresent()).toBe(false, 'Answer button is present');
+        forum.othersCategory.click();
+        expect(forum.answerTopicButton.isPresent()).toBe(false, 'Answer button is present');
         forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
-        forum.breadcrumbsForo.click();
-        forum.lastTopicOthers.click();
-        browser.sleep(vars.timeToWaitTab);
-        expect(forum.topicTopicTitle.getText()).toMatch(titulo, 'Wrong topic')
+        expect(forum.answerTopicButton.isPresent()).toBe(true, 'Answer button is not present');
         login.logout();
 
     });
-
-
 
 });

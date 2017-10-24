@@ -284,6 +284,38 @@ var Login = function() {
             year: randomUserCredentials.year
 
         };
+
+    };
+
+    this.loginFromHeaderForum = function(urlDest) {
+        header.enterButton.click();
+        var randomUserCredentials = register.generateUser();
+        register.createAccountButtn.click();
+        register.createAccount(
+            randomUserCredentials.username,
+            randomUserCredentials.userEmail,
+            randomUserCredentials.password,
+            randomUserCredentials.day,
+            randomUserCredentials.month,
+            randomUserCredentials.year,
+            true,
+            true);
+        //wait succesfull login page
+        /*browser.getCurrentUrl().then(function(url) {
+            expect(url.indexOf(browser.baseUrl + '#/' + urlDest) > -1).toBeTruthy();
+        });*/
+
+        //Add return for reuse user if is necessary
+        return {
+            user: randomUserCredentials.username,
+            userEmail: randomUserCredentials.userEmail,
+            password: randomUserCredentials.password,
+            day: randomUserCredentials.day,
+            month: randomUserCredentials.month,
+            year: randomUserCredentials.year
+
+        };
+
     };
 
 };

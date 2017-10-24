@@ -285,14 +285,14 @@ describe('make tab', function () {
         hwtab.boardsTab.click();
         hwtab.hwBoardBQZum.click();
         make.infoTab.click();
-        expect(infotab.infotabBQZumTag.getText()).toMatch('bq ZUM', 'The tag does not matches');
-        expect(infotab.infotabBQZumDeleteTag.isPresent()).toBe(false, 'Tag can be removed');
+        expect(infotab.infotabBQZumTag.getText()).toMatch('bq ZUM', 'The tag Bqz ZUM does not matches');
+        expect(infotab.infotabBQZumDeleteTag.isPresent()).toBe(false, 'Bq ZUM tag can be removed');
         make.hardwareTab.click();
         hwtab.boardsTab.click();
         hwtab.hwBoardFreaduinoUno.click();
         make.infoTab.click();
-        expect(infotab.infotabFreaduinoUnoTag.getText()).toMatch('Freaduino UNO', 'The tag does not matches');
-        expect(infotab.infotabFreaduinoUnoDeleteTag.isPresent()).toBe(false, 'Tag can be removed');
+        expect(infotab.infotabFreaduinoUnoTag.getText()).toMatch('Freaduino UNO', 'The Freaduino UNO tag does not matches');
+        expect(infotab.infotabFreaduinoUnoDeleteTag.isPresent()).toBe(false, 'Freaduino UNO tag can be removed');
         expect(infotab.infotabBQZumTag.isPresent()).toBe(false, 'Bq ZUM tag was not removed');
         make.hardwareTab.click();
         hwtab.robotsTab.click();
@@ -300,12 +300,12 @@ describe('make tab', function () {
         modals.cancelDialog.click();
         browser.sleep(vars.timeToWaitFadeModals);
         make.infoTab.click();
-        expect(infotab.infotabMCoreTag.getText()).toMatch('MCore', 'The tag does not matches');
-        expect(infotab.infotabMCoreDeleteTag.isPresent()).toBe(false, 'Tag can be removed');
-        expect(infotab.infotabMBotTag.getText()).toMatch('mBot', 'The tag does not matches');
-        expect(infotab.infotabMBotDeleteTag.isPresent()).toBe(false, 'Tag can be removed');
+        expect(infotab.infotabMCoreTag.getText()).toMatch('MCore', 'The MCore tag does not matches');
+        expect(infotab.infotabMCoreDeleteTag.isPresent()).toBe(false, 'MCore tag can be removed');
+        expect(infotab.infotabMBotTag.getText()).toMatch('mBot', 'The MBot tag does not matches');
+        expect(infotab.infotabMBotDeleteTag.isPresent()).toBe(false, 'MBot tag can be removed');
         expect(infotab.infotabBQZumTag.isPresent()).toBe(false, 'Bq ZUM tag was not removed');
-        expect(infotab.infotabFreaduinoUnoTag.isPresent()).toBe(false, 'Bq ZUM tag was not removed');
+        expect(infotab.infotabFreaduinoUnoTag.isPresent()).toBe(false, 'Freaduino UNO tag was not removed');
 
         login.logout();
     });

@@ -22,7 +22,7 @@ var Forum = function() {
     //forum
     this.forumBackground = element(by.xpath('//body/div/div[contains(@class, "forum")]'));
     this.forumThreadsCounterArray = element.all(by.xpath('//*[contains(@data-element, "forum-threads")]'));
-    this.forumBlockItemTitleArray = element.all(by.xpath('//*[contains(@class, "block__item__title")]'));
+    this.forumBlockItemTitleArray = by.xpath('//*[contains(@class, "block__item__title")]');
 
     //sections
     this.sectionsArray = element.all(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")]'));
@@ -43,6 +43,7 @@ var Forum = function() {
     this.newTopicDescription = $('[data-element="forum-new-theme-description"]');
     this.forumScroll = '$(\'[data-element="forum-scroll"]\')';
     this.publishTopic = $('[data-element="forum-publish-theme"]');
+    this.categoryDropdownHeader = $('[data-element="forum_category_dropdown-heading"]');
 
     //new topic category dropdown
     this.categoryListNoticias = $('[data-element2="forum_category_dropdown-Noticias"]');
@@ -66,7 +67,7 @@ var Forum = function() {
     this.answerUpdatedAt = element(by.xpath('//*[contains(@ng-if, "answer.updatedAt")]'));
     this.loginButton = element(by.xpath('//*[contains(@class, "btn--primary")]'));
     this.paginationList = element(by.xpath('//*[contains(@class, "pagination__list")]'));
-
+    this.answerTopicButton = $('[data-element="forum-new-reply-button"]');
 
     //FAQS
     this.faqCastellanoThreadCounter = $('[data-element="forum-threads-counter-Preguntas frecuentes"]');
@@ -165,5 +166,33 @@ var Forum = function() {
     this.isPresentContentThread = function() {
         return $('[data-element="forum-theme-theme-content"]').isPresent();
     };
+
+    this.checkCategoriesOrder = function() {
+        element.all(this.forumBlockItemTitleArray).then(function (items){
+            expect(items.length).toBe(22);
+            expect(items[0].getText()).toBe('Noticias', 'Noticias title fail');
+            expect(items[1].getText()).toBe('Bienvenida', 'Bienvenida title fail');
+            expect(items[2].getText()).toBe('Preguntas frecuentes', 'Preguntas frecuentes title fail');
+            expect(items[3].getText()).toBe('¡Ayuda!', 'Ayuda title fail');
+            expect(items[4].getText()).toBe('Exposición', 'Exposición title fail');
+            expect(items[5].getText()).toBe('Laboratorio de ideas', 'Laboratorio title fail');
+            expect(items[6].getText()).toBe('Otros', 'Otros title fail');
+            expect(items[7].getText()).toBe('Preguntas', 'Preguntas title fail');
+            expect(items[8].getText()).toBe('Sugerencias', 'Sugerencias title fail');
+            expect(items[9].getText()).toBe('Errores y fallos en la web', 'Errores title fail');
+            expect(items[10].getText()).toBe('Versiones de Bitbloq', 'Versiones title fail');
+            expect(items[11].getText()).toBe('English', 'English title fail');
+            expect(items[12].getText()).toBe('Netherlands', 'Netherlands title fail');
+            expect(items[13].getText()).toBe('Pусский', 'Pусский title fail');
+            expect(items[14].getText()).toBe('Italiano', 'Italiano title fail');
+            expect(items[15].getText()).toBe('Euskara', 'Euskara title fail');
+            expect(items[16].getText()).toBe('Català', 'Català title fail');
+            expect(items[17].getText()).toBe('Français', 'Français title fail');
+            expect(items[18].getText()).toBe('Deutsch', 'Deutsch title fail');
+            expect(items[19].getText()).toBe('Português', 'Português title fail');
+            expect(items[20].getText()).toBe('Galego', 'Galegotitle fail');
+            expect(items[21].getText()).toBe('简体中文', '简体中文 title fail');
+        });
+      };
 };
 module.exports = Forum;
