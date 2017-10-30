@@ -124,7 +124,7 @@ describe('User account view', function () {
         login.loginWithRandomUser();
         header.openHeaderMenu.click();
         header.settings.click();
-        expect(account.imAChromeApp.isDisplayed()).toBe(true, 'The check is not showed');
+        expect(account.useChromeAppCheckbox.isDisplayed()).toBe(true, 'The check is not showed');
         login.logout();
     });
 });
