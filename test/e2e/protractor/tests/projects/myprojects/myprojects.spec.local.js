@@ -24,14 +24,14 @@ var vars = new Variables(),
 
 globalFunctions.xmlReport('myProjectsLocal');
 
-describe('My projects, only local', function() {
+describe('My projects, only local', function () {
     //beforeEach commons
     globalFunctions.beforeTest();
 
     // afterEach commons
     globalFunctions.afterTest();
 
-    fit('bbb-33:myProjectsLocal:Verify copy a project', function() {
+    fit('bbb-33:myProjectsLocal:Verify copy a project', function () {
         var nameProject = 'test';
         make.saveProjectNewUser(nameProject);
         projects.get();
@@ -41,18 +41,18 @@ describe('My projects, only local', function() {
         browser.sleep(vars.timeToWaitFadeModals);
         myprojects.getProjectInfo(nameProject).click();
         myprojects.getElementFromProjectMenu('export').click();
-        browser.driver.wait(function() {
+        browser.driver.wait(function () {
             return fs.existsSync(file1);
-        }, 4001).then(function() {
+        }, 4001).then(function () {
             browser.actions().mouseMove(myprojects.overMyProjects).perform();
             browser.sleep(vars.timeToWaitFadeModals);
             myprojects.getElementFromProjectMenu('copy').click();
             browser.sleep(vars.timeToWaitFadeModals);
             modals.okDialog.click();
-            browser.sleep(vars.timeToWaitAutoSave).then(function() {
+            browser.sleep(vars.timeToWaitAutoSave).then(function () {
                 var file2 = '';
                 globalFunctions.navigatorLanguage()
-                    .then(function(language) {
+                    .then(function (language) {
                         if (language === 'es') {
                             expect(myprojects.projectName.getText()).toEqual('Copia de ' + nameProject);
                             file2 = path.resolve() + '/target/' + 'Copia_de_' + nameProject + '.ino';
@@ -64,13 +64,13 @@ describe('My projects, only local', function() {
 
                 browser.actions().mouseMove(myprojects.overMyProjects).perform();
                 browser.sleep(vars.timeToWaitFadeModals);
-                myprojects.getProjectInfo("Copia de " + nameProject).click();
+                myprojects.getProjectInfo('Copia de ' + nameProject).click();
                 browser.sleep(vars.timeToWaitFadeModals);
                 myprojects.getElementFromProjectMenu('export').click();
 
-                browser.driver.wait(function() {
+                browser.driver.wait(function () {
                     return fs.existsSync(file2);
-                }, 4002).then(function() {
+                }, 4002).then(function () {
                     expect(fs.readFileSync(file1, 'utf8')).toEqual(fs.readFileSync(file2, 'utf8'), 'not equal');
                     login.logout();
                 });
@@ -78,7 +78,7 @@ describe('My projects, only local', function() {
         });
     });
 
-    it('bbb-29:myProjectsLocal:Verify strange characters in project name do not appear in code export', function() {
+    it('bbb-29:myProjectsLocal:Verify strange characters in project name do not appear in code export', function () {
         var name = 'asdf!·$%&';
         var fileToUpload = path.resolve() + '/test/e2e/protractor/res/CreandoUnVoltimetroBitbloq.json';
         fileToUpload = globalFunctions.filePath(fileToUpload);
@@ -98,9 +98,9 @@ describe('My projects, only local', function() {
         browser.actions().mouseMove(myprojects.overMyProjects).perform();
         myprojects.getProjectInfo(name).click();
         myprojects.getElementFromProjectMenu('export').click();
-        browser.wait(function() {
+        browser.wait(function () {
             return fs.existsSync(fileDownload);
-        }, 4000).then(function() {
+        }, 4000).then(function () {
             expect(fs.readFileSync(fileDownload, 'utf8')).toEqual(fs.readFileSync(fileToCompare, 'utf8'));
             expect(path.basename(fileDownload)).toEqual('asdf.ino');
             login.logout();

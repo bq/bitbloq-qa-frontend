@@ -1,19 +1,13 @@
 'use strict';
 
 var GlobalFunctions = require('../../commons/globalFunctions.js'),
-    Login = require('../../login/login.po.js'),
-    Modals = require('../../modals/modals.po.js'),
     Header = require('../../header/header.po.js'),
-    Variables = require('../../commons/variables.js'),
     MyExercises = require('./myexercises.po.js'),
     ExercisesTable = require('../exercisesTable/exercisesTable.po.js'),
     Centermode = require('../centermode.po.js');
 
 var globalFunctions = new GlobalFunctions(),
-    login = new Login(),
-    modals = new Modals(),
     header = new Header(),
-    vars = new Variables(),
     myExercises = new MyExercises(),
     exercisesTable = new ExercisesTable(),
     centermode = new Centermode();

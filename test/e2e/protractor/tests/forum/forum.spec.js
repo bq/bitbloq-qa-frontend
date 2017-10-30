@@ -150,19 +150,19 @@ describe('Forum', function () {
         login.loginWithRandomUser();
         forum.get();
         expect(forum.breadcrumbsForo.isPresent()).toBe(true, 'Forum breadcrumb fail 1');
-        expect(forum.breadcrumbsForo.getCssValue('color')).toBe('rgba(55, 59, 68, 1)','Forum breadcrumb color fail 1');
+        expect(forum.breadcrumbsForo.getCssValue('color')).toBe('rgba(55, 59, 68, 1)', 'Forum breadcrumb color fail 1');
         //categoria
         forum.newsCategory.click();
         expect(forum.breadcrumbsCategory.isPresent()).toBe(true, 'Category breadcrumb fail 1');
-        expect(forum.breadcrumbsForo.getCssValue('color')).toBe('rgba(55, 59, 68, 1)','Forum breadcrumb color fail 2');
-        expect(forum.breadcrumbsCategory.getCssValue('color')).toBe('rgba(140, 145, 155, 1)','Category breadcrumb color fail 1');
+        expect(forum.breadcrumbsForo.getCssValue('color')).toBe('rgba(55, 59, 68, 1)', 'Forum breadcrumb color fail 2');
+        expect(forum.breadcrumbsCategory.getCssValue('color')).toBe('rgba(140, 145, 155, 1)', 'Category breadcrumb color fail 1');
         forum.breadcrumbsForo.click();
         forum.newsCategory.click();
         //tema
         forum.categoryTopicTitleArray.get(0).click();
         expect(forum.breadcrumbsCategory.isPresent()).toBe(true, 'Topic breadcrumb fail 1');
-        expect(forum.breadcrumbsForo.getCssValue('color')).toBe('rgba(55, 59, 68, 1)','Forum breadcrumb color fail 3');
-        expect(forum.breadcrumbsCategory.getCssValue('color')).toBe('rgba(55, 59, 68, 1)','Category breadcrumb color fail 2');
+        expect(forum.breadcrumbsForo.getCssValue('color')).toBe('rgba(55, 59, 68, 1)', 'Forum breadcrumb color fail 3');
+        expect(forum.breadcrumbsCategory.getCssValue('color')).toBe('rgba(55, 59, 68, 1)', 'Category breadcrumb color fail 2');
         forum.breadcrumbsForo.click();
         expect(forum.breadcrumbsCategory.isPresent()).toBe(false, 'Category breadcrumb is present');
         forum.newsCategory.click();
@@ -180,11 +180,16 @@ describe('Forum', function () {
         forum.get();
         forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
         forum.createAnswer();
-        expect(forum.firstAnswerTopic.getText()).toContain("1", 'Wrong answer number 1');
+        var answers = forum.answersArray;
+        expect(answers.get(0).$('[data-element="forum-answer-number"]').getText()).toContain('1', 'Wrong answer number 1');
         forum.createAnswer();
-        expect(forum.secondAnswerTopic.getText()).toContain("2", 'Wrong answer number 2');
+        expect(answers.get(1).$('[data-element="forum-answer-number"]').getText()).toContain('2', 'Wrong answer number 2');
         forum.breadcrumbsCategory.click();
-        expect(element(by.xpath('//*[@data-element="forum-category-theme-title"][contains(text(), "'+titulo+'")]/../../../../../div[2]//span')).getText()).toContain("2", 'Wrong answer count');
+
+
+        //expect(element(by.xpath('//*[@data-element="forum-category-theme-title"][contains(text(), "' + titulo + '")]/../../../../../div[2]//span')).getText()).toContain('2', 'Wrong answer count');
+        expect(forum.getAnswerByTitle(titulo).$('[data-element="forum-thread-numberofanswers"]').getText()).toContain('2', 'Wrong answer count');
+
         login.logout();
 
     });
@@ -203,8 +208,8 @@ describe('Forum', function () {
 
         protractor.promise.all([
             forum.createAnswer()
-        ]).then(function (results) {
-            var date = getFecha(new Date());
+        ]).then(function () {
+            var date = formatDate(new Date());
             browser.driver.navigate().refresh();
             expect(forum.answerUser.getText()).toBe(user.user.toLowerCase(), 'Usuario incorrecto en respuesta 1');
             expect(forum.answerUpdatedAt.getText()).toBe(date, 'Fecha incorrecta en respuesta 1');
@@ -212,8 +217,8 @@ describe('Forum', function () {
             forum.createNewTopic(titulo2, contenido2, forum.categoryListOtros);
             protractor.promise.all([
                 forum.createAnswer()
-            ]).then(function (results) {
-                date = getFecha(new Date());
+            ]).then(function () {
+                date = formatDate(new Date());
                 browser.driver.navigate().refresh();
                 expect(forum.answerUser.getText()).toBe(user.user.toLowerCase(), 'Usuario incorrecto en respuesta 2');
                 expect(forum.answerUpdatedAt.getText()).toBe(date, 'Fecha incorrecta en respuesta 2');
@@ -221,21 +226,21 @@ describe('Forum', function () {
         });
         login.logout();
 
-        function getFecha(date){
-            var monthNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
-              "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-            var fecha = date.getDate() +' '+ monthNames[date.getMonth()]+'. '+date.getFullYear()+', ';
-            if(date.getHours()<10){
-                fecha = fecha+ '0' + date.getHours();
-            }else{
+        function formatDate(date) {
+            var monthNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+            var fecha = date.getDate() + ' ' + monthNames[date.getMonth()] + '. ' + date.getFullYear() + ', ';
+            if (date.getHours() < 10) {
+                fecha = fecha + '0' + date.getHours();
+            } else {
                 fecha = fecha + date.getHours();
             }
-            if(date.getMinutes() < 10){
+            if (date.getMinutes() < 10) {
                 fecha = fecha + ':0' + date.getMinutes();
-            }else{
+            } else {
                 fecha = fecha + ':' + date.getMinutes();
             }
-              return fecha;
+            return fecha;
         }
 
 
@@ -245,50 +250,95 @@ describe('Forum', function () {
 
         forum.get();
         //general background color:
-        expect(forum.forumBackground.getCssValue('background-color')).toBe('rgba(238, 238, 238, 1)','Forum background is not grey');
-
-        forum.sectionsArray.then(function(items){
-            for(var seccion = 1; seccion<=items.length; seccion++) { //Iterates over the sections
-                if(seccion!=1){ //Si no es la primera, no buscar titulo
-                    expect(element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")]['+seccion+']/div[contains(@class, "section__heading")]')).isPresent()).toBe(true, 'Title fail');
+        expect(forum.forumBackground.getCssValue('background-color')).toBe('rgba(238, 238, 238, 1)', 'Forum background is not grey');
+        forum.sectionsArray.count().then(function (numSections) {
+            console.log('numSections ' + numSections);
+            for (var sectionNumber = 0; sectionNumber < numSections; sectionNumber++) {
+                if (sectionNumber !== 0) {
+                    expect(forum.sectionsArray.get(sectionNumber).$('[data-element="forum-section-header"]').isPresent()).toBe(true, 'Title fail in section ' + sectionNumber);
                 }
-                expect(items[seccion-1].getCssValue('background-color')).toBe('rgba(255, 255, 255, 1)','Background color is not white');
-                expect(items[seccion-1].getCssValue('margin-bottom')).toBe('30px','Section margin is not 30px');
 
-                comprobarCategoriasDeSeccion(seccion);
+                expect(forum.sectionsArray.get(sectionNumber).getCssValue('background-color')).toBe('rgba(255, 255, 255, 1)', 'Background color is not white in section ' + sectionNumber);
+                expect(forum.sectionsArray.get(sectionNumber).getCssValue('margin-bottom')).toBe('30px', 'Section margin is not 30px in section ' + sectionNumber);
+
+                checkCategoriesOnSections(sectionNumber);
             }
 
-            /**
-            * This function recives a section and iterate over the categories inside it.
-            **/
-            function comprobarCategoriasDeSeccion(seccion){
-                element.all(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")]['+seccion+']/div[contains(@class, "row")]')).then(function(rows){
-                    for(var categoria = 1; categoria<=rows.length; categoria++) { //Iterates over the categories
-                        //console.log('Seccion: '+seccion+' || Categoria: '+categoria);
-                        hasLastTopic(seccion, categoria);
+            function hasLastTopic(section, category) {
+                protractor.promise.all([
+                    element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + section + ']/div[contains(@class, "row")][' + category + ']//span[contains(@data-element, "forum-threads-counter")]')).getText(),
+                    element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + section + ']/div[contains(@class, "row")][' + category + ']/div[3]//span')).getText()
+                ]).then(function (results) {
+                    if (results[0] === 0 && results[1] === 0) {
+                        expect(element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + section + ']/div[contains(@class, "row")][' + category + ']/div[4]//a')).isPresent()).toBe(false, 'Does have last topic');
+                    } else {
+                        expect(element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + section + ']/div[contains(@class, "row")][' + category + ']/div[4]//a')).isPresent()).toBe(true, 'Does not have last topic');
                     }
                 });
             }
-
-            /**
-            * This function recieves section and category and asserts his behaviour
-            **/
-            function hasLastTopic(seccion, categoria){
-                  protractor.promise.all([
-                             element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")]['+seccion+']/div[contains(@class, "row")]['+categoria+']//span[contains(@data-element, "forum-threads-counter")]')).getText(),
-                              element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")]['+seccion+']/div[contains(@class, "row")]['+categoria+']/div[3]//span')).getText()
-                 ]).then(function (results) {
-                     if(results[0]==0 && results[1]==0){
-                         expect(element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")]['+seccion+']/div[contains(@class, "row")]['+categoria+']/div[4]//a')).isPresent()).toBe(false, 'Does have last topic');
-                     }else{
-                         expect(element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")]['+seccion+']/div[contains(@class, "row")]['+categoria+']/div[4]//a')).isPresent()).toBe(true, 'Does not have last topic');
-                     }
-                 });
+            function checkCategoriesOnSections(section) {
+                element.all(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + section + ']/div[contains(@class, "row")]')).then(function (rows) {
+                    for (var categoria = 1; categoria <= rows.length; categoria++) { //Iterates over the categories
+                        //console.log('Seccion: '+seccion+' || Categoria: '+categoria);
+                        hasLastTopic(section, categoria);
+                    }
+                });
             }
         });
+
+
+
+        /*forum.sectionsArray.then(function (items) {
+            for (var seccion = 0; seccion <= items.length; seccion++) { //Iterates over the sections
+                if (seccion !== 0) { //Si no es la primera, no buscar titulo
+                    console.log(seccion);
+                    /*expect(element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + seccion + ']/div[contains(@class, "section__heading")]')).isPresent()).toBe(true, 'Title fail');
+                    element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + seccion + ']/div[contains(@class, "section__heading")]')).getText().then(function (text) {
+                        console.log('text ' + text);
+                    });*/
+        /*expect(forum.sectionsArray.get(seccion).$('[data-element="forum-section-header"]').isPresent()).toBe(true, 'Title fail in section ' + seccion);
+        forum.sectionsArray.get(seccion).$('[data-element="forum-section-header"]').getText().then(function (text) {
+            console.log('text ' + text);
+        });
+    }
+    //console.log(items);
+    expect(items[seccion].getCssValue('background-color')).toBe('rgba(255, 255, 255, 1)', 'Background color is not white');
+    expect(items[seccion].getCssValue('margin-bottom')).toBe('30px', 'Section margin is not 30px');
+
+    comprobarCategoriasDeSeccion(seccion);
+}*/
+
+        /**
+        * This function recives a section and iterate over the categories inside it.
+        **/
+        /*function comprobarCategoriasDeSeccion(seccion) {
+            element.all(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + seccion + ']/div[contains(@class, "row")]')).then(function (rows) {
+                for (var categoria = 1; categoria <= rows.length; categoria++) { //Iterates over the categories
+                    //console.log('Seccion: '+seccion+' || Categoria: '+categoria);
+                    hasLastTopic(seccion, categoria);
+                }
+            });
+        }*/
+
+        /**
+        * This function recieves section and category and asserts his behaviour
+        **/
+        /*function hasLastTopic(seccion, categoria) {
+            protractor.promise.all([
+                element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + seccion + ']/div[contains(@class, "row")][' + categoria + ']//span[contains(@data-element, "forum-threads-counter")]')).getText(),
+                element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + seccion + ']/div[contains(@class, "row")][' + categoria + ']/div[3]//span')).getText()
+            ]).then(function (results) {
+                if (results[0] == 0 && results[1] == 0) {
+                    expect(element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + seccion + ']/div[contains(@class, "row")][' + categoria + ']/div[4]//a')).isPresent()).toBe(false, 'Does have last topic');
+                } else {
+                    expect(element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + seccion + ']/div[contains(@class, "row")][' + categoria + ']/div[4]//a')).isPresent()).toBe(true, 'Does not have last topic');
+                }
+            });
+        }
+    });*/
     });
 
-    it('bbb-236:forum:check visit counter to a topic', function () {
+    fit('bbb-236:forum:check visit counter to a topic', function () {
 
 
         var titulo = 'tema automatico ' + Number(new Date());
@@ -301,7 +351,8 @@ describe('Forum', function () {
         forum.breadcrumbsCategory.click();
         forum.categoryTopicTitleArray.get(0).click();
         forum.breadcrumbsCategory.click();
-        expect(forum.firstTopicVisitCount.getText()).toContain("0", 'Wrong visits count 1');
+
+        expect(forum.firstTopicVisitCount.getText()).toContain('0', 'Wrong visits count 1');
         login.logout();
 
         //visit topic logged (increment visit count)
@@ -310,7 +361,7 @@ describe('Forum', function () {
         forum.othersCategory.click();
         forum.categoryTopicTitleArray.get(0).click();
         forum.breadcrumbsCategory.click();
-        expect(forum.firstTopicVisitCount.getText()).toContain("1", 'Wrong visits count 2');
+        expect(forum.firstTopicVisitCount.getText()).toContain('1', 'Wrong visits count 2');
         login.logout();
 
         //visit topic with visitor (visit count does not increment)
@@ -318,7 +369,7 @@ describe('Forum', function () {
         forum.othersCategory.click();
         forum.categoryTopicTitleArray.get(0).click();
         forum.breadcrumbsCategory.click();
-        expect(forum.firstTopicVisitCount.getText()).toContain("1", 'Wrong visits count 3');
+        expect(forum.firstTopicVisitCount.getText()).toContain('1', 'Wrong visits count 3');
 
     });
 
@@ -337,12 +388,12 @@ describe('Forum', function () {
 
         login.loginWithRandomUser();
         forum.get();
-        forum.noTopicCategories.then(function(noTopic){
+        forum.noTopicCategories.then(function (noTopic) {
             noTopic[0].click();
             browser.sleep(10000);
             expect(forum.paginationList.isPresent()).toBe(false, 'Pagination is present');
             forum.get();
-            forum.moreThanTenTopicCategories.then(function(moreThanTen){
+            forum.moreThanTenTopicCategories.then(function (moreThanTen) {
                 moreThanTen[0].click();
                 browser.sleep(10000);
                 expect(forum.paginationList.isPresent()).toBe(true, 'Pagination is not present');
@@ -376,17 +427,17 @@ describe('Forum', function () {
         forum.get();
         forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
         //bucle 10 anwsers (no pagination)
-        for (var i=0;i<10;i++){
+        for (var i = 0; i < 10; i++) {
             forum.createAnswer();
-            expect(forum.paginationList.isPresent()).toBe(false, 'Pagination is present')
+            expect(forum.paginationList.isPresent()).toBe(false, 'Pagination is present');
         }
         //create the 11 answer (pagination is present)
         forum.createAnswer();
-        expect(forum.paginationList.isPresent()).toBe(true, 'No pagination is present')
+        expect(forum.paginationList.isPresent()).toBe(true, 'No pagination is present');
         forum.breadcrumbsForo.click();
         forum.lastTopicOthers.click();
         browser.sleep(vars.timeToWaitTab);
-        expect(forum.topicTopicTitle.getText()).toMatch(titulo, 'Wrong topic')
+        expect(forum.topicTopicTitle.getText()).toMatch(titulo, 'Wrong topic');
         login.logout();
 
     });
@@ -415,7 +466,7 @@ describe('Forum', function () {
         forum.get();
         forum.othersCategory.click();
         forum.newTopicButton.click();
-        expect(forum.categoryDropdownHeader.getText()).toMatch("Otros", 'Wrong category');
+        expect(forum.categoryDropdownHeader.getText()).toMatch('Otros', 'Wrong category');
         login.logout();
 
     });

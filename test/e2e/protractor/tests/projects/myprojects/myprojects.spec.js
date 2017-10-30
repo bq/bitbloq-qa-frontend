@@ -36,7 +36,7 @@ var vars = new Variables(),
 
 globalFunctions.xmlReport('myprojects');
 
-describe('My Projects', function() {
+describe('My Projects', function () {
 
     //beforeEach commons
     globalFunctions.beforeTest();
@@ -44,12 +44,12 @@ describe('My Projects', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-674:myProjects: Delete a project - send to trash', function() {
+    it('bbb-674:myProjects: Delete a project - send to trash', function () {
         sendProjectToTrash();
         login.logout();
     });
 
-    it('bbb-675:myProjects: Delete a project - delete permanently', function() {
+    it('bbb-675:myProjects: Delete a project - delete permanently', function () {
         var projectName = sendProjectToTrash();
         browser.actions().mouseMove(projects.getTrashObject({
             'name': projectName
@@ -57,25 +57,25 @@ describe('My Projects', function() {
         projects.getTrashOptions(projectName).click();
         projects.eliminate4ever.click();
         expect(commons.toastSendProjectToTrash.isPresent(true, 'Project not deleted'));
-        projects.getTrashCount().then(function(result) {
+        projects.getTrashCount().then(function (result) {
             expect(Number(result)).toEqual(0);
         });
-        projects.trashCount.getText().then(function(result) {
+        projects.trashCount.getText().then(function (result) {
             expect(Number(result.slice(1, -1))).toEqual(0);
         });
         projects.myprojectsTab.click();
         expect(projects.projectsName.isPresent()).toBe(false);
-        projects.getProjectCount().then(function(result) {
+        projects.getProjectCount().then(function (result) {
             expect(Number(result)).toEqual(0);
         });
 
-        myprojects.projectsCount.getText().then(function(result) {
+        myprojects.projectsCount.getText().then(function (result) {
             expect(Number(result.slice(1, -1))).toEqual(0);
         });
         login.logout();
     });
 
-    it('bbb-676:myProjects: Delete a project - restore project', function() {
+    it('bbb-676:myProjects: Delete a project - restore project', function () {
         var projectName = sendProjectToTrash();
         browser.actions().mouseMove(projects.getTrashObject({
             'name': projectName
@@ -83,19 +83,19 @@ describe('My Projects', function() {
         projects.getTrashOptions(projectName).click();
         projects.restoreProject.click();
         expect(commons.toastSendProjectToTrash.isPresent(true, 'Project not deleted'));
-        projects.getTrashCount().then(function(result) {
+        projects.getTrashCount().then(function (result) {
             expect(Number(result)).toEqual(0);
         });
-        projects.trashCount.getText().then(function(result) {
+        projects.trashCount.getText().then(function (result) {
             expect(Number(result.slice(1, -1))).toEqual(0);
         });
         projects.myprojectsTab.click();
         expect(projects.projectsName.isPresent()).toBe(true);
-        projects.getProjectCount().then(function(result) {
+        projects.getProjectCount().then(function (result) {
             expect(Number(result)).toEqual(1);
         });
 
-        myprojects.projectsCount.getText().then(function(result) {
+        myprojects.projectsCount.getText().then(function (result) {
             expect(Number(result.slice(1, -1))).toEqual(1);
         });
         login.logout();
@@ -103,7 +103,7 @@ describe('My Projects', function() {
 
     function sendProjectToTrash() {
         //Create and check saved project
-        var newLoginRandom = login.loginWithRandomUser();
+        login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -122,10 +122,10 @@ describe('My Projects', function() {
         projects.get();
         expect(projects.projectsName.getText()).toEqual(name);
 
-        projects.getProjectCount().then(function(result) {
+        projects.getProjectCount().then(function (result) {
             expect(Number(result)).toEqual(1);
         });
-        myprojects.projectsCount.getText().then(function(result) {
+        myprojects.projectsCount.getText().then(function (result) {
             expect(Number(result.slice(1, -1))).toEqual(1);
         });
         browser.actions().mouseMove(myprojects.getProjectObject({
@@ -136,48 +136,48 @@ describe('My Projects', function() {
         expect(commons.toastSendProjectToTrash.isPresent(true, 'Project not deleted'));
 
         expect(projects.projectsName.isPresent()).toBe(false);
-        projects.getProjectCount().then(function(result) {
+        projects.getProjectCount().then(function (result) {
             expect(Number(result)).toEqual(0);
         });
 
-        myprojects.projectsCount.getText().then(function(result) {
+        myprojects.projectsCount.getText().then(function (result) {
             expect(Number(result.slice(1, -1))).toEqual(0);
         });
         projects.trashProjects.click();
         expect(projects.projectsName.isPresent()).toBe(true);
-        projects.trashCount.getText().then(function(result) {
+        projects.trashCount.getText().then(function (result) {
             expect(Number(result.slice(1, -1))).toEqual(1);
         });
         return name;
     }
 
-    it('bbb-27:myProjects:Verify that the Search bar work correctly', function() {
+    it('bbb-27:myProjects:Verify that the Search bar work correctly', function () {
 
         //Save and publish 2 project begining in test_save__ , and use name of one
         // make.saveProjectAndPublish(true);
 
-        make.saveProjectAndPublishNewUserAndLogout().then(function(savedProject) {
+        make.saveProjectAndPublishNewUserAndLogout().then(function (savedProject) {
             // promise because expect return promise
-            make.saveProjectAndPublishUser(savedProject.user.user, savedProject.user.password).then(function(project) {
+            make.saveProjectAndPublishUser(savedProject.user.user, savedProject.user.password).then(function (project) {
                 projects.get();
 
-                projects.findBar.clear().sendKeys(project.projectName).then(function() {
+                projects.findBar.clear().sendKeys(project.projectName).then(function () {
                     browser.sleep(2000);
-                    projects.getProjectCount().then(function(result) {
+                    projects.getProjectCount().then(function (result) {
                         expect(Number(result)).toEqual(1);
                     });
                 });
 
-                projects.findBar.clear().sendKeys('test_save_').then(function() {
+                projects.findBar.clear().sendKeys('test_save_').then(function () {
                     browser.sleep(2000);
-                    projects.getProjectCount().then(function(result) {
+                    projects.getProjectCount().then(function (result) {
                         expect(Number(result) >= 1).toBeTruthy();
                     });
                 });
 
-                projects.findBar.clear().sendKeys('no_test' + Number(new Date())).then(function() {
+                projects.findBar.clear().sendKeys('no_test' + Number(new Date())).then(function () {
                     browser.sleep(2000);
-                    projects.getProjectCount().then(function(result) {
+                    projects.getProjectCount().then(function (result) {
                         expect(Number(result)).toEqual(0);
                     });
                 });
@@ -188,12 +188,12 @@ describe('My Projects', function() {
 
     });
 
-    it('bbb-28:myProjects:Verify that the project can be published', function() {
+    it('bbb-28:myProjects:Verify that the project can be published', function () {
 
         var nameProject = make.saveProjectNewUser().projectName;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
-        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+        bloqs.getBloqFunctions('bloq-return-function').then(function (bloque1) {
             bloqs.addToGroupVars(bloque1);
             bloqs.closeTab();
         });
@@ -214,8 +214,8 @@ describe('My Projects', function() {
         makeActions.publishButton.click();
         header.navExplore.click();
         //Check that the project is displayed in explora page.
-        explore.exploreFind.clear().sendKeys(nameProject).then(function() {
-            explore.exploreCounts.getText().then(function(value) {
+        explore.exploreFind.clear().sendKeys(nameProject).then(function () {
+            explore.exploreCounts.getText().then(function (value) {
                 value = value.split('/');
                 // Verify that it has a result
                 expect(Number(value[1])).toEqual(1);
@@ -233,8 +233,8 @@ describe('My Projects', function() {
                 makeActions.privateButton.click();
                 header.navExplore.click();
                 //Check that the project isn't displayed in explora page.
-                explore.exploreFind.clear().sendKeys(nameProject).then(function() {
-                    explore.exploreCounts.getText().then(function(value) {
+                explore.exploreFind.clear().sendKeys(nameProject).then(function () {
+                    explore.exploreCounts.getText().then(function (value) {
                         value = value.split('/');
                         // Verify that it hasn't any result
                         expect(Number(value[1])).toEqual(0);
@@ -247,7 +247,7 @@ describe('My Projects', function() {
 
     });
 
-    it('bbb-32:myProjects:Verify if not have project, show create new project', function() {
+    it('bbb-32:myProjects:Verify if not have project, show create new project', function () {
         login.loginWithRandomUser();
         myprojects.newProject.click();
         globalFunctions.toMatchUrlInNewTab(/#\/bloqsproject/);
@@ -255,9 +255,9 @@ describe('My Projects', function() {
 
     });
 
-    it('bbb-30:myProjects:Check if projects are show correctly in my projects', function() {
+    it('bbb-30:myProjects:Check if projects are show correctly in my projects', function () {
 
-        var checkNameProjects = function(row, contain) {
+        var checkNameProjects = function (row, contain) {
             expect(element.all(by.repeater('project in projectSearched').row(row).column('project.name')).getText()).toContain(contain);
         };
 
@@ -453,7 +453,7 @@ describe('My Projects', function() {
         login.logout();
     });
 
-    it('bbb-35:myProjects:Verify you can change the name of a project', function() {
+    it('bbb-35:myProjects:Verify you can change the name of a project', function () {
         var originalName = make.saveProjectNewUser().projectName;
         browser.sleep(vars.timeToWaitSaveNewProject);
         projects.get();
@@ -461,7 +461,7 @@ describe('My Projects', function() {
 
         //rename
 
-        myprojects.timeTag.getText().then(function(timeCreation) {
+        myprojects.timeTag.getText().then(function (timeCreation) {
             browser.actions().mouseMove(myprojects.overMyProjects).perform();
             browser.sleep(vars.timeToWaitFadeModals);
             browser.actions().mouseMove(myprojects.getProjectObject({
@@ -483,24 +483,24 @@ describe('My Projects', function() {
 
     });
 
-    it('bbb-XX:myProjects: Check no pagination when not enough projects', function() {
+    it('bbb-XX:myProjects: Check no pagination when not enough projects', function () {
         make.saveProjectNewUser('Project_1');
         myprojects.get();
 
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
 
-        projects.getProjectCount().then(function(result) {
+        projects.getProjectCount().then(function (result) {
             expect(Number(result)).toEqual(1);
         });
 
         browser.sleep(3000);
-        browser.executeScript('$("#projects__view").scrollTop(10000);').then(function() {
+        browser.executeScript('$("#projects__view").scrollTop(10000);').then(function () {
             expect(browser.isElementPresent((myprojects.getMyProjectsPage(1)))).toBe(false);
         });
         login.logout();
     });
 
-    it('bbb-XX:myProjects: Check Pagination', function() {
+    it('bbb-XX:myProjects: Check Pagination', function () {
         make.saveProjectNewUser('Project_1');
         make.saveProject('Project_2');
         make.saveProject('Project_3');
@@ -527,16 +527,16 @@ describe('My Projects', function() {
 
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
 
-        projects.getProjectCount().then(function(result) {
+        projects.getProjectCount().then(function (result) {
             expect(Number(result)).toEqual(20);
         });
 
         browser.sleep(3000);
-        browser.executeScript('$("#projects__view").scrollTop(10000);').then(function() {
+        browser.executeScript('$("#projects__view").scrollTop(10000);').then(function () {
             myprojects.getMyProjectsPage(2).click();
             browser.sleep(3000);
             expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=2');
-            projects.getProjectCount().then(function(result) {
+            projects.getProjectCount().then(function (result) {
                 expect(Number(result)).toEqual(2);
             });
             myprojects.getMyProjectsPage(1).click();
@@ -545,7 +545,7 @@ describe('My Projects', function() {
         login.logout();
     });
 
-    it('bbb-XX:myProjects: Check Pagination Back and Next', function() {
+    it('bbb-XX:myProjects: Check Pagination Back and Next', function () {
         make.saveProjectNewUser('Project_1');
         make.saveProject('Project_2');
         make.saveProject('Project_3');
@@ -572,18 +572,18 @@ describe('My Projects', function() {
 
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
 
-        projects.getProjectCount().then(function(result) {
+        projects.getProjectCount().then(function (result) {
             expect(Number(result)).toEqual(20);
         });
 
         browser.sleep(3000);
-        browser.executeScript('$("#projects__view").scrollTop(10000);').then(function() {
+        browser.executeScript('$("#projects__view").scrollTop(10000);').then(function () {
             myprojects.paginationLast.click();
             expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
             myprojects.paginationNext.click();
             browser.sleep(3000);
             expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=2');
-            projects.getProjectCount().then(function(result) {
+            projects.getProjectCount().then(function (result) {
                 expect(Number(result)).toEqual(2);
             });
             myprojects.paginationLast.click();
@@ -592,7 +592,7 @@ describe('My Projects', function() {
         login.logout();
     });
 
-    fit('bbb-XX:myProjects: Check Pagination Enter Url', function() {
+    fit('bbb-XX:myProjects: Check Pagination Enter Url', function () {
         make.saveProjectNewUser('Project_1');
         make.saveProject('Project_2');
         make.saveProject('Project_3');
@@ -619,12 +619,12 @@ describe('My Projects', function() {
 
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
 
-        projects.getProjectCount().then(function(result) {
+        projects.getProjectCount().then(function (result) {
             expect(Number(result)).toEqual(20);
         });
 
         browser.get('#/projects/myprojects?page=2');
-        projects.getProjectCount().then(function(result) {
+        projects.getProjectCount().then(function (result) {
             expect(Number(result)).toEqual(2);
         });
 

@@ -14,7 +14,7 @@ var header = new Header(),
     bloqsExercise = new BloqsExercise(),
     globalFunctions = new GlobalFunctions();
 
-var Myprojects = function() {
+var Myprojects = function () {
 
     this.eliminateMyProjects = $('[data-element="eliminate-myproject"]');
     this.overMyProjects = $('[data-element="over-project"]');
@@ -33,34 +33,34 @@ var Myprojects = function() {
     //Data-tooltips
     this.copyProject = $('[data-element="myprojects-copy-project"]');
     this.downloadProject = $('[data-element="myprojects-download-project"]');
-    this.exportArduinoProject = $('[data-element="myprojects-export-arduino-code-button"]')
+    this.exportArduinoProject = $('[data-element="myprojects-export-arduino-code-button"]');
     this.projectsCount = $('[data-element="projects-count"]');
     this.paginationLast = $('[data-element="pagination-last"]');
     this.paginationNext = $('[data-element="pagination-next"]');
     this.url = '#/projects/myprojects';
-    this.get = function() {
+    this.get = function () {
         browser.get(this.url);
     };
 
-    this.getProjectObject = function(projectInfo) {
+    this.getProjectObject = function (projectInfo) {
         return $('[data-element2="project-' + projectInfo.name + '"]');
     };
 
-    this.getElementFromProjectMenu = function(element) {
+    this.getElementFromProjectMenu = function (element) {
         return $('[data-element="myprojects-' + element + '-project"]');
-    }
+    };
 
-    this.getProjectInfo = function(name) {
+    this.getProjectInfo = function (name) {
         console.log('vamoooh');
         console.log('[data-element="project-' + name + '-options"]');
         return $('[data-element="project-' + name + '-options"]');
-    }
+    };
 
-    this.getMyProjectsPage = function(pageno) {
+    this.getMyProjectsPage = function (pageno) {
         return $('[data-element="page-' + pageno + '"]');
-    }
+    };
 
-    this.createProject = function(options) {
+    this.createProject = function (options) {
         options = options || {};
         var project = {
             name: 'Project_' + globalFunctions.getRandomNumber()
@@ -70,7 +70,7 @@ var Myprojects = function() {
         this.newProject.click();
         browser.sleep(vars.timeToWaitTab);
 
-        return browser.getAllWindowHandles().then(function(handles) {
+        return browser.getAllWindowHandles().then(function (handles) {
 
             browser.sleep(vars.timeToWaitTab);
 
@@ -107,7 +107,7 @@ var Myprojects = function() {
                 }
             }
 
-            return browser.close().then(function() {
+            return browser.close().then(function () {
                 browser.switchTo().window(handles[0]);
 
                 return project;

@@ -6,7 +6,6 @@
 
 var Variables = require('../commons/variables.js'),
     GlobalFunctions = require('../commons/globalFunctions.js'),
-    Commons = require('../commons/commons.po.js'),
     Make = require('./make.po.js'),
     Login = require('../login/login.po.js'),
     Projects = require('../projects/projects.po.js'),
@@ -17,7 +16,6 @@ var Variables = require('../commons/variables.js'),
 
 var vars = new Variables(),
     globalFunctions = new GlobalFunctions(),
-    commons = new Commons(),
     login = new Login(),
     make = new Make(),
     projects = new Projects(),
@@ -266,6 +264,7 @@ describe('make tab', function () {
     });
 
     it('bbb-152:bloqsproject:verify header-compile is blocked when clicked', function () {
+        //you have to accept open web2board links, or test fail
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -275,7 +274,7 @@ describe('make tab', function () {
         browser.sleep(4000);
         expect(make.compileButton.isEnabled()).toBe(true);
         login.logout();
-     });
+    });
 
     it('bbb-147:bloqsproject:verify robot and board tags', function () {
         login.loginWithRandomUser();
@@ -297,8 +296,7 @@ describe('make tab', function () {
         make.hardwareTab.click();
         hwtab.robotsTab.click();
         hwtab.hwRobotMBot.click();
-        modals.cancelDialog.click();
-        browser.sleep(vars.timeToWaitFadeModals);
+        modals.cancel();
         make.infoTab.click();
         expect(infotab.infotabMCoreTag.getText()).toMatch('MCore', 'The MCore tag does not matches');
         expect(infotab.infotabMCoreDeleteTag.isPresent()).toBe(false, 'MCore tag can be removed');

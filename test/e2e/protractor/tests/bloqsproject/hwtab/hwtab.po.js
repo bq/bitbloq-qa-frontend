@@ -10,14 +10,14 @@ var HwTab = function () {
     this.hwContextMenuBoard = $('[id="board-context-menu"]');
     this.hwContextMenuDeleteBoard = $('[data-element="hw-contextmenu-board-delete"]');
     this.hwContextMenuDisconnectBoard = $('[data-element="hw-contextmenu-board-disconnect"]');
-    this.hwBoardBQZum = element(by.xpath('//h1[contains(text(), "bq ZUM")]/../img'));
-    this.hwBoardFreaduinoUno = element(by.xpath('//h1[contains(text(), "Freaduino UNO")]/../img'));
+    this.hwBoardBQZum = $('[data-element="board-bqZUM"]');
+    this.hwBoardFreaduinoUno = $('[data-element="board-FreaduinoUNO"]');
 
 
     //ROBOTS
     this.hwContextMenuRobot = $('[id="robot-context-menu"]');
     this.hwContextMenuDeleteRobot = $('[data-element="hw-contextmenu-robot-delete"]');
-    this.hwRobotMBot = element(by.xpath('//h1[contains(text(), "mBot")]/../img'));
+    this.hwRobotMBot = $('[data-element="robot-mbot"]');
 
 
     //COMPONENT

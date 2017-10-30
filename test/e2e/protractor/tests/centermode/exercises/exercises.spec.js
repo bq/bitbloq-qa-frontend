@@ -2,40 +2,19 @@
 var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Header = require('../../header/header.po.js'),
     Login = require('../../login/login.po.js'),
-    Variables = require('../../commons/variables.js'),
-    MyCenter = require('./../mycenter/myCenter.po.js'),
     Centermode = require('../centermode.po.js'),
-    MyExercises = require('../myexercises/myexercises.po.js'),
     Exercises = require('../exercises/exercises.po.js'),
     Myclass = require('../myclass/myclass.po.js'),
-    TaskTable = require('../taskTable/taskTable.po.js'),
-    BloqsExercise = require('../bloqsExercise/bloqsExercise.po.js'),
-    ExercisesTable = require('../exercisesTable/exercisesTable.po.js'),
-    MakeActions = require('../../bloqsproject/makeActions/makeActions.po.js'),
-    Myprojects = require('../../projects/myprojects/myprojects.po.js'),
-    Hwtab = require('../../bloqsproject/hwtab/hwtab.po.js'),
-    Modals = require('../../modals/modals.po.js'),
-    ThirdPartyRobotsApi = require('../../commons/api/ThirdPartyRobotsApi.js');
+    Modals = require('../../modals/modals.po.js');
 
 
 var globalFunctions = new GlobalFunctions(),
     header = new Header(),
     login = new Login(),
-    taskTable = new TaskTable(),
-    myExercises = new MyExercises(),
     exercises = new Exercises(),
-    vars = new Variables(),
-    mycenter = new MyCenter(),
     centermode = new Centermode(),
     myclass = new Myclass(),
-    bloqsExercise = new BloqsExercise(),
-    exercisesTable = new ExercisesTable(),
-    makeActions = new MakeActions(),
-    myprojects = new Myprojects(),
-    thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
-    flow = browser.controlFlow(),
-    modals = new Modals(),
-    hwtab = new Hwtab();
+    modals = new Modals();
 
 globalFunctions.xmlReport('exercises');
 

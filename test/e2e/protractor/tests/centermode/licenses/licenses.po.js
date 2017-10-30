@@ -80,7 +80,7 @@ var Licenses = function () {
             browser.switchTo().window(handles[0]);
             if (!options.student) {
                 header.navClass.click();//refresh
-            };
+            }
 
         });
     };
