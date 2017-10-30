@@ -17,7 +17,7 @@ var Account = function () {
     this.accountImage = $('[data-element="account-image"]');
     //checkbox
     this.imATeacher = $('[data-element="teacher-checkbox"]');
-    this.imAChromeApp = $('[data-element="chromeapp-checkbox"]');
+    this.useChromeAppCheckbox = $('[data-element="chromeapp-checkbox"]');
 
 
     this.get = function () {
