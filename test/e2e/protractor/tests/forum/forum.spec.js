@@ -338,7 +338,7 @@ describe('Forum', function () {
     });*/
     });
 
-    fit('bbb-236:forum:check visit counter to a topic', function () {
+    it('bbb-236:forum:check visit counter to a topic', function () {
 
 
         var titulo = 'tema automatico ' + Number(new Date());
