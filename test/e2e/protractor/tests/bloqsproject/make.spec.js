@@ -271,7 +271,7 @@ describe('make tab', function () {
         browser.sleep(vars.timeToWaitFadeModals);
         make.compileButton.click();
         expect(make.compileButton.isEnabled()).toBe(false);
-        browser.sleep(4000);
+        browser.sleep(6000);
         expect(make.compileButton.isEnabled()).toBe(true);
         login.logout();
     });
