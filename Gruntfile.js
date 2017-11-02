@@ -2,7 +2,7 @@
 /*jshint camelcase: false */
 /* jshint loopfunc: true */
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     var path = require('path'),
         async = require('async');
@@ -43,12 +43,12 @@ module.exports = function(grunt) {
             },
             list_all_files: 'ls -la',
             echo_grunt_version: {
-                cmd: function() {
+                cmd: function () {
                     return 'echo ' + this.version;
                 }
             },
             echo_name: {
-                cmd: function(firstName, lastName) {
+                cmd: function (firstName, lastName) {
                     var formattedName = [
                         lastName.toUpperCase(),
                         firstName.toUpperCase()
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
                 }
             },
             jenkins: {
-                cmd: function(env, buildN) {
+                cmd: function (env, buildN) {
                     switch (env) {
                         case 'NEXT':
                             env = 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/';
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
                 }
             },
             retry_jenkins: {
-                cmd: function(env, failID, suiteFail, buildN) {
+                cmd: function (env, failID, suiteFail, buildN) {
                     switch (env) {
                         case 'NEXT':
                             env = 'http://next-bitbloq.com.s3-website-eu-west-1.amazonaws.com/';
@@ -118,8 +118,8 @@ module.exports = function(grunt) {
         protractor: {
             options: { // Default config file
                 configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js', // Default config file
-                keepAlive: false, // If false, the grunt process stops when the test fails.
-                noColor: true, // If true, protractor will not use colors in its output.
+                keepAlive: true, // If false, the grunt process stops when the test fails.
+                noColor: false, // If true, protractor will not use colors in its output.
                 webdriverManagerUpdate: true,
                 includeStackTrace: true
             },
@@ -162,7 +162,18 @@ module.exports = function(grunt) {
                         suite: 'ALL,enviroment'
                     }
                 }
+            },
+            beta: {
+                options: {
+                    configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
+                    args: {
+                        baseUrl: 'http://beta-bitbloq.bq.com/',
+                        seleniumAddress: 'http://localhost:4444/wd/hub',
+                        suite: 'ALL,enviroment'
+                    }
+                }
             }
+
         }, //Protractor config task
 
         release: {
@@ -183,11 +194,11 @@ module.exports = function(grunt) {
 
     grunt.registerTask('listFiles', ['exec:list_all_files']);
 
-    grunt.registerTask('test', 'Protractor e2e funcional test (Selenium) task.', function(env) {
+    grunt.registerTask('test', 'Protractor e2e funcional test (Selenium) task.', function (env) {
         var tasks = ['jshint'];
 
         env = env || 'local';
-        
+
         tasks.push('clean:target');
         tasks.push('protractor_webdriver:e2eStart');
         tasks.push('protractor:' + env);
@@ -196,14 +207,14 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask('testjenkins', 'Protractor e2e funcional test (Selenium) task on jenkins', function(env) {
+    grunt.registerTask('testjenkins', 'Protractor e2e funcional test (Selenium) task on jenkins', function (env) {
         env = env || 'jenkins_next';
         var tasks = [];
         tasks.push('protractor:' + env);
         grunt.task.run(tasks);
     });
 
-    grunt.registerTask('jsonbitbloq1', 'Generate json of id testCase on bitbloq1', function() {
+    grunt.registerTask('jsonbitbloq1', 'Generate json of id testCase on bitbloq1', function () {
         // Force task into async mode and grab a handle to the "done" function.
         var done = this.async();
 
@@ -217,7 +228,7 @@ module.exports = function(grunt) {
             testplanid: 29714,
         };
 
-        testlinkConnect.getTestCasesForTestPlan(PlanID, function(obj) {
+        testlinkConnect.getTestCasesForTestPlan(PlanID, function (obj) {
 
             var testCaseObjArray = {
                 test: []
@@ -242,7 +253,7 @@ module.exports = function(grunt) {
                 }
             }
 
-            fs.writeFile('./target/bitbloq.json', JSON.stringify(testCaseObjArray.test), function(err) {
+            fs.writeFile('./target/bitbloq.json', JSON.stringify(testCaseObjArray.test), function (err) {
                 if (err) {
                     throw err;
                 }
@@ -257,7 +268,7 @@ module.exports = function(grunt) {
     // Save resulttest bitbloq 1 on testlink:
     // 1) grunt jsonbitbloq1
     // 2) grunt testlink --build=$idBuild --old=true  (only necessary indicate --build and old=true )
-    grunt.registerTask('testlink', 'Testlink report dump', function() {
+    grunt.registerTask('testlink', 'Testlink report dump', function () {
 
         var planID = grunt.option('plan') || '29389', // by default ALLTEST Plan Management
             buildID = grunt.option('build') || '1104', // by default 2.0.7 en Next - Corbel 1.22.0
@@ -296,7 +307,7 @@ module.exports = function(grunt) {
         var obj, passedArray = [];
 
         //Obj result
-        var Passed = function() {
+        var Passed = function () {
             return {
                 user: user,
                 testplanid: planID,
@@ -311,7 +322,7 @@ module.exports = function(grunt) {
         };
 
         function readFile(callback) {
-            fs.readFile(file, 'utf8', function(err, data) {
+            fs.readFile(file, 'utf8', function (err, data) {
                 grunt.log.writeln('Processing report file...');
                 if (err) {
                     throw err;
@@ -340,18 +351,18 @@ module.exports = function(grunt) {
         function reporter(value, callback) {
             //http://chaitanyaqa.github.io/testlink-api-client/classes/TestLinkApi.html#method_reportTCResult
 
-            testlinkConnect.reportTCResult(value, function() {
+            testlinkConnect.reportTCResult(value, function () {
                 grunt.log.ok('report sent: ', value);
                 callback();
             }, proxyValues);
         }
 
         async.waterfall([
-            function(callback) {
+            function (callback) {
                 readFile(callback);
             },
-            function(callback) {
-                async.map(passedArray, reporter, function(err) {
+            function (callback) {
+                async.map(passedArray, reporter, function (err) {
                     if (err) {
                         // console.error(err);
                     } else {
@@ -360,7 +371,7 @@ module.exports = function(grunt) {
                     callback();
                 });
             }
-        ], function(err) {
+        ], function (err) {
             if (err) {
                 // console.error(err);
             }
@@ -371,7 +382,7 @@ module.exports = function(grunt) {
 
     //
 
-    grunt.registerTask('readJSONRetryFailTest', 'Read JSON repeat fail test on jenkins', function() {
+    grunt.registerTask('readJSONRetryFailTest', 'Read JSON repeat fail test on jenkins', function () {
         // Force task into async mode and grab a handle to the "done" function.
         var done = this.async(),
             fs = require('fs'),
@@ -383,7 +394,7 @@ module.exports = function(grunt) {
             env = grunt.option('env') || 'NEXT';
 
         function readFile(callback) {
-            fs.readFile(file, 'utf8', function(err, data) {
+            fs.readFile(file, 'utf8', function (err, data) {
                 grunt.log.writeln('Processing report file...');
                 if (err) {
                     throw err;
@@ -406,10 +417,10 @@ module.exports = function(grunt) {
         }
 
         async.waterfall([
-            function(callback) {
+            function (callback) {
                 readFile(callback);
             },
-            function(callback) {
+            function (callback) {
                 if (isError) {
                     grunt.log.ok('Read JSON Fail and retry test: ' + id_test + ' of suites :' + id_suite + ' on baseUrl' + env + ' result on file' + grunt.option('buildN'));
                     grunt.task.run('exec:retry_jenkins:' + env + ':' + id_test + ':' + id_suite + ':' +
@@ -418,7 +429,7 @@ module.exports = function(grunt) {
                 }
                 callback();
             }
-        ], function(err) {
+        ], function (err) {
             if (err) {
                 console.error(err);
             }
