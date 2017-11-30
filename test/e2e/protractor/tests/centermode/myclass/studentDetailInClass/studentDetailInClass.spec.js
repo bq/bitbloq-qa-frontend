@@ -213,7 +213,7 @@ describe('Student Detail inside class Detail', function () {
             myclass.getClassObject(classInfo.id).click();
             classDetail.studentsTab.click();
             classDetail.getStudentsObjectInStudentsTable(student.user).click();
-            expect(taskTable.getTaskStatusObjectByExerciseName(exerciseInfo1.name).getText()).toBe('8.6', 'The mark is different');
+            expect(taskTable.getTaskStatusObjectByExerciseName(exerciseInfo1.name).getText()).toBe('8.06', 'The mark is different');
             login.logout();
 
         });
