@@ -270,7 +270,7 @@ describe('My center', function () {
         login.logout();
     });
 
-    fit('bbb-632:mycenter:Check robot activation', function () {
+    it('bbb-632:mycenter:Check robot activation', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
