@@ -6,7 +6,7 @@
 
 'use strict';
 
-var Variables = function() {
+var Variables = function () {
     //count for login
     this.user = 'luisangonzalez5';
     this.password = '123456';
@@ -29,7 +29,7 @@ var Variables = function() {
     this.emailFb = 'webpruebas.2@gmail.com';
     this.passwordFb = '299SeptiembreBitbloq';
     this.userFb = 'Paco';
-    this.lastnameFb = 'Gomez';
+    this.lastnameFb = 'Gómez';
     this.usernameFb = 'webpruebas';
 
     //timers
@@ -59,7 +59,7 @@ var Variables = function() {
     this.supportEmailIT = 'mailto:support.bitbloq.it@bq.com';
     this.supportEmailSV = 'mailto:support.bitbloq.sv@bq.com';
     this.supportEmailEN = 'mailto:support.bitbloq.en@bq.com';
-    this.supportEmail = function(language) {
+    this.supportEmail = function (language) {
         switch (language) {
             case 'es':
                 return this.supportEmailES;
@@ -116,7 +116,7 @@ var Variables = function() {
     this.threadCreated = 'Tema creado';
     this.threadCreatedEN = 'Thread created';
 
-    this.account = function(cuenta) {
+    this.account = function (cuenta) {
         if (cuenta === 'google') {
             return {
                 user: this.userGoogle,

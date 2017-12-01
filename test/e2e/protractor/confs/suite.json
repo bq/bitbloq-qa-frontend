@@ -89,8 +89,14 @@
         "../tests/state/state.spec.js",
         "../tests/centermode/centermode.spec.js",
         "../tests/centermode/mycenter/mycenter.spec.js",
-        "../tests/centermode/myclass/groups/groups.spec.js",
+        "../tests/centermode/myexercises/myExercises.spec.js",
+        "../tests/centermode/exercises/exercises.spec.js",
         "../tests/centermode/myclass/myclass.spec.js",
+        "../tests/centermode/licenses/licenses.spec.js",
+        "../tests/centermode/myclass/classDetail/classDetail.spec.js",
+        "../tests/centermode/myclass/studentDetailInClass/studentDetailInClass.spec.js",
+        "../tests/centermode/myclass/exerciseDetailInClass/exerciseDetailInClass.spec.js",
+        "../tests/bloqsproject/makeActions/share/makeActionsShare.spec.env.js",
         "../tests/account/account.spec.local.js",
         "../tests/autosave/autosave.spec.local.js",
         "../tests/bloqsproject/hwtab/hwtab.spec.local.js",
@@ -237,5 +243,9 @@
         "../tests/social/social.spec.local.js",
         "../tests/state/state.spec.local.js"
     ],
-    "unsupportedDesktop": "../tests/unsupported/unsupportedDesktop.spec.js"
+    "unsupportedDesktop": "../tests/unsupported/unsupportedDesktop.spec.js",
+    "custom":[
+        "../tests/landing/landing.spec.js",
+        "../tests/account/account.spec.js"
+    ]
 }

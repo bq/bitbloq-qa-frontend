@@ -11,7 +11,7 @@ var Register = require('../register/register.po.js'),
     Header = require('../header/header.po.js'),
     header = new Header();
 
-var Login = function() {
+var Login = function () {
     //This elements are public (this) by reuse
     //Login basic
     this.loginButton = $('[data-element="login-button"]');
@@ -48,7 +48,7 @@ var Login = function() {
 
     this.url = '#/login';
 
-    this.get = function() {
+    this.get = function () {
         browser.get(this.url);
     };
 
@@ -58,7 +58,7 @@ var Login = function() {
      * @param {String} password bitbloq user
      * @return {Void} void
      */
-    this.login = function(options) {
+    this.login = function (options) {
         options = options || {};
         if (!options.dontTravel) {
             this.get();
@@ -70,7 +70,7 @@ var Login = function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
     };
 
-    this.loginFail = function(user, password) {
+    this.loginFail = function (user, password) {
         this.user.sendKeys(user);
         this.password.sendKeys(password);
         this.loginButton.click();
@@ -84,14 +84,14 @@ var Login = function() {
      * @param {String} password bitbloq user
      * @return {Void} void
      */
-    this.loginFb = function(email, password) {
+    this.loginFb = function (email, password) {
 
         this.facebookButton.click();
 
         var that = this;
         browser.sleep(vars.timeToWaitTab);
         browser.getAllWindowHandles().then(
-            function(handles) {
+            function (handles) {
                 // Ignore sync (not angular page)
                 browser.ignoreSynchronization = true;
 
@@ -119,9 +119,9 @@ var Login = function() {
      * @param {String} password bitbloq user
      * @return {Void} void
      */
-    this.loginGoogle = function(email, password) {
+    this.loginGoogle = function (email, password) {
 
-        this.googleButton.click().then(function() {
+        this.googleButton.click().then(function () {
             console.log('click2');
         });
 
@@ -129,7 +129,7 @@ var Login = function() {
 
         var that = this;
         browser.sleep(vars.timeToWaitTab);
-        browser.getAllWindowHandles().then(function(handles) {
+        browser.getAllWindowHandles().then(function (handles) {
             // Ignore sync (not angular page)
             browser.ignoreSynchronization = true;
 
@@ -139,7 +139,7 @@ var Login = function() {
             //TODO refactor
             that.googleUser.sendKeys(email);
             browser.sleep(1000);
-            that.googleNext.click().then(function() {
+            that.googleNext.click().then(function () {
                 console.log('clic next');
             });
             browser.sleep(1000);
@@ -157,7 +157,7 @@ var Login = function() {
         });
     };
 
-    this.loginWithRandomUser = function(options) {
+    this.loginWithRandomUser = function (options) {
         options = options || {};
         this.get();
         var randomUserCredentials = register.generateUser(options.youngThan14);
@@ -203,7 +203,7 @@ var Login = function() {
         };
     };
 
-    this.loginWithUserName = function(name) {
+    this.loginWithUserName = function (name) {
         this.get();
         var randomUserCredentials = register.generateUser();
         register.createAccountButtn.click();
@@ -235,7 +235,7 @@ var Login = function() {
      * Are localStorage ?
      *  @return {boolean} boolean true or false cookies
      */
-    this.arelocalStorage = function() {
+    this.arelocalStorage = function () {
 
         //expect de token que se deben crear al hacer login
         var refreshToken = browser.executeScript('window.localStorage.getItem("ngStorage-userRefreshToken");');
@@ -249,14 +249,14 @@ var Login = function() {
         return true;
     };
 
-    this.logout = function() {
+    this.logout = function () {
         header.navLogo.click();
         $('[data-element="open-header-menu"]').click();
         $('[data-element="header-menu-logout"]').click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/');
     };
 
-    this.loginFromHeader = function(urlDest) {
+    this.loginFromHeader = function (urlDest) {
         header.enterButton.click();
         var randomUserCredentials = register.generateUser();
         register.createAccountButtn.click();
@@ -270,7 +270,7 @@ var Login = function() {
             true,
             true);
         //wait succesfull login page
-        browser.getCurrentUrl().then(function(url) {
+        browser.getCurrentUrl().then(function (url) {
             expect(url.indexOf(browser.baseUrl + '#/' + urlDest) > -1).toBeTruthy();
         });
 
@@ -284,6 +284,38 @@ var Login = function() {
             year: randomUserCredentials.year
 
         };
+
+    };
+
+    this.loginFromHeaderForum = function () {
+        header.enterButton.click();
+        var randomUserCredentials = register.generateUser();
+        register.createAccountButtn.click();
+        register.createAccount(
+            randomUserCredentials.username,
+            randomUserCredentials.userEmail,
+            randomUserCredentials.password,
+            randomUserCredentials.day,
+            randomUserCredentials.month,
+            randomUserCredentials.year,
+            true,
+            true);
+        //wait succesfull login page
+        /*browser.getCurrentUrl().then(function(url) {
+            expect(url.indexOf(browser.baseUrl + '#/' + urlDest) > -1).toBeTruthy();
+        });*/
+
+        //Add return for reuse user if is necessary
+        return {
+            user: randomUserCredentials.username,
+            userEmail: randomUserCredentials.userEmail,
+            password: randomUserCredentials.password,
+            day: randomUserCredentials.day,
+            month: randomUserCredentials.month,
+            year: randomUserCredentials.year
+
+        };
+
     };
 
 };

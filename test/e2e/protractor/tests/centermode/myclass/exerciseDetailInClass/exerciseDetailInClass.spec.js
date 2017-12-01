@@ -86,7 +86,7 @@ describe('Exercise Detail inside class Detail', function () {
             myclass.getClassObject(classInfo.id).click();
             classDetail.exercisesTab.click();
             exercisesTable.getExerciseNameObject(exerciseInfo1.name).click();
-            expect(taskTable.getTaskStatusObjectByUserName(student.user).getText()).toBe('8.6', 'The mark is different');
+            expect(taskTable.getTaskStatusObjectByUserName(student.user).getText()).toBe('8.06', 'The mark is different');
             login.logout();
 
         });

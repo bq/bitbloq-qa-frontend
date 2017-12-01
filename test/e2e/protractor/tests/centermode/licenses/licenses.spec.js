@@ -1,45 +1,33 @@
 'use strict';
 var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Commons = require('../../commons/commons.po.js'),
-    Header = require('../../header/header.po.js'),
     Login = require('../../login/login.po.js'),
-    Variables = require('../../commons/variables.js'),
     MyCenter = require('./../mycenter/myCenter.po.js'),
     Centermode = require('../centermode.po.js'),
     MyExercises = require('../myexercises/myexercises.po.js'),
     Exercises = require('../exercises/exercises.po.js'),
     Myclass = require('../myclass/myclass.po.js'),
-    TaskTable = require('../taskTable/taskTable.po.js'),
-    BloqsExercise = require('../bloqsExercise/bloqsExercise.po.js'),
-    ExercisesTable = require('../exercisesTable/exercisesTable.po.js'),
     Licenses = require('./licenses.po.js'),
     MakeActions = require('../../bloqsproject/makeActions/makeActions.po.js'),
     Myprojects = require('../../projects/myprojects/myprojects.po.js'),
-    Hwtab = require('../../bloqsproject/hwtab/hwtab.po.js'),
     CodeProjects = require('../../codeproject/codeproject.po.js'),
     ThirdPartyRobotsApi = require('../../commons/api/ThirdPartyRobotsApi.js');
 
 
 var globalFunctions = new GlobalFunctions(),
     commons = new Commons(),
-    header = new Header(),
     login = new Login(),
-    taskTable = new TaskTable(),
     myExercises = new MyExercises(),
     exercises = new Exercises(),
-    vars = new Variables(),
     mycenter = new MyCenter(),
     centermode = new Centermode(),
     myclass = new Myclass(),
-    bloqsExercise = new BloqsExercise(),
-    exercisesTable = new ExercisesTable(),
     licenses = new Licenses(),
     makeActions = new MakeActions(),
     myprojects = new Myprojects(),
     thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
     codeProjects = new CodeProjects(),
-    flow = browser.controlFlow(),
-    hwtab = new Hwtab();
+    flow = browser.controlFlow();
 
 globalFunctions.xmlReport('licenses');
 
@@ -813,7 +801,7 @@ describe('Test licenses', function () {
             });
         });
     });
-    fit('bbb-669:licenses:Cant compile codeproject of not activated robots', function () {
+    it('bbb-669:licenses:Cant compile codeproject of not activated robots', function () {
         login.loginWithRandomUser();
         codeProjects.get();
         expect(makeActions.compileButton.isEnabled()).toBe(true, 'without library the user can compile');

@@ -7,6 +7,7 @@ var Login = require('../login/login.po.js'),
     Infotab = require('./infotab/infotab.po.js'),
     MakeActions = require('./makeActions/makeActions.po.js'),
     Hwtab = require('../bloqsproject/hwtab/hwtab.po.js'),
+    Infotab = require('../bloqsproject/infotab/infotab.po.js'),
     ThirdPartyRobotsApi = require('../commons/api/ThirdPartyRobotsApi.js'),
     Bloqs = require('../bloqs/bloqs.po.js');
 
@@ -19,16 +20,16 @@ var login = new Login(),
     thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
     bloqs = new Bloqs(),
     hwtab = new Hwtab(),
+    infotab = new Infotab(),
     flow = browser.controlFlow();
 
-var Make = function() {
+var Make = function () {
 
     this.hardwareTab = $('[data-element="hardware-tab"]');
     this.softwareTab = $('[data-element="software-tab"]');
     this.infoTab = $('[data-element="info-tab"]');
     this.bloqsTab = $('[data-element="bloqs-tab"]');
     this.codeTab = $('[data-element="code-tab"]');
-
     this.swToolboxFunctions = $('[data-element="sw-toolbox-functions"]');
     this.projectName = $('[data-element="project-name"]');
     this.hideBar = $('[data-element="hide-bar"]');
@@ -40,11 +41,11 @@ var Make = function() {
     this.compileButton = $('[data-element="header-compile"]');
     this.uploadButton = $('[data-element="header-upload"]');
 
-    this.get = function() {
+    this.get = function () {
         browser.get(this.url);
     };
 
-    this.saveProject = function(nameProject) {
+    this.saveProject = function (nameProject) {
         var nameSavedProject = nameProject || 'Test_Save_' + Number(new Date());
         this.get();
         this.infoTab.click();
@@ -60,7 +61,7 @@ var Make = function() {
         };
     };
 
-    this.saveProjectNewUser = function(nameProject) {
+    this.saveProjectNewUser = function (nameProject) {
         var user = login.loginWithRandomUser();
         var nameSavedProject = nameProject || 'Test_Save_' + Number(new Date());
         this.get();
@@ -82,7 +83,7 @@ var Make = function() {
 
     };
 
-    this.saveProjectNewUserAndLogout = function() {
+    this.saveProjectNewUserAndLogout = function () {
         var project = this.saveProjectNewUser();
         login.logout();
         return {
@@ -92,7 +93,7 @@ var Make = function() {
 
     };
 
-    this.saveProjectUser = function(user, password) {
+    this.saveProjectUser = function (user, password) {
         login.get();
         login.login({
             'user': user,
@@ -104,7 +105,7 @@ var Make = function() {
         };
     };
 
-    this.saveProjectUserAndLogout = function(user, password) {
+    this.saveProjectUserAndLogout = function (user, password) {
         login.login({
             'user': user,
             'password': password
@@ -117,21 +118,21 @@ var Make = function() {
 
     };
 
-    this.saveProjectAndPublishNewUser = function() {
+    this.saveProjectAndPublishNewUser = function () {
         var projectUser = this.saveProjectNewUser();
         browser.sleep(vars.timeToWaitAutoSave);
         var make = this;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
-        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+        bloqs.getBloqFunctions('bloq-return-function').then(function (bloque1) {
             bloqs.addToGroupVars(bloque1);
             bloqs.closeTab();
             browser.sleep(vars.timeToWaitAutoSave);
             make.publishProject();
             browser.sleep(vars.timeToWaitAutoSave);
         });
-        return browser.wait(function() {
-            return browser.getCurrentUrl().then(function(url) {
+        return browser.wait(function () {
+            return browser.getCurrentUrl().then(function (url) {
                 return {
                     projectName: projectUser.projectName,
                     user: projectUser.user,
@@ -141,21 +142,21 @@ var Make = function() {
         }, 1000, ' browser.getCurrentUrl TimeOut');
     };
 
-    this.saveProjectAndPublishNewUserAndLogout = function() {
+    this.saveProjectAndPublishNewUserAndLogout = function () {
         var projectUser = this.saveProjectNewUser();
         browser.sleep(vars.timeToWaitAutoSave);
         var make = this;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
-        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+        bloqs.getBloqFunctions('bloq-return-function').then(function (bloque1) {
             bloqs.addToGroupVars(bloque1);
             bloqs.closeTab();
             browser.sleep(vars.timeToWaitAutoSave);
             make.publishProject();
             browser.sleep(vars.timeToWaitAutoSave);
         });
-        return browser.wait(function() {
-            return browser.getCurrentUrl().then(function(url) {
+        return browser.wait(function () {
+            return browser.getCurrentUrl().then(function (url) {
                 login.logout();
                 return {
                     projectName: projectUser.projectName,
@@ -167,21 +168,21 @@ var Make = function() {
 
     };
 
-    this.saveProjectAndPublishUser = function(user, password) {
+    this.saveProjectAndPublishUser = function (user, password) {
         var projectUser = this.saveProjectUser(user, password);
         browser.sleep(vars.timeToWaitAutoSave);
         var make = this;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
-        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+        bloqs.getBloqFunctions('bloq-return-function').then(function (bloque1) {
             bloqs.addToGroupVars(bloque1);
             bloqs.closeTab();
             browser.sleep(vars.timeToWaitAutoSave);
             make.publishProject();
             browser.sleep(vars.timeToWaitAutoSave);
         });
-        return browser.wait(function() {
-            return browser.getCurrentUrl().then(function(url) {
+        return browser.wait(function () {
+            return browser.getCurrentUrl().then(function (url) {
                 return {
                     projectName: projectUser.projectName,
                     urlid: url
@@ -191,21 +192,21 @@ var Make = function() {
 
     };
 
-    this.saveProjectAndPublishUserAndLogout = function(user, password) {
+    this.saveProjectAndPublishUserAndLogout = function (user, password) {
         var projectUser = this.saveProjectUser(user, password);
         browser.sleep(vars.timeToWaitAutoSave);
         var make = this;
         make.softwareTab.click();
         browser.sleep(vars.timeToWaitTab);
-        bloqs.getBloqFunctions('bloq-return-function').then(function(bloque1) {
+        bloqs.getBloqFunctions('bloq-return-function').then(function (bloque1) {
             bloqs.addToGroupVars(bloque1);
             bloqs.closeTab();
             browser.sleep(vars.timeToWaitAutoSave);
             make.publishProject();
             browser.sleep(vars.timeToWaitAutoSave);
         });
-        return browser.wait(function() {
-            return browser.getCurrentUrl().then(function(url) {
+        return browser.wait(function () {
+            return browser.getCurrentUrl().then(function (url) {
                 login.logout();
                 return {
                     projectName: projectUser.projectName,
@@ -216,7 +217,7 @@ var Make = function() {
 
     };
 
-    this.publishProject = function() {
+    this.publishProject = function () {
         makeActions.menuShare.click();
         browser.sleep(vars.timeToWaitMenu);
         makeActions.menuSharePublish.click();
@@ -224,7 +225,7 @@ var Make = function() {
         makeActions.publishButton.click();
     };
 
-    this.publishProjectWithName = function(name) {
+    this.publishProjectWithName = function (name) {
 
         makeActions.menuFile.click();
         browser.sleep(vars.timeToWaitMenu);
@@ -241,7 +242,7 @@ var Make = function() {
         makeActions.publishButton.click();
     };
 
-    this.importFile = function(file) {
+    this.importFile = function (file) {
         browser.get('#/bloqsproject');
         modals.rejectTour();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -251,7 +252,7 @@ var Make = function() {
 
     };
 
-    this.importFileGuestUser = function(file) {
+    this.importFileGuestUser = function (file) {
         browser.get('#/bloqsproject');
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -263,16 +264,16 @@ var Make = function() {
 
     };
 
-    this.importFileNewUser = function(file) {
+    this.importFileNewUser = function (file) {
         var user = login.loginWithRandomUser();
-        return this.importFile(file).then(function() {
+        return this.importFile(file).then(function () {
             return {
                 user: user
             };
         });
     };
 
-    this.importFileUserLogin = function(file, user) {
+    this.importFileUserLogin = function (file, user) {
         login.login({
             'user': user.user,
             'password': user.password
@@ -283,19 +284,19 @@ var Make = function() {
         browser.sleep(vars.timeToWaitFadeModals);
     };
 
-    this.importFileUser = function(file) {
+    this.importFileUser = function (file) {
         browser.get('#/bloqsproject');
         file = globalFunctions.filePath(file);
         makeActions.inputUploadFile.sendKeys(file);
         browser.sleep(vars.timeToWaitFadeModals);
     };
 
-    this.isProjectSavedShown = function() {
+    this.isProjectSavedShown = function () {
         var elem = element.all(by.xpath('//*[@data-element="project-save-label-make-project-saved-ok"]')).first();
         return elem.isPresent();
     };
 
-    this.isProjectNotAllowSaveShown = function() {
+    this.isProjectNotAllowSaveShown = function () {
         var elem = element.all(by.xpath('//*[@data-element="project-save-label-make-project-not-allow-to-save"]')).first();
         return elem.isPresent();
     };
@@ -312,12 +313,12 @@ var Make = function() {
 
     }
 
-    this.activateRobot = function(options) {
+    this.activateRobot = function (options) {
         options = options || {};
         if (options.code) {
             _activateRobotAndCheck(options);
         } else {
-            flow.execute(thirdPartyRobotsApi['get' + options.robot + 'PersonalCode']).then(function(result) {
+            flow.execute(thirdPartyRobotsApi['get' + options.robot + 'PersonalCode']).then(function (result) {
                 options.code = result[0].code;
                 _activateRobotAndCheck(options);
             });
