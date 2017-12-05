@@ -12,7 +12,7 @@ if (dev) {
 // utils
 var getErrorNumber = function(json) {
   var num = json.testsuites.testsuite[0].$.failures;
-  return 'filter_' + (num < 10 ? num : num + '_plus');
+  return 'filter_' + (num < 10 ? num : 9 + '_plus');
 };
 
 var getRealDate = function(json) {
@@ -26,6 +26,14 @@ var getGlobalInfo = function(json) {
     res += json.testsuites.testsuite[0].$[k] + '.\n';
   });
   return res + '\n\n';
+};
+
+var unHTML = function(str) {
+  var res = str.replace(/(_)/g, '&#95;');
+      res = res.replace(/(<)/g, '&#60;');
+      res = res.replace(/(>)/g, '&#62;');
+      res = res.replace(/(")/g, '&#34;');
+  return res;
 };
 
 var getErrors = function(json) {
@@ -44,14 +52,14 @@ var getErrors = function(json) {
       });
       if (item.failure) {
         Object.keys(item.failure).forEach(function(i) {
-          res += ' - *' + 'type'.toUpperCase() + ':* ';
-          res += item.failure[i].$.type + '.\n';
-          res += ' - *' + 'message'.toUpperCase() + ':* ';
-          res += item.failure[i].$.message + '.\n';
-          // res += JSON.stringify(item.failure[i].$) + '.\n';
-          res += ' - *' + 'content'.toUpperCase() + ':* ';
-          res += item.failure[i]._ + '.\n';
-          res += '\n\n';
+          res += '<div class="error-bloq">'
+          res += '<p>*' + 'type'.toUpperCase() + ':* ';
+          res += item.failure[i].$.type + '.</p>';
+          res += '<p>*' + 'message'.toUpperCase() + ':* ';
+          res += unHTML(item.failure[i].$.message) + '.</p>';
+          res += '<p>*' + 'content'.toUpperCase() + ':*</p>';
+          res += '<code class="content">' + unHTML(item.failure[i]._) + '</code>';
+          res += '</div>'
         });
       }
       res += '\n';

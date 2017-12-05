@@ -14,3 +14,4 @@ target/
 privateConfig.js
 privateConfig.json
 settings.json
+test/reporter/src/items/
