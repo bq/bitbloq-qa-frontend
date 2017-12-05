@@ -43,6 +43,26 @@ h5
 h6
   font-size: 20px
 
+sidebar, pre
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-thumb
+    display: none
+    border-left: 1px solid $color-gris
+  &::-webkit-scrollbar-track
+    background-color: $color-gris
+  &::-webkit-scrollbar
+    width: 6px
+    background-color: $color-gris
+  &::-webkit-scrollbar-thumb
+     +linear-gradient($color-naranja, $color-naranja)
+  &:hover
+    margin-right: -6px
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-thumb
+      display: block
+
 sidebar
   +linear-gradient($color-morado, $color-magenta)
   +box-shadow(1px, 1px, 3px, black, false)
@@ -52,19 +72,27 @@ sidebar
   width: $sidebar-width
   min-height: -webkit-fill-available
   position: fixed
+  overflow-y: auto
+  max-height: -webkit-fill-available
+  &:hover
+    padding-right: 9px
   .link-home
     color: $color-blanco
     text-align: center
     text-decoration: none
   ul
     margin-bottom: 10px
-    li.collection h3
+    li.collection h5
       +rounded(10px)
       background-color: $color-sidebar-li
       color: $color-naranja
       padding: 2px 4px
       border: 2px $color-sidebar-li solid
       width: fit-content
+      text-overflow: ellipsis
+      white-space: nowrap
+      overflow: hidden
+      max-width: -webkit-fill-available
     li.item
       padding: 5px 0 0 5px
       margin-left: 10px
@@ -72,7 +100,7 @@ sidebar
       border-left: solid $color-sidebar-li 2px
       width: fit-content
       a
-        display: inline-grid
+        display: block
         background: $color-sidebar-li
         color: $color-blanco
         padding: 3px
@@ -81,46 +109,39 @@ sidebar
         max-width: 250px
         text-decoration: none
         text-overflow: ellipsis
-        &:hover
-          font-weight: 400
-          background: $color-naranja
-          i
-            display: inherit
-            font-size: 11px
-        i
-          display: none
+        white-space: nowrap
+        overflow: hidden
+        max-width: -webkit-fill-available
+        .material-icons
+          color: $color-rojo
+          font-size: 16px
+          margin-right: 3px
+          &.ok
+            color: $color-blanco
 
 content
   display: block
   padding: 30px
   float: right
   width: calc(100% - #{$sidebar-width})
+  min-width: 500px
+  ul
+    list-style: initial
+    li
+      margin-left: 20px
+      padding-left: 0px
+  h3#errors
+    margin-top: 20px
   h4
     margin-top: 20px
     font-weight: 100
   pre
     border: 1px solid $color-gris
-    width: fit-content
+    max-width: fit-content
     max-height: 500px
     float: center
-    &::-webkit-scrollbar-track,
-    &::-webkit-scrollbar,
-    &::-webkit-scrollbar-thumb
-      display: none
-      border-left: 1px solid $color-gris
-    &::-webkit-scrollbar-track
-      background-color: $color-gris
-    &::-webkit-scrollbar
-    	width: 6px
-    	background-color: $color-gris
-    &::-webkit-scrollbar-thumb
-  	   +linear-gradient($color-naranja, $color-naranja)
-    &:hover
-      margin-right: -6px
-      &::-webkit-scrollbar-track,
-      &::-webkit-scrollbar,
-      &::-webkit-scrollbar-thumb
-        display: block
     code
       font-family: 'Ubuntu Mono', monospace !important
       font-size: 14px
+      span
+        white-space: pre-line

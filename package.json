@@ -34,6 +34,7 @@
         "lodash": "^4.2.1",
         "metalsmith": "^2.3.0",
         "metalsmith-auto-collections": "^0.1.3",
+        "metalsmith-beautify": "^0.2.0",
         "metalsmith-date-formatter": "^1.0.2",
         "metalsmith-layouts": "^1.8.1",
         "metalsmith-markdown": "^0.2.1",
@@ -42,6 +43,7 @@
         "metalsmith-pug": "^2.0.0",
         "metalsmith-sass": "^1.4.0",
         "metalsmith-serve": "0.0.7",
+        "metalsmith-tags": "^2.0.0",
         "metalsmith-watch": "^1.0.3",
         "moment": "^2.19.3",
         "testlink-connect-proxy": "^0.5.4",
@@ -53,7 +55,10 @@
         "npm": ">=2.4.1"
     },
     "scripts": {
-        "postinstall": "node ./node_modules/protractor/bin/webdriver-manager update --standalone"
+        "postinstall": "node ./node_modules/protractor/bin/webdriver-manager update --standalone",
+        "reporter": "node ./test/reporter/parser.js && node ./test/reporter/metal.js && http-server ./test/reporter/dist",
+        "reporterDev": "node ./test/reporter/parser.js  --dev && node ./test/reporter/metal.js --dev",
+        "cleaner": "rm -R ./test/reporter/dist || true && rm -R ./test/reporter/src/items/*  || true"
     },
     "dependencies": {
         "grunt": "^0.4.5",
