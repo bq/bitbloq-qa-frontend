@@ -1,4 +1,5 @@
 doctype html
+- var dateList = []
 html
     head
         title= title
@@ -9,4 +10,23 @@ html
         include sidebar.pug
         content
             h1= title
-            p= description
+            p= description                
+            each item in (collections !== undefined) ? collections : []
+                unless !item[0] || !item[0].collection[0] || item[0].collection[0] === './src'
+                    - if (dateList.indexOf(item[0].date) === -1) { dateList.push(item[0].date) }
+            each dateItem in dateList.sort().reverse()
+                h5= dateItem
+                ul
+                    - var filtered = []
+                    each item in (collections !== undefined) ? collections : []
+                        unless !item[0] || !item[0].collection[0] || item[0].collection[0] === './src'
+                            - if (item[0].date === dateItem) { filtered.push(item[0]) }
+                    each item in filtered
+                        li
+                            a(href='/'+item.path)
+                                if (item.title !== 'filter_0')
+                                    i.material-icons= item.title
+                                    span= item.collection[0]
+                                else
+                                    i.material-icons.bl check_circle
+                                    span= item.collection[0]
