@@ -55,7 +55,7 @@ sidebar, pre
     width: 6px
     background-color: $color-gris
   &::-webkit-scrollbar-thumb
-     +linear-gradient($color-naranja, $color-naranja)
+    +linear-gradient($color-naranja, $color-naranja)
   &:hover
     margin-right: -6px
     &::-webkit-scrollbar-track,
@@ -110,7 +110,6 @@ sidebar
         text-decoration: none
         text-overflow: ellipsis
         white-space: nowrap
-        overflow: hidden
         max-width: -webkit-fill-available
         .material-icons
           color: $color-rojo
@@ -118,6 +117,8 @@ sidebar
           margin-right: 3px
           &.ok
             color: $color-blanco
+          &.bl
+            color: $color-gris
 
 content
   display: block
@@ -129,7 +130,17 @@ content
     list-style: initial
     li
       margin-left: 20px
-      padding-left: 0px
+      padding-left: 0
+      a
+        text-decoration: none
+      .material-icons
+        color: $color-rojo
+        font-size: 16px
+        margin-right: 3px
+        &.ok
+          color: $color-blanco
+        &.bl
+          color: $color-gris
   h3#errors
     margin-top: 20px
   h4
@@ -154,11 +165,11 @@ content
     p
       margin-bottom: 2px
     .content
-       +linear-gradient($color-negro, $color-gris)
-       +box-shadow(1px, 1px, 3px, black, false)
-       +rounded(5px)
-       margin: 10px
-       padding: 10px
-       color: $color-blanco
-       display: block
-       font-size: 12px
+      +linear-gradient($color-negro, $color-gris)
+      +box-shadow(1px, 1px, 3px, black, false)
+      +rounded(5px)
+      margin: 10px
+      padding: 10px
+      color: $color-blanco
+      display: block
+      font-size: 12px
