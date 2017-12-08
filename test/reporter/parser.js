@@ -52,20 +52,39 @@ var getErrors = function(json) {
       });
       if (item.failure) {
         Object.keys(item.failure).forEach(function(i) {
-          res += '<div class="error-bloq">'
+          res += '<div class="error-bloq">';
           res += '<p>*' + 'type'.toUpperCase() + ':* ';
           res += item.failure[i].$.type + '.</p>';
           res += '<p>*' + 'message'.toUpperCase() + ':* ';
           res += unHTML(item.failure[i].$.message) + '.</p>';
           res += '<p>*' + 'content'.toUpperCase() + ':*</p>';
           res += '<code class="content">' + unHTML(item.failure[i]._) + '</code>';
-          res += '</div>'
+          res += '</div>';
         });
       }
       res += '\n';
     }
   });
   return res + '\n\n';
+};
+
+var colecs = {};
+var getColecs = function (date, title) {
+  var res = [];
+  // res.push(date);
+  res.push(title);
+
+  //is into colecs => colec.js?
+  res.forEach(function(i) {
+    var bool = colecs[i];
+    if (!bool) {
+      colecs[i] = {
+        sortBy: 'date',
+        reverse: true
+      };
+    }
+  });
+  return res.join(' ');
 };
 
 // xml2js
@@ -78,7 +97,7 @@ if (data) {
     if (file) {
       parser.parseString(file, function(err, result) {
         if (!err && result) {
-          var report = JSON.stringify(result);
+          //var report = JSON.stringify(result);
           var reportPretty = JSON.stringify(result, null, 2);
           // folder
           var folderName = fileName.replace('.xml', '');
@@ -87,7 +106,7 @@ if (data) {
             fs.mkdirSync(__dirname + '/src/items/' + folderName);
           }
           // md
-          var mdDate = moment(getRealDate(result))
+          var mdDate = moment(getRealDate(result), moment.ISO_8601)
             .format('YYYY-MM-DD')
             .toString();
           var mdFileName = mdDate + '.' + folderName + '.md';
@@ -98,6 +117,7 @@ if (data) {
           output += 'title: ' + getErrorNumber(result) + '\n';
           output += 'date: ' + mdDate + '\n';
           output += 'layout: post.jade\n';
+          output += 'collection: ' + getColecs(mdDate, folderName) +'\n';
           output += '---\n\n';
           output += getGlobalInfo(result);
           output += getErrors(result);
@@ -112,6 +132,11 @@ if (data) {
       });
     }
   });
+
+  // colec => colec.js
+  var resColec = JSON.stringify(colecs, null, 2);
+  dev && console.log(typeof colecs, resColec);
+  fs.writeFileSync(__dirname + '/colec.js', 'module.exports = { colec: ' + resColec + ' };');
 } else {
   console.log('[ERROR]: No hay reportes en ./target/report');
 }

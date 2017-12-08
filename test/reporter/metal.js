@@ -1,7 +1,9 @@
 'use strict';
 
-var ms = require('metalsmith'),
+var fs = require('fs'),
+  ms = require('metalsmith'),
   autocollections = require('metalsmith-auto-collections'),
+  collections = require('metalsmith-collections'),
   markdown = require('metalsmith-markdown'),
   layouts = require('metalsmith-layouts'),
   permalinks = require('metalsmith-permalinks'),
@@ -12,6 +14,7 @@ var ms = require('metalsmith'),
   watch = require('metalsmith-watch'),
   dateFormatter = require('metalsmith-date-formatter'),
   beautify = require('metalsmith-beautify'),
+  archive = require('metalsmith-archive'),
   tags = require('metalsmith-tags');
 
 var dev = process.argv[2] === '--dev';
@@ -20,6 +23,8 @@ if (dev) {
 } else {
   console.log('--[METALSMITH | NORMAL MODE]--');
 }
+
+var colec = require('./colec.js')
 
 // we are, we are, the metalheads!
 var metal = ms(__dirname)
@@ -46,13 +51,7 @@ if (dev) {
 metal
   .use(paths({ property: 'paths' }))
   .use(
-    autocollections({
-      pattern: 'items/**/*.md',
-      settings: {
-        sortBy: 'date',
-        reverse: true
-      }
-    })
+    collections(colec.colec)
   )
   .use(markdown())
   .use(
@@ -88,9 +87,7 @@ metal
   .use(
     beautify({
       js: false,
-      html: {
-        wrap_line_length: 80
-      }
+      html: { wrap_line_length: 80 }
     })
   )
   .use(
