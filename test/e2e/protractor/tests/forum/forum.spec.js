@@ -471,6 +471,25 @@ describe('Forum', function () {
 
     });
 
+    fit('bbb-360:comprobar que un menos de 14 años no puede escribir (antes de aceptar)', function() {
+        var until = protractor.ExpectedConditions;
+
+        login.loginWithRandomUser({
+            youngThan14: true
+        });
+
+        forum.get();
+        forum.newTopicButton.click();
+        expect(forum.alertMsg.isPresent()).toBe(true);
+        forum.newsCategory.click();
+        browser.wait(until.presenceOf(forum.firstPost), 8000, 'Waiting for element to be display');
+        forum.firstPost.click();
+        forum.createAnswer('automated answer');
+        expect(forum.alertMsg.isPresent()).toBe(true);
+    });
+
+
+
     it('bbb-368:Boton Responder a un tema', function () {
 
         var titulo = 'tema automatico ' + Number(new Date());
