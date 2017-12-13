@@ -98,22 +98,24 @@ describe('Verify landing ', function() {
 
         var array = [
             'landing.downloadBtn',
-            'landing.windowsBtn',
-            'landing.linuxBtn',
-            'landing.macsBtn',
-            'landing.chromeBtn',
+            'landing.windows',
+            'landing.linux64',
+            'landing.linux32',
+            'landing.macs',
+            'landing.chrome',
             'landing.requirements'
         ];
 
         landing.get();
         landing.howItWorksButton.click();
-        browser.sleep(1000);
 
         array.forEach(function (array) {
             expect(array.isPresent);
         });
     });
 
+    //Comprobación de que el número de telefono sigue siendo el mismo.
+    //Hay que realizar la llamada manual para comprobar que es el correcto.
     it('bbb-256:landing:verificar numero de telefono en el area de soporte', function() {
         var phoneNmbDefault = '+34 902 676 061';
 

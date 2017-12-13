@@ -49,7 +49,7 @@ var Forum = function () {
     this.categoryDropdownHeader = $('[data-element="forum_category_dropdown-heading"]');
 
     //new topic category dropdown
-    this.categoryListNoticias = $('[data-element="forum_category_dropdown-Noticias"]');
+    this.categoryListNoticias = $('[data-element2="forum_category_dropdown-Noticias"]');
     this.categoryListBienvenida = $('[data-element2="forum_category_dropdown-Bienvenida"]');
     this.categoryListOtros = $('[data-element2="forum_category_dropdown-Otros"]');
 
@@ -207,7 +207,12 @@ var Forum = function () {
 
     };
 
-    this.alertMsg = element(by.className('alert--content'));
-    this.firstPost = element(by.xpath('//div[@class="forum__block"]/div[1]//a'));
+    this.clickFirstPost = function() {
+        var clikable = element.all(by.repeater('thread in forum.categoryThemes | filter:q | itemsPerPage: forum.categoryThemesPerPage')).first().all(by.tagName('h2')).first();
+        clikable.click();
+    };
+
+    this.alertMsg = $('[data-id="creatingAnswer"]');
+
 };
 module.exports = Forum;
