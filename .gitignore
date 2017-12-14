@@ -16,3 +16,4 @@ privateConfig.json
 settings.json
 test/reporter/src/items/
 test/reporter/colec.js
+test/reporter/index.md

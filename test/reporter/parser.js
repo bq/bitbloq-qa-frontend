@@ -2,12 +2,20 @@
 
 var fs = require('fs'),
   xml2js = require('xml2js'),
-  moment = require('moment');
+  moment = require('moment'),
+  mkdirp = require('mkdirp'),
+  chalk = require('chalk');
 
 var dev = process.argv[2] === '--dev';
 if (dev) {
-  console.log('--[PARSER | DEV MODE]--');
+  console.log(chalk.cyan('--[PARSER | ') + chalk.yellow('DEV MODE') + chalk.cyan(']--'));
 }
+
+// if no src/items -> mkdir
+mkdirp(__dirname + '/src/items', function(err) {
+  if (err) { console.log(err); }
+  else { console.log(chalk.cyan.bold('Preparando carpeta: ') + chalk.bgGreen.black.italic(__dirname + '/src/items')); }
+});
 
 // utils
 var getErrorNumber = function(json) {
@@ -63,6 +71,8 @@ var getErrors = function(json) {
         });
       }
       res += '\n';
+    } else {
+      res = '';
     }
   });
   return res + '\n\n';
@@ -91,7 +101,7 @@ var getColecs = function (date, title) {
 var parser = new xml2js.Parser();
 var data = fs.readdirSync('./target/report/');
 if (data) {
-  dev && console.log('xml2json:');
+  dev && console.log(chalk.yellow.italic('xml2json:'));
   data.forEach(function(fileName) {
     var file = fs.readFileSync('./target/report/' + fileName);
     if (file) {
@@ -106,17 +116,17 @@ if (data) {
             fs.mkdirSync(__dirname + '/src/items/' + folderName);
           }
           // md
-          var mdDate = moment(getRealDate(result), moment.ISO_8601)
-            .format('YYYY-MM-DD')
-            .toString();
-          var mdFileName = mdDate + '.' + folderName + '.md';
+          var theDate = moment(getRealDate(result))
+          var fileDate = theDate.format('YYYY-MM-DD-kkmm').toString();
+          var simpleDate = theDate;
+          var mdFileName = fileDate + '.' + folderName + '.md';
           var mdRoute = __dirname + '/src/items/' + folderName + '/' + mdFileName;
-          dev && console.log(fileName + ' => ' + folderName + '/' + mdFileName);
+          dev && console.log(chalk.yellow.italic(fileName + ' => ' + folderName + '/' + mdFileName));
           var output = '---\n';
           output += 'title: ' + getErrorNumber(result) + '\n';
-          output += 'date: ' + mdDate + '\n';
+          output += 'date: ' + simpleDate + '\n';
           output += 'layout: post.jade\n';
-          output += 'collection: ' + getColecs(mdDate, folderName) +'\n';
+          output += 'collection: ' + getColecs(simpleDate, folderName) +'\n';
           output += '---\n\n';
           output += getGlobalInfo(result);
           output += getErrors(result);
@@ -126,7 +136,7 @@ if (data) {
             '\n</code></pre>';
           fs.writeFileSync(mdRoute, output);
         } else {
-          dev && console.log('[ERROR]: no se ha podido parsear ' + file);
+          dev && console.log(chalk.yellow.italic('[ERROR]: no se ha podido parsear ' + file));
         }
       });
     }
@@ -134,8 +144,8 @@ if (data) {
 
   // colec => colec.js
   var resColec = JSON.stringify(colecs, null, 2);
-  dev && console.log(typeof colecs, resColec);
+  dev && console.log(chalk.yellow.italic(typeof colecs, resColec));
   fs.writeFileSync(__dirname + '/colec.js', 'module.exports = { colec: ' + resColec + ' };');
 } else {
-  console.log('[ERROR]: No hay reportes en ./target/report');
+  console.log(chalk.red('[ERROR]: No hay reportes en ./target/report'));
 }
