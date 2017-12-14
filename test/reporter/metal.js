@@ -15,13 +15,14 @@ var fs = require('fs'),
   dateFormatter = require('metalsmith-date-formatter'),
   beautify = require('metalsmith-beautify'),
   archive = require('metalsmith-archive'),
-  tags = require('metalsmith-tags');
+  tags = require('metalsmith-tags'),
+  chalk = require('chalk');
 
 var dev = process.argv[2] === '--dev';
 if (dev) {
-  console.log('--[METALSMITH | DEV MODE]--');
+  console.log(chalk.cyan('\n--[METALSMITH | ') + chalk.yellow('DEV MODE') + chalk.cyan(']--'));
 } else {
-  console.log('--[METALSMITH | NORMAL MODE]--');
+  console.log(chalk.cyan('\n--[METALSMITH | ') + chalk.green('NORMAL MODE') + chalk.cyan(']--'));
 }
 
 var colec = require('./colec.js')
@@ -59,7 +60,7 @@ metal
       dates: [
         {
           key: 'date',
-          format: 'YYYY-MM-DD'
+          format: 'YYYY-MM-DD_kk:mm'
         }
       ]
     })
@@ -96,14 +97,11 @@ metal
     })
   );
 
-if (dev) {
-  metal.use(serve());
-}
-
+metal.use(serve());
 metal.build(function(err, files) {
   if (err) {
     throw err;
   } else {
-    console.log('-> Build DONE:', Object.keys(files).length, 'files procesed.');
+    console.log(chalk.cyan('-> Build DONE:'), chalk.magenta(Object.keys(files).length), chalk.cyan('files procesed.'));
   }
 });
