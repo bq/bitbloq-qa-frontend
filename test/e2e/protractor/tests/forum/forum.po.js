@@ -213,6 +213,7 @@ var Forum = function () {
     };
 
     this.alertMsg = $('[data-id="creatingAnswer"]');
-
+    this.searchBar = element(by.id('search--normal'));
+    this.searchResults = element.all(by.repeater('result in forum.results.data | itemsPerPage: forum.itemsPerPage track by $index')).first().all(by.tagName('h2')).first();
 };
 module.exports = Forum;

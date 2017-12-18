@@ -402,6 +402,22 @@ describe('Forum', function () {
         });
     });
 
+    fit('bbb-239:check searchbar for a topic', function(){
+        login.loginWithRandomUser({
+            youngThan14: true
+        });
+        
+        forum.get();
+        expect(forum.searchBar.isPresent()).toBe(true);
+        forum.searchBar.sendKeys('tema automatico');
+        forum.searchResults.getText().then(function(text){
+            expect(text).toContain('tema automatico');
+            forum.searchResults.click();
+            expect(forum.topicTopicTitle.getText()).toMatch(text);
+            browser.sleep(10000);
+        });
+    });
+
     it('bbb-240:forum:verify click last topic', function () {
 
         var titulo = 'tema automatico ' + Number(new Date());
