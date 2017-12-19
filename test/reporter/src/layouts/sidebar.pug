@@ -1,0 +1,19 @@
+sidebar
+    a.link-home(href="/")
+        h1.wobble
+            i.material-icons home
+    ul
+        each item in (collections !== undefined) ? collections : []
+            unless !item[0] || !item[0].collection[0] || item[0].collection[0] === './src'
+                li.collection
+                    h5= item[0].collection[0]
+                    ul
+                        each report in item
+                            li.item
+                                a(href='/'+report.path)
+                                    if (report.title !== 'filter_0')
+                                        i.material-icons= report.title
+                                        span= report.date
+                                    else
+                                        i.material-icons.ok check_circle
+                                        span= report.date

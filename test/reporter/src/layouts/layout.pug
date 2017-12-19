@@ -1,0 +1,37 @@
+doctype html
+- var dateList = []
+html
+    head
+        title= title
+        meta(name='description', content= description)
+        link(rel='stylesheet', href='scss/main.css')
+        script(src='http://localhost:35729/livereload.js')
+    body
+        include sidebar.pug
+        content
+            h1= title
+            p= description                
+            each item in (collections !== undefined) ? collections : []
+                unless !item[0] || !item[0].collection[0] || item[0].collection[0] === './src'
+                    - var dateClip = item[0].date.substr(0, item[0].date.length - 6)
+                    - if (dateList.indexOf(dateClip) === -1) { dateList.push(dateClip) }
+            each dateItem in dateList.sort().reverse()
+                h5= dateItem
+                ul
+                    - var filtered = []
+                    each colec in (collections !== undefined) ? collections : []
+                        unless !colec[0] || !colec[0].collection[0] || colec[0].collection[0] === './src'
+                            each item in colec
+                                - var dateClip2 = item.date.substr(0, item.date.length - 6)
+                                - if (dateClip2 === dateItem) { filtered.push(item) }
+                    each item in filtered
+                        li
+                            a(href='/'+item.path)
+                                if (item.title !== 'filter_0')
+                                    i.material-icons= item.title
+                                    span= item.collection[0]
+                                    span.timer= '[' +item.date.substr(item.date.length - 5, 5) + ']'
+                                else
+                                    i.material-icons.bl check_circle
+                                    span= item.collection[0]
+                                    span.timer= '[' +item.date.substr(item.date.length - 5, 5) + ']'
