@@ -81,7 +81,7 @@ var getErrors = function(json) {
 var colecs = {};
 var getColecs = function (date, title) {
   var res = [];
-  // res.push(date);
+  // res.push(date); 
   res.push(title);
 
   //is into colecs => colec.js?
