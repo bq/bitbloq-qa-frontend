@@ -147,7 +147,7 @@ var Forum = function () {
 
         return {
             topicTitle: nameTitle,
-            topicDescription: nameDescription
+            topicDescription: nameDescription,
 
         };
 
@@ -212,8 +212,31 @@ var Forum = function () {
         clikable.click();
     };
 
+    this.clickRandomCategory = function() {
+        var allTopics = element.all(by.repeater('category in section | orderBy:\'order\'')).all(by.tagName('h2'));
+
+        allTopics.count().then(function (topicsNumber) {
+            return Math.floor(Math.random() * topicsNumber) + 1;
+        }).then(function (randomNumber) {
+            allTopics.get(randomNumber).click();
+        });
+    };
+
+    this.clickRandomPost = function() {
+        var allPosts = element.all(by.repeater('thread in forum.categoryThemes | filter:q | itemsPerPage: forum.categoryThemesPerPage')).all(by.tagName('h2'));
+
+        allPosts.count().then(function (postsNumber) {
+            return Math.floor(Math.random() * postsNumber) + 1;
+        }).then(function (randomNumber) {
+            allPosts.get(randomNumber).click();
+        });
+    };
+
+
     this.alertMsg = $('[data-id="creatingAnswer"]');
     this.searchBar = element(by.id('search--normal'));
     this.searchResults = element.all(by.repeater('result in forum.results.data | itemsPerPage: forum.itemsPerPage track by $index')).first().all(by.tagName('h2')).first();
+    this.lastAnswerTopic = element.all(by.repeater('answer in forum.themeAnswers | filter:q | itemsPerPage: forum.categoryThemesPerPage')).last().all(by.className('answer__content'));
+    //this.lastPageTopic = element.all(by.repeater('pageNumber in pages track by tracker(pageNumber, $index)')).last();
 };
 module.exports = Forum;
