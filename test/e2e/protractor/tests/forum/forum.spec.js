@@ -450,7 +450,7 @@ describe('Forum', function () {
 
     });
 
-    fit('bbb-228:forum:Answer a topic', function() {
+    it('bbb-228:forum:Answer a topic', function() {
         login.loginWithRandomUser();
         header.navForum.click();
         forum.othersCategory.click();
@@ -750,6 +750,17 @@ describe('Forum', function () {
         forum.newTopicButton.click();
         expect(forum.categoryDropdownHeader.getText()).toMatch('Otros', 'Wrong category');
         login.logout();
+
+    });
+
+    fit('bbb-244:forum:check autofocus on text editor when hover', function () { //can't click buttons if textbox is not clicked first.
+        login.loginWithRandomUser();
+        header.navForum.click();
+        forum.newTopicButton.click();
+        expect(forum.newTopicDescription.getAttribute('class')).not.toContain('focussed');
+        forum.textBoxNewTopic.click();
+        expect(forum.newTopicDescription.getAttribute('class')).toContain('focussed');
+
 
     });
 

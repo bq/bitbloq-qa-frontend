@@ -238,5 +238,6 @@ var Forum = function () {
     this.searchResults = element.all(by.repeater('result in forum.results.data | itemsPerPage: forum.itemsPerPage track by $index')).first().all(by.tagName('h2')).first();
     this.lastAnswerTopic = element.all(by.repeater('answer in forum.themeAnswers | filter:q | itemsPerPage: forum.categoryThemesPerPage')).last().all(by.className('answer__content'));
     //this.lastPageTopic = element.all(by.repeater('pageNumber in pages track by tracker(pageNumber, $index)')).last();
+    this.textBoxNewTopic = element(by.css('div[id*=taTextElement]'));
 };
 module.exports = Forum;
