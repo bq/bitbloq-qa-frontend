@@ -30,8 +30,31 @@ describe('Learn ', function() {
         login.loginWithRandomUser();
         header.navLearn.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/learn');
-        expect(learn.basicTutorialTable.isPresent());
+        learn.tutorialList.all(by.tagName('a')).count().then(function (tutorialNmbr) {
+            if(tutorialNmbr > 0){
+                expect(learn.contactUsTutorials.isPresent()).toBe(false);
+            } else {
+                expect(learn.contactUsTutorials.isPresent()).toBe(true);
+            }
+        });
         login.logout();
+    });
+
+    it('bbb-199:learn:Verify suggest a tutorial action (registered user)', function() {
+        login.loginWithRandomUser();
+        header.navLearn.click();
+        learn.contactUsTutorials.click();
+        browser.sleep(vars.timeToWaitFadeModals);
+        globalFunctions.navigatorLanguage().then(function(language) {
+            if (language === 'es') {
+                expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
+            } else {
+                expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
+            }
+            modals.bladeClose.click();
+            browser.sleep(vars.timeToWaitFadeModals);
+            login.logout();
+        });
     });
 
     it('bbb-200:learn:Appears the tutorial with an unregistered user', function() {
@@ -114,23 +137,6 @@ describe('Learn ', function() {
             expect(browser.getCurrentUrl()).toBe('http://diwo.bq.com/');
             browser.close().then(browser.switchTo().window(handles[0]));
             browser.ignoreSynchronization = false;
-        });
-    });
-
-    it('bbb-199:learn:Verify suggest a tutorial action (registered user)', function() {
-        login.loginWithRandomUser();
-        header.navLearn.click();
-        learn.contactUsTutorials.click();
-        browser.sleep(vars.timeToWaitFadeModals);
-        globalFunctions.navigatorLanguage().then(function(language) {
-            if (language === 'es') {
-                expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteral);
-            } else {
-                expect(modals.modalTitle.getText()).toEqual(vars.sendCommentsLiteralEN);
-            }
-            modals.bladeClose.click();
-            browser.sleep(vars.timeToWaitFadeModals);
-            login.logout();
         });
     });
 
