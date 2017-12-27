@@ -25,7 +25,7 @@ var Login = function () {
     this.facebookPassword = element(by.id('pass'));
     this.facebookEnter = element(by.id('loginbutton'));
     //Login Google
-    this.googleButton = element(by.buttonText('Google +'));
+    this.googleButton = element(by.buttonText('Google'));
     this.googleNext = element(by.id('identifierNext'));
     this.googleUser = element(by.id('identifierId'));
     this.googlePassword = element(by.name('password'));
