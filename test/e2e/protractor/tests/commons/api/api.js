@@ -22,6 +22,7 @@ var Api = function () {
             serverUrlFieldInConfigFile;
         params = params || {};
         params.env = vars.defaults.env;
+        //params.env = 'beta';
         switch (params.serverName) {
             case 'api':
                 serverUrlFieldInConfigFile = 'serverUrl';

@@ -9,6 +9,7 @@ var GlobalFunctions = require('../../commons/globalFunctions.js'),
     Myclass = require('../myclass/myclass.po.js'),
     Licenses = require('./licenses.po.js'),
     MakeActions = require('../../bloqsproject/makeActions/makeActions.po.js'),
+    Make = require('../../bloqsproject/make.po.js'),
     Myprojects = require('../../projects/myprojects/myprojects.po.js'),
     CodeProjects = require('../../codeproject/codeproject.po.js'),
     ThirdPartyRobotsApi = require('../../commons/api/ThirdPartyRobotsApi.js');
@@ -24,6 +25,7 @@ var globalFunctions = new GlobalFunctions(),
     myclass = new Myclass(),
     licenses = new Licenses(),
     makeActions = new MakeActions(),
+    make = new Make(),
     myprojects = new Myprojects(),
     thirdPartyRobotsApi = new ThirdPartyRobotsApi(),
     codeProjects = new CodeProjects(),
@@ -806,7 +808,7 @@ describe('Test licenses', function () {
         codeProjects.get();
         expect(makeActions.compileButton.isEnabled()).toBe(true, 'without library the user can compile');
         $('[class="ace_text-input"]').sendKeys('#include <BitbloqMBotRanger.h>');
-        makeActions.compileButton.click();
+        make.hideBar.click();
         makeActions.compileButton.click();
         browser.sleep(5000);
         expect(commons.toastCantCompileRobot.isPresent()).toBe(true, 'users cant compile with the robot library');
