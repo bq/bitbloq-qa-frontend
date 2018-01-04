@@ -22,6 +22,27 @@ describe('Forum', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
+    it('bbb-191:forum: contact us (register user)', function () {
+
+        login.loginWithRandomUser();
+        forum.get();
+        browser.executeScript('arguments[0].click()', forum.contactUsButton.getWebElement()).then(function () {
+            expect(modals.okDialog.isEnabled()).toBe(false);
+            modals.sendCommentsTextarea.sendKeys('Esto es un mensaje');
+            browser.sleep(vars.timeToWaitSendKeys);
+            expect(modals.okDialog.isEnabled()).toBe(true);
+            modals.okDialog.click();
+        });
+    });
+
+    it('bbb-194:forum: contact us (unregister user)', function () {
+        forum.get();
+        globalFunctions.navigatorLanguage()
+            .then(function (language) {
+                expect(forum.contactUsLink.getAttribute('href')).toEqual(vars.supportEmail(language));
+            });
+    });
+
     it('bbb-215:forum:check forum tag is present', function () {
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -64,87 +85,6 @@ describe('Forum', function () {
         });
     });
 
-    it('bbb-225:forum:create a new topic (not registered)', function () {
-        forum.get();
-        forum.newTopicButton.click();
-        browser.getCurrentUrl().then(function (url) {
-            expect(url).toMatch(/#\/login/);
-            forum.get();
-            browser.get('#/forum/new-theme/');
-            browser.getCurrentUrl().then(function (url2) {
-                expect(url2).toMatch(/#\/login/);
-            });
-        });
-    });
-
-
-    it('bbb-226:forum:create a new topic wrong', function () {
-        login.loginWithRandomUser();
-
-        var titulo = 'tema automatico ' + Number(new Date());
-        var contenido = 'comentario automatico ' + Number(new Date());
-
-
-        //topic no category
-        forum.get();
-        forum.newTopicButton.click();
-        forum.newTopicTitle.sendKeys(titulo);
-        forum.newTopicDescription.all(by.css('div')).get(15).click();
-        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys(contenido);
-        expect(forum.publishTopic.getAttribute('aria-disabled')).toBe('true');
-
-
-        //topic no title
-        forum.get();
-        forum.newTopicButton.click();
-        forum.categoryList.click();
-        forum.categoryList.all(by.css('li')).get(4).click();
-        forum.newTopicDescription.all(by.css('div')).get(15).click();
-        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys(contenido);
-        expect(forum.publishTopic.getAttribute('aria-disabled')).toBe('true');
-
-
-        //topic no description
-        forum.get();
-        forum.newTopicButton.click();
-        forum.categoryList.click();
-        forum.categoryList.all(by.css('li')).get(4).click();
-        forum.newTopicTitle.sendKeys(titulo);
-        expect(forum.publishTopic.getAttribute('aria-disabled')).toBe('true');
-
-        //all is ok
-        forum.get();
-        forum.newTopicButton.click();
-        forum.categoryList.click();
-        forum.categoryList.all(by.css('li')).get(4).click();
-        forum.newTopicTitle.sendKeys(titulo);
-        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys(contenido);
-        expect(forum.publishTopic.getAttribute('aria-disabled')).toBe('false');
-
-        login.logout();
-    });
-
-    it('bbb-194:forum: contact us (unregister user)', function () {
-        forum.get();
-        globalFunctions.navigatorLanguage()
-            .then(function (language) {
-                expect(forum.contactUsLink.getAttribute('href')).toEqual(vars.supportEmail(language));
-            });
-    });
-
-    it('bbb-191:forum: contact us (register user)', function () {
-
-        login.loginWithRandomUser();
-        forum.get();
-        browser.executeScript('arguments[0].click()', forum.contactUsButton.getWebElement()).then(function () {
-            expect(modals.okDialog.isEnabled()).toBe(false);
-            modals.sendCommentsTextarea.sendKeys('Esto es un mensaje');
-            browser.sleep(vars.timeToWaitSendKeys);
-            expect(modals.okDialog.isEnabled()).toBe(true);
-            modals.okDialog.click();
-        });
-    });
-
     it('bbb-217:forum:breadcrumbs functionalities', function () {
 
         login.loginWithRandomUser();
@@ -168,81 +108,6 @@ describe('Forum', function () {
         forum.newsCategory.click();
         expect(forum.breadcrumbsCategory.isPresent()).toBe(true, 'Category breadcrumb fail 2');
         login.logout();
-
-    });
-
-    it('bbb-221:forum:verify check answer count for topic', function () {
-
-        var titulo = 'tema automatico ' + Number(new Date());
-        var contenido = 'comentario automatico ' + Number(new Date());
-
-        login.loginWithRandomUser();
-        forum.get();
-        forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
-        forum.createAnswer();
-        var answers = forum.answersArray;
-        expect(answers.get(0).$('[data-element="forum-answer-number"]').getText()).toContain('1', 'Wrong answer number 1');
-        forum.createAnswer();
-        expect(answers.get(1).$('[data-element="forum-answer-number"]').getText()).toContain('2', 'Wrong answer number 2');
-        forum.breadcrumbsCategory.click();
-
-
-        //expect(element(by.xpath('//*[@data-element="forum-category-theme-title"][contains(text(), "' + titulo + '")]/../../../../../div[2]//span')).getText()).toContain('2', 'Wrong answer count');
-        expect(forum.getAnswerByTitle(titulo).$('[data-element="forum-thread-numberofanswers"]').getText()).toContain('2', 'Wrong answer count');
-
-        login.logout();
-
-    });
-
-    it('bbb-223:forum:check the last answer in a topic', function () {
-
-        var titulo = 'tema automatico ' + Number(new Date());
-        var contenido = 'comentario automatico ' + Number(new Date());
-
-        var titulo2 = 'tema automatico2 ' + Number(new Date());
-        var contenido2 = 'comentario automatico2 ' + Number(new Date());
-
-        var user = login.loginWithRandomUser();
-        forum.get();
-        forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
-
-        protractor.promise.all([
-            forum.createAnswer()
-        ]).then(function () {
-            var date = formatDate(new Date());
-            browser.driver.navigate().refresh();
-            expect(forum.answerUser.getText()).toBe(user.user.toLowerCase(), 'Usuario incorrecto en respuesta 1');
-            expect(forum.answerUpdatedAt.getText()).toBe(date, 'Fecha incorrecta en respuesta 1');
-            forum.breadcrumbsCategory.click();
-            forum.createNewTopic(titulo2, contenido2, forum.categoryListOtros);
-            protractor.promise.all([
-                forum.createAnswer()
-            ]).then(function () {
-                date = formatDate(new Date());
-                browser.driver.navigate().refresh();
-                expect(forum.answerUser.getText()).toBe(user.user.toLowerCase(), 'Usuario incorrecto en respuesta 2');
-                expect(forum.answerUpdatedAt.getText()).toBe(date, 'Fecha incorrecta en respuesta 2');
-            });
-        });
-        login.logout();
-
-        function formatDate(date) {
-            var monthNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-                'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-            var fecha = date.getDate() + ' ' + monthNames[date.getMonth()] + '. ' + date.getFullYear() + ', ';
-            if (date.getHours() < 10) {
-                fecha = fecha + '0' + date.getHours();
-            } else {
-                fecha = fecha + date.getHours();
-            }
-            if (date.getMinutes() < 10) {
-                fecha = fecha + ':0' + date.getMinutes();
-            } else {
-                fecha = fecha + ':' + date.getMinutes();
-            }
-            return fecha;
-        }
-
 
     });
 
@@ -309,8 +174,8 @@ describe('Forum', function () {
 }*/
 
         /**
-        * This function recives a section and iterate over the categories inside it.
-        **/
+         * This function recives a section and iterate over the categories inside it.
+         **/
         /*function comprobarCategoriasDeSeccion(seccion) {
             element.all(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + seccion + ']/div[contains(@class, "row")]')).then(function (rows) {
                 for (var categoria = 1; categoria <= rows.length; categoria++) { //Iterates over the categories
@@ -321,8 +186,8 @@ describe('Forum', function () {
         }*/
 
         /**
-        * This function recieves section and category and asserts his behaviour
-        **/
+         * This function recieves section and category and asserts his behaviour
+         **/
         /*function hasLastTopic(seccion, categoria) {
             protractor.promise.all([
                 element(by.xpath('//*[contains(@class, "forum__main")]/div/*[contains(@class, "forum__block")][' + seccion + ']/div[contains(@class, "row")][' + categoria + ']//span[contains(@data-element, "forum-threads-counter")]')).getText(),
@@ -338,8 +203,410 @@ describe('Forum', function () {
     });*/
     });
 
-    it('bbb-236:forum:check visit counter to a topic', function () {
+    it('bbb-219:forum:check topic count category', function() {
+        forum.get();
+        browser.sleep(vars.timeToWaitTab);
+        element.all(by.repeater('category in section').row(0).column('category.numberOfThreads')).getText().then(function(topicsInCategory) {
+            var topicsInCategoryVal = parseInt(topicsInCategory);
+            forum.createTopicNewUser();
+            forum.createNewTopic();
+            forum.createNewTopic();
+            forum.get();
+            topicsInCategoryVal += 3;
+            topicsInCategory = topicsInCategoryVal.toString();
+            expect(element.all(by.repeater('category in section').row(0).column('category.numberOfThreads')).getText()).toMatch(topicsInCategory);
+            login.logout();
 
+        });
+    });
+
+    it('bbb-220:forum:check answer count for a category', function() { //bug +100 temas por categoria
+        forum.createTopicNewUser();
+        forum.get();
+        element.all(by.repeater('category in section').row(0).column('category.numberOfAnswers')).getText().then(function(categoryAnswers) {
+            var answerCount = parseInt(categoryAnswers);
+            browser.sleep(vars.timeToWaitTab);
+            forum.newsCategory.click();
+            browser.sleep(vars.timeToWaitLoadForumCategory);
+            forum.categoryTopicTitle.click();
+            browser.sleep(vars.timeToWaitTab);
+            forum.createAnswer();
+            forum.createAnswer();
+            forum.createAnswer();
+            forum.createAnswer();
+            answerCount += 4;
+            categoryAnswers = answerCount.toString();
+            forum.get();
+            browser.sleep(vars.timeToWaitTab);
+            element.all(by.repeater('category in section').row(0).column('category.numberOfAnswers')).getText().then(function(updateCategoryAnswers) {
+                expect(updateCategoryAnswers).toMatch(categoryAnswers);
+                login.logout();
+
+            });
+        });
+    });
+
+    it('bbb-221:forum:verify check answer count for topic', function () {
+
+        var titulo = 'tema automatico ' + Number(new Date());
+        var contenido = 'comentario automatico ' + Number(new Date());
+
+        login.loginWithRandomUser();
+        forum.get();
+        forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
+        forum.createAnswer();
+        var answers = forum.answersArray;
+        expect(answers.get(0).$('[data-element="forum-answer-number"]').getText()).toContain('1', 'Wrong answer number 1');
+        forum.createAnswer();
+        expect(answers.get(1).$('[data-element="forum-answer-number"]').getText()).toContain('2', 'Wrong answer number 2');
+        forum.breadcrumbsCategory.click();
+
+
+        //expect(element(by.xpath('//*[@data-element="forum-category-theme-title"][contains(text(), "' + titulo + '")]/../../../../../div[2]//span')).getText()).toContain('2', 'Wrong answer count');
+        expect(forum.getAnswerByTitle(titulo).$('[data-element="forum-thread-numberofanswers"]').getText()).toContain('2', 'Wrong answer count');
+
+        login.logout();
+
+    });
+
+    it('bbb-222:forum:check the last answer in the main page', function() { //bug +100 temas
+        var topicTitle2 = forum.createTopicNewUser('titulo_' + Number(new Date()), 'descripcion_' + Number(new Date()), forum.categoryListBienvenida).topicTitle;
+        var topicTitle = 'last answer topic' + Number(new Date());
+        browser.getCurrentUrl().then(function(topicUrl2) {
+            forum.createNewTopic(topicTitle, 'descripcion_' + Number(new Date()), forum.categoryListBienvenida);
+            browser.getCurrentUrl().then(function(topicUrl) {
+                forum.get();
+                element.all(by.repeater('category in section').row(1).column('category.lastThread.title')).getText().then(function(lastTopicTitle) {
+                    expect(lastTopicTitle).toMatch(topicTitle);
+                    element.all(by.repeater('category in section').row(1).column('category.lastThread.title')).click();
+                    expect(browser.getCurrentUrl()).toMatch(topicUrl);
+                    login.logout();
+                    login.loginWithRandomUser();
+                    forum.get();
+                    element.all(by.repeater('category in section').row(1).column('category.name')).click();
+                    browser.sleep(vars.timeToWaitLoadForumCategory);
+                    element.all(by.repeater('thread in forum.categoryThemes').row(1).column('thread.title')).click();
+                    forum.createAnswer();
+                    forum.get();
+                    element.all(by.repeater('category in section').row(1).column('category.lastThread.title')).getText().then(function(lastTopicTitle2) {
+                        expect(lastTopicTitle2).toMatch(topicTitle2);
+                        element.all(by.repeater('category in section').row(1).column('category.lastThread.title')).click();
+                        expect(browser.getCurrentUrl()).toMatch(topicUrl2);
+                        login.logout();
+                    });
+                });
+            });
+        });
+    });
+
+    it('bbb-223:forum:check the last answer in a topic', function () {
+
+        var titulo = 'tema automatico ' + Number(new Date());
+        var contenido = 'comentario automatico ' + Number(new Date());
+
+        var titulo2 = 'tema automatico2 ' + Number(new Date());
+        var contenido2 = 'comentario automatico2 ' + Number(new Date());
+
+        var user = login.loginWithRandomUser();
+        forum.get();
+        forum.createNewTopic(titulo, contenido, forum.categoryListOtros);
+
+        protractor.promise.all([
+            forum.createAnswer()
+        ]).then(function () {
+            var date = formatDate(new Date());
+            browser.driver.navigate().refresh();
+            expect(forum.answerUser.getText()).toBe(user.user.toLowerCase(), 'Usuario incorrecto en respuesta 1');
+            expect(forum.answerUpdatedAt.getText()).toBe(date, 'Fecha incorrecta en respuesta 1');
+            forum.breadcrumbsCategory.click();
+            forum.createNewTopic(titulo2, contenido2, forum.categoryListOtros);
+            protractor.promise.all([
+                forum.createAnswer()
+            ]).then(function () {
+                date = formatDate(new Date());
+                browser.driver.navigate().refresh();
+                expect(forum.answerUser.getText()).toBe(user.user.toLowerCase(), 'Usuario incorrecto en respuesta 2');
+                expect(forum.answerUpdatedAt.getText()).toBe(date, 'Fecha incorrecta en respuesta 2');
+            });
+        });
+        login.logout();
+
+        function formatDate(date) {
+            var monthNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+            var fecha = date.getDate() + ' ' + monthNames[date.getMonth()] + '. ' + date.getFullYear() + ', ';
+            if (date.getHours() < 10) {
+                fecha = fecha + '0' + date.getHours();
+            } else {
+                fecha = fecha + date.getHours();
+            }
+            if (date.getMinutes() < 10) {
+                fecha = fecha + ':0' + date.getMinutes();
+            } else {
+                fecha = fecha + ':' + date.getMinutes();
+            }
+            return fecha;
+        }
+    });
+
+    it('bbb-224:forum:create new topic', function () {
+        var title = 'tema automatico ' + Number(new Date());
+        var content = 'comentario automatico ' + Number(new Date());
+
+        login.loginWithRandomUser();
+        header.navForum.click();
+        forum.createNewTopic(title, content, forum.categoryListNoticias);
+
+        forum.topicTopicTitle.getText().then(function (text) {
+            expect(title).toMatch(text);
+            forum.breadcrumbsCategory.getText().then(function (topicCategoryTxt) {
+                expect(topicCategoryTxt).toBe('Noticias');
+            });
+        });
+    });
+
+    it('bbb-225:forum:create a new topic (not registered)', function () {
+        forum.get();
+        forum.newTopicButton.click();
+        browser.getCurrentUrl().then(function (url) {
+            expect(url).toMatch(/#\/login/);
+            forum.get();
+            browser.get('#/forum/new-theme/');
+            browser.getCurrentUrl().then(function (url2) {
+                expect(url2).toMatch(/#\/login/);
+            });
+        });
+    });
+
+
+    it('bbb-226:forum:create a new topic wrong', function () {
+        login.loginWithRandomUser();
+
+        var titulo = 'tema automatico ' + Number(new Date());
+        var contenido = 'comentario automatico ' + Number(new Date());
+
+
+        //topic no category
+        forum.get();
+        forum.newTopicButton.click();
+        forum.newTopicTitle.sendKeys(titulo);
+        forum.newTopicDescription.all(by.css('div')).get(15).click();
+        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys(contenido);
+        expect(forum.publishTopic.getAttribute('aria-disabled')).toBe('true');
+
+
+        //topic no title
+        forum.get();
+        forum.newTopicButton.click();
+        forum.categoryList.click();
+        forum.categoryList.all(by.css('li')).get(4).click();
+        forum.newTopicDescription.all(by.css('div')).get(15).click();
+        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys(contenido);
+        expect(forum.publishTopic.getAttribute('aria-disabled')).toBe('true');
+
+
+        //topic no description
+        forum.get();
+        forum.newTopicButton.click();
+        forum.categoryList.click();
+        forum.categoryList.all(by.css('li')).get(4).click();
+        forum.newTopicTitle.sendKeys(titulo);
+        expect(forum.publishTopic.getAttribute('aria-disabled')).toBe('true');
+
+        //all is ok
+        forum.get();
+        forum.newTopicButton.click();
+        forum.categoryList.click();
+        forum.categoryList.all(by.css('li')).get(4).click();
+        forum.newTopicTitle.sendKeys(titulo);
+        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys(contenido);
+        expect(forum.publishTopic.getAttribute('aria-disabled')).toBe('false');
+
+        login.logout();
+    });
+
+    it('bbb-227:forum:create topics with the same title', function() {
+        var title = 'same title ' + Number(new Date()),
+            description = 'same description' + Number(new Date());
+
+        forum.createTopicNewUser(title, description);
+        forum.createNewTopic(title, description, forum.categoryListNoticias);
+        forum.get();
+        forum.newsCategory.click();
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        element.all(by.repeater('thread in forum.categoryThemes').row(0).column('thread.title')).click();
+        browser.getCurrentUrl().then(function(url) {
+            expect(forum.topicTopicTitle.getText()).toBe(title);
+            expect(forum.topicTopicContent.getText()).toMatch(description);
+            forum.get();
+            forum.newsCategory.click();
+            browser.sleep(vars.timeToWaitLoadForumCategory);
+            element.all(by.repeater('thread in forum.categoryThemes').row(1).column('thread.title')).click();
+            expect(browser.getCurrentUrl()).not.toMatch(url);
+            expect(forum.topicTopicTitle.getText()).toBe(title);
+            expect(forum.topicTopicContent.getText()).toMatch(description);
+            login.logout();
+        });
+
+    });
+
+    it('bbb-228:forum:Answer a topic', function() {
+        login.loginWithRandomUser();
+        header.navForum.click();
+        forum.othersCategory.click();
+        forum.clickRandomPost();
+
+        var autoAnswer = forum.createAnswer().answer; //escribimos una respuesta automatica
+
+        forum.lastAnswerTopic.getText().then(function (lastAnswer) { //cogemos la última respuesta del post y comparamos con respuesta automatica
+            var plainText = lastAnswer.toString();
+            var txt = plainText.replace(/[^a-zA-Z0-9_-]/g,'');
+            var autoPlain = autoAnswer.replace(/[^a-zA-Z0-9_-]/g,'');
+
+            expect(txt).toMatch(autoPlain);
+
+        });
+
+        login.logout();
+
+
+
+
+
+
+
+
+        // var user = forum.createTopicNewUser().user;
+        // forum.get();
+        // forum.newsCategory.click();
+        // element.all(by.repeater('thread in forum.categoryThemes').row(0).column('thread.title')).click();
+        // var answer = 'answer_' + Number(new Date());
+        // forum.answerTopic.all(by.css('div')).get(15).click();
+        // forum.answerTopic.all(by.css('div')).get(15).sendKeys(answer);
+        // browser.sleep(vars.timeToWaitSendKeys);
+        // forum.publishAnswerButton.click();
+        // element.all(by.repeater('answer in forum.themeAnswers').row(0).column('answer.creator.username')).getText().then(function(userAnswer) {
+        //     expect(userAnswer).toMatch(user.user.toLowerCase());
+        //     expect(forum.answerContent.getText()).toMatch(answer);
+        //     login.logout();
+        // });
+    });
+
+    it('bbb-229:forum:Answer a topic (empty answer)', function() {
+        forum.createTopicNewUser();
+        forum.get();
+        browser.sleep(vars.timeToWaitTab);
+        forum.newsCategory.click();
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        element.all(by.repeater('thread in forum.categoryThemes').row(0).column('thread.title')).click();
+        browser.sleep(vars.timeToWaitTab);
+        expect(forum.publishAnswerButton.getAttribute('aria-disabled')).toBe('true');
+        forum.answerTopic.all(by.css('div')).get(15).click();
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys('random keystrokes');
+        browser.sleep(vars.timeToWaitSendKeys);
+        browser.sleep(vars.timeToWaitFadeModals);
+        expect(forum.publishAnswerButton.getAttribute('aria-disabled')).toBe('false');
+        forum.answerTopic.all(by.css('div')).get(15).click();
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys(protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE + protractor.Key.BACK_SPACE);
+        browser.sleep(vars.timeToWaitFadeModals);
+        expect(forum.publishAnswerButton.getAttribute('aria-disabled')).toBe('true');
+        login.logout();
+    });
+
+    it('bbb-230:forum:topic title size limit', function() {
+        var longTitle = 'long title ' + Number(new Date());
+        for (var i = 0; i < 125; i++) {
+            longTitle = longTitle + ' even longer title ' + Number(new Date());
+        }
+        forum.createTopicNewUser(longTitle);
+        forum.get();
+        forum.newsCategory.click();
+        element.all(by.repeater('thread in forum.categoryThemes').row(0).column('thread.title')).click();
+        expect(forum.topicTopicTitle.getText()).toBe(longTitle);
+        login.logout();
+
+    });
+
+    it('bbb-231:forum:topic answer size limit', function() {
+        forum.createTopicNewUser();
+        var longanswer = 'long answer ' + Number(new Date());
+        for (var i = 0; i < 125; i++) {
+            longanswer = longanswer + ' even longer answer ' + Number(new Date());
+        }
+        forum.get();
+        forum.newsCategory.click();
+        element.all(by.repeater('thread in forum.categoryThemes').row(0).column('thread.title')).click();
+        forum.answerTopic.all(by.css('div')).get(15).click();
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys(longanswer);
+        forum.publishAnswerButton.click();
+        element.all(by.repeater('answer in forum.themeAnswers').row(0).column('answer.owner.username')).getText().then(function() {
+            expect(forum.answerContent.getText()).toMatch(longanswer);
+            login.logout();
+        });
+    });
+
+    it('bbb-232:forum:check undo/redo buttons on editor', function() {
+        login.loginWithRandomUser();
+        forum.get();
+        //en nuevo tema
+        forum.newTopicButton.click();
+        browser.sleep(vars.timeToWaitTab);
+        forum.newTopicDescription.all(by.css('div')).get(15).click();
+        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys('random description');
+        browser.sleep(1000);
+        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys('123456');
+        forum.newTopicDescription.all(by.css('button')).get(9).click(); //undo
+        expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).toMatch('random description');
+        expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).not.toMatch('random description123456');
+        forum.newTopicDescription.all(by.css('button')).get(9).click(); //undo
+        expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).not.toMatch('random description');
+        forum.newTopicDescription.all(by.css('button')).get(10).click(); //redo
+        expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).toMatch('random description');
+        forum.newTopicDescription.all(by.css('button')).get(10).click(); //redo
+        expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).toMatch('random description123456');
+        //en respuesta
+        forum.get();
+        forum.newsCategory.click();
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        forum.categoryTopicTitle.click();
+        browser.sleep(vars.timeToWaitTab);
+        forum.answerTopic.all(by.css('div')).get(15).click();
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys('random description');
+        browser.sleep(1000);
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys('123456');
+        forum.answerTopic.all(by.css('button')).get(9).click(); //undo
+        expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('random description');
+        expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).not.toMatch('random description123456');
+        forum.answerTopic.all(by.css('button')).get(9).click(); //undo
+        expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).not.toMatch('random description');
+        forum.answerTopic.all(by.css('button')).get(10).click(); //redo
+        expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('random description');
+        forum.answerTopic.all(by.css('button')).get(10).click(); //redo
+        expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('random description123456');
+        login.logout();
+    });
+
+
+    it('bbb-235:forum:special characters in editor', function() {
+        login.loginWithRandomUser();
+        forum.get();
+        forum.newTopicButton.click();
+        browser.sleep(vars.timeToWaitTab);
+        forum.newTopicDescription.all(by.css('div')).get(15).click();
+        forum.newTopicDescription.all(by.css('div')).get(15).sendKeys('<>&');
+        expect(forum.newTopicDescription.all(by.css('input')).getAttribute('value')).toMatch('&lt;&gt;&amp;');
+        forum.get();
+        forum.newsCategory.click();
+        browser.sleep(vars.timeToWaitLoadForumCategory);
+        forum.categoryTopicTitle.click();
+        browser.sleep(vars.timeToWaitTab);
+        forum.answerTopic.all(by.css('div')).get(15).click();
+        forum.answerTopic.all(by.css('div')).get(15).sendKeys('<>&');
+        expect(forum.answerTopic.all(by.css('input')).getAttribute('value')).toMatch('&lt;&gt;&amp;');
+        login.logout();
+    });
+
+    it('bbb-236:forum:check visit counter to a topic', function () {
 
         var titulo = 'tema automatico ' + Number(new Date());
         var contenido = 'comentario automatico ' + Number(new Date());
@@ -402,7 +669,7 @@ describe('Forum', function () {
         });
     });
 
-    fit('bbb-239:check searchbar for a topic', function(){
+    it('bbb-239:check searchbar for a topic', function(){
         login.loginWithRandomUser({
             youngThan14: true
         });
@@ -414,7 +681,6 @@ describe('Forum', function () {
             expect(text).toContain('tema automatico');
             forum.searchResults.click();
             expect(forum.topicTopicTitle.getText()).toMatch(text);
-            browser.sleep(10000);
         });
     });
 
@@ -484,6 +750,17 @@ describe('Forum', function () {
         forum.newTopicButton.click();
         expect(forum.categoryDropdownHeader.getText()).toMatch('Otros', 'Wrong category');
         login.logout();
+
+    });
+
+    fit('bbb-244:forum:check autofocus on text editor when hover', function () { //can't click buttons if textbox is not clicked first.
+        login.loginWithRandomUser();
+        header.navForum.click();
+        forum.newTopicButton.click();
+        expect(forum.newTopicDescription.getAttribute('class')).not.toContain('focussed');
+        forum.textBoxNewTopic.click();
+        expect(forum.newTopicDescription.getAttribute('class')).toContain('focussed');
+
 
     });
 
