@@ -222,4 +222,12 @@ describe('Test CookiesBar', function() {
         browser.quit();
     });
 
+    it('bbb-176:cookiesBar:Verify link reject cookies', function() {
+        landing.get();
+        expect(cookiesBar.cookiesBar.isPresent());
+        cookiesBar.notAcceptoCookies.click();
+        expect(browser.getCurrentUrl()).toEqual('https://www.google.es/');
+        landing.get();
+        expect(cookiesBar.cookiesBar.isPresent());
+    });
 });

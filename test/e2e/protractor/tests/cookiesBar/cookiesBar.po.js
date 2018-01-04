@@ -6,6 +6,7 @@
 var CookiesBar = function() {
     this.cookiesBar = $('[data-element="cookies"]');
     this.cookiesBarLink = $('[data-element="cookies-link"]');
+    this.notAcceptoCookies = $('[data-element="notAcceptCookies"]');
 
     this.closeCookiesBar = function() {
         this.cookiesBar.click();
