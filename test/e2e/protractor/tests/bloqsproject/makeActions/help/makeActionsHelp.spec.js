@@ -47,7 +47,7 @@ describe('Menu Help of MakeActions', function() {
         login.logout();
     });
 
-    it('feedback modal are not displayed but it posible send mailto:bloqsprojectMakeActionsHelp:NO login, feedback modal are not displayed but it posible send mailto', function() {
+    it('SWBIT-2934:bloqsprojectMakeActionsHelp:NO login, feedback modal are not displayed but it posible send mailto', function() {
 
         make.get();
         modals.attentionContinueGuest.click();

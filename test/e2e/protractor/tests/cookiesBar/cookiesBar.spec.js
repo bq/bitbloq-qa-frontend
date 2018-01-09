@@ -222,7 +222,7 @@ describe('Test CookiesBar', function() {
         browser.quit();
     });
 
-    it('Verify link reject cookies:cookiesBar:Verify link reject cookies', function() {
+    it('SWBIT-3108:cookiesBar:Verify link reject cookies', function() {
         landing.get();
         expect(cookiesBar.cookiesBar.isPresent());
         cookiesBar.notAcceptoCookies.click();
