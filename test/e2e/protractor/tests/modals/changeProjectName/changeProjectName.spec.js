@@ -28,7 +28,7 @@ describe('Rename modal on make', function() {
   // afterEach commons
   globalFunctions.afterTest();
 
-    it('bbb-267:modalsChangeProjectName:Rename project and save', function() {
+    it('SWBIT-3134:modalsChangeProjectName:Rename project and save', function() {
 
         login.loginWithRandomUser();
         make.get();
@@ -48,7 +48,7 @@ describe('Rename modal on make', function() {
     });
 
 
-    it('bbb-268:modalsChangeProjectName:Rename project and not save', function() {
+    it('SWBIT-3135:modalsChangeProjectName:Rename project and not save', function() {
 
         //test no saved if click in cancel modal
         login.loginWithRandomUser();
@@ -73,7 +73,7 @@ describe('Rename modal on make', function() {
         login.logout();
     });
 
-    it('bbb-269:modalsChangeProjectName:Verify save name when sendKeys enter in modal', function() {
+    it('SWBIT-3136:modalsChangeProjectName:Verify save name when sendKeys enter in modal', function() {
 
         //test no saved if click in cancel modal
         login.loginWithRandomUser();
@@ -91,7 +91,7 @@ describe('Rename modal on make', function() {
         login.logout();
     });
 
-    it('bbb-272:modalsChangeProjectName:Verify save name when sendKeys ESCAPE in modal no save name', function() {
+    it('SWBIT-3139:modalsChangeProjectName:Verify save name when sendKeys ESCAPE in modal no save name', function() {
 
         //test no saved if click in cancel modal
         login.loginWithRandomUser();

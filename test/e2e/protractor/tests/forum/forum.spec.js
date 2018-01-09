@@ -22,7 +22,7 @@ describe('Forum', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-191:forum: contact us (register user)', function () {
+    it('SWBIT-3080:forum: contact us (register user)', function () {
 
         login.loginWithRandomUser();
         forum.get();
@@ -35,7 +35,7 @@ describe('Forum', function () {
         });
     });
 
-    it('bbb-194:forum: contact us (unregister user)', function () {
+    it('SWBIT-3079forum: contact us (unregister user)', function () {
         forum.get();
         globalFunctions.navigatorLanguage()
             .then(function (language) {
@@ -43,7 +43,7 @@ describe('Forum', function () {
             });
     });
 
-    it('bbb-215:forum:check forum tag is present', function () {
+    it('SWBIT-3023:forum:check forum tag is present', function () {
         forum.get();
         browser.sleep(vars.timeToWaitTab);
         browser.getCurrentUrl().then(function (url) {
@@ -52,7 +52,7 @@ describe('Forum', function () {
         });
 
     });
-    it('bbb-216:forum:check create a new topic button', function () {
+    it('SWBIT-3024:forum:check create a new topic button', function () {
 
         login.loginWithRandomUser();
         // from the main forum page
@@ -85,7 +85,7 @@ describe('Forum', function () {
         });
     });
 
-    it('bbb-217:forum:breadcrumbs functionalities', function () {
+    it('SWBIT-3025:forum:breadcrumbs functionalities', function () {
 
         login.loginWithRandomUser();
         forum.get();
@@ -111,7 +111,7 @@ describe('Forum', function () {
 
     });
 
-    it('bbb-218:forum:check differeciated sections on the forum', function () {
+    it('SWBIT-3026:forum:check differeciated sections on the forum', function () {
 
         forum.get();
         //general background color:
@@ -203,7 +203,7 @@ describe('Forum', function () {
     });*/
     });
 
-    it('bbb-219:forum:check topic count category', function() {
+    it('SWBIT-3027:forum:check topic count category', function() {
         forum.get();
         browser.sleep(vars.timeToWaitTab);
         element.all(by.repeater('category in section').row(0).column('category.numberOfThreads')).getText().then(function(topicsInCategory) {
@@ -220,7 +220,7 @@ describe('Forum', function () {
         });
     });
 
-    it('bbb-220:forum:check answer count for a category', function() { //bug +100 temas por categoria
+    it('SWBIT-3028:forum:check answer count for a category', function() { //bug +100 temas por categoria
         forum.createTopicNewUser();
         forum.get();
         element.all(by.repeater('category in section').row(0).column('category.numberOfAnswers')).getText().then(function(categoryAnswers) {
@@ -246,7 +246,7 @@ describe('Forum', function () {
         });
     });
 
-    it('bbb-221:forum:verify check answer count for topic', function () {
+    it('SWBIT-3029:forum:verify check answer count for topic', function () {
 
         var titulo = 'tema automatico ' + Number(new Date());
         var contenido = 'comentario automatico ' + Number(new Date());
@@ -269,7 +269,7 @@ describe('Forum', function () {
 
     });
 
-    it('bbb-222:forum:check the last answer in the main page', function() { //bug +100 temas
+    it('SWBIT-3030:forum:check the last answer in the main page', function() { //bug +100 temas
         var topicTitle2 = forum.createTopicNewUser('titulo_' + Number(new Date()), 'descripcion_' + Number(new Date()), forum.categoryListBienvenida).topicTitle;
         var topicTitle = 'last answer topic' + Number(new Date());
         browser.getCurrentUrl().then(function(topicUrl2) {
@@ -299,7 +299,7 @@ describe('Forum', function () {
         });
     });
 
-    it('bbb-223:forum:check the last answer in a topic', function () {
+    it('SWBIT-3031:forum:check the last answer in a topic', function () {
 
         var titulo = 'tema automatico ' + Number(new Date());
         var contenido = 'comentario automatico ' + Number(new Date());
@@ -349,7 +349,7 @@ describe('Forum', function () {
         }
     });
 
-    it('bbb-224:forum:create new topic', function () {
+    it('SWBIT-3032:forum:create new topic', function () {
         var title = 'tema automatico ' + Number(new Date());
         var content = 'comentario automatico ' + Number(new Date());
 
@@ -365,7 +365,7 @@ describe('Forum', function () {
         });
     });
 
-    it('bbb-225:forum:create a new topic (not registered)', function () {
+    it('SWBIT-3033:forum:create a new topic (not registered)', function () {
         forum.get();
         forum.newTopicButton.click();
         browser.getCurrentUrl().then(function (url) {
@@ -379,7 +379,7 @@ describe('Forum', function () {
     });
 
 
-    it('bbb-226:forum:create a new topic wrong', function () {
+    it('SWBIT-3034:forum:create a new topic wrong', function () {
         login.loginWithRandomUser();
 
         var titulo = 'tema automatico ' + Number(new Date());
@@ -425,7 +425,7 @@ describe('Forum', function () {
         login.logout();
     });
 
-    it('bbb-227:forum:create topics with the same title', function() {
+    it('SWBIT-3035:forum:create topics with the same title', function() {
         var title = 'same title ' + Number(new Date()),
             description = 'same description' + Number(new Date());
 
@@ -450,7 +450,7 @@ describe('Forum', function () {
 
     });
 
-    it('bbb-228:forum:Answer a topic', function() {
+    it('SWBIT-3036:forum:Answer a topic', function() {
         login.loginWithRandomUser();
         header.navForum.click();
         forum.othersCategory.click();
@@ -492,7 +492,7 @@ describe('Forum', function () {
         // });
     });
 
-    it('bbb-229:forum:Answer a topic (empty answer)', function() {
+    it('SWBIT-3037:forum:Answer a topic (empty answer)', function() {
         forum.createTopicNewUser();
         forum.get();
         browser.sleep(vars.timeToWaitTab);
@@ -513,7 +513,7 @@ describe('Forum', function () {
         login.logout();
     });
 
-    it('bbb-230:forum:topic title size limit', function() {
+    it('SWBIT-3038:forum:topic title size limit', function() {
         var longTitle = 'long title ' + Number(new Date());
         for (var i = 0; i < 125; i++) {
             longTitle = longTitle + ' even longer title ' + Number(new Date());
@@ -527,7 +527,7 @@ describe('Forum', function () {
 
     });
 
-    it('bbb-231:forum:topic answer size limit', function() {
+    it('SWBIT-3039:forum:topic answer size limit', function() {
         forum.createTopicNewUser();
         var longanswer = 'long answer ' + Number(new Date());
         for (var i = 0; i < 125; i++) {
@@ -545,7 +545,7 @@ describe('Forum', function () {
         });
     });
 
-    it('bbb-232:forum:check undo/redo buttons on editor', function() {
+    it('SWBIT-3040:forum:check undo/redo buttons on editor', function() {
         login.loginWithRandomUser();
         forum.get();
         //en nuevo tema
@@ -587,7 +587,7 @@ describe('Forum', function () {
     });
 
 
-    it('bbb-235:forum:special characters in editor', function() {
+    it('SWBIT-3043:forum:special characters in editor', function() {
         login.loginWithRandomUser();
         forum.get();
         forum.newTopicButton.click();
@@ -606,7 +606,7 @@ describe('Forum', function () {
         login.logout();
     });
 
-    it('bbb-236:forum:check visit counter to a topic', function () {
+    it('SWBIT-3044:forum:check visit counter to a topic', function () {
 
         var titulo = 'tema automatico ' + Number(new Date());
         var contenido = 'comentario automatico ' + Number(new Date());
@@ -640,7 +640,7 @@ describe('Forum', function () {
 
     });
 
-    it('bbb-237:forum:Answer a topic (not registered)', function () {
+    it('SWBIT-3045:forum:Answer a topic (not registered)', function () {
 
         forum.get();
         forum.othersCategory.click();
@@ -651,7 +651,7 @@ describe('Forum', function () {
 
     });
 
-    it('bbb-238:forum:check category pages when many topics', function () {
+    it('SWBIT-3046:forum:check category pages when many topics', function () {
 
         login.loginWithRandomUser();
         forum.get();
@@ -669,7 +669,7 @@ describe('Forum', function () {
         });
     });
 
-    it('bbb-239:check searchbar for a topic', function(){
+    it('SWBIT-3047:check searchbar for a topic', function(){
         login.loginWithRandomUser({
             youngThan14: true
         });
@@ -684,7 +684,7 @@ describe('Forum', function () {
         });
     });
 
-    it('bbb-240:forum:verify click last topic', function () {
+    it('SWBIT-3048:forum:verify click last topic', function () {
 
         var titulo = 'tema automatico ' + Number(new Date());
         var contenido = 'comentario automatico ' + Number(new Date());
@@ -700,7 +700,7 @@ describe('Forum', function () {
 
     });
 
-    it('bbb-241:check answer pages when too many answers', function () {
+    it('SWBIT-3049:check answer pages when too many answers', function () {
 
         var titulo = 'tema automatico ' + Number(new Date());
         var contenido = 'comentario automatico ' + Number(new Date());
@@ -724,7 +724,7 @@ describe('Forum', function () {
 
     });
 
-    it('bbb-242:check categories are always in the same order', function () {
+    it('SWBIT-3050:check categories are always in the same order', function () {
 
         forum.get();
         forum.checkCategoriesOrder();
@@ -742,7 +742,7 @@ describe('Forum', function () {
 
     });
 
-    it('bbb-243:check category dropdown when creating a topic from within a category', function () {
+    it('SWBIT-3051:check category dropdown when creating a topic from within a category', function () {
 
         login.loginWithRandomUser();
         forum.get();
@@ -753,7 +753,7 @@ describe('Forum', function () {
 
     });
 
-    fit('bbb-244:forum:check autofocus on text editor when hover', function () { //can't click buttons if textbox is not clicked first.
+    it('SWBIT-3052:forum:check autofocus on text editor when hover', function () { //can't click buttons if textbox is not clicked first.
         login.loginWithRandomUser();
         header.navForum.click();
         forum.newTopicButton.click();
@@ -764,7 +764,7 @@ describe('Forum', function () {
 
     });
 
-    it('bbb-360:comprobar que un menos de 14 años no puede escribir (antes de aceptar)', function() {
+    it('SWBIT-3053:comprobar que un menos de 14 años no puede escribir (antes de aceptar)', function() {
 
         login.loginWithRandomUser({
             youngThan14: true
@@ -779,7 +779,7 @@ describe('Forum', function () {
         expect(forum.alertMsg.isPresent()).toBe(true);
     });
 
-    it('bbb-368:Boton Responder a un tema', function () {
+    it('SWBIT-3058:Boton Responder a un tema', function () {
 
         var titulo = 'tema automatico ' + Number(new Date());
         var contenido = 'comentario automatico ' + Number(new Date());

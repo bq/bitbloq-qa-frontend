@@ -24,13 +24,13 @@ describe('Login ', function() {
    // afterEach commons
    globalFunctions.afterTest();
 
-   it('bbb-257:login:Login with a basic account', function() {
+   it('SWBIT-3124:login:Login with a basic account', function() {
       login.loginWithRandomUser();
       login.logout();
    });
 
 
-   it('bbb-258:login:Cant login with a non registered user', function() {
+   it('SWBIT-3125:login:Cant login with a non registered user', function() {
 
       landing.enterButton.click();
 
@@ -43,7 +43,7 @@ describe('Login ', function() {
    });
 
 
-   it('bbb-259:login:is show "Introduce un nombre de usuario o e-mail" ?', function() {
+   it('SWBIT-3126:login:is show "Introduce un nombre de usuario o e-mail" ?', function() {
 
       landing.enterButton.click();
 
@@ -60,7 +60,7 @@ describe('Login ', function() {
 
    });
 
-   it('bbb-260:login:is show "Introduce una contraseña" ?', function() {
+   it('SWBIT-3127:login:is show "Introduce una contraseña" ?', function() {
 
       landing.enterButton.click();
 
@@ -78,7 +78,7 @@ describe('Login ', function() {
 
    });
 
-   it('bbb-261:login:is show "La contraseña debe tener 6 caracteres como mínimo" ?', function() {
+   it('SWBIT-3128:login:is show "La contraseña debe tener 6 caracteres como mínimo" ?', function() {
 
       landing.enterButton.click();
 
@@ -96,7 +96,7 @@ describe('Login ', function() {
 
    });
 
-   it('bbb-262:login:is show "El usuario no está registrado" ?', function() {
+   it('SWBIT-3129:login:is show "El usuario no está registrado" ?', function() {
 
       landing.enterButton.click();
       //Login in bitbloq with false  password
@@ -109,7 +109,7 @@ describe('Login ', function() {
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
    });
 
-   it('bbb-263:login:is show "La contraseña es incorrecta" ?', function() {
+   it('SWBIT-3130:login:is show "La contraseña es incorrecta" ?', function() {
 
       //Register && login and save username
       landing.enterButton.click();
@@ -129,7 +129,7 @@ describe('Login ', function() {
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
    });
 
-   it('bbb-266:login:Check show user not register if email is not register', function() {
+   it('SWBIT-3133:login:Check show user not register if email is not register', function() {
 
        login.get();
        login.forgotPasswordButton.click();

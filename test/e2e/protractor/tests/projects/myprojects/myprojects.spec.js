@@ -44,12 +44,12 @@ describe('My Projects', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-674:myProjects: Delete a project - send to trash', function () {
+    it('SWBIT-3164:myProjects: Delete a project - send to trash', function () {
         sendProjectToTrash();
         login.logout();
     });
 
-    it('bbb-675:myProjects: Delete a project - delete permanently', function () {
+    it('SWBIT-3165:myProjects: Delete a project - delete permanently', function () {
         var projectName = sendProjectToTrash();
         browser.actions().mouseMove(projects.getTrashObject({
             'name': projectName
@@ -75,7 +75,7 @@ describe('My Projects', function () {
         login.logout();
     });
 
-    it('bbb-676:myProjects: Delete a project - restore project', function () {
+    it('SWBIT-3166:myProjects: Delete a project - restore project', function () {
         var projectName = sendProjectToTrash();
         browser.actions().mouseMove(projects.getTrashObject({
             'name': projectName
@@ -151,7 +151,7 @@ describe('My Projects', function () {
         return name;
     }
 
-    it('bbb-27:myProjects:Verify that the Search bar work correctly', function () {
+    it('SWBIT-3152:myProjects:Verify that the Search bar work correctly', function () {
 
         //Save and publish 2 project begining in test_save__ , and use name of one
         // make.saveProjectAndPublish(true);
@@ -188,7 +188,7 @@ describe('My Projects', function () {
 
     });
 
-    it('bbb-28:myProjects:Verify that the project can be published', function () {
+    it('SWBIT-3153:myProjects:Verify that the project can be published', function () {
 
         var nameProject = make.saveProjectNewUser().projectName;
         make.softwareTab.click();
@@ -247,7 +247,7 @@ describe('My Projects', function () {
 
     });
 
-    it('bbb-32:myProjects:Verify if not have project, show create new project', function () {
+    it('SWBIT-3157:myProjects:Verify if not have project, show create new project', function () {
         login.loginWithRandomUser();
         myprojects.newProject.click();
         globalFunctions.toMatchUrlInNewTab(/#\/bloqsproject/);
@@ -255,7 +255,7 @@ describe('My Projects', function () {
 
     });
 
-    it('bbb-30:myProjects:Check if projects are show correctly in my projects', function () {
+    it('SWBIT-3155:myProjects:Check if projects are show correctly in my projects', function () {
 
         var checkNameProjects = function (row, contain) {
             expect(element.all(by.repeater('project in projectSearched').row(row).column('project.name')).getText()).toContain(contain);
@@ -453,7 +453,7 @@ describe('My Projects', function () {
         login.logout();
     });
 
-    it('bbb-35:myProjects:Verify you can change the name of a project', function () {
+    it('SWBIT-3160:myProjects:Verify you can change the name of a project', function () {
         var originalName = make.saveProjectNewUser().projectName;
         browser.sleep(vars.timeToWaitSaveNewProject);
         projects.get();

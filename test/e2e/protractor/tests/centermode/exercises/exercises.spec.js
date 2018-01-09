@@ -26,7 +26,7 @@ describe('Exercises/tasks view', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-510:exercises:A user can register in a group', function () {
+    it('SWBIT-3291:exercises:A user can register in a group', function () {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -42,7 +42,7 @@ describe('Exercises/tasks view', function () {
         });
     });
 
-    it('bbb-513:exercises:should appear an error when the class id used is wrong', function () {
+    it('SWBIT-3292:exercises:should appear an error when the class id used is wrong', function () {
         login.loginWithRandomUser();
         exercises.registerInClass({
             idClass: 'tooFakeToBeReal',
@@ -56,7 +56,7 @@ describe('Exercises/tasks view', function () {
 
     });
 
-    it('bbb-514:exercises:add class button should be disabled if text is empty', function () {
+    it('SWBIT-3293:exercises:add class button should be disabled if text is empty', function () {
         login.loginWithRandomUser();
         header.navTasks.click();
         exercises.registerInClassButton.click();

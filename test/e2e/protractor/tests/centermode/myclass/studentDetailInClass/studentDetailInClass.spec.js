@@ -35,7 +35,7 @@ describe('Student Detail inside class Detail', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-473:studentDetailInClass: Must appear a list of exercises', function () {
+    it('SWBIT-3258:studentDetailInClass: Must appear a list of exercises', function () {
 
         protractor.promise.all([
             login.loginWithRandomUser(),
@@ -103,7 +103,7 @@ describe('Student Detail inside class Detail', function () {
 
     });
 
-    it('bbb-474:studentDetailInClass: Delete student from class', function () {
+    it('SWBIT-3259:studentDetailInClass: Delete student from class', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -151,7 +151,7 @@ describe('Student Detail inside class Detail', function () {
 
     });
 
-    it('bbb-477:studentDetailInClass: correct exercise', function () {
+    it('SWBIT-3260:studentDetailInClass: correct exercise', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({

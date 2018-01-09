@@ -31,7 +31,7 @@ describe('My center', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-396:mycenter:Order the teacher', function () {
+    it('SWBIT-3242:mycenter:Order the teacher', function () {
         var headMasterEmail = '210417prueba@prueba.es';
         var headMasterPass = 'prueba';
         login.login({
@@ -82,7 +82,7 @@ describe('My center', function () {
         login.logout();
     });
 
-    it('bbb-397:mycenter:Create a teacher - VALID', function () {
+    it('SWBIT-3243:mycenter:Create a teacher - VALID', function () {
         var headMaster = centermode.createHeadMaster();
 
         centermode.createTeacher({
@@ -99,7 +99,7 @@ describe('My center', function () {
         });
     });
 
-    it('bbb-398:mycenter:Create a teacher - headmaster email', function () {
+    it('SWBIT-3244:mycenter:Create a teacher - headmaster email', function () {
         var headMaster = centermode.createHeadMaster({
             keepLogin: true
         });
@@ -115,7 +115,7 @@ describe('My center', function () {
         login.logout();
     });
 
-    it('bbb-399:mycenter:Create a teacher - Wrong email', function () {
+    it('SWBIT-3245:mycenter:Create a teacher - Wrong email', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -131,7 +131,7 @@ describe('My center', function () {
         login.logout();
     });
 
-    it('bbb-400:mycenter:Create a teacher - The email doesnt exist', function () {
+    it('SWBIT-3246:mycenter:Create a teacher - The email doesnt exist', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -147,7 +147,7 @@ describe('My center', function () {
         login.logout();
     });
 
-    it('bbb-402:mycenter:Delete a teacher - The teacher belongs to a center', function () {
+    it('SWBIT-3248:mycenter:Delete a teacher - The teacher belongs to a center', function () {
         var headMaster = centermode.createHeadMaster();
 
         centermode.createTeacher({
@@ -174,7 +174,7 @@ describe('My center', function () {
         });
     });
 
-    it('bbb-403:mycenter:Delete a teacher - The teacher is the headmaster', function () {
+    it('SWBIT-3249:mycenter:Delete a teacher - The teacher is the headmaster', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -185,7 +185,7 @@ describe('My center', function () {
         login.logout();
     });
 
-    it('bbb-454:mycenter:Create a teacher - The teacher is already on the list', function () {
+    it('SWBIT-3250:mycenter:Create a teacher - The teacher is already on the list', function () {
         var headMaster = centermode.createHeadMaster();
         centermode.createTeacher({
             headMaster: headMaster
@@ -207,7 +207,7 @@ describe('My center', function () {
         });
     });
 
-    it('bbb-455:mycenter:the list of teacher', function () {
+    it('SWBIT-3251:mycenter:the list of teacher', function () {
         var headMaster = centermode.createHeadMaster();
         centermode.createTeacher({
             headMaster: headMaster
@@ -226,7 +226,7 @@ describe('My center', function () {
         });
     });
 
-    it('bbb-631:mycenter:Modify center mode information', function () {
+    it('SWBIT-3252:mycenter:Modify center mode information', function () {
 
         var headMaster = centermode.createHeadMaster({
             keepLogin: true
@@ -270,7 +270,7 @@ describe('My center', function () {
         login.logout();
     });
 
-    it('bbb-632:mycenter:Check robot activation', function () {
+    it('SWBIT-3253:mycenter:Check robot activation', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });

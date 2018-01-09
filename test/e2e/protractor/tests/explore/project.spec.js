@@ -35,7 +35,7 @@ describe('Publish project', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-283:exploreProject:Verify that the "Add to my project" option is displayed', function() {
+    it('SWBIT-3085:exploreProject:Verify that the "Add to my project" option is displayed', function() {
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
@@ -76,7 +76,7 @@ describe('Publish project', function() {
         });
     });
 
-    it('bbb-285:exploreProject:Verify that the project can be displayed', function() {
+    it('SWBIT-3087:exploreProject:Verify that the project can be displayed', function() {
         //Unregistered user
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
@@ -139,7 +139,7 @@ describe('Publish project', function() {
         });
     });
 
-    it('bbb-286:exploreProject:Verify the viewered counter', function() {
+    it('SWBIT-3088:exploreProject:Verify the viewered counter', function() {
         //Unregistered user
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
@@ -229,7 +229,7 @@ describe('Publish project', function() {
         });
     });
 
-    it('bbb-287:exploreProject:Verify the "Add to my project" counter', function() {
+    it('SWBIT-3089:exploreProject:Verify the "Add to my project" counter', function() {
         var projectElem;
         //Se salva un proyecto para que al menos explora tenga un proyecto
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {

@@ -37,7 +37,7 @@ describe('State ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-291:state:See a explore tab', function() {
+    it('SWBIT-3204:state:See a explore tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -48,7 +48,7 @@ describe('State ', function() {
         login.logout();
     });
 
-    it('bbb-292:state:See a project in explore tab', function() {
+    it('SWBIT-3205:state:See a project in explore tab', function() {
         var projectElem;
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             make.get();
@@ -71,7 +71,7 @@ describe('State ', function() {
         });
     });
 
-    it('bbb-293:state:See a bloqs project detail from explore tab', function() {
+    it('SWBIT-3206:state:See a bloqs project detail from explore tab', function() {
         var projectElem;
         make.saveProjectAndPublishNewUserAndLogout().then(function(project1) {
             make.get();
@@ -103,7 +103,7 @@ describe('State ', function() {
         });
     });
 
-    it('bbb-294:state:See a code project detail from explore tab', function() {
+    it('SWBIT-3207:state:See a code project detail from explore tab', function() {
         var projectElem;
         var projectSaved = codeProject.saveCodeProjectAndPublishNewUserAndLogout();
         make.get();
@@ -134,7 +134,7 @@ describe('State ', function() {
         });
     });
 
-    it('bbb-295:state:See a faq page', function() {
+    it('SWBIT-3208:state:See a faq page', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -145,7 +145,7 @@ describe('State ', function() {
         login.loginFromHeader('forum/Preguntas%20frecuentes');
     });
 
-    it('bbb-296:state:See a tutorial page', function() {
+    it('SWBIT-3209:state:See a tutorial page', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -155,7 +155,7 @@ describe('State ', function() {
         login.loginFromHeader('learn');
     });
 
-    it('bbb-297:state:See a changelog page', function() {
+    it('SWBIT-3210:state:See a changelog page', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -166,7 +166,7 @@ describe('State ', function() {
         login.loginFromHeader('forum/Versiones%20de%20Bitbloq');
     });
 
-    it('bbb-298:state:A search in the explora tab', function() {
+    it('SWBIT-3211:state:A search in the explora tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -187,7 +187,7 @@ describe('State ', function() {
         });
     });
 
-    it('bbb-299:state:A filter in the explora tab', function() {
+    it('SWBIT-3212:state:A filter in the explora tab', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -210,7 +210,7 @@ describe('State ', function() {
     });
 
 
-    it('bbb-300:state:Verify that the empty bloqsproject isnt saved', function() {
+    it('SWBIT-3213:state:Verify that the empty bloqsproject isnt saved', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -232,7 +232,7 @@ describe('State ', function() {
         login.logout();
     });
 
-    it('bbb-301:state:Verify that the empty codeproject is saved', function() {
+    it('SWBIT-3214:state:Verify that the empty codeproject is saved', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -249,7 +249,7 @@ describe('State ', function() {
         login.logout();
     });
 
-    it('bbb-302:state:Check login and back to where you were(Foro)', function() {
+    it('SWBIT-3215:state:Check login and back to where you were(Foro)', function() {
         forum.get();
         var curl;
         browser.getCurrentUrl().then(function(url) {

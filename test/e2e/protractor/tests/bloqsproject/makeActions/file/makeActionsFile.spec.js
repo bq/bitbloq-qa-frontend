@@ -31,7 +31,7 @@ describe('Menu file of MakeActions', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-89:bloqsprojectMakeActionsFile:Open new project', function() {
+    it('SWBIT-2928:bloqsprojectMakeActionsFile:Open new project', function() {
 
         make.get();
         modals.attentionContinueGuest.click();
@@ -59,7 +59,7 @@ describe('Menu file of MakeActions', function() {
 
     });
 
-    it('bbb-92:bloqsprojectMakeActionsFile: Copy a project', function() {
+    it('SWBIT-2931:bloqsprojectMakeActionsFile: Copy a project', function() {
         var nameSavedProject = 'Test_Save_' + Number(new Date());
         login.loginWithRandomUser();
         projects.createNewProject();

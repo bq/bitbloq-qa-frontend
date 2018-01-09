@@ -33,7 +33,7 @@ describe('Exercise Detail inside class Detail', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-652:exerciseDetailInClass: correct exercise', function () {
+    it('SWBIT-3263:exerciseDetailInClass: correct exercise', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({

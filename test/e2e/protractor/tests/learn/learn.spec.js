@@ -26,7 +26,7 @@ describe('Learn ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-198:learn:Appears the tutorial with a registered user', function() {
+    it('SWBIT-2896:learn:Appears the tutorial with a registered user', function() {
         login.loginWithRandomUser();
         header.navLearn.click();
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/learn');
@@ -40,7 +40,7 @@ describe('Learn ', function() {
         login.logout();
     });
 
-    it('bbb-199:learn:Verify suggest a tutorial action (registered user)', function() {
+    it('SWBIT-2908:learn:Verify suggest a tutorial action (registered user)', function() {
         login.loginWithRandomUser();
         header.navLearn.click();
         learn.contactUsTutorials.click();
@@ -57,7 +57,7 @@ describe('Learn ', function() {
         });
     });
 
-    it('bbb-200:learn:Appears the tutorial with an unregistered user', function() {
+    it('SWBIT-2898:learn:Appears the tutorial with an unregistered user', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -67,7 +67,7 @@ describe('Learn ', function() {
         expect(learn.basicTutorialTable.isPresent());
     });
 
-    it('bbb-201:learn:Verify that you can click on tutorial (registered user)', function() {
+    it('SWBIT-2899:learn:Verify that you can click on tutorial (registered user)', function() {
         login.loginWithRandomUser();
         header.navLearn.click();
         var elemTutorial = learn.firstElementTutorial();
@@ -86,7 +86,7 @@ describe('Learn ', function() {
 
     });
 
-    it('bbb-202:learn:Verify that you can click on tutorial (unregistered user)', function() {
+    it('SWBIT-2907:learn:Verify that you can click on tutorial (unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -105,7 +105,7 @@ describe('Learn ', function() {
         });
     });
 
-    it('bbb-349:learn:Verify that you can click on "Show more tutorials in DIWO" (registered user)', function() {
+    it('SWBIT-2906:learn:Verify that you can click on "Show more tutorials in DIWO" (registered user)', function() {
         login.loginWithRandomUser();
         header.navLearn.click();
         learn.goToDIWOButton.click();
@@ -122,7 +122,7 @@ describe('Learn ', function() {
         });
     });
 
-    it('bbb-350:learn:Verify that you can click on "Show more tutorials in DIWO" (unregistered user)', function() {
+    it('SWBIT-2907:learn:Verify that you can click on "Show more tutorials in DIWO" (unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -140,7 +140,7 @@ describe('Learn ', function() {
         });
     });
 
-    it('bbb-351:learn:Verify suggest a tutorial action (unregistered user)', function() {
+    it('SWBIT-2908:learn:Verify suggest a tutorial action (unregistered user)', function() {
         learn.get();
         browser.sleep(vars.timeToWaitFadeModals);
         globalFunctions.navigatorLanguage().then(function(language) {

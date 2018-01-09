@@ -42,7 +42,7 @@ describe('Test CookiesBar', function() {
      *
      */
 
-    it('bbb-172:cookiesBar:Check cookies bar shows any page if not login user', function() {
+    it('SWBIT-3104:cookiesBar:Check cookies bar shows any page if not login user', function() {
 
         //check landing
         browser.manage().window().setSize(1024, 768);
@@ -118,7 +118,7 @@ describe('Test CookiesBar', function() {
 
     });
 
-    it('bbb-173:cookiesBar:Check, If you close cookies bar it not appear again in other pages (in same session && no login user )', function() {
+    it('SWBIT-3105:cookiesBar:Check, If you close cookies bar it not appear again in other pages (in same session && no login user )', function() {
 
         //check landing
         var browserCheckCookiesNoLogin = browser.forkNewDriverInstance(),
@@ -160,7 +160,7 @@ describe('Test CookiesBar', function() {
 
     });
 
-    it('bbb-174:cookiesBar:Check, Login user accept cookies and never appear in other session', function() {
+    it('SWBIT-3106:cookiesBar:Check, Login user accept cookies and never appear in other session', function() {
 
         /* Open browser with random user and close cookiesBar */
 
@@ -208,7 +208,7 @@ describe('Test CookiesBar', function() {
 
     });
 
-    it('bbb-175:cookiesBar:Verify link to "Politica de cookies" is ok', function() {
+    it('SWBIT-3107:cookiesBar:Verify link to "Politica de cookies" is ok', function() {
 
         //check landing
         var browserCheckCookiesURL = browser.forkNewDriverInstance(),
@@ -222,7 +222,7 @@ describe('Test CookiesBar', function() {
         browser.quit();
     });
 
-    it('bbb-176:cookiesBar:Verify link reject cookies', function() {
+    it('Verify link reject cookies:cookiesBar:Verify link reject cookies', function() {
         landing.get();
         expect(cookiesBar.cookiesBar.isPresent());
         cookiesBar.notAcceptoCookies.click();

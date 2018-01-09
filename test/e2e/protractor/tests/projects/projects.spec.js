@@ -28,7 +28,7 @@ describe('Projects', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-39:projects:New project button only appears in projects tab', function() {
+    it('SWBIT-3167:projects:New project button only appears in projects tab', function() {
         //search for the new project button w/ registered user
         login.loginWithRandomUser();
         expect(projects.newProject.isPresent()).toBe(true);

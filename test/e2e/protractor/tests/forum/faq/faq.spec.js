@@ -26,7 +26,7 @@ describe('FAQ ', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-192:faq:Appears the FAQs with a registered user', function () {
+    it('SWBIT-3073:faq:Appears the FAQs with a registered user', function () {
         login.loginWithRandomUser();
         header.navForum.click();
         forum.faqCategory.click();
@@ -37,7 +37,7 @@ describe('FAQ ', function () {
         });
     });
 
-    xit('bbb-193:faq:Verify that we can open a faq (registered user)', function () {
+    xit('SWBIT-3074:faq:Verify that we can open a faq (registered user)', function () {
         login.loginWithRandomUser();
         header.navForum.click();
         forum.faqCategory.click();
@@ -48,7 +48,7 @@ describe('FAQ ', function () {
         login.logout();
     });
 
-    xit('bbb-195:faq:Appears the FAQs with an unregistered user', function () {
+    xit('SWBIT-3075:faq:Appears the FAQs with an unregistered user', function () {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -62,7 +62,7 @@ describe('FAQ ', function () {
         });
     });
 
-    xit('bbb-196:faq:Verify that we can open a faq (unregistered user)', function () {
+    xit('SWBIT-3076:faq:Comprobar que al darle a una faq se abre y cierra sin estar logueado', function () {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -76,7 +76,7 @@ describe('FAQ ', function () {
         expect(forum.isPresentContentThread()).toBe(true);
     });
 
-    xit('bbb-345:faq:Appears all language FAQs with a registered user', function () {
+    xit('SWBIT-3077:faq:Appears all language FAQs with a registered user', function () {
         login.loginWithRandomUser();
         header.navForum.click();
         expect(globalFunctions.toNumber(forum.faqEnglishThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
@@ -92,7 +92,7 @@ describe('FAQ ', function () {
         expect(globalFunctions.toNumber(forum.faqChineseThreadCounter.getText())).not.toBeLessThan(vars.numberOfFaqs);
     });
 
-    xit('bbb-346:faq:Appears all language FAQs with an unregistered user', function () {
+    xit('SWBIT-3078:faq:Appears all language FAQs with an unregistered user', function () {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();

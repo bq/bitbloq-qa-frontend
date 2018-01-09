@@ -30,7 +30,7 @@ describe('Check makeActions actions in codeProjects', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-162:codeProjectMakeActions:check enabled/disabled options by logged in user', function () {
+    it('SWBIT-3020:codeProjectMakeActions:check enabled/disabled options by logged in user', function () {
 
         login.loginWithRandomUser();
 
@@ -82,7 +82,7 @@ describe('Check makeActions actions in codeProjects', function () {
     /**
      * User not logged in
      */
-    it('bbb-163:codeProjectMakeActions:check enabled/disabled options by not logged in user', function () {
+    it('SWBIT-3011:codeProjectMakeActions:check enabled/disabled options by not logged in user', function () {
 
         make.get();
         modals.attentionContinueGuest.click();

@@ -34,7 +34,7 @@ describe('Test Codeproject verify', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-164:codeProject:User guest edit code, OK edit and show modal && toast', function() {
+    it('SWBIT-3012:codeProject:User guest edit code, OK edit and show modal && toast', function() {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -65,7 +65,7 @@ describe('Test Codeproject verify', function() {
 
     });
 
-    it('bbb-165:codeProject:Login edit code, OK edit and show modal && toast', function() {
+    it('SWBIT-3013:codeProject:Login edit code, OK edit and show modal && toast', function() {
 
         //Check modal show first time
         var user = login.loginWithRandomUser();
@@ -103,7 +103,7 @@ describe('Test Codeproject verify', function() {
 
     });
 
-    it('bbb-166:codeProject:Verify wit LOGIN user, undo change in TOAST (before create bloqsproject)', function() {
+    it('SWBIT-3014:codeProject:Verify wit LOGIN user, undo change in TOAST (before create bloqsproject)', function() {
 
         make.saveProjectNewUser();
 
@@ -123,7 +123,7 @@ describe('Test Codeproject verify', function() {
 
     });
 
-    it('bbb-167:codeProject:We can change the board in the info tab and saved it', function() {
+    it('SWBIT-3015:codeProject:We can change the board in the info tab and saved it', function() {
 
         var projectUser = make.saveProjectNewUser();
         make.softwareTab.click();
@@ -218,14 +218,14 @@ describe('Test Codeproject verify', function() {
 
     });
 
-    it('bbb-168:codeProject:If redirect to /#/codeproject NO show toast', function() {
+    it('SWBIT-3016:codeProject:If redirect to /#/codeproject NO show toast', function() {
 
         codeproject.get();
         expect(commons.editToast.isPresent()).toBe(false);
 
     });
 
-    it('bbb-169:codeProject:Project must have a name', function() {
+    it('SWBIT-3017:codeProject:Project must have a name', function() {
         codeproject.saveCodeProjectNewUser();
         projects.get();
         myprojects.overMyProjects.click().then(function() {

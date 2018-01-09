@@ -26,7 +26,7 @@ describe('My Class', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-404:myclass:new class', function () {
+    it('SWBIT-3275:myclass:new class', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -34,7 +34,7 @@ describe('My Class', function () {
         myclass.createClass();
     });
 
-    it('bbb-405:myclass:Create a group - The field is empty', function () {
+    it('SWBIT-3276:myclass:Create a group - The field is empty', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -53,7 +53,7 @@ describe('My Class', function () {
         });
     });
 
-    it('bbb-438:myclass:Check that the centers combo is visible', function () {
+    it('SWBIT-3277:myclass:Check that the centers combo is visible', function () {
         var headMaster1 = centermode.createHeadMaster({
             keepLogin: true
         });
@@ -105,7 +105,7 @@ describe('My Class', function () {
         });
     });
 
-    it('bbb-642:myclass:Order and filters', function () {
+    it('SWBIT-3278:myclass:Order and filters', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });
@@ -136,7 +136,7 @@ describe('My Class', function () {
         });
     });
 
-    it('bbb-649:myclass:Check that the classId is visible', function () {
+    it('SWBIT-3279:myclass:Check that the classId is visible', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });

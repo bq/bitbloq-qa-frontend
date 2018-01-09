@@ -34,7 +34,7 @@ describe('Register ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-1:register:Register with a user basic account', function() {
+    it('SWBIT-3168:register:Register with a user basic account', function() {
 
         landing.enterButton.click();
         //expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
@@ -53,7 +53,7 @@ describe('Register ', function() {
 
     });
 
-    fit('bbb-2:register:The email is duplicated', function() {
+    it('SWBIT-3169:register:The email is duplicated', function() {
         landing.enterButton.click();
 
         //Go to create account form
@@ -81,7 +81,7 @@ describe('Register ', function() {
 
     });
 
-    it('bbb-3:register:Verify remember password email', function() {
+    it('SWBIT-3170:register:Verify remember password email', function() {
 
         //check bloqsproject
         var browserEmail = browser.forkNewDriverInstance();
@@ -134,7 +134,7 @@ describe('Register ', function() {
 
     });
 
-    it('bbb-4:register:Cant register with the same user name', function() {
+    it('SWBIT-3171:register:Cant register with the same user name', function() {
 
         landing.enterButton.click();
 
@@ -181,7 +181,7 @@ describe('Register ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
     });
 
-    it('bbb-5:register:Cant register without an user name', function() {
+    it('SWBIT-3172:register:Cant register without an user name', function() {
         landing.enterButton.click();
 
         //Go to create account form
@@ -207,7 +207,7 @@ describe('Register ', function() {
 
     });
 
-    it('bbb-6:register:validate INCORRECT FORMAT USER ', function() {
+    it('SWBIT-3173:register:validate INCORRECT FORMAT USER ', function() {
 
         landing.enterButton.click();
 
@@ -241,7 +241,7 @@ describe('Register ', function() {
 
     });
 
-    it('bbb-7:register:Cant register without checking conditions', function() {
+    it('SWBIT-3174:register:Cant register without checking conditions', function() {
 
         landing.enterButton.click();
 
@@ -269,7 +269,7 @@ describe('Register ', function() {
 
     });
 
-    it('bbb-8:register:validate NO EMAIL ', function() {
+    it('SWBIT-3175:register:validate NO EMAIL ', function() {
 
         landing.enterButton.click();
 
@@ -295,7 +295,7 @@ describe('Register ', function() {
 
     });
 
-    it('bbb-9:register:validate INCORRECT EMAIL ', function() {
+    it('SWBIT-3176:register:validate INCORRECT EMAIL ', function() {
 
         landing.enterButton.click();
 
@@ -316,7 +316,7 @@ describe('Register ', function() {
 
     });
 
-    it('bbb-10:register:in password is show "Introduce una contraseña" ?', function() {
+    it('SWBIT-3177:register:in password is show "Introduce una contraseña" ?', function() {
 
         landing.enterButton.click();
 
@@ -340,7 +340,7 @@ describe('Register ', function() {
 
     });
 
-    it('bbb-11:register:in password is show La contraseña debe tener 6 caracteres como mínimo', function() {
+    it('SWBIT-3178:register:in password is show La contraseña debe tener 6 caracteres como mínimo', function() {
 
         landing.enterButton.click();
 
@@ -365,7 +365,7 @@ describe('Register ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
     });
 
-    it('bbb-12:register:validate NOT DATE OF BIRTH ', function() {
+    it('SWBIT-3179:register:validate NOT DATE OF BIRTH ', function() {
         landing.enterButton.click();
 
         //Go to create account form
@@ -418,7 +418,7 @@ describe('Register ', function() {
 
     });
 
-    it('bbb-13:register:validate DATE OF BIRTH BEFORE 14 YEARS 14 - DATENOW ', function() {
+    it('SWBIT-3180:register:validate DATE OF BIRTH BEFORE 14 YEARS 14 - DATENOW ', function() {
 
         landing.enterButton.click();
 
@@ -432,7 +432,7 @@ describe('Register ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/projects/myprojects?page=1');
     });
 
-    it('bbb-14:register:Check that a checkbox appears to indicate that you are a teacher', function() {
+    it('SWBIT-3181:register:Check that a checkbox appears to indicate that you are a teacher', function() {
         landing.enterButton.click();
         register.createAccountButtn.click();
 
@@ -450,7 +450,7 @@ describe('Register ', function() {
 
     });
 
-    it('bbb-15:register:Check that link recovery password only use one time', function() {
+    it('SWBIT-3182:register:Check that link recovery password only use one time', function() {
 
         //check bloqsproject
         var browserEmail = browser.forkNewDriverInstance();
@@ -531,7 +531,7 @@ describe('Register ', function() {
 
     });
 
-    it('bbb-16:register:The date is incorrect', function() {
+    it('SWBIT-3183:register:The date is incorrect', function() {
         landing.enterButton.click();
 
         //Go to create account form
@@ -547,7 +547,7 @@ describe('Register ', function() {
         expect(register.showValidBirthdate.isDisplayed()).toBeTruthy();
     });
 
-    it('bbb-17:register:Remember the password - EMAIL DOESNT EXIST', function() {
+    it('SWBIT-3184:register:Remember the password - EMAIL DOESNT EXIST', function() {
         var email = 'fakeemail@fake.fake';
         login.get();
         login.user.sendKeys(email);
@@ -557,7 +557,7 @@ describe('Register ', function() {
         expect(login.showEmailNotExist.isDisplayed()).toBeTruthy();
     });
 
-    it('bbb-18:register:Remember the password - EMAIL INCORRECT', function() {
+    it('SWBIT-3185:register:Remember the password - EMAIL INCORRECT', function() {
         var email = 'emailincorrect';
         login.get();
         login.user.sendKeys(email);
@@ -567,7 +567,7 @@ describe('Register ', function() {
         expect(login.showEmailIncorrect.isDisplayed()).toBeTruthy();
     });
 
-    it('bbb-355:register:the tutor email match to student email', function() {
+    it('SWBIT-3186:register:the tutor email match to student email', function() {
 
         landing.enterButton.click();
 
@@ -581,7 +581,7 @@ describe('Register ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
     });
 
-    it('bbb-356:register:Register without tutor email', function() {
+    it('SWBIT-3187:register:Register without tutor email', function() {
 
         landing.enterButton.click();
 
@@ -595,7 +595,7 @@ describe('Register ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
     });
 
-    it('bbb-357:register:Register with incorrect tutor email', function() {
+    it('SWBIT-3188:register:Register with incorrect tutor email', function() {
 
         landing.enterButton.click();
 
@@ -609,7 +609,7 @@ describe('Register ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
     });
 
-    it('bbb-358:register:Register without tutor name', function() {
+    it('SWBIT-3189:register:Register without tutor name', function() {
 
         landing.enterButton.click();
 
@@ -623,7 +623,7 @@ describe('Register ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
     });
 
-    it('bbb-359:register:Register without tutor surname', function() {
+    it('SWBIT-3190:register:Register without tutor surname', function() {
 
         landing.enterButton.click();
 
@@ -637,7 +637,7 @@ describe('Register ', function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/login');
     });
 
-    it('bbb-362:register:The legal tutor doesnt accept', function() {
+    it('SWBIT-3191:register:The legal tutor doesnt accept', function() {
         //check bloqsproject
         var browserEmail = browser.forkNewDriverInstance();
 
@@ -682,7 +682,7 @@ describe('Register ', function() {
         });
     });
 
-    it('bbb-363:register:The legal tutor accept', function() {
+    it('SWBIT-3192:register:The legal tutor accept', function() {
         //check bloqsproject
         var browserEmail = browser.forkNewDriverInstance(),
             userName,

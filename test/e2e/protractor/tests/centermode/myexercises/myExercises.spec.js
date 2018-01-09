@@ -20,7 +20,7 @@ describe('My exercises as teacher', function () {
 
     globalFunctions.afterTest();
 
-    it('bbb-439:my exercises: Things to see on my exercises', function () {
+    it('SWBIT-3344:my exercises: Things to see on my exercises', function () {
         centermode.createHeadMaster({
             keepLogin: true
         });

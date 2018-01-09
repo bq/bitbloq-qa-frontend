@@ -24,7 +24,7 @@ describe('Verify landing ', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-251:landing:Check that links to legal documents work', function() {
+    it('SWBIT-3118:landing:Check that links to legal documents work', function() {
         var cookies = '#/cookies',
             terms = '#/terms',
             script = landing.landingPage + '.scrollTo(0,5000);';
@@ -51,7 +51,7 @@ describe('Verify landing ', function() {
         });
     });
 
-    it('bbb-250:landing:check if NO login go to mailto in landing (link "contacto")', function() {
+    it('SWBIT-3117:landing:check if NO login go to mailto in landing (link "contacto")', function() {
 
         browser.sleep(1000);
         landing.helpButton.click();
@@ -63,7 +63,7 @@ describe('Verify landing ', function() {
 
     });
 
-    it('bbb-252:landing:check if is login show modal feedback in landing (link "contacto")', function() {
+    it('SWBIT-3119:landing:check if is login show modal feedback in landing (link "contacto")', function() {
 
         login.loginWithRandomUser();
         landing.get();
@@ -94,7 +94,7 @@ describe('Verify landing ', function() {
 
     });
 
-    it('bbb-253:landing:verify that the downloaded links works correctly', function() {
+    it('SWBIT-3120:landing:verify that the downloaded links works correctly', function() {
 
         var array = [
             'landing.downloadBtn',
@@ -116,7 +116,7 @@ describe('Verify landing ', function() {
 
     //Comprobación de que el número de telefono sigue siendo el mismo.
     //Hay que realizar la llamada manual para comprobar que es el correcto.
-    it('bbb-256:landing:verificar numero de telefono en el area de soporte', function() {
+    it('SWBIT-3123:landing:verificar numero de telefono en el area de soporte', function() {
         var phoneNmbDefault = '+34 902 676 061';
 
         landing.get();

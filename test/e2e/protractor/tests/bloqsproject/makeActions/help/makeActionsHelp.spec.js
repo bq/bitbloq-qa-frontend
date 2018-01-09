@@ -30,7 +30,7 @@ describe('Menu Help of MakeActions', function() {
     globalFunctions.afterTest();
 
     //TODO CHECK TOAST
-    it('bbb-94:bloqsprojectMakeActionsHelp:Login and feedback error', function() {
+    it('SWBIT-2933:bloqsprojectMakeActionsHelp:Login and feedback error', function() {
 
         login.loginWithRandomUser();
         make.get();
@@ -47,7 +47,7 @@ describe('Menu Help of MakeActions', function() {
         login.logout();
     });
 
-    it('bbb-95:bloqsprojectMakeActionsHelp:NO login, feedback modal are not displayed but it posible send mailto', function() {
+    it('feedback modal are not displayed but it posible send mailto:bloqsprojectMakeActionsHelp:NO login, feedback modal are not displayed but it posible send mailto', function() {
 
         make.get();
         modals.attentionContinueGuest.click();

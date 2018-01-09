@@ -34,11 +34,11 @@ describe('make tab', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-156:bloqsproject:Save project', function () {
+    it('SWBIT-3000:bloqsproject:Save project', function () {
         make.saveProjectNewUserAndLogout();
     });
 
-    it('bbb-154:bloqsproject:We can move between all tabs', function () {
+    it('SWBIT-2998:bloqsproject:We can move between all tabs', function () {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -51,7 +51,7 @@ describe('make tab', function () {
         login.logout();
     });
 
-    it('bbb-155:bloqsproject:Rename project in make and test change in project', function () {
+    it('SWBIT-2999:bloqsproject:Rename project in make and test change in project', function () {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -107,7 +107,7 @@ describe('make tab', function () {
         });
     });
 
-    it('bbb-158:bloqsproject:Project must have a name', function () {
+    it('SWBIT-3002:bloqsproject:Project must have a name', function () {
 
         login.loginWithRandomUser();
 
@@ -139,7 +139,7 @@ describe('make tab', function () {
         login.logout();
     });
 
-    it('bbb-152:bloqsproject:verify header-compile is blocked when clicked', function () {
+    it('SWBIT-2996:bloqsproject:verify header-compile is blocked when clicked', function () {
         //you have to accept open web2board links, or test fail
         login.loginWithRandomUser();
         make.get();

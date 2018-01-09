@@ -41,7 +41,7 @@ describe('Test licenses', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-653:licenses: A Director and their students cant compile no activated robots exercises', function () {
+    it('SWBIT-3352:licenses: A Director and their students cant compile no activated robots exercises', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -91,7 +91,7 @@ describe('Test licenses', function () {
 
     });
 
-    it('bbb-654:licenses: A Director cant compile activated robots exercises if is not asigned to a center', function () {
+    it('SWBIT-3353:licenses: Director cant compile activated robots exercises if is not assigned to a class', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -116,7 +116,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-655:licenses: A Director and their students can compile activated robots exercises', function () {
+    it('SWBIT-3354:licenses: A Director and their students can compile activated robots exercises', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -173,7 +173,7 @@ describe('Test licenses', function () {
         });
 
     });
-    it('bbb-656:licenses: A teacher and their students cant compile no activated robots exercises', function () {
+    it('SWBIT-3355:licenses: A teacher and their students cant compile no activated robots exercises', function () {
 
         protractor.promise.all([
             centermode.createTeacher({
@@ -226,7 +226,7 @@ describe('Test licenses', function () {
 
     });
 
-    it('bbb-657:licenses: A Teacher and their students can compile activated robots exercises', function () {
+    it('SWBIT-3356:licenses: A Teacher and their students can compile activated robots exercises', function () {
         var headMaster = centermode.createHeadMaster({
             keepLogin: true
         });
@@ -287,7 +287,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-658:licenses: A Director and their students can compile only after activate robots exercises', function () {
+    it('SWBIT-3357:licenses: A Director and their students can compile only after activate robots exercises', function () {
 
         protractor.promise.all([
             centermode.createHeadMaster({
@@ -357,7 +357,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-659:licenses: A Teacher and their students can compile only after activate robots exercises', function () {
+    it('SWBIT-3358:licenses: A Teacher and their students can compile only after activate robots exercises', function () {
         var headMaster = centermode.createHeadMaster();
         protractor.promise.all([
             centermode.createTeacher({
@@ -434,7 +434,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-660:licenses:Cant compile a robot project without activate it', function () {
+    it('SWBIT-3359:licenses:Cant compile a robot project without activate it', function () {
         protractor.promise.all([
             login.loginWithRandomUser(),
             myprojects.createProject({
@@ -452,7 +452,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-661:licenses:Can compile an activated robot project', function () {
+    it('SWBIT-3360:licenses:Can compile an activated robot project', function () {
         protractor.promise.all([
             login.loginWithRandomUser(),
             myprojects.createProject({
@@ -470,7 +470,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-662:licenses:Cant activate a personal proyect robot with a centermode code', function () {
+    it('SWBIT-3361:licenses:Cant activate a personal proyect robot with a centermode code', function () {
 
         flow.execute(thirdPartyRobotsApi.getMBotCenterCode).then(function (result) {
             protractor.promise.all([
@@ -495,7 +495,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-663:licenses:Cant compile a exercise, when i have a personal code', function () {
+    it('SWBIT-3362:licenses:Cant compile a exercise, when i have a personal code', function () {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -543,7 +543,7 @@ describe('Test licenses', function () {
         });
     });
 
-    it('bbb-664:licenses:Cant compile a proyect, when i have a center with an activated code', function () {
+    it('SWBIT-3363:licenses:Cant compile a proyect, when i have a center with an activated code', function () {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -687,19 +687,19 @@ describe('Test licenses', function () {
         });
     }
 
-    it('bbb-665:licenses:Cant compile ranger and starter if a mbot is activated', function () {
+    it('SWBIT-3364:licenses:Cant compile ranger and starter if a mbot is activated', function () {
         checkThatARobotActivationAffectOnlyHimself('MBot');
     });
 
-    it('bbb-666:licenses:Cant compile mbot and starter if a mranger is activated', function () {
+    it('SWBIT-3365:licenses:Cant compile mbot and starter if a mranger is activated', function () {
         checkThatARobotActivationAffectOnlyHimself('MRanger');
     });
 
-    it('bbb-667:licenses:Cant compile mbot and mranger if a starter is activated', function () {
+    it('SWBIT-3366:licenses:Cant compile mbot and mranger if a starter is activated', function () {
         checkThatARobotActivationAffectOnlyHimself('StarterKit');
     });
 
-    it('bbb-668:licenses: Teacher and students can use robots activated in teacher\'s other centers', function () {
+    it('SWBIT-3367:licenses: Teacher and students can use robots activated in teacher\'s other centers', function () {
         var headMaster1 = centermode.createHeadMaster({
             keepLogin: true
         });
@@ -803,7 +803,7 @@ describe('Test licenses', function () {
             });
         });
     });
-    it('bbb-669:licenses:Cant compile codeproject of not activated robots', function () {
+    it('SWBIT-3363:licenses:Cant compile codeproject of not activated robots', function () {
         login.loginWithRandomUser();
         codeProjects.get();
         expect(makeActions.compileButton.isEnabled()).toBe(true, 'without library the user can compile');

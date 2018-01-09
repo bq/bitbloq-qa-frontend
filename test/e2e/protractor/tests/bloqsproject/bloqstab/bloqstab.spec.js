@@ -20,7 +20,7 @@ describe('make tab', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-125:bloqsproject:Save project', function() {
+    it('SWBIT-2969:bloqsproject:Save project', function() {
         make.saveProjectNewUser();
         make.softwareTab.click();
         expect(make.componentsIcon.isVisible()).toBe(true);

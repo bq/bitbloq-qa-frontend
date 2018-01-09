@@ -27,7 +27,7 @@ describe('Changelog ', function() { //This pages has been deleted
     globalFunctions.afterTest();
 
 
-    it('bbb-203:changelog:Verify that we can open changelog category (Registered user)', function() {
+    it('SWBIT-3067:changelog:Verify that we can open changelog category (Registered user)', function() {
         login.loginWithRandomUser();
         header.navForum.click();
         forum.versionCategory.click();
@@ -37,7 +37,7 @@ describe('Changelog ', function() { //This pages has been deleted
         });
     });
 
-    it('bbb-204:changelog:Verify that we can open changelog category  (Unregistered user)', function() {
+    it('SWBIT-3068:changelog:Verify that we can open changelog category  (Unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -49,14 +49,14 @@ describe('Changelog ', function() { //This pages has been deleted
         });
     });
 
-    xit('bbb-205:changelog:Verify that the last changelog post tell about the last version Bitbloq  (Registered user)', function() {
+    xit('SWBIT-3069:changelog:Verify that the last changelog post tell about the last version Bitbloq  (Registered user)', function() {
         login.loginWithRandomUser();
         header.navForum.click();
         forum.versionCategory.click();
         expect(forum.categoryTopicTitle.getText()).toMatch(vars.versionBitbloq);
     });
 
-    xit('bbb-206:changelog:Verify that the last changelog post tell about the last version Bitbloq  (Unregistered user)', function() {
+    xit('SWBIT-3070:changelog:Verify that the last changelog post tell about the last version Bitbloq  (Unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();
@@ -66,7 +66,7 @@ describe('Changelog ', function() { //This pages has been deleted
         expect(forum.categoryTopicTitle.getText()).toMatch(vars.versionBitbloq);
     });
 
-    xit('bbb-347:changelog:Verify that we can open the last changelog post  (Registered user)', function() {
+    xit('SWBIT-3071:changelog:Verify that we can open the last changelog post  (Registered user)', function() {
         login.loginWithRandomUser();
         header.navForum.click();
         forum.versionCategory.click();
@@ -75,7 +75,7 @@ describe('Changelog ', function() { //This pages has been deleted
         expect(forum.isPresentContentThread()).toBe(true);
     });
 
-    xit('bbb-348:changelog:Verify that we can open the last changelog post (Unregistered user)', function() {
+    xit('SWBIT-3072:changelog:Verify that we can open the last changelog post (Unregistered user)', function() {
         make.get();
         modals.attentionContinueGuest.click();
         modals.rejectTour();

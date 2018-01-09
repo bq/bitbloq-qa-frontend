@@ -33,7 +33,7 @@ describe('User account view', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-42:account:Verify fields from new normal user', function () {
+    it('SWBIT-2869:account:Verify fields from new normal user', function () {
 
         var randomUserInfo = login.loginWithRandomUser();
         account.get();
@@ -46,7 +46,7 @@ describe('User account view', function () {
         login.logout();
     });
 
-    it('bbb-40:account:Verify reset password (no social login)', function () {
+    it('SWBIT-2867:account:Verify reset password (no social login)', function () {
 
         var randomUserInfo = login.loginWithRandomUser();
         account.get();
@@ -66,7 +66,7 @@ describe('User account view', function () {
     });
 
 
-    it('bbb-41:account:Check name and surmane are edits (input text)', function () {
+    it('SWBIT-2868:account:Check name and surmane are edits (input text)', function () {
 
         var randomUserInfo = login.loginWithRandomUser();
         account.get();
@@ -89,7 +89,7 @@ describe('User account view', function () {
         expect(account.lastname.getAttribute('value')).toMatch('Garcia');
     });
 
-    it('bbb-322:account:Change the username', function () {
+    it('SWBIT-2873:account:Change the username', function () {
         var user = login.loginWithRandomUser();
         account.get();
         account.userTab.click();
@@ -112,7 +112,7 @@ describe('User account view', function () {
 
     });
 
-    it('bbb-45:account:verify teacher checkbox', function () {
+    it('SWBIT-2872:account:verify teacher checkbox', function () {
         login.loginWithRandomUser();
         header.openHeaderMenu.click();
         header.settings.click();
@@ -120,7 +120,7 @@ describe('User account view', function () {
         login.logout();
     });
 
-    it('bbb-353:account:verify chromeapp checkbox', function () {
+    it('SWBIT-2874:account:verify chromeapp checkbox', function () {
         login.loginWithRandomUser();
         header.openHeaderMenu.click();
         header.settings.click();

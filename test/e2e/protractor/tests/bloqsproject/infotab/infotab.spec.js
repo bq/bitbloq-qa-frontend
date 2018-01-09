@@ -36,7 +36,7 @@ describe('Info tab', function () {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-144:bloqsprojectInfo: Verificar en el tab de información que no aparecen las opciones que requieren registro', function () {
+    it('SWBIT-2988:bloqsprojectInfo: Verificar en el tab de información que no aparecen las opciones que requieren registro', function () {
         make.get();
         modals.attentionContinueGuest.click();
         browser.sleep(vars.timeToWaitFadeModals);
@@ -50,7 +50,7 @@ describe('Info tab', function () {
         expect(infoTab.infotabTaginputButton.getAttribute('disabled')).toBe('true');
     });
 
-    it('bbb-145:bloqsprojectInfo:We can insert and save tag', function () {
+    it('SWBIT-2989:bloqsprojectInfo:We can insert and save tag', function () {
 
         var userLogin = login.loginWithRandomUser();
         make.get();
@@ -119,7 +119,7 @@ describe('Info tab', function () {
         });
     });
 
-    it('bbb-146:bloqsprojectInfo:Delete tag', function () {
+    it('SWBIT-2990:bloqsprojectInfo:Delete tag', function () {
         var userLogin = login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -174,7 +174,7 @@ describe('Info tab', function () {
         });
     });
 
-    it('bbb-147:bloqsprojectInfo:verify robot and board tags', function () {
+    it('SWBIT-2991:bloqsprojectInfo:verify robot and board tags', function () {
         login.loginWithRandomUser();
         make.get();
         modals.rejectTour();
@@ -206,7 +206,7 @@ describe('Info tab', function () {
         login.logout();
     });
 
-    it('bbb-148:bloqsprojectInfo: Verificar el cambio de tema del proyecto', function () {
+    it('SWBIT-2992:bloqsprojectInfo: Verificar el cambio de tema del proyecto', function () {
         function setThemeColor(color) {
             var themeColor;
             if (color === 'gray') {
@@ -241,7 +241,7 @@ describe('Info tab', function () {
         expect(element(by.css('.bloq-void-function')).getCssValue('color')).toBe('rgba(255, 255, 255, 1)');
     });
 
-    it('bbb-149:bloqsprojectInfo: Verify the Youtube URL', function () {
+    it('SWBIT-2993:bloqsprojectInfo: Verify the Youtube URL', function () {
         var validYoutubeUrl = 'https://youtu.be/f2WME8N8qXc?list=PL3AshJDPy8GQhVWkzsjc5IvrzD5ctpQXN';
         login.loginWithRandomUser();
         make.get();

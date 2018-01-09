@@ -40,7 +40,7 @@ describe('Class Detail', function() {
     // afterEach commons
     globalFunctions.afterTest();
 
-    it('bbb-440:myclass:User can enter in a director open class', function() {
+    it('SWBIT-3264:myclass:User can enter in a director open class', function() {
         var student = login.loginWithRandomUser();
         login.logout();
 
@@ -69,7 +69,7 @@ describe('Class Detail', function() {
         });
     });
 
-    it('bbb-441:classDetail:User get an error entering in a director closed class', function() {
+    it('SWBIT-3265:classDetail:User get an error entering in a director closed class', function() {
 
         centermode.createHeadMaster({
             keepLogin: true
@@ -92,7 +92,7 @@ describe('Class Detail', function() {
         });
     });
 
-    it('bbb-442:classDetail:Must be a list of student', function() {
+    it('SWBIT-3266:classDetail:Must be a list of student', function() {
 
         var headMaster = centermode.createHeadMaster({
             keepLogin: true
@@ -127,7 +127,7 @@ describe('Class Detail', function() {
         });
     });
 
-    it('bbb-443:classDetail:Must be a list of exercises', function() {
+    it('SWBIT-3267:classDetail:Must be a list of exercises', function() {
 
         centermode.createHeadMaster({
             keepLogin: true,
@@ -161,7 +161,7 @@ describe('Class Detail', function() {
         });
     });
 
-    it('bbb-444:classDetail:Verify that a Class can be archived', function() {
+    it('SWBIT-3268:classDetail:Verify that a Class can be archived', function() {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -202,7 +202,7 @@ describe('Class Detail', function() {
         });
     });
 
-    it('bbb-445:classDetail:Verify that is possible to cancel the process of archive a class', function() {
+    it('SWBIT-3269:classDetail:Verify that is possible to cancel the process of archive a class', function() {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -227,7 +227,7 @@ describe('Class Detail', function() {
         });
     });
 
-    it('bbb-446:classDetail:Verify that a class can be deleted', function() {
+    it('SWBIT-3270:classDetail:Verify that a class can be deleted', function() {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -271,7 +271,7 @@ describe('Class Detail', function() {
         });
     });
 
-    it('bbb-448:classDetail:Verify that is possible to cancel the process of delete a class', function() {
+    it('SWBIT-3271:classDetail:Verify that is possible to cancel the process of delete a class', function() {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -315,7 +315,7 @@ describe('Class Detail', function() {
         });
     });
 
-    it('bbb-475:classDetail:delete task', function() {
+    it('SWBIT-3272:classDetail:delete task', function() {
         protractor.promise.all([
             centermode.createHeadMaster({
                 keepLogin: true
@@ -377,7 +377,7 @@ describe('Class Detail', function() {
         });
     });
 
-    it('bbb-648:myclass:User can enter in a profesor open class', function() {
+    it('SWBIT-3274:myclass:User can enter in a profesor open class', function() {
         var headMaster = centermode.createHeadMaster();
         var student = login.loginWithRandomUser();
         login.logout();
