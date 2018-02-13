@@ -157,7 +157,7 @@ module.exports = function (grunt) {
                 options: {
                     configFile: path.resolve() + '/test/e2e/protractor/confs/basic.js',
                     args: {
-                        baseUrl: 'http://front.bitbloq.k8s-dev.bq.com/',
+                        baseUrl: 'http://front.bitbloq.k8s-dev-sof.bq.com/',
                         seleniumAddress: 'http://localhost:4444/wd/hub',
                         suite: 'ALL,enviroment'
                     }
