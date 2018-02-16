@@ -226,7 +226,8 @@ describe('Test CookiesBar', function() {
         landing.get();
         expect(cookiesBar.cookiesBar.isPresent());
         cookiesBar.notAcceptoCookies.click();
-        expect(browser.getCurrentUrl()).toEqual('https://www.google.es/');
+        browser.ignoreSynchronization = true;
+        expect(browser.getCurrentUrl()).toEqual('https://www.bq.com/es/');
         landing.get();
         expect(cookiesBar.cookiesBar.isPresent());
     });
